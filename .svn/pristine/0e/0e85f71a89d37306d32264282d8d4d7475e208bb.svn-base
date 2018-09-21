@@ -1,0 +1,77 @@
+<!--pages/lck/address/address.wxml-->
+<view class="page-con">
+    <view class="manage-add-con">
+        管理收货地址
+    </view>
+    <block wx:if='{{!editor}}'>
+        <view class="addContainer">
+            <view class="address-detail-con">
+                <!--设置收货人信息(从服务器上拉取收货地址数据)for循环-->
+                <view class="add-item">
+                    <view class="user-con">
+                        <view class="n">
+                            收货人姓名
+                        </view>
+                        <view class="p">
+                            1xx*xxxxx
+                        </view>
+                    </view>
+                    <view class="add-info">
+                        河南省驻马店市新蔡县大王庄村委大李庄
+                    </view>
+                </view>
+                <!--默认地址等的设置-->
+                <view class="add-manager">
+                    <view class="default-con">
+                        <checkbox bindchange='addChanged' checked='{{isChecked}}' color='#ec0023' value='{{add}}'>
+                            <block wx:if='{{isChecked}}'>
+                                默认地址
+                            </block>
+                            <block wx:else>
+                                设为默认地址
+                            </block>
+                        </checkbox>
+                    </view>
+                    <view class="edit-del-con">
+                        <view class='sbtn editor' bindtap='editorAdd'>
+                            编辑
+                        </view>
+                        <view class="sbtn delete" bindtap='deleteAdd'>
+                            删除
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <!--添加收货地址-->
+        <view class="addAdd">
+            <view class="add-icon" style="margin-right:20rpx;margin-top:10rpx;">
+                <image src='../../../resources/plus.png' style='width:40rpx;height:40rpx;'></image>
+            </view>
+            <view>
+                <text>添加新收货地址</text>
+            </view>
+        </view>
+    </block>
+    <block wx:else>
+        <view class="editor-con">
+            <view class='editor-item'>
+                <input type="text" placeholder="收货人"/>
+            </view>
+            <view class='editor-item'>
+                <input type="text" placeholder="手机号码"/>
+            </view>
+            <view class='editor-item'>
+                <input type="text" placeholder="所在地区"/>
+            </view>
+            <view class='editor-item'>
+                <input type="text" placeholder="详细地址：如道路,小区,楼号,单元号,门牌号等,"/>
+            </view>
+            <view class="save-container">
+                <view class="save-btn">
+                    保存
+                </view>
+            </view>
+        </view>
+    </block>
+</view>

@@ -1,0 +1,13 @@
+<!--pages/MyCode/MyCode.wxml-->
+<!-- <view class= "background">
+    <view class="CodeBox">
+      <image src='{{url}}' class="image" >
+    
+        </image>
+        
+    </view>
+</view> -->
+<!-- <image  src='{{url}}' class="image">
+
+
+</image> -->

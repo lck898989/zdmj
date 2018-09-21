@@ -1,0 +1,92 @@
+
+ .backgroundh {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background-color: #292424;
+}
+
+.wxscore {
+    position: absolute;
+    background-color: #08bb06;
+    bottom: 8.4%;
+    width: 69.8%;
+    height: 11.1%;
+    left: 15.1%;
+    border-radius: 25px;
+    color: white;
+    
+}
+
+.admit {
+    position: absolute;
+    top: 31.8%;
+    left: 35%;
+    line-height: 14px;
+}
+
+.iconScope {
+    position: absolute;
+    width: 10.7%;
+    height: 55.4%;
+    left: 20.1%;
+    top: 22.3%;
+}
+
+.loadScene {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background-color: #292424;
+}
+
+.scoreBox {
+    position: absolute;
+    width: 90%;
+    left: 5%;
+    height: 60%;
+    top: 15.2%;
+    background-color: white;
+}
+
+.texthh {
+    position: absolute;
+    top: 5%;
+    width: 100%;
+    text-align: center;
+}
+
+.henggang {
+    position: absolute;
+    left: 6.4%;
+    top: 14.4%;
+    width: 87.2%;
+    height: 10%;
+    border-top: 2px solid #817f7e;
+}
+
+.scoreImage {
+    position: absolute;
+    width: 630rpx;
+    height: 43.6%;
+    left: 2.85%;
+    top: 17.8%;
+}
+
+.textzz {
+    position: absolute;
+    left: 39.9%;
+    top: 63.9%;
+    color: #c72e2e;
+}
+
+.textzh {
+    position: absolute;
+    left: 23.75%;
+    top: 72.7%;
+    color: #575757;
+}

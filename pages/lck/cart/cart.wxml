@@ -1,0 +1,17 @@
+<!--pages/lck/cart/cart.wxml-->
+<view class='page-con'>
+    <view class='store-con'>
+        <view>
+            <!-- <icon type='' color='' size=20></icon> -->
+        </view>
+        <view class='storename'>
+            
+        </view>
+    </view>
+    <view>
+    
+    </view>
+    <view>
+    
+    </view>
+</view>

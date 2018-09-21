@@ -1,0 +1,204 @@
+<!--pages/shopshare/shopshare.wxml-->
+<view class="box" hidden='{{hidden4}}'>
+    <view class="userinfo">
+        <view class="userCon">
+            <view class='imgCon'>
+                <image src="{{userInfo.avatarUrl}}" mode='widthFix'style="width: 120rpx; "></image>
+            </view>
+            <text style='font-size:15px;' class="userName11">{{userInfo.name}}:</text>
+            <text bindtap='pressShareGui' style='font-size:15px;' class="shareGui">游戏规则</text>
+            <image bindtap='pressShareGui' mode='widthFix'class="dayuhao" style='font-size:15px;' src="../../resources/icon_arrow.png"></image>
+            <text class='mianfeina' style='font-size:14px;'>这么好的东西，支持一下免费拿</text>
+        </view>
+        <view class='goodsCon'>
+            <image class="shopImage11" mode='widthFix'src="{{url1+commMsg.filepath}}"></image>
+            <text space="ensp" class="shopmsg11" style='font-size:17px;'>【{{commMsg.commName}}】{{commMsg.comment}}</text>
+            <text class="huodongshijian11" style='font-size:12px;'>活动时间：{{commMsg.startTime}}到{{commMsg.validTime}}</text>
+            <text class="getPerson" style='font-size:13px;'>{{commMsg.virtualNumber}}人免费领取</text>
+            <text class="price11" style='font-size:20px;'>￥{{commMsg.commPrice}}</text>
+        </view>
+        <view class='countDownCon'>
+            <text style='display:inline-block;font-size:13px;' class="text">距离结束还剩</text>
+            <text style='display:inline-block; font-size:10px;' class='tui-conutdown-box1'>{{commMsg.time.secs}} </text>
+            <text style='display:inline-block; font-size:10px;' class="colon1">:</text>
+            <text style='display:inline-block; font-size:10px;' class='tui-conutdown-box2'>{{commMsg.time.mins}}</text>
+            <text style='display:inline-block; font-size:10px;' class="colon2">:</text>
+            <text style='display:inline-block; font-size:10px;' class='tui-conutdown-box3'>{{commMsg.time.hous}}</text>
+            <text style='display:inline-block; font-size:10px;' class="colon3">:</text>
+            <text style='display:inline-block; font-size:10px;' class='tui-conutdown-box4'>{{commMsg.time.days}}天</text>
+        </view>
+        <text class="shareText" style='font-size:15px;'>我的分享数</text>
+        <text style="display:inline-block;" class="sharedu1">{{commMsg.price-commMsg.shareNumber}}/{{commMsg.price}}</text>
+        <view class="shareprogress">
+            <progress percent="{{(commMsg.price-commMsg.shareNumber)/commMsg.price*100}}" activeColor="#fadd23" stroke-width="10" />
+        </view>
+        <button wx:if="{{isShare}}" bindtap="{{pressName}}" open-type="{{buttonAuthroity}}" bindgetuserinfo="{{userBack}} " class='shareCon'>{{buttonText}}</button>
+        <button open-type="{{buttonZuo}}" bindtap="{{pressName1}}" bindgetphonenumber="{{userBack1}}" class='shareCon' wx:else>{{buttonText}}</button>
+        <view class='weChatFrendsCon'>
+            <text style='font-size:15px;' class="shareTitleCon">微信好友助威团</text>
+            <view class='friends' wx:for="{{helpFriend}}">
+                <image src="{{item.avatarUrl}}" mode='widthFix' class="friendIname11"></image>
+                <text style='font-size:15px;' class="wodeFriend">{{item.name}}</text>
+            </view>
+        </view>
+    </view>
+    <view class="fujinremen">
+        <text class="textremen">附近热门</text>
+    </view>
+    <!-- <view class="firstShop" wx:if="{{moreShop.length>=1}}">
+        <image class="shopImage111" src="{{url1+moreShop[0].filepath}}">
+        </image>
+        <text class="shopName111" style='font-size:14px;'>【{{moreShop[0].commName}}】{{moreShop[0].comment}}</text>
+        <text class="getNumber111" style='font-size:12px;' space="ensp"> {{moreShop[0].sales}}人免费领取 </text>
+        <text class="price111" style='font-size:16px;'>￥{{moreShop[0].commPrice}}</text>
+        <text bindtap="pressGetMian" id="{{moreShop[0].commid}}" class="mianfeilingqu111" style='font-size:17px;'>免费领取</text>
+    </view> 
+     <view class="twoShop" wx:if="{{moreShop.length>=2}}">
+        <image class="shopImage111" src="{{url1+moreShop[1].filepath}}">
+        </image>
+        <text class="shopName111" style='font-size:14px;'>【{{moreShop[1].commName}}】{{moreShop[1].comment}}</text>
+        <text class="getNumber111" style='font-size:12px;' space="ensp"> {{moreShop[1].sales}}人免费领取 </text>
+        <text class="price111" style='font-size:16px;'>￥{{moreShop[1].commPrice}}</text>
+        <text bindtap="pressGetMian" id="{{moreShop[1].commid}}"class="mianfeilingqu111" style='font-size:17px;'>免费领取</text>
+    </view>
+    <view class="threeShop"  wx:if="{{moreShop.length>=3}}">
+        <image class="shopImage111" src="{{url1+moreShop[2].filepath}}">
+        </image>
+        <text class="shopName111" style='font-size:14px;'>【{{moreShop[2].commName}}】{{moreShop[2].comment}}</text>
+        <text class="getNumber111" style='font-size:12px;'  space="ensp"> {{moreShop[2].sales}}人免费领取 </text>
+        <text class="price111" style='font-size:16px;'>￥{{moreShop[2].commPrice}}</text>
+        <text bindtap="pressGetMian" id="{{moreShop[2].commid}}"class="mianfeilingqu111" style='font-size:17px;'>免费领取</text>
+    </view>
+    <view class="fourShop"  wx:if="{{moreShop.length>=4}}">
+        <image class="shopImage111" src="{{url1+moreShop[3].filepath}}">
+        </image>
+        <text class="shopName111" style='font-size:14px;'>【{{moreShop[3].commName}}】{{moreShop[3].comment}}</text>
+        <text class="getNumber111" style='font-size:12px;'  space="ensp"> {{moreShop[3].sales}}人免费领取 </text>
+        <text class="price111" style='font-size:16px;'>￥{{moreShop[3].commPrice}}</text>
+        <text bindtap="pressGetMian" id="{{moreShop[3].commid}}"class="mianfeilingqu111" style='font-size:17px;'>免费领取</text>
+    </view>  -->
+</view>
+
+ <view class='loadScene' hidden='{{loadHidden}}'></view>
+
+
+<view class="moreShopScene"  hidden='{{hidden4}}'wx:if="{{moreShop.length==1||moreShop.length==2}}">
+    <view class="firstShop1" wx:if="{{moreShop.length>=1}}">
+        <image class="shopImage111" mode='wodthFix' src="{{url1+moreShop[0].filepath}}">
+        </image>
+        <text class="shopName111" style='font-size:14px;'>【{{moreShop[0].commName}}】{{moreShop[0].comment}}</text>
+        <text class="getNumber111" style='font-size:12px;' space="ensp"> {{moreShop[0].sales}}人免费获取 </text>
+        <text class="price111" style='font-size:16px;'>￥{{moreShop[0].commPrice}}</text>
+        <text bindtap="pressGetMian" id="{{moreShop[0].commid}}" class="mianfeilingqu111" style='font-size:17px;'>免费获取</text>
+    </view>
+    <view class="twoShop2" wx:if="{{moreShop.length>=2}}">
+        <image class="shopImage111" mode='wodthFix'src="{{url1+moreShop[1].filepath}}">
+        </image>
+        <text class="shopName111" style='font-size:14px;'>【{{moreShop[1].commName}}】{{moreShop[1].comment}}</text>
+        <text class="getNumber111" style='font-size:12px;' space="ensp"> {{moreShop[1].sales}}人免费获取 </text>
+        <text class="price111" style='font-size:16px;'>￥{{moreShop[1].commPrice}}</text>
+        <text bindtap="pressGetMian" id="{{moreShop[1].commid}}" class="mianfeilingqu111" style='font-size:17px;'>免费获取</text>
+    </view>
+</view> 
+
+<view class="moreShopScene1"  hidden='{{hidden4}}' wx:if="{{moreShop.length>=3}}">
+    <view class="firstShop" wx:if="{{moreShop.length>=1}}">
+        <image class="shopImage111" mode='wodthFix'src="{{url1+moreShop[0].filepath}}">
+        </image>
+        <text class="shopName111" style='font-size:14px;'>【{{moreShop[0].commName}}】{{moreShop[0].comment}}</text>
+        <text class="getNumber111" style='font-size:12px;' space="ensp"> {{moreShop[0].virtualNumber}}人免费获取 </text>
+        <text class="price111" style='font-size:16px;'>￥{{moreShop[0].commPrice}}</text>
+        <text bindtap="pressGetMian" id="{{moreShop[0].commid}}" class="mianfeilingqu111" style='font-size:17px;'>免费获取</text>
+    </view>
+    <view class="twoShop" wx:if="{{moreShop.length>=2}}">
+        <image class="shopImage111" mode='wodthFix'src="{{url1+moreShop[1].filepath}}">
+        </image>
+        <text class="shopName111" style='font-size:14px;'>【{{moreShop[1].commName}}】{{moreShop[1].comment}}</text>
+        <text class="getNumber111" style='font-size:12px;' space="ensp"> {{moreShop[1].virtualNumber}}人免费获取 </text>
+        <text class="price111" style='font-size:16px;'>￥{{moreShop[1].commPrice}}</text>
+        <text bindtap="pressGetMian" id="{{moreShop[1].commid}}" class="mianfeilingqu111" style='font-size:17px;'>免费获取</text>
+    </view>
+    <view class="threeShop" wx:if="{{moreShop.length>=3}}">
+        <image class="shopImage111" mode='wodthFix'src="{{url1+moreShop[2].filepath}}">
+        </image>
+        <text class="shopName111" style='font-size:14px;'>【{{moreShop[2].commName}}】{{moreShop[2].comment}}</text>
+        <text class="getNumber111" style='font-size:12px;' space="ensp"> {{moreShop[2].virtualNumber}}人免费获取 </text>
+        <text class="price111" style='font-size:16px;'>￥{{moreShop[2].commPrice}}</text>
+        <text bindtap="pressGetMian" id="{{moreShop[2].commid}}" class="mianfeilingqu111" style='font-size:17px;'>免费获取</text>
+    </view>
+    <view class="fourShop" wx:if="{{moreShop.length>=4}}">
+        <image class="shopImage111" mode='wodthFix'src="{{url1+moreShop[3].filepath}}">
+        </image>
+        <text class="shopName111" style='font-size:14px;'>【{{moreShop[3].commName}}】{{moreShop[3].comment}}</text>
+        <text class="getNumber111" style='font-size:12px;' space="ensp"> {{moreShop[3].virtualNumber}}人免费获取 </text>
+        <text class="price111" style='font-size:16px;'>￥{{moreShop[3].commPrice}}</text>
+        <text bindtap="pressGetMian" id="{{moreShop[3].commid}}" class="mianfeilingqu111" style='font-size:17px;'>免费获取</text>
+    </view>
+</view>
+
+
+<!-- <view class="firstShop" wx:if="{{moreShop.length>=1}}">
+        <image class="shopImage111" src="{{url1+moreShop[0].filepath}}">
+        </image>
+        <text class="shopName111" style='font-size:14px;'>【{{moreShop[0].commName}}】{{moreShop[0].comment}}</text>
+        <text class="getNumber111" style='font-size:12px;' space="ensp"> {{moreShop[0].sales}}人免费领取 </text>
+        <text class="price111" style='font-size:16px;'>￥{{moreShop[0].commPrice}}</text>
+        <text bindtap="pressGetMian" id="{{moreShop[0].commid}}" class="mianfeilingqu111" style='font-size:17px;'>免费领取</text>
+    </view> 
+     <view class="twoShop" wx:if="{{moreShop.length>=2}}">
+        <image class="shopImage111" src="{{url1+moreShop[1].filepath}}">
+        </image>
+        <text class="shopName111" style='font-size:14px;'>【{{moreShop[1].commName}}】{{moreShop[1].comment}}</text>
+        <text class="getNumber111" style='font-size:12px;' space="ensp"> {{moreShop[1].sales}}人免费领取 </text>
+        <text class="price111" style='font-size:16px;'>￥{{moreShop[1].commPrice}}</text>
+        <text bindtap="pressGetMian" id="{{moreShop[1].commid}}"class="mianfeilingqu111" style='font-size:17px;'>免费领取</text>
+    </view>
+    <view class="threeShop"  wx:if="{{moreShop.length>=3}}">
+        <image class="shopImage111" src="{{url1+moreShop[2].filepath}}">
+        </image>
+        <text class="shopName111" style='font-size:14px;'>【{{moreShop[2].commName}}】{{moreShop[2].comment}}</text>
+        <text class="getNumber111" style='font-size:12px;'  space="ensp"> {{moreShop[2].sales}}人免费领取 </text>
+        <text class="price111" style='font-size:16px;'>￥{{moreShop[2].commPrice}}</text>
+        <text bindtap="pressGetMian" id="{{moreShop[2].commid}}"class="mianfeilingqu111" style='font-size:17px;'>免费领取</text>
+    </view>
+    <view class="fourShop"  wx:if="{{moreShop.length>=4}}">
+        <image class="shopImage111" src="{{url1+moreShop[3].filepath}}">
+        </image>
+        <text class="shopName111" style='font-size:14px;'>【{{moreShop[3].commName}}】{{moreShop[3].comment}}</text>
+        <text class="getNumber111" style='font-size:12px;'  space="ensp"> {{moreShop[3].sales}}人免费领取 </text>
+        <text class="price111" style='font-size:16px;'>￥{{moreShop[3].commPrice}}</text>
+        <text bindtap="pressGetMian" id="{{moreShop[3].commid}}"class="mianfeilingqu111" style='font-size:17px;'>免费领取</text>
+    </view>  -->
+
+
+<view class="modal ">
+    <modal hidden="{{hidden}}" confirm-text="返回页面" title="分享成功!ta送给你一个爱的抱抱" cancel-text="浏览商城" bindcancel="cancel" bindconfirm="confirm">
+        <view class="shopMsg1 ">
+            <image src="{{url}} " mode='widthFix' style="width:180rpx;" class="image1 ">
+            </image>
+            <text class="shopworld">【{{commMsg.commName}}】{{commMsg.comment}}</text>
+            <text class="getNumber1" style="font-size:12px; " space='ensp'>   亲，他还需要{{commMsg.shareNumber}}个分享就能免费领取这件宝贝  </text>
+        </view>
+    </modal>
+</view>
+
+
+<view class="modal ">
+    <modal hidden="{{hidden1}}" confirm-text="查看详情" title="领取成功" cancel-text="浏览商城" bindcancel="cancel" cancel-color="#f2f2f2" bindconfirm="pressDetail">
+        <view class="shopMsg1 ">
+            <image src="{{url1+commMsg.filepath}}"  mode='widthFix' style="width:180rpx;" class="image2 ">
+            </image>
+            <text class="shopworld">【{{commMsg.commName}}】{{commMsg.comment}}</text>
+            <text class="getNumber" style="font-size:12px; "> 您的体验码</text>
+            <text class="experienceCode ">{{getCode}}</text>
+        </view>
+    </modal>
+</view>
+
+
+<view class="modal">
+    <modal hidden="{{hidden2}}" confirm-text="返回页面" title="帮忙砍价失败，你已经帮他分享过" cancel-text="浏览商城" bindcancel="cancel1" bindconfirm="confirm1">
+    </modal>
+</view>
+<!-- 
+<view class='loadScene' hidden='{{loadHidden}}'></view> -->

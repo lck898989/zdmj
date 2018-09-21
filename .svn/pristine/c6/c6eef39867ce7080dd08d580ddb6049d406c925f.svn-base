@@ -1,0 +1,10 @@
+<!--pages/Person/Person.wxml-->
+<view class="background">
+    <view class="CodeBox">
+        <image src='{{url}}' mode='widthFix'class="image">
+        </image>
+        <text style="font-size:24px;" class="GetMsg">指点迷津</text>
+        <text style="font-size:18px;" class='texts'>右上角关于指点迷津，进入相关公众号，发送“免费领取”，即有专门客服和更多优惠等你来！</text>
+        <button  bindtap="PressReturn"style="border-radius: 6px;"class="anniu">返回商城</button> 
+    </view>
+</view>

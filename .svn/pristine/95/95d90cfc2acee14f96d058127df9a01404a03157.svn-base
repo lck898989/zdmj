@@ -1,0 +1,15 @@
+<!--pages/Person/Person.wxml-->
+<view class="background">
+    <view class="CodeBox">
+        <text class="shopperName" style="font-size:12px;">店铺名称</text>
+        <text class="shopperName1" style="font-size:19px;">{{codeMsg.cerchanName}}</text>
+        <text class="codeTime" style="font-size:12px;">有效日期</text>
+        <text class="date" style="font-size:12px;">{{codeMsg.succTime}}到{{codeMsg.validTime}}</text>
+        <text class="shopUrl" style="font-size:12px;">店铺地址</text>
+        <text class="shopUrl1" style="font-size:12px;">{{shopAddress}}</text>
+        <text class="shopNumber" style="font-size:12px;">订单编号 ：{{codeMsg.orderNumber}}</text>
+        <text class="xuyao" style="font-size:12px;">需要预约</text>
+        <text class="code" style="font-size:16px;">您的体验码{{codeMsg.code}}</text>
+        <text  bindtap='pressPerson' class="talkPerson"  style="font-size:19px;">联系客服进行预订</text>
+    </view>
+</view>

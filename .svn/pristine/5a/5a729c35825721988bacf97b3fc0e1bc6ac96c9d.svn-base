@@ -1,0 +1,27 @@
+/* pages/MyCode/MyCode.wxss */
+.background{
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    top:0px;
+    bottom: 0px;
+    background-color: black;
+    
+}
+.CodeBox{
+    position: absolute;
+    height: 90%;
+    width: 90%;
+    left: 5%;
+    top: 5%;
+    background: white;
+
+}
+.image{
+    position: absolute;
+    top: 3%;
+    left:5%;
+    height: 40%;
+    width:90%; 
+}
+  

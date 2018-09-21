@@ -1,0 +1,70 @@
+<!--components/shopping-common/shoppingCommon-component.wxml-->
+<!--组件-->
+<view class='head-con'>
+    <!--热门或者精选商城-->
+    <view class='shop-type-con'>
+        <view class='button-con'>
+            <button class='hot btn'>热门</button>
+        </view>
+        <view class='button-con'>
+            <button class='wonderful btn'>精选</button>
+        </view>
+    </view>
+    <!--商品类别-->
+    <view class='goods-type-con'>
+        <view class='type-parent'>
+            <view class='type-list' id='all'>
+               全部
+            </view>
+            <view class='type-list' id='ele'>
+               电器
+            </view>
+            <view class='type-list' id='mix'>
+               美妆
+            </view>
+            <view class='type-list' id='shuma'>
+               数码产品
+            </view>
+            <view class='type-list' id='cw'>
+               厨卫
+            </view>
+        </view>
+        <view class='extra'>
+            <image src='../../resources/icon_right.png' style='width:30rpx;height:30rpx;'></image>
+        </view>
+    </view>
+    <!--搜索及排序-->
+    <view class='other-con'>
+        <!--搜索功能-->
+        <view class='search-con'>
+            <view class='icon-con'>
+                <icon type='search' color='#fff' size='20'></icon>
+            </view>
+            <view class='inputC'>
+                <input placeholder='搜你想要！' style='color:#fff;font-size:30rpx;'></input>
+            </view>
+        </view>
+        <!--价格等信息-->
+        <view class='price-extra-con'>
+            <view class='price-con'>
+                价格
+            </view>
+            <view class='price-con'>
+                销量
+            </view>
+            <view class='price-con withIcon' bindtap='banshi'>
+                <view>版式</view>
+                <block wx:if='{{!banshi}}'>
+                    <view class='banshi'>
+                        <image src='../../resources/list.png' style='width:35rpx;height:35rpx;'></image>
+                    </view>
+                </block>
+                <block wx:else>
+                    <view class='banshi'>
+                        <image src='../../resources/row.png' style='width:35rpx;height:35rpx;'></image>
+                    </view>
+                </block>
+            </view>
+        </view>
+    </view>
+</view>

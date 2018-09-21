@@ -1,0 +1,111 @@
+<!--pages/detailshop/detailshop.wxml-->
+<!-- <text>pages/detailshop/detailshop.wxml</text> -->
+<!-- <view class="scene">
+  <view class="shopImage">
+    <image class="shopimage" src="{{url}}"></image>
+  </view>
+  <view class="shopmsg">
+    <view class="text1">
+      <text class="getNumber"> {{getNumber}}人</text>
+      <view class="text2">
+        <text style="font-size:10px;" class="textY">已免费拿</text>
+        <text style="font-size:10px;" class="price">价值{{commMsg.commPrice}}元</text>
+      </view>
+    </view>
+    <view class="shopname">
+      <text space="ensp" style="font-size:19px;" class='texts'> 【{{commMsg.commName}}】{{commMsg.comment}}</text>
+    </view>
+    <view class="overTime1">
+      <text class="texth" style="font-size:17px;" space='ensp'> 活动时间 : </text>
+      <text class="startime" style="font-size:17px;">{{startTime1}}</text>
+      <text class="textd" style="font-size:17px;" space='ensp'> 到 </text>
+      <text class="overtime2" style="font-size:17px;"  space='ensp'>{{overTime1}}</text>
+      <text space='ensp' hidden='false' class="ensp">a</text>
+    </view>
+    <text bindtap="pressGame" class="gameShuo" style="font-size:12px;">游戏规则</text>
+    <image bindtap="pressGame" class='dayu' src="../../resources/icon_arrow.png"></image>
+  </view>
+  <view class="btns">
+    <text class="btn1"> 需要{{commMsg.price}}分享度 </text>
+    <button bindtap='PressShare' class='btn2'>分享好友免费拿</button>
+  </view>
+  <view class="shoppingmsg">
+    <image src='../../resources/icon_address.png' class="shopimage1">
+    </image>
+    <text class="shopLocation" style="font-size:17px;">{{shopperMsg.cerchanAddress}}</text>
+  </view>
+  <view class="shopPhone">
+    <image src='../../resources/icon_phone.png' class="shopimage2">
+    </image>
+    <text style="font-size:17px;" class="textT">营业时间</text>
+    <text  style="font-size:17px;" class="textTime1">{{shopperMsg.startTime}}-{{shopperMsg.endTime}}</text>
+    <text style="font-size:17px;" class="texts1">是否需要预约</text>
+    <text style="font-size:17px;"  class="textx">需要</text>
+  </view>
+</view> -->
+<view class="scene">
+    <scroll-view scroll-y="true" class="topScene">
+        <swiper bindchange='PressSwiper' class="shopimage" scroll-x="true" circular='true' autoplay='true' interval="5000">
+            <swiper-item class="shopimageson" wx:for="{{url}}">
+                <image src="{{item}}" class="imageActivity"></image>
+            </swiper-item>
+        </swiper>
+        <image class="indexImage" src="../../resources/page_bar.png">
+            <text class="indexText" style='font-size:13px;'>{{index}}/{{url.length}}</text>
+        </image>
+        <view class="getPerson">
+            <!-- <text class="getText">saasdad</text> -->
+            <image class="icon" src='../../resources/exclamation_icon.png' style="top:{{marqueeDistance3}}%;opacity:{{imageOpacity}}"></image>
+            <text class="getText" style="top:{{marqueeDistance2}}%;font-size: {{size}}px;opacity:{{textOpacity}}">{{getText}}</text>
+        </view>
+        <view class="shopmsg">
+            <text class="getNumber" style="font-size:23px;">{{getNumber}}人</text>
+            <text style="font-size:12px;" class="textY">已免费拿</text>
+            <text style="font-size:12px;" class="price">价值{{commMsg.commPrice}}元</text>
+            <text space="ensp" style="font-size:19px;" class='texts'> [{{commMsg.commName}}]{{commMsg.comment}}</text>
+            <text class="overTime1">
+                <text class="texth" style="font-size:15px;" space='ensp'> 活动时间</text>
+            <text class="fen" style="font-size:15px;">:</text>
+            <text class="startime" space='ensp' style="font-size:13px;"> {{startTime1}} </text>
+            <text class="textd" style="font-size:15px;" space='ensp'>到</text>
+            <text class="overtime2" style="font-size:13px;" space='ensp'> {{overTime1}} </text>
+            </text>
+            <text bindtap="pressGame" class="gameShuo" style="font-size:12px;">游戏规则</text>
+            <image bindtap="pressGame" mode='widthFix' class='dayu' src="../../resources/icon_arrow.png"></image>
+        </view>
+        <view class="shoppingmsg">
+            <image src='../../resources/icon_address.png' class="shopimage1">
+            </image>
+            <text class="shopLocation" style="font-size:17px;">{{shopperMsg.cerchanAddress}}</text>
+        </view>
+        <view class="shopPhone">
+            <image src='../../resources/icon_phone.png' class="shopimage2">
+            </image>
+            <text style="font-size:15px;" class="textT">营业时间</text>
+            <text style="font-size:14px;" class="textTime1">{{shopperMsg.startTime}}-{{shopperMsg.endTime}}</text>
+            <text style="font-size:15px;" class="texts1">是否需要预约</text>
+            <text style="font-size:14px;" class="textx">需要</text>
+        </view>
+        <view class='shopMsgView'>
+            <text class='commMsgText' style="font-size:17px;font-weight:900">商品信息</text>
+            <text class='commDetailText' style="font-size:16px;">{{commMsg.commInfor}}</text>
+            <text class='comm222' space='ensp' style="font-size:16px;">产品内容：{{commMsg.commContent}}</text  >
+    <text class='shopSize'space='ensp' style="font-size:16px;">规格：{{commMsg.specifications}}</text>
+        </view>
+        <image class='commDetailShop'  mode='widthFix' src='{{item}}' wx:for="{{url3}}">
+        </image>
+        <view class="MerchantView">
+            <text class='MerchantText' style="font-size:17px;">商户信息介绍</text>
+            <view class='border'></view>
+            <text class='MerchantDetaiParent' space='ensp' style="font-size:16px;"><text class='MerchantName'  style="font-size:17px;font-weight:900">商户描述 </text>
+            <text class='MerchantDetail' style="font-size:16px">{{shopperMsg.cerContent}}</text></text>
+            <text class='MerchantText1' style="font-size:16px;font-weight:900">店内实拍</text>
+        </view>
+
+        <image src='{{url2+item}}' mode='widthFix' class="Merchant" wx:for="{{shoperPicture}}"></image>
+    </scroll-view>
+    <view class="btns">
+        <text class="btn1" style="font-size:19px;"> 需要{{commMsg.price}}分享数 </text>
+        <button bindtap='PressShare' class='btn2' style="font-size:19px;">推荐好友免费拿</button>
+    </view>
+</view>

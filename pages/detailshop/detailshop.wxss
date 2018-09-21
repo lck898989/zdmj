@@ -1,0 +1,519 @@
+/* pages/detailshop/detailshop.wxss */
+
+.scene {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+
+.shopImage {
+  position: absolute;
+  width: 750rpx;
+  top: 0;
+  height: 55%;
+}
+
+.topScene {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 91.1%;
+  top: 0;
+  background-color: #d9d9d9;
+}
+
+.shopimage {
+  position: relative;
+  width: 750rpx;
+  margin-top: 0;
+  height: 378px;
+}
+
+.shopimageson {
+  position: relative;
+  width: 750rpx;
+  height: 100%;
+}
+
+.indexImage {
+  position: absolute;
+  right: 3%;
+  top: 62.5%;
+  width: 14.8%;
+  height: 4%;
+}
+
+.getText {
+  position: absolute;
+  left: 13%;
+  color: white;
+}
+
+.icon {
+  position: absolute;
+  top: 18%;
+  height: 64%;
+  width: 29rpx;
+  left: 10rpx;
+}
+
+.getPerson {
+  position: absolute;
+  left: 0;
+  top: 62.5%;
+  width: 398rpx;
+  height: 21px;
+  line-height: 21px;
+  background-color: black;
+  opacity: 0.5;
+}
+
+.indexText {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  text-align: center;
+  color: white;
+  line-height: 22px;
+}
+
+.imageActivity {
+  position: relative;
+  width: 750rpx;
+  height: 100%;
+}
+
+.btns {
+  position: absolute;
+  height: 8.9%;
+  width: 750rpx;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.btn1 {
+  position: absolute;
+  background-color: white;
+  left: 0;
+  width: 38%;
+  text-align: center;
+  line-height: 53px;
+  height: 53px;
+  color: #eb7f0c;
+}
+
+.btn2 {
+  position: absolute;
+  right: 0;
+  width: 62%;
+  border-radius: 6px;
+  border-bottom: 2px solid #70319a;
+  background-color: #b883db;
+  height: 53px;
+  line-height: 53px;
+  text-align: center;
+  color: white;
+}
+
+.GetShop {
+  position: absolute;
+  left: 0px;
+  bottom: 10px;
+  background-color: green;
+  width: 70%;
+  height: 30px;
+}
+
+.text {
+  position: absolute;
+  left: 0;
+  bottom: 20%;
+}
+
+.shopmsg {
+  position: relative;
+  height: 126px;
+  width: 750rpx;
+  margin-top: 0;
+  bottom: 5px;
+  background-color: white;
+}
+
+.text1 {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 5%;
+  height: 20%;
+}
+
+.getNumber {
+  position: absolute;
+  left: 10%;
+  top: 9%;
+  
+  text-align: right;
+  color: #b31227;
+}
+
+.text2 {
+  position: absolute;
+  left: 32%;
+  bottom: 20%;
+  width: 68%;
+  height: 60%;
+}
+
+.textY {
+  position: absolute;
+  left:20%;
+  top: 17.8%;
+  width: 20%;
+  color: #b31227;
+}
+
+.price {
+  position: absolute;
+  right: 3.5%;
+  top: 18.3%;
+  color: #808080;
+  text-align: right;
+}
+
+.shopname {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 26%;
+  height: 30%;
+}
+
+/* .texts {
+    position: absolute;
+    bottom: 40%;
+    top: 26%;
+    height: 30%;
+    background-color: green;
+} */
+
+.texts {
+  position: absolute;
+  top: 39.4%;
+  left: 3.3%;
+  width: 90%;
+  height: 100%;
+  display: -webkit-box;
+  line-height: 20px;
+  word-break: break-all;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  letter-spacing: 0.5px;
+}
+
+.overTime1 {
+  position: absolute;
+  bottom: 5.5%;
+  left: 2%;
+  width: 76%;
+  line-height: 20px;
+  height: 19.4%;
+  background-color: #fcdf4d;
+  border-radius: 2px;
+}
+
+.ensp {
+  /* right: 0;
+    width: 2%; */
+}
+
+.texth {
+  position: absolute;
+  height: 23px;
+  /* top:5%; */
+  line-height: 23px;
+  color: #b31227;
+}
+
+.startime {
+  position: absolute;
+  /* border-top: 1px solid #b31227;
+    border-bottom: 1px solid #b31227;
+    border-left: 1px solid #b31227;
+    border-right: 1px solid #b31227; */
+  right: 41%;
+  top: 14.3%;
+  width: 31%;
+  height: 71.6%;
+  line-height: 17px;
+  background-color: #b31227;
+  color: white;
+  text-align: center;
+}
+
+.fen {
+  position: absolute;
+  height: 76%;
+  width: 5%;
+  top: 0;
+  left: 25.5%;
+  line-height: 20px;
+  color: #b31227;
+}
+
+.overtime2 {
+  /* border-top: 1px solid #b31227;
+    border-bottom: 1px solid #b31227;
+    border-left: 1px solid #b31227;
+    border-right: 1px solid #b31227; */
+  position: absolute;
+  right: 2%;
+  top: 14.3%;
+  width: 31%;
+  height: 71.4%;
+  line-height: 17px;
+  background-color: #b31227;
+  color: white;
+  text-align: center;
+}
+
+.textd {
+  position: absolute;
+  left: 60.2%;
+  height: 23px;
+  line-height: 23px;
+  /* top: 5%; */
+  color: #b31227;
+}
+
+.background {
+  position: relative;
+  width: 750rpx;
+  height: 220px;
+  background-color: #d9d9d9;
+  bottom: 30px;
+}
+
+.shoppingmsg {
+  position: relative;
+  height: 60px;
+  width: 750rpx;
+  margin-top: 0px;
+  background-color: white;
+}
+
+.shopimage1 {
+  position: absolute;
+  left: 2.37%;
+  height: 58.8%;
+  top: 21.8%;
+  width: 9.26%;
+}
+
+.shopLocation {
+  position: absolute;
+  bottom: 0;
+  left: 13.8%;
+  width: 75%;
+  height: 90%;
+  display: -webkit-box;
+  font-size: 30rpx;
+  line-height: 30px;
+  word-break: break-all;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  color: transparent;
+}
+
+.Merchant {
+  position: relative;
+  left: 0;
+  width: 750rpx;
+  height: 750rpx;
+  margin-top: 0;
+
+}
+
+.shopPhone {
+  position: relative;
+  height: 60px;
+  width: 750rpx;
+  background-color: white;
+  margin-top: 5px;
+}
+
+.shopimage2 {
+  position: absolute;
+  left: 2.37%;
+  height: 58.8%;
+  top: 21.8%;
+  width: 9.25%;
+}
+
+.textT {
+  position: absolute;
+  left: 13.8%;
+  top: 15%;
+  color: #808080;
+}
+
+.textTime1 {
+  position: absolute;
+  right: 7.4%;
+  top: 15%;
+}
+
+.texts1 {
+  position: absolute;
+  left: 13.8%;
+  bottom: 20.6%;
+  color: #808080;
+}
+
+.textx {
+  position: absolute;
+  right: 7.4%;
+  bottom: 20.6%;
+}
+
+.gameShuo {
+  position: absolute;
+  right: 5.5%;
+  width: 15%;
+  bottom: 10.5%;
+  color: #808080;
+  text-align: right;
+}
+
+.dayu {
+  position: absolute;
+  bottom: 10%;
+  right: 2.2%;
+  width: 20rpx;
+  height: 13.3%;
+  text-align: right;
+}
+
+.shopMsgView {
+  position: relative;
+  width: 750rpx;
+  margin-top: 5px;
+  height: 170px;
+  background-color: white;
+}
+
+.commMsgText {
+  position: absolute;
+  top: 7%;
+  left: 4.4%;
+  color: #262626;
+}
+
+.commDetailText {
+  position: absolute;
+  left: 4.4%;
+  top: 25.2%;
+  line-height: 18px;
+  display: -webkit-box;
+  word-break: break-all;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 91.2%;
+  color: #808080;
+}
+
+.comm222 {
+  position: absolute;
+  top: 71%;
+  left: 4.4%;
+  color: #808080;
+}
+
+.shopSize {
+  position: absolute;
+  left: 4.4%;
+  bottom: 3.7%;
+  color: #808080;
+}
+
+.MerchantView {
+  position: relative;
+  margin-top: 5px;
+  width: 750rpx;
+  background: white;
+  height: 163px;
+}
+
+.MerchantText {
+  position: absolute;
+  top: 1.2%;
+  left: 3.4%;
+  color: #863bb7;
+}
+
+.border {
+  position: absolute;
+  top: 19.8%;
+  width: 750rpx;
+  height: 5%;
+  border-top: 2px solid #863bb7;
+  left: 0;
+}
+
+.MerchantName {
+  /* position: absolute;
+  left: 0;
+  top:0;
+  text-align: center; */
+}
+
+.MerchantDetail {
+  /* position: absolute;
+  top: 25%;
+  left: 22%; */
+  color: #808080;
+}
+
+.MerchantDetaiParent {
+  position: absolute;
+  left: 4.4%;
+  top: 25%;
+  height: 60%;
+  width: 91.2%;
+   line-height: 18px;
+  display: -webkit-box;
+  word-break: break-all;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 6;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  
+}
+.MerchantText1{
+   position: absolute;
+   left: 4.4%;
+   bottom: 2%;
+   color:#262626;
+}
+.commDetailShop{
+     position: relative;
+  margin-top: 5px;
+  width: 750rpx;
+  background: white;
+  
+}

@@ -1,0 +1,207 @@
+/* pages/lck/address/address.wxss */
+.page-con{
+    position: relative;
+}
+.back{
+    margin-left: 30rpx;
+}
+.m{
+    margin-right: 30rpx;
+    justify-self: center;
+    align-items: center;
+}
+.index-manager{
+    background-color: #eee;
+    padding:40rpx 0rpx;
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: nowrap;
+    align-items: center;
+}
+.manage-add-con{
+    background-color: #eee;
+    padding:40rpx 0rpx;
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    align-items: center;
+}
+.addContainer{
+    padding-bottom: 20rpx;
+}
+.address-detail-con{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: nowrap;
+    border-bottom: 1px solid #888;
+    padding-top: 30rpx;
+    padding-bottom: 25rpx;
+}
+.add-item{
+    width: 100%;
+    padding-bottom: 60rpx;
+    border-bottom: 1px solid #888;
+}
+.user-con{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: nowrap;
+    /* background-color: bisque; */
+    height:100rpx;
+}
+.add-info{
+    width: 100%;
+    text-align: center;
+}
+.user-con .n{
+    margin-left: 30rpx;
+}
+.user-con .p{
+    margin-left: 100rpx;
+}
+.add-manager{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: nowrap;
+    margin-top: 20rpx;
+}
+.edit-del-con{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: nowrap;
+    margin-right: 20rpx;
+}
+.default-con{
+    margin-left: 20rpx;
+    font-size: 30rpx;
+}
+.sbtn{
+    width: 120rpx;
+    font-size: 30rpx;
+    color: #fff;
+    padding:25rpx 35rpx;
+    border-radius: 10rpx;
+}
+.editor{
+    background-color: rgb(199, 188, 37);
+    margin-right: 20rpx;
+    text-align: center;
+}
+.delete{
+    background-color: rgb(243, 74, 7);
+    text-align: center;
+}
+.addAdd{
+    padding: 20rpx;
+    color:#aaa;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: nowrap;
+    /* background-color: red; */
+}
+.editor-con{
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-wrap: nowrap;
+}
+.editor-item{
+    margin-left: 40rpx;
+    margin-top: 30rpx;
+    width:100%;
+    border-bottom: 1px solid #aaa;
+    padding-bottom: 30rpx;
+    font-size: 35rpx;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: nowrap;
+}
+.save-container{
+    width:750rpx;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: nowrap;
+}
+.save-btn{
+    margin-top: 40rpx;
+    background-color: rgb(243, 74, 7);
+    padding: 35rpx 120rpx;
+    color:white;
+    border-radius: 10rpx;
+}
+.error-con{
+    width: 40%;
+    margin-left: 30%;
+    border: 1px solid #ec0023;
+    color: #ec0023;
+    padding: 10rpx 15rpx;
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: nowrap;
+    /* border: 1px solid #ec0023; */
+}
+#phone_type{
+    color: #888;
+    margin-right: 30rpx;
+}
+.citypicker{
+    margin-top: 100rpx;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: nowrap;
+}
+/* .city-con{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: nowrap;
+} */
+.cityheader{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: nowrap;
+}
+.but{
+    font-size: 35rpx;
+    color : #fff;
+    background-color: rgb(243, 74, 7);
+    padding: 20rpx 40rpx;
+    border-radius: 10rpx;
+}
+.city-cancel{
+    margin-left: 20rpx;
+}
+.city-true{
+    margin-right: 20rpx;
+}
