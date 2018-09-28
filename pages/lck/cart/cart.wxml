@@ -1,17 +1,93 @@
 <!--pages/lck/cart/cart.wxml-->
 <view class='page-con'>
-    <view class='store-con'>
-        <view>
-            <!-- <icon type='' color='' size=20></icon> -->
+    <scroll-view class='goodList'>
+        <checkbox-group class='store-con' bindchange='change'>
+            <block wx:for='{{cart}}' wx:for-item='outItem' wx:for-index='outIndex'>
+                <view class='store-container' bindtouchstart='chooseStore'>
+                    <!--一个店家的容器-->
+                    <view class='per-store-con'>
+                        <view class='storename-con'>
+                            <checkbox value='{{outItem[0].storeName}}' checked='{{}}' bindtap='selectAllByStoreName' id='{{outItem[0].storeName}}'>{{outItem[0].storeName}}</checkbox>
+                        </view>
+                        <block wx:for='{{outItem}}' wx:for-index='innerIndex' wx:for-item='innerItem'>
+                            <checkbox value='{{innerItem.pid}}' class='checkbox-con' checked='{{innerItem.choosed}}'>
+                                <view class='store-detail'>
+                                    <view class='imagecontainer'>
+                                        <image src='{{innerItem.imagePath}}' style='width:150rpx;height:150rpx;'></image>
+                                    </view>
+                                    <view class='right-text-con'>
+                                        <view class='right-line-con'>
+                                            <block wx:if='{{!innerItem.editor}}'>
+                                                <view>
+                                                    {{innerItem.productName}}
+                                                </view>
+                                                <view class='editor' catchtap='editor' data-pid='{{innerItem.pid}}' data-storename='{{innerItem.storeName}}'>
+                                                    编辑
+                                                </view>
+                                            </block>
+                                            <block wx:else>
+                                                <view class='count-control'>
+                                                    <view class='count-item'>
+                                                        数量
+                                                    </view>
+                                                    <view class='count-item' catchtap='sub' data-pid='{{innerItem.pid}}' data-count='{{innerItem.count}}' data-storename='{{innerItem.storeName}}'>
+                                                        -
+                                                    </view>
+                                                    <view class='real-count'>
+                                                        {{innerItem.count}}
+                                                    </view>
+                                                    <view class='count-item' catchtap='add' data-pid='{{innerItem.pid}}' data-count='{{innerItem.count}}' data-storename='{{innerItem.storeName}}'>
+                                                        +
+                                                    </view>
+                                                </view>
+                                            </block>
+                                        </view>
+                                        <view class='right-line-con'>
+                                            <block wx:if='{{!innerItem.editor}}'>
+                                                <view>
+                                                    {{innerItem.size.size}}/{{innerItem.size.color}}    ￥{{innerItem.price}}
+                                                </view>
+                                                <view class='editor' style='background-color:#eee;color:#000;'>
+                                                    {{innerItem.count}}
+                                                </view>
+                                            </block>
+                                            <block wx:else>
+                                                <view style='margin-right:50rpx;'>
+                                                    {{innerItem.size.size}}/{{innerItem.size.color}}
+                                                </view>
+                                                <view class='delete' catchtap='cancel' data-pid='{{innerItem.pid}}' data-storename='{{innerItem.storeName}}'>
+                                                    取消
+                                                </view>
+                                                <view class='delete' catchtap='delete' data-pid='{{innerItem.pid}}' data-storename='{{innerItem.storeName}}'>
+                                                    删除
+                                                </view>
+                                            </block>
+                                        </view>
+                                    </view>
+                                </view>
+                            </checkbox>                        
+                        </block>
+                    </view>
+                </view>
+            </block>
+        </checkbox-group>
+    </scroll-view>
+    <!--结算栏-->
+    <view class='settle-con'>
+        <view class='left-con'>
+            <view class='selectAll-con'>
+                <checkbox-group bindchange='selectAllChange'>
+                    <checkbox value='all'>全选</checkbox>
+                </checkbox-group>
+            </view>
         </view>
-        <view class='storename'>
-            
+        <view class='left-con'>
+            <view>
+                合计
+            </view>
+            <view class='settle'>
+                结算(0)
+            </view>
         </view>
-    </view>
-    <view>
-    
-    </view>
-    <view>
-    
     </view>
 </view>

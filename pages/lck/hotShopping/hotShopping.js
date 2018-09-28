@@ -11,9 +11,9 @@ Page({
    */
   data: {
       //商品列表
-      goods: [new Goods(50, '/resources/example.jpg', '好商品不容错过', '天津一家人'),
-              new Goods(50, '/resources/example.jpg', '好商品不容错过', '天津一家人'),
-              new Goods(50, '/resources/example.jpg', '好商品不容错过', '天津一家人')],
+    //   goods: [new Goods(50, '/resources/example.jpg', '好商品不容错过', '天津一家人'),
+    //           new Goods(50, '/resources/example.jpg', '好商品不容错过', '天津一家人'),
+    //           new Goods(50, '/resources/example.jpg', '好商品不容错过', '天津一家人')],
       //是否显示行式排版
       banshi : false,
       moreType : false,
@@ -39,27 +39,27 @@ Page({
   onLoad: async function (options) {
       console.log("asdfasdf");
       //向服务器请求数据
-//       let req = new Request(Const.host +`API?query={products(page:1) {
-//         pid
-//         pname
-//         price
-//         unit
-//         size
-//         info
-//         sname
-//         counts
-//         sales
-//         tname
-//         t2name
-//         image
-//         head
-//     }
-// }`,{},"GET","text");
-//       console.log("ae32333");
-//       let res = await req.sendRequest();
-//       console.log();
-//       console.log("res.data is ",res.data.data.products);
-//       this.setData({ goods: res.data.data.products});
+      let req = new Request(Const.host +`API?query={products(page:1) {
+        pid
+        pname
+        price
+        unit
+        size
+        info
+        sname
+        counts
+        sales
+        tname
+        t2name
+        image
+        head
+    }
+}`,{},"GET","text");
+      console.log("ae32333");
+      let res = await req.sendRequest();
+      console.log();
+      console.log("res.data is ",res.data.data.products);
+      this.setData({ goods: res.data.data.products});
   },
 
   /**
@@ -184,5 +184,11 @@ Page({
     let req = new Request();
     //将请求数据发送给服务器
     
+  },
+  //进入商品详情界面
+  goodsDetail:function(){
+      wx.navigateTo({
+          url: '../cartGoodsDetail/cartGoodsDetail',
+      })
   }
 })

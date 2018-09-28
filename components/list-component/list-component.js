@@ -1,4 +1,5 @@
 // pages/goodsList.js
+import Host from '../../utils/Const.js'
 Component({
     //包含多个slot节点的时候需要声明的
     options: {
@@ -26,7 +27,7 @@ Component({
             observer: function (newVal, oldVal, changedPath) {
 
             }
-        }
+        },
     },
     lifetimes: {
         created: function () {
@@ -59,7 +60,7 @@ Component({
      * 组件的初始数据 进行模板渲染
      */
     data: {
-
+        host : Host.host
     },
 
     /**
@@ -84,18 +85,22 @@ Component({
             console.log("e is ", e);
         },
         onTap: function () {
-            console.log("tap is -->>");
-            //自定义组件触发事件时候，需要使用triggerEvent 方法，指定事件名，detail对象和事件选项
-            let eventname = 'eventListener';
-            //detail对象
-            let eventDetail = { "tag": 1 };
-            //事件的选项
-            let eventOption = {
-                bubbles: true,
-                composed: false,
-            };
-            //自定义组件触发事件
-            this.triggerEvent(eventname, eventDetail, eventOption);
+            wx.navigateTo({
+                url: '../cartGoodsDetail/cartGoodsDetail?goods='+JSON.stringify(this.data.goods),
+            })
+            // console.log("tap is -->>");
+            // //自定义组件触发事件时候，需要使用triggerEvent 方法，指定事件名，detail对象和事件选项
+            // let eventname = 'eventListener';
+            // //detail对象
+            // let eventDetail = { "tag": 1 };
+            // //事件的选项
+            // let eventOption = {
+            //     bubbles: true,
+            //     composed: false,
+            // };
+            // //自定义组件触发事件
+            // this.triggerEvent(eventname, eventDetail, eventOption);
+
         }
     }
 })

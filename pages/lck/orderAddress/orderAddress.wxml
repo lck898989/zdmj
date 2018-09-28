@@ -2,7 +2,7 @@
 <view class="page-con">
     <block wx:if='{{isChecked}}'>
         <view class='index-manager'>
-            管理收货地址
+            更改收货地址
         </view>
     </block>
     <block wx:else>
@@ -68,12 +68,12 @@
                                 设为默认地址
                             </block>
                         </view>
-                        <view class="edit-del-con" catchtap='stopEvent'>
+                        <view class="edit-del-con">
                             <view class='sbtn editor' bindtap='editorAdd' data-aid='{{item.aid}}'>
-                                编辑
+                                修改
                             </view>
-                            <view class="sbtn delete" bindtap='deleteAdd' data-aid='{{item.aid}}'>
-                                删除
+                            <view class="sbtn delete" bindtap='chooseAdd' data-aid='{{item.aid}}'>
+                                选择
                             </view>
                         </view>
                     </view>

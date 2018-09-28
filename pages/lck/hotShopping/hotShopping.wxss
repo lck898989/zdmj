@@ -83,7 +83,7 @@ page{
     align-items: center;
 }
 .search-con{
-    background-color: rgba(176, 10, 241, 0.2); 
+    background-color: rgba(176, 10, 241, 0.2);
     border: 1px solid rgba(176, 10, 241, 0.2);
     width: 40%;
     height:60rpx;

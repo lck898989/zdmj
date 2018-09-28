@@ -1,8 +1,9 @@
 {
     "pages": [
-        "pages/lck/cart/cart",
-        "pages/lck/address/address",
         "pages/lck/hotShopping/hotShopping",
+        "pages/lck/order/order",
+        "pages/lck/address/address",
+        "pages/lck/cart/cart",
         "pages/wxscope/wxscope",
         "pages/index/index",
         "pages/myshop/myshop",
@@ -13,8 +14,10 @@
         "pages/Person/Person",
         "pages/CheckCode/CheckCode",
         "pages/Advertisting/Advertisting",
-        "pages/lck/testJing/perfact"
-        
+        "pages/lck/testJing/perfact",
+        "pages/lck/cartGoodsDetail/cartGoodsDetail",
+        "pages/lck/editAddress/editAddress",
+        "pages/lck/orderAddress/orderAddress"
     ],
     "window": {
         "navigationBarBackgroundColor": "#863bb7",

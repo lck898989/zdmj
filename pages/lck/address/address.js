@@ -1,6 +1,8 @@
 // pages/lck/address/address.js
 import tcity from '../../../utils/city.js';
 import Request from  '../../../utils/Request.js';
+import Host from '../../../utils/Const.js';
+import regeneratorRuntime from '../../../utils/regenerator-runtime/runtime-module.js'
 let app = getApp();
 Page({
 
@@ -17,22 +19,8 @@ Page({
      address : '',
      addressDetail : '',
      //模拟服务器送来的数据
-     user      : [{
-       id : 0,
-       username : '李成昆',
-       phoneNumber : '15101667396',
-       address : '天津市南开区',
-       addressDetail : '水云花园',
-       isDefault : true,
-     }],
+      user : [],
      //将要发送到服务器的收货地址
-    //  userAdd      : {
-    //    username : '',
-    //    phoneNumber : '',
-    //    address : '',
-    //    addressDetail : '',
-    //    isDefault : false,
-    //  },
      inputError : false,
      //用户名没有输入
      nameError : false,
@@ -46,17 +34,22 @@ Page({
      county: '',
      value: [0, 0, 0],
      values: [0, 0, 0],
-     condition: false
+     condition: false,
+     choosedAddColor : '#ec0023',
+     unChoosedAddColor : '#eee'
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad: async function (options) {
       /**
        * 
        * 初始化城市信息
        */
+      wx.showLoading({
+          title:'数据加载中',
+      })
       console.log("onLoad");
       var that = this;
       tcity.init(that);
@@ -86,6 +79,22 @@ Page({
           'county': cityData[0].sub[0].sub[0].name
       })
       this.data.user.address = cityData[0].name + cityData[0].sub[0].name + cityData[0].sub[0].sub[0].name;
+      //请求所有收货地址的数据
+      let url = Host.host + 'Data/getAddressByUid';
+      let data = {
+          uid : 1
+      }
+      let req = new Request(url,data,"POST",'text');
+      let res = await req.sendRequest();
+      console.log("res is ",res.data.address);
+      this.setData({
+          user : res.data.address
+      });
+      //不显示数据加载中
+      wx.hideLoading({
+          
+      })
+
   },
 
   /**
@@ -99,7 +108,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+      console.log("in onShow user is ",this.data.user);
   },
 
   /**
@@ -129,7 +138,9 @@ Page({
   onReachBottom: function () {
 
   },
-
+  stopEvent : function(event){
+      console.log("in stop event is ",event);
+  },
   /**
    * 用户点击右上角分享
    */
@@ -140,16 +151,51 @@ Page({
     console.log("in addChanged event is ",event);
   },
   //编辑收货地址
-  editorAdd : function(){
+  editorAdd : function(event){
     this.setData({
-        isChecked : false,
-        editor    : true,
+        editor : true
     })
+    console.log("in editorAdd event is",event);
+    let dataSet = event.currentTarget.dataset;
+    let aid = dataSet.aid;
+    console.log("aid is ",aid);
+    // let add = this.getAddressById(aid);
+    let add = this.getAddressByAid(aid);
+    console.log("add is ",add);
     //转向编辑界面
+    wx.navigateTo({
+        url: '../editAddress/editAddress?currentAdd='+JSON.stringify(add)
+    })
   },
-  deleteAdd : function(event){
+  deleteAdd : async function(event){
     //向服务器发送删除请求
-
+    let dataSet = event.currentTarget.dataset;
+    let aid = dataSet.aid;
+    let url = Host.host + 'Data/DeleteAddress';
+    let data = {
+        aid : aid,
+        uid : 1
+    }
+    let req = new Request(url,data,"POST",'text');
+    let res = await req.sendRequest();
+    console.log("res is ",res);
+    if(res.data.encode === 0){
+        //重新刷新地址列表
+        let url = Host.host + 'Data/getAddressByUid';
+        let data = {
+            uid: 1
+        }
+        let req = new Request(url, data, "POST", 'text');
+        let result = await req.sendRequest();
+        console.log("result is ", result.data.address);
+        this.setData({
+            isChecked: !this.data.isChcked,
+            user: result.data.address
+        });
+        wx.showToast({
+            title: `${res.data.msg}`,
+        })
+    }
   },
   //添加新地址
   addAdd : function(){
@@ -222,7 +268,7 @@ Page({
               numberError : true
           })
       }
-  },
+    },
     //获得收货地址所在的地区
     getAddress: function (event) {
        let address = event.detail.value;
@@ -252,14 +298,14 @@ Page({
             console.log("addressDetail is ", this.data.user[id].addressDetail);
         }
     },
-  startAdd : function(){
+    startAdd : function(){
       if (this.data.user.phoneNumber === '') {
           this.setData({
               inputError: true,
               numberError: true
           });
       }
-  },
+    },
     bindChange: function (e) {
         //console.log(e);
         var val = e.detail.value
@@ -354,17 +400,47 @@ Page({
         })
     },
     //保存地址并将该地址信息发送到服务器
-    saveAdd : function(event){
+    saveAdd : async function(event){
         if(this.data.add){
             if(this.data.username !== '' && this.data.phoneNumber !== '' &&
             this.data.address !== '' && this.data.addressDetail !== ''){
                 //发送请求
                 console.log("enter the savaAdd ");
-                //请求之后显示全部地址
-                this.setData({
-                    isChecked : !this.data.isChcked,
-                    add : !this.data.add,
-                });
+                let url = Host.host + 'Data/AddAddress'
+                let addInfo = {
+                    address : {
+                        recipient: this.data.username,
+                        phone: this.data.phoneNumber,
+                        district: this.data.address,
+                        detaildistrict: this.data.addressDetail,
+                        uid: 1
+                    }
+                }
+                let req = new Request(url,addInfo,"POST",'text');
+                let res = await req.sendRequest();
+                if(res.data.encode === 0){
+                    wx.showToast({
+                        title: `${res.data.msg}`,
+                    });
+                    let url = Host.host + 'Data/getAddressByUid';
+                    let data = {
+                        uid: 1
+                    }
+                    let req = new Request(url, data, "POST", 'text');
+                    let result = await req.sendRequest();
+                    console.log("result is ", result.data.address);
+                    this.setData({
+                        isChecked: !this.data.isChcked,
+                        add: !this.data.add,
+                        user: result.data.address
+                    });
+                    // //请求之后显示全部地址
+                    // this.setData({
+                    //     isChecked : !this.data.isChcked,
+                    //     add : !this.data.add,
+                    //     user : this.data.user
+                    // });
+                }
             }else{
                 console.log("信息不完整");
                 wx.showToast({
@@ -389,6 +465,65 @@ Page({
             isChecked : true,
             inputError : false,
         });
+    },
+    //单选框选中事件
+    changeEvent : async function(event){
+        console.log("in changeEvent event is ",event);
+        let dataSet = event.currentTarget.dataset;
+        let aid = dataSet.aid;
+        let uid = 1;
+        //将用户id和收货地址id发送给服务器改变默认值
+        let url = Host.host + 'Data/EditState';
+        let data = {
+            aid : aid,
+            uid : uid
+        }
+        let req = new Request(url,data,"POST",'text');
+        let res = await req.sendRequest();
+        console.log("in changeEvent res is ",res);
+        if(res.data.encode === 0){
+            console.log("adfadfasd");
+            this.getAddressById(aid);
+        }
+    },
+    getAddressById : function(aid){
+        let len = this.data.user.length;
+        let findAdd = null;
+        aid = Number(aid);
+        console.log("len is ",len,"id is ",aid);
+        for(let i = 0;i < len;i++){
+            if(aid === this.data.user[i].aid){
+                //其他的设为非默认地址
+                this.data.user[i].state = 0;
+                findAdd = this.data.user[i];
+            }else{
+                this.data.user[i].state = 1;
+            }
+        }
+        this.setData({
+            user : this.data.user
+        });
+        return findAdd;
+    },
+    getAddressByAid : function(aid){
+        let len = this.data.user.length;
+        let findAdd = null;
+        aid = Number(aid);
+        console.log("len is ",len,"id is ",aid);
+        for(let i = 0;i < len;i++){
+            if(aid === this.data.user[i].aid){
+                return this.data.user[i];
+            }
+        }
+    },
+    getUsername : function(event){
+        let aid = this.getAid(event);
+        console.log("aid is ",aid);
+        // let address = this.getAddressById(aid);
+        // console.log("address is ",address);
+
+    },
+    stopEvent : function(event){
+        console.log("in stopEvent event is ",event);
     }
-    
 })
