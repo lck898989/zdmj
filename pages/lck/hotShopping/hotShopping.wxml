@@ -4,61 +4,75 @@
         <!--热门或者精选商城-->
         <view class='shop-type-con'>
             <block wx:if='{{choosed}}'>
-                <view class='button-con' bindtap='enterHot'>
-                    <button class='btn choosed'>热门</button>
+                <view bindtap='enterHot' class='hot-con-p'>
+                    <view class='button-con' style='border-bottom:3px solid #f26e96'>
+                        <view class='hot'>
+                            热
+                        </view>
+                        <view class='choosed hotGoods'>热卖商品</view>
+                    </view>
                 </view>
-                <view class='button-con' bindtap='enterPerfact'>
-                    <button class='btn'>精选</button>
+                <view class='hot-con-p jx-p' bindtap='enterPerfact'>
+                    <view class='button-con'>
+                        <view class='hot jx'>
+                            精
+                        </view>
+                        <view class='choosed specialGoods'>精选好货</view>
+                    </view>
                 </view>
             </block>
             <block wx:else>
-                <view class='button-con' bindtap='enterHot'>
-                    <button class='btn'>热门</button>
+                <view bindtap='enterHot' class='hot-con-p'>
+                    <view class='button-con'>
+                        <view class='hot'>
+                            热
+                        </view>
+                        <view class='choosed hotGoods'>热卖商品</view>
+                    </view>
                 </view>
-                <view class='button-con' bindtap='enterPerfact'>
-                    <button class='btn choosed'>精选</button>
-                </view>       
+                <view class='hot-con-p jx-p' bindtap='enterPerfact'>
+                    <view class='button-con' style='border-bottom:3px solid #bc6fcd'>
+                        <view class='hot jx'>
+                            精
+                        </view>
+                        <view class='choosed specialGoods'>精选好货</view>
+                    </view>
+                </view>
             </block>
         </view>
         <!--商品类别-->
         <view class='goods-type-con'>
             <view class='type-parent'>
-                <view class='type-list' id='all' bindtap='dealRequest'>
-                全部
-                </view>
-                <view class='type-list' id='ele' bindtap='dealRequest'>
-                电器
-                </view>
-                <view class='type-list' id='mix' bindtap='dealRequest'>
-                美妆
-                </view>
-                <view class='type-list' id='shuma' bindtap='dealRequest'>
-                数码产品
-                </view>
-                <view class='type-list' id='cw' bindtap='dealRequest'>
-                厨卫
+                <view class='type-list' wx:for="{{typeArr}}" id='{{item.id}}' bindtap='chooseType' style='{{item.choosed ? typeActiveColor : typeUnActiveColor}}' data-type='goodsType'>
+                    {{item.text}}
                 </view>
             </view>
             <view class='extra' bindtap='showMore'>
-                <block wx:if='{{!moreType}}'>
-                    <image src='../../../resources/icon_right.png' style='width:20rpx;height:20rpx;'></image>
+                <block wx:if='{{!isMore}}'>
+                    <image src='../../../resources/down.png' style='width:20rpx;height:10rpx;'></image>
                 </block>
                 <block wx:else>
-                    <image src='../../../resources/arrow-bottom.png' style='width:30rpx;height:30rpx;'></image>
+                    <image src='../../../resources/up_active.png' style='width:20rpx;height:10rpx;'></image>
                 </block>
             </view>
         </view>
+        <!--显示更多分类-->
+        <block wx:if='{{isMore}}'>
+            <view class='more'>
+                <view wx:for='{{moreTypeArr}}' class='moreType-item' bindtap='chooseType' id='{{item.id}}' style='{{item.choosed ? typeActiveColor : typeUnActiveColor}}' data-type='moreType'>
+                    {{item.text}}
+                </view>
+            </view>
+        </block>
         <!--搜索及排序-->
         <view class='other-con'>
             <!--搜索功能-->
             <view class='search-con'>
-                <view class='icon-con'>
-                    <icon type='search' color='#fff' size='20'></icon>
-                </view>
                 <view class='inputC'>
-                    <input type='text' placeholder-style="color:#fff" placeholder='搜你想要！' 
-                    style='color:#fff;font-size:30rpx;' bindinput='getSearch' 
-                    bindconfirm='commit' bindblur='initInput' value="{{inputString}}"></input>
+                    <input type='text' placeholder-style="color:#eee" style='color:#eee;font-size:30rpx;' bindinput='getSearch' bindconfirm='commit' bindblur='initInput' value="{{inputString}}"></input>
+                </view>
+                <view class='icon-con'>
+                    <icon type='search' color='#e2e2e2' size='15'></icon>
                 </view>
             </view>
             <!--价格等信息-->
@@ -67,20 +81,33 @@
                     <view class='price-con' bindtap='dealRequest'>
                         价格
                     </view>
+                    <view class='arrow-con'>
+                        <block wx:if='{{isUpPrice}}'>
+                            <image class='arrow-up' src='../../../resources/up_active.png' style='width:20rpx;height:10rpx;' bindtap='sortPrice' data-sort='up'></image>
+                        </block>
+                        <block wx:else>
+                            <image class='arrow-up' src='../../../resources/up.png' style='width:20rpx;height:10rpx;' bindtap='sortPrice' data-sort='up'></image>
+                        </block>
+                        <block wx:if='{{isDownPrice}}'>
+                            <image class='arrow-down' src='../../../resources/down_active.png' style='width:20rpx;height:10rpx;' bindtap='sortPrice' data-sort='down'></image>
+                        </block>
+                        <block wx:else>
+                            <image class='arrow-down' src='../../../resources/down.png' style='width:20rpx;height:10rpx;' bindtap='sortPrice' data-sort='down'></image>
+                        </block>
+                    </view>
                     <view class='price-con' bindtap='dealRequest'>
                         销量
                     </view>
                 </block>
                 <block wx:else>
                     <view class='price-con' bindtap='dealRequest'>
-                            最新
+                        最新
                     </view>
                     <view class='price-con' bindtap='dealRequest'>
-                         最多人看
+                        最多人看
                     </view>
                 </block>
                 <view class='price-con withIcon' bindtap='banshi'>
-                    <view>版式</view>
                     <block wx:if='{{!banshi}}'>
                         <view class='banshi'>
                             <image src='../../../resources/list.png' style='width:35rpx;height:35rpx;'></image>
@@ -115,36 +142,21 @@
         </block>
     </block>
     <block wx:else>
-            <block wx:if='{{!banshi}}'>
-                    <view class='list-style' bindtouchmove='switchShoppingType' bindtouchend='clearEventArr' bindtouchcancel='clearEventArr' bindtouchstart='startMove'>
-                        <block wx:for='{{goods}}'>
-                            <view>
-                                精品商城竖版内容
-                            </view>
-                        </block>
-                    </view>
+        <block wx:if='{{!banshi}}'>
+            <view class='list-style' bindtouchmove='switchShoppingType' bindtouchend='clearEventArr' bindtouchcancel='clearEventArr' bindtouchstart='startMove'>
+                <block wx:for='{{goods}}'>
+                    <list-goods-component goods='{{item}}'>
+                    </list-goods-component>
                 </block>
-            <!--显示行式排版-->
-            <block wx:else>
-                <view class='row-style' bindtouchmove='switchShoppingType' bindtouchend='clearEventArr' bindtouchcancel='clearEventArr' bindtouchstart='startMove'>
-                        <view>
-                            精品商城横版内容
-                        </view>
-                </view>
-            </block>
-    </block>
-    <!--显示更多分类-->
-    <block wx:if='{{moreType}}'>
-        <scroll-view class="typelist-con" scroll-y>
-            <view class="type-item">电器</view>
-            <view class="type-item">运动健身</view>
-            <view class="type-item">户外运动</view>
-            <view class="type-item">电器</view>
-            <view class="type-item">电器</view>
-            <view class="type-item">电器</view>
-            <view class="type-item">电器</view>
-            <view class="type-item">电器</view>
-            <view class="type-item">电器</view>
-        </scroll-view>
+            </view>
+        </block>
+        <!--显示行式排版-->
+        <block wx:else>
+            <view class='row-style' bindtouchmove='switchShoppingType' bindtouchend='clearEventArr' bindtouchcancel='clearEventArr' bindtouchstart='startMove'>
+                 <block wx:for='{{goods}}'>
+                    <row-goods-component goods='{{item}}'></row-goods-component>
+                </block>
+            </view>
+        </block>
     </block>
 </view>

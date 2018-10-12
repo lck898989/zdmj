@@ -3,31 +3,31 @@
     </view>
     <view class='list-con' bindtap='onTap'>
         <view class='img-con'>
-            <image src="{{host}}{{goods.head}}" style="width:350rpx;height:150px;"></image>
+            <image src="{{host}}{{goods.head}}" style="width:223rpx;height:223rpx;"></image>
         </view>
         <view class='text-con'>
             <view class='top-text'>
-                <text>{{goods.description}}</text>
+                <text>{{goods.pname}}</text>
             </view>
             <view class='bottom-text'>
-                <view style='font-size:30rpx;'>
-                    供应商地址(天津)
+                <view>
+                    天津 南开
                 </view>
                 <view class='price-con'>
-                    <text style='fone-size:30rpx;'>￥{{goods.price}}</text>
+                    已有{{goods.sales}}人购买
                 </view>
             </view>
             <view class='detail-con'>
                 <view class='detail-left'>
-                    <view style='font-size:30rpx;'>
-                        已有10人购买                    
-                    </view>
-                    <view style='font-size:30rpx;'>
-                        可赚返利10.8元
-                    </view>
+                    可赚返利{{goods.profit}}元
                 </view>
-                <view class='detail-right' style='font-size:30rpx;'>
-                    商品详情
+                <view class='detail-right'>
+                    <view class='price-wrap' style='color:#b72537;font-size:30rpx;font-weight:800'>
+                        ￥{{goods.price}}
+                    </view>
+                    <view class='detail-wrap' style='font-size:30rpx;'>
+                        查看详情  >
+                    </view>
                 </view>
             </view>
             <!--需要动态添加的元素在这里添加-->
@@ -36,3 +36,4 @@
         <slot name='flex-row-last'></slot>
     </view>
 </view>
+

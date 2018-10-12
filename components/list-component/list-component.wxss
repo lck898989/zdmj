@@ -6,59 +6,73 @@
 */
 .list-con{
     width: 750rpx;
+    height: 270rpx;
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
     align-items: center;
     justify-content: flex-start;
     background-color: white;
-    border: 1px solid #ec0023;
-    margin-bottom: 20rpx;
+    margin-bottom: 2rpx;
 }
 .img-con{
     justify-self:flex-start;
     align-self: center;
+    margin-left: 23rpx;
+    margin-top: 24rpx;
 }
 .text-con{
-    margin-left: 20rpx;
+    margin-left: 28rpx;
+    height: 270rpx;
     display: flex;
     flex-wrap : nowrap;
     flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+.top-text{
+    margin-top: 30rpx;
 }
 .bottom-text{
+    width: 100%;
     display: flex;
     flex-wrap : nowrap;
     flex-direction: row;
     align-items: center;
-    justify-content: space-around;
-    margin-top: 40rpx;
+    justify-content: space-between;
+    margin-top: 20rpx;
+    font-size: 25rpx;
+    color:#808080;
 }
 .price-con{
-    margin-left: 35rpx;
+    margin-left: 168rpx;
 }
 .detail-left{
-    display: flex;
-    flex-wrap : nowrap;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
+    width: 180rpx;
+    height: 20rpx;
+    line-height: 20rpx;
+    text-align: center;
+    font-size: 25rpx;
+    background-color: #e6e6e6;
+    border-radius:40rpx;
+    padding: 10rpx 20rpx;
+    margin-top: 20rpx;
 }
 .detail-con{
     display: flex;
     flex-wrap : nowrap;
     flex-direction: row;
-    align-items: center;
+    align-items: flex-end;
     justify-content: space-between;
     margin-top: 50rpx;
+    margin-bottom: 40rpx;
 }
 .detail-right{
-    margin-left: 10rpx;
-    background-color: #ec0023;
-    color: #fff;
-    padding: 10rpx;
-    height: 50rpx;
-    line-height: 50rpx;
-    border-radius: 50rpx;
+    margin-left: 70rpx;
+    display: flex;
+    flex-wrap : nowrap;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: flex-start;
+    color: #808080;
 }

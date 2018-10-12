@@ -1,52 +1,19 @@
 /* components/goodsList1/goodsList1.wxss */
 .list-item{
-    width: 350rpx;
+    width: 372rpx;
+    height: 526rpx;
     display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
+    flex-direction: column;
+    flex-wrap: nowrap;
     justify-content: flex-start;
-    align-items: center;
-    border: 1px solid #888;
+    align-items: flex-start;
     background-color: #fff;
-    margin-right: 5rpx;
-    margin-left: 5rpx;
-    margin-top: 10rpx;
+    margin-right: 3rpx;
+    margin-bottom: 2rpx;
 }
-.img-con{
-    position: relative;
-}
-.bottom-shadow{
-    position: absolute;
-    width: 100%;
-    height: 20%;
-    /*支持各种浏览器的特性的差异*/
-    background:-webkit-linear-gradient(bottom,rgba(0, 0, 0, 0.8),rgba(255, 255, 255, 0));
-    background:-o-linear-gradient(bottom,rgba(0, 0, 0, 0.8),rgba(255, 255, 255, 0));
-    background:-moz-linear-gradient(bottom,rgba(0, 0, 0, 0.8),rgba(255, 255, 255, 0));
-    background:linear-gradient(bottom,rgba(0, 0, 0, 0.8),rgba(255, 255, 255, 0));
-    /* background-color: #888; */
-    top: 250rpx;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    justify-content:space-between;
-    align-items: center;
-}
-.text-pos-con{
-    margin-left: 10rpx;
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    align-items: center;
-    flex-wrap: nowrap;
-}
-.other{
-    background-color: yellow;
+.top-text{
+    margin-left: 20rpx;
 }
 .bottom-text{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    align-items: center;
-    flex-wrap: nowrap;
+    margin-bottom: 15rpx;
 }

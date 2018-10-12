@@ -1,5 +1,26 @@
+import Host from './utils/Const.js'
 //app.js
 App({
+    //保存订单号
+    orderNumber: null,
+    //商户好
+    payPhone: 1487347762,
+    //用户信息
+    userInfo1: {
+        familyAddress: {
+            aid: null
+        },
+    },
+    //支付detailInfo
+    detailInfo: null,
+    //吴世超openid
+    serverOpenid: null,
+    //微信返回的unid
+    unionId: null,
+    //吴世超uid
+    uid: null,
+    //获取登录sessionKey
+    sessionKey: null,
     scoreHiddenLoad: null,
     scoreHiddenScope: null,
     isShareEnter: false,
@@ -45,6 +66,7 @@ App({
     //判断点击查看详情
     isPressDetail: false,
     onLaunch: function(res) {
+        console.log(this.userInfo1);
         var self = this;
         this.StartLongConnect();
         // var self = this;
@@ -61,7 +83,7 @@ App({
                 console.log(res);
             },
             success: res => {
-                console.log("33333333333333333");
+                console.log("???????????????????" + JSON.stringify(res));
                 self.loginCode = res.code;
                 //判断是否授权
                 wx.getSetting({
@@ -69,10 +91,15 @@ App({
                         //当授权时
                         if (res.authSetting['scope.userInfo']) {
                             if (self.loginCode) {
-                                self.ShortConnect(self.url + "/users/WeChatLogin", {
-                                    "code": self.loginCode,
-                                    "appid": self.appid,
-                                    "secret": self.secret,
+                                self.ShortConnect("https://account.ykplay.com/ykLogin/Login", {
+                                    app: "zhidianmijin",
+                                    bindingType: "1",
+                                    bindingMsg: {
+                                        "code": self.loginCode,
+                                        "appid": self.appid,
+                                        "secret": self.secret,
+                                        errMsg: "login:ok"
+                                    }
                                 }, "code");
                                 if (self.isShare == false) {
                                     console.log("0000000000000000");
@@ -88,10 +115,15 @@ App({
                             }
                         } else {
                             if (self.isShare == false) {
-                                self.ShortConnect(self.url + "/users/WeChatLogin", {
-                                    "code": self.loginCode,
-                                    "appid": self.appid,
-                                    "secret": self.secret,
+                                self.ShortConnect("https://account.ykplay.com/ykLogin/Login", {
+                                    app: "zhidianmijin",
+                                    bindingType: "1",
+                                    bindingMsg: {
+                                        "code": self.loginCode,
+                                        "appid": self.appid,
+                                        "secret": self.secret,
+                                        errMsg: "login:ok"
+                                    }
                                 }, "code");
                                 console.log("1111111111111");
                                 if (self.setscopeHidden) {
@@ -100,10 +132,15 @@ App({
                                     self.scoreHiddenScope = false;
                                 }
                             } else {
-                                self.ShortConnect(self.url + "/users/WeChatLogin", {
-                                    "code": self.loginCode,
-                                    "appid": self.appid,
-                                    "secret": self.secret,
+                                self.ShortConnect("https://account.ykplay.com/ykLogin/Login", {
+                                    app: "zhidianmijin",
+                                    bindingType: "1",
+                                    bindingMsg: {
+                                        "code": self.loginCode,
+                                        "appid": self.appid,
+                                        "secret": self.secret,
+                                        errMsg: "login:ok"
+                                    }
                                 }, "code");
                             }
                         }
@@ -163,6 +200,7 @@ App({
     },
     //微信授权
     ShouQuan: function() {
+        console.log("33333");
         var self = this;
         wx.getUserInfo({
             success: res => {
@@ -207,8 +245,9 @@ App({
                 console.log("22222222222222222" + JSON.stringify(res));
                 switch (state) {
                     case "code":
-                         if (res.data.success == "true") {
-                            self.openid = res.data.username;
+                        if (res.data.result == "ok") {
+                            // self.openid = res.data.username;
+                            self.sessionKey = res.data.data;
                             console.log("33333");
                             if (self.isShare == false) {
                                 wx.getSetting({
@@ -239,13 +278,33 @@ App({
                         self.ShowShopDate(res);
                         break;
                     case "userInfo":
-                        if (self.isShare) {
-                            self.ShortConnect(self.url + "/commodity/ShowAllCommodity", {}, "shop");
-                        } else {
-                            if (res.data.success == "true") {
-                                self.ShortConnect(self.url + "/commodity/ShowAllCommodity", {}, "shop");
-                                console.log("???????????????????");
-                            }
+                        self.openid = res.data.userInfo.openid;
+                        self.detailInfo = res.data.detailInfo;
+                        // self.ShortConnect("http://192.168.1.206:10086/users/login2", {
+                        //     access_token: res.data.access_token,
+                        //     openid: res.data.userInfo.openid
+                        // }, "liginSuccess");
+                        self.ShortConnect(Host.devHost + "Entry", {
+                            access_token: res.data.access_token,
+                            openId: res.data.userInfo.openid
+                        }, "liginSuccess");
+                        // if (self.isShare) {
+                        //     self.ShortConnect(self.url + "/commodity/ShowAllCommodity", {}, "shop");
+                        // } else {
+                        //     if (res.data.success == "true") {
+                        //         self.ShortConnect(self.url + "/commodity/ShowAllCommodity", {}, "shop");
+                        //         console.log("???????????????????");
+                        //     }
+                        // }
+                        break;
+                    case "liginSuccess":
+                        if (res.data.desc == "用户合法登录") {
+                            self.unionId = res.data.userInfo.unionId;
+                            self.uid = res.data.userInfo.uid;
+                            self.serverOpenid = res.data.userInfo.openid;
+                            self.ShortConnect("https://pay.ykplay.com/user/reg", {
+                                openid: self.serverOpenid
+                            }, "register");
                         }
                         break;
                     case "turnshare":
@@ -369,7 +428,6 @@ App({
                             header: {
                                 'content-type': 'application/json'
                             },
-
                             method: "POST",
                             success: function(res) {
                                 console.log(self.url + "/users/TransformQrCode");
@@ -427,6 +485,60 @@ App({
                     case "remen":
                         self.setRenMen(res);
                         break;
+                    case "wechatpay":
+                        wx.requestPayment({
+                            'timeStamp': res.data.timeStamp,
+                            'nonceStr': res.data.nonce_str,
+                            'package': "prepay_id=" + res.data.prepay_id,
+                            'signType': "MD5",
+                            'paySign': res.data.paySign ,
+                            'success': function(res) {
+                                if (res.errMsg == "requestPayment:ok") {
+                                    console.log("555");
+                                    self.setLoad();
+                                    self.ShortConnect(Host.devHost + "Data/PayOrder", {
+                                        openid: self.openid,
+                                        orderNumber: self.orderNumber
+                                    }, "checkPay");
+                                }
+                            },
+                            'fail': function(res) {
+                                console.log(res);
+                            },
+                            'complete': function(res) {
+                                console.log(res);
+                            }
+                        })
+                        break;
+                    case "checkPay":
+                        if (res.data.msg == "支付成功") {
+                            wx.navigateTo({
+                                url: '../ShopSuccess/ShopSuccess',
+                            })
+                            wx.hideLoading();
+                        }
+                        break;
+                    case "pay":
+                        self.orderNumber = res.data.order.onumber;
+                        console.log(res.data.order.orderItems);
+                        if (res.data.encode == 0) {
+                            self.ShortConnect("https://pay.ykplay.com/miniWx/miniPay", {
+                                openid: self.serverOpenid,
+                                orderNumber: res.data.order.onumber,
+                                appid: self.appid,
+                                mch_id: self.payPhone,
+                                body: res.data.info,
+                                total_fee: res.data.order.orderItems[0].product.price,
+                                wxMsg: self.detailInfo,
+                                attach: "指点迷津"
+                            }, "wechatpay");
+                        }
+                        else
+                        {
+                            
+
+                        }
+                        break;
                 }
             },
         })
@@ -476,9 +588,15 @@ App({
         // 可以将 res 发送给后台解码出 unionId
         this.globalData.userInfo = res.userInfo;
         console.log(this.openid + "6666666666");
-        res.username = this.openid;
+        res.sessionKey = this.sessionKey;
         console.log(JSON.stringify(res));
-        this.ShortConnect(this.url + "/users/SaveUserInformation", res, "userInfo");
+        this.ShortConnect("https://account.ykplay.com/ykLogin/UserInfoLogin", {
+            bindingType: "1",
+            app: "zhidianmijin",
+            platform: "1",
+            channel: "0",
+            bindingMsg: res
+        }, "userInfo");
         // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
         // 所以此处加入 callback 以防止这种情 况
         // if (this.userInfoReadyCallback) {

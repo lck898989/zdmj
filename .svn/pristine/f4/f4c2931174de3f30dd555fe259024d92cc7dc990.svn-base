@@ -1,0 +1,73 @@
+/* pages/lck/order/order.wxss */
+page{
+    background-color: #eee;
+}
+
+.address-con,.recept-info,.youhui{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: center;   
+}
+.address-con{
+    padding: 25rpx 0rpx;
+    background-color: rgba(238, 224, 245, 0.74)
+}
+.address-detail,.order-con,.goods-style{
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+  font-size: 30rpx;
+}
+.recept-item{
+    margin-right: 10rpx;
+}
+.recept-info{
+    font-size: 35rpx;
+}
+.addManager{
+    margin-right: 20rpx;
+    font-size: 35rpx;
+    align-self: flex-end;
+    color:#888;
+}
+.youhui{
+    padding: 30rpx 15rpx;
+}
+.order-con{
+    padding: 20rpx 10rpx;
+}
+.order-head{
+    width: 100%;
+    margin-bottom: 10rpx;
+    border-bottom:1px solid #fff;
+}
+.order-detail{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-around;
+  align-items: center;
+  padding: 15rpx 5rpx;
+}
+.img-con{
+    justify-self: flex-start;
+    background-color: red;
+}
+.goods-style{
+    justify-content: space-between;
+    align-items: space-between;
+    margin-left: 30rpx;
+}
+.pay{
+    margin-top: 30rpx;
+    background-color: #ec0023;
+    color: #fff;
+    text-align: center;
+    padding: 20rpx 30rpx;
+    margin-left: 500rpx;
+}

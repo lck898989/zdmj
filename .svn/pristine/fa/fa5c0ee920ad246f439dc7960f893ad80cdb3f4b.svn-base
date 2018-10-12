@@ -1,0 +1,143 @@
+<!--pages/lck/address/address.wxml-->
+<view class="page-con">
+    <block wx:if='{{isChecked}}'>
+        <view class='index-manager'>
+            管理收货地址
+        </view>
+    </block>
+    <block wx:else>
+        <view class="manage-add-con">
+            <view class='back' bindtap='back' wx:if='{{add || editor}}'>
+                <image src='../../../resources/left.png' style='width:45rpx;height:45rpx;'></image>
+            </view>
+            <block wx:if='{{add}}'>
+                <view class='m'>
+                    添加收货地址
+                </view>
+            </block>
+            <block wx:elif='{{editor}}'>
+                <view class='m'>
+                    编辑收货地址
+                </view>
+            </block>
+        </view>
+    </block>
+    <block wx:if='{{inputError}}'>
+        <view class='error-con'>
+            <view>
+                <image src='../../../resources/warning.png' style='width:30rpx;height:30rpx;'></image>
+            </view>
+            <block wx:if='{{nameError}}'>
+                <view style='font-size:30rpx;margin-left:15rpx;'>
+                    用户名不能为空
+                </view>
+            </block>
+            <block wx:elif='{{numberError}}'>
+                <view style='font-size:30rpx;margin-left:15rpx;'>
+                    手机号不合法
+                </view>
+            </block>
+        </view>
+    </block>
+    <block wx:if='{{isChecked}}'>
+        <view class="addContainer">
+            <view class="address-detail-con">
+                <!--设置收货人信息(从服务器上拉取收货地址数据)for循环-->
+                <block wx:for='{{user}}'>
+                    <view class="add-item">
+                        <view class="user-con">
+                            <view class="n">
+                                {{item.recipient}}
+                            </view>
+                            <view class="p">
+                                {{item.phone}}
+                            </view>
+                        </view>
+                        <view class="add-info">
+                            {{item.district + item.detaildistrict}}
+                        </view>
+                    </view>
+                    <!--默认地址等的设置-->
+                    <view class="add-manager">
+                        <view class="default-con">
+                            <icon type='success' color='{{item.state === 0 ? choosedAddColor : unChoosedAddColor}}' bindtouchstart='changeEvent' data-aid='{{item.aid}}' style="margin-right:20rpx;"></icon>
+                            <block wx:if='{{item.state === 0}}'>
+                                默认地址
+                            </block>
+                            <block wx:else>
+                                设为默认地址
+                            </block>
+                        </view>
+                        <view class="edit-del-con" catchtap='stopEvent'>
+                            <view class='sbtn editor' bindtap='editorAdd' data-aid='{{item.aid}}'>
+                                编辑
+                            </view>
+                            <view class="sbtn delete" bindtap='deleteAdd' data-aid='{{item.aid}}'>
+                                删除
+                            </view>
+                        </view>
+                    </view>
+                </block>
+            </view>
+        </view>
+        <!--添加收货地址-->
+        <view class="addAdd" bindtap='addAdd'>
+            <view class="add-icon" style="margin-right:20rpx;margin-top:10rpx;">
+                <image src='../../../resources/plus.png' style='width:40rpx;height:40rpx;'></image>
+            </view>
+            <view>
+                <text>添加新收货地址</text>
+            </view>
+        </view>
+    </block>
+    <block wx:if='{{add}}'>
+        <view class="editor-con">
+            <view class='editor-item'>
+                <input type="text" placeholder="收货人" bindinput='getGoods_user'/>
+            </view>
+            <view class='editor-item'>
+                <view>
+                    <input type="text" placeholder="手机号码" bindinput='getPhoneNumber' bindblur='checkNumber' bindfocus='checkName'/>
+                </view>
+                <view id='phone_type'>
+                    +86 >
+                </view>
+            </view>
+            <view class='editor-item'>
+                <view>
+                    <input type="text" placeholder="所在地区" bindinput='getAddress' bindfocus='open' value='{{province}}{{city}}{{county}}' focus='{{focus}}' style='width:600rpx;' bindconfirm='commit'/>
+                </view>
+                <view id='phone_type'>
+                    >
+                </view>
+            </view>
+            <view class='editor-item'>
+                <input type="text" placeholder="详细地址：如道路,小区,楼号,单元号,门牌号等," bindfocus='closeCityList' bindinput='getAddressDetail' bindconfirm='over' style='width:700rpx'/>
+            </view>
+            <view class="save-container">
+                <view class="save-btn" bindtap='saveAdd' wx:if='{{add}}'>
+                    添加
+                </view>
+            </view>
+        </view>
+    </block>
+    <view wx:if="{{condition}}" class="citypicker">
+        <view class="cityheader">
+            <block wx:if='{{add}}'>
+                <view bindtap="open" class="city-cancel but">取消</view>
+                <view bindtap="commit" class="city-true but">确定</view>
+            </block>
+        </view>
+        <picker-view indicator-style="height: 50px;" style="width: 100%; height: 300px;" value="{{value}}" bindchange="bindChange" class="citybody">
+            <picker-view-column>
+                <view wx:for="{{provinces}}" wx:key="item" style="line-height: 50px;padding-left:10px;">{{item}}</view>
+            </picker-view-column>
+            <picker-view-column>
+                <view wx:for="{{citys}}" wx:key="item" style="line-height: 50px;padding-left:10px;">{{item}}</view>
+            </picker-view-column>
+            <picker-view-column>
+                <view wx:for="{{countys}}" wx:key="item" style="line-height: 50px;padding-left:10px;">{{item}}</view>
+            </picker-view-column>
+        </picker-view>
+    </view>    
+</view>

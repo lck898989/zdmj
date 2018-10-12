@@ -1,0 +1,84 @@
+/* pages/lck/editAddress/editAddress.wxss */
+.page-con{
+    width: 100%;
+    /* display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: nowrap; */
+}
+.index-manager{
+    background-color: #eee;
+    padding:40rpx 0rpx;
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: nowrap;
+    align-items: center;
+}
+.editor-con{
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: nowrap;
+}
+.editor-item{
+    margin-left: 40rpx;
+    margin-top: 30rpx;
+    width:100%;
+    border-bottom: 1px solid #aaa;
+    padding-bottom: 30rpx;
+    font-size: 35rpx;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: nowrap;
+}
+.save-container{
+    width:750rpx;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: nowrap;
+}
+.save-btn{
+    margin-top: 40rpx;
+    background-color: rgb(243, 74, 7);
+    padding: 35rpx 120rpx;
+    color:white;
+    border-radius: 10rpx;
+}
+.citypicker{
+    margin-top: 100rpx;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: nowrap;
+}
+.cityheader{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: nowrap;
+}
+.but{
+    font-size: 35rpx;
+    color : #fff;
+    background-color: rgb(243, 74, 7);
+    padding: 20rpx 40rpx;
+    border-radius: 10rpx;
+}
+.city-cancel{
+    margin-left: 20rpx;
+}
+.city-true{
+    margin-right: 20rpx;
+}

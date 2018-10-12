@@ -1,0 +1,147 @@
+<view class="page-con">
+    <!-- <shoping-head-component></shoping-head-component> -->
+    <view class='head-con'>
+        <!--热门或者精选商城-->
+        <view class='shop-type-con'>
+            <block wx:if='{{choosed}}'>
+                <view class='button-con' bindtap='enterHot'>
+                    <button class='btn choosed'>热门</button>
+                </view>
+                <view class='button-con' bindtap='enterPerfact'>
+                    <button class='btn'>精选</button>
+                </view>
+            </block>
+            <block wx:else>
+                <view class='button-con' bindtap='enterHot'>
+                    <button class='btn'>热门</button>
+                </view>
+                <view class='button-con' bindtap='enterPerfact'>
+                    <button class='btn choosed'>精选</button>
+                </view>
+            </block>
+        </view>
+        <!--商品类别-->
+        <view class='goods-type-con'>
+            <view class='type-parent'>
+                <view class='type-list' id='all' bindtap='dealRequest'>
+                    全部
+                </view>
+                <view class='type-list' id='ele' bindtap='dealRequest'>
+                    电器
+                </view>
+                <view class='type-list' id='mix' bindtap='dealRequest'>
+                    美妆
+                </view>
+                <view class='type-list' id='shuma' bindtap='dealRequest'>
+                    数码产品
+                </view>
+                <view class='type-list' id='cw' bindtap='dealRequest'>
+                    厨卫
+                </view>
+            </view>
+            <view class='extra' bindtap='showMore'>
+                <block wx:if='{{!moreType}}'>
+                    <image src='../../../resources/icon_right.png' style='width:20rpx;height:20rpx;'></image>
+                </block>
+                <block wx:else>
+                    <image src='../../../resources/arrow-bottom.png' style='width:30rpx;height:30rpx;'></image>
+                </block>
+            </view>
+        </view>
+        <!--搜索及排序-->
+        <view class='other-con'>
+            <!--搜索功能-->
+            <view class='search-con'>
+                <view class='icon-con'>
+                    <icon type='search' color='#fff' size='20'></icon>
+                </view>
+                <view class='inputC'>
+                    <input type='text' placeholder-style="color:#fff" placeholder='搜你想要！' style='color:#fff;font-size:30rpx;' bindinput='getSearch' bindconfirm='commit' bindblur='initInput' value="{{inputString}}"></input>
+                </view>
+            </view>
+            <!--价格等信息-->
+            <view class='price-extra-con'>
+                <block wx:if='{{choosed}}'>
+                    <view class='price-con' bindtap='dealRequest'>
+                        价格
+                    </view>
+                    <view class='price-con' bindtap='dealRequest'>
+                        销量
+                    </view>
+                </block>
+                <block wx:else>
+                    <view class='price-con' bindtap='dealRequest'>
+                        最新
+                    </view>
+                    <view class='price-con' bindtap='dealRequest'>
+                        最多人看
+                    </view>
+                </block>
+                <view class='price-con withIcon' bindtap='banshi'>
+                    <view>版式</view>
+                    <block wx:if='{{!banshi}}'>
+                        <view class='banshi'>
+                            <image src='../../../resources/list.png' style='width:35rpx;height:35rpx;'></image>
+                        </view>
+                    </block>
+                    <block wx:else>
+                        <view class='banshi'>
+                            <image src='../../../resources/row.png' style='width:35rpx;height:35rpx;'></image>
+                        </view>
+                    </block>
+                </view>
+            </view>
+        </view>
+    </view>
+    <!--这里根据商城类型进行渲染精彩商城视图或者是热门商城视图-->
+    <block wx:if='{{choosed}}'>
+        <block wx:if='{{!banshi}}'>
+            <view class='list-style' bindtouchmove='switchShoppingType' bindtouchend='clearEventArr' bindtouchcancel='clearEventArr' bindtouchstart='startMove'>
+                <block wx:for='{{goods}}'>
+                    <list-goods-component goods='{{item}}'>
+                    </list-goods-component>
+                </block>
+            </view>
+        </block>
+        <!--显示行式排版-->
+        <block wx:else>
+            <view class='row-style' bindtouchmove='switchShoppingType' bindtouchend='clearEventArr' bindtouchcancel='clearEventArr' bindtouchstart='startMove'>
+                <block wx:for='{{goods}}'>
+                    <row-goods-component goods='{{item}}'></row-goods-component>
+                </block>
+            </view>
+        </block>
+    </block>
+    <block wx:else>
+        <block wx:if='{{!banshi}}'>
+            <view class='list-style' bindtouchmove='switchShoppingType' bindtouchend='clearEventArr' bindtouchcancel='clearEventArr' bindtouchstart='startMove'>
+                <block wx:for='{{goods}}'>
+                    <list-goods-component goods='{{item}}'>
+                    </list-goods-component>
+                </block>
+            </view>
+        </block>
+        <!--显示行式排版-->
+        <block wx:else>
+            <view class='row-style' bindtouchmove='switchShoppingType' bindtouchend='clearEventArr' bindtouchcancel='clearEventArr' bindtouchstart='startMove'>
+                 <block wx:for='{{goods}}'>
+                    <row-goods-component goods='{{item}}'></row-goods-component>
+                </block>
+            </view>
+        </block>
+    </block>
+    <!--显示更多分类-->
+    <block wx:if='{{moreType}}'>
+        <scroll-view class="typelist-con" scroll-y>
+            <view class="type-item">电器</view>
+            <view class="type-item">运动健身</view>
+            <view class="type-item">户外运动</view>
+            <view class="type-item">电器</view>
+            <view class="type-item">电器</view>
+            <view class="type-item">电器</view>
+            <view class="type-item">电器</view>
+            <view class="type-item">电器</view>
+            <view class="type-item">电器</view>
+        </scroll-view>
+    </block>
+</view>

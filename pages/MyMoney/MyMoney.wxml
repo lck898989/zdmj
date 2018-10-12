@@ -1,0 +1,7 @@
+<!--pages/MyMoney/MyMoney.wxml-->
+<view class='showMoney'>
+    <text class='textQ'>钱包：</text>
+    <text class='intQ'>34元</text>
+</view>
+<text class='textT' bindtap='tixian'>提现</text>
+<text class='textM'>明细</text>

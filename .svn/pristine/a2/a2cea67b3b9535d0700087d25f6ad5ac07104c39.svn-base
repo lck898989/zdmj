@@ -1,0 +1,142 @@
+/* pages/lck/cart/cart.wxss */
+page{
+    background-color: #eee;
+}
+.page-con{
+    position: relative;
+}
+checkbox .wx-checkbox-input{
+   border-radius: 50%;/* 圆角 */
+   width: 40rpx; /* 背景的宽 */
+   height: 40rpx; /* 背景的高 */
+}
+/* 选中后的 背景样式 （红色背景 无边框 可根据UI需求自己修改） */
+checkbox .wx-checkbox-input.wx-checkbox-input-checked{
+   border: none;
+   background: red;
+}
+/* 选中后的 对勾样式 （白色对勾 可根据UI需求自己修改） */
+checkbox .wx-checkbox-input.wx-checkbox-input-checked::before{
+   border-radius: 50%;/* 圆角 */
+   width: 40rpx;/* 选中后对勾大小，不要超过背景的尺寸 */
+   height: 40rpx;/* 选中后对勾大小，不要超过背景的尺寸 */
+   line-height: 40rpx;
+   text-align: center;
+   font-size:30rpx; /* 对勾大小 30rpx */
+   color:#fff; /* 对勾颜色 白色 */
+   background: transparent;
+   transform:translate(-50%, -50%) scale(1);
+   -webkit-transform:translate(-50%, -50%) scale(1);
+}
+.store-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+    align-items: center;
+    background-color: #fff;
+    padding: 30rpx 0rpx;
+    border-bottom: 1px solid #eee;
+}
+.storename-con{
+    padding: 10rpx 20rpx;
+    border-bottom: 1px solid #eee;
+}
+.icon_con{
+    margin-left: 20rpx;
+    margin-right: 20rpx;
+}
+.checkbox-con{
+    padding: 10rpx 20rpx;
+}
+.imagecontainer{
+    margin-left: 10rpx;
+}
+.store-detail{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+    align-items: center;
+    background-color: #fff;
+}
+.right-text-con{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+    align-items: center;
+    margin-left: 30rpx;
+}
+.right-line-con{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    align-items: center;
+    width : 500rpx;
+    height: 100rpx;
+}
+.editor{
+    margin-right: 20rpx;
+    background-color: #ec0023;
+    color : #fff;
+    padding: 10rpx 20rpx;
+}
+.count-control{
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    flex-direction: row;
+    align-items: center;
+    width : 100%;
+}
+.count-item{
+    border: 1px solid #eee;
+    margin-right: 10rpx;
+    padding: 10rpx 20rpx;
+}
+.real-count{
+    margin-right: 10rpx;
+}
+.delete{
+    color : #fff;
+    background-color: #ec0023;
+    padding: 10rpx 20rpx;
+    margin-right: 10rpx;
+}
+.settle-con{
+    width: 100%;
+    justify-self: flex-end;
+    padding: 20rpx 0rpx;
+    margin-top: 10rpx;
+    background-color:#F8F8FF;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    flex-direction: row;
+    align-items: center;
+    position: fixed;
+    bottom: 0px;
+}
+.left-con{
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    flex-direction: row;
+    align-items: center;
+}
+.settle{
+    margin-left: 80rpx;
+    margin-right: 20rpx;
+    background-color: #ec0023;
+    color : #fff;
+    padding: 10rpx 20rpx;
+    border-radius: 40rpx;
+}
+.goodList{
+    margin-bottom: 100rpx;
+}
+.selectAll-con{
+    margin-left: 20rpx;
+}

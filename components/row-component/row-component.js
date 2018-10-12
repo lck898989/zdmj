@@ -1,5 +1,5 @@
 import Goods from "../../utils/Goods";
-
+import Host from '../../utils/Const.js';
 // components/goodsList1/goodsList1.js
 Component({
     /**
@@ -19,7 +19,7 @@ Component({
      * 组件的初始数据
      */
     data: {
-
+        host : Host.devHost
     },
 
     /**

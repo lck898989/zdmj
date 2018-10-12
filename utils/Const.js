@@ -1,3 +1,8 @@
 export default {
-    host: 'http://shop.ykplay.com/'
+       devHost: 'http://192.168.1.186:3150/',
+       productionHost: 'http://shop.ykplay.com/',
+
+    methods : {
+        
+    }
 }

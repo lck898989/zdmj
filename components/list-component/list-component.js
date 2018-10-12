@@ -60,7 +60,7 @@ Component({
      * 组件的初始数据 进行模板渲染
      */
     data: {
-        host : Host.host
+        host : Host.devHost
     },
 
     /**

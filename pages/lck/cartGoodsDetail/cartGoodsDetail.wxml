@@ -1,41 +1,98 @@
 <!--pages/lck/cartGoodsDetail/cartGoodsDetail.wxml-->
 <view class='page-con'>
     <view animation='{{backAnimaData}}'>
-        <swiper autoplay='true' interval='2000' class='swiper-con'>
-            <block wx:for='{{goodsImageList}}'>
+        <swiper class='swiper-con'>
+            <block wx:for='{{goodsImageList}}' wx:for-len = '{{goodsImageList.length}}'>
                 <swiper-item>
-                    <image src='{{host}}{{item}}' mode='aspectFit'></image>
+                    <view class='img-con'>
+                        <image src='{{host}}{{item}}' style='width:750rpx;height:750rpx;'></image>
+                        <view class='index-num'>
+                            {{index+1}}/{{goodsImageList.length}}
+                            <!-- 1/20 -->
+                        </view>
+                    </view>
                 </swiper-item>
             </block>
         </swiper>
         <view class='price-con'>
             <view class='goodsPrice'>
-                ￥{{goods.price}}
+                <view class='price'>
+                    ￥{{goods.price}}
+                </view>
+                <view class='sell'>
+                    售出{{goods.sales}}{{goods.unit}}
+                </view>
             </view>
-            <view class='goodsName'>
-                {{goods.pname}}
+            <view class='goodsName' style='margin-top:10rpx;font-size:32rpx;margin-left:30rpx'>
+                {{goods.pname}}正宗行货放心购买
             </view>
-            <view class='goodsSales'>
-                已经出售{{goods.sales}}{{goods.unit}}
+            <view class='notice-con'>
+                <view class='server-item'>
+                    七天退换货
+                </view>
+                <view class='server-item'>
+                    商品包邮
+                </view>
+                <view class='server-item'>
+                    24小时发货
+                </view>
+                <view class='server-item'>
+                    正品保障
+                </view>
             </view>
         </view>
-        <view class='notice-con'>
-            七天退换货 商品包邮 24小时发货 正品保障
+        <view class='type-address' bindtap='showBuyCon' data-clickType='yes'>
+            <view class='server-item'>
+                选择款式
+                <view wx:if='{{!isChooseType}}' class='type-item' style='margin-left:32rpx;'>
+                    <view>
+                        颜色规格
+                    </view>
+                </view>
+                <view wx:else class='type-item' style='margin-left:32rpx;'>
+                    已选：
+                    <block wx:for='{{sizeValueArr}}'>
+                        <view>
+                            {{item}}
+                        </view>
+                    </block>
+                </view>
+            </view>
+            <view class='arrow-right'>
+                >
+            </view>
         </view>
-        <view>
-            选择规格 
+        <view class='type-address'>
+            <view class='server-item'>
+                收货地址
+                <view class='type-item' style='margin-left:32rpx;'>
+                    {{defaultAdd}}
+                </view>
+            </view>
+            <view class='arrow-right'>
+                >
+            </view>
         </view>
-        <view>
-            商品详情
+        <view class='goodsDetail'>
+            <view class='head'>
+                商品详情
+            </view>
         </view>
         <view class='goods_introduce'>
 
         </view>
-        <view class='options-con'>
-            <view class='cart-con' bindtap='showBuyCon' id='addcart'>
+        <view class='confirm'>
+            <!-- <view class='cart-con' bindtap='showBuyCon' id='addcart'>
                 加入购物车
             </view>
             <view class='buy-now' bindtap='showBuyCon' id='buyit'>
+                立即购买
+            </view> -->
+            <!--判断尺寸是否选择完毕-->
+            <view class='addCartn' bindtap='showBuyCon' id='addcart'>
+                加入购物车
+            </view>
+            <view class='buyNown' bindtap='showBuyCon' id='buyit'>
                 立即购买
             </view>
         </view>
@@ -88,8 +145,24 @@
                     </view>
                 </view>
             </view>
-            <view class='confirm' bindtap='confirm' id='{{goods.pid}}'>
-                确认
+            <view class='addOrBuy'>
+                <!--检查是否点击过购物车和立即购买按钮-->
+                <block wx:if='{{!addCart && !BuyIt}}'>
+                    <view class='addCartn' bindtap='showBuyCon' id='addcart_t'>
+                        加入购物车
+                    </view>
+                    <view class='buyNown' bindtap='showBuyCon' id='buyit_t'>
+                        立即购买
+                    </view>
+                </block>
+                <block wx:else>
+                    <view wx:if='{{addCart}}' class='saveType' bindtap='confirm' id='addcart'>
+                        保存
+                    </view>
+                    <view wx:if='{{BuyIt}}' class='saveBuy' bindtap='confirm' id='buyit'>
+                        确定
+                    </view>
+                </block>
             </view>
         </view>
     </block>

@@ -1,0 +1,12 @@
+<!--pages/index2/index2.wxml-->
+<swiper class="activityView" bindchange='MoveSwiper' scroll-x="true" circular='true' autoplay='true' interval="{{moveSpeed}}">
+    <swiper-item class="activityViewSon" wx:for="{{activityImage}}" bindtap='PressSwiper' id="{{index}}">
+        <image src="{{item}}" class="imageActivity"></image>
+    </swiper-item>
+</swiper>
+<view class='activityView1'>
+    <view class='activityViewSon1'></view>
+    <view class='activityViewSon1'></view>
+    <view class='activityViewSon1'></view>
+    <view class='activityViewSon1'></view>
+</view>

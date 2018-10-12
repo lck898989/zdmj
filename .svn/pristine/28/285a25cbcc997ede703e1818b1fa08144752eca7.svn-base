@@ -1,0 +1,96 @@
+<!--pages/lck/cartGoodsDetail/cartGoodsDetail.wxml-->
+<view class='page-con'>
+    <view animation='{{backAnimaData}}'>
+        <swiper autoplay='true' interval='2000' class='swiper-con'>
+            <block wx:for='{{goodsImageList}}'>
+                <swiper-item>
+                    <image src='{{host}}{{item}}' mode='aspectFit'></image>
+                </swiper-item>
+            </block>
+        </swiper>
+        <view class='price-con'>
+            <view class='goodsPrice'>
+                ￥{{goods.price}}
+            </view>
+            <view class='goodsName'>
+                {{goods.pname}}
+            </view>
+            <view class='goodsSales'>
+                已经出售{{goods.sales}}{{goods.unit}}
+            </view>
+        </view>
+        <view class='notice-con'>
+            七天退换货 商品包邮 24小时发货 正品保障
+        </view>
+        <view>
+            选择规格 
+        </view>
+        <view>
+            商品详情
+        </view>
+        <view class='goods_introduce'>
+
+        </view>
+        <view class='options-con'>
+            <view class='cart-con' bindtap='showBuyCon' id='addcart'>
+                加入购物车
+            </view>
+            <view class='buy-now' bindtap='showBuyCon' id='buyit'>
+                立即购买
+            </view>
+        </view>
+    </view>
+    <block wx:if='{{showBuyCon}}'>
+        <view class='buy-con' animation='{{animationData}}'>
+            <view class='lineOne-con'>
+                <view class='imageContainer'>
+                    <image src='{{host}}{{goods.head}}' style='width:100rpx;height:100rpx;'></image>
+                </view>
+                <view class='price-order-con'>
+                    <view>
+                        单买价  ￥{{goods.price}}
+                    </view>
+                    <view>
+                        商品编号 : {{goods.pid}}
+                    </view>
+                </view>
+                <view class='cancel-con' bindtap='cancel'>
+                    <image src='../../../resources/Cancel.png' style='width:40rpx;height:40rpx;'></image>
+                </view>
+            </view>
+            <block wx:for='{{typeArr}}' wx:for-index='outIndex' wx:for-item='outItem'>
+                <view class='lineTwo-con'>
+                    <view>
+                        {{outItem}}
+                    </view>
+                    <view class='color-con'>
+                        <block wx:for='{{typeValueArr[outIndex]}}' wx:for-index='innerIndex'>
+                            <view class='color-item' id='{{item.mode}}-{{outIndex}}-{{outItem}}' bindtap='chooseType' style='background-color:{{item.touch ? selectColor : unSelectColor}};color:{{item.touch ? selectFontColor : unSelectFontColor}}'>
+                                {{item.mode}}
+                            </view>
+                        </block>
+                    </view>
+                </view>
+            </block>
+            <view class='countContainer'>
+                <view>
+                    数量
+                </view>
+                <view class='add-sub-con'>
+                    <view class='as-item' bindtap='sub'>
+                        -
+                    </view>
+                    <view class='as-item'>
+                        {{count}}
+                    </view>
+                    <view class='as-item' bindtap='add'>
+                        +
+                    </view>
+                </view>
+            </view>
+            <view class='confirm' bindtap='confirm' id='{{goods.pid}}' data-shopnumber='{{}}'>
+                确认
+            </view>
+        </view>
+    </block>
+</view>
