@@ -1,5 +1,6 @@
 // pages/goodsList.js
 import Host from '../../utils/Const.js'
+let app = getApp()
 Component({
     //包含多个slot节点的时候需要声明的
     options: {
@@ -60,7 +61,7 @@ Component({
      * 组件的初始数据 进行模板渲染
      */
     data: {
-        host : Host.devHost
+        host : app.host
     },
 
     /**

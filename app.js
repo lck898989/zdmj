@@ -1,6 +1,7 @@
 import Host from './utils/Const.js'
 //app.js
 App({
+    host : Host.productionHost,
     //保存订单号
     orderNumber: null,
     //商户好
@@ -284,7 +285,7 @@ App({
                         //     access_token: res.data.access_token,
                         //     openid: res.data.userInfo.openid
                         // }, "liginSuccess");
-                        self.ShortConnect(Host.devHost + "Entry", {
+                        self.ShortConnect(Host.productionHost + "Entry", {
                             access_token: res.data.access_token,
                             openId: res.data.userInfo.openid
                         }, "liginSuccess");
@@ -496,7 +497,7 @@ App({
                                 if (res.errMsg == "requestPayment:ok") {
                                     console.log("555");
                                     self.setLoad();
-                                    self.ShortConnect(Host.devHost + "Data/PayOrder", {
+                                    self.ShortConnect(Host.productionHost + "Data/PayOrder", {
                                         openid: self.openid,
                                         orderNumber: self.orderNumber
                                     }, "checkPay");

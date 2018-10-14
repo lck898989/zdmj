@@ -65,7 +65,7 @@ Page({
   onLoad: async function (options) {
       console.log("asdfasdf");
       //向服务器请求数据
-      let req = new Request(Const.devHost +'Data/GetProducts',{page : this.data.page},"POST","text");
+      let req = new Request(app.host +'Data/GetProducts',{page : this.data.page},"POST","text");
       console.log("ae32333");
       let res = await req.sendRequest();
       console.log();
@@ -204,7 +204,7 @@ Page({
             choosed: false
         });
         //访问服务器
-        app.ShortConnect(Const.devHost + "API", {
+        app.ShortConnect(app.host + "API", {
             "query": `{
                 essays(page: 1) {
                  eid
@@ -308,7 +308,7 @@ Page({
               isUpPrice : !this.data.isUpPrice,
           })
       }
-      let url = Const.devHost + 'Data/GetProductByPrice'
+      let url = app.host + 'Data/GetProductByPrice'
       let data = {
           up : null
       }

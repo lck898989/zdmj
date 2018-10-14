@@ -1,5 +1,4 @@
 // pages/lck/cartGoodsDetail/cartGoodsDetail.js
-import Host from '../../../utils/Const.js'
 import Request from '../../../utils/Request.js'
 import regeneratorRuntime from '../../../utils/regenerator-runtime/runtime-module.js'
 let app = getApp();
@@ -10,7 +9,7 @@ Page({
    */
   data: {
       goodsImageList: [],
-      host : Host.devHost,
+      host : app.host,
       goods : null,
       showBuyCon : false,
       animationData : null,
@@ -43,7 +42,10 @@ Page({
       //默认收货地址
       defaultAdd : null,
       //是通过商品详情点击了选择款式的按钮进入尺寸选择界面
-      isChooseType : false
+      isChooseType : false,
+      fixPage : "overflow-y:hidden",
+      //启用滚动条
+      unFixPage : "overflow-y:auto"
     //   index : 0
   },
 
@@ -101,7 +103,7 @@ Page({
       }
       //请求收货地址
       //请求所有收货地址的数据
-      let url = Host.devHost + 'Data/getAddressByUid';
+      let url = this.data.host + 'Data/getAddressByUid';
       console.log("uid is  ", app.uid);
       let data = {
           uid: app.uid
@@ -171,6 +173,9 @@ Page({
   onShareAppMessage: function () {
 
   },
+  test : function(){
+
+  },
   cancel : function(){
       //检查规格数据是否选择完毕
       this.checkData(this.data.goods.pid,'cancel');
@@ -196,7 +201,7 @@ Page({
 
     //   }).then()
       animation.translateY(400).step();
-      backAnimation.opacity(1).step().backgroundColor('#efefef').step();
+    //   backAnimation.opacity(1).step().backgroundColor('#fff').step();
       //   backAnimation.backgroundColor('#000').step();
       this.setData({
           animationData: animation.export(),
@@ -213,6 +218,9 @@ Page({
 //   },
   showBuyCon : async function(event){
       console.log("event is ",event);
+      this.setData({
+        showBuyCon: true
+      });
       let dataSet = event.currentTarget.dataset;
     //   if(clickType === 'yes'){
     //       //设置状态为已经选择了尺寸参数
@@ -229,7 +237,7 @@ Page({
     //   console.log(this.data.sizeChoosed,this.data.colorChoosed);
       let id = event.currentTarget.id;
       if(id === 'addcart_t'){
-            let url = Host.devHost + 'Data/AddCart';
+            let url = this.data.host + 'Data/AddCart';
             let data = this.checkData(this.data.goods.pid);
             //在选择规格界面添加购物车
             if (this.data.isOk) {
@@ -237,7 +245,6 @@ Page({
                     //尺寸颜色都已经选择了
                     isChooseType: true
                 });
-
                 //将对象的值取出来
                 this.data.sizeValueArr = Object.values(this.data.sendServerSize);
                 console.log("sizeValueArr is ", this.data.sizeValueArr);
@@ -268,17 +275,16 @@ Page({
           this.setData({
               addCart : true,
               BuyIt   : false,
+              showBuyCon: true,
           })
           
       }else if(id === 'buyit'){
           this.setData({
               BuyIt : true,
               addCart : false,
+              showBuyCon: true,
           })
       }
-      this.setData({
-          showBuyCon : true,
-      });
       let animation = wx.createAnimation({
           duration:1000,
           timingFunction:'liner',
@@ -288,7 +294,8 @@ Page({
           timingFunction:'liner',
       });
       animation.translateY(-400).step();
-      backAnimation.opacity(0.1).step().backgroundColor('000000').step();
+      backAnimation
+    //   backAnimation.backgroundColor('#fff').step().opacity(0.3).step();
     //   backAnimation.backgroundColor('#000').step();
       this.setData({
           animationData : animation.export(),
@@ -330,7 +337,7 @@ Page({
       //确认加入购物车
       if(this.data.addCart){
           console.log();
-        let url = Host.devHost + 'Data/AddCart';
+        let url = this.data.host + 'Data/AddCart';
         let data = this.checkData(pid);
         if(this.data.isOk){
             this.setData({

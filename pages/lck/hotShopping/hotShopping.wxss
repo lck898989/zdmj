@@ -36,10 +36,17 @@ page{
     height:60rpx;
     line-height: 60rpx;
     background-color: #f26e96;
+    /* margin: 0rpx auto;
     font-weight: 600;
     color : #fff;
-    font-size: 20px;
-    text-align: center;
+    font-size: 40rpx;
+    text-align: center; */
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: nowrap;
+    color: #fff;
 }
 .hotGoods{
     font-size: 16px;
