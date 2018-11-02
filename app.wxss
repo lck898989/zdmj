@@ -1,4 +1,5 @@
 /**app.wxss**/
+/* @import './wxParse/wxParse.wxss'; */
 .container {
   height: 100%;
   display: flex;
@@ -8,6 +9,10 @@
   padding: 200rpx 0;
   box-sizing: border-box;
 } 
+image{
+    border: 0;
+}
+
 
 
 

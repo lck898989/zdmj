@@ -1,0 +1,180 @@
+<block wx:if='{{showBuyCon}}' >
+    <view class='mask' animation='{{backAnimaData}}' catchtouchmove='test' data-e='mask'></view>
+</block>
+<scroll-view class='{{showBuyCon ? "page-con-showbuy" : "page-con"}}'>
+    <view>
+        <swiper class='swiper-con'>
+            <block wx:for='{{goodsImageList}}' wx:for-len = '{{goodsImageList.length}}'>
+                <swiper-item>
+                    <view class='img-con'>
+                        <image src='{{imageHost}}{{item}}' style='width:750rpx;height:750rpx;'></image>
+                        <view class='index-num'>
+                            {{index+1}}/{{goodsImageList.length}}
+                        </view>
+                    </view>
+                </swiper-item>
+            </block>
+        </swiper>
+        <view class='price-con'>
+            <view class='goodsPrice'>
+                <view class='price'>
+                    ￥{{goods.price}}
+                </view>
+                <view class='sell'>
+                    售出{{goods.sales}}{{goods.unit}}
+                </view>
+            </view>
+            <view class='goodsName' style='margin-top:10rpx;font-size:32rpx;margin-left:30rpx'>
+                {{goods.pname}}
+            </view>
+            <view class='notice-con'>
+                <view class='server-item'>
+                    七天退换货
+                </view>
+                <view class='server-item'>
+                    商品包邮
+                </view>
+                <view class='server-item'>
+                    24小时发货
+                </view>
+                <view class='server-item'>
+                    正品保障
+                </view>
+            </view>
+        </view>
+        <view class='type-address' bindtap='showBuyCon' data-clickType='yes'>
+            <view class='server-item'>
+                选择款式
+                <view wx:if='{{!isChooseType}}' class='type-item' style='margin-left:32rpx;'>
+                    <view>
+                        颜色规格
+                    </view>
+                </view>
+                <view wx:else class='type-item' style='margin-left:32rpx;'>
+                    已选：
+                    <block wx:for='{{sizeValueArr}}'>
+                        <view>
+                            {{item}}
+                        </view>
+                    </block>
+                </view>
+            </view>
+            <view class='arrow-right'>
+                >
+            </view>
+        </view>
+        <view class='type-address'>
+            <view class='server-item'>
+                发货地址
+                <view class='type-item' style='margin-left:32rpx;'>
+                    {{goods.sendaddress}}
+                </view>
+            </view>
+        </view>
+        <view class='goodsDetail'>
+            <view class='head'>
+                商品详情
+            </view>
+        </view>
+        <view class='goods_introduce'>
+            <block wx:if='{{goodsDetailList}}'>
+                <!-- <view>
+                    {{goodsDetailList.imageUrls[0]}}
+                </view> -->
+                <image wx:for='{{goodsDetailList.imageUrls}}' src='{{item}}' mode='widthFix' style='width:750rpx;height:auto'></image>
+            </block>
+        </view>
+        <view class='confirm'>
+            <!-- <view class='cart-con' bindtap='showBuyCon' id='addcart'>
+                加入购物车
+            </view>
+            <view class='buy-now' bindtap='showBuyCon' id='buyit'>
+                立即购买
+            </view> -->
+            <button class='share' open-type='share'>
+                分享
+            </button>
+            <!--判断尺寸是否选择完毕-->
+            <view class='addCartn' bindtap='showBuyCon' id='addcart'>
+                加入购物车
+            </view>
+            <view class='buyNown' bindtap='showBuyCon' id='buyit'>
+                立即购买
+            </view>
+        </view>
+    </view>
+    <block wx:if='{{showBuyCon}}'>
+        <view class='imageContainer'>
+            <image src='{{imageHost}}{{goodsImageList[0]}}' style='width:220rpx;height:220rpx;'></image>
+        </view>
+        <view class='buy-con' animation='{{animationData}}' catchtouchmove="ture" data-e='buy-con'>
+            <view class='lineOne-con'>
+                <view class='price-order-con'>
+                    <view class='price-item' style='font-size:35rpx;color:#b31227;font-weight:800;'>
+                       ￥  {{goods.price}}
+                    </view>
+                    <view class='price-item' style='font-size:30rpx;color:#404040'>
+                        已选:
+                        <text wx:for='{{sendServerSize}}'>{{item}}</text>
+                    </view>
+                </view>
+                <view class='cancel-con' bindtap='cancel'>
+                    <image src='../../../resources/Cancel.png' style='width:40rpx;height:40rpx;'></image>
+                </view>
+            </view>
+            <scroll-view class='scc-con' scroll-y>
+                <block wx:for='{{typeArr}}' wx:for-index='outIndex' wx:for-item='outItem'>
+                    <view class='lineTwo-con'>
+                        <view>
+                            {{outItem}}
+                        </view>
+                        <view class='color-con'>
+                            <block wx:for='{{typeValueArr[outIndex][outItem]}}' wx:for-index='innerIndex'>
+                                <view class='color-item' id='{{item.mode}}-{{outIndex}}-{{outItem}}' bindtap='chooseType' style='background-color:{{item.touch ? selectColor : unSelectColor}};color:{{item.touch ? selectFontColor : unSelectFontColor}};border:{{item.touch ? selectBorder : unselectBorder}}'>
+                                    {{item.mode}}
+                                </view>
+                            </block>
+                        </view>
+                    </view>
+                </block>
+                <view class='countContainer'>
+                    <view style='margin-left:22rpx;'>
+                        数量
+                    </view>
+                    <view class='add-sub-con' style='margin-right:22rpx;'>
+                        <view class='as-item' bindtap='sub'>
+                            -
+                        </view>
+                        <view class='as-item'>
+                            {{count}}
+                        </view>
+                        <view class='as-item' bindtap='add'>
+                            +
+                        </view>
+                    </view>
+                </view>
+            </scroll-view>
+            <view class='addOrBuy'>
+                <!--检查是否点击过购物车和立即购买按钮-->
+                <block wx:if='{{!addCart && !BuyIt}}'>
+                    <view class='AB'>
+                        <view class='addCart' bindtap='showBuyCon' id='addcart_t'>
+                            加入购物车
+                        </view>
+                        <view class='buyNow' bindtap='showBuyCon' id='buyit_t'>
+                            立即购买
+                        </view>
+                    </view>
+                </block>
+                <block wx:else>
+                    <view wx:if='{{addCart}}' class='saveType' bindtap='confirm' id='addcart'>
+                        保存
+                    </view>
+                    <view wx:if='{{BuyIt}}' class='saveBuy' bindtap='confirm' id='buyit'>
+                        确定
+                    </view>
+                </block>
+            </view>
+        </view>
+    </block>
+</scroll-view>

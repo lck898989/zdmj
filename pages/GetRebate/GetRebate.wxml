@@ -1,0 +1,11 @@
+<!--pages/GetRebate/GetRebate.wxml-->
+<!-- <text>pages/GetRebate/GetRebate.wxml</text> -->
+<view class='myFriends' hidden="{{rebate}}">
+    我的亲友团
+    <button open-type="share" bindtap="" bindgetphonenumber="{{userBack1}}" class='shareCon'>邀请好友成为下级</button>
+</view>
+<view class='shareBox' hidden="{{shareHidden}}">
+    您的好友正在邀请您成为他的亲友团
+    <button class='agree' bindtap='agree'>接受</button>
+    <button class='noAgree'>不接受</button>
+</view>

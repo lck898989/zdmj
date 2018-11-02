@@ -1,0 +1,27 @@
+<!--pages/TiXian/TiXian.wxml-->
+<!-- <text>pages/TiXian/TiXian.wxml</text> -->
+<view class='tixianView'>
+    <view class='tixianTop'>
+        <text class='textQianBao' style="font-size:28rpx;">钱包余额</text>
+        <image class='imagejinbi' src='../../resources/main_personal_dw.png' mode='widthFix'></image>
+        <text class='textMoney' style="font-size:38rpx;">￥6.00</text>
+    </view>
+    <view class='tixianMoneyView'>
+        <text class='tixianMoney' style="font-size:27rpx;">提现金额</text>
+        <view class='qianshu'>
+            <block wx:for='{{moneyArray}}'>
+                <view class='yuan' wx:if='{{index==indexs}}' style="font-size:25rpx; background-color:#ede2f4;color:#863bb7; border-top: 1px solid #863bb7;    border-bottom: 1px solid #863bb7;  border-left: 1px solid #863bb7;border-right: 1px solid #863bb7;" bindtap='chooseMoney'
+                    id="{{index}}">
+                    {{item}}元
+                </view>
+                <view class='yuan' style="font-size:25rpx;background-color:#f2f2f2;" bindtap='chooseMoney' id="{{index}}" wx:else>
+                    {{item}}元
+                </view>
+            </block>
+        </view>
+        <text class='tixianX' style="font-size:21rpx;">提现金额不足5元时不能体现，提现金额将直接发放到"微信-我的钱包"</text>
+    </view>
+    <view class='tixianButton'>
+        <text style='color:white'>确认提现</text>
+    </view>
+</view>

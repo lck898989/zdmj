@@ -1,28 +1,36 @@
 {
     "pages": [
+        "pages/lck/cart/cart",
         "pages/lck/hotShopping/hotShopping",
+        "pages/index/index",
+        "pages/indextwo/indextwo",
+        "pages/GetRebate/GetRebate",
+        "pages/userInfo/userInfo",
+        "pages/lck/searchDetail/searchDetail",
+        "pages/lck/testJing/perfact",
+        "pages/lck/address/address",
+        "pages/lck/order/order",
         "pages/lck/cartGoodsDetail/cartGoodsDetail",
         "pages/index2/index2",
         "pages/lck/ShopSuccess/ShopSuccess",
-        "pages/lck/address/address",
-        "pages/lck/order/order",
-        "pages/lck/cart/cart",
-        "pages/wxscope/wxscope",
-        "pages/index/index",
         "pages/myshop/myshop",
-        "pages/userInfo/userInfo",
         "pages/shopshare/shopshare",
         "pages/detailshop/detailshop",
         "pages/MyCode/MyCode",
         "pages/Person/Person",
         "pages/CheckCode/CheckCode",
         "pages/Advertisting/Advertisting",
-        "pages/lck/testJing/perfact",
         "pages/lck/editAddress/editAddress",
         "pages/lck/orderAddress/orderAddress",
-        "pages/MyMoney/MyMoney"
+        "pages/MyMoney/MyMoney",
+        "pages/Message/Message",
+        "pages/TiXian/TiXian",
+        "pages/MingXi/MingXi",
+        "pages/MyOrder/MyOrder",
+        "libs/citySelector/switchcity/switchcity"
     ],
     "window": {
+        "backgroundTextStyle": "dark",
         "navigationBarBackgroundColor": "#863bb7",
         "navigationBarTitleText": "指点迷津",
         "navigationBarTextStyle": "white",
@@ -32,13 +40,13 @@
         "selectedColor": "#863bb7",
         "list": [
             {
-                "pagePath": "pages/index2/index2",
+                "pagePath": "pages/indextwo/indextwo",
                 "iconPath": "resources/main_home_up.png",
                 "selectedIconPath": "resources/main_home_dw.png",
                 "text": "首页"
             },
             {
-                "pagePath": "pages/myshop/myshop",
+                "pagePath": "pages/lck/hotShopping/hotShopping",
                 "iconPath": "resources/main_share_up.png",
                 "selectedIconPath": "resources/main_share_dw.png",
                 "text": "商城"
@@ -50,7 +58,7 @@
                 "text": "我的分享"
             },
             {
-                "pagePath":   "pages/wxscope/wxscope",
+                "pagePath": "pages/GetRebate/GetRebate",
                 "iconPath": "resources/main_personal_up.png",
                 "selectedIconPath": "resources/main_personal_dw.png",
                 "text": "返利"

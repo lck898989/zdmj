@@ -1,0 +1,164 @@
+// pages/lck/order/order.js
+var app=getApp();
+import Request from '../../../utils/Request.js';
+import Host from '../../../utils/Const.js';
+// import userInfo from '../../userInfo/userInfo.js';
+import regeneratorRuntime from '../../../utils/regenerator-runtime/runtime-module.js'
+Page({
+
+  /**
+   * 页面的初始数据
+   */
+  data: {
+      host : app.host,
+      loadButton:true,
+      sceneView:false,
+      goods : null,
+      add : null
+  },
+
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad: async function () {
+    let self = this;
+    app.setLoad = res => {
+          wx.showLoading({
+              title: '加载中',
+          })
+          this.setData({
+              loadButton: false,
+              sceneView:true
+          })
+      }
+    
+    //从缓存中取数据
+    let promise = new Promise(function(resolve,reject){
+        wx.getStorage({
+            key: 'buyGoodsItem',
+            success: function(res){
+                console.log("res is ",res);
+                resolve(res);
+            },
+        })
+    })
+    promise.then(function(res){
+        console.log("res's data is ",res.data);
+        self.setData({
+            goods : res.data
+        })
+    })
+    console.log(app.uid);
+    //请求所有收货地址的数据
+    let url = app.host + 'Data/getAddressByUid';
+    let data = {
+        uid: 1
+    }
+    let req = new Request(url, data, "POST", 'text');
+    let res = await req.sendRequest();
+    console.log("res is ", res.data.address);
+    let addressArr = res.data.address;
+    if(addressArr !== null){
+        let len = addressArr.length;
+        for(let i = 0;i < len;i++){
+            console.log("地址项是： ",addressArr[i]);
+            if(addressArr[i].state === 0){
+                console.log("找到默认地址： ",addressArr[i]);
+                //将该地址取出来显示
+                this.setData({
+                    add : addressArr[i]
+                });
+                console.log("add is ",this.data.add);
+            }
+        }
+    }
+    // if(options)
+    // let tempData = JSON.parse(options);
+    // console.log("tempData is ",tempData);
+  },
+
+  /**
+   * 生命周期函数--监听页面初次渲染完成
+   */
+  onReady: function () {
+
+  },
+
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function (event) {
+      console.log("goods is ",this.data.goods);
+      console.log(event);
+      console.log("订单页面重新显示");
+      let choosedAdd = wx.getStorageSync('choosedAdd');
+      console.log("选择的地址是：",choosedAdd);
+      let pageStack = getCurrentPages();
+      console.log("pageStack is ",pageStack);
+  },
+
+  /**
+   * 生命周期函数--监听页面隐藏
+   */
+  onHide: function () {
+
+  },
+
+  /**
+   * 生命周期函数--监听页面卸载
+   */
+  onUnload: function () {
+
+  },
+
+  /**
+   * 页面相关事件处理函数--监听用户下拉动作
+   */
+  onPullDownRefresh: function () {
+
+  },
+
+  /**
+   * 页面上拉触底事件的处理函数
+   */
+  onReachBottom: function () {
+
+  },
+  enterAddress : function(event){
+      console.log("event si ",event);
+      wx.redirectTo({
+          url: '../orderAddress/orderAddress',
+      })
+  },
+  //支付接口
+  pay : function(){
+      console.log("444");
+      console.log(app.userInfo1.familyAddress);
+      var self=this;
+      if (app.userInfo1.familyAddress.aid == null)
+      {
+          wx.showModal({
+              showCancel: false,
+              title: '提示',
+              content: "请添加收货地址",
+              success: function (res) {
+                  if (res.confirm) {
+                      console.log('用户点击确定')
+                  } else if (res.cancel) {
+                      console.log('用户点击取消')
+                  }
+              }
+          })
+      }         
+      else
+      {
+          app.ShortConnect("http://192.168.1.192:3150/Data/AddOrder",{
+              aid: app.userInfo1.familyAddress.aid,
+              pcount: self.data.goods.count,
+              pid: self.data.goods.pid,
+              buysource:1,
+              uid: app.uid ,
+          },"pay");
+      }
+  }
+})

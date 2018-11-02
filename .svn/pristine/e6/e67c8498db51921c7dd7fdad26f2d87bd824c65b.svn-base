@@ -1,0 +1,20 @@
+<!--pages/Message/Message.wxml-->
+<view class='messageText'>
+<text >消息通知</text>
+</view>
+<view class='messageText'>
+<text>系统通知</text>
+</view>
+<view class='messageText'>
+<text>全部</text>
+</view>
+<view class='messageText'>
+<text>商铺通知</text>
+</view>
+<view class='messageText'>
+<text>购买通知</text>
+</view>
+<view class='messageText'>
+<text>物品过期通知</text>
+</view>
+    

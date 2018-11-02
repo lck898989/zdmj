@@ -1,6 +1,10 @@
-import Host from './utils/Const.js'
+import Host from './utils/Const'
 //app.js
 App({
+    //初始化提现信息数组
+    arrayTixian: [],
+    urlw: "http://192.168.1.143:3150/",
+    host: Host.productionHost,
     //保存订单号
     orderNumber: null,
     //商户好
@@ -66,6 +70,7 @@ App({
     //判断点击查看详情
     isPressDetail: false,
     onLaunch: function(res) {
+        console.log("res is ",res);
         console.log(this.userInfo1);
         var self = this;
         this.StartLongConnect();
@@ -78,6 +83,15 @@ App({
         // logs.unshift(Date.now())
         // wx.setStorageSync('logs', logs);
         // 登录 
+        wx.getSystemInfo({
+            success: function(res) {
+                console.log("手机信息是：",res);
+                console.log("手机高度是：",res.screenHeight * res.pixelRatio + 'px');
+                console.log("手机宽度是：",res.screenWidth * res.pixelRatio + 'px');
+                console.log("屏幕的高是：",res.windowHeight*res.pixelRatio + 'px');
+                console.log("屏幕的宽是：",res.windowWidth * res.pixelRatio + 'px');
+            },
+        })
         wx.login({
             fail: function(res) {
                 console.log(res);
@@ -242,26 +256,36 @@ App({
             },
             method: "POST",
             success: function(res) {
-                console.log("22222222222222222" + JSON.stringify(res));
+                console.log("1111111111111" + JSON.stringify(res));
+
                 switch (state) {
                     case "code":
                         if (res.data.result == "ok") {
                             // self.openid = res.data.username;
                             self.sessionKey = res.data.data;
-                            console.log("33333");
-                            if (self.isShare == false) {
-                                wx.getSetting({
-                                    success(res) {
-                                        //当授权时
-                                        if (res.authSetting['scope.userInfo']) {
-                                            self.ShouQuan();
-                                        }
+                            wx.getSetting({
+                                success(res) {
+                                    //当授权时
+                                    if (res.authSetting['scope.userInfo']) {
+                                        console.log("============");
+                                        self.ShouQuan();
                                     }
-                                })
-                            }
+                                }
+                            })
+                            console.log("33333");
+                            // if (self.isShare == false) {
+                            //     wx.getSetting({
+                            //         success(res) {
+                            //             //当授权时
+                            //             if (res.authSetting['scope.userInfo']) {
+                            //                 self.ShouQuan();
+                            //             }
+                            //         }
+                            //     })
+                            // }
                             // if (self.isShare == false) {
                             //     // console.log("sss");
-                            //     // self.GetUserInfo();
+                            //     // self.GetUserInfo();000000000000000000000000000000000
                             // } else {
                             //     self.openid = res.data.username;
                             //     app.ShortConnect(app.url + "/commodity/GetShareCommodityLink", {
@@ -279,12 +303,13 @@ App({
                         break;
                     case "userInfo":
                         self.openid = res.data.userInfo.openid;
+                        console.log(res.data.userInfo.openid);
                         self.detailInfo = res.data.detailInfo;
                         // self.ShortConnect("http://192.168.1.206:10086/users/login2", {
                         //     access_token: res.data.access_token,
                         //     openid: res.data.userInfo.openid
                         // }, "liginSuccess");
-                        self.ShortConnect(Host.devHost + "Entry", {
+                        self.ShortConnect("https://shop.ykplay.com/Entry", {
                             access_token: res.data.access_token,
                             openId: res.data.userInfo.openid
                         }, "liginSuccess");
@@ -299,6 +324,7 @@ App({
                         break;
                     case "liginSuccess":
                         if (res.data.desc == "用户合法登录") {
+                            console.log(res.data.userInfo.openid);
                             self.unionId = res.data.userInfo.unionId;
                             self.uid = res.data.userInfo.uid;
                             self.serverOpenid = res.data.userInfo.openid;
@@ -306,6 +332,12 @@ App({
                                 openid: self.serverOpenid
                             }, "register");
                         }
+                        break;
+                    case "register":
+                        wx.reLaunch({
+                            url: '../indextwo/indextwo',
+                        })
+
                         break;
                     case "turnshare":
                         if (res.data.success == "true") {
@@ -473,11 +505,7 @@ App({
                         }
                         break;
                     case "checkCode":
-                        self.codeMsg = res.data.code[0];
-                        self.cerchanAddress = res.data.cerchan[0].cerchanAddress;
-                        wx.navigateTo({
-                            url: '../CheckCode/CheckCode',
-                        })
+
                         break;
                     case "typeShop":
                         self.setUserInfo(res);
@@ -491,12 +519,13 @@ App({
                             'nonceStr': res.data.nonce_str,
                             'package': "prepay_id=" + res.data.prepay_id,
                             'signType': "MD5",
-                            'paySign': res.data.paySign ,
+                            'paySign': res.data.paySign,
                             'success': function(res) {
+                                console.log(res);
                                 if (res.errMsg == "requestPayment:ok") {
                                     console.log("555");
                                     self.setLoad();
-                                    self.ShortConnect(Host.devHost + "Data/PayOrder", {
+                                    self.ShortConnect("http://192.168.1.47:3150/Data/PayOrder", {
                                         openid: self.openid,
                                         orderNumber: self.orderNumber
                                     }, "checkPay");
@@ -518,6 +547,36 @@ App({
                             wx.hideLoading();
                         }
                         break;
+                    case "tixianZero":
+                        if (res.data.encode == -1) {
+                            // wx.redirectTo({
+                            //     url: '../MyMoney/MyMoney',
+                            // })
+                        } else {
+                            if (res.data.encode == 1) {
+
+                                // wx.redirectTo({
+                                //     url: '../MyMoney/MyMoney',
+                                // })  
+                            } else {
+
+                                // wx.redirectTo({
+                                //     url: '../MyMoney/MyMoney',
+                                // })
+                            }
+                        }
+                        break;
+                    case "tixianOne":
+                        if (res.data.encode == -1) {
+
+                        } else {
+                            if (res.data.encode == 1) {
+
+                            } else {
+
+                            }
+                        }
+                        break;
                     case "pay":
                         self.orderNumber = res.data.order.onumber;
                         console.log(res.data.order.orderItems);
@@ -532,12 +591,56 @@ App({
                                 wxMsg: self.detailInfo,
                                 attach: "指点迷津"
                             }, "wechatpay");
-                        }
-                        else
-                        {
-                            
+                        } else {
+
+
+
+
 
                         }
+                        break;
+                    case "agree":
+                        console.log("agree");
+                        if (res.data.encode == 0) {
+                            wx.showModal({
+                                showCancel: false,
+                                title: '提示',
+                                content: res.data.msg,
+                                success: function(res) {
+                                    if (res.confirm) {
+                                        console.log('用户点击确定')
+                                    } else if (res.cancel) {
+                                        console.log('用户点击取消')
+                                    }
+                                }
+                            })
+                        } else {
+                            wx.showModal({
+                                showCancel: false,
+                                title: '提示',
+                                content: res.data.msg,
+                                success: function(res) {
+                                    if (res.confirm) {
+                                        console.log('用户点击确定')
+                                    } else if (res.cancel) {
+                                        console.log('用户点击取消')
+                                    }
+                                }
+                            })
+                        }
+                        break;
+                    case "GetAllMessage":
+                        self.arrayTixian = res.data.informs;
+                        if (res.data.encode == -2) {
+                            self.setmingxiFalse(res);
+                        }
+                        wx.navigateTo({
+                            url: '../MingXi/MingXi',
+                        })
+                        // self.setMessageNumber(res);
+                        break;
+                    case "myorder":
+                        console.log(res.data.orders.length);
                         break;
                 }
             },

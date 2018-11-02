@@ -1,0 +1,20 @@
+/* pages/lck/testJing/perfact.wxss */
+.con-p{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: center;
+    position: relative;
+    background-color: red;
+}
+.phone{
+    width: 50px;
+    height: 50rpx;
+    background-color: green;
+    padding: 50rpx 80rpx;
+    text-align: center;
+    /* align-self: center; */
+    /* align-self: center;
+    justify-self: center; */
+}

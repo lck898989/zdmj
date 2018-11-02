@@ -1,0 +1,72 @@
+{
+    "pages": [
+        "pages/wxscope/wxscope",
+        "pages/indextwo/indextwo",
+        "pages/GetRebate/GetRebate",
+        "pages/TixianMingxi/TixianMingxi",
+        "pages/lck/hotShopping/hotShopping",
+        "pages/userInfo/userInfo",
+        "pages/index/index",
+        "pages/lck/ShopSuccess/ShopSuccess",
+        "pages/lck/addres`s/address",
+        "pages/lck/order/order",
+        "pages/lck/cart/cart",
+        "pages/myshop/myshop",
+        "pages/shopshare/shopshare",
+        "pages/detailshop/detailshop",
+        "pages/MyCode/MyCode",
+        "pages/Person/Person",
+        "pages/CheckCode/CheckCode",
+        "pages/Advertisting/Advertisting",
+        "pages/lck/testJing/perfact",
+        "pages/lck/cartGoodsDetail/cartGoodsDetail",
+        "pages/lck/editAddress/editAddress",
+        "pages/lck/orderAddress/orderAddress",
+        "pages/MyMoney/MyMoney",
+        "pages/Message/Message",
+        "pages/TiXian/TiXian",
+        "pages/MingXi/MingXi",
+        "pages/MyOrder/MyOrder"
+    ],
+    "window": {
+        "navigationBarBackgroundColor": "#863bb7",
+        "navigationBarTitleText": "指点迷津",
+        "navigationBarTextStyle": "white",
+        "enablePullDownRefresh": true
+    },
+    "tabBar": {
+        "selectedColor": "#863bb7",
+        "list": [
+            {
+                "pagePath": "pages/indextwo/indextwo",
+                "iconPath": "resources/main_home_up.png",
+                "selectedIconPath": "resources/main_home_dw.png",
+                "text": "首页"
+            },
+            {
+                "pagePath": "pages/lck/hotShopping/hotShopping",
+                "iconPath": "resources/main_share_up.png",
+                "selectedIconPath": "resources/main_share_dw.png",
+                "text": "商城"
+            },
+            {
+                "pagePath": "pages/index/index",
+                "iconPath": "resources/main_personal_up.png",
+                "selectedIconPath": "resources/main_personal_dw.png",
+                "text": "我的分享"
+            },
+            {
+                "pagePath": "pages/GetRebate/GetRebate",
+                "iconPath": "resources/main_personal_up.png",
+                "selectedIconPath": "resources/main_personal_dw.png",
+                "text": "返利"
+            },
+            {
+                "pagePath": "pages/userInfo/userInfo",
+                "iconPath": "resources/main_personal_up.png",
+                "selectedIconPath": "resources/main_personal_dw.png",
+                "text": "个人信息"
+            }
+        ]
+    }
+}

@@ -1,0 +1,252 @@
+/* pages/lck/hotShopping/hotShopping.wxss */
+page{
+    background-color: #f2f2f2;
+}
+.page-con{
+    position: relative;
+}
+.shop-type-con{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #fff;
+    width: 100%;
+    height: 100rpx;
+    border-bottom: 2rpx solid #f2f2f2;
+    
+}
+.hot-con-p{
+    text-align: center;
+    width: 100%;
+    height: 100rpx;
+    /* background-color: yellowgreen; */
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+}
+.jx-p{
+    border-left: 2rpx solid #f2f2f2;
+}
+.hot{
+    width: 60rpx;
+    height:60rpx;
+    line-height: 60rpx;
+    background-color: #f26e96;
+    font-weight: 600;
+    color : #fff;
+    font-size: 20px;
+    text-align: center;
+}
+.hotGoods{
+    font-size: 16px;
+    color: #f26e96;
+}
+.specialGoods{
+    font-size: 16px;
+    color: #bc6fcd;
+}
+.j{
+    border-left:2rpx solid #f2f2f2;
+}
+.jx{
+    background-color: #bc6fcd;
+}
+.button-con{
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    /* background-color: red; */
+    padding: 16rpx 0rpx;
+    margin-left: 84rpx;
+    /* border-bottom: 3px solid #f26e96; */
+    margin-right: 80rpx;
+}
+.btn{
+    height: 100rpx;
+    width: 200rpx;
+    color: #fff;
+    background-color: #aaa;
+}
+.choosed{
+    margin-left: 20rpx;
+}
+.wonderful{
+    background-color: grey;
+}
+.goods-type-con{
+    background-color: #fff;
+    width: 750rpx;
+    height: 100rpx;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: center;
+}
+.type-parent{
+    margin-left: 10rpx;
+    width: 95%;
+    height: 90rpx;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+    align-items: center;
+}
+.type-list{
+    font-size: 16px;
+    text-align: center;
+}
+.extra{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    width: 5%;
+    height: 60%;
+    color: white;
+    margin-right: 17rpx;
+}
+.more{
+    width: 100%;
+    height: 100rpx;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #f2f2f2;
+}
+.moreType-item{
+    background-color: #fff;
+    height: 70rpx;
+    line-height: 70rpx;
+    font-size: 16px;
+    padding-left: 20rpx;
+    padding-right: 20rpx;
+}
+.other-con{
+    margin-top: 10rpx;
+    width: 100%;
+    height: 90rpx;
+    background-color: #fff;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: center;
+    border-bottom: 2rpx solid #f2f2f2;
+}
+.search-con{
+    background-color: #fff;
+    border: 1px solid #e2e2e2;
+    width: 265rpx;
+    height:50rpx;
+    border-radius: 80rpx; 
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: center;
+    margin-left: 32rpx;
+}
+.inputC{
+    width: 266rpx;
+}
+.icon-con{
+    margin-right: 15rpx;
+    margin-top: 5rpx;
+}
+.arrow-con{
+    margin-left: 6rpx;
+    position: relative;
+    background-color: red;
+    margin-right: 90rpx;
+    height: 90rpx;
+}
+.arrow-up{
+    position: absolute;
+    top: 30rpx;
+    left: 6rpx;
+    padding: 3rpx 0rpx;
+}
+.arrow-down{
+    position: absolute;
+    bottom: 25rpx;
+    left: 6rpx;
+    padding: 3rpx 0rpx;
+}
+.price-extra-con{
+    margin-left: 40rpx;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: center;
+    width: 60%;
+    position: relative;
+}
+.price-con{
+    font-size: 35rpx;
+}
+.withIcon{
+    margin-left: 117rpx;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+    align-items: center;
+}
+.banshi{
+    margin-left: 6rpx;
+    margin-top: 10rpx;
+}
+.row-style{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+}
+.list-style{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    /* align-items: center; */
+}
+/* 更多分类样式 */
+.typelist-con{
+    width: 300rpx;
+    height:500rpx;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: center;
+    background-color: #ec0023;
+    top : 235rpx;
+    right: 5rpx;
+}
+.type-item{
+    width: 80%;
+    font-size: 30rpx;
+    color: #fff;
+    margin:20rpx 0rpx;
+    border-bottom: 1px solid #fff;
+}
+.textCommView{
+    background-color: white;
+    height: 100px;
+    width: 750rpx;
+}

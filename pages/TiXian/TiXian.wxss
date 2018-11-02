@@ -1,0 +1,106 @@
+/* pages/TiXian/TiXian.wxss */
+
+.tixianView {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background-color: #f2f2f2;
+}
+
+.tixianTop {
+    position: relative;
+    height: 130rpx;
+    width: 750rpx;
+    background-color: white;
+}
+
+.textQianBao {
+    position: absolute;
+    top: 51rpx;
+    left: 50rpx;
+}
+
+.imagejinbi {
+    position: absolute;
+    top: 39rpx;
+    right: 208rpx;
+    width: 48rpx;
+}
+
+.textMoney {
+    position: absolute;
+    top: 45rpx;
+    right: 46rpx;
+}
+
+.tixianMoneyView {
+    position: relative;
+    width: 750rpx;
+    height: 385rpx;
+    margin-top: 2px;
+    background-color: white;
+}
+
+.tixianMoney {
+    position: absolute;
+    top: 37rpx;
+    left: 32rpx;
+    color: #808080;
+}
+
+.qianshu {
+    position: absolute;
+    top: 97rpx;
+    width: 750rpx;
+    left: 0;
+    display: flex;
+    height: 180rpx;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.yuan {
+    position: relative;
+    width: 220rpx;
+    height: 70rpx;
+    /* background-color: #f2f2f2; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    /* border-top: 1px solid #863bb7;
+    border-bottom: 1px solid #863bb7;
+    border-left: 1px solid #863bb7;
+    border-right: 1px solid #863bb7; */
+}
+
+.yuanson {
+    position: relative;
+    width: 220rpx;
+    height: 70rpx;
+    padding: 20rpx 20rpx;
+    text-align: center;
+}
+
+.tixianX {
+    position: absolute;
+    width: 750rpx;
+    bottom: 40rpx;
+    left: 32rpx;
+    margin-top: 57rpx;
+    color: #808080;
+}
+
+.tixianButton {
+    position: absolute;
+    width: 750rpx;
+    display: flex;
+    height: 101rpx;
+    background-color: #44b73b;
+    justify-content: center;
+    align-items: center;
+    bottom: 0;
+}

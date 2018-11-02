@@ -1,0 +1,19 @@
+<!--pages/lck/searchDetail/searchDetail.wxml-->
+<view class='page-wrapper'>
+    <view class='search-con'>
+        <view>
+            <image src='../../../resource'></image>
+            <input type='text'></input>
+        </view>
+    </view>
+    <view class='hot-search-con'>
+        <view class='hot-search-top'>
+            <view style='font-size:30rpx;'>
+                热门搜索
+            </view>
+            <view style='font-size:25rpx;color:#ec0023;'>
+                换一批
+            </view>
+        </view>
+    </view>
+</view>

@@ -1,0 +1,20 @@
+<!--pages/TixianMingxi/TixianMingxi.wxml-->
+<view class='tixianmingxiView'>
+    <view class='money'>
+        <text class='tixianText' style='font-size:26rpx;'>提现金额</text>
+        <image class='moneyImage' mode='widthFix' src='../../resources/qiaobao_pic.png'></image>
+        <text class='moneyText'>{{money1}}</text>
+    </view>
+    <view class='tixianState'>
+        <text class='stateText'  style='font-size:26rpx;'>提现状态</text>
+        <text class='stateText1' style='color:red' wx:if='{{success==0}}'>提现失败</text>
+        <text class='stateText1' style='color:#7ccd7e;font-size:26rpx;' wx:else>提现成功</text>
+        <image class='shibaiImage' src='../../resources/qiaobao_icon5.png'  wx:if='{{success==0}}'mode='widthFix'></image>
+    </view>
+    <view class='tixianView3'>
+        <text class='timetext'  style='font-size:26rpx;'>时间</text>
+        <text class='time' style='font-size:21rpx;'>{{time}}</text>
+        <text class='numberText'  style='font-size:26rpx;'>提现单号</text>
+        <text class='number' style='font-size:21rpx;'>{{number}}</text>
+    </view>
+</view>

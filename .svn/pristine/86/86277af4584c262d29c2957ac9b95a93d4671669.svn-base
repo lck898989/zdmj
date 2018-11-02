@@ -1,0 +1,25 @@
+/* pages/MyOrder/MyOrder.wxss */
+
+/* .orderView{
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background-color: #808080;
+} */
+
+.typeView {
+    position: relative;
+    width: 750rpx;
+    height: 95rpx;
+    background-color: white;
+    display: flex;
+    justify-content: space-around;  
+    /* align-items: center;
+    flex-direction: row; */
+}
+.typeson {
+    padding: 34rpx 0rpx 34rpx 0rpx;
+    /* border-bottom: 4rpx solid #ff861a; */
+}

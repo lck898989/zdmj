@@ -1,0 +1,27 @@
+<!--pages/lck/searchDetail/searchDetail.wxml-->
+<view class='page-wrapper'>
+    <view class='search-con'>
+        <view class='search-pa'>
+            <image src='../../../resources/search.png' style='width:40rpx;height:40rpx;'></image>
+            <input type='text' placeholder='电器' class='search-input' placeholder-style="font-size:30rpx;"></input>
+        </view>
+        <view class='search-text'>
+            搜索
+        </view>
+    </view>
+    <view class='hot-search-con'>
+        <view class='hot-search-top'>
+            <view style='font-size:30rpx;'>
+                热门搜索
+            </view>
+            <view style='font-size:25rpx;color:#ec0023;'>
+                换一批
+            </view>
+        </view>
+        <view class='hotTypeContent'>
+            <view wx:for='{{hostTypeArr}}' class='type-item'>
+                {{item}}
+            </view>
+        </view>
+    </view>
+</view>

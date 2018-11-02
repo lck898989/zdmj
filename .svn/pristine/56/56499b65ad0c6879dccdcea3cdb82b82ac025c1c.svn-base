@@ -1,0 +1,19 @@
+/* components/goodsList1/goodsList1.wxss */
+.list-item{
+    width: 372rpx;
+    height: 526rpx;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+    background-color: #fff;
+    margin-right: 3rpx;
+    margin-bottom: 2rpx;
+}
+.top-text{
+    margin-left: 20rpx;
+}
+.bottom-text{
+    margin-bottom: 15rpx;
+}

@@ -1,0 +1,22 @@
+/* pages/GetRebate/GetRebate.wxss */
+
+.myFriends{
+}
+.shareBox{
+    position:relative;
+    width: 750rpx;
+    height: 100px;
+}
+.agree{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+
+
+}
+.noAgree{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+
+}
