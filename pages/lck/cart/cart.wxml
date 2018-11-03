@@ -23,16 +23,16 @@
                                             {{outItem}}
                                         </view>
                                     </view>
-                                    <view style="margin-right:35rpx;color:#808080;">
+                                    <view class='arrow-right'>
                                         >
                                     </view>
                                 </view>
                             </view>
                         </view>
                         <block wx:for='{{carts[outItem].data}}' wx:for-index='innerIndex' wx:for-item='innerItem'>
-                            <view value='{{innerItem.pid}}|{{innerItem.product.sid}}|{{innerIndex}}|{{outIndex}}' class='checkbox-con' checked='{{innerItem.choosed}}' bindtap='change'
+                            <view class='checkbox-con' checked='{{innerItem.choosed}}' bindtap='change'
                             data-pid='{{innerItem.pid}}' data-sid='{{innerItem.product.sid}}' data-goodsIndex='{{innerIndex}}' data-storeIndex='{{outIndex}}'>
-                                <view class='store-detail' bindtap='chooseStore' data-pid='{{innerItem.pid}}' data-sid='{{innerItem.product.sid}}'>
+                                <view class='store-detail'>
                                     <image wx:if='{{!innerItem.choosed}}' src='../../../resources/select_1.png' style='width:42rpx;height:42rpx;'></image>
                                     <image wx:else src='../../../resources/select_2.png' style='width:42rpx;height:42rpx;'></image>
                                     <image src='{{imageHost}}{{innerItem.product.head[0]}}' style='width:150rpx;height:150rpx;margin-left:25rpx;'></image>
@@ -55,7 +55,7 @@
                                             <view class='typeActive' style='color:#ff861a;font-weight:600;'>
                                                 ￥ {{innerItem.product.price}}
                                             </view>
-                                            <image src='../../../resources/pen_2.png' style='width:30rpx;height:30rpx;' bindtap='editorGoods'  data-pid='{{innerItem.pid}}' data-sid='{{innerItem.product.sid}}' data-choosed='{{innerItem.size}}'></image>
+                                            <image src='../../../resources/pen_2.png' style='width:30rpx;height:30rpx;' bindtap='editorGoods' data-pid='{{innerItem.pid}}' data-storeIndex='{{outIndex}}' data-goodsIndex='{{innerIndex}}'  data-choosed='{{innerItem.size}}'></image>
                                         </view>
                                     </view>
                                 </view>
@@ -82,7 +82,7 @@
                 合计 : <text style='color:#ec0023;font-weight:600;'>￥{{totalPrice}}</text>
             </view>
             <view class='settle'>
-                付款(0)
+                付款({{totalCount}})
             </view>
         </view>
     </view>

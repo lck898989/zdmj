@@ -43,9 +43,6 @@ Page({
       productSize : [],
       //购物车对象
       carts : {},
-      //是不是处于编辑状态
-      isEditor : false,
-      count : 3,
       //是否为全选
       isFullChoosed : false,
       fullChoosedColor : '#bbb',
@@ -75,6 +72,8 @@ Page({
       thisPrice : 0,
       //总价
       totalPrice : 0,
+      //选中的商品个数
+      totalCount : 0
   },
   
   /**
@@ -144,19 +143,22 @@ Page({
     // }
     console.log("carts is ",this.data.carts);
     let priceSum = 0;
+    let totalCount = 0;
     for(let i = 0;i < this.data.carts[`${storeItem}`].data.length;i++){
         let cartsItem = this.data.carts[[`${storeItem}`]].data[i];
         if(cartsItem.choosed === true){
             //把价格取出来
             let price = cartsItem.product.price;
             priceSum += price;
+            totalCount++;
             console.log("price is ",price);
         }
     }
     console.log("sum is ",priceSum);
     this.setData({
         carts : this.data.carts,
-        totalPrice : priceSum
+        totalPrice : priceSum,
+        totalCount : totalCount
     });
   },
   //选择商品
@@ -498,7 +500,7 @@ Page({
                   sid          : this.data.sid,
                   choosedType  : this.data.choosedType,
                   cartsItem    : this.data.cartsItem,
-                  thisPrice    : this.data.cartsItem.product.price
+                  thisPrice    : (this.data.cartsItem.product.price / this.data.cartsItem.count).toFixed(2)
             });
        }else{
            this.setData({
@@ -510,7 +512,7 @@ Page({
             sid          : this.data.sid,
             choosedType  : this.data.choosedType,
             cartsItem    : this.data.cartsItem,
-            thisPrice    : this.data.cartsItem.product.price
+            thisPrice    : (this.data.cartsItem.product.price / this.data.cartsItem.count).toFixed(2)
            })
        }
   },
@@ -681,7 +683,7 @@ Page({
     sub: function () {
         console.log("减少商品");
         console.log("购物车项是：",this.data.cartsItem);
-        console.log("该商品的原价是：",this.data.thisPrice);
+        console.log("该商品的单价是：",this.data.thisPrice);
         if (this.data.cartsItem.count > 1) {
             this.data.cartsItem.count -= 1;
             for(let i = 0;i < this.data.storeList.length;i++){
@@ -693,12 +695,11 @@ Page({
                     }
                 }
             }
-            this.data.cartsItem.product.price =this.data.thisPrice * this.data.cartsItem.count;
-            this.setData({
-                cartsItem : this.data.cartsItem,
-                carts     : this.data.carts
-            })
         }
+        this.data.cartsItem.product.price =this.data.thisPrice * this.data.cartsItem.count;
+        this.setData({
+            cartsItem : this.data.cartsItem,
+        })
     },
     add: function () {
         console.log("增加商品");
@@ -717,7 +718,6 @@ Page({
         this.data.cartsItem.product.price =this.data.thisPrice * this.data.cartsItem.count;
         this.setData({
             cartsItem : this.data.cartsItem,
-            carts     : this.data.carts
         })
         console.log("this.carts is ",this.data.carts);
     },
@@ -735,17 +735,21 @@ Page({
         productArr.choosed = !productArr.choosed;
         let productLen = productArr.data.length;
         let priceSum = 0;
+        let totalCount = 0;
         for(let i = 0;i < productLen;i++){
             let productItem = productArr.data[i];
             console.log("product item is ",productItem);
             productItem.choosed = !productItem.choosed;
             if(productItem.choosed){
                 priceSum += productItem.product.price;
+                //总商品数相加
+                totalCount++;
             }
         }
         this.setData({
             carts : this.data.carts,
-            totalPrice : priceSum
+            totalPrice : priceSum,
+            totalCount : totalCount
         })
     },
     //全选商品包括商店

@@ -41,12 +41,15 @@ page{
     margin-bottom: 20rpx;
 }
 .storeName-item-p{
-    width: 616rpx;
+    width: 660rpx;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: center;
     flex-wrap: nowrap;
+}
+.arrow-right{
+    margin-left: 300rpx;
 }
 .storeName-item{
     display: flex;
