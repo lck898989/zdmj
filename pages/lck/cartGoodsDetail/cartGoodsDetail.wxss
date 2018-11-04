@@ -137,13 +137,6 @@ page{
     height: 800rpx;
     bottom: 0rpx;
     z-index: 2000;
-    /* display: flex;
-    flex-wrap: nowrap;
-    justify-content: flex-start;
-    align-items: flex-start;
-    flex-direction: column; */
-    /* -webkit-animation: upMove 1s ease-in-out;
-    animation: upMove 1s ease-in-out; */
 }
 /* @-webkit-keyframes upMove{
     from{bottom: -800rpx;}

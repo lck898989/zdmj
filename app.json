@@ -1,7 +1,7 @@
 {
     "pages": [
-        "pages/lck/cart/cart",
         "pages/lck/hotShopping/hotShopping",
+        "pages/lck/cart/cart",
         "pages/index/index",
         "pages/indextwo/indextwo",
         "pages/GetRebate/GetRebate",

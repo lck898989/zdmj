@@ -85,6 +85,15 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: async function (options) {
+      Array.prototype.contain = function(item){
+          let len = this.length;
+          for(let i = 0;i < len;i++){
+              if(this[i].t2id === item.t2id && this[i].t2name === itme.t2name && this[i].tid === item.tid){
+                  return true;
+              }
+          }
+          return false;
+      }
     //   console.log("options is ",options.tid === undefined);
      if(options.tid === undefined){
          this.data.tid = 14;
@@ -109,10 +118,35 @@ Page({
       let typeReq = new Request(app.host+typeUrl,data,'POST','text');
       let typeRes = await typeReq.sendRequest();
       console.log("获得二级分类的res is ",typeRes.data.tab2s);
+      console.log("二级分类的长度是：",typeRes.data.tab2s.length);
       if(typeRes.data.tab2s.length === 0){
           wx.showToast({
               title: '没有该分类',
               icon : 'none'
+          })
+      }else{
+          console.log("二级分类开始重新组装");
+          //转换为我需要的数据格式
+          let resourceData = typeRes.data.tab2s;
+          let typeLen = resourceData.length;
+          this.data.typeArr = [];
+          this.data.moreTypeArr = [];
+          for(let i = 0;i < typeLen;i++){
+              let tempJson = {
+
+              }
+              tempJson.tid = resourceData[i].tid;
+              tempJson.t2id = resourceData[i].t2id;
+              tempJson.text = resourceData[i].t2name;
+              tempJson.choosed = (i === 0 ? true : false);
+              if(!this.data.typeArr.contain(tempJson)){
+                this.data.typeArr.push(tempJson);
+              }
+          }
+          console.log("typeArr is ",this.data.typeArr);
+          this.setData({
+              typeArr     : this.data.typeArr,
+              moreTypeArr : this.data.moreTypeArr
           })
       }
   },

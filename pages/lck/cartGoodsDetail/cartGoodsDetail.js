@@ -50,11 +50,14 @@ Page({
         goodsDetailArr: [],
         slideStart: 1,
         /**
+         * 
          * 小泉的变量
          * 
          */
         url: "http://192.168.1.50:3150",
         interSource: null,
+        //选择类别时候显示加入购物车和立即购买
+        fromTypeToAdd :false
     },
 
     /**
@@ -88,7 +91,6 @@ Page({
                 break;
             case "1":
 
-
                 break;
             case "2":
                 this.setData({
@@ -114,6 +116,7 @@ Page({
         }
         console.log("options is ", options);
         let isNullObj = (JSON.stringify(options) === '{}');
+        //通过分享得来的
         if (!isNullObj) {
             try {
                 console.log("options is ", options);
@@ -170,7 +173,6 @@ Page({
                 console.log("res is ", res);
             },
         })
-
     },
     //初始化商品信息
     initGoodsInfo: async function () {
@@ -291,6 +293,7 @@ Page({
         console.log("ops is ", ops);
         if (ops.from === 'button') {
             console.log("分享的商品是：",this.data.goods);
+            //改变来源商品分享得来的
             this.data.goods.resources = 1;
             console.log("分享出去的商品是：",this.data.goods);
             return {
@@ -348,16 +351,24 @@ Page({
     showBuyCon: async function (event) {
         console.log("event is ", event);
         let dataSet = event.currentTarget.dataset;
+        let pid = dataSet.pid;
         let id = event.currentTarget.id;
+        let clickType = dataSet.clicktype;
         //没有开启规格的时候都是默认的商品类型
-        if (this.data.goods.openstandard !== 1) {
-            this.setData({
-                showBuyCon: true,
-                isOk: true
-            });
-            
-            if (id === 'addcart_t') {
+        this.setData({
+            showBuyCon: true,
+        });
+        let data = this.checkData(this.data.goods.pid);
+        switch(id){
+            //点击商品详情页面内的选择规格弹出页面的
+            case 'addcart_t':
                 let url = this.data.host + 'Data/AddCart';
+                if(this.data.goods.openstandard !== 1){
+                    //无规格时候是默认选择的
+                    this.setData({
+                        isOk : true
+                    })
+                }
                 //在选择规格界面添加购物车
                 if (this.data.isOk) {
                     this.setData({
@@ -370,7 +381,7 @@ Page({
                     console.log("data is ", data);
                     console.log(data.size.size);
                     console.log(data.size.color);
-                    if (data.uid != null) {
+                    if (data.uid !== null) {
                         let req = new Request(url, data, "POST", "text");
                         let res = await req.sendRequest();
                         console.log("res is ", res);
@@ -389,92 +400,43 @@ Page({
                         })
                     }
                 }
-            } else if (id === 'buyit_t') {
+                break;
+            case 'buyit_t':
+                if(this.data.goods.openstandard !== 1){
+                    //没有开启规格
+                    this.setData({
+                        isOk : true
+                    })
+                }
                 if (this.data.isOk) {
                     wx.navigateTo({
                         url: '../order/order?goods=' + JSON.stringify(data),
                     });
                 }
-            }
-            else if (id === 'addcart') {
+                break;
+            case 'addcart':
                 this.setData({
                     addCart: true,
                     BuyIt: false,
                     showBuyCon: true,
-                })
-            } else if (id === 'buyit') {
+                    fromTypeToAdd : false
+                });
+                break;
+            case 'buyit':
                 this.setData({
                     BuyIt: true,
                     addCart: false,
                     showBuyCon: true,
-                })
-            }
-        } else {
-            if (id === 'addcart') {
-                this.setData({
-                    addCart: true,
-                    BuyIt: false,
-                    
-                })
-            } else if (id === 'buyit') {
-                this.setData({
-                    BuyIt: true,
-                    addCart: false,
-                })
-            }
-            //开启规格的时候请求规格参数
-            let url = 'Data/GetStandardByPid'
-            console.log("----->>pid is ", this.data.goods.pid);
-            let data = {
-                pid: this.data.goods.pid
-            }
-            let req = new Request(app.host + url, data, "POST", 'text');
-            let res = await req.sendRequest();
-            console.log("res is ", res);
-            let categoryArr = res.data.products;
-            let categoryLen = categoryArr.length;
-            for (let i = 0; i < categoryLen; i++) {
-                let keys = Object.keys(categoryArr[i]);
-                console.log("keys is ", keys);
-                //把规格存进数组
-                for (let m = 0; m < keys.length; m++) {
-                    let keyObj = keys[m];
-                    this.data.typeArr.push(keyObj);
-                    console.log("种类的值是：", categoryArr[i][`${keyObj}`]);
-                    let le = categoryArr[i][`${keyObj}`].length;
-                    let tempJson = {
-
-                    }
-                    console.log("le is ", le);
-                    tempJson[`${keyObj}`] = [];
-                    for (let a = 0; a < le; a++) {
-                        console.log("种类值是：", categoryArr[i][`${keyObj}`][a]);
-                        let innerJson = {
-
-                        }
-                        innerJson.mode = categoryArr[i][`${keyObj}`][a];
-                        if (a === 0) {
-                            innerJson.touch = true;
-                            this.data.sendServerSize[`${keyObj}`] = innerJson.mode;
-                            console.log("sendServerSize is ", this.data.sendServerSize);
-                            this.setData({
-                                sendServerSize: this.data.sendServerSize
-                            })
-                        } else {
-                            innerJson.touch = false;
-                        }
-                        tempJson[`${keyObj}`].push(innerJson);
-                    }
-                    this.data.typeValueArr.push(tempJson);
-                }
-            }
-            let keys = Object.keys(categoryArr);
-            console.log("typeArr is ", this.data.typeArr);
-            console.log("typeValueArr is ", this.data.typeValueArr);
+                    fromTypeToAdd : false
+                });
+                break;
+        }
+        //如果选择商品详情页面的选择规格会标记为选中了
+        if(clickType === 'yes'){
             this.setData({
-                showBuyCon: true,
-                typeArr: this.data.typeArr,
-                typeValueArr: this.data.typeValueArr
+                fromTypeToAdd : true,
+                BuyIt : false,
+                addCart : false
             })
         }
     },

@@ -123,6 +123,22 @@
                 </view>
             </view>
             <scroll-view class='scc-con' scroll-y>
+                <view class='countContainer'>
+                        <view style='margin-left:22rpx;'>
+                            数量
+                        </view>
+                        <view class='add-sub-con' style='margin-right:22rpx;'>
+                            <view class='as-item' bindtap='sub'>
+                                -
+                            </view>
+                            <view class='as-item'>
+                                {{count}}
+                            </view>
+                            <view class='as-item' bindtap='add'>
+                                +
+                            </view>
+                        </view>
+                </view>
                 <block wx:for='{{typeArr}}' wx:for-index='outIndex' wx:for-item='outItem'>
                     <view class='lineTwo-con'>
                         <view style='font-size:30rpx;'>
@@ -137,26 +153,11 @@
                         </view>
                     </view>
                 </block>
-                <view class='countContainer'>
-                    <view style='margin-left:22rpx;'>
-                        数量
-                    </view>
-                    <view class='add-sub-con' style='margin-right:22rpx;'>
-                        <view class='as-item' bindtap='sub'>
-                            -
-                        </view>
-                        <view class='as-item'>
-                            {{count}}
-                        </view>
-                        <view class='as-item' bindtap='add'>
-                            +
-                        </view>
-                    </view>
-                </view>
+                
             </scroll-view>
             <view class='addOrBuy'>
                 <!--检查是否点击过购物车和立即购买按钮-->
-                <block wx:if='{{!addCart && !BuyIt}}'>
+                <block wx:if='{{fromTypeToAdd}}'>
                     <view class='AB'>
                         <view class='addCart' bindtap='showBuyCon' id='addcart_t'>
                             加入购物车
