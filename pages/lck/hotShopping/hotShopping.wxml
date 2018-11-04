@@ -43,11 +43,11 @@
         <!--商品类别-->
         <view class='goods-type-con'>
             <view class='type-parent'>
-                <view class='type-list' wx:for="{{typeArr}}" id='{{item.id}}' bindtap='chooseType' style='{{item.choosed ? typeActiveColor : typeUnActiveColor}}' data-type='goodsType'>
+                <view class='type-list' wx:for="{{typeArr}}" id='{{item.t2id}}' bindtap='chooseType' style='{{item.choosed ? typeActiveColor : typeUnActiveColor}}' data-type='goodsType'>
                     {{item.text}}
                 </view>
             </view>
-            <view class='extra' bindtap='showMore'>
+            <view class='extra' bindtap='showMore' wx:if='{{showArrowDown}}'>
                 <block wx:if='{{!isMore}}'>
                     <image src='../../../resources/down.png' style='width:20rpx;height:10rpx;'></image>
                 </block>
@@ -59,7 +59,7 @@
         <!--显示更多分类-->
         <block wx:if='{{isMore}}'>
             <view class='more'>
-                <view wx:for='{{moreTypeArr}}' class='moreType-item' bindtap='chooseType' id='{{item.id}}' style='{{item.choosed ? typeActiveColor : typeUnActiveColor}}' data-type='moreType'>
+                <view wx:for='{{moreTypeArr}}' class='moreType-item' bindtap='chooseType' id='{{item.t2id}}' style='{{item.choosed ? typeActiveColor : typeUnActiveColor}}' data-type='moreType'>
                     {{item.text}}
                 </view>
             </view>

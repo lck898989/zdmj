@@ -3,18 +3,20 @@
 </block>
 <scroll-view class='{{showBuyCon ? "page-con-showbuy" : "page-con"}}'>
     <view>
-        <swiper class='swiper-con'>
-            <block wx:for='{{goodsImageList}}' wx:for-len = '{{goodsImageList.length}}'>
-                <swiper-item>
-                    <view class='img-con'>
-                        <image src='{{imageHost}}{{item}}' style='width:750rpx;height:750rpx;'></image>
-                        <view class='index-num'>
-                            {{index+1}}/{{goodsImageList.length}}
+        <view class='swiper-con' >
+            <swiper bindchange='swiperWhere' style="width:750rpx;height:750rpx;">
+                <block wx:for='{{goodsImageList}}' wx:for-len = '{{goodsImageList.length}}'>
+                    <swiper-item>
+                        <view class='img-con'>
+                            <image src='{{imageHost}}{{item}}' style='width:750rpx;height:750rpx;'></image>
                         </view>
-                    </view>
-                </swiper-item>
-            </block>
-        </swiper>
+                    </swiper-item>
+                </block>
+            </swiper>
+            <view class='index-num'>
+                {{currentHeadImageIndex}}/{{goodsImageList.length}}
+            </view>
+        </view>
         <view class='price-con'>
             <view class='goodsPrice'>
                 <view class='price'>
@@ -52,7 +54,7 @@
                 </view>
                 <view wx:else class='type-item' style='margin-left:32rpx;'>
                     已选：
-                    <block wx:for='{{sizeValueArr}}'>
+                    <block wx:for='{{sendServerSize}}'>
                         <view>
                             {{item}}
                         </view>
@@ -111,7 +113,7 @@
             <view class='lineOne-con'>
                 <view class='price-order-con'>
                     <view class='price-item' style='font-size:35rpx;color:#b31227;font-weight:800;'>
-                       ￥  {{goods.price}}
+                       ￥  {{goods.price * count}}
                     </view>
                     <view class='price-item' style='font-size:30rpx;color:#404040'>
                         已选:
@@ -124,20 +126,20 @@
             </view>
             <scroll-view class='scc-con' scroll-y>
                 <view class='countContainer'>
-                        <view style='margin-left:22rpx;'>
-                            数量
+                    <view style='margin-left:22rpx;'>
+                        数量
+                    </view>
+                    <view class='add-sub-con' style='margin-right:22rpx;'>
+                        <view class='as-item' bindtap='sub'>
+                            -
                         </view>
-                        <view class='add-sub-con' style='margin-right:22rpx;'>
-                            <view class='as-item' bindtap='sub'>
-                                -
-                            </view>
-                            <view class='as-item'>
-                                {{count}}
-                            </view>
-                            <view class='as-item' bindtap='add'>
-                                +
-                            </view>
+                        <view class='as-item'>
+                            {{count}}
                         </view>
+                        <view class='as-item' bindtap='add'>
+                            +
+                        </view>
+                    </view>
                 </view>
                 <block wx:for='{{typeArr}}' wx:for-index='outIndex' wx:for-item='outItem'>
                     <view class='lineTwo-con'>

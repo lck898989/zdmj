@@ -26,20 +26,8 @@ Page({
         new Goods(50, '/resources/example.jpg', '好商品不容错过', '天津一家人'),
         new Goods(50, '/resources/example.jpg', '好商品不容错过', '天津一家人')
         ],
-        typeArr: [
-            { id: '0', text: '全部', choosed: true },
-            { id: '1', text: '洗护', choosed: false },
-            { id: '2', text: '电器', choosed: false },
-            { id: '3', text: '数码产品', choosed: false },
-            { id: '4', text: '厨卫', choosed: false },
-            { id: '5', text: '美妆', choosed: false }
-        ],
-        moreTypeArr: [{ id: '6', text: '全部', choosed: false },
-        { id: '7', text: '洗护', choosed: false },
-        { id: '8', text: '电器', choosed: false },
-        { id: '9', text: '数码产品', choosed: false },
-        { id: '10', text: '厨卫', choosed: false },
-        { id: '11', text: '美妆', choosed: false }],
+        typeArr: [],
+        moreTypeArr: [],
         //是否显示行式排版
         banshi: false,
         moreType: false,
@@ -80,80 +68,21 @@ Page({
         //以及分类id
         tid: null,
         isPull: false,
+        showArrowDown : true
     },
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: async function (options) {
-      Array.prototype.contain = function(item){
-          let len = this.length;
-          for(let i = 0;i < len;i++){
-              if(this[i].t2id === item.t2id && this[i].t2name === itme.t2name && this[i].tid === item.tid){
-                  return true;
-              }
-          }
-          return false;
-      }
-    //   console.log("options is ",options.tid === undefined);
-     if(options.tid === undefined){
-         this.data.tid = 14;
-     }else{
-         this.data.tid = options.tid;
-     }
-     console.log("this.data.tid is ",this.data.tid);
-      console.log("asdfasdf");
-      //向服务器请求数据
-      let req = new Request(app.host +'Data/GetProducts',{page : this.data.page,tid:this.data.tid},"POST","text");
-      console.log("ae32333");
-      let res = await req.sendRequest();
-      console.log();
-      console.log("res.data is ",res.data.products);
-      this.setData({ goods: res.data.products});
-      console.log("in hotShopping uid is ",app.uid);
-      //获得typeArr /Data/ 
-      let typeUrl = 'Data/GetTab2ByTid';
-      let data = {
-          tid : this.data.tid
-      }
-      let typeReq = new Request(app.host+typeUrl,data,'POST','text');
-      let typeRes = await typeReq.sendRequest();
-      console.log("获得二级分类的res is ",typeRes.data.tab2s);
-      console.log("二级分类的长度是：",typeRes.data.tab2s.length);
-      if(typeRes.data.tab2s.length === 0){
-          wx.showToast({
-              title: '没有该分类',
-              icon : 'none'
-          })
-      }else{
-          console.log("二级分类开始重新组装");
-          //转换为我需要的数据格式
-          let resourceData = typeRes.data.tab2s;
-          let typeLen = resourceData.length;
-          this.data.typeArr = [];
-          this.data.moreTypeArr = [];
-          for(let i = 0;i < typeLen;i++){
-              let tempJson = {
-
-              }
-              tempJson.tid = resourceData[i].tid;
-              tempJson.t2id = resourceData[i].t2id;
-              tempJson.text = resourceData[i].t2name;
-              tempJson.choosed = (i === 0 ? true : false);
-              if(!this.data.typeArr.contain(tempJson)){
-                this.data.typeArr.push(tempJson);
-              }
-          }
-          console.log("typeArr is ",this.data.typeArr);
-          this.setData({
-              typeArr     : this.data.typeArr,
-              moreTypeArr : this.data.moreTypeArr
-          })
-      }
-  },
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: async function (options) {
+        Array.prototype.contain = function(item){
+            let len = this.length;
+            for(let i = 0;i < len;i++){
+                if(this[i].t2id === item.t2id && this[i].t2name === item.t2name && this[i].tid === item.tid){
+                    return true;
+                }
+            }
+            return false;
+        }
         console.log(options.tid+"//////////");
         app.loadJingArray = res => {
             var orderArray1 = this.data.perfactShopArray;
@@ -210,6 +139,60 @@ Page({
             wx.showToast({
                 title: '没有该分类',
                 icon: 'none'
+            })
+        }else{
+            console.log("二级分类开始重新组装");
+            //转换为我需要的数据格式
+            let resourceData = typeRes.data.tab2s;
+            let typeLen = resourceData.length;
+            if(typeLen >= 5){
+                for(var i = 0;i < 5;i++){
+                    let tempJson = {
+      
+                    }
+                    tempJson.tid = resourceData[i].tid;
+                    tempJson.t2id = resourceData[i].t2id;
+                    tempJson.text = resourceData[i].t2name;
+                    tempJson.choosed = (i === 0 ? true : false);
+                    if(!this.data.typeArr.contain(tempJson)){
+                      this.data.typeArr.push(tempJson);
+                    }
+                }
+                for(let j = i;j < typeLen;j++){
+                    let tempJson = {
+      
+                    }
+                    tempJson.tid = resourceData[j].tid;
+                    tempJson.t2id = resourceData[j].t2id;
+                    tempJson.text = resourceData[j].t2name;
+                    tempJson.choosed = false;
+                    if(!this.data.moreTypeArr.contain(tempJson)){
+                      this.data.moreTypeArr.push(tempJson);
+                    }
+                }
+            }else{
+                //如果种类小于五个
+                for(let m = 0;m < typeLen;m++){
+                    let tempJson = {
+      
+                    }
+                    tempJson.tid = resourceData[m].tid;
+                    tempJson.t2id = resourceData[m].t2id;
+                    tempJson.text = resourceData[m].t2name;
+                    tempJson.choosed = (m === 0 ? true : false);
+                    if(!this.data.typeArr.contain(tempJson)){
+                      this.data.typeArr.push(tempJson);
+                    }
+                }
+                this.setData({
+                    showArrowDown : false
+                })
+            }
+            console.log("typeArr is ",this.data.typeArr);
+            console.log("moreTypeArr is ",this.data.moreTypeArr);
+            this.setData({
+                typeArr     : this.data.typeArr,
+                moreTypeArr : this.data.moreTypeArr,
             })
         }
     },
@@ -389,7 +372,9 @@ Page({
             }
         }
         for (let i = 0; i < len; i++) {
-            if (id === typeArr[i].id) {
+            console.log("id is ",id);
+            console.log("t2id is  ",typeArr[i].t2id);
+            if (id === typeArr[i].t2id) {
                 typeArr[i].choosed = true;
             } else {
                 typeArr[i].choosed = false;
@@ -503,7 +488,7 @@ Page({
     chooseType: function (event) {
         console.log("in chooseType event is ", event);
         let requestType = event.currentTarget.dataset.type;
-        let id = event.currentTarget.id;
+        let id = Number(event.currentTarget.id);
         console.log("请求类型是 ", requestType);
         switch (requestType) {
             case 'goodsType':

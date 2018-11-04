@@ -49,6 +49,7 @@ Page({
         isChooseType: false,
         goodsDetailArr: [],
         slideStart: 1,
+        
         /**
          * 
          * 小泉的变量
@@ -57,7 +58,9 @@ Page({
         url: "http://192.168.1.50:3150",
         interSource: null,
         //选择类别时候显示加入购物车和立即购买
-        fromTypeToAdd :false
+        fromTypeToAdd :false,
+        //当前头图索引
+        currentHeadImageIndex : 1
     },
 
     /**
@@ -229,6 +232,61 @@ Page({
                 typeArr: self.data.typeArr,
                 typeValueArr: self.data.typeValueArr
             })
+        }else{
+            //有规格的商品
+            let url = this.data.host+'Data/GetStandardByPid';
+            let data = {
+                pid : this.data.goods.pid
+            }
+            let req = new Request(url,data,'POST','text');
+            let res = await req.sendRequest();
+            console.log("有规格的产品的规格是：",res.data.products);
+            let categoryArr = res.data.products;
+            let categoryLen = categoryArr.length;
+            for (let i = 0; i < categoryLen; i++) {
+                let keys = Object.keys(categoryArr[i]);
+                console.log("keys is ", keys);
+                //把规格存进数组
+                for (let m = 0; m < keys.length; m++) {
+                    let keyObj = keys[m];
+                    this.data.typeArr.push(keyObj);
+                    // console.log("种类的值是：", categoryArr[i][`${keyObj}`]);
+                    let le = categoryArr[i][`${keyObj}`].length;
+                    let tempJson = {};
+                    console.log("le is ", le);
+                    console.log("keyObj is ",keyObj);
+                    tempJson[`${keyObj}`] = [];
+                    for (let a = 0; a < le; a++) {
+                        // console.log("种类值是：", categoryArr[i][`${keyObj}`][a]);
+                        let innerJson = {
+
+                        }
+                        innerJson.mode = categoryArr[i][`${keyObj}`][a];
+                        let typeKeys = categoryArr[i][`${keyObj}`];
+                        console.log("typeKeys is ",typeKeys);
+                        // a === 0 ? (innerJson.touch = true) : (innerJson.touch) = false;
+                        if(a === 0){
+                            innerJson.touch = true;
+                            //默认选择的类型
+                            this.data.sendServerSize[`${keyObj}`] = innerJson.mode;
+                        }else{
+                            innerJson.touch = false;
+                        }
+                        // //检查商品中的size_choosed中的value值是否与该
+                        // innerJson.touch = false;
+                        tempJson[`${keyObj}`].push(innerJson);
+                    }
+                    this.data.typeValueArr.push(tempJson);
+                }
+            }
+            let keys = Object.keys(categoryArr);
+            console.log("typeArr is ", this.data.typeArr);
+            console.log("typeValueArr is ", this.data.typeValueArr);
+            this.setData({
+                  typeArr : this.data.typeArr,
+                  typeValueArr : this.data.typeValueArr,
+                  sendServerSize : this.data.sendServerSize
+            });
         }
         let headList = self.data.goods.head.split(',');
         for (let k = 0; k < headList.length; k++) {
@@ -243,6 +301,14 @@ Page({
                 goodsImageList: self.data.goodsImageList
             })
         }
+    },
+    //显示当前头图的索引
+    swiperWhere : function(event){
+        console.log("event is ",event);
+        this.data.currentHeadImageIndex = event.detail.current + 1;
+        this.setData({
+            currentHeadImageIndex : this.data.currentHeadImageIndex
+        })
     },
     /**
      * 生命周期函数--监听页面初次渲染完成
@@ -324,10 +390,10 @@ Page({
             showBuyCon: false,
         })
         if (this.data.goods.openstandard === 1) {
-            this.setData({
-                typeValueArr: [],
-                typeArr: []
-            });
+            // this.setData({
+            //     typeValueArr: [],
+            //     typeArr: []
+            // });
         }
         //   console.log("isChoosedOk is ",isChoosedOk);
         if (this.data.isOk) {
@@ -358,6 +424,7 @@ Page({
         this.setData({
             showBuyCon: true,
         });
+        
         let data = this.checkData(this.data.goods.pid);
         switch(id){
             //点击商品详情页面内的选择规格弹出页面的
@@ -439,6 +506,7 @@ Page({
                 addCart : false
             })
         }
+        console.log("选择的默认规格是：",this.data.sendServerSize);
     },
     //减少商品数量
     sub: function () {
