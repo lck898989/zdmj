@@ -1,18 +1,22 @@
 {
     "pages": [
-        "pages/lck/hotShopping/hotShopping",
-        "pages/lck/cart/cart",
-        "pages/index/index",
+        "pages/lck/applySaleAfter/applySaleAfter",
+        "pages/lck/saleService/saleService",
+        "pages/wxscope/wxscope",
         "pages/indextwo/indextwo",
+        "pages/lck/hotShopping/hotShopping",
+        "pages/lck/ShopSuccess/ShopSuccess",
+        "libs/citySelector/switchcity/switchcity",
         "pages/GetRebate/GetRebate",
         "pages/userInfo/userInfo",
         "pages/lck/searchDetail/searchDetail",
+        "pages/index/index",
         "pages/lck/testJing/perfact",
         "pages/lck/address/address",
-        "pages/lck/order/order",
         "pages/lck/cartGoodsDetail/cartGoodsDetail",
         "pages/index2/index2",
-        "pages/lck/ShopSuccess/ShopSuccess",
+        "pages/lck/order/order",
+        "pages/lck/cart/cart",
         "pages/myshop/myshop",
         "pages/shopshare/shopshare",
         "pages/detailshop/detailshop",
@@ -27,10 +31,18 @@
         "pages/TiXian/TiXian",
         "pages/MingXi/MingXi",
         "pages/MyOrder/MyOrder",
-        "libs/citySelector/switchcity/switchcity"
+        "pages/IntroductionRebate/IntroductionRebate",
+        "pages/JinRebate/JinRebate",
+        "pages/ActicleScene/ActicleScene",
+        "pages/GoodThIngs/GoodThings",
+        "pages/LookTianJin/LookTianJin",
+        "pages/TwoFunction/TwoFunction",
+        "pages/WeiMaTwo/WeiMaTwo",
+        "pages/ShopAdress/ShopAdress",
+        "pages/lck/applyProgress/applyProgress"
     ],
     "window": {
-        "backgroundTextStyle": "dark",
+        "backgroundTextStyle": "light",
         "navigationBarBackgroundColor": "#863bb7",
         "navigationBarTitleText": "指点迷津",
         "navigationBarTextStyle": "white",
@@ -47,8 +59,8 @@
             },
             {
                 "pagePath": "pages/lck/hotShopping/hotShopping",
-                "iconPath": "resources/main_share_up.png",
-                "selectedIconPath": "resources/main_share_dw.png",
+                "iconPath": "resources/main_2_up.png",
+                "selectedIconPath": "resources/main_2_dw.png",
                 "text": "商城"
             },
             {
@@ -59,8 +71,8 @@
             },
             {
                 "pagePath": "pages/GetRebate/GetRebate",
-                "iconPath": "resources/main_personal_up.png",
-                "selectedIconPath": "resources/main_personal_dw.png",
+                "iconPath": "resources/main_3_up.png",
+                "selectedIconPath": "resources/main_3_dw.png",
                 "text": "返利"
             },
             {

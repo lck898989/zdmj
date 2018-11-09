@@ -1,0 +1,71 @@
+<view class='page-con'>
+    <view class='contact-service'>
+        <view class='head-text'>
+            部分商品支持未到货退款，十五天内换货
+        </view>
+        <button class='service' bindcontact='contactServer' open-type='contact' session-from='s' send-message-title='aaaa' show-message-card='true'>
+            联系客服
+        </button>
+    </view>
+    <!--服务类型开始-->
+    <view class='server-type'>
+        <view class='headS'>
+            服务类型
+        </view>
+        <view class='type-list'>
+            <view class='change'>
+                换货
+            </view>
+            <view class='change' style='margin-left:40rpx;'>
+                退货
+            </view>
+        </view>
+    </view>
+    <!--具体商品信息-->
+    <view class='goods-con'>
+        <saleAfter-component goods='{{goods}}'>
+            <view slot='footer' class='footer'>
+                <view>
+                    申请原因
+                </view>
+                <view class='chooseResonse'>
+                    <view>
+                        请选择
+                    </view>
+                    <image src='../../../resources/ellipsis.png' style='width:32rpx;height:35rpx;margin-left:30rpx;'></image>
+                </view>
+            </view>
+        </saleAfter-component>
+    </view>
+    <!--问题描述-->
+    <view class='question-con'>
+        <view class='question-page'>
+            <view class='question_title'>
+                问题描述
+            </view>
+            <textarea placeholder='请您在此描述问题' placeholder-class='{{textA}}' class='textArea' bindinput='textAreaInput'>
+                <block wx:if='{{screenshotArray.length > 0}}'>
+                    <view class='screenShot-con'>
+                        <image wx:for='{{screenshotArray}}' src='{{item}}' class='screenShot-item' style='width:80rpx;height:100rpx;'></image>
+                    </view>
+                </block>
+            </textarea>
+            <view class='limit'>
+                0/500
+            </view>
+            <view class='camera-con'>
+                <image src='../../../resources/camera.png' style='width:45rpx;height:40rpx;margin-top:20rpx;margin-left:25rpx;' bindtap='uploadImage'></image>
+            </view>
+        </view>
+    </view>
+    
+    <!--商品退回方式-->
+    <!-- <view class='sendBackType-con'>
+        <view class='sendBack'>
+            商品退回方式
+        </view>
+        <view>
+            快递至第三方卖家
+        </view>
+    </view> -->
+</view>

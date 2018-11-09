@@ -1,0 +1,113 @@
+/* pages/lck/applySaleAfter/applySaleAfter.wxss */
+page{
+    background: #f2f2f2;
+}
+.type-list,.footer,.chooseResonse,.screenShot-con{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.contact-service{
+    height: 90rpx;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background: #fff;
+    margin-bottom: 10rpx;
+    font-weight: 800;
+}
+.head-text{
+    font-size: 25rpx;
+    color:#737776;
+    margin-left: 40rpx;
+}
+.service{
+    margin-right: 30rpx;
+    font-size: 25rpx;
+    color:#737776;
+    /* padding: 10rpx 20rpx; */
+    border: 2rpx solid #737776;
+}
+button::after{
+    border: none;
+    border-radius: 0;
+}
+button{
+    background: #fff;
+    border-radius: 0;
+}
+.server-type{
+    background: #fff;
+    height: 200rpx;
+    color:#404040;
+}
+.headS{
+    font-size: 25rpx;
+    font-weight: 600;
+    padding: 25rpx;
+}
+.type-list{
+    margin-top: 21rpx;
+    margin-left: 24rpx;
+}
+.change{
+    font-size: 25rpx;
+    width: 157rpx;
+    height: 62rpx;
+    line-height: 62rpx;
+    color: #de3c45;
+    border: 2rpx solid #de3c45;
+    text-align: center;
+}
+.footer{
+    margin-top: 2rpx;
+    background: #fff;
+    height:20rpx;
+    padding: 30rpx 30rpx;
+    line-height: 20rpx;
+    font-size: 30rpx;
+    justify-content: space-between;
+}
+.goods-con{
+    margin-top: 25rpx;    
+}
+.question-con{
+    height: 435rpx;
+    background:#fff;
+    margin-top: 25rpx;
+    position: relative;
+}
+.question_title{
+    font-size: 30rpx;
+    color: #575757;
+    padding: 35rpx 0rpx;
+}
+.question-page{
+    margin-left: 25rpx;
+}
+/* textarea{
+    padding: 25rpx 18rpx;
+} */
+.textArea{
+    width:700rpx;
+    background-color: #f8f8f8;
+    font-size: 30rpx;
+    /* height: 240rpx;  */
+    /* padding: 28rpx 18rpx; */
+}
+.limit{
+    position: absolute;
+    color: #bdbdbd;
+    font-size: 20rpx;
+    right: 45rpx;
+    top  :300rpx;
+}
+.screenShot-item{
+    margin: 25rpx;
+}
+.camera-con{
+    margin-left: -25rpx;
+    width: 750rpx;
+    background-color: #fff;
+}

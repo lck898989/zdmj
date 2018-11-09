@@ -1,0 +1,25 @@
+<view>
+    <view bindcustomevent='eventListener'>
+    </view>
+    <slot name='orderInfo'></slot>
+    <view class='list-con' bindtap='onTap'>
+        <image class='img-con' src="{{goods.headImg}}" style="width:150rpx;height:150rpx;"></image>
+        <view class='text-con'>
+            <view class='top-text'>
+                <text>【{{goods.pname}}】</text>
+            </view>
+            <view class='bottom-text'>
+                <view>
+                    价格： ￥{{goods.price}}
+                </view>
+                <view style='margin-left:40rpx;'>
+                    数量： {{goods.count}}
+                </view>
+            </view>
+            <!--需要动态添加的元素在这里添加-->
+            <slot name='text-extra'></slot>
+        </view>
+    </view>
+    <slot name='footer'></slot>
+</view>
+
