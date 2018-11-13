@@ -139,11 +139,13 @@ textarea{
     top  :300rpx;
 }
 .screenShot-con{
-    width: 750rpx;
+    padding-top: 30rpx;
+    padding-left: 25rpx;
+    width: 675rpx;
     height: 120rpx;
-    border-top: 2rpx solid #000;
-    background: #fff;
-    margin-left: -25rpx;
+    /* border-top: 2rpx solid #000; */
+    background: #f8f8f8;
+    border-top: 2rpx solid #808080;
 }
 /* .screenShot-item{
     margin: 25rpx;
@@ -275,6 +277,9 @@ textarea{
 .add-choose{
     /* justify-self: flex-end; */
 
+}
+.screenShot-item{
+    margin-left: 35rpx;
 }
 .add-item-con{
     justify-content: space-between;

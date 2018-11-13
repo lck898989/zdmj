@@ -251,48 +251,6 @@ Page({
           }
       }  
   },
-//   uploadImg : function(data,reasonList){
-//     var that = this,
-//     i = data.i ? data.i : 0,
-//     success = data.success ? data.success : 0,
-//     fail = data.fail ? data.fail : 0;
-//       wx.uploadFile({
-//           url: data.url,
-//           filePath: data.path[i],
-//           name: 'file',
-//           formData: {
-//               //此处可以传自定义参数……
-//           },
-//           header: {
-//               "Content-Type": "multipart/form-data",
-//               //"sessionId": getApp().globalData.sessionId,
-//           },
-//           success: (resp) => {
-//               success++;
-//           },
-//           fail: (res) => {
-//               fail++;
-//           },
-//           complete: () => {
-//               i++;
-//               if (i == data.path.length) {   //当图片传完时，停止调用
-//                   wx.showToast({
-//                       title: '上传成功',
-//                       duration: 1500,
-//                       mask: 'false'
-//                   })
-//                   that.setData({
-//                       tempFilePaths: []
-//                   })
-//               } else {//若图片还没有传完，则继续调用函数
-//                   data.i = i;
-//                   data.success = success;
-//                   data.fail = fail;
-//                   that.uploadimg(data);
-//               }
-//           }
-//       });
-//   },
   //获取输入的用户名
   getName : function(e){
       console.log("in getName e is ",e);
@@ -339,5 +297,18 @@ Page({
               icon  : 'none'
           })
       }
+  },
+  close : function(e){
+      console.log("e is ",e);
+      let dataSet = e.currentTarget.dataset;
+      console.log("dataSet is ",dataSet);
+      let index = dataSet.index;
+      console.log("index is ",index);
+      console.log("screenShotArray is ", this.data.screenshotArray);
+      this.data.screenshotArray.splice(index,1);
+      this.setData({
+          screenshotArray: this.data.screenshotArray
+      });
+      console.log("screenshotArray is ",this.data.screenshotArray);
   }
 })

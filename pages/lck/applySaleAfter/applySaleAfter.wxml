@@ -56,17 +56,18 @@
                 <view class='count-limit'>
                     {{inputNumber}}/500
                 </view>
+                <block wx:if='{{screenshotArray.length > 0}}'>
+                    <view class='screenShot-con'>
+                        <block wx:for='{{screenshotArray}}'>
+                            <view class='image-con'>
+                                <image src='{{item}}' class='screenShot-item' style='width:80rpx;height:100rpx;'></image>
+                                <image src='../../../resources/close.png' style='width:30rpx;height:30rpx;' class='close' bindtap='close' data-index='{{index}}'></image>
+                            </view>
+                        </block>
+                    </view>
+                </block>
             </view>
-            <block wx:if='{{screenshotArray.length > 0}}'>
-                <view class='screenShot-con'>
-                    <block wx:for='{{screenshotArray}}'>
-                        <view class='image-con'>
-                            <image src='{{item}}' class='screenShot-item' style='width:80rpx;height:100rpx;'></image>
-                            <image src='../../../resources/close.png' style='width:30rpx;height:30rpx;' class='close' bindtap='close'></image>
-                        </view>
-                    </block>
-                </view>
-            </block>
+            
             <view class='camera-con'>
                 <image src='../../../resources/camera.png' style='width:45rpx;height:40rpx;margin-top:20rpx;margin-left:25rpx;' bindtap='uploadImage'></image>
             </view>

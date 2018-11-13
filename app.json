@@ -1,9 +1,9 @@
 {
     "pages": [
+        "pages/lck/applySaleAfter/applySaleAfter",
         "pages/userInfo/userInfo",
         "pages/lck/saleService/saleService",
         "pages/lck/applyProgress/applyProgress",
-        "pages/lck/applySaleAfter/applySaleAfter",
         "pages/indextwo/indextwo",
         "pages/wxscope/wxscope",
         "pages/lck/hotShopping/hotShopping",
