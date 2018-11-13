@@ -3,8 +3,7 @@ page{
     background: #f2f2f2;
 }
 .page-con{
-    overflow: hidden;
-    position: relative;
+
 }
 .mask{
     position: fixed;
@@ -17,7 +16,6 @@ page{
 }
 .page-con-showReason{
     height: 100vh;
-    position: relative;
 }
 .type-list,.footer,.chooseResonse,.screenShot-con,.add-item,.line-reason,.add-item-con{
     display: flex;
@@ -77,14 +75,6 @@ button{
     border: 2rpx solid #de3c45;
     text-align: center;
 }
-.image-con{
-    position: relative;
-}
-.close{
-    position: absolute;
-    top: -8rpx;
-    right: -8rpx;
-}
 .footer{
     margin-top: 2rpx;
     background: #fff;
@@ -118,18 +108,11 @@ button{
     padding: 25rpx 18rpx;
 } */
 .textArea{
-    width:682rpx;
+    width:700rpx;
     background-color: #f8f8f8;
     font-size: 30rpx;
     /* height: 240rpx;  */
     /* padding: 28rpx 18rpx; */
-}
-textarea{
-    padding: 28rpx 0rpx 0rpx 18rpx;
-}
-.textContainer .textA{
-    padding: 28rpx 0rpx 0rpx 18rpx;
-    background: red;
 }
 .limit{
     position: absolute;
@@ -158,8 +141,8 @@ textarea{
 }
 .count-limit{
     position : absolute;
-    right    : 45rpx;
-    top      : 280rpx;
+    right    : 50rpx;
+    top      : 250rpx;
     font-size: 20rpx;
     color: #808080;
 }

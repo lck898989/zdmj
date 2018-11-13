@@ -4,6 +4,7 @@ import Request from '../../../utils/Request.js';
 import regeneratorRuntime from '../../../utils/regenerator-runtime/runtime-module.js'
 let app = getApp();
 Page({
+
   /**
    * 页面的初始数据
    */
@@ -16,6 +17,7 @@ Page({
           收货人   : '',
           手机号   : '',
       },
+      textA : `font-size:30rpx;padding:28rpx 18rpx;color:#bdbdbd;`,
       //问题描述
       questionDescription : '',
       //缩略图数组

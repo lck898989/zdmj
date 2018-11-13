@@ -1,5 +1,5 @@
 export default {
-    devHost: 'http://192.168.1.149:3150/',
+    devHost: 'http://192.168.1.56:3150/',
     productionHost: 'https://shop.ykplay.com/',
     //数组内容为基本类型去重
     uniq   : function(array){
@@ -49,5 +49,26 @@ export default {
             res.push(JSON.parse(keyItems[j]));
         }
         return res;
+    },
+    saleCommon : {
+        "1" : '申请退款',
+        "2" : '申请途中退货',
+        "3" : '申请到货退货',
+        "4" : '申请到货换货'
+    },
+    //日期字符串格式化
+    formatDate : function(dataString){
+        let ymd = dataString.slice(0, 8);
+        let hms = dataString.slice(8);
+        let year = ymd.slice(0, 4);
+        let month = ymd.slice(4, 6);
+        let day = ymd.slice(6, 8);
+        let formatYmd = year + '-' + month + '-' + day + ' ';
+        let hours = hms.slice(0, 2);
+        let minutes = hms.slice(2, 4);
+        let seconds = hms.slice(4, 6);
+        let formatMms = hours + ':' + minutes + ':' + seconds;
+        return formatYmd + formatMms;
     }
+
 }

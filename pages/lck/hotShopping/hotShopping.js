@@ -1,7 +1,6 @@
 // pages/lck/hotShopping/hotShopping.js
 import Request from '../../../utils/Request.js';
 import Const from '../../../utils/Const.js';
-import Goods from '../../../utils/Goods.js';
 var app = getApp();
 //支持es6 async..await
 import regeneratorRuntime from '../../../utils/regenerator-runtime/runtime-module.js'
@@ -23,10 +22,7 @@ Page({
         //精选商城商品数组
         arrayTextMsg: [],
         //商品列表
-        goods: [new Goods(50, '/resources/example.jpg', '好商品不容错过', '天津一家人'),
-        new Goods(50, '/resources/example.jpg', '好商品不容错过', '天津一家人'),
-        new Goods(50, '/resources/example.jpg', '好商品不容错过', '天津一家人')
-        ],
+        goods: [],
         typeArr: [],
         moreTypeArr: [],
         //是否显示行式排版

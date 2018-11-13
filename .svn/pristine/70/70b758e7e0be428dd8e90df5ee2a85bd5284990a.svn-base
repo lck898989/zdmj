@@ -41,9 +41,60 @@ Page({
    */
   onLoad: async function (options) {
       //请求服务器数据
-      this.getSaleAfterList();
+      let url = this.data.host + 'Data/GetAfterSale';
+      console.log("host is ", this.data.host);
+      console.log("uid is ", app.uid);
+      let data = {
+          uid: app.uid,
+          page: 1
+      }
+      if (data.uid !== null) {
+          let req = new Request(url, data, 'POST', 'text');
+          let res = await req.sendRequest();
+          console.log(res);
+          console.log("时间是：", res.data.orders);
+          let orders = res.data.orders;
+          this.setData({
+              sourceData: orders
+          })
+          for (let i = 0; i < orders.length; i++) {
+              let time = Const.formatDate(orders[i].ordertime);
+              let orderItemsLen = orders[i].orderItems.length;
+              let saleOrderView = {
+                  ordertime: time,
+                  onumber: res.data.orders[i].onumber,
+              }
+              let products = [];
+              //遍历订单项
+              for (let j = 0; j < orderItemsLen; j++) {
+                  let headImg = orders[i].orderItems[j].product.head.split(',')[0];
+                  let count = orders[i].orderItems[j].pcount;
+                  let pname = orders[i].orderItems[j].product.pname;
+                  let price = orders[i].orderItems[j].product.price;
+                  let oitemid = orders[i].orderItems[j].oitemid;
+                  let oid = orders[i].orderItems[j].oid;
+                  let product = {
+                      headImg: headImg,
+                      count: count,
+                      pname: pname,
+                      price: price,
+                      oitemid: oitemid,
+                      oid: oid
+                  }
+                  products.push(product);
+              }
+              saleOrderView.products = products;
+              // res.data.orders[i].ordertime = time;
+              this.data.saleOrderArray.push(saleOrderView);
+          }
+          console.log("saleOrderArray is ", this.data.saleOrderArray);
+          this.setData({
+              saleOrderArray: this.data.saleOrderArray
+          })
+      }
+
   },
-  
+
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -93,6 +144,7 @@ Page({
 
   },
   chooseTitle : async function(e){
+
     console.log("e is ",e);
     let dataSet = e.currentTarget.dataset;
     let text = dataSet.text;
@@ -113,89 +165,8 @@ Page({
       saleOrderArray : []
     })
     console.log("saleHeadText is ",this.data.saleHeadText);
-    //向服务器请求信息
-    switch(text){
-        case '售后申请':
-            this.getSaleAfterList();
-            break;
-        case '正在申请':
-            this.getApplyingList();
-            break;
-        case '申请记录':
-            this.getApplyRecord();
-            break;
-    }
+    
   },
-    //获取售后列表
-    getSaleAfterList: async function () {
-        let url = this.data.host + 'Data/GetAfterSale';
-        console.log("host is ", this.data.host);
-        console.log("uid is ", app.uid);
-        let data = {
-            uid: app.uid,
-            page: 1
-        }
-        if (data.uid !== null) {
-            let req = new Request(url, data, 'POST', 'text');
-            let res = await req.sendRequest();
-            console.log(res);
-            console.log("时间是：", res.data.orders);
-            if (res.data.encode === 0) {
-                let orders = res.data.orders;
-                this.setData({
-                    sourceData: orders
-                })
-                for (let i = 0; i < orders.length; i++) {
-                    let time = Const.formatDate(orders[i].ordertime);
-                    let orderItemsLen = orders[i].orderItems.length;
-                    let saleOrderView = {
-                        ordertime: time,
-                        onumber: res.data.orders[i].onumber,
-                    }
-                    let products = [];
-                    //遍历订单项
-                    for (let j = 0; j < orderItemsLen; j++) {
-                        let headImg = orders[i].orderItems[j].product.head.split(',')[0];
-                        let count = orders[i].orderItems[j].pcount;
-                        let pname = orders[i].orderItems[j].product.pname;
-                        let price = orders[i].orderItems[j].product.price;
-                        let oitemid = orders[i].orderItems[j].oitemid;
-                        let oid = orders[i].orderItems[j].oid;
-                        let product = {
-                            headImg: headImg,
-                            count: count,
-                            pname: pname,
-                            price: price,
-                            oitemid: oitemid,
-                            oid: oid
-                        }
-                        products.push(product);
-                    }
-                    saleOrderView.products = products;
-                    // res.data.orders[i].ordertime = time;
-                    this.data.saleOrderArray.push(saleOrderView);
-                }
-                console.log("saleOrderArray is ", this.data.saleOrderArray);
-                this.setData({
-                    saleOrderArray: this.data.saleOrderArray
-                })
-            } else {
-                //没有可以售后的订单信息
-                wx.showToast({
-                    title: res.data.msg,
-                    icon: 'none'
-                })
-            }
-        }
-    },
-    //获取正在申请的列表等待运营进行审核
-    getApplyingList: async function () {
-        console.log("获取正在申请的售后信息");
-    },
-    //获取申请的记录
-    getApplyRecord: async function () {
-        console.log("获取申请记录信息");
-    },
   //申请售后
   applyAfterSale : function(event){
       console.log("saleOrderArray is ",this.data.saleOrderArray);

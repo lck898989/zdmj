@@ -29,6 +29,7 @@ Component({
                 
             }
         },
+        
 
     },
     computed : {

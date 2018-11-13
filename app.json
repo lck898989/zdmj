@@ -1,14 +1,15 @@
 {
     "pages": [
-        "pages/lck/applySaleAfter/applySaleAfter",
+        "pages/userInfo/userInfo",
         "pages/lck/saleService/saleService",
-        "pages/wxscope/wxscope",
+        "pages/lck/applyProgress/applyProgress",
+        "pages/lck/applySaleAfter/applySaleAfter",
         "pages/indextwo/indextwo",
+        "pages/wxscope/wxscope",
         "pages/lck/hotShopping/hotShopping",
         "pages/lck/ShopSuccess/ShopSuccess",
         "libs/citySelector/switchcity/switchcity",
         "pages/GetRebate/GetRebate",
-        "pages/userInfo/userInfo",
         "pages/lck/searchDetail/searchDetail",
         "pages/index/index",
         "pages/lck/testJing/perfact",
@@ -38,8 +39,7 @@
         "pages/LookTianJin/LookTianJin",
         "pages/TwoFunction/TwoFunction",
         "pages/WeiMaTwo/WeiMaTwo",
-        "pages/ShopAdress/ShopAdress",
-        "pages/lck/applyProgress/applyProgress"
+        "pages/ShopAdress/ShopAdress"
     ],
     "window": {
         "backgroundTextStyle": "light",
@@ -82,5 +82,13 @@
                 "text": "个人信息"
             }
         ]
-    }
+    },
+    "subpackages" : [
+        {
+            "root" : "packageEat",
+            "pages":[
+                "pages/index/index"
+            ]
+        }
+    ]
 }

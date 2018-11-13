@@ -1,7 +1,9 @@
 <block wx:if='{{showReason}}'>
-    <view class='mask' catchtouchmove='test'></view>
+    <view class='mask'>
+
+    </view>
 </block>
-<scroll-view class='{{showReason ? "page-con-showReason" : "page-con"}}'>
+<scroll-view class='{{showReason ? "page-con-showReason" : "page-con"}}' catchtouchmove='test'>
     <view class='contact-service'>
         <view class='head-text'>
             部分商品支持未到货退款，十五天内换货
@@ -51,7 +53,7 @@
                 问题描述
             </view>
             <view class='textContainer'>
-                <textarea  placeholder-class='textA' class='textArea' bindinput='textAreaInput'>
+                <textarea placeholder='请您在此描述问题' placeholder-class='{{textA}}' class='textArea' bindinput='textAreaInput'>
                 </textarea>
                 <view class='count-limit'>
                     {{inputNumber}}/500
@@ -59,12 +61,7 @@
             </view>
             <block wx:if='{{screenshotArray.length > 0}}'>
                 <view class='screenShot-con'>
-                    <block wx:for='{{screenshotArray}}'>
-                        <view class='image-con'>
-                            <image src='{{item}}' class='screenShot-item' style='width:80rpx;height:100rpx;'></image>
-                            <image src='../../../resources/close.png' style='width:30rpx;height:30rpx;' class='close' bindtap='close'></image>
-                        </view>
-                    </block>
+                    <image wx:for='{{screenshotArray}}' src='{{item}}' class='screenShot-item' style='width:80rpx;height:100rpx;'></image>
                 </view>
             </block>
             <view class='camera-con'>
@@ -91,13 +88,13 @@
             <view>
                 收货人:
             </view>
-            <input type='text' bindinput='getName' style='margin-left:10rpx;color:#404040;'></input>
+            <input type='text' bindinput='getName'></input>
         </view>
         <view class='recept-item'>
             <view>
                 手机号码:
             </view>
-            <input type='text' bindfocus='checkName' style='margin-left:10rpx;color:#404040;' bindblur='checkPhoneNumber' bindinput='getPhoneNumber'></input>
+            <input type='text' bindfocus='checkName' bindblur='checkPhoneNumber' bindinput='getPhoneNumber'></input>
         </view>
         <!-- <view style='color:#404040;'>
             {{item}}
@@ -128,24 +125,24 @@
             </view>
         </view>
     </view>
-    <block wx:if='{{showReason}}'>
-        <view class='reasonCon'>
-            <view class='reasonD-con'>
-                <view class='line-reason'>
-                    <view class='reason-title'>
-                        申请原因
-                    </view>
-                    <image src='../../../resources/Cancel.png' style='width:40rpx;height:40rpx;margin-right:40rpx;' bindtap='cancel'></image>
+</scroll-view>
+<block wx:if='{{showReason}}'>
+    <view class='reasonCon'>
+        <view class='reasonD-con'>
+            <view class='line-reason'>
+                <view class='reason-title'>
+                    申请原因
                 </view>
-                <view class='changeGoods'>
-                    {{backGoodsType.msg}}
-                </view>
+                <image src='../../../resources/Cancel.png' style='width:40rpx;height:40rpx;margin-right:40rpx;' bindtap='cancel'></image>
             </view>
-            <view class='reason-detail'>
-                <view wx:for='{{reasonList}}' class='reason-item' bindtap='chooseTheReason' data-reason='{{item}}'>
-                    {{item}}
-                </view>
+            <view class='changeGoods'>
+                {{backGoodsType.msg}}
             </view>
         </view>
-    </block>
-</scroll-view>
+        <view class='reason-detail'>
+            <view wx:for='{{reasonList}}' class='reason-item' bindtap='chooseTheReason' data-reason='{{item}}'>
+                {{item}}
+            </view>
+        </view>
+    </view>
+</block>

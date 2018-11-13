@@ -1,5 +1,4 @@
 // pages/lck/cart/cart.js
-import Cart from '../../../utils/Cart.js';
 //请求类
 import Request from '../../../utils/Request.js'
 import regeneratorRuntime from '../../../utils/regenerator-runtime/runtime-module.js'

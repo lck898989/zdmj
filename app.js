@@ -30,10 +30,10 @@
      //初始化提现信息数组
      arrayTixian: null,
      access_token: "",
-     host: Host.productionHost,
+     host: Host.devHost,
      urlw3: "http://shop.ykplay.com",
      urlw2: "http://shop.ykplay.com/",
-     urlw: "http://192.168.1.165:3150/",
+     urlw: "http://192.168.1.56:3150/",
      //保存订单号
      orderNumber: null,
      //商户好
@@ -138,7 +138,7 @@
                          //当授权时
                          if (res.authSetting['scope.userInfo']) {
                              if (self.loginCode) {
-                                 self.ShortConnect("https://account.ykplay.com/ykLogin/Login", {
+                                 self.ShortConnect("https://newaccount.ykplay.com/ykLogin/Login", {
                                      app: "zhidianmijin",
                                      bindingType: "1",
                                      bindingMsg: {
@@ -162,7 +162,7 @@
                              }
                          } else {
                              if (self.isShare == false) {
-                                 self.ShortConnect("https://account.ykplay.com/ykLogin/Login", {
+                                 self.ShortConnect("https://newaccount.ykplay.com/ykLogin/Login", {
                                      app: "zhidianmijin",
                                      bindingType: "1",
                                      bindingMsg: {
@@ -179,7 +179,7 @@
                                      self.scoreHiddenScope = false;
                                  }
                              } else {
-                                 self.ShortConnect("https://account.ykplay.com/ykLogin/Login", {
+                                 self.ShortConnect("https://newaccount.ykplay.com/ykLogin/Login", {
                                      app: "zhidianmijin",
                                      bindingType: "1",
                                      bindingMsg: {
@@ -1017,7 +1017,7 @@
          res.sessionKey = this.sessionKey;
 
          console.log(res.userInfo);
-         this.ShortConnect("https://account.ykplay.com/ykLogin/UserInfoLogin", {
+         this.ShortConnect("https://newaccount.ykplay.com/ykLogin/UserInfoLogin", {
              bindingType: "1",
              app: "zhidianmijin",
              platform: "1",

@@ -223,11 +223,8 @@
          },
          shouhou:function(){
              wx.navigateTo({
-                 url: '../lck/saleService/saleService',
+                 url: '../ButReady/BuyReady',
              })
-            //  wx.navigateTo({
-            //      url: '../ButReady/BuyReady',
-            //  })
          },
          /**
           * 生命周期函数--监听页面隐藏

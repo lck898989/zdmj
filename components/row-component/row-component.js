@@ -1,4 +1,3 @@
-import Goods from "../../utils/Goods";
 import Host from '../../utils/Const.js';
 // components/goodsList1/goodsList1.js
 Component({

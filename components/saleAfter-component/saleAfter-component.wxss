@@ -51,7 +51,7 @@
     align-items: center;
     justify-content: flex-start;
     margin-top: 20rpx;
-    font-size: 25rpx;
+    font-size: 30rpx;
     color:#808080;
 }
 .detail-left{
@@ -84,6 +84,7 @@
     justify-content: flex-start;
     color: #808080;
 }
+.
 .footer{
     height: 80rpx;
     background: #fff;
