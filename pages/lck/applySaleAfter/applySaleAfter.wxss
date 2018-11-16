@@ -145,6 +145,15 @@ textarea{
     height: 120rpx;
     /* border-top: 2rpx solid #000; */
     background: #f8f8f8;
+}
+.imgParent{
+    width: 650rpx;
+    height: 120rpx;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    padding-top: 10rpx;
     border-top: 2rpx solid #808080;
 }
 /* .screenShot-item{
@@ -283,4 +292,15 @@ textarea{
 }
 .add-item-con{
     justify-content: space-between;
+}
+.sub,.add{
+    padding: 5rpx;
+    border: 1rpx solid #808080;
+    font-size: 25rpx;
+}
+.sub{
+    margin-right: 10rpx;
+}
+.add{
+    margin-left: 10rpx;
 }

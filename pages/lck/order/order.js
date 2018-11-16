@@ -63,6 +63,10 @@ Page({
                     console.log("add is ", this.data.add);
                 }
             }
+        }else{
+            this.setData({
+                add : null
+            })
         }
     }
     let self = this;

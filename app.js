@@ -33,7 +33,7 @@
      host: Host.devHost,
      urlw3: "http://shop.ykplay.com",
      urlw2: "http://shop.ykplay.com/",
-     urlw: "http://192.168.1.56:3150/",
+     urlw: "http://192.168.1.190:3150/",
      //保存订单号
      orderNumber: null,
      //商户好

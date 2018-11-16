@@ -1,7 +1,7 @@
 export default {
-    devHost: 'http://192.168.1.56:3150/',
+    devHost: 'http://192.168.1.190:3150/',
     productionHost: 'https://shop.ykplay.com/',
-    //数组内容为基本类型去重
+    //数组内容为
     uniq   : function(array){
         let temp = [];
         let index = [];
@@ -69,6 +69,18 @@ export default {
         let seconds = hms.slice(4, 6);
         let formatMms = hours + ':' + minutes + ':' + seconds;
         return formatYmd + formatMms;
+    },
+    //拼接对象数组或者是普通数组
+    concatObjInArr : function(source,newArr){
+        if (source instanceof Array && newArr instanceof Array) {
+            let newLen = newArr.length;
+            for (let i = 0; i < newLen; i++) {
+                source.push(newArr[i]);
+            }
+        }
+        //对source进行去重
+        this.uniqObjInArray(source);
+        return source;
     }
 
 }

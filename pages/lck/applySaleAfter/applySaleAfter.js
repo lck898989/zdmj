@@ -32,7 +32,9 @@ Page({
           
       },
       //输入的文字个数
-      inputNumber : 0
+      inputNumber : 0,
+      serverType : '退货',
+      backcount : 0
 
   },
 
@@ -57,12 +59,19 @@ Page({
       let req = new Request(url,data,'POST','text');
       let res = await req.sendRequest();
       console.log("res is ",res);
-      this.data.backGoodsType.msg = res.data.msg;
-      this.data.backGoodsType.type = res.data.type;
-      this.setData({
-          backGoodsType : this.data.backGoodsType
-      })
-      console.log("constArray is ",this.data.constArray);
+      if(res.data.encode === 1){
+          wx.showToast({
+              title : '订单已发货不支持退款！',
+              icon  : 'none'
+          })
+      }else{
+        this.data.backGoodsType.msg = res.data.msg;
+        this.data.backGoodsType.type = res.data.type;
+        this.setData({
+            backGoodsType : this.data.backGoodsType
+        })
+        console.log("constArray is ",this.data.constArray);
+      }
 
   },
 
@@ -186,20 +195,31 @@ Page({
   },
   //提交原因
   submit : function(){
+      wx.showLoading({
+          title: '正在提交数据...',
+      })
       let self = this;
       console.log("uid is ",app.uid);
       console.log("收货人是 ",this.data.receptInfo['收货人']);
       console.log("手机号是 ",this.data.receptInfo['手机号']);
+    //   if(this.data.receptInfo['收货人'] === '' || this.data.receptInfo['手机号'] === ''){
+    //       wx.showToast({
+    //           title : '请完善信息',
+    //           icon  : 'none'
+    //       });
+    //   }
       let reasonList = {
           accept   : this.data.receptInfo['收货人'],
           phone    : this.data.receptInfo['手机号'],
           question :  this.data.questionDescription,
           reason   : this.data.reason,
           add      : '上海市',
-          oitemid  : 18,
+          oitemid: self.data.goods.oitemid,
           uid      : app.uid,
-          typ      : self.data.backGoodsType.type
+          typ      : self.data.backGoodsType.type,
+          backcount: self.data.backcount
       }
+      console.log("reasonList is ",reasonList);
       //获得缩略图数组的长度
       let uploadImgLen = this.data.screenshotArray.length;
       let j = 0;
@@ -235,21 +255,61 @@ Page({
                             success :function(res){
                                 console.log("图片上传完毕的相应");
                                 console.log("res is ",res);
+                                // 响应
+                                wx.hideLoading();
+                                if(res.data.encode === 0){
+                                    //跳转页面进入正在申请界面
+                                    wx.navigateTo({
+                                        url: '../saleService/saleService?status=1',
+                                        success : function(){
+                                            wx.showToast({
+                                                title : '提交数据成功!',
+                                                icon  : 'none'
+                                            })
+                                        }
+                                    })
+                                }
                             },
                             fail : function(){
                                 console.log("请求失败");
                             }
                         })
-
                     }
-                    
                 },
                 fail : function(){
                     console.log("上传图片出错了");
                 }
             })
           }
-      }  
+      } else {
+          //发送给服务器上传完毕--不上传图片
+          wx.request({
+              url: self.data.host + 'Data/ApplyAfterSale',
+              method: 'POST',
+              data: reasonList,
+              success: function (res) {
+                  console.log("图片上传完毕的相应");
+                  console.log("res is ", res);
+                  // 响应
+                  wx.hideLoading();
+                  if (res.data.encode === 0) {
+                      //跳转页面进入正在申请界面
+                      wx.navigateTo({
+                          url: '../saleService/saleService?status=1',
+                          success: function () {
+                              wx.showToast({
+                                  title: '提交数据成功!',
+                                  icon: 'none'
+                              })
+                          }
+                      })
+                  }
+              },
+              fail: function () {
+                  console.log("请求失败");
+              }
+          })
+      }
   },
   //获取输入的用户名
   getName : function(e){
@@ -298,17 +358,44 @@ Page({
           })
       }
   },
-  close : function(e){
-      console.log("e is ",e);
-      let dataSet = e.currentTarget.dataset;
-      console.log("dataSet is ",dataSet);
-      let index = dataSet.index;
-      console.log("index is ",index);
-      console.log("screenShotArray is ", this.data.screenshotArray);
-      this.data.screenshotArray.splice(index,1);
+  //取消选择图片缩略图
+  close: function (e) {
+    console.log("e is ", e);
+    let dataSet = e.currentTarget.dataset;
+    console.log("dataSet is ", dataSet);
+    let index = dataSet.index;
+    console.log("index is ", index);
+    console.log("screenShotArray is ", this.data.screenshotArray);
+    //删除该元素
+    this.data.screenshotArray.splice(index, 1);
+    this.setData({
+        screenshotArray: this.data.screenshotArray
+    });
+    console.log("screenshotArray is ", this.data.screenshotArray);
+  },
+  //添加数量
+  addCount : function(event){
+    let dataSet = event.currentTarget.dataset;
+    let count = Number(dataSet.c);
+    console.log("c is ",count);
+    //如果退货的数量小于商品的数量可以加数量
+    if(this.data.backcount < count){
+        this.data.backcount++;
+    }
+    this.setData({
+        backcount : this.data.backcount
+    })
+  },
+  //较少数量
+  subCount : function(event){
+      let dataSet = event.currentTarget.dataset;
+      let count = Number(dataSet.c);
+      console.log("count is ",count);
+      if(this.data.backcount > 0){
+          this.data.backcount--;
+      }
       this.setData({
-          screenshotArray: this.data.screenshotArray
-      });
-      console.log("screenshotArray is ",this.data.screenshotArray);
+        backcount : this.data.backcount
+      })
   }
 })

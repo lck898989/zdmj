@@ -1,9 +1,0 @@
-{
-    "navigationBarTitleText": "商城",
-    "usingComponents": {
-        "shoping-head-component": "/components/shopping-common/shoppingCommon-component",
-        "list-goods-component":"/components/list-component/list-component",
-        "row-goods-component" : "/components/row-component/row-component"
-    }
-   
-}

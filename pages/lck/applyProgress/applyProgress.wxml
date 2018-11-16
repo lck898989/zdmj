@@ -2,7 +2,7 @@
 <!-- <text>pages/lck/applyProgress/applyProgress.wxml</text> -->
 <view class='page-con'>
     <view class='applyGoods'>
-        <saleAfter-component goods='{{testGoods}}'></saleAfter-component>
+        <saleAfter-component goods='{{Goods}}'></saleAfter-component>
     </view>
     <view class='process-con'>
         <view class='process-leftd'>
@@ -14,13 +14,13 @@
             进度
         </view> -->
         <view class='process-right'>
-            <block wx:for='{{applyRouter}}'>
+            <block wx:for='{{progressArr}}'>
                 <view class='order'>
                     <view class='icon {{0==index?"in":"no_in"}}'></view>
                     <view class='logistics_centent' style='{{index === 0 ? onDeal : dealed}}'>
-                        <view class='order-item'>{{item.text}},正在扫描</view>
-                        <view class='order-item'>{{item.time}}</view>
-                        <view class='order-item'>经办人:{{item.name}}</view>
+                        <view class='order-item'>{{item.t2}}</view>
+                        <view class='order-item'>{{item.t0}}</view>
+                        <view class='order-item'>经办人:{{item.t1}}</view>
                     </view>
                     <view class='on'></view>
                 </view>
@@ -34,10 +34,10 @@
         </view>
         <view class='bottom-text'>
             <view>
-                hada
+                {{questionDes.question}}
             </view>
             <view style='margin-top:30rpx;'>
-                2018-11-11 11:12:25
+                {{questionDes.submitTime}}
             </view>
         </view>
     </view>

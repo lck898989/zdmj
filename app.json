@@ -1,18 +1,18 @@
 {
     "pages": [
-        "pages/lck/applySaleAfter/applySaleAfter",
         "pages/userInfo/userInfo",
+        "pages/lck/testJing/perfact",
         "pages/lck/saleService/saleService",
+        "pages/lck/searchDetail/searchDetail",
         "pages/lck/applyProgress/applyProgress",
+        "pages/lck/applySaleAfter/applySaleAfter",
         "pages/indextwo/indextwo",
         "pages/wxscope/wxscope",
         "pages/lck/hotShopping/hotShopping",
         "pages/lck/ShopSuccess/ShopSuccess",
         "libs/citySelector/switchcity/switchcity",
         "pages/GetRebate/GetRebate",
-        "pages/lck/searchDetail/searchDetail",
         "pages/index/index",
-        "pages/lck/testJing/perfact",
         "pages/lck/address/address",
         "pages/lck/cartGoodsDetail/cartGoodsDetail",
         "pages/index2/index2",
@@ -45,8 +45,7 @@
         "backgroundTextStyle": "light",
         "navigationBarBackgroundColor": "#863bb7",
         "navigationBarTitleText": "指点迷津",
-        "navigationBarTextStyle": "white",
-        "enablePullDownRefresh": true
+        "navigationBarTextStyle": "white"
     },
     "tabBar": {
         "selectedColor": "#863bb7",

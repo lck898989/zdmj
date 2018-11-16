@@ -1,6 +1,0 @@
-{
-    "navigationBarTitleText": "审核进度",
-    "usingComponents": {
-        "saleAfter-component": "/components/saleAfter-component/saleAfter-component"
-    }
-}

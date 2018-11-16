@@ -49,9 +49,9 @@
             <view style='padding-left:10rpx;padding-right:10rpx;z-index:400;margin-left:20rpx;'>
                 <image src='../../../resources/location.png' style='width:50rpx;height:50rpx;'></image>
             </view>
-            <view class='address-detail' style='z-index:400;'>
+            <view class='address-detail' style='z-index:600;'>
                 <block wx:if='{{add === null}}'>
-                    <view>暂时没有收货地址添加一个吧</view>
+                    <view bindtap='enterAddress'>暂时没有收货地址添加一个吧</view>
                 </block>
                 <block wx:else>
                     <view class='recept-info'>
@@ -69,7 +69,7 @@
                     </view>
                 </block>
             </view>
-            <image src='../../../resources/right.png' style='width:25rpx;height:25rpx;' class='addManager' bindtap='enterAddress'></image>
+            <view class='addManager' bindtap='enterAddress'>></view>
         </view>
     </view>
     <view class='youhui' style='border-bottom:1px solid #fff;background-color:#fff;margin-top:10rpx;margin-bottom:2rpx;'>

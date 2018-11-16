@@ -1,7 +1,23 @@
-<image src='http://img.baidu.com/hi/jx2/j_0003.gif' style='width:100rpx;height:100rpx;'></image>
+<!-- <image src='http://img.baidu.com/hi/jx2/j_0003.gif' style='width:100rpx;height:100rpx;'></image> -->
 <view wx:for='{{typeValue}}'>
     {{item}}
 </view>
+<button type='primary' bindtap='showTable' class='btn'>显示右框</button>
 <view>
-    <button type='primary' open-type='share'>分享</button>
+    <!-- <button type='primary' bindtap='share'>请求二维码</button>
+    <button type='primary' bindtap='share'>请求二维码</button>
+    <button type='primary' bindtap='share'>请求二维码</button>
+    <button type='primary' bindtap='share'>请求二维码</button>
+    <button type='primary' bindtap='share'>请求二维码</button>
+    <button type='primary' bindtap='share'>请求二维码</button>
+    <button type='primary' bindtap='share'>请求二维码</button>
+    <button type='primary' bindtap='share'>请求二维码</button>
+    <button type='primary' bindtap='share'>请求二维码</button>
+    <image src='{{host}}Data/create_qrcode?text=http://www.baidu.com'></image> -->
 </view>
+<view wx:if='{{showRightToast}}' class='rightToast-con'>
+    <view class='rightToast'>
+
+    </view>
+</view>
+

@@ -1,7 +1,0 @@
-<image src='http://img.baidu.com/hi/jx2/j_0003.gif' style='width:100rpx;height:100rpx;'></image>
-<view wx:for='{{typeValue}}'>
-    {{item}}
-</view>
-<view>
-    <button type='primary' open-type='share'>分享</button>
-</view>

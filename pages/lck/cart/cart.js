@@ -249,7 +249,7 @@ Page({
         let url = app.host + 'Data/CartList';
         console.log("url is ", url);
         let reqCartListData = {
-            uid: 1,
+            uid: app.uid,
             page: 1
         }
 

@@ -190,6 +190,11 @@ Page({
                     if (!this.data.typeArr.contain(tempJson)) {
                         this.data.typeArr.push(tempJson);
                     }
+                    if(m === 0){
+                        this.setData({
+                            t2id : tempJson.t2id
+                        })
+                    }
                 }
                 this.setData({
                     showArrowDown: false
@@ -208,11 +213,11 @@ Page({
                 goods  : resGoods,
                 dataOk : true
             });
-            wx.hideLoading();
             console.log("in hotShopping uid is ", app.uid);
 
             console.log("typeArr is ", this.data.typeArr);
             console.log("moreTypeArr is ", this.data.moreTypeArr);
+            wx.hideLoading();
             this.setData({
                 typeArr: this.data.typeArr,
                 moreTypeArr: this.data.moreTypeArr,
@@ -527,6 +532,9 @@ Page({
         console.log("t2id is ",id);
         this.data.t2id = id;
         console.log("请求类型是 ", requestType);
+        wx.showLoading({
+            title: '加载数据中...',
+        })
         //重置page=1
         this.data.page = 1;
         this.data.pricePage = 1;
@@ -540,7 +548,14 @@ Page({
                 let url = 'Data/GetProductsByT2id'
                 let req = new Request(app.host + url,data,'POST','text');
                 let res = await req.sendRequest();
+                wx.hideLoading();
                 console.log("in chooseType res is ",res);
+                if(res.data.products.length === 0){
+                    wx.showToast({
+                        title: '暂时还没有该分类的商品...',
+                        icon : 'none'
+                    })
+                }
                 this.splitHeadImage(res.data.products);
                 this.setData({
                     goods :res.data.products
@@ -567,7 +582,14 @@ Page({
                 let url2 = 'Data/GetProductsByT2id'
                 let req2 = new Request(app.host + url2, data2, 'POST', 'text');
                 let res2 = await req2.sendRequest();
+                wx.hideLoading();
                 console.log("in moreType res is ", res2);
+                if(res2.data.products.length === 0){
+                    wx.showToast({
+                        title : '暂时还没有该分类的商品...',
+                        icon  : 'none'
+                    })
+                }
                 this.splitHeadImage(res2.data.products);
                 this.setData({
                     goods: res2.data.products
@@ -583,6 +605,9 @@ Page({
     },
     //价格排序  
     sortPrice: async function (event) {
+        wx.showLoading({
+            title: '数据加载中...',
+        })
         //价格下拉
         this.data.updateState = 1;
         console.log("in sortPrice event is ", event);
@@ -617,6 +642,7 @@ Page({
         //发送根据价格升序排列的数据
         let req = new Request(url, data, "POST", 'text');
         let res = await req.sendRequest();
+        wx.hideLoading();
         console.log("in sort price res is ", res.data.products);
         //先将原来的置空
         this.data.goods = [];

@@ -2,6 +2,21 @@
 page{
     background: #f2f2f2;
 }
+.page-con{
+
+}
+.page-mask-con{
+    height: 100vh;
+}
+.mask{
+    position: fixed;
+    width: 750rpx;
+    top: 0rpx;
+    left: 0rpx;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 500;
+}
 .saleHead{
     width: 100%;
     position: fixed;
@@ -68,4 +83,87 @@ page{
     overflow: hidden;
     text-overflow: ellipsis;
     flex-wrap: nowrap;
+}
+.record-status{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    flex-wrap: nowrap;
+    padding: 10rpx 10rpx;
+    background: #fff;
+}
+.writeExpressOrder{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    font-size: 30rpx;
+    background: #fff;
+    padding: 20rpx 0rpx;
+    /* margin-bottom: 20rpx; */
+}
+.input-con{
+    margin-left: 20rpx;
+}
+.submit-express{
+    padding: 10rpx 20rpx;
+    margin-right: 20rpx;
+    border: 2rpx solid #b31227;
+    border-radius: 10rpx;
+    background: #b31227;
+    color: #fff;
+}
+.submited{
+    justify-self: flex-end;
+}
+.reasonCon{
+    width: 750rpx;
+    height: 800rpx;
+    position: fixed;
+    bottom: 0rpx;
+    left: 0rpx;
+    background: #f2f2f2;
+    z-index: 1000;
+}
+.line-reason{
+   padding-top: 30rpx;
+   justify-content: flex-start;
+   margin-bottom: 10rpx;
+   background: #fff;
+   display: flex;
+   flex-direction: row;
+   align-items: center;
+   border-bottom: 2rpx solid #f2f2f2;
+   padding-bottom: 30rpx;
+}
+.reason-title{
+    margin: 0 auto;
+    color: #999999;
+    
+}
+.reasonD-con{
+    background: #fff;
+}
+.changeGoods{
+    background: #fff;
+    font-size: 30rpx;
+    width: 60rpx;
+    padding: 0rpx 0rpx 30rpx 0rpx;
+    border-bottom: 4rpx solid #b31227;
+    margin-left: 25rpx;
+}
+.reason-detail{
+    height: 600rpx;
+    background: #fff;
+    margin-top: 2rpx;
+    padding: 40rpx 22rpx 0rpx 20rpx;
+}
+.reason-item{
+    margin-bottom: 60rpx;
+    color: #444444;
+    font-size: 33rpx;
+}
+.express-con{
+    height: 650rpx;
 }

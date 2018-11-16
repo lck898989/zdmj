@@ -5,7 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-      testGoods : {
+      Goods : {
           pname : '七匹狼裤子',
           price : 152,
           count : 1,
@@ -41,14 +41,54 @@ Page({
           '联系人'  :'lck',
           '联系电话':'18522463796',
           '收货地址': '上海市徐汇区滨江大道'
-      }
+      },
+      questionDes  : {},
+      progressArr  : []
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+      let serverItem = wx.getStorageSync("serverItem");
+      console.log(serverItem);
+      this.data.questionDes.question = serverItem.questionDes;
+      this.data.questionDes.submitTime = serverItem.submitTime;
+      console.log("serverItem is ",serverItem.products[0]);
+      //赋值产品信息
+      this.setData({
+          Goods       : serverItem.products[0],
+          questionDes : this.data.questionDes
+      });
+      wx.removeStorageSync("serverItem");
+      console.log("Goods is ",this.data.Goods);
+      console.log("serverItem is ",serverItem);
+      //重新赋值服务单信息
+      this.data.serverpageInfo['服务类型'] = serverItem.serviceType;
+      this.data.serverpageInfo['申请原因'] = serverItem.reason;
+      this.data.serverpageInfo['联系人'] = serverItem.recepter;
+      this.data.serverpageInfo['联系电话'] = serverItem.recepterPhone;
+      this.data.serverpageInfo['收货地址'] = serverItem.address;
+      console.log("服务单信息是：",this.data.serverpageInfo);
+      this.setData({
+          serverpageInfo : this.data.serverpageInfo
+      });
+      let progressmsg = serverItem.progressMsg;
+      let progressTempArr = progressmsg.split(',');
+      for(let i = 0;i < progressTempArr.length;i++){
+          let tempJson = {};
+          let progressA = progressTempArr[i].split(';');
+          for(let j = 0;j < progressA.length;j++){
+              tempJson[`t${j}`] = progressA[j];
+          }
+          this.data.progressArr.push(tempJson);
+      }
+      this.data.progressArr.reverse();
+      this.setData({
+          progressArr : this.data.progressArr
+      })
+      console.log("this.data.progressArr is ",this.data.progressArr);
+    //   progressArr
   },
 
   /**
@@ -62,7 +102,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+      wx.hideLoading();
   },
 
   /**

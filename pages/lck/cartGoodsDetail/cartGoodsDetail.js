@@ -68,32 +68,18 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: async function (options) {
-        console.log("loading......");
         let startTime = new Date().getMilliseconds();
-        wx.showLoading({
-            title: '模块加载中...',
-            success : function(res){
-                console.log("等待加载成功");
-            },
-            fail : function(){
-                console.log("加载等待模块失败！！");
-            }
-        })
-        // wx.showShareMenu({
-        //     //要求小程序返回分享目标信息
-        //     withShareTicket: true
-        // })
         switch (options.inter) {
             case "0":
                 // var shop = JSON.parse(decodeURIComponent(options.goods));
-                let shop = wx.getStorageSync('goods')
+                let shop = wx.getStorageSync('goods');
                 // shop.head = shop.head.split(",");
                 this.setData({
                     goods: shop,
                     goodsImageList: shop.head
                 })
                 //删除缓存中的数据以便腾出空间
-                wx.removeStorageSync('goods')
+                wx.removeStorageSync('goods');
                 this.initGoodsInfo();
                 console.log(this.data.goodsImageList);
                 break;
@@ -159,30 +145,24 @@ Page({
         } else {
             let self = this;
             let startTime = new Date().getMilliseconds();
-            new Promise(function (resolve, reject) {
-                wx.getStorage({
-                    key: 'goods',
-                    success: function (res) {
-                        let endTime = new Date().getMilliseconds();
-                        console.log("获取缓存的时间长度是：", endTime - startTime,'ms');
-                        console.log("res is ", res);
-                        let goodsObj = res.data;
-                        self.data.goods = goodsObj;
-                        self.setData({
-                            goods: goodsObj
-                        })
-                        console.log("#@#@#@#@#@",self.data.goods);
-                        self.initGoodsInfo();
-                        //获取完数据之后删除缓存中的数据
-                        wx.removeStorageSync('goods');
-                        resolve("ok");
-                    },
-                })
-            }).then(function(msg){
-                if (msg === "ok") {
+            wx.showLoading({
+                title: '数据加载中...',
+            })
+            let wxS = wx;
+            wx.getStorage({
+                key: 'goods',
+                success: function(res) {
+                    console.log("从缓存中拿到的数据是：",res.data);
                     let endTime = new Date().getMilliseconds();
-                    console.log("用时是：",endTime - startTime,'ms');
-                }
+                    console.log("从缓存中拿数据用时：",(endTime - startTime) + 'ms');
+                    self.setData({
+                        goods : res.data
+                    });
+                    self.initGoodsInfo();
+                    console.log("wx is ",wxS);
+                    wxS.hideLoading();
+                    wxS.removeStorageSync('goods');
+                },
             });
         }
     },
@@ -338,9 +318,6 @@ Page({
      */
     onReady: function () {
         console.log("页面初次渲染完成！！！");
-        setTimeout(() => {
-            wx.hideLoading()
-        }, 100)
         // wx.hideLoading();
     },
 
@@ -349,9 +326,7 @@ Page({
      */
     onShow: function () {
         console.log("开始显示！");
-        setTimeout(() => {
-            wx.hideLoading()
-        }, 100)
+        
     },
 
     /**
@@ -656,7 +631,7 @@ Page({
             cancel = arguments[1];
         }
         let data = {
-            uid: 1,
+            uid: app.uid,
             pid: pid,
             size: this.data.sendServerSize,
             count: this.data.count,

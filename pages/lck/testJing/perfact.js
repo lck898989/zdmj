@@ -1,15 +1,21 @@
 // pages/lck/testJing/perfact.js
-import wxParse from '../../../wxParse/wxParse.js'
+import wxParse from '../../../wxParse/wxParse.js';
+import Request from '../../../utils/Request.js';
+import Const from '../../../utils/Const.js';
+import regeneratorRuntime from '../../../utils/regenerator-runtime/runtime-module.js';
+let app = getApp();
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+      host : app.host,
       dkheight: 300,
       dkcontent: `你好<br/>nihao,<br/><br/><br/><br/><br/><br/><br/>这个是测试<br/><br/>你同意了吗<br/><br/><br/>hehe<b class='nihao'>n你好啊，我加粗了kk</b >
       <p><img src='http://shop.ykplay.com/upload/1/App.ico'/><strong>asdfasdfasd</strong></p>`,
-      typeValue : null
+      typeValue : null,
+      showRightToast : false,
   },
 
   /**
@@ -48,7 +54,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    //   wx.hideLoading();
   },
 
   /**
@@ -112,5 +118,20 @@ Page({
                 path: '/pages/lck/hotShopping/hotShopping?name='+ user.name
             }
         }
+    },
+    share : async function(event){
+        let url = app.host + 'Data/create_qrcode?text=http://blog.csdn.net/fo11ower';
+        let data = {
+
+        };
+        let req = new Request(url,data,'GET','text');
+        let res = await req.sendRequest();
+        console.log("res is ",res);
+
+    },
+    showTable : function(){
+        this.setData({
+            showRightToast : !this.data.showRightToast
+        });
     }
 })

@@ -23,7 +23,10 @@
     </view>
     <!--具体商品信息-->
     <view class='goods-con'>
+        <!--自定义组件-->
         <saleAfter-component goods='{{goods}}'>
+            <text slot='beforeCount' bindtap='subCount' class='sub' data-c='{{goods.count}}'>-</text>
+            <text slot='afterCount' bindtap='addCount' class='add' data-c='{{goods.count}}'>+</text>
             <view slot='footer' class='footer'>
                 <view>
                     申请原因
@@ -52,18 +55,23 @@
             </view>
             <view class='textContainer'>
                 <textarea  placeholder-class='textA' class='textArea' bindinput='textAreaInput'>
+                    <cover-view>
+                        
+                    </cover-view>
                 </textarea>
                 <view class='count-limit'>
                     {{inputNumber}}/500
                 </view>
                 <block wx:if='{{screenshotArray.length > 0}}'>
                     <view class='screenShot-con'>
-                        <block wx:for='{{screenshotArray}}'>
-                            <view class='image-con'>
-                                <image src='{{item}}' class='screenShot-item' style='width:80rpx;height:100rpx;'></image>
-                                <image src='../../../resources/close.png' style='width:30rpx;height:30rpx;' class='close' bindtap='close' data-index='{{index}}'></image>
-                            </view>
-                        </block>
+                        <view class='imgParent'>
+                            <block wx:for='{{screenshotArray}}'>
+                                <view class='image-con'>
+                                    <image src='{{item}}' class='screenShot-item' style='width:80rpx;height:100rpx;'></image>
+                                    <image src='../../../resources/close.png' style='width:30rpx;height:30rpx;' class='close' bindtap='close' data-index='{{index}}'></image>
+                                </view>
+                            </block>
+                        </view>
                     </view>
                 </block>
             </view>
@@ -73,80 +81,79 @@
             </view>
         </view>
     </view>
-    <view class='backType-con'>
-        <view class='title-back'>
-            商品退回方式        
-        </view>
-        <view class='backThirdSoler'>
-            快递至第三方卖家
-        </view>
-        <view class='detail-info'>
-            商品寄回地址将在审核通过后以短信形式告知，或在申请记录中查询。
-        </view>
-    </view>
-    <view class='recept-info'>
-        <!-- <view>
-            {{key}}：
-        </view> -->
-        <view class='recept-item'>
-            <view>
-                收货人:
+    <!--退货换货显示这些组件-->
+    <block wx:if='{{backGoodsType.msg === "退货" || backGoodsType.msg === "退款"}}'>
+        <view class='backType-con'>
+            <view class='title-back'>
+                商品退回方式        
             </view>
-            <input type='text' bindinput='getName' style='margin-left:10rpx;color:#404040;'></input>
-        </view>
-        <view class='recept-item'>
-            <view>
-                手机号码:
+            <view class='backThirdSoler'>
+                快递至第三方卖家
             </view>
-            <input type='text' bindfocus='checkName' style='margin-left:10rpx;color:#404040;' bindblur='checkPhoneNumber' bindinput='getPhoneNumber'></input>
-        </view>
-        <!-- <view style='color:#404040;'>
-            {{item}}
-        </view> -->
-        <view class='add-detail'>
-            <view class='add-title'>
-                <text>收货地址</text>
-                <text style='margin-left:50rpx;'>(该地址是商品回寄给您的地址)</text>
+            <view class='detail-info'>
+                商品寄回地址将在审核通过后以短信形式告知，或在申请记录中查询。
             </view>
-            <view class='add-item-con'>
-                <view class='add-item'>
-                    <image src='../../../resources/location.png' style='width:40rpx;height:40rpx;'></image>
-                    <view class='detail-add' style='margin-left:50rpx;'>
-                        上海市徐汇区
+        </view>
+        <view class='recept-info'>
+            <!-- <view>
+                {{key}}：
+            </view> -->
+            <view class='recept-item'>
+                <view>
+                    收货人:
+                </view>
+                <input type='text' bindinput='getName' style='margin-left:10rpx;color:#404040;'></input>
+            </view>
+            <view class='recept-item'>
+                <view>
+                    手机号码:
+                </view>
+                <input type='text' bindfocus='checkName' style='margin-left:10rpx;color:#404040;' bindblur='checkPhoneNumber' bindinput='getPhoneNumber'></input>
+            </view>
+            <block wx:if='{{!backGoodsType.msg === "退款"}}'>
+                <view class='add-detail'>
+                    <view class='add-title'>
+                        <text>收货地址</text>
+                        <text style='margin-left:50rpx;'>(该地址是商品回寄给您的地址)</text>
+                    </view>
+                    <view class='add-item-con'>
+                        <view class='add-item'>
+                            <image src='../../../resources/location.png' style='width:40rpx;height:40rpx;'></image>
+                            <input class='detail-add' style='margin-left:50rpx;' placeholder='请输入收货地址'>
+                                上海市徐汇区
+                            </input>
+                        </view>
                     </view>
                 </view>
-                <view class='add-choose' bindtap='chooseAdd'>
-                    >
-                </view>
-            </view>
+            </block>
         </view>
-        <view class='submit-con'>
-            <view class='server-detail'>
-                提交服务单后，售后专员可能与您电话沟通，请保持手机畅通
-            </view>
-            <view class='submit' bindtap='submit'>
-                提交
-            </view>
+    </block>
+    <view class='submit-con'>
+        <view class='server-detail'>
+            提交服务单后，售后专员可能与您电话沟通，请保持手机畅通
+        </view>
+        <view class='submit' bindtap='submit'>
+            提交
         </view>
     </view>
     <block wx:if='{{showReason}}'>
-        <view class='reasonCon'>
-            <view class='reasonD-con'>
-                <view class='line-reason'>
-                    <view class='reason-title'>
+        <cover-view class='reasonCon'>
+            <cover-view class='reasonD-con'>
+                <cover-view class='line-reason'>
+                    <cover-view class='reason-title'>
                         申请原因
-                    </view>
-                    <image src='../../../resources/Cancel.png' style='width:40rpx;height:40rpx;margin-right:40rpx;' bindtap='cancel'></image>
-                </view>
-                <view class='changeGoods'>
-                    {{backGoodsType.msg}}
-                </view>
-            </view>
-            <view class='reason-detail'>
-                <view wx:for='{{reasonList}}' class='reason-item' bindtap='chooseTheReason' data-reason='{{item}}'>
+                    </cover-view>
+                        <cover-image src='../../../resources/Cancel.png' style='width:40rpx;height:40rpx;margin-right:40rpx;' bindtap='cancel'></cover-image>
+                    </cover-view>
+                    <cover-view class='changeGoods'>
+                        {{backGoodsType.msg}}
+                    </cover-view>
+                </cover-view>
+                <cover-view class='reason-detail'>
+                <cover-view wx:for='{{reasonList}}' class='reason-item' bindtap='chooseTheReason' data-reason='{{item}}'>
                     {{item}}
-                </view>
-            </view>
-        </view>
+                </cover-view>
+            </cover-view>
+        </cover-view>
     </block>
 </scroll-view>

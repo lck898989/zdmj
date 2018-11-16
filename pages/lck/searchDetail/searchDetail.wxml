@@ -2,26 +2,55 @@
 <view class='page-wrapper'>
     <view class='search-con'>
         <view class='search-pa'>
-            <image src='../../../resources/search.png' style='width:40rpx;height:40rpx;'></image>
-            <input type='text' placeholder='电器' class='search-input' placeholder-style="font-size:30rpx;"></input>
+            <image src='../../../resources/search.png' style='width:40rpx;height:40rpx;' class='searchIcon'></image>
+            <view>
+                <input type='text' placeholder='电器' class='search-input' bindinput='getSearchContent'></input>
+            </view>
         </view>
-        <view class='search-text'>
+        <view wx:if='{{isSearch}}' class='search-text' bindtap='search'>
             搜索
         </view>
+        <block wx:if='{{isRow}}'>
+            <image src='../../../resources/row.png' style='width:40rpx;height:40rpx;' class='icon' bindtap='showGoods' id='row'></image>
+        </block>
+        <block wx:if='{{isCol}}' bindtap='showGoodsList'>
+            <image src='../../../resources/list.png' style='width:40rpx;height:40rpx;' class='icon' bindtap='showGoods' id='col'></image>
+        </block>
     </view>
-    <view class='hot-search-con'>
-        <view class='hot-search-top'>
-            <view style='font-size:30rpx;'>
-                热门搜索
+    <block wx:if='{{isSearch}}'>
+        <view class='hot-search-con'>
+            <view class='hot-search-top'>
+                <view style='font-size:30rpx;'>
+                    热门搜索
+                </view>
+                <view style='font-size:25rpx;color:#ec0023;'>
+                    换一批
+                </view>
             </view>
-            <view style='font-size:25rpx;color:#ec0023;'>
-                换一批
+            <view class='hotTypeContent'>
+                <view wx:for='{{hostTypeArr}}' class='type-item'>
+                    {{item}}
+                </view>
             </view>
         </view>
-        <view class='hotTypeContent'>
-            <view wx:for='{{hostTypeArr}}' class='type-item'>
-                {{item}}
-            </view>
+    </block>
+    <block wx:if='{{isRow}}'>
+        <view class='rowStyle'>
+            <block wx:for='{{goodsList}}'>
+                <row-goods-component goods='{{item}}'></row-goods-component>
+            </block>
         </view>
-    </view>
+    </block>
+    <block wx:if='{{isCol}}'>
+        <view class='colStyle'>
+            <block wx:for='{{goodsList}}'>
+                <list-goods-component goods='{{item}}'></list-goods-component>
+            </block>
+        </view>
+    </block>
+    <!-- <block wx:if='{{isCol}}'>
+        <block wx:for='{{goodsList}'>
+            <list-goods-component goods='{{item}}'></list-goods-component>
+        </block>
+    </block> -->
 </view>

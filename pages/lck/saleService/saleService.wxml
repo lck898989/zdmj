@@ -1,9 +1,12 @@
-<view class='page-con'>
+<block wx:if='{{showExpressOrg}}'>
+    <view class='mask' catchtouchmove='test'></view>
+</block>
+<scroll-view class='{{showExpressOrg ? "page-mask-con" : "page-con"}}'>
     <view class="saleHead">
         <view wx:for='{{saleHeadText}}' style="{{item.choosed ? redText : headText}}" bindtap='chooseTitle' data-text='{{item.text}}'>{{item.text}}</view>
     </view>
     <view class='goods-con'>
-        <block wx:for='{{saleOrderArray}}'>
+        <block wx:if='{{isSaleAfter}}' wx:for='{{saleOrderArray}}'>
             <view class='sale-com'>
                 <view class='saleaf-text'>
                     <view class='orderNum'>
@@ -29,6 +32,105 @@
                 </block>
             </view>
         </block>
+        <block wx:if='{{isApplying}}' wx:for='{{applyingOrderArr}}'>
+            <view class='sale-com'>
+                <view class='saleaf-text'>
+                    <view class='orderNum'>
+                        <view>服务编号：</view>
+                        <view class='orderItem'>{{item.serviceNumber}}</view>
+                    </view>
+                    <view class='orderNum'>
+                        <view>服务类型：</view>
+                        <view class='orderItemTime'>{{item.serviceType}}</view>
+                    </view>
+                </view>
+                <!--显示商品的详情-->
+                <block wx:for='{{item.products}}' wx:for-item='innerItem'>
+                    <view>
+                        <saleAfter-component goods='{{innerItem}}'>
+                            <view slot='footer'>
+                                <view class='saleafter-con'>
+                                    <view class='saleafter' bindtap='enterProgress' data-oitemid='{{innerItem.oitemid}}'>
+                                        处理进度
+                                    </view>
+                                </view>
+                            </view>
+                        </saleAfter-component>
+                    </view>
+                </block>
+            </view>
+        </block>
+        <block wx:if='{{isApplyRecord}}' wx:for='{{applyRecord}}'>
+            <view class='sale-com'>
+                <view class='saleaf-text'>
+                    <view class='orderNum'>
+                        <view>服务编号：</view>
+                        <view class='orderItem'>{{item.serviceNumber}}</view>
+                    </view>
+                    <view class='orderNum'>
+                        <view>服务类型：</view>
+                        <view class='orderItemTime'>{{item.serviceType}}</view>
+                    </view>
+                </view>
+                <!--显示商品的详情-->
+                <block wx:for='{{item.products}}' wx:for-item='innerItem'>
+                    <saleAfter-component goods='{{innerItem}}'>
+                        <view slot='footer'>
+                            <view class='record-status'>
+                                <block wx:if='{{item.progressRes === 2 || item.progressRes === 5}}'>
+                                    <image src='../../../resources/zq.png' style='width:25rpx;height:25rpx;margin-right:50rpx;'></image>
+                                </block>
+                                <block wx:if='{{item.progressRes === 10}}'>
+                                    <image src='../../../resources/err.png' style='width:25rpx;height:25rpx;margin-right:20rpx;'></image>
+                                </block>
+                                <view style='color:#404040;font-size:30rpx;'>
+                                    {{item.progressMsg}}
+                                </view>
+                            </view>
+                        </view>
+                    </saleAfter-component>
+                    <block wx:if='{{item.progressRes === 2 || item.progressRes === 3}}'>
+                        <block wx:if='{{isSubmitOrder && item.progressRes === 3}}'>
+                            <view class='writeExpressOrder'>
+                                运单已提交等待审核
+                            </view>
+                        </block>
+                        <block wx:else>
+                            <view class='writeExpressOrder'>
+                                <view bindtap='chooseExpress'>
+                                    <block wx:if='{{choosedExpressOrg === ""}}'>
+                                        物流公司
+                                    </block>
+                                    <block wx:else>
+                                        {{choosedExpressOrg}}
+                                    </block>
+                                </view>
+                                <input placeholder='请填写运单号' bindinput='getExpressOrder' class='input-con'></input>
+                                <view class='submit-express' bindtap='submitExpressOrder' data-exOrder='{{item.serviceNumber}}'>
+                                    提交运单
+                                </view>
+                            </view>
+                        </block>
+                    </block>
+                </block>
+            </view>
+        </block>
     </view>
-
-</view>
+    <block wx:if='{{showExpressOrg}}'>
+        <view class='reasonCon'>
+            <view class='reasonD-con'>
+                <view class='line-reason'>
+                    <view class='reason-title'>
+                        物流公司
+                    </view>
+                        <image src='../../../resources/Cancel.png' style='width:40rpx;height:40rpx;margin-right:40rpx;' bindtap='cancel'></image>
+                </view>
+                <scroll-view class='express-con' scroll-y>
+                    <view wx:for='{{expressOrgList}}' class='reason-item' bindtap='chooseExpressOrg' data-reason='{{item}}'>
+                        {{item}}
+                    </view>
+                </scroll-view>
+            </view>
+        </view>
+    </block>
+</scroll-view>

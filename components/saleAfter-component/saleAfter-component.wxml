@@ -2,7 +2,7 @@
     <view bindcustomevent='eventListener'>
     </view>
     <slot name='orderInfo'></slot>
-    <view class='list-con' bindtap='onTap'>
+    <view class='list-con'>
         <image class='img-con' src="{{host}}{{goods.headImg}}" style="width:150rpx;height:150rpx;"></image>
         <view class='text-con'>
             <view class='top-text'>
@@ -13,7 +13,7 @@
                     价格： ￥{{goods.price}}
                 </view>
                 <view style='margin-left:40rpx;'>
-                    数量： {{goods.count}}
+                    <view>数量： <slot name='beforeCount'></slot>{{goods.count}}<slot name='afterCount'></slot></view>
                 </view>
             </view>
             <!--需要动态添加的元素在这里添加-->

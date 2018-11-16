@@ -124,16 +124,7 @@ Component({
             console.log("e is ", e);
         },
         onTap: function () {
-            console.log("in listComponent goods is ",this.data.goods);
-            console.log("goods String is ",JSON.stringify(this.data.goods));
-            //利用缓存传递页面数据
-            wx.setStorage({
-                key: 'goods',
-                data: this.data.goods,
-            })
-            wx.navigateTo({
-                url: '../cartGoodsDetail/cartGoodsDetail'
-            })
+        
         }
     }
 })
