@@ -1,0 +1,97 @@
+<!--pages/lck/index/index.wxml-->
+<view class='page-con'>
+    <view class='weather-con'>
+        <view class='weather-item'>
+            <view class='weather'>
+                <view class='today'>
+                    今日
+                </view>
+                <view class='weather'>
+                    <image src='https://shopfile.ykplay.com/resources/rains.png' style='width:75rpx;height:75rpx;'></image>
+                    <view class='weatherDesc'>
+                        <view>
+                            {{weatherData.weatherDesc}}
+                        </view>
+                        <view>
+                            {{weatherData.temperature}}
+                        </view>
+                    </view>
+                </view>
+            </view>
+            <view class='week'> 
+                <text>{{weatherData.date}}</text>
+            </view>
+        </view>
+        <view class='search-con'>
+            <view class='input-con'>
+                <input class='input' placeholder='搜索...'></input>
+            </view>
+            <image class='search-icon' src='../../../resources/search_icon.png' style='width:30rpx;height:30rpx;'></image>
+        </view>
+    </view>
+    <view class='swiper-stage'>
+
+    </view>
+    <view class='ed-con'>
+        <image src='https://shopfile.ykplay.com/resources/btn_eat.png'
+         style='width:360rpx;height:135rpx;margin-right:10rpx;margin-bottom:10rpx;'></image>
+        <image src='https://shopfile.ykplay.com/resources/btn_play.png' style='width:360rpx;height:135rpx;margin-bottom:10rpx;'></image>
+        <image src='https://shopfile.ykplay.com/resources/btn_drink.png' style='width:360rpx;height:135rpx;margin-right:10rpx;'></image>
+        <image src='https://shopfile.ykplay.com/resources/btn_fun.png' style='width:360rpx;height:135rpx;'></image>
+        <image src='https://shopfile.ykplay.com/resources/btn_shop.png' style='width:220rpx;height:220rpx;' class='circle'></image>
+    </view>
+    <!-- <swiper display-multiple-items='3' indicator-dots='true' 
+    autoplay circular previous-margin='50rpx' next-margin='50rpx'
+    bindchange='currentEvent' indicator-active-color='#fff' class='stage'>
+        <view class='wrapper'>
+            <block wx:for='{{imgUrls}}'>
+                <swiper-item class='swiperItem'>
+                    <image src='{{item}}' class='slide-item {{currentIndex === index ? "active" : "quiet"}}' style='width:750rpx;height:350rpx'></image>
+                </swiper-item>
+            </block>
+        </view>
+    </swiper> -->
+    <view class='hot-today'>
+        <view class='title'>
+            <view style='font-weight:bolder;'>
+                今日热卖
+            </view>
+            <view>
+                美妆大卖场 热销Top榜
+            </view>
+            <view class='swiper-con'>
+                <swiper current='{{swiperIndex}}' bindchange='swiperChaner' autoplay='true'>
+                    <swiper-item wx:for='{{slider}}' style='height:385rpx;'>
+                        <swiper-item-component goods='{{goods}}'></swiper-item-component>
+                    </swiper-item>
+                </swiper>
+                <view class='dots'>
+                    <block wx:for='{{slider}}' wx:key='unique'>
+                        <view data-i='{{index}}' bindtap='fn' class='dot {{index === swiperIndex ? "active" : ""}}'></view>
+                    </block>
+                </view>
+            </view>
+        </view>
+        <image src='../../../resources/img_hotbanner_01.png' mode='widthFix' style='width:355rpx;height:157rpx;border-radius:10rpx;' class='right_img'></image>
+    </view>
+    <view class='type-con'>
+        <view class="type-parent">
+            <scroll-view scroll-x='true' style='width:635rpx;'
+            bindscroll='scrollEvent' scroll-with-animation='true' class='banner-type'>
+                <view wx:for='{{bannerType}}' class='swiperIt {{item.choosed ? "typeactive" : ""}}' bindtap='chooseType' data-id='{{item.id}}'>
+                    {{item.text}}
+                </view>
+            </scroll-view>
+            <image src='../../../resources/arrow_right.png' style="width:16rpx;height:30rpx;" class="rightArrow"></image>
+        </view>
+        <view class='type-easy'>
+            <block wx:for='{{easyItemArray}}'>
+                <view class='typeDetail-con'>
+                    <!--利用组件显示文章信息-->
+                    <index-type-detail-component easyItem='{{item}}'></index-type-detail-component>
+                </view>
+            </block>
+        </view>
+    </view>
+</view>
+

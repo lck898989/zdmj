@@ -1,23 +1,20 @@
-<!-- <image src='http://img.baidu.com/hi/jx2/j_0003.gif' style='width:100rpx;height:100rpx;'></image> -->
-<view wx:for='{{typeValue}}'>
-    {{item}}
-</view>
-<button type='primary' bindtap='showTable' class='btn'>显示右框</button>
-<view>
-    <!-- <button type='primary' bindtap='share'>请求二维码</button>
-    <button type='primary' bindtap='share'>请求二维码</button>
-    <button type='primary' bindtap='share'>请求二维码</button>
-    <button type='primary' bindtap='share'>请求二维码</button>
-    <button type='primary' bindtap='share'>请求二维码</button>
-    <button type='primary' bindtap='share'>请求二维码</button>
-    <button type='primary' bindtap='share'>请求二维码</button>
-    <button type='primary' bindtap='share'>请求二维码</button>
-    <button type='primary' bindtap='share'>请求二维码</button>
-    <image src='{{host}}Data/create_qrcode?text=http://www.baidu.com'></image> -->
-</view>
-<view wx:if='{{showRightToast}}' class='rightToast-con'>
-    <view class='rightToast'>
-
+<view class='page-con'>
+    perfact.wxml
+    <view class='stage'>
+        <view class='wrapper' bindtouchstart='start' bindtouchend='end'>
+            <block wx:for='{{swiperList}}'>
+                    <view wx:if='{{index !== 0}}' class='maskCon'>
+                        <image class='imgBasic {{index === 0 ? "" : "fold"}} {{item.active ? item.swpClass : ""}}' src='{{item.imgsrc}}' data-index='{{index}}'></image>
+                        <view class='mask'></view>
+                    </view>
+                    <image wx:else class='imgBasic {{index === 0 ? "" : "fold"}} {{item.active ? item.swpClass : ""}}' src='{{item.imgsrc}}' data-index='{{index}}'></image>
+            </block>
+        </view>
+        <view class='dots'>
+            <block wx:for='{{swiperList}}' wx:key='unique'>
+                <view data-i='{{index}}' bindtap='fn' class='dot {{index === currentImageIndex ? "active" : ""}}'></view>
+            </block>
+        </view>
     </view>
 </view>
 

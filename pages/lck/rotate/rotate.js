@@ -20,28 +20,28 @@ Page({
         show: true,
         swiperList: [
             {
-                index: 0,
+                index : 0,
                 aurl: "../start/start",
                 swpClass: "swp-left",
                 active: false,
                 imgsrc: "../../../resources/test.png",
             },
             {
-                index: 1,
+                index : 1,
                 aurl: "#",
                 swpClass: "swp-right",
                 active: false,
                 imgsrc: "../../../resources/800.jpg"
             },
             {
-                index: 2,
+                index : 2,
                 aurl: "#",
                 swpClass: "swp-right",
                 active: false,
                 imgsrc: "../../../resources/900.jpg"
             },
             {
-                index: 3,
+                index : 3,
                 aurl: "#",
                 swpClass: "swp-right",
                 active: false,
@@ -49,8 +49,8 @@ Page({
             }],
         played: false,
         //滑动触点开始的时候
-        startPoint: 0,
-        currentImageIndex: 0
+        startPoint : 0,
+        currentImageIndex : 0
 
     },
 
@@ -184,7 +184,7 @@ Page({
         if (idx == 1 && prev && next) {
             prev.swpClass = 'swp-right';
             curView.swpClass = 'swp-left';
-            console.log("curView.index is ", curView.index);
+            console.log("curView.index is ",curView.index);
             for (let i = 2; i < max; i++) {
                 if (i === 2) {
                     swp[i].swpClass = 'move-left1';
@@ -210,29 +210,29 @@ Page({
             })
         }
     },
-    start: function (e) {
-        console.log("e is ", e);
+    start : function(e){
+        console.log("e is ",e);
         this.data.startPoint = e.changedTouches[0].pageX;
-        console.log("startPoint is ", this.data.startPoint);
+        console.log("startPoint is ",this.data.startPoint);
     },
-    end: function (e) {
+    end : function(e){
         let isLeft = false;
         let isRight = false;
-        console.log("e is ", e);
-        console.log("endPoint is ", e.changedTouches[0].pageX);
+        console.log("e is ",e);
+        console.log("endPoint is ",e.changedTouches[0].pageX);
         let endPoint = e.changedTouches[0].pageX;
-        console.log("是否向左移动？", (endPoint - this.data.startPoint) < 0 ? (isLeft = true) : (isRight = true));
-        console.log("isLeft is ", isLeft);
-        console.log("isRight is ", isRight);
+        console.log("是否向左移动？",(endPoint - this.data.startPoint) < 0 ? (isLeft = true ) : (isRight = true));
+        console.log("isLeft is ",isLeft);
+        console.log("isRight is ",isRight);
         //如果向左移动的话执行相应方法
-        if (isLeft) {
+        if(isLeft){
             this.moveLeft(1);
-        } else {
+        }else{
             // this.moveRight();
         }
     },
-    moveLeft: function (idx) {
-        if (idx === 1) {
+    moveLeft : function (idx) {
+        if(idx === 1){
             let swp = this.data.swiperList;
             let max = swp.length;
             let prev = swp[idx - 1];
@@ -246,10 +246,10 @@ Page({
             if (prev && next) {
                 prev.swpClass = 'swp-right';
                 curView.swpClass = 'swp-left';
-                console.log("curView.index is ", curView.index);
+                console.log("curView.index is ",curView.index);
                 // this.data.currentImageIndex = curView.index;
                 this.setData({
-                    currentImageIndex: curView.index
+                    currentImageIndex : curView.index
                 })
                 for (let i = 2; i < max; i++) {
                     if (i === 2) {

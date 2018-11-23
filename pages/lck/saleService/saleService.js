@@ -141,19 +141,19 @@ Page({
         this.data.saleAfterPage++;
         //重新获取
         console.log("拼接后 saleOrderArray is ", this.data.saleOrderArray);
-        this.getSaleAfterList();
+        this.updateSaleAfterList();
         this.data.saleOrderArray = Const.uniqObjInArray(this.data.saleOrderArray);
       }else if(this.data.isApplying){
         console.log("正在申请的页面数是：",this.data.applyingPage);
         this.data.applyingPage++;
-        this.getApplyingList();
+        this.updateApplying();
         this.data.applyingOrderArr = Const.uniqObjInArray(this.data.applyingOrderArr);
         
       }else if(this.data.isApplyRecord){
         console.log("申请记录的页面数是：",this.data.applyRecordPage);
         this.data.applyRecordPage++;
-        this.getApplyRecord();
-          this.data.applyRecord = Const.uniqObjInArray(this.data.applyRecord);
+        this.updateApplyRecord();
+        this.data.applyRecord = Const.uniqObjInArray(this.data.applyRecord);
       }
       this.setData({
           saleOrderArray   : this.data.saleOrderArray,
@@ -207,7 +207,7 @@ Page({
   },
     //获取售后列表
     getSaleAfterList: async function () {
-        // this.data.saleAfterPage = 1;
+        this.data.saleAfterPage = 1;
         wx.showLoading({
             title: '数据加载中...',
         })
@@ -216,24 +216,28 @@ Page({
             isSaleAfter: true,
             isApplying: false,
             isApplyRecord: false
-        })
+        });
+        this.updateSaleAfterList();
+    },
+    //更新售后申请列表
+    updateSaleAfterList : async function(){
         let url = this.data.host + 'Data/GetAfterSale';
         console.log("host is ", this.data.host);
         console.log("uid is ", app.uid);
         let data = {
-            uid  : app.uid,
-            page : this.data.saleAfterPage
+            uid: app.uid,
+            page: this.data.saleAfterPage
         }
         if (data.uid !== null) {
             let req = new Request(url, data, 'POST', 'text');
             let res = await req.sendRequest();
-            
+
             console.log(res);
             console.log("时间是：", res.data.orders);
-            if(res.data.orders.length === 0){
+            if (res.data.orders.length === 0) {
                 wx.showToast({
                     title: '没有多余售后订单了!',
-                    icon : 'none'
+                    icon: 'none'
                 })
             }
             if (res.data.encode === 0) {
@@ -243,10 +247,10 @@ Page({
                     sourceData: orders,
                 });
                 for (let i = 0; i < orders.length; i++) {
-                    let time=null;
-                    if(orders[i].ordertime.includes('-')){
+                    let time = null;
+                    if (orders[i].ordertime.includes('-')) {
                         time = orders[i].ordertime;
-                    }else{
+                    } else {
                         time = Const.formatDate(orders[i].ordertime);
                     }
                     let orderItemsLen = orders[i].orderItems.length;
@@ -297,90 +301,69 @@ Page({
         wx.showLoading({
             title: '数据加载中...',
         })
-        // this.data.applyingPage = 1;
+        this.data.applyingPage = 1;
         //检查第一页有没有内容如果没有内容就证明没有正在审核的商品了
         this.setData({
             isSaleAfter: false,
             isApplying: true,
             isApplyRecord: false
         })
-        let page = 1;
+        this.updateApplying();
+    },
+    updateApplying : async function(){
         let url = this.data.host + 'Data/GetAfterSaleIng';
-        console.log("uid is ", app.uid);
         let data = {
             uid: app.uid,
-            page: page,
+            page: this.data.applyingPage,
         }
         let req = new Request(url, data, 'POST', 'text');
         let res = await req.sendRequest();
-        
         console.log("正在申请的售后信息是：", res);
         let applyingSaleDates = res.data.aftersales;
-        if(applyingSaleDates.length === 0){
-            this.data.applyingOrderArr = [];
+        if (applyingSaleDates.length === 0) {
             wx.showToast({
-                title : '没有正在申请的服务信息！',
-                icon  : 'none'
+                title: '没有更多了',
+                icon: 'none'
             })
-        }else{
-            data = {
-                uid  : app.uid,
-                page : this.data.applyingPage,
-            }
-            req = new Request(url,data,'POST','text');
-            res = await req.sendRequest();
-            console.log("正在申请的售后信息是：",res);
-            applyingSaleDates = res.data.aftersales;
-            if(applyingSaleDates.length === 0){
-                wx.showToast({
-                    title: '没有更多了',
-                    icon : 'none'
-                })
-            }
-            for(let i = 0;i < applyingSaleDates.length;i++){
-                let serviceNumber = applyingSaleDates[i].service_number;
-                let servicetype = applyingSaleDates[i].type.toString();
-                let saleType = this.data.saleType[`${servicetype}`];
-                let reason = applyingSaleDates[i].reason;
-                let progressMsg = applyingSaleDates[i].progress_msg;
-                console.log("saleType is ",saleType);
-                let applyingView = {
-                    serviceNumber : serviceNumber,
-                    serviceType   : saleType,
-                    progressMsg   : progressMsg,
-                    reason        : reason,
-                    recepter      : applyingSaleDates[i].consignee,
-                    recepterPhone : applyingSaleDates[i].phone,
-                    address       : applyingSaleDates[i].address,
-                    submitTime    : applyingSaleDates[i].start_time,
-                    questionDes   : applyingSaleDates[i].info
-                }
-                let products = [];
-                let productTemp = {
-                    pname   : applyingSaleDates[i].orderItems[0].product.pname,
-                    headImg : applyingSaleDates[i].orderItems[0].product.head.split(',')[0],
-                    price   : applyingSaleDates[i].orderItems[0].product.price,
-                    count   : applyingSaleDates[i].orderItems[0].pcount,
-                    oitemid : applyingSaleDates[i].orderItems[0].oitemid,
-                    oid     : applyingSaleDates[i].orderItems[0].oid
-                }
-                products.push(productTemp);
-                applyingView.products = products;
-                this.data.applyingOrderArr.push(applyingView);
-            }
-            console.log("applyingOrderArr is ",this.data.applyingOrderArr);
-            console.log("去重后的applyingOrderArr is ", Const.uniqObjInArray(this.data.applyingOrderArr));
-            this.data.applyingOrderArr = Const.uniqObjInArray(this.data.applyingOrderArr);
         }
-        console.log("applyingOrderArr is ",this.data.applyingOrderArr);
-        wx.hideLoading();
-        this.setData({
-            applyingOrderArr : this.data.applyingOrderArr
-        });
+        for (let i = 0; i < applyingSaleDates.length; i++) {
+            let serviceNumber = applyingSaleDates[i].service_number;
+            let servicetype = applyingSaleDates[i].type.toString();
+            let saleType = this.data.saleType[`${servicetype}`];
+            let reason = applyingSaleDates[i].reason;
+            let progressMsg = applyingSaleDates[i].progress_msg;
+            console.log("saleType is ", saleType);
+            let applyingView = {
+                serviceNumber: serviceNumber,
+                serviceType: saleType,
+                progressMsg: progressMsg,
+                reason: reason,
+                recepter: applyingSaleDates[i].consignee,
+                recepterPhone: applyingSaleDates[i].phone,
+                address: applyingSaleDates[i].address,
+                submitTime: applyingSaleDates[i].start_time,
+                questionDes: applyingSaleDates[i].info
+            }
+            let products = [];
+            let productTemp = {
+                pname: applyingSaleDates[i].orderItems[0].product.pname,
+                headImg: applyingSaleDates[i].orderItems[0].product.head.split(',')[0],
+                price: applyingSaleDates[i].orderItems[0].product.price,
+                count: applyingSaleDates[i].orderItems[0].pcount,
+                oitemid: applyingSaleDates[i].orderItems[0].oitemid,
+                oid: applyingSaleDates[i].orderItems[0].oid
+            }
+            products.push(productTemp);
+            applyingView.products = products;
+            this.data.applyingOrderArr.push(applyingView);
+        }
+        console.log("applyingOrderArr is ", this.data.applyingOrderArr);
+        console.log("去重后的applyingOrderArr is ", Const.uniqObjInArray(this.data.applyingOrderArr));
+        this.data.applyingOrderArr = Const.uniqObjInArray(this.data.applyingOrderArr);
     },
     //获取申请的记录
     getApplyRecord: async function () {
-        // this.data.applyRecordPage = 1;
+        this.data.applyRecordPage = 1;
         wx.showLoading({
             title: '数据加载中...',
         })
@@ -391,15 +374,20 @@ Page({
             isApplying    : false,
             isSaleAfter   : false,
         });
+        this.updateApplyRecord();
+    },
+    //刷新申请记录
+    updateApplyRecord : async function(){
         let url = this.data.host + 'Data/GetAfterSaleRecord';
+        console.log("用户uid is ",app.uid);
         let data = {
-            uid  : app.uid,
-            page : this.data.applyRecordPage
+            uid: app.uid,
+            page: this.data.applyRecordPage
         }
         let req = new Request(url, data, 'POST', 'text');
         let res = await req.sendRequest();
-        
-        console.log("获得的申请的记录是：",res.data.aftersales);
+
+        console.log("获得的申请的记录是：", res.data.aftersales);
         let applyingSaleDates = res.data.aftersales;
         if (applyingSaleDates.length === 0) {
             wx.showToast({
@@ -413,13 +401,13 @@ Page({
             let saleType = this.data.saleType[`${servicetype}`];
             let reason = applyingSaleDates[i].reason;
             let index = applyingSaleDates[i].progress_msg.lastIndexOf(';');
-            let progressMsg = applyingSaleDates[i].progress_msg.slice(index+1);
+            let progressMsg = applyingSaleDates[i].progress_msg.slice(index + 1);
             console.log("saleType is ", saleType);
             let applyingView = {
-                serviceNumber : serviceNumber,
-                serviceType   : saleType,
-                progressMsg   : progressMsg,
-                progressRes   : applyingSaleDates[i].progress
+                serviceNumber: serviceNumber,
+                serviceType: saleType,
+                progressMsg: progressMsg,
+                progressRes: applyingSaleDates[i].progress
             }
             let products = [];
             let productTemp = {
@@ -439,7 +427,7 @@ Page({
         this.data.applyRecord = Const.uniqObjInArray(this.data.applyRecord);
         wx.hideLoading();
         this.setData({
-            applyRecord : this.data.applyRecord
+            applyRecord: this.data.applyRecord
         })
     },
   //申请售后
@@ -511,25 +499,31 @@ Page({
         let serverNumber = dataSet.exorder;
         console.log("serverNumber is ",serverNumber);
         console.log("expressOrder is ",this.data.expressOrder);
-        let url = app.host + 'Data/UploadExpressNumber'
-        let data = {
-            serverNumber : serverNumber,
-            uid          : app.uid,
-            expressOrder : this.data.expressOrder,
-            expressAge   : this.data.choosedExpressOrg
-        }
-        let req = new Request(url,data,'POST','text');
-        let res = await req.sendRequest();
-        console.log("提交运单的结果是 res is ",res);
-        if(res.data.encode === 0){
-
+        if(this.data.expressOrder === ''){
             wx.showToast({
-                title : '提交运单号成功!',
-                icon  : 'none'
+                title: '请填写运单号！',
             })
-            this.setData({
-                isSubmitOrder :true
-            })
+        }else{
+            let url = app.host + 'Data/UploadExpressNumber'
+            let data = {
+                serverNumber : serverNumber,
+                uid          : app.uid,
+                expressOrder : this.data.expressOrder,
+                expressAge   : this.data.choosedExpressOrg
+            }
+            let req = new Request(url,data,'POST','text');
+            let res = await req.sendRequest();
+            console.log("提交运单的结果是 res is ",res);
+            if(res.data.encode === 0){
+
+                wx.showToast({
+                    title : '提交运单号成功!',
+                    icon  : 'none'
+                })
+                this.setData({
+                    isSubmitOrder :true
+                })
+            }
         }
     },
     //选择物流

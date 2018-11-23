@@ -1,0 +1,194 @@
+
+.weather-con,.weather,.ed-con,.dots,.type-parent{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: nowrap;
+}
+.weather-con{
+    width: 750rpx;
+    padding-top: 5rpx;
+    padding-bottom: 5rpx;
+}
+.weather-item{
+    width: 500rpx;
+}
+.weather{
+    justify-content: flex-start;
+}
+.today{
+    margin-left: 25rpx;
+    margin-right: 25rpx;
+    font-size: 60rpx;
+    font-weight: bolder;
+}
+.week{
+    margin-top: 10rpx;
+    margin-left: 25rpx;
+    font-size: 25rpx;
+    color: #959595;
+}
+.weatherDesc{
+    font-size: 25rpx;
+    color:#959595;
+    margin-left: 5rpx;
+}
+.search-con{
+    width: 210rpx;
+    padding: 0rpx 20rpx;
+    position: relative;
+}
+.input{
+    width:125rpx;
+    border: 2rpx solid #959595;
+    border-radius: 50rpx;
+    height: 50rpx;
+    font-size: 25rpx;
+    padding-left: 75rpx;
+}
+.search-icon{
+    position: absolute;
+    top: 15rpx;
+    left: 40rpx;
+}
+.swiper-stage{
+    background: #fff;
+    height: 520rpx;
+    width: 750rpx;
+    border-bottom: 2rpx solid #f2f2f2;
+}
+.ed-con{
+    width: 730rpx;
+    height: 280rpx;
+    padding: 10rpx;
+    flex-wrap: wrap;
+    position: relative;
+}
+.img-list{
+    padding: 0rpx 10rpx 10rpx 0rpx;
+}
+.circle{
+    position: absolute;
+    left: 267rpx;
+    /* border: 10rpx solid #fff; */
+}
+.hot-today{
+    margin-top: 5rpx;
+    height:495rpx;
+    width: 700rpx;
+    padding: 25rpx;
+    border-bottom: 2rpx solid #f2f2f2;
+    background: linear-gradient(#da91f5,#fcf5fe);
+    border-top-left-radius: 30rpx;
+    border-top-right-radius: 30rpx;
+    position: relative;
+    z-index:1;
+}
+.title{
+    color: #a531d0;
+    font-size: 30rpx;
+    z-index: 2;
+}
+.swiper-con{
+    position: relative;
+    z-index: 2;
+}
+swiper{
+    height:389rpx;
+    margin-top: 20rpx;
+}
+.dots{
+    justify-content: center;
+    margin: 0 8rpx;
+    position: absolute;
+    left: 0rpx;
+    right: 0rpx;
+    bottom: 15rpx;
+}
+/*
+ dot
+*/
+.dot{
+    margin: 0 8rpx;
+    height: 15rpx;
+    width: 15rpx;
+    background: #da91f5;
+    border-radius: 15rpx;
+}
+.active{
+    width: 40rpx;
+    height: 15rpx;
+    border-radius: 15rpx;
+}
+/*
+    商品种类
+*/
+.banner-type{
+    display: flex;
+    /* flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+    align-items: center; */
+    /*
+    文字不会换行
+    */
+    white-space: nowrap;
+    padding-left: 68rpx;
+    height: 100rpx;
+}
+/*
+隐藏横向滚动条
+*/
+::-webkit-scrollbar{
+    width:0;
+    height:0;
+    color:transparent;
+}
+.swiperIt{
+    width: 100rpx;
+    margin-right: 30rpx;
+    font-size: 40rpx;
+    padding-top: 20rpx;
+    padding-left: 10rpx;
+    padding-right: 10rpx;
+    display: inline-block;
+    text-align: center;
+    font-weight: bolder;
+}
+.type-parent{
+    justify-content: space-between;
+}
+.rightArrow{
+    margin-right: 10rpx;
+}
+.typeactive{
+    border-bottom:10rpx solid #da91f5;
+    display: inline-block;
+}
+.type-easy{
+    padding: 0rpx 23rpx;
+    /* flex-wrap: wrap;
+    align-items: flex-start;
+    vertical-align: bottom; */
+    /*
+    两列显示
+    */
+    column-count: 2;
+    column-gap: 18rpx;
+
+}
+
+.typeDetail-con:nth-child(2n+1){
+    margin-right: 18rpx;
+}
+.typeDetail-con:nth-child(2n){
+    margin-right: 0rpx;
+}
+.right_img{
+    position: absolute;
+    right: 0rpx;
+    top: 0rpx;
+    z-index: 1;
+}
+

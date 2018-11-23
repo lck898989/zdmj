@@ -1,0 +1,11 @@
+<!--components/index-type-detail-component/index-type-detail-component.wxml-->
+<view class="con">
+    <image src='{{easyItem.goodsPicture}}' style="width:343rpx;height:auto;" mode='widthFix' class="im"></image>
+    <view class="text">{{easyItem.text}}</view>
+    <view class="author-con">
+        <image src='{{easyItem.authorAvatar}}' style="width:32rpx;height:32rpx;border-radius:32rpx;"></image>
+        <view style="font-size:20rpx;margin-left:10rpx;">{{easyItem.author}}</view>
+    </view>
+    <image src='../../resources/cover.png' style="width:128rpx;height:36rpx;" class="im_t"></image>
+    <text class="watched-count">{{easyItem.watched}}</text>
+</view>

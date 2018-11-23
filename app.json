@@ -1,13 +1,16 @@
 {
     "pages": [
-        "pages/userInfo/userInfo",
+        "pages/lck/test/test",
+        "pages/lck/rotate/rotate",
         "pages/lck/testJing/perfact",
+        "pages/wxscope/wxscope",
+        "pages/userInfo/userInfo",
+        "pages/lck/index/index",
         "pages/lck/saleService/saleService",
         "pages/lck/searchDetail/searchDetail",
         "pages/lck/applyProgress/applyProgress",
         "pages/lck/applySaleAfter/applySaleAfter",
         "pages/indextwo/indextwo",
-        "pages/wxscope/wxscope",
         "pages/lck/hotShopping/hotShopping",
         "pages/lck/ShopSuccess/ShopSuccess",
         "libs/citySelector/switchcity/switchcity",
@@ -82,10 +85,10 @@
             }
         ]
     },
-    "subpackages" : [
+    "subpackages": [
         {
-            "root" : "packageEat",
-            "pages":[
+            "root": "packageEat",
+            "pages": [
                 "pages/index/index"
             ]
         }

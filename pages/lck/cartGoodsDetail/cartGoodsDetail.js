@@ -148,26 +148,28 @@ Page({
             wx.showLoading({
                 title: '数据加载中...',
             })
-            let wxS = wx;
             wx.getStorage({
                 key: 'goods',
                 success: function(res) {
+                    wx.hideLoading();
                     console.log("从缓存中拿到的数据是：",res.data);
                     let endTime = new Date().getMilliseconds();
                     console.log("从缓存中拿数据用时：",(endTime - startTime) + 'ms');
                     self.setData({
                         goods : res.data
                     });
-                    self.initGoodsInfo();
-                    console.log("wx is ",wxS);
-                    wxS.hideLoading();
-                    wxS.removeStorageSync('goods');
+                    new Promise(function(resolve,reject){
+                        self.initGoodsInfo(resolve);
+                    }).then(function(){
+                        console.log("wx is ",wx);
+                        wx.removeStorageSync('goods');
+                    });
                 },
             });
         }
     },
     //初始化商品信息
-    initGoodsInfo: async function () {
+    initGoodsInfo: async function (ca) {
         let self = this;
         console.log("in initGoodsInfo goods is ",self.data.goods);
         if(self.data.goods !== null){
@@ -304,6 +306,7 @@ Page({
                 });
             }
         }
+        ca();
     },
     //显示当前头图的索引
     swiperWhere : function(event){

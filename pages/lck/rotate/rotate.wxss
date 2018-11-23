@@ -1,89 +1,43 @@
 .stage{
-    /* perspective: 3000rpx;
-    perspective-origin: 50% 50%; */
+    perspective: 3000rpx;
+    perspective-origin: 50% 50%;
     border: 2rpx solid rgba(0, 0, 0, 0.5);
-    padding: 20rpx 10rpx;
+    padding: 20rpx 28rpx;
     background: rgba(255, 255, 255,0.8);
     height: 520rpx;
 }
 .wrapper{
     height:480rpx;
     margin-top: 20rpx;
-    /* transform-style: preserve-3d; */
-    /* position: relative; */
-    display: flex;
-    flex-wrap: nowrap;
-    justify-content: flex-start;
-    align-items: flex-end;
-    flex-direction: row;
+    transform-style: preserve-3d;
     position: relative;
-}
-.maskCon{
-    position: relative;
-    width: 500rpx;
-    height: 500rpx;
-}
-.mask{
-    position: absolute;
-    top: 10rpx;
-    left: 10rpx;
-    background: #fff;
-    width: 480rpx;
-    height:480rpx;
-    opacity: 0.5;
-    z-index: 100;
 }
 .imgBasic{
     position: absolute;
     width:480rpx;
     height:480rpx;
-    border-radius:20rpx;
-    border: 10rpx solid #fff;
+    border-radius:10rpx;
+    border: 7rpx solid #fff;
 }
 image:nth-child(1){
     -webkit-transform: rotateY(0deg);
     transform: rotateY(0deg);
-    z-index: 100;
 }
-/* image:nth-child(2){
-    left: 100rpx;
-    bottom: 0rpx;
-    z-index:60;
-    transform: scale(0.93);
+image:nth-child(2){
+    left: 260rpx;
 }
 image:nth-child(3){
-    left: 200rpx;
-    bottom: 0rpx;
-    z-index: 40;
-    transform: scale(0.86);
+    left: 320rpx;
 }
 image:nth-child(4){
-    left: 280rpx;
-    z-index: 20;
-    transform: scale(0.80);
-    bottom: 0rpx;
-} */
-.leftImg:nth-child(1){
-    position: absolute;
-    left: 100rpx;
-    bottom: 0rpx;
-    z-index:60;
-    transform: scale(0.93);
+    left: 380rpx;
 }
-.leftImg:nth-child(2){
-    position: absolute;
-    left: 200rpx;
-    bottom: 0rpx;
-    z-index: 40;
-    transform: scale(0.86);
+.fold{
+    transform: rotateY(-80deg) scale3d(1,0.85,1) translateZ(-10%);
+    -webkit-transform: rotateY(-80deg) scale3d(1,0.85,1);
+    background: rgba(255, 255, 255,0.8);
 }
-.leftImg:nth-child(3){
-    position: absolute;
-    left: 280rpx;
-    z-index: 20;
-    transform: scale(0.80);
-    bottom: 0rpx;
-}
+
 .swiper-con{
     height: 520rpx;
 }

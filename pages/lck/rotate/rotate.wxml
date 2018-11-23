@@ -1,0 +1,16 @@
+<view class='page-con'>
+    rotate.wxml
+    <view class='stage'>
+        <view class='wrapper' bindtouchstart='start' bindtouchend='end'>
+            <block wx:for='{{swiperList}}'>
+                <image class='imgBasic {{index === 0 ? "" : "fold"}} {{item.active ? item.swpClass : ""}}' src='{{item.imgsrc}}' data-index='{{index}}'></image>
+            </block>
+        </view>
+        <view class='dots'>
+            <block wx:for='{{swiperList}}' wx:key='unique'>
+                <view data-i='{{index}}' bindtap='fn' class='dot {{index === currentImageIndex ? "active" : ""}}'></view>
+            </block>
+        </view>
+    </view>
+</view>
+

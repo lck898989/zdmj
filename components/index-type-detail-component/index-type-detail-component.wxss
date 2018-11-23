@@ -1,0 +1,50 @@
+/* components/index-type-detail-component/index-type-detail-component.wxss */
+.con,.author-con{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: nowrap;
+}
+.con{
+    position: relative;
+    float: left;
+    width:343rpx;
+    flex-direction: column;
+    border-radius: 10rpx;
+    /* margin-right: 18rpx; */
+    box-shadow: 0rpx 8rpx 8rpx #d0d0d0;
+    -webkit-box-shadow:0rpx 8rpx 8rpx #d0d0d0;
+    margin-bottom: 18rpx;
+    padding-bottom: 10rpx;
+    /*
+        避免在元素中断行产生新列
+    */
+    -webkit-column-break-inside: avoid;
+    break-inside: avoid;
+    /* counter-increment:item-counter; */
+}
+.author-con{
+    width: 100%;
+    flex-direction: row;
+    margin-top:5rpx;margin-left:10rpx;
+}
+.im{
+    border-top-left-radius: 10rpx;
+    border-top-right-radius: 10rpx;
+}
+.im_t{
+    border-top-right-radius: 10rpx;
+    position: absolute;
+    top: 0rpx;
+    right: 0rpx;
+}
+.watched-count{
+    position: absolute;
+    top: 0rpx;
+    right: 35rpx;
+    color:#fff;
+    font-size: 25rpx;
+}
+.text{
+    font-size:25rpx;margin-top:5rpx;margin-left:10rpx;
+}

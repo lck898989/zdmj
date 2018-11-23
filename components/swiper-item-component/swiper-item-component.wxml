@@ -1,0 +1,36 @@
+<!--components/swiper-item-component/swiper-item-component.wxml-->
+<view class='con'>
+    <view class='left-con'>
+        <image src='{{goods[0].headImg}}' style='width:260rpx;height:285rpx;' class='im'></image>
+        <view class='pname'>
+            {{goods[0].pname}}
+        </view>
+        <view class='price'>
+            ￥{{goods[0].price}}
+        </view>
+    </view>
+    <view class='right-con'>
+        <view class='item'>
+            <image src='{{goods[1].headImg}}' style='width:430rpx;height:145rpx;' class='im'></image>
+            <view class='item-row'>
+                <view class='pname_r'>
+                    惊艳唇膏{{goods[1].pname}}
+                </view>
+                <view class='price_r'>
+                    ￥{{goods[1].price}}
+                </view>
+            </view>
+        </view>
+        <view class='item'>
+            <image src='{{goods[2].headImg}}' style='width:430rpx;height:145rpx;' class='im'></image>
+            <view class='item-row'>
+                <view class='pname_r'>
+                    惊艳唇膏{{goods[2].pname}}
+                </view>
+                <view class='price_r'>
+                    ￥{{goods[2].price}}
+                </view>
+            </view>
+        </view>
+    </view>
+</view>

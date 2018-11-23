@@ -1,0 +1,55 @@
+/* pages/lck/test/test.wxss */
+page{
+    background: rgba(0, 0, 0, 0.5);
+}
+view{
+    margin: 0rpx;
+    padding : 0rpx;
+}
+.page-con{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-end;
+    flex-wrap: nowrap;
+    position: relative;
+    padding: 20rpx 10rpx;
+    background: #000;
+}
+.firstImg{
+    z-index: 100;
+}
+.img{
+    border-radius: 20rpx;
+    border: 10rpx solid #fff;
+}
+.imgCon1{
+    position: absolute;
+    top: 20rpx;
+    left: 100rpx;
+    z-index: 80;
+    transform: scale(0.93);
+}
+.imgCon2{
+    position: absolute;
+    top: 20rpx;
+    left: 200rpx;
+    transform: scale(0.86);
+    z-index: 60;
+}
+.imgCon3{
+    position: absolute;
+    top: 20rpx;
+    left: 300rpx;
+    transform: scale(0.80);
+    z-index: 40;
+}
+.mask{
+    position: absolute;
+    top: 10rpx;
+    left: 10rpx;
+    background: #fff;
+    width: 240rpx;
+    height:240rpx;
+    opacity: 0.5;
+}
