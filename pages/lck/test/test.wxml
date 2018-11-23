@@ -1,16 +1,14 @@
 <!--pages/lck/test/test.wxml-->
 <view class='page-con'>
-    <image src='../../../resources/test.png' style='width:240rpx;height:240rpx;' class='img firstImg'></image>
-    <view class='imgCon1'>
-        <image src='../../../resources/800.jpg' style='width:240rpx;height:240rpx;' class='img'></image>
-        <view class='mask'></view>
-    </view>
-    <view class='imgCon2'>
-        <image src='../../../resources/900.jpg' style='width:240rpx;height:240rpx;' class='img'></image>
-        <view class='mask'></view>
-    </view>
-    <view class='imgCon3'>
-        <image src='../../../resources/1000.jpg' style='width:240rpx;height:240rpx;' class='img'></image>
-        <view class='mask'></view>
-    </view>
+    <block wx:for='{{swiperList}}'>
+        <block wx:if='{{index === 0}}'>
+            <image src='../../../resources/test.png' style='width:240rpx;height:240rpx;' class='img firstImg'></image>
+        </block>
+        <block wx:else>
+            <view class='imgCon{{index}}'>
+                <image src='{{item.imgsrc}}' style='width:240rpx;height:240rpx;' class='img'></image>
+                <view class='mask'></view>
+            </view>
+        </block>
+    </block>
 </view>

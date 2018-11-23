@@ -1,6 +1,6 @@
 /* pages/lck/test/test.wxss */
 page{
-    background: rgba(0, 0, 0, 0.5);
+    background: #fff;
 }
 view{
     margin: 0rpx;
