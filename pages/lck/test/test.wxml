@@ -1,16 +1,53 @@
 <!--pages/lck/test/test.wxml-->
 <view class='page-con'>
-    <image src='../../../resources/test.png' style='width:240rpx;height:240rpx;' class='img firstImg'></image>
-    <view class='imgCon1'>
-        <image src='../../../resources/800.jpg' style='width:240rpx;height:240rpx;' class='img'></image>
-        <view class='mask'></view>
-    </view>
-    <view class='imgCon2'>
-        <image src='../../../resources/900.jpg' style='width:240rpx;height:240rpx;' class='img'></image>
-        <view class='mask'></view>
-    </view>
-    <view class='imgCon3'>
-        <image src='../../../resources/1000.jpg' style='width:240rpx;height:240rpx;' class='img'></image>
-        <view class='mask'></view>
+    <view class='wrap'>
+        <block wx:for='{{swiperList}}'>
+            <!-- <block wx:if='{{index === 0}}'>
+                <image src='../../../resources/test.png' style='width:480rpx;height:480rpx;' class='img firstImg'></image>
+            </block>
+            <block wx:else> -->
+            <view class='imgCon{{index}} common {{item.active ? item.swpClass : ""}}' bindtap='swapBtn' data-index='{{index}}'>
+                <image src='{{item.imgsrc}}' style='width:480rpx;height:480rpx;' class='img'></image>
+                <block wx:if='{{index !== 0}}'>
+                    <view class='mask {{item.swpClass === "swiper-left" ? "hideMask" : ""}}'></view>
+                </block>
+            </view>
+        </block>
     </view>
 </view>
+<view class='page-con'>
+    <view class='wrap' bindtouchstart='moveStart' bindtouchend='moveEnd'>
+        <block wx:for='{{swiperList}}'>
+            <!-- <block wx:if='{{index === 0}}'>
+                <image src='../../../resources/test.png' style='width:480rpx;height:480rpx;' class='img firstImg'></image>
+            </block>
+            <block wx:else> -->
+            <block wx:if='{{(item.active && item.swpClass !== "swiper-right" && item.swpClass !== "swiper-left" && item.swpClass !== "move-right4" && item.swpClass !== "move-right0") || !item.active}}'>
+                <view class='imgCon{{index}} common {{item.active ? item.swpClass : ""}}' data-index='{{index}}'>
+                    <image src='{{item.imgsrc}}' style='width:480rpx;height:480rpx;' class='img'></image>
+                    <view class='mask {{index === 0 ? "firstMask" : ""}}'></view>
+                </view>
+            </block>
+            <!--item.active一定为true-->
+            <block wx:else>
+                <view class='common {{item.active ? item.swpClass : ""}}' data-index='{{index}}'>
+                    <image src='{{item.imgsrc}}' style='width:480rpx;height:480rpx;' class='img'></image>
+                    <view class='mask {{item.swpClass === "swiper-left" || item.swpClass === "move-right4" ? "hideMask" : ""}}'></view>
+                </view>
+            </block>
+        </block>
+    </view>
+    <view class='dots'>
+        <block wx:for='{{swiperList}}' wx:key='unique'>
+            <view data-i='{{index}}' bindtap='fn' class='dot {{index === currentIndex ? "active" : ""}}'></view>
+        </block>
+    </view>
+</view>
+<!-- <block wx:for='{{swiperList}}'>
+    <block wx:if='{{(item.active && item.swpClass !== "swiper-right") || !item.active}}'>
+        <view class='imgCon{{index}}'></view>
+    </block>
+    <block wx:else>
+        <view class='{{item.swpClass}}'></view>
+    </block>
+</block> -->

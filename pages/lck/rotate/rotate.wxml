@@ -3,7 +3,7 @@
     <view class='stage'>
         <view class='wrapper' bindtouchstart='start' bindtouchend='end'>
             <block wx:for='{{swiperList}}'>
-                <image class='imgBasic {{index === 0 ? "" : "fold"}} {{item.active ? item.swpClass : ""}}' src='{{item.imgsrc}}' data-index='{{index}}'></image>
+                <image class='imgBasic {{index === 0 ? "" : "fold"}} {{item.active ? item.swpClass : ""}}' src='{{item.imgsrc}}' data-index='{{index}}' bindtap='swpBtn'></image>
             </block>
         </view>
         <view class='dots'>

@@ -1,11 +1,11 @@
 {
     "pages": [
+        "pages/lck/index/index",
         "pages/lck/test/test",
         "pages/lck/rotate/rotate",
         "pages/lck/testJing/perfact",
         "pages/wxscope/wxscope",
         "pages/userInfo/userInfo",
-        "pages/lck/index/index",
         "pages/lck/saleService/saleService",
         "pages/lck/searchDetail/searchDetail",
         "pages/lck/applyProgress/applyProgress",

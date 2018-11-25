@@ -81,6 +81,5 @@ export default {
         //对source进行去重
         this.uniqObjInArray(source);
         return source;
-    }
-
+    },
 }
