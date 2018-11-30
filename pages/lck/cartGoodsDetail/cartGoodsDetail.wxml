@@ -49,7 +49,7 @@
                 选择款式
                 <view wx:if='{{!isChooseType}}' class='type-item' style='margin-left:32rpx;'>
                     <view>
-                        颜色规格
+                        选择规格
                     </view>
                 </view>
                 <view wx:else class='type-item' style='margin-left:32rpx;'>
@@ -111,14 +111,12 @@
         
     </view> -->
     <block wx:if='{{showBuyCon}}'>
-        <view class='buy-con' animation='{{animationData}}' catchtouchmove="ture" data-e='buy-con'>
-            <view class='imageContainer'>
-                <image src='{{imageHost}}{{goodsImageList[0]}}' style='width:220rpx;height:220rpx;' class='img'></image>
-            </view>
+        <view class='buy-con' catchtouchmove="ture" data-e='buy-con'>
             <view class='lineOne-con'>
+                <image src='{{imageHost}}{{goods.head[0]}}' style='width:220rpx;height:220rpx;' class='img'></image>
                 <view class='price-order-con'>
-                    <view class='price-item' style='font-size:35rpx;color:#b31227;font-weight:800;'>
-                    ￥  {{goods.price * count}}
+                    <view class='price-item' style='font-size:40rpx;color:#ffcb05;font-weight:800;'>
+                    ￥  {{goods.oprice * count}}
                     </view>
                     <view class='price-item' style='font-size:30rpx;color:#404040'>
                         已选:
@@ -130,22 +128,6 @@
                 </view>
             </view>
             <scroll-view class='scc-con' scroll-y>
-                <view class='countContainer'>
-                    <view style='margin-left:22rpx;'>
-                        数量
-                    </view>
-                    <view class='add-sub-con' style='margin-right:22rpx;'>
-                        <view class='as-item' bindtap='sub'>
-                            -
-                        </view>
-                        <view class='as-item'>
-                            {{count}}
-                        </view>
-                        <view class='as-item' bindtap='add'>
-                            +
-                        </view>
-                    </view>
-                </view>
                 <block wx:for='{{typeArr}}' wx:for-index='outIndex' wx:for-item='outItem'>
                     <view class='lineTwo-con'>
                         <view style='font-size:30rpx;'>
@@ -153,35 +135,35 @@
                         </view>
                         <view class='color-con'>
                             <block wx:for='{{typeValueArr[outIndex][outItem]}}' wx:for-index='innerIndex'>
-                                <view class='color-item' id='{{item.mode}}-{{outIndex}}-{{outItem}}' bindtap='chooseType' style='background-color:{{item.touch ? selectColor : unSelectColor}};color:{{item.touch ? selectFontColor : unSelectFontColor}};border:{{item.touch ? selectBorder : unselectBorder}}'>
+                                <view class='color-item' id='{{item.mode}}-{{outIndex}}-{{outItem}}' bindtap='chooseStand' style='background-color:{{item.touch ? selectColor : unSelectColor}};color:{{item.touch ? selectFontColor : unSelectFontColor}};border:{{item.touch ? selectBorder : unselectBorder}}'>
                                     {{item.mode}}
                                 </view>
                             </block>
                         </view>
                     </view>
                 </block>
-                
             </scroll-view>
+            <view class='countContainer'>
+                <view style='margin-left:22rpx;'>
+                    购买数量
+                </view>
+                <view class='add-sub-con' style='margin-right:22rpx;'>
+                    <view class='as-item' bindtap='sub'>
+                        -
+                    </view>
+                    <view class='as-item'>
+                        {{count}}
+                    </view>
+                    <view class='as-item' bindtap='add'>
+                        +
+                    </view>
+                </view>
+            </view>
             <view class='addOrBuy'>
                 <!--检查是否点击过购物车和立即购买按钮-->
-                <block wx:if='{{fromTypeToAdd}}'>
-                    <view class='AB'>
-                        <view wx:if='{{!isSharePage}}' class='addCart' bindtap='showBuyCon' id='addcart_t'>
-                            加入购物车
-                        </view>
-                        <view class='buyNow' bindtap='showBuyCon' id='buyit_t'>
-                            立即购买
-                        </view>
-                    </view>
-                </block>
-                <block wx:else>
-                    <view wx:if='{{addCart}}' class='saveType' bindtap='confirm' id='addcart'>
-                        保存
-                    </view>
-                    <view wx:if='{{BuyIt}}' class='saveBuy' bindtap='confirm' id='buyit'>
-                        确定
-                    </view>
-                </block>
+                <view class='saveBuy' bindtap='confirm'>
+                    确定
+                </view>
             </view>
         </view>
     </block>

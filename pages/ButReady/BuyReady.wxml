@@ -1,0 +1,9 @@
+<!--pages/ButReady/BuyReady.wxml-->
+<!-- <text>pages/ButReady/BuyReady.wxml</text> -->
+<view class='shouhouView'>
+    <text class='shouText'>售后申请</text>
+    <text class='shenText'>申请记录</text>
+</view>
+
+<view  class=''></view>
+

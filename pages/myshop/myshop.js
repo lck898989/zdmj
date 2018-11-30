@@ -35,23 +35,41 @@ Page({
         isHas1: false,
     },
     //点击继续分享按钮
-    PressContinue: function(event) {
+    PressContinue: function (event) {
         console.log(event.currentTarget.dataset.ordernumber);
         console.log(event.currentTarget.dataset.username);
+        console.log(parseInt(event.currentTarget.dataset.shopnumber));
         console.log(app.url + "/commodity/GoShareData");
-        this.setData({
-            ordernumbe: event.currentTarget.dataset.ordernumber
-        })
-        app.setOrdernumber = res => {
-            app.shopNumber = this.data.ordernumbe
+        if (parseInt(event.currentTarget.dataset.shopnumber) == 0) {
+            wx.showModal({
+                showCancel: false,
+                title: '提示',
+                content: "该商品已售空",
+                success: function (res) {
+                    if (res.confirm) {
+                        console.log('用户点击确定')
+                    } else if (res.cancel) {
+                        console.log('用户点击取消')
+                    }
+                }
+            })
         }
-        app.ShortConnect(app.url + "/commodity/GoShareData", {
-            "username": event.currentTarget.dataset.username,
-            "orderNumber": event.currentTarget.dataset.ordernumber,
-        }, "pressContinue");
+        else {
+            this.setData({
+                ordernumbe: event.currentTarget.dataset.ordernumber
+            })
+            app.setOrdernumber = res => {
+                app.shopNumber = this.data.ordernumbe
+            }
+            app.ShortConnect(app.url + "/commodity/GoShareData", {
+                "username": event.currentTarget.dataset.username,
+                "orderNumber": event.currentTarget.dataset.ordernumber,
+            }, "pressContinue");
+
+        }
     },
     //点击查看体验码
-    CheckCode: function(event) {
+    CheckCode: function (event) {
         console.log(event.currentTarget.dataset.username);
         console.log(event.currentTarget.dataset.code);
         app.ShortConnect(this.data.url + "/commodity/CheckVolum", {
@@ -60,16 +78,22 @@ Page({
             codeid: event.currentTarget.dataset.codeid,
         }, "checkCode");
     },
+    //获取订单结束剩余时间
+    GetOrderTime: function (orderTime) {
+        var orderTime1 = new Date(this.makeDate(orderTime)).getTime();
+        console.log(orderTime1);
+        return orderTime1;
+    },
     /**
      * 生命周期函数--监听页面加载
      */
-    onLoad: function(options) {
+    onLoad: function (options) {
         var arrayPath = [];
         app.setFalse1 = res => {
             this.setData({
                 isHas1: false,
                 hidden2: true,
-                hidden1:false,
+                hidden1: false,
             })
         }
         app.setFalse = res => {
@@ -77,7 +101,7 @@ Page({
             this.setData({
                 isHas: false,
                 hidden1: true,
-                hidden2:false,
+                hidden2: false,
             })
         }
         app.setHidden4 = res => {
@@ -87,11 +111,50 @@ Page({
                     res.data.comm[i].filepath = arrayPath[0];
                 }
             }
+            var shopArray = res.data.comm;
+            console.log(JSON.stringify(shopArray));
+
+            for (var i = 0; i <= shopArray.length - 2; i++) {
+                for (var j = i + 1; j <= shopArray.length - 1; j++) {
+
+                    if (shopArray[j].number < 10) {
+                        if (shopArray[i].number < 10) {
+                            if (shopArray[j].number < shopArray[i].number) {
+                                var indexObject = shopArray[i];
+                                shopArray[i] = shopArray[j];
+                                shopArray[j] = indexObject;
+                            }
+                        }
+                        else {
+                            var indexObject = shopArray[i];
+                            shopArray[i] = shopArray[j];
+                            shopArray[j] = indexObject;
+                        }
+                    }
+                    else {
+                        if (shopArray[i].number < 10) {
+                            break;
+                        }
+                        else {
+                            if (this.GetOrderTime(shopArray[j].orderValidTime) < this.GetOrderTime(shopArray[i].orderValidTime)) {
+                                console.log("LLLLLLLLLLLLLLLLLL");
+                                var indexObject = shopArray[i];
+                                shopArray[i] = shopArray[j];
+                                shopArray[j] = indexObject;
+                            }
+                            else {
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+            console.log("[][][][][][" + JSON.stringify(shopArray));
             this.setData({
                 hidden2: false,
                 hidden1: true,
                 // shareMsg: res.data.order,
-                shopMsg: res.data.comm,
+                shopMsg: shopArray,
                 isHas: true,
                 SceneState: 1,
             })
@@ -110,16 +173,28 @@ Page({
                 res.data.code[i].succTime = res.data.code[i].succTime.slice(0, 10);
                 res.data.code[i].validTime = res.data.code[i].validTime.slice(0, 10);
             }
+            var shopArray1 = res.data.code;
+            console.log(JSON.stringify(shopArray1));
+            for (var i = 0; i <= shopArray1.length - 2; i++) {
+                for (var j = i + 1; j <= shopArray1.length - 1; j++) {
+                    if (shopArray1[j].codeStatus == 0 && shopArray1[i].codeStatus == 1) {
+                        var indexObject = shopArray1[i];
+                        shopArray1[i] = shopArray1[j];
+                        shopArray1[j] = indexObject;
+                    }
+                }
+            }
             this.setData({
                 hidden2: true,
                 hidden1: false,
-                getMsg: res.data.code,
+                getMsg: shopArray1,
                 isHas1: true,
-                shopMsg: res.data.comm,
+                // shopMsg: res.data.comm,
                 SceneState: 0,
             })
-            console.log("??????????????????");
+            console.log(this.data.getMsg);
         }
+
         // if (app.openShare == false) {
         //     app.ShortConnect(app.url + "/commodity/UserClickGetRecode", {
         //         username: app.openid
@@ -129,11 +204,11 @@ Page({
     /**
      * 生命周期函数--监听页面初次渲染完成
      */
-    onReady: function() {},
+    onReady: function () { },
     /**0
 1   * 生命周期函数--监听页面显示
    */
-    onShow: function() {
+    onShow: function () {
         if (this.data.SceneState == 0) {
             app.ShortConnect(app.url + "/commodity/UserClickGetRecode", {
                 username: app.openid
@@ -146,7 +221,7 @@ Page({
         }
     },
     //点击分享记录
-    PressShareMsg: function() {
+    PressShareMsg: function () {
         if (this.data.SceneState == 0) {
             console.log("55555");
             //访问分享记录接口
@@ -163,13 +238,13 @@ Page({
         })
     },
     //点击立即行动
-    TurnIndex: function() {
+    TurnIndex: function () {
         wx.switchTab({
             url: '../index/index'
         })
     },
     //点击领取记录
-    PressGetMsg: function() {
+    PressGetMsg: function () {
         if (this.data.SceneState == 1) {
             app.ShortConnect(app.url + "/commodity/UserClickGetRecode", {
                 username: app.openid
@@ -189,8 +264,8 @@ Page({
     makeDate(date) {
         try {
             var date = new Date(date).toISOString().
-            replace(/T/, ' ').
-            replace(/\..+/, '');
+                replace(/T/, ' ').
+                replace(/\..+/, '');
         } catch (e) {
             console.log(e);
             var date = "0000-00-00 00:00:00";
@@ -205,22 +280,26 @@ Page({
         // let countDownArr = [];
         // 对结束时间进行处理渲染到页面
         this.data.shopMsg.forEach(o => {
-            let endTime = new Date(this.makeDate(o.orderValidTime)).getTime();
+            var a = o.orderValidTime.replace(/-/g, "/");
+            a = a.replace("T", " ");
+            a = a.replace(".000Z", " ");
+
+            let endTime = new Date(a).getTime();
             let day = '0';
             let hou = '0';
             let min = '0';
             let sec = '0';
             let obj = null;
-            let days=null;
+            let days = null;
             // 如果活动未结束，对时间进行处理
             if (endTime - newTime > 0) {
                 let time = (endTime - newTime) / 1000;
                 // 获取天、时、分、秒
                 day = this.timeFormat(parseInt(time / (60 * 60 * 24))).toString();
                 if (day[0] == '0') {
-                    days = day.substr(1,1);
+                    days = day.substr(1, 1);
                     day = days;
-                } 
+                }
                 hou = this.timeFormat(parseInt(time % (60 * 60 * 24) / 3600)).toString();
                 min = this.timeFormat(parseInt(time % (60 * 60 * 24) % 3600 / 60)).toString();
                 sec = this.timeFormat(parseInt(time % (60 * 60 * 24) % 3600 % 60)).toString();
@@ -260,35 +339,37 @@ Page({
     /**
      * 生命周期函数--监听页面隐藏
      */
-    onHide: function() {
+    onHide: function () {
+
 
     },
 
     /**
      * 生命周期函数--监听页面卸载
      */
-    onUnload: function() {
+    onUnload: function () {
 
     },
 
     /**
      * 页面相关事件处理函数--监听用户下拉动作
      */
-    onPullDownRefresh: function() {
+    onPullDownRefresh: function () {
 
     },
 
     /**
      * 页面上拉触底事件的处理函数
      */
-    onReachBottom: function() {
+    onReachBottom: function () {
+        
 
     },
 
     /**
      * 用户点击右上角分享
      */
-    onShareAppMessage: function() {
+    onShareAppMessage: function () {
 
     }
 })

@@ -74,23 +74,29 @@
     width: 750rpx;
     height: 90rpx;
     background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
 }
 .tixianImage{
     position: absolute;
     left: 31rpx;
-    top: 31rpx;
+
+    width: 29rpx;
 }
 .tixianT{
     position:absolute;
-    top: 31rpx;
+
     left: 103rpx;
       color:#404040;
 }
 .dayu{
     position: absolute;
-    top: 31rpx;
-    right: 31rpx;
+    width: 16rpx;
+    right: 30rpx;
+
+
 }
 .mingxiView{
     position: relative;
@@ -98,15 +104,19 @@
     width: 750rpx;
     height: 90rpx;
     background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .mingxiImage{
     position: absolute;
     left: 31rpx;
-    top: 31rpx;
+
+    width: 29rpx;
 }
 .mingxiText{
       position:absolute;
-    top: 31rpx;
+  
     left: 103rpx;
     color:#404040;
 

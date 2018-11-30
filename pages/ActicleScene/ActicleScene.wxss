@@ -1,1 +1,581 @@
-/* pages/ActicleScene/ActicleScene.wxss */
+/* pages/ShopActicle/ShopActicle.wxss */
+
+.shoppingName {
+    position: absolute;
+    left: 197rpx;
+    top: 32rpx;
+    color: #fff;
+}
+
+.shoppingImageView {
+    position: relative;
+    width: 750rpx;
+    height: 750rpx;
+}
+
+.shoppingType {
+    position: absolute;
+    top: 73rpx;
+    left: 197rpx;
+    color: #fff;
+}
+
+.shu {
+    position: absolute;
+    top: 73rpx;
+    width: 2rpx;
+    height: 28rpx;
+    background-color: #fff;
+    left: 261rpx;
+}
+
+.shoppingAdress {
+    position: absolute;
+    top: 73rpx;
+    left: 287rpx;
+    color: #fff;
+}
+
+.shopMsg {
+    position: relative;
+    width: 750rpx;
+    overflow: hidden;
+}
+
+.shoppingAdress1 {
+    position: absolute;
+    left: 197rpx;
+    color: #fff;
+    bottom: 25rpx;
+}
+
+.shoppingImage {
+    position: absolute;
+    top: 20rpx;
+    width: 120rpx;
+    border-radius: 8px;
+    left: 36rpx;
+}
+
+.imageActivity {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 750rpx;
+}
+
+.activityViewSon {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 750rpx;
+}
+
+.indexLun {
+    position: absolute;
+    top: 710rpx;
+    right: 21rpx;
+    color: #fff;
+}
+
+.shoppingTitleView {
+    position: relative;
+    margin-top: 0rpx;
+    width: 750rpx;
+    height: 219rpx;
+    background-color: #fff;
+}
+
+.wxParse-p {
+    font-size: 28rpx;
+    text-indent: 56rpx;
+    width: 702rpx;
+    margin-left: 24rpx;
+    color: #000;
+    line-height: 45rpx;
+    font-weight: 900;
+}
+
+.nullView {
+    position: relative;
+    width: 750rpx;
+    height: 37rpx;
+}
+
+.shopPrice1 {
+    position: absolute;
+    top: 100rpx;
+    left: 338rpx;
+    text-decoration: line-through;
+}
+
+.detaitText {
+    position: absolute;
+    width: 90rpx;
+    height: 50rpx;
+    right: 32rpx;
+    direction: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row;
+}
+
+.detaitText1 {
+    position: absolute;
+    right: 65rpx;
+}
+
+.textXiang {
+    position: relative;
+    width: 114rpx;
+}
+
+.textDetail {
+    position: relative;
+    width: 580rpx;
+}
+
+.youxianView {
+    position: relative;
+    width: 696rpx;
+    margin-left: 17rpx;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.youxiaoData {
+    position: relative;
+    width: 580rpx;
+}
+
+.chuwaiView {
+    position: relative;
+    width: 696rpx;
+    margin-left: 17rpx;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.chuwaiText {
+    position: relative;
+    width: 110rpx;
+}
+
+.chuwaiData {
+    position: relative;
+    width: 580rpx;
+}
+
+.chooseShop {
+    position: relative;
+    width: 750rpx;
+    height: 188rpx;
+    display: flex;
+    align-items: center;
+}
+
+.choosePrice {
+    position: absolute;
+    left: 238rpx;
+    top: 38rpx;
+}
+
+.chooseImage {
+    position: absolute;
+    left: 20rpx;
+    width: 150rpx;
+}
+
+.fenleiText {
+    position: relative;
+    margin-top: 0rpx;
+    width: 750rpx;
+    display: flex;
+    align-items: flex-end;
+    height: 49rpx;
+}
+
+.fenleiText1 {
+    position: absolute;
+    left: 28rpx;
+}
+
+.typeView {
+    position: relative;
+    width: 750rpx;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.typeView1 {
+    position: relative;
+    background-color: #eee;
+    color: #7d7d7d;
+    margin-top: 18rpx;
+    padding: 21rpx 48rpx 21rpx 48rpx;
+    margin-left: 19rpx;
+    border-radius: 10px;
+}
+
+.nullView6 {
+    position: relative;
+    margin-top: 0;
+    width: 750rpx;
+    height: 2rpx;
+    background-color: #eee;
+}
+
+.nullView7 {
+    position: relative;
+    width: 750rpx;
+    height: 21rpx;
+    background-color: white;
+}
+
+.goumaiText {
+    position: absolute;
+    left: 20rpx;
+}
+
+.jiaTrxt {
+    position: absolute;
+    right: 47rpx;
+    color: #404040;
+}
+
+.shopNumber {
+    position: absolute;
+    right: 139rpx;
+  
+}
+
+.mask {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #000;
+    opacity: 0.7;
+    overflow: hidden;
+    z-index: 1000;
+}
+
+.jianTrxt {
+    position: absolute;
+    right: 218rpx;
+    top: 6rpx;
+}
+
+.shopNumberView {
+    position: relative;
+    margin-top: 0rpx;
+    width: 750rpx;
+    height: 64rpx;
+    display: flex;
+    align-items: center;
+}
+
+.Icon {
+    position: absolute;
+    top: 17rpx;
+    right: 19rpx;
+    width: 32rpx;
+}
+
+.chooseShopName1 {
+    position: absolute;
+    top: 102rpx;
+    left: 238rpx;
+}
+
+.chooseShopView {
+    position: absolute;
+    top: 188rpx;
+    width: 750rpx;
+    height: 512rpx;
+    left: 0;
+}
+
+.sureView {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #b964d8;
+    bottom: 0;
+    left: 0;
+    width: 750rpx;
+    height: 100rpx;
+}
+
+.buy-con {
+    position: fixed;
+    background-color: #fff;
+    width: 750rpx;
+    height: 800rpx;
+    bottom: 0rpx;
+    z-index: 2000;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.shopDetail2 {
+    position: relative;
+    width: 696rpx;
+    margin-left: 17rpx;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.keyongView {
+    position: relative;
+    width: 696rpx;
+    margin-left: 17rpx;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.keyongText {
+    position: relative;
+    width: 110rpx;
+}
+
+.nullView4 {
+    position: relative;
+    width: 730rpx;
+    height: 20rpx;
+    margin-left: 0;
+    border-radius: 8px;
+}
+
+.keyongData {
+    position: relative;
+    width: 580rpx;
+}
+
+.nullView3 {
+    position: relative;
+    width: 730rpx;
+    margin-left: 0;
+    height: 2px;
+    background-color: #eee;
+}
+
+.detailView {
+    position: relative;
+    width: 730rpx;
+    margin-left: 0rpx;
+    background-color: #fff;
+    border-radius: 8px;
+}
+
+.dayuView {
+    position: absolute;
+    right: 32rpx;
+    width: 31rpx;
+    display: flex;
+    height: 30rpx;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.nullView5 {
+    position: relative;
+    width: 750rpx;
+    height: 11rpx;
+    background-color: #ffffff;
+}
+
+.dayu {
+    position: absolute;
+}
+
+.buyView {
+    position: relative;
+    width: 750rpx;
+    height: 100rpx;
+    display: flex;
+    margin-top: 0rpx;
+    justify-content: space-between;
+}
+
+.sharePrice {
+    position: relative;
+    width: 312rpx;
+    height: 100rpx;
+    display: flex;
+    justify-content: center;
+}
+
+.shareView {
+    position: relative;
+    width: 219rpx;
+    height: 100rpx;
+    background-color: #f39800;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 0;
+}
+
+.huodeText {
+    position: absolute;
+    top: 12rpx;
+}
+
+.getPriceText {
+    position: absolute;
+    bottom: 12rpx;
+}
+
+.buy {
+    position: relative;
+    width: 219rpx;
+    height: 100rpx;
+    background-color: #b964d8;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.shopView1 {
+    overflow: hidden;
+    position: relative;
+    width: 720rpx;
+    height: 150rpx;
+    margin-top: 0rpx;
+    margin-left: 13rpx;
+    /* background-color: #ffffff; */
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    border-top: 2rpx solid #9f9f9f;
+    border-bottom: 2rpx solid #9f9f9f;
+    border-left: 2rpx solid #9f9f9f;
+    border-right: 2rpx solid #9f9f9f;
+}
+.shopPrice {
+    position: absolute;
+    top: 85rpx;
+    left: 177rpx;
+    color: #ffcb05;
+}
+
+.daiText {
+    position: absolute;
+    top: 22rpx;
+    left: 177rpx;
+    color: #000;
+}
+
+.shopImage {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 150rpx;
+}
+
+.shopView {
+    position: relative;
+    width: 730rpx;
+    margin-top: 11rpx;
+    margin-left: 10rpx;
+    border-radius: 8px;
+    background-color: #fff;
+}
+
+.nullView1 {
+    position: absolute;
+    width: 750rpx;
+    height: 2px;
+}
+
+.nullView2 {
+    position: relative;
+    width: 750rpx;
+    height: 2px;
+}
+
+.shoppingMsg {
+    position: relative;
+    width: 750rpx;
+    height: 156rpx;
+}
+
+.authorTextView {
+    position: relative;
+    margin-top: 0rpx;
+    background-color: #fff;
+    width: 750rpx;
+}
+
+.wxParse-img {
+    width: 710rpx;
+    height: 710rpx;
+    position: relative;
+    margin-left: -80rpx;
+}
+
+.titleText {
+    position: absolute;
+    top: 22rpx;
+    left: 30rpx;
+    width: 690rpx;
+    height: 80rpx;
+    color: #000;
+    /* line-height: 15rpx; */
+}
+
+.authorView {
+    position: absolute;
+    top: 117rpx;
+    left: 0rpx;
+    width: 750rpx;
+    height: 48rpx;
+}
+
+.authorImage {
+    position: absolute;
+    top: 0;
+    left: 30rpx;
+    width: 48rpx;
+}
+
+.authorName {
+    position: absolute;
+    top: -2rpx;
+    left: 99rpx;
+    color: #000;
+}
+
+.wenzhangData {
+    position: absolute;
+    left: 99rpx;
+    bottom: -2rpx;
+    color: #898989;
+}
+
+.seeIcon {
+    position: absolute;
+    top: 4rpx;
+    right: 94rpx;
+    width: 24rpx;
+}
+
+.seeNumber {
+    position: absolute;
+    top: 0rpx;
+    left: 680rpx;
+    color: #000;
+    text-align: left;
+}

@@ -1,0 +1,168 @@
+<!--pages/search/search.wxml-->
+
+<view class='mask' animation='{{backAnimaData}}' hidden='{{buyBoxHidden}}' catchtouchmove='test' data-e='mask'></view>
+<view class='searchView'>
+    <!-- <image class='searchDa' mode='widthFix' src='../../resources/icon_right.png'></image> -->
+    <view class='sreachboxView'>
+        <icon type='search' size='15' class='searchIcon'></icon>
+        <input class='searchText' style='font-size:22rpx;font-weight:900;' bindinput='sreach'  placeholder='输入商户或商品名称' value='{{sreachText}}' maxlength='18'></input>
+        <icon class='clear' size='15' wx:if='{{sreachText.length>=1}}' bindtap='clearSreach' type='clear'></icon>
+    </view>
+    <text class='searchText1' style='font-size:24rpx' bindtap='pressSreach'>搜索</text>
+</view>
+<scroll-view class='scrolView' bindscrolltolower='reshshData' scroll-y='true' style='height:{{scrolViewHeight}}px' wx:if="{{sreachText.length==0}}">
+    <view class='sreachJinView'>
+        <text class='searchJinText' style='font-size:28rpx;font-weight:900;'>最近搜索</text>
+        <image class='lajiImage' mode='widthFix' src='../../resources/gouwuche_icon2.png' bindtap='clearNear'></image>
+    </view>
+    <view class="sreachjinParent">
+        <view class='sreachjinChild' wx:for='{{nearSreach}}' style='font-size:22rpx;font-weight:900;'>{{item.keyword}}</view>
+    </view>
+    <view class='hotView'>
+        <view class='nullView'></view>
+        <view class='searchhotView'>
+            <text class='remenText' style='font-size:28rpx;font-weight:900;'>热门搜索</text>
+        </view>
+    </view>
+    <view class="sreachhotParent">
+        <view class='sreachhotChild' wx:for='{{hotSreach}}' style='font-size:22rpx;font-weight:900;'>{{item.keyword}}</view>
+    </view>
+    <view class='nullView3'></view>
+    <block wx:for='{{goodShop}}' wx:for-index='idx'>
+        <view class='shopView' style='height:340rpx;' wx:if='{{idx==0}}' data-pid='{{item.pid}}' bindtap='buyShop'>
+            <text class='tuijianText' style='font-size:28rpx;color:#000000;font-weight:900;'>推荐商品</text>
+            <view class='nullView1'></view>
+            <image class='shopImage' style='top:61rpx;' mode='widthFix' src='{{url+item.head[0]}}'></image>
+            <text class='shopName1' style='font-size:29rpx;color:#000000;font-weight:900;top:103rpx;'>{{item.pname}}</text>
+            <!-- <text class='shopDetail' style='font-size:25rpx;color:#aaaaaa;font-weight:900;top:141rpx;'>阿打算大所多</text> -->
+            <text class='shopPrice' space='ensp' style='font-size:23rpx;color:#707070;font-weight:900;top:224rpx;'>市场价 ￥{{item.otherprice}}</text>
+            <text class="shopPrice1" style='font-size:32rpx;color:#ffcb05;font-weight:900;'>￥{{item.price}}</text>
+            <image class='shpoIcon' catchtap='buyShop1' mode='widthFix' data-shop='{{item}}' data-pid='{{item.pid}}' src='../../resources/btn_buy.png'></image>
+            <image class='zhidanIcon' mode='widthFix' src='../../resources/img_jin.png'></image>
+        </view>
+        <view class='shopView' wx:else bindtap='buyShop' data-pid='{{item.pid}}'>
+            <view class='nullView1'></view>
+            <image class='shopImage' mode='widthFix' src='{{url+item.head[0]}}'></image>
+            <text class='shopName1' style='font-size:29rpx;color:#000000;font-weight:900;'>{{item.pname}}</text>
+            <!-- <text class='shopDetail' style='font-size:25rpx;color:#aaaaaa;font-weight:900;'>阿打算大所多</text> -->
+            <text class='shopPrice' space='ensp' style='font-size:23rpx;color:#707070;font-weight:900;'>市场价 {{item.otherprice}}</text>
+            <text class="shopPrice1" style='font-size:32rpx;color:#ffcb05;font-weight:900;'>￥{{item.price}}</text>
+            <image class='shpoIcon' catchtap='buyShop1' mode='widthFix' data-shop='{{item}}' data-pid='{{item.pid}}' src='../../resources/btn_buy.png'></image>
+            <image class='zhidanIcon' mode='widthFix' src='../../resources/img_jin.png'></image>
+        </view>
+    </block>
+</scroll-view>
+<scroll-view class='scrolView' scroll-y='true' scroll-top='{{scrolltop}}' style='height:{{scrolViewHeight}}px' wx:if="{{sreachText.length>0}}">
+    <view class='sreachResultView' wx:for='{{sreachArray}}' bindtap='turnSreach' data-id='{{i.keywords}}' wx:for-item="i">
+        <view class='nullView1'></view>
+         <block wx:if='{{i.type.length==2}}'>
+            <image class='shopIcon' mode='widthFix' src='../../resources/ico_type_3.png'></image>
+        </block>
+        <block wx:else>
+           <image class='shopIcon' wx:if='{{i.type[0]=="product"}}' mode='widthFix' src='../../resources/ico_type_2.png'></image>
+             <image class='shopIcon' wx:if='{{i.type[0]=="essay"}}' mode='widthFix' src='../../resources/ico_type_1.png'></image>
+        </block> 
+        <view class='shopName'>
+            <block wx:for='{{i.hasArray}}' wx:for-item="j" wx:for-index='index1'>
+                <block wx:for='{{i.name}}' wx:for-item="k" wx:for-index='index2'>
+                    <block wx:if="{{index1==index2}}">
+                        <text class='' style="font-size:33rpx;color:#b964d8;font-weight:900;" wx:if='{{j==true}}'>{{k}}</text>
+                        <text class='' style="font-size:33rpx;color:#000000;font-weight:900;" wx:else> {{k}}</text>
+                    </block>
+                </block>
+            </block>
+        </view>
+        <text class='resultNumberText' style='font-size:22rpx;'>约{{i.number}}个结果</text>
+    </view>
+    <view class='checkView' wx:if='{{scrolViewHeight1>=scrolViewHeight}}'>
+        <view class='nullView1'></view>
+        <text ensp='space' style="font-size:33rpx;color:#b964d8;font-weight:900;"> 查找 “{{sreachText}}”</text>
+    </view>
+    <view class='checkView1' ensp='space' bindtap='pressSreach' wx:else style="font-size:33rpx;color:#b964d8;font-weight:900;">
+        <view class='nullView1'></view>
+        <text ensp='space' style="font-size:33rpx;color:#b964d8;font-weight:900;"> 查找 “{{sreachText}}”</text>
+    </view>
+</scroll-view>
+
+<!-- <view class='buy-con' hidden='{{buyBoxHidden}}'>
+    <view class='chooseShop'>
+        <image class='chooseImage' bindtap='pressX' src='{{url+wenzhangJson.product_head}}' mode='widthFix'></image>
+        <text class='choosePrice' style='font-size:36rpx;font-weight:900;color:#ffcb05'>￥{{wenzhangJson.product_price}}</text>
+    <text class='chooseShopName1' style='font-size:27rpx;font-weight:900;color:#707070' space='ensp'>已选: {{wenzhangJson.product_name}}</text>
+        <image class='Icon' src='../../resources/Cancel.png' mode='widthFix' bindtap='pressClose'></image>
+    </view>
+    <scroll-view class='chooseShopView' scroll-y='true'>
+        <view class='nullView6'></view>
+        <view class='fenleiText' style='font-size:28rpx;font-weight:900;color:#000000'>
+            <text class='fenleiText1' style='font-size:28rpx;font-weight:900;color:#000000'>分类</text>
+        </view>
+        <view class='typeView'>
+          <view class='typeView1' style='font-size:22rpx;font-weight:900;color:#b25bd2;background:#ecceff;border-bottom: 2px solid #863bb7;border-top: 2px solid #863bb7;border-left: 2px solid #863bb7;border-right: 2px solid #863bb7;'>{{wenzhangJson.product_name}}</view> -->
+<!-- <view class='typeView1' bindtap='chooseShop' data-index='{{index}}' style='font-size:22rpx;font-weight:900;color:#404040'>{{wenzhangJson.product_name}}</view> -->
+<!-- </view>
+        <view class='nullView7'></view>
+        <view class='nullView6'></view>
+        <view class='shopNumberView'>
+            <text class='goumaiText' style='font-size:28rpx;font-weight:900;color:#000000'>购买数量</text>
+            <text class='jiaTrxt' bindtap='add'>+</text>
+            <text class='shopNumber' style='font-size:26rpx;color:#404040;font-weight:900;'>{{shopNumber}}</text>
+            <text class='jianTrxt' bindtap='jian'>-</text>
+        </view>
+    </scroll-view>
+    <view class='sureView' style='font-size:32rpx;font-weight:900;color:#ffffff' bindtap='pressSure'>确定</view>
+</view>  -->
+<view class='buy-con' hidden='{{buyBoxHidden}}' data-e='buy-con'>
+    <view class='lineOne-con'>
+        <image src='{{url+indexShopArray.head[0]}}' style='width:220rpx;height:220rpx;' class='img'></image>
+        <view class='price-order-con'>
+            <view class='price-item' style='font-size:40rpx;color:#ffcb05;font-weight:800;'>
+                ￥ {{indexShopArray.price * shopNumber}}
+            </view>
+            <view class='price-item' style='font-size:30rpx;color:#404040'>
+                已选:
+                <text wx:for='{{indexShopArray.size}}'>{{item}}</text>
+            </view>
+        </view>
+        <view class='cancel-con' bindtap='cancel'>
+            <image src='../../../resources/Cancel.png' bindtap='pressClose' style='width:40rpx;height:40rpx;'></image>
+        </view>
+    </view>
+    <scroll-view class='scc-con' scroll-y>
+        <block wx:for='{{typeArr}}' wx:for-index='outIndex' wx:for-item='outItem'>
+            <view class='lineTwo-con'>
+                <view style='font-size:30rpx;'>
+                    {{outItem}}
+                </view>
+                <view class='color-con'>
+                    <block wx:for='{{typeValueArr[outIndex][outItem]}}' wx:for-index='innerIndex'>
+                        <view class='color-item' id='{{item.mode}}-{{outIndex}}-{{outItem}}' bindtap='chooseStand' style='background-color:{{item.touch ? selectColor : unSelectColor}};color:{{item.touch ? selectFontColor : unSelectFontColor}};border:{{item.touch ? selectBorder : unselectBorder}}'>
+                            {{item.mode}}
+                        </view>
+                    </block>
+                </view>
+            </view>
+        </block>
+    </scroll-view>
+    <view class='countContainer'>
+        <view style='margin-left:22rpx;'>
+            购买数量
+        </view>
+        <view class='add-sub-con' style='margin-right:22rpx;'>
+            <view class='as-item' bindtap='sub'>
+                -
+            </view>
+            <view class='as-item'>
+                {{shopNumber}}
+            </view>
+            <view class='as-item' bindtap='add'>
+                +
+            </view>
+        </view>
+    </view>
+    <view class='addOrBuy'>
+
+        <view class='saveBuy' bindtap='confirm' id='buyit'>
+            确定
+        </view>
+    </view>
+</view>

@@ -1,0 +1,31 @@
+<view class='goods-con' bindtap='enterDetail' data-id='{{goods.pid}}'>
+    <view class='goods-parent'>
+        <!-- <image src='{{host}}{{goods.head[0]}}' style='width:240rpx;height:240rpx;border-radius:10rpx;'></image> -->
+        <image-loader originalImage='{{host}}{{goods.head[0]}}' width='240rpx' height='240rpx' mode='' styleClass='border-radius:10rpx;'></image-loader>
+        <view class='rightText'>
+            <view class='pd-con'>
+                <view class='pname'>
+                    {{goods.pname}}
+                </view>
+                <view class='desc'>
+                    
+                </view>        
+            </view>
+            <view class='price-con'>
+                <view class='left-price'>
+                    <view class='marketPrice'>
+                        市场价 ￥{{goods.otherprice}}
+                    </view>
+                    <view class='priceReal'>
+                        <view class='price'>
+                            ￥{{goods.oprice}}
+                        </view>
+                        <image src='../../resources/img_jin.png' style='width:100rpx;height:25rpx;'></image>
+                    </view>
+                </view>
+                <!--子控件阻止事件的传递用catchtap-->
+                <image src='../../resources/btn_buy.png' style='width:65rpx;height:65rpx;margin-right:10rpx;' catchtap='addCart' data-id='{{goods.pid}}'></image>
+            </view>        
+        </view>
+    </view>
+</view>

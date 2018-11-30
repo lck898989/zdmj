@@ -61,7 +61,7 @@ Page({
         fromTypeToAdd :false,
         //当前头图索引
         currentHeadImageIndex : 1,
-        isSharePage : false
+        isSharePage : false,
     },
 
     /**
@@ -102,11 +102,16 @@ Page({
                 break;
         }
         if (app.shopMsgJson) {
-            app.shopMsgJson.head = app.shopMsgJson.head.split(",");
+            console.log(app.shopMsgJson);
+            console.log(typeof app.shopMsgJson.head + "=========================");
+            var a = JSON.stringify(app.shopMsgJson.head).split(",");
+
+            console.log(app.shopMsgJson.head + "=========================");
             this.setData({
                 goods: app.shopMsgJson,
-                goodsImageList: app.shopMsgJson.head
+                goodsImageList: a
             })
+            console.log(JSON.stringify(this.data.goods) + "=========================");
             this.initGoodsInfo();
         } else {
             app.setShopArrayJson = res => {
@@ -115,6 +120,7 @@ Page({
                     goods: res.data.product,
                     goodsImageList: res.data.product.head
                 })
+                console.log(this.data.goods + "=========================");
             }
             this.initGoodsInfo();
         }
@@ -158,18 +164,14 @@ Page({
                     self.setData({
                         goods : res.data
                     });
-                    new Promise(function(resolve,reject){
-                        self.initGoodsInfo(resolve);
-                    }).then(function(){
-                        console.log("wx is ",wx);
-                        wx.removeStorageSync('goods');
-                    });
+                    self.initGoodsInfo();
+                    wx.removeStorageSync('goods');
                 },
             });
         }
     },
     //初始化商品信息
-    initGoodsInfo: async function (ca) {
+    initGoodsInfo: async function () {
         let self = this;
         console.log("in initGoodsInfo goods is ",self.data.goods);
         if(self.data.goods !== null){
@@ -306,7 +308,6 @@ Page({
                 });
             }
         }
-        ca();
     },
     //显示当前头图的索引
     swiperWhere : function(event){
@@ -433,7 +434,9 @@ Page({
                 if(this.data.goods.openstandard !== 1){
                     //无规格时候是默认选择的
                     this.setData({
-                        isOk : true
+                        isOk    : true,
+                        addCart : true,
+                        BuyIt   : false
                     })
                 }
                 //在选择规格界面添加购物车
@@ -472,7 +475,9 @@ Page({
                 if(this.data.goods.openstandard !== 1){
                     //没有开启规格
                     this.setData({
-                        isOk : true
+                        isOk    : true,
+                        BuyIt   : true,
+                        addCart : false
                     })
                 }
                 if (this.data.isOk) {
@@ -516,7 +521,7 @@ Page({
         if(clickType === 'yes'){
             this.setData({
                 fromTypeToAdd : true,
-                BuyIt : false,
+                BuyIt : true,
                 addCart : false
             })
         }

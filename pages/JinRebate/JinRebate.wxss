@@ -1,1 +1,337 @@
 /* pages/JinRebate/JinRebate.wxss */
+
+.rumenActivityView {
+    position: relative;
+    width: 750rpx;
+    height: 510rpx;
+    margin-top: 0rpx;
+}
+
+.activityImage {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.join {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-color: #b31227;
+    color: white;
+}
+
+.shareButton {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: #b31227;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.share {
+    position: absolute;
+    top: 30rpx;
+    left: 40rpx;
+    width: 670rpx;
+    height: 84rpx;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #b31227;
+    color: white;
+}
+
+.textliji {
+    position: absolute;
+    width: 670rpx;
+    height: 90rpx;
+    background-color: #b31227;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.sharedActivity {
+    position: relative;
+    width: 750rpx;
+    height: 732rpx;
+    margin-top: 0;
+}
+
+.sharedImage {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.sharedUser {
+    position: absolute;
+    top: 70rpx;
+    left: 55rpx;
+    width: 640rpx;
+    height: 380rpx;
+    background-color: #f0f1fe;
+}
+
+.sharedUserMsg {
+    position: relative;
+    width: 640rpx;
+    height: 146rpx;
+    margin-top: 0;
+    display: flex;
+    align-items: center;
+}
+
+.shareduserImage {
+    position: absolute;
+    left: 40rpx;
+    width: 66rpx;
+}
+
+.sharedName {
+    position: absolute;
+    left: 139rpx;
+}
+
+.nullbackfround {
+    position: relative;
+    width: 590rpx;
+    margin-left: 25rpx;
+    height: 2rpx;
+    background-color: #bfbfbf;
+}
+
+.sharedText {
+    position: relative;
+    margin-top: 43rpx;
+    margin-left: 45rpx;
+    width: 550rpx;
+    height: 180rpx;
+}
+
+.sharedText1 {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    line-height: 50rpx;
+    display: -webkit-box;
+    word-break: break-all;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    letter-spacing: 1px;
+}
+
+.chengweixiaji {
+    position: absolute;
+    width: 680rpx;
+    left: 40rpx;
+    bottom: 40rpx;
+    height: 110rpx;
+    background-color: #b31227;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+
+.remenshopView1 {
+    position: relative;
+    background-color: #f2f2f2;
+    margin-top: 0rpx;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.shopView1 {
+    position: relative;
+    width: 370rpx;
+    background-color: white;
+    margin-top: 10rpx;
+}
+
+.shopImageView {
+    position: relative;
+    margin-top: 0rpx;
+    width: 370rpx;
+}
+
+.shopNameView {
+    position: relative;
+    width: 350rpx;
+    margin-top: 20rpx;
+    margin-left: 10rpx;
+    height: 100rpx;
+}
+
+.shopnameText {
+    position: absolute;
+    width: 100;
+    left: 0;
+    top: 0;
+    display: -webkit-box;
+    line-height: 20px;
+    word-break: break-all;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    letter-spacing: 1px;
+}
+
+.shopMsgText {
+    position: relative;
+    margin-top: 0rpx;
+    width: 370rpx;
+    height: 42rpx;
+    display: flex;
+    align-items: flex-end;
+}
+
+.shopPrice {
+    position: absolute;
+    left: 10rpx;
+    color: #b31227;
+}
+
+.shopAdress {
+    position: absolute;
+    left: 100rpx;
+    color: #bfbfbf;
+}
+
+.fukuanNumber {
+    position: absolute;
+    right: 10rpx;
+    text-align: right;
+    color: #bfbfbf;
+}
+
+.buyView {
+    position: relative;
+    width: 350rpx;
+    margin-top: 20rpx;
+    margin-left: 10rpx;
+    height: 54rpx;
+    background-color: #b883db;
+    color: white;
+    border-bottom: 2px solid #70319a;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 4px;
+}
+
+.chudi {
+    position: relative;
+    margin-top: 10rpx;
+    width: 750rpx;
+    height: 100rpx;
+    color: #863bb7;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.shopImage {
+    position: relative;
+    margin-top: 0rpx;
+    width: 370rpx;
+}
+
+.jinBackground {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 510rpx;
+    height: 1000rpx;
+    background-color: #f2f2f2;
+}
+
+.friendsView {
+    position: absolute;
+    width: 690rpx;
+    left: 30rpx;
+    top: 154rpx;
+    height: 700rpx;
+    background-color: #fcebd2;
+}
+
+.textView {
+    position: relative;
+    height: 84rpx;
+    width: 638rpx;
+    color: #907348;
+    border-bottom: 2px solid #907348;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    left: 26rpx;
+}
+
+/* ::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+    color: transparent;
+}   */
+
+.helpFriend {
+    position: relative;
+    width: 690rpx;
+    margin-top: 25rpx;
+    height: 591rpx;
+}
+
+.helpfriend1 {
+    position: relative;
+    margin-top: 25rpx;
+    width: 690rpx;
+    height: 50rpx;
+    display: flex;
+    align-items: center;
+}
+
+
+
+
+.helpfriend2 {
+    position: relative;
+    margin-top: 0rpx;
+    width: 690rpx;
+    height: 50rpx;
+    display: flex;
+    align-items: center;
+}
+
+.userImage {
+    position: absolute;
+    left: 61rpx;
+    top: 0rpx;
+    width: 50rpx;
+    height: 50rpx;
+}
+
+.userText {
+    position: absolute;
+    left: 125rpx;
+}
+
+.loadView {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background-color: #292424;
+}

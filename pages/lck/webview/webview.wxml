@@ -1,0 +1,4 @@
+<!--pages/lck/webview/webview.wxml-->
+<web-view src='{{webSrc}}' bindload='loadWebOk'>
+
+</web-view>

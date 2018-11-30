@@ -4,7 +4,7 @@
         <image bindtap='PressShareMsg' mode='widthFix' src="../../resources/icon_share.png" class="picture1">
         </image>
         <text bindtap='PressShareMsg' class="text1" style='font-size:15px; color:{{color2}};'>分享记录</text>
-        <image src="../../resources/icon_receive.png" mode='widthFix' bindtap='PressGetMsg' class="picture2">
+        <image src="../../resources/icon_receive.png" mode='widthFix' bindtap='PressGetMsg' class="picture2">、
         </image>
         <text bindtap='PressGetMsg' class="text2" style='font-size:15px; color:{{color1}}'>获取记录</text>
         <view class="shareHeng" hidden="{{hidden4}}"></view>
@@ -17,7 +17,9 @@
             <text space="ensp" class="texts" style='font-size:15px;font-weight:600;'> 【{{item.commName}}】{{shopMsg[index].comment}}</text>
             <text class="texty" style='font-size:12px;font-weight:600;'>有效日期</text>
             <text class="textDay" style='font-size:12px;font-weight:500;'>{{item.succTime}}到{{item.validTime}}</text>
-            <text bindtap="CheckCode" style='font-size:16px;' data-username="{{item.username}}" data-codeid="{{item.codeid}}" data-code="{{item.code}}" class="checkCode">查看劵码</text>
+            <text wx:if="{{getMsg[0].codeStatus==1}}" bindtap="CheckCode" style='font-size:16px;' data-username="{{item.username}}" data-codeid="{{item.codeid}}" data-code="{{item.code}}" class="checkCode">查看劵码</text>
+            <text wx:elif='{{getMsg[0].codeStatus==0}}' bindtap="CheckCode" style='font-size:16px;' data-username="{{item.username}}" data-codeid="{{item.codeid}}" data-code="{{item.code}}" class="checkCode">已领取</text>
+            <text wx:elif='{{getMsg[0].codeStatus==3}}' bindtap="CheckCode" style='font-size:16px;' data-username="{{item.username}}" data-codeid="{{item.codeid}}" data-code="{{item.code}}" class="checkCode">劵码过期</text>
         </view>
     </scroll-view>
     <view hidden="{{hidden1}}" class='noMsgScene' wx:else>
@@ -29,6 +31,14 @@
     <scroll-view hidden="{{hidden2}}" scroll-y="true" class="shop" wx:if="{{isHas}}">
         <view class='con' wx:for="{{shopMsg}}">
             <image mode='widthFix' class="shopImage" src='{{url+item.filepath}}'>
+                <image class='sign1' wx:if="{{item.number>=10}}" src='../../resources/item_0.png'>
+                </image>
+                <image class='sign2' mode='widthFix' wx:elif="{{item.number>=7&&item.number<10}}" src='../../resources/item_3.png'>
+                </image>
+                <image class='sign2' mode='widthFix' wx:elif="{{item.number>=4&&item.number<7}}" src='../../resources/item_2.png'>
+                </image>
+                <image class='sign2' mode='widthFix' wx:elif="{{item.number>=0&&item.number<4}}" src='../../resources/item_1.png'>
+                </image>
             </image>
             <text space="ensp" class="texts" style='font-size:15px;font-weight:600;'> 【{{item.commName}}】{{item.comment}}</text>
             <text class="texty1" style='font-size:12px;font-weight:600;'>领取时间还剩</text>
@@ -37,7 +47,7 @@
             </text>
             <text class="shareProcess" style='font-size:12px;font-weight:500;' wx:else>分享度{{item.price-item.shareNumber}}/{{item.price}}</text>
             <text class="shareFail" wx:if="{{item.orderStatus==0}}" style='font-size:16px;'>获取失败</text>
-            <text bindtap='PressContinue' data-username="{{item.username}}" data-ordernumber="{{item.orderNumber}}" class="continueShare" wx:elif="{{item.orderStatus==1}}" style='font-size:16px;'>继续分享</text>
+            <text bindtap='PressContinue' data-username="{{item.username}}" data-shopnumber="{{item.number}}" data-ordernumber="{{item.orderNumber}}" class="continueShare" wx:elif="{{item.orderStatus==1}}" style='font-size:16px;'>继续分享</text>
             <text bindtap='PressContinue' style='font-size:16px;' data-username="{{item.username}}" data-ordernumber="{{item.orderNumber}}" class="shareSuccess" wx:elif="{{item.orderStatus==2}}">免费获取</text>
         </view>
     </scroll-view>

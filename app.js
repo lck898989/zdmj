@@ -1,11 +1,37 @@
  //app.js
  import Host from './utils/Const.js'
  App({
-     hotEssay:[],
+     sreacJson:null,
+     sreachPages:null,
+     nearsreachArray:null,
+     hotsreachArray:null,
+     //初始化购买的商品数量
+     buyNumber:null,
+     //
+     buyShopJson:null,
+     //计算该手机上rpx和px的换算比例
+     ratio: null,
+     //获取屏幕可见区域高度
+     seeHeight: null,
+     //判断是否开启过订单计时器
+     isStartOrder: false,
+     timeObject: [],
+     oidObject: [],
+     imageUrl: "https://shopfile.ykplay.com/resources/",
+     //初始化我的订单界面当前类型
+     orderIndexType: null,
+     //初始化我的订单访问数字
+     myOrderNumber: null,
+     //初始化订单信息
+     orderMsg: {},
+     shopJSON: {},
+     urlj: "http://sharetwo.ykplay.com",
+     hotEssay: [],
      //初始化商品物流数组
-     shopAdressArray:[],
+     shopAdressArray: [],
      //初始化商品名
      shopName: "",
+     dd: [1, 2],
      //地址
      adress: "",
      shopNumber: "",
@@ -13,7 +39,7 @@
      IndexTypeArray: null,
      //初始化商品信息json
      shopMsgJson: null,
-     //初始化文章jso
+     //初始化文章json
      wenzhangJson: null,
      //初始化帮好友看到数组
      helpFriends: [],
@@ -26,26 +52,32 @@
      //初始化我的订单界面的总数据页数
      orderPage: 1,
      //初始化我的订单数组
-     myorderArray: [],
+     myorderArray: null,
      //初始化提现信息数组
      arrayTixian: null,
      access_token: "",
-     host: Host.devHost,
+     host: Host.productionHost,
      urlw3: "http://shop.ykplay.com",
      urlw2: "http://shop.ykplay.com/",
-     urlw: "http://192.168.1.44:3150/",
+     urlw: Host.productionHost,
      //保存订单号
      orderNumber: null,
      //商户好
      payPhone: 1487347762,
+     //
      //用户信息
      userInfo1: {
          familyAddress: {
              aid: null
          },
          wechatMsg: {
+
+
+
+
          },
      },
+     goodShop:null,
      //支付detailInfo
      detailInfo: null,
      //吴世超openid
@@ -101,26 +133,45 @@
      //判断点击查看详情
      isPressDetail: false,
      onLaunch: function(res) {
-         var a = [];
+        //  var a = { "色号": "12"};
+        //  var b = { "颜色": "红"};
+        //  var keysa = Object.keys(a);
+        //  var keysb = Object.keys(b);
+        //  var e={};
+        //  for(let i=0;i<keysa.length;i++){
+        //      e[`${keysa[i]}`]=a[`${keysa[i]}`];
+        //  }
+        //  for (let i = 0; i < keysb.length; i++) {
+        //      e[`${keysb[i]}`] = b[`${keysb[i]}`];
+        //  }
+         
+         var self = this;
+         wx.getSystemInfo({
+             success(res) {
+                 self.ratio = 750 / res.windowWidth;
+                 self.seeHeight = res.windowHeight;
+             }
+         })
 
-         console.log(typeof a);
-         // wx.showTabBarRedDot({
-         //     index:1,
-         //     success:function(res){
-         //         console.log(res+"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-         //     }
-         // })
+         //  var c="adasdasd";
+         // for(var i=0;i<=c.length-1;i++)
+         // {
+         //     console.log(c[i]);
+         // }
+         //  var c;
+         //  if(c==undefined||c==null)
+         //  {
+         //      console.log("222");
+         //  }
+
+         // var a=[];
+         // a.push(1);
+         // console.log(a);
+
          console.log(this.userInfo1);
          var self = this;
          this.StartLongConnect();
-         // var self = this;
-         // if (res.scene == 1007 || res.scene == 1008) {
-         //   self.isShare = true;
-         // }
-         // // 展示本地存储能力d
-         // var logs = wx.getStorageSync('logs') 
-         // logs.unshift(Date.now())
-         // wx.setStorageSync('logs', logs);
+
          // 登录 
          wx.login({
              fail: function(res) {
@@ -265,9 +316,7 @@
          // this.isShareEnter = false;
      },
      onHide: function(res) {
-         // if (this.isShare) {
-         //   this.isShareEnter = true;
-         // }
+
      },
      //显示分享界面
      ShowShareMsg: function() {
@@ -289,13 +338,57 @@
                  console.log("1111111111111" + JSON.stringify(res));
 
                  switch (state) {
+                     case "upda":
+                         if (res.data.encode == 0) {
+                             switch (self.myOrderNumber) {
+                                 case 0:
+                                     self.orderLoadPage = 1;
+                                     self.ShortConnect(self.urlw + "Data/GetOrdersByUid", {
+                                         uid: self.uid,
+                                         page: 1
+                                     }, "getmyOrder");
+                                     //  self.setUpda(res)
+
+                                     break;
+
+                                 case 2:
+                                     self.orderLoadPage = 1;
+                                     self.ShortConnect(self.urlw + "Data/GetOrdersByUidAndState", {
+                                         uid: self.uid,
+                                         page: 1,
+                                         state: 3
+                                     }, "getmyOrder");
+                                     //  self.setUpda(res)
+                                     break;
+                                 case 3:
+                                     self.orderLoadPage = 1;
+                                     self.ShortConnect(self.urlw + "Data/GetOrdersByUidAndState", {
+                                         uid: self.uid,
+                                         page: 1,
+                                         state: 5
+                                     }, "getmyOrder");
+                                     //  self.setUpda(res)
+                                     break;
+                             }
+                         }
+                         break;
                      case "shareWenZhang":
                          self.setSeeNumber(res);
-                          break;
+                         break;
                      case "SeeWen":
                          self.setSeeNumber(res);
-                         console.log("SeeWen"+JSON.stringify(res));
+                         console.log("SeeWen" + JSON.stringify(res));
+                         break;
+                     case "pressSreach":
+                         self.sreacJson=res.data;
+                          if(self.setSreachWen)
+                          {
+                              self.setSreachWen(res);
+                          }
                           break;
+                     case "searchText":
+                         self.setSreachArray(res);
+                         break;
                      case "code":
                          if (res.data.result == "ok") {
                              // self.openid = res.data.username;
@@ -304,7 +397,6 @@
                                  success(res) {
                                      //当授权时
                                      if (res.authSetting['scope.userInfo']) {
-
                                          console.log("============");
                                          self.ShouQuan();
                                      } else {
@@ -316,26 +408,7 @@
                                  }
                              })
                              console.log("33333");
-                             // if (self.isShare == false) {
-                             //     wx.getSetting({
-                             //         success(res) {
-                             //             //当授权时
-                             //             if (res.authSetting['scope.userInfo']) {
-                             //                 self.ShouQuan();
-                             //             }
-                             //         }
-                             //     })
-                             // }
-                             // if (self.isShare == false) {
-                             //     // console.log("sss");
-                             //     // self.GetUserInfo();000000000000000000000000000000000
-                             // } else {
-                             //     self.openid = res.data.username;
-                             //     app.ShortConnect(app.url + "/commodity/GetShareCommodityLink", {
-                             //         "username": self.openid,
-                             //         "commid": self.getShopId(res),
-                             //     }, "getHelpFriend");
-                             // }
+
                          }
                          break;
                      case "getuserInfo":
@@ -354,9 +427,9 @@
                          break;
                      case "ActicleInterShop":
                          self.shopMsgJson = res.data.product;
+                         console.log(JSON.stringify(self.shopMsgJson) + "ActicleInterShop");
                          if (self.setShopArrayJson) {
                              self.setShopArrayJson(res)
-
                          }
                          break;
                      case "GetAllMessage1":
@@ -369,11 +442,102 @@
                          }
 
                          break;
-                     case "GetShopAdressNumber":
-                         self.shopAdressArray = res.data.order.orderitems;
+                     case "getShopDi":
+                         if (res.data.encode == -1) {
+                             //  res.data.state = parseInt(res.data.state);
+                             self.shopJSON = {
+                                 state: 2,
+                                 state1: 1,
+                                 data: [{
+                                     context: ["商品出库中"],
+                                     time: res.data.time
+                                 }]
+
+
+                             };
+                             switch (res.data.com) {
+                                 case "shunfeng":
+                                     self.orderMsg.com = "顺丰快递";
+                                     break;
+                                 case "yuantong":
+                                     self.orderMsg.com = "圆通快递";
+                                     break;
+                                 case "zhongtong":
+                                     self.orderMsg.com = "中通快递";
+                                     break;
+                                 case "shentong":
+                                     self.orderMsg.com = "申通快递";
+                                     break;
+                                 case "huitongkuaidi":
+                                     self.orderMsg.com = "百世快递";
+                                     break;
+                                 case "yunda":
+                                     self.orderMsg.com = "韵达快递";
+                                     break;
+                                 case "tiantian":
+                                     self.orderMsg.com = "天天快递";
+                                     break;
+                                 case "yzguonei":
+                                     self.orderMsg.com = "中国邮政快递";
+                                     break;
+                                 case "ems":
+                                     self.orderMsg.com = "EMS快递";
+                                     break;
+                                 case "debangwuliu":
+                                     self.orderMsg.com = "德邦快递";
+                                     break;
+                                 case "quanfengkuaidi":
+                                     self.orderMsg.com = "全峰快递";
+                                     break;
+                             }
+                         } else {
+                             res.data.state = parseInt(res.data.state);
+                             self.shopJSON = res.data;
+                             switch (res.data.com) {
+                                 case "shunfeng":
+                                     self.orderMsg.com = "顺丰快递";
+                                     break;
+                                 case "yuantong":
+                                     self.orderMsg.com = "圆通快递";
+                                     break;
+                                 case "zhongtong":
+                                     self.orderMsg.com = "中通快递";
+                                     break;
+                                 case "shentong":
+                                     self.orderMsg.com = "申通快递";
+                                     break;
+                                 case "huitongkuaidi":
+                                     self.orderMsg.com = "百世快递";
+                                     break;
+                                 case "yunda":
+                                     self.orderMsg.com = "韵达快递";
+                                     break;
+                                 case "tiantian":
+                                     self.orderMsg.com = "天天快递";
+                                     break;
+                                 case "yzguonei":
+                                     self.orderMsg.com = "中国邮政快递";
+                                     break;
+                                 case "ems":
+                                     self.orderMsg.com = "EMS快递";
+                                     break;
+                                 case "debangwuliu":
+                                     self.orderMsg.com = "德邦快递";
+                                     break;
+                                 case "quanfengkuaidi":
+                                     self.orderMsg.com = "全峰快递";
+                                     break;
+                             }
+                         }
                          wx.navigateTo({
                              url: '../ShopAdress/ShopAdress',
                          })
+                         break;
+                     case "GetShopAdressNumber":
+                         //  self.shopAdressArray = res.data.order.orderitems;
+                         //  wx.navigateTo({
+                         //      url: '../ShopAdress/ShopAdress',
+                         //  })
                          break;
                      case "userInfo":
                          console.log(res.data);
@@ -381,22 +545,12 @@
                          console.log(res.data.userInfo.openid);
                          self.detailInfo = res.data.detailInfo;
                          self.access_token = res.data.access_token;
-                         // self.ShortConnect("http://192.168.1.206:10086/users/login2", {
-                         //     access_token: res.data.access_token,
-                         //     openid: res.data.userInfo.openid
-                         // }, "liginSuccess");
+
                          self.ShortConnect(self.urlw + "Entry", {
                              access_token: res.data.access_token,
                              openId: res.data.userInfo.openid
                          }, "liginSuccess");
-                         // if (self.isShare) {
-                         //     self.ShortConnect(self.url + "/commodity/ShowAllCommodity", {}, "shop");
-                         // } else {
-                         //     if (res.data.success == "true") {
-                         //         self.ShortConnect(self.url + "/commodity/ShowAllCommodity", {}, "shop");
-                         //         console.log("???????????????????");
-                         //     }
-                         // }
+
                          break;
                      case "interWenZhang":
 
@@ -429,9 +583,7 @@
                                  self.unionId = res.data.userInfo.unionId;
                                  self.uid = res.data.userInfo.uid;
                                  self.serverOpenid = res.data.userInfo.openid;
-                                 // self.ShortConnect("https://pay.ykplay.com/user/reg", {
-                                 //     openid: self.serverOpenid
-                                 // }, "register");
+
                              } else {
                                  self.openid = res.data.userInfo.wxopenId;
                                  console.log(res.data.userInfo.openid);
@@ -442,16 +594,13 @@
                                  self.ShortConnect("https://pay.ykplay.com/user/reg", {
                                      openid: self.serverOpenid
                                  }, "register");
-                                 self.ShortConnect(self.urlw2 + "Data/GetHotProducts", {
+                                 self.ShortConnect(self.urlw + "Data/GetHotProducts", {
                                      page: 1
                                  }, "index2Remen");
                              }
                          } else {
                              console.log("登录失败");
-                             // self.ShortConnect(self.urlw + "Entry", {
-                             //   access_token: self.access_token,
-                             //   openId: self.openid
-                             // }, "liginSuccess");
+
                          }
                          break;
                      case "loadWenzhang":
@@ -463,14 +612,13 @@
                          if (self.setIndex2Hot) {
                              self.setIndex2Hot(res);
                          }
-
                          break;
                      case "register":
                          if (self.isShare) {
 
                          } else {
                              wx.reLaunch({
-                                 url: '../indextwo/indextwo',
+                                 url: '../lck/index/index',
                              })
                          }
                          break;
@@ -528,7 +676,7 @@
                                  self.isShare = false;
                                  self.isShareEnter = false;
                              }
-                             // self.shopNumber = res.data.orderNumber;
+
                              self.setOrdernumber(res);
                              self.detailShopMsg = res.data;
                              self.detailShopMsg.comm[0].price = parseInt(res.data.comm[0].price);
@@ -536,22 +684,18 @@
                              wx.navigateTo({
                                  url: '../shopshare/shopshare?id=' + self.shopNumber,
                              })
-                             // if (self.shopdetailmsgcallback) {
-                             //     self.shopdetailmsgcallback(res);
-                             // 
+
                          }
                          break;
                      case "detailShop":
                          if (res.data.success == "true") {
-                             // self.shopNumber = res.data.orderNumber;
+
                              self.detailShopMsg = res.data;
                              console.log();
                              wx.navigateTo({
                                  url: '../detailshop/detailshop?shopid=' + res.data.comm[0].commid.toString()
                              })
-                             // if (self.shopdetailmsgcallback) {
-                             //     self.shopdetailmsgcallback(res);
-                             // }
+
                          }
                          break;
                      case "helpFriend":
@@ -601,9 +745,7 @@
                                  self.ShortConnect(self.urlw2 + "/users/TransformQrCode", {
                                      QrCode: res.data,
                                  }, "stringcode");
-                                 // if (self.getUserCode) {
-                                 //     self.getUserCode(res);
-                                 // }
+
                              },
                              fail: function(res) {
                                  console.log('isFail')
@@ -679,17 +821,14 @@
                          break;
                      case "checkPay":
                          if (res.data.msg == "支付成功") {
-                             if (res.data.type==0)
-                             {
+                             if (res.data.type == 0) {
                                  self.ShortConnect(self.urlw + "Data/GetHotShop", {
                                      page: 1
-                                 }, "loadPaySuccess1");
-                             }
-                             else
-                             {
+                                 }, "loadPaySuccess");
+                             } else {
                                  self.ShortConnect(self.urlw + "Data/GetHotEssays", {
                                      page: 1
-                                 }, "loadPaySuccess");
+                                 }, "loadPaySuccess1");
                              }
                              self.shopName = res.data.order.orderItems[0].pname;
                              self.adress = res.data.order.district + res.data.order.detaildistrict;
@@ -743,9 +882,9 @@
                          }
                          break;
                      case "pay1":
-                         self.orderNumber = res.data.order.onumber;
-                         console.log(res.data.order.orderItems);
+
                          if (res.data.encode == 0) {
+                             self.orderNumber = res.data.order.onumber;
                              self.ShortConnect("https://pay.ykplay.com/miniWx/miniPay", {
                                  openid: self.serverOpenid,
                                  orderNumber: res.data.order.onumber,
@@ -768,17 +907,15 @@
                          }
                          break;
                      case "pay":
-                         self.orderNumber = res.data.order.onumber;
-                         console.log(res.data.order.orderItems);
                          if (res.data.encode == 0) {
+                             self.orderNumber = res.data.order.onumber;
                              self.ShortConnect("https://pay.ykplay.com/miniWx/miniPay", {
                                  openid: self.serverOpenid,
                                  orderNumber: res.data.order.onumber,
                                  appid: self.appid,
                                  mch_id: self.payPhone,
                                  body: res.data.info,
-                                 // total_fee: res.data.order.orderItems[0].product.price,
-                                 total_fee: 1,
+                                 total_fee: res.data.order.oaccount,
                                  wxMsg: self.detailInfo,
                                  attach: "指点迷津"
                              }, "wechatpay");
@@ -789,9 +926,9 @@
                                  content: res.data.msg,
                                  success: function(res) {
                                      if (res.confirm) {
-                                         wx.switchTab({
-                                             url: '../indextwo/indextwo'
-                                         })
+                                         //  wx.switchTab({
+                                         //      url: '../indextwo/indextwo'
+                                         //  })
                                      } else if (res.cancel) {
                                          console.log('用户点击取消')
                                      }
@@ -839,18 +976,32 @@
                          if (res.data.msg == "消息为空") {
                              self.setmingxiFalse(res);
                          }
-                         // wx.navigateTo({
-                         //     url: '../MingXi/MingXi',
-                         // })
-                         // self.setMessageNumber(res);
+
                          break;
                      case "interorder":
                          self.myorderArray = res.data.orders;
                          self.orderPage = res.data.pages;
                          wx.navigateTo({
-                             url: '../MyOrder/MyOrder',
+                             url: '../../MyOrder/MyOrder',
                          })
                          console.log(res.data.orders.length);
+                         break;
+
+                     case "interorder1":
+                         if (res.data.encode == -1) {
+                             self.setNullButton();
+
+                         } else {
+                             self.myorderArray = res.data.orders;
+                             self.orderPage = res.data.pages;
+                             if (self.setMyOrder) {
+                                 self.setMyOrder(res);
+                             }
+
+
+                         }
+
+
                          break;
                      case "getmyOrder":
                          if (res.data.encode == -1) {
@@ -866,6 +1017,7 @@
                                  }
                              }
                              self.getOrderArray(res);
+
                          }
                          break;
                      case "getMyShopping":
@@ -965,45 +1117,94 @@
                              url: '../TiXian/TiXian?inter=tixian' + "&msg=" + res.data.msg + "&money=" + res.data.wallet,
                          })
                          break;
+                     case "sureGet":
+                         switch (self.orderIndexType) {
+                             case 0:
+                                 self.orderLoadPage = 1;
+                                 self.ShortConnect(self.urlw + "Data/GetOrdersByUid", {
+                                     uid: self.uid,
+                                     page: self.orderLoadPage
+                                 }, "getmyOrder");
+                                 break;
+                             case 2:
+                                 self.orderLoadPage = 1;
+                                 self.ShortConnect(self.urlw + "Data/GetOrdersByUidAndState", {
+                                     uid: self.uid,
+                                     page: 1,
+                                     state: 3
+                                 }, "getmyOrder");
+                                 break;
+                         }
+                         break;
+                     case "dissppearOrder":
+                         switch (self.orderIndexType) {
+                             case 0:
+                                 self.orderLoadPage = 1;
+                                 self.ShortConnect(self.urlw + "Data/GetOrdersByUid", {
+                                     uid: self.uid,
+                                     page: self.orderLoadPage
+                                 }, "getmyOrder");
+                                 console.log("dissppearOrder11");
+                                 break;
+                             case 1:
+                                 self.orderLoadPage = 1;
+                                 self.ShortConnect(self.urlw + "Data/GetOrdersByUidAndState", {
+                                     uid: self.uid,
+                                     page: self.orderLoadPage,
+                                     state: 1
+                                 }, "getmyOrder");
+                                 break;
+                         }
+                         break;
+                     case "getPages":
+                         self.orderPage = res.data.pages;
+
+                         break;
+                     case "ActicleInterOrder":
+                         self.buyShopJson=res.data.product;
+                         let data = {
+                             uid: self.uid,
+                             pid: self.buyShopJson.pid,
+                             size: self.buyShopJson.size,
+                             count: this.data.count,
+                             source: 0,
+                         }
+                         console.log(res.data);
+                         break;
+                     case "InterSreach":
+                       
+                         self.nearsreachArray = res.data.historySearchs;
+                         self.hotsreachArray=res.data.hotsearchs;
+                         if (self.setNearsreach)
+                         {
+                             self.setNearsreach(res);
+                         }
+                        break;
+                     case "InterSreach1":
+                         self.sreachPages = res.data.pages;
+                         self.goodShop = res.data.hotProducts;
+                         if (self.setTuiShop) {
+                             self.setTuiShop(res);
+                         }
+                        break;
+                     case "InterSreach2":
+                         self.setSreachTui(res);
+                         break;
+                     case "setSreachSize":
+                        self.setKaiQi(res);
+                         break;
                  }
              },
          })
      },
      //显示商品信息
      ShowShopDate: function(res) {
-         // this.shopMsg = res;
-         // wx.hideLoading();
-         // if (this.setindexHidden)
-         // {
-         //     this.setindexHidden(res);
-         // }
+
          if (this.shopmsgcallback) {
              this.shopmsgcallback(res);
          }
-         // if (this.isShare) {
-         //     // wx.redirectTo({
-         //     //     url: '../detailshop/detailshop'
-         //     // })
-         //     console.log("ttttt");
-         // } else {
-         //     this.shopMsg = res;
-         //     if (this.shopmsgcallback) {
-         //         this.shopmsgcallback(res);
-         //     }
-         //     console.log("!!!!!!!!!!!!!!");
-         // }
 
-         // wx.redirectTo({
-         //     url: "../index/index"
-         // })
-         // this.ShortConnect(this.url +"/users/SaveUserInformation",{
-         //   username: this.openid,
-         // },"username");
-         // index.indexObject.userInfo=res;
-         // console.log(index.indexObject.userInfo);
-         // wx.navigateTo({
-         //   url: "pages/index/index"
-         // }) 
+
      },
      // 获取用户信息
      GetUserInfo: function(res) {
@@ -1012,7 +1213,6 @@
          this.globalData.userInfo = res.userInfo;
          console.log(this.openid + "6666666666");
          res.sessionKey = this.sessionKey;
-
          console.log(res.userInfo);
          this.ShortConnect("https://newaccount.ykplay.com/ykLogin/UserInfoLogin", {
              bindingType: "1",
@@ -1021,64 +1221,7 @@
              channel: "0",
              bindingMsg: res
          }, "userInfo");
-         // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-         // 所以此处加入 callback 以防止这种情 况
-         // if (this.userInfoReadyCallback) {
-         //     this.userInfoReadyCallback(res)
-         // }
-         // wx.getSetting({
-         //     success: res => {
-         //         if (res.authSetting['scope.userInfo']) {
-         //             // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
-         //             wx.getUserInfo({
-         //                 success: res => {
-         //                     // 可以将 res 发送给后台解码出 unionId
-         //                     this.globalData.userInfo = res.userInfo;
-         //                     console.log("5555555" + JSON.stringify(res));
-         //                     withCredentials: true,
-         //                         res.username = this.openid;
-         //                     this.ShortConnect(this.url + "/users/SaveUserInformation", res, "userInfo");
-         //                     // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-         //                     // 所以此处加入 callback 以防止这种情 况 
-         //                     if (this.userInfoReadyCallback) {
-         //                         this.userInfoReadyCallback(res)
-         //                     }
-         //                 }
-         //             })
-         //         } else {
-         // // 可以将 res 发送给后台解码出 unionId
-         // this.globalData.userInfo = res.userInfo;
-         // withCredentials: true,
-         //     res.username = this.openid;
-         // this.ShortConnect(this.url + "/users/SaveUserInformation", res, "userInfo");
-         // // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-         // // 所以此处加入 callback 以防止这种情 况
-         // if (this.userInfoReadyCallback) {
-         //     this.userInfoReadyCallback(res)
-         // }
-         // wx.authorize({
-         //     scope: 'scope.userInfo',
-         //     success() {
-         //         // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
-         //         wx.getUserInfo({
-         //             success: res => {
-         //                 // 可以将 res 发送给后台解码出 unionId
-         //                 this.globalData.userInfo = res.userInfo;
-         //                 withCredentials: true,
-         //                     res.username = this.openid;
-         //                 this.ShortConnect(this.url + "/users/SaveUserInformation", res, "userInfo");
-         //                 // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-         //                 // 所以此处加入 callback 以防止这种情 况
-         //                 if (this.userInfoReadyCallback) {
-         //                     this.userInfoReadyCallback(res)
-         //                 }
-         //             }
-         //         })
-         //     }
-         // })
-         //         }
-         //     }
-         // })
+
      },
      globalData: {
          userInfo: null

@@ -31,7 +31,7 @@ Page({
         //用户信息回调
         userBack: "",
         url1: "https://share.ykplay.com",
-        url: "",
+        url: "",    
         //商品idm
         commid: 0,
         buttonZuo: "share",
@@ -435,7 +435,10 @@ Page({
         let sec = "";
         let days = "";
         // 对结束时间进行处理渲染到页面
-        let endTime = new Date(this.makeDate(this.data.commMsg.validTime)).getTime();
+        var a = this.data.commMsg.validTime.replace(/-/g, "/");
+        a = a.replace("T", " ");
+        a = a.replace(".000Z", " ");
+        let endTime = new Date(a).getTime();
         let obj = null;
         // 如果活动未结束，对时间进行处理
         if (endTime - newTime > 0) {

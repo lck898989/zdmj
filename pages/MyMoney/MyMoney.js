@@ -1,11 +1,11 @@
 // pages/MyMoney/MyMoney.js
 var app = getApp()
 Page({
-
     /**
      * 页面的初始数据
      */
     data: {
+        money:"0",
 
     },
 
@@ -13,6 +13,11 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function(options) {
+        this.setData({
+            money: options.money,
+            
+        })
+        console.log("3333");
 
     },
 
@@ -52,14 +57,18 @@ Page({
     },
     tixianButton:function(){
         wx.navigateTo({
-            url: '../TiXian/TiXian',
+            url: '../TiXian/TiXian?money='+this.data.money,
         })
-
     },
     mingxiButton:function(){
         app.ShortConnect(app.urlw + "Data/GetAllInformByUid", {
-            uid: app.uid
+            uid: app.uid,
+            type:-1,
+            page:1
         }, "GetAllMessage");
+        wx.navigateTo({
+            url: '../MingXi/MingXi?money='+this.data.money,
+        })
     },
     tixian: function() {
         wx.request({
@@ -69,18 +78,8 @@ Page({
             },
             method: "GET",
             success: function(res) {
-        
                 if (res.data.result == "1") {
                     console.log(res);
-                    // app.ShortConnect(app.urlw + "Data/WithDraw", {
-                    //     amount: 1000,
-                    //     desc: "指点迷津商家付款",
-                    //     openid: app.serverOpenid,
-                    //     from: "zhidianmijin"
-                    // }, "tixianZero");
-                    // wx.navigateTo({
-                    //     url: '../Advertisting/Advertisting',
-                    // })
                     app.ShortConnect(app.urlw + "Data/WithDraw", {
                         amount: 1000,
                         desc: "指点迷津商家付款",
@@ -101,20 +100,7 @@ Page({
                 }
             }
         })
-        // app.ShortConnect(app.urlw+"Data/WithDraw",{
-        //     amount:1000,
-        //     desc:"指点迷津商家付款",
-        //     openid: app.serverOpenid,
-        //     from:"zhidianmijin"
-        // },"tixian");
-        // console.log("？？？？？？？？？？？？？？？？？？？？？？？？？？")
-        // wx.navigateTo({
-        //     url: '../Advertisting/Advertisting',
-        // })
-        // var self = this;
-        //发起网络请求
-
-
+      
     },
     /**
      * 页面上拉触底事件的处理函数

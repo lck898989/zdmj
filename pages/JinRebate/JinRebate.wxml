@@ -1,2 +1,76 @@
 <!--pages/JinRebate/JinRebate.wxml-->
-<text>pages/JinRebate/JinRebate.wxml</text>
+<view class='rumenActivityView' hidden="{{rebate}}">
+    <image class='activityImage' src='{{imageUrl+"fanli_5.png"}}'></image>
+</view>
+<view class='jinBackground' hidden="{{rebate}}">
+    <view class='share' style='font-size:32rpx;'>
+        <button class='shareButton' open-type='share'>立刻组建自己的优惠班</button>
+    </view>
+    <view class='friendsView'>
+        <view class='textView' style='font-size:28rpx;'>微信好友助威团</view>
+        <scroll-view scroll-y='true' class='helpFriend'>
+            <block wx:for="{{helpFriend}}">
+                <view class='helpfriend2' wx:if='{{index==0}}'>
+                    <image class='userImage' src='{{item.wxhead}}'></image>
+                    <text class='userText' style='font-size:24rpx;'>{{item.wxnickname}}</text>
+                </view>
+                <view class='helpfriend1' wx:else>
+                    <image class='userImage' src='{{item.wxhead}}'></image>
+                    <text class='userText' style='font-size:24rpx;'>{{item.wxnickname}}</text>
+                </view>
+            </block>
+        </scroll-view>
+    </view>
+</view>
+<view class='sharedActivity' hidden="{{shareHidden}}">
+    <image class='sharedImage' src='{{imageUrl+"fanli_7.png"}}'>
+    </image>
+    <view class='sharedUser'>
+        <view class='sharedUserMsg'>
+            <image class='shareduserImage' src='{{wechatImage}}' mode='widthFix'></image>
+            <!-- <image class='shareduserImage' scr='../../resources/fanli_6.png' mode='widthFix'></image> -->
+            <text class='sharedName' style='font-size:30rpx;'>{{wechatName}}</text>
+        </view>
+        <view class='nullbackfround'> </view>
+        <view class='sharedText'>
+            <text class='sharedText1' style='font-size:29rpx;'>您的好友正在邀请您进入ta的优惠亲友团加入亲友团福利多多,还在等什么？别犹豫了!</text>
+        </view>
+    </view>
+    <view class='chengweixiaji'>
+        <button class='join' open-type='{{typeButton}}' bindtap='{{joinBotton}}' bindgetuserinfo='{{userInfo}}'>{{buttonText}}</button>
+    </view>
+</view>
+<view class='remenshopView1' hidden="{{shareHidden}}">
+    <block wx:for="{{hotShop}}">
+        <view class='shopView1' wx:if="{{index>1}}">
+            <view class='shopImageView'>
+                <image class='shopImage' mode='widthFix' src='{{url+item.image}}'></image>
+            </view>
+            <view class='shopNameView'>
+                <text class='shopnameText' space='ensp' style='font-size:28rpx;'>{{item.pname}}</text>
+            </view>
+            <view class='shopMsgText'>
+                <text class='shopPrice' style='font-size:28rpx;'>￥{{item.price}}</text>
+                <text class='shopAdress' style='font-size:24rpx;'>天津市南开区</text>
+                <text class='fukuanNumber' style='font-size:24rpx;'>{{item.sales}}人付款</text>
+            </view>
+            <view class='buyView' style='font-size:34rpx;'>立即购买</view>
+        </view>
+        <view class='shopView1' style='margin-top:40rpx' wx:else>
+            <view class='shopImageView'>
+                <image class='shopImage' mode='widthFix' src='{{url+item.image}}'></image>
+            </view>
+            <view class='shopNameView'>
+                <text class='shopnameText' space='ensp' style='font-size:28rpx;'>{{item.pname}}</text>
+            </view>
+            <view class='shopMsgText'>
+                <text class='shopPrice' style='font-size:28rpx;'>￥{{item.price}}</text>
+                <text class='shopAdress' style='font-size:24rpx;'>天津市南开区</text>
+                <text class='fukuanNumber' style='font-size:24rpx;'>{{item.sales}}人付款</text>
+            </view>
+            <view class='buyView' style='font-size:34rpx;'>立即购买</view>
+        </view>
+    </block>
+</view>
+<view class='chudi' hidden="{{shareHidden}}" wx:if='{{iscollisionBottom}}' style='font-size:31rpx;'>进入指点迷津小程序</view>
+<view class='loadView' hidden='{{loadHidden}}'></view>

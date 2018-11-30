@@ -18,7 +18,7 @@
     <view class='scoreBox'>
         <text class='texthh' style='font-size:20px;'>欢迎来到</text>
         <view class='henggang'></view>
-        <image class='scoreImage' src='../../resources/pic_shouquan.jpg'></image>
+        <image class='scoreImage' src='{{imageUrl+"pic_shouquan.jpg"}}'></image>
         <text class='textzz' style='font-size:19px;font-weight:900;'>指点迷津</text>
         <text class='textzh' style='font-size:13px'>专注于天津本地的生活服务平台</text>
         <button class='wxscore' open-type="getUserInfo" bindgetuserinfo="onGotUserInfo">

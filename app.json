@@ -1,33 +1,32 @@
 {
+    "plugins": {
+        "myPlugin": {
+            "version": "1.0.5",
+            "provider": "wx60d306fd175fe556"
+        }
+    },
     "pages": [
-        "pages/lck/test/test",
-        "pages/lck/rotate/rotate",
-        "pages/lck/testJing/perfact",
         "pages/wxscope/wxscope",
-        "pages/userInfo/userInfo",
+        "pages/search/search",
         "pages/lck/index/index",
-        "pages/lck/saleService/saleService",
-        "pages/lck/searchDetail/searchDetail",
-        "pages/lck/applyProgress/applyProgress",
-        "pages/lck/applySaleAfter/applySaleAfter",
-        "pages/indextwo/indextwo",
-        "pages/lck/hotShopping/hotShopping",
+        "pages/lck/shop/shop",
+        "pages/ButReady/BuyReady",
         "pages/lck/ShopSuccess/ShopSuccess",
+        "pages/indextwo/indextwo",
         "libs/citySelector/switchcity/switchcity",
         "pages/GetRebate/GetRebate",
-        "pages/index/index",
-        "pages/lck/address/address",
-        "pages/lck/cartGoodsDetail/cartGoodsDetail",
-        "pages/index2/index2",
+        "pages/TixianMingxi/TixianMingxi",
+        "pages/lck/hotShopping/hotShopping",
+        "pages/lck/saleService/saleService",
+        "pages/lck/applyProgress/applyProgress",
+        "pages/lck/applySaleAfter/applySaleAfter",
+        "pages/lck/searchDetail/searchDetail",
+        "pages/userInfo/userInfo",
         "pages/lck/order/order",
         "pages/lck/cart/cart",
-        "pages/myshop/myshop",
-        "pages/shopshare/shopshare",
-        "pages/detailshop/detailshop",
-        "pages/MyCode/MyCode",
-        "pages/Person/Person",
-        "pages/CheckCode/CheckCode",
         "pages/Advertisting/Advertisting",
+        "pages/lck/testJing/perfact",
+        "pages/lck/cartGoodsDetail/cartGoodsDetail",
         "pages/lck/editAddress/editAddress",
         "pages/lck/orderAddress/orderAddress",
         "pages/MyMoney/MyMoney",
@@ -42,55 +41,49 @@
         "pages/LookTianJin/LookTianJin",
         "pages/TwoFunction/TwoFunction",
         "pages/WeiMaTwo/WeiMaTwo",
-        "pages/ShopAdress/ShopAdress"
+        "pages/ShopAdress/ShopAdress",
+        "pages/MyOrderDetail/MyOrderDetail",
+        "pages/TIANQI/TIANQI",
+        "pages/SreachResult/SreachResult",
+        "pages/ShopActicle/ShopActicle"
     ],
     "window": {
-        "backgroundTextStyle": "light",
         "navigationBarBackgroundColor": "#863bb7",
         "navigationBarTitleText": "指点迷津",
-        "navigationBarTextStyle": "white"
+        "navigationBarTextStyle": "white",
+        "enablePullDownRefresh": true
     },
     "tabBar": {
         "selectedColor": "#863bb7",
         "list": [
             {
-                "pagePath": "pages/indextwo/indextwo",
-                "iconPath": "resources/main_home_up.png",
-                "selectedIconPath": "resources/main_home_dw.png",
+                "pagePath": "pages/lck/index/index",
+                "iconPath": "resources/btn_main_0.png",
+                "selectedIconPath": "resources/btn_main_1.png",
                 "text": "首页"
             },
             {
-                "pagePath": "pages/lck/hotShopping/hotShopping",
-                "iconPath": "resources/main_2_up.png",
-                "selectedIconPath": "resources/main_2_dw.png",
-                "text": "商城"
+                "pagePath": "pages/lck/cart/cart",
+                "iconPath": "resources/btn_cart_0.png",
+                "selectedIconPath": "resources/btn_cart_1.png",
+                "text": "购物车"
             },
             {
-                "pagePath": "pages/index/index",
-                "iconPath": "resources/main_personal_up.png",
-                "selectedIconPath": "resources/main_personal_dw.png",
-                "text": "我的分享"
-            },
-            {
-                "pagePath": "pages/GetRebate/GetRebate",
-                "iconPath": "resources/main_3_up.png",
-                "selectedIconPath": "resources/main_3_dw.png",
-                "text": "返利"
+                "pagePath": "pages/indextwo/indextwo",
+                "iconPath": "resources/btn_share.png"
             },
             {
                 "pagePath": "pages/userInfo/userInfo",
-                "iconPath": "resources/main_personal_up.png",
-                "selectedIconPath": "resources/main_personal_dw.png",
-                "text": "个人信息"
+                "iconPath": "resources/btn_history_0.png",
+                "selectedIconPath": "resources/btn_history_1.png",
+                "text": "历史分享"
+            },
+            {
+                "pagePath": "pages/lck/shop/shop",
+                "iconPath": "resources/btn_mine_0.png",
+                "selectedIconPath": "resources/btn_mine_1.png",
+                "text": "我的"
             }
         ]
-    },
-    "subpackages": [
-        {
-            "root": "packageEat",
-            "pages": [
-                "pages/index/index"
-            ]
-        }
-    ]
+    }
 }

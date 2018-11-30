@@ -1,0 +1,176 @@
+/* pages/lck/play/play.wxss */
+page{
+    background: #0d0909;
+}
+.page-con{
+    height: 100%;
+}
+.title-con,.text{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+}
+.title-con{
+    padding: 15rpx 18rpx;
+}
+.text{
+    font-size: 35rpx;
+    color: #fff;
+    margin-left: 275rpx;
+    white-space: nowrap;
+}
+.dot1{
+    justify-content: center;
+    margin-left: 5rpx;
+    margin-right: 5rpx;
+    margin-top: -15rpx;
+}
+.search-con{
+    width: 210rpx;
+    padding: 0rpx 20rpx;
+    position: relative;
+    margin-left: 80rpx;
+}
+.input{
+    width:90rpx;
+    border: 2rpx solid #fff;
+    border-radius: 50rpx;
+    height: 50rpx;
+    font-size: 25rpx;
+    padding-left: 60rpx;
+    color: #fff;
+}
+.search-icon{
+    position: absolute;
+    top: 15rpx;
+    left: 40rpx;
+}
+swiper{
+    height:750rpx;
+}
+.swiper-con{
+    position: relative;
+}
+.swiper-item{
+    width: 750rpx;
+    height:750rpx;
+}
+.dots{
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: center;
+    margin: 0 8rpx;
+    position: absolute;
+    left: 0rpx;
+    right: 0rpx;
+    bottom: 15rpx;
+}
+.dot{
+    margin: 0 8rpx;
+    height: 15rpx;
+    width: 15rpx;
+    background: #fff;
+    border-radius: 15rpx;
+}
+.active{
+    width: 40rpx;
+    height: 15rpx;
+    border-radius: 15rpx;
+}
+.scrollView{
+    width: 750rpx;
+}
+.lrWrapper{
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+}
+.twoColCon{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: 704rpx;
+    padding: 0rpx 23rpx;
+}
+.type-con .scrollView .twoColCon .left-con{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-wrap: nowrap;
+    width: 342rpx;
+}
+.type-con{
+    width: 380rpx;
+
+}
+/*
+    商品种类
+*/
+.banner-type{
+    display: flex;
+    /* flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+    align-items: center; */
+    /*
+    文字不会换行
+    */
+    white-space: nowrap;
+    padding-left: 55rpx;
+    height: 100rpx;
+}
+/*
+隐藏横向滚动条
+*/
+::-webkit-scrollbar{
+    width:0;
+    height:0;
+    color:transparent;
+}
+.swiperIt{
+    width: 100rpx;
+    margin-right: 30rpx;
+    font-size: 35rpx;
+    padding-top: 20rpx;
+    display: inline-block;
+    text-align: center;
+    color: #fff;
+}
+.type-parent{
+    display:flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: nowrap;
+}
+.rightArrow{
+    margin-right: 10rpx;
+}
+.typeactive{
+    border-bottom:10rpx solid #a6141a;
+    font-weight: bold;
+    display: inline-block;
+}
+.goTop{
+    position: fixed;
+    bottom: 50rpx;
+    padding: 20rpx;
+    right: 30rpx;
+}
+.siangle{
+    width:0px;
+	height:0px;
+	border-width:15rpx;
+	border-style:solid;
+	border-color:transparent transparent transparent #fff;
+    margin-bottom: 10rpx;
+    margin-left: 25rpx;
+}

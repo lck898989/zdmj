@@ -1,0 +1,6 @@
+{
+    "component": true,
+    "usingComponents": {
+        "index-type-detail-component": "/components/index-type-detail-component/index-type-detail-component"
+    }
+}

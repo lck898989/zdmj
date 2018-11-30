@@ -331,7 +331,7 @@ justify-content: space-between;
 
 .indicationPoint {
     position: absolute;
-    width: 80rpx;
+    width: 100rpx;
     left: 335rpx;
     height: 10%;
     bottom: 15%;
@@ -380,6 +380,8 @@ justify-content: space-between;
 
 .shopLei {
     position: absolute;
+    display: flex;
+    align-items: center;
     width: 750rpx;
     /* display: flex;
     justify-content:center;
@@ -647,7 +649,7 @@ justify-content: space-between;
     position: relative;
     margin-left: 20px;
     height: 100%;
-    top:4px;
+   
     display: inline-block;  
 }
 

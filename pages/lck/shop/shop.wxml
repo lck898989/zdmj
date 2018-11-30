@@ -1,0 +1,222 @@
+<block wx:if='{{showWindow}}' >
+    <view class='mask' catchtouchmove='test' data-e='mask'></view>
+</block>
+<scroll-view class='{{showWindow ? "page-con-showbuy" : "page-con"}}' bindscrolltolower='loadImages' scroll-y bindscroll='scrollTop' scroll-top='{{topNum}}'>
+    <block wx:if='{{isTopLevel}}' >
+        <view class='maskTopLevel'></view>
+    </block>
+    <view class='title-con'>
+        <view class='text'>
+            <view>
+                购
+            </view>
+            <view class='dot1'>.</view>
+            <view>
+                精品商城
+            </view>
+        </view>
+        <view class='search-con'>
+            <view class='input-con'>
+                <input class='input' placeholder='搜索...' bindfocus='enterSearch' placeholder-style='color:#9f9f9f;'></input>
+            </view>
+            <image class='search-icon' src='../../../resources/search_icon.png' style='width:30rpx;height:30rpx;'></image>
+        </view>
+    </view>
+    <!--轮播图-->
+    <view class='swiper-con'>
+        <swiper bindchange='getIndex'>
+            <swiper-item wx:for='{{pictureList}}' class='swiper-item'>
+                <image src='{{item}}' style='width:750rpx;height:750rpx;' mode='widthFix'></image>
+            </swiper-item>
+        </swiper>
+        <view class='dots'>
+            <block wx:for='{{pictureList}}' wx:key='unique'>
+                <view data-i='{{index}}' bindtap='fn' class='dot {{index === swiperIndex ? "active" : ""}}'></view>
+            </block>
+        </view>
+    </view>
+    <!--精品分享和热卖商城-->
+    <view class='jr-con-p'>
+        <view class='jr-con'>
+            <block wx:if='{{isShare}}'>
+                <image src='../../../resources/btn_share_1.png' style='width:350rpx;height:100rpx;' bindtap='chooseIt' data-type='精品分享'></image>
+                <image src='../../../resources/btn_shopping_0.png' style='width:350rpx;height:100rpx;' bindtap='chooseIt' data-type='热卖商城'></image>
+            </block>
+            <block wx:else>
+                <image src='../../../resources/btn_share_0.png' style='width:350rpx;height:100rpx;' bindtap='chooseIt' data-type='精品分享'></image>
+                <image src='../../../resources/btn_shopping_1.png' style='width:350rpx;height:100rpx;' bindtap='chooseIt' data-type='热卖商城'></image>
+            </block>
+            <!-- <block wx:for='{{btnArr}}'>
+                <image src='{{item.active ? item.srcActive : item.srcUnActive}}' style='width:350rpx;height:100rpx;' bindtap='chooseIt' data-type='{{item.btnText}}'></image>
+                <view class='jingpin' style='{{item.active ? btnActive : btnUnActive}}' bindtap='chooseIt' data-type='{{item.btnText}}'>
+                    <image src='{{item.src}}' class='share_icon' style='width:50rpx;height:50rpx;margin-right:20rpx;'></image>
+                    <view class='share_text'>{{item.btnText}}</view>
+                </view> 
+            </block> -->
+        </view>
+    </view>
+    <view class='type-parent'>
+        <view class='type-con'>
+            <view class="type-parent">
+                <scroll-view scroll-x='true' style='width:635rpx;'
+                bindscroll='scrollEvent' scroll-with-animation='true' class='banner-type'>
+                    <view wx:for='{{bannerType}}' class='swiperIt {{item.choosed ? "typeactive" : ""}}' bindtap='chooseBannerType' data-id='{{item.tid}}'>
+                        {{item.text}}
+                    </view>
+                </scroll-view>
+            </view>
+            <!---->
+            <view class='siangle' bindtap='detailClass'></view>
+            <view wx:if='{{isTopLevel}}' class='topLevel-con'>
+                <view class='class-title'>
+                    <view style='margin-left:10rpx;'>
+                        详细类别
+                    </view>
+                    <view class='siangle-bottom' bindtap='hideTopLevel'></view>
+                </view>
+                <view class='class-arr'>
+                    <block wx:for='{{topLevelSource}}'>
+                        <view class='class-item' bindtap='getTid' data-tid='{{item.tid}}'>
+                            <view class='classimage-con'>
+                                <block wx:if='{{index === 0}}'>
+                                    <image src='{{imageHost}}resources/btn_type_5.png' style='width:100rpx;height:100rpx;border-radius:25rpx;'></image>
+                                </block>
+                                <block wx:if='{{index === 1}}'>
+                                    <image src='{{imageHost}}resources/btn_type_6.png' style='width:100rpx;height:100rpx;border-radius:25rpx;'></image>
+                                </block>
+                                <block wx:if='{{index === 2}}'>
+                                    <image src='{{imageHost}}resources/btn_type_1.png' style='width:100rpx;height:100rpx;border-radius:25rpx;'></image>
+                                </block>
+                                <block wx:if='{{index === 3}}'>
+                                    <image src='{{imageHost}}resources/btn_type_2.png' style='width:100rpx;height:100rpx;border-radius:25rpx;'></image>
+                                </block>
+                                <block wx:if='{{index === 4}}'>
+                                    <image src='{{imageHost}}resources/btn_type_4.png' style='width:100rpx;height:100rpx;border-radius:25rpx;'></image>
+                                </block>
+                                <block wx:if='{{index === 5}}'>
+                                    <image src='{{imageHost}}resources/btn_type_7.png' style='width:100rpx;height:100rpx;border-radius:25rpx;'></image>
+                                </block>
+                                <block wx:if='{{index === 6}}'>
+                                    <image src='{{imageHost}}resources/btn_type_3.png' style='width:100rpx;height:100rpx;border-radius:25rpx;'></image>
+                                </block>
+                                <block wx:if='{{index === 7}}'>
+                                    <image src='{{imageHost}}resources/btn_type_8.png' style='width:100rpx;height:100rpx;border-radius:25rpx;'></image>
+                                </block>
+                                <block wx:if='{{index === 8}}'>
+                                    <image src='{{imageHost}}resources/btn_type_9.png' style='width:100rpx;height:100rpx;border-radius:25rpx;'></image>
+                                </block>
+                                <block wx:if='{{index === 9}}'>
+                                    <image src='{{imageHost}}resources/btn_type_10.png' style='width:100rpx;height:100rpx;border-radius:25rpx;'></image>
+                                </block>
+                                
+                            </view>
+                            <view style='margin-top:15rpx;'>
+                                {{item.tname}}
+                            </view>
+                        </view>
+                    </block>
+                </view>
+            </view>
+            <!-- <view wx:else class='topLevle-con'>
+            
+            </view> -->
+            <!-- <view wx:if='{{isTopLevel}}' class='topLevel-con'>
+
+            </view> -->
+        </view>
+        <!--二级分类显示区域-->
+        <view wx:if='{{IsecondLevel}}' class='secondLevel-con'>
+            <block wx:for='{{secondLevels}}'>
+                <view class='secondLevel-item' data-t2id='{{item.t2id}}' data-tid='{{item.tid}}' bindtap='chooset2Id'>
+                    {{item.t2name}}
+                </view>
+            </block>
+        </view>
+    </view>
+    <block wx:if='{{!isHot}}'>
+        <view style="display:none">
+            <image wx:for="{{dataArray}}" wx:key="id" id="{{item.id}}" src="{{item.goodsPicture}}" bindload="onImageLoad"></image>
+        </view>
+        <view class='scrollView' scroll-y='true' style='height:{{scrollH}}rpx'>
+            <view class='twoColCon' style='height:{{scrollH}}rpx;'>
+                <view class='left-con' style='width:342rpx;height:{{col1H}}rpx;margin-right:18rpx;'>
+                    <block wx:for='{{col1}}'>
+                        <index-type-detail-component easyItem='{{item}}' shadow='{{backgroundColor}}'></index-type-detail-component>
+                    </block>
+                    
+                </view>
+                <view class='left-con' style='width:342rpx;height:{{col2H}}rpx;'>
+                    <block wx:for='{{col2}}'>
+                        <index-type-detail-component easyItem='{{item}}' shadow='{{backgroundColor}}'></index-type-detail-component>
+                    </block>
+                </view>
+            </view>
+        </view> 
+    </block>
+    <block wx:else>
+        <!--使用组件进行显示-->
+        <scroll-view scroll-y='true'>
+            <block wx:for='{{goods}}'>
+                <new-buy-index-component goods='{{item}}' bindaddcart='myevent' bindenterDetail='enterDetail'></new-buy-index-component>
+            </block>
+        </scroll-view>
+    </block>
+    <block wx:if='{{showWindow}}'>
+        <view class='buy-con' catchtouchmove="ture" data-e='buy-con'>
+            <view class='lineOne-con'>
+                <image src='{{imageHost}}{{currentGoods.head[0]}}' style='width:220rpx;height:220rpx;' class='img'></image>
+                <view class='price-order-con'>
+                    <view class='price-item' style='font-size:40rpx;color:#ffcb05;font-weight:800;'>
+                    ￥  {{currentGoods.oprice * count}}
+                    </view>
+                    <view class='price-item' style='font-size:30rpx;color:#404040'>
+                        已选:
+                        <text wx:for='{{sendServerSize}}'>{{item}}</text>
+                    </view>
+                </view>
+                <view class='cancel-con' bindtap='cancel'>
+                    <image src='../../../resources/Cancel.png' style='width:40rpx;height:40rpx;'></image>
+                </view>
+            </view>
+            <scroll-view class='scc-con' scroll-y>
+                <block wx:for='{{typeArr}}' wx:for-index='outIndex' wx:for-item='outItem'>
+                    <view class='lineTwo-con'>
+                        <view style='font-size:30rpx;'>
+                            {{outItem}}
+                        </view>
+                        <view class='color-con'>
+                            <block wx:for='{{typeValueArr[outIndex][outItem]}}' wx:for-index='innerIndex'>
+                                <view class='color-item' id='{{item.mode}}-{{outIndex}}-{{outItem}}' bindtap='chooseStand' style='background-color:{{item.touch ? selectColor : unSelectColor}};color:{{item.touch ? selectFontColor : unSelectFontColor}};border:{{item.touch ? selectBorder : unselectBorder}}'>
+                                    {{item.mode}}
+                                </view>
+                            </block>
+                        </view>
+                    </view>
+                </block>
+            </scroll-view>
+            <view class='countContainer'>
+                <view style='margin-left:22rpx;'>
+                    购买数量
+                </view>
+                <view class='add-sub-con' style='margin-right:22rpx;'>
+                    <view class='as-item' bindtap='sub'>
+                        -
+                    </view>
+                    <view class='as-item'>
+                        {{count}}
+                    </view>
+                    <view class='as-item' bindtap='add'>
+                        +
+                    </view>
+                </view>
+            </view>
+            <view class='addOrBuy'>
+                <!--检查是否点击过购物车和立即购买按钮-->
+                <view class='saveBuy' bindtap='confirm' id='buyit'>
+                    确定
+                </view>
+            </view>
+        </view>
+    </block>
+    <image src='../../../resources/btn_top.png' class='goTop' hidden='{{!floorStatus}}' bindtap='goTop' style='width:110rpx;height:110rpx;'/>
+</scroll-view>

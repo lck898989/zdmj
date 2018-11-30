@@ -1,0 +1,16 @@
+/* pages/TIANQI/TIANQI.wxss */
+
+.img_item {
+    width: 48%;
+    margin: 1%;
+    display: inline-block;
+    vertical-align: top;
+    height: 10%;
+    background-color: red;
+}
+
+.a1 {
+    display: inline-block;
+    margin: 1%;
+       
+}

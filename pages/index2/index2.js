@@ -5,7 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-      activityImage: ["http://shop.ykplay.com/upload/1/File.ico","http://shop.ykplay.com/upload/1/File.ico"]
+      activityImage: ["http://192.168.1.183:3150/upload/1/favicon.ico", "http://192.168.1.183:3150/upload/1/favicon.ico"],
   
   },
 
@@ -20,6 +20,7 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
+
   
   },
 

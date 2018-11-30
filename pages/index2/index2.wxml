@@ -4,9 +4,3 @@
         <image src="{{item}}" class="imageActivity"></image>
     </swiper-item>
 </swiper>
-<view class='activityView1'>
-    <view class='activityViewSon1'></view>
-    <view class='activityViewSon1'></view>
-    <view class='activityViewSon1'></view>
-    <view class='activityViewSon1'></view>
-</view>

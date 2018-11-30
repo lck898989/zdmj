@@ -1,2 +1,48 @@
 <!--pages/IntroductionRebate/IntroductionRebate.wxml-->
-<text>pages/IntroductionRebate/IntroductionRebate.wxml</text>
+<view class='rumenActivityView'>
+    <image class='activityImage' src='{{imageUrl+"fanli_4.png"}}'></image>
+</view>
+<view class='share'>
+    <text class='textliji' bindtap='interShopView' >立刻前往商城</text>
+</view>
+<view class='remneView' >
+    <view class='renmencenterView'>
+        <image class='remenIcon' mode='widthFix' src='../../resources/remen.png'></image>
+        <text class='' style='font-size:24rpx;color:#863bb7'>热门好货</text>
+    </view>
+</view>
+<view class='remenshopView' >
+    <block wx:for="{{hotShop}}">
+        <view class='shopView1' wx:if="{{index>1}}">
+            <view class='shopImageView'>
+                <image class='shopImage' mode='widthFix' src='{{url+item.head[0]}}'></image>
+            </view>
+            <view class='shopNameView'>
+                <text class='shopnameText' space='ensp' style='font-size:28rpx;'>{{item.pname}}</text>
+            </view>
+            <view class='shopMsgText'>
+                <text class='shopPrice' style='font-size:28rpx;'>￥{{item.price}}</text>
+                <text class='shopAdress' style='font-size:24rpx;'>天津市南开区</text>
+                <text class='fukuanNumber' style='font-size:24rpx;'>{{item.sales}}人付款</text>
+            </view>
+            <view class='buyView'  data-shopmsg='{{item}}' id='{{item}}' style='font-size:34rpx;' bindtap='pressBuy'>立即购买</view>
+        </view>
+        <view class='shopView' style='margin-top:0rpx;'
+ wx:else>
+            <view class='shopImageView'>
+                <image class='shopImage' mode='widthFix' src='{{url+item.head[0]}}'></image>
+            </view>
+            <view class='shopNameView'>
+                <text class='shopnameText' space='ensp' style='font-size:28rpx;'>{{item.pname}}</text>
+            </view>
+            <view class='shopMsgText'>
+                <text class='shopPrice' style='font-size:28rpx;'>￥{{item.price}}</text>
+                <text class='shopAdress' style='font-size:24rpx;'>天津市南开区</text>
+                <text class='fukuanNumber' style='font-size:24rpx;'>{{item.sales}}人付款</text>
+            </view>
+            <view class='buyView'    data-shopmsg='{{item}}' id='{{item}}'style='font-size:34rpx;' bindtap='pressBuy'>立即购买</view>
+        </view>
+    </block>
+</view>
+
+ 

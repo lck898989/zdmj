@@ -2,7 +2,11 @@
 
 .activityView {
     width: 750rpx;
-    height: 200px;
+    height:350rpx;
+    background-color: red;
+    position: relative;
+    margin-top: 0;
+    margin-left: 0;
 }
 
 .activityViewSon {
@@ -11,8 +15,8 @@
 }
 
 .imageActivity {
-    width: 100px;
-    height: 100px;
+  width: 100%;
+  height: 100%;
 }
 
 .activityView1 {

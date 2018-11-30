@@ -25,25 +25,15 @@ Page({
       this.setData({
           url: "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxd53d8ea8fc7e67cb&redirect_uri=" + a + "&response_type=code&scope=snsapi_base&state=123#wechat_redirect"
       })
-    //    this.setData({
-    //        url: "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxd53d8ea8fc7e67cb&redirect_uri=https%3a%2f%2fpay.ykplay.com%2fwechat%2fgetOpenId%3ffrom%3dzhidianmijin%26openid%3db05NZ2Y1WGR1VkRjZzZPVy15c2IwVTFNUGdtdw%3d%3d&response_type=code&scope=snsapi_base&state=123#wechat_redirect"
-    //   })
-      console.log(app.serverOpenid);
-    //   wx.request({
-    //       url: "https://pay.ykplay.com/wechat/getOpenidVerify?from=zhidianmijin&openid=" + app.serverOpenid,
-
-    //       header: {
-    //           'content-type': 'application/json' // 默认值
-    //       },
-    //       method: "GET",
-    //       success: function (res) {
-    //           console.log(res);       
-    //       }
-    //   })
-
-    //   wx.navigateBack({
-    //       delta: 1
-    //   })
+      console.log(this.data.url);
+    app.ShortConnect(app.urlw+"Data/WithDraw",{
+      amount: options.money,
+      desc:"指点迷津体现",
+      openid: app.serverOpenid,
+      from:"zhidianmijin"
+    },"checkTiXian"); 
+ 
+      console.log();
   },
 
   /**

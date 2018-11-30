@@ -5,29 +5,46 @@ Page({
      * 页面的初始数据
      */
     data: {
-        //存储页面分享这的openid
-        shareParentUid: "",
-        shareHidden: true,
-        rebate: true,
+        imageUrl:"",
+        // //存储页面分享这的openid
+        // shareParentUid: "",
+        // shareHidden: true,
+        // rebate: true,
     },
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-        console.log("5555555");
-        if (app.isShare) {
-            this.setData({
-                shareHidden: false,
-                shareParentUid: options.uid
-            });
-        } else {
-            console.log("5555555");
-            this.setData({
-                rebate: false,
-            });
-        }
+        this.setData({
+            imageUrl: app.imageUrl
+        })
+    
     },
+    //点击我的钱包
+    pressMyMoney:function(){
+      app.ShortConnect(app.urlw + "Data/GetPersonCenter", {
+        uid: app.uid
 
+      }, "getMyQian");
+     
+    },
+    //点击入门返利
+    pressIntroduction:function(){
+        app.rumenPage=1;
+        app.ShortConnect(app.urlw2+"Data/GetHotProducts",{
+            page: app.rumenPage
+        },"interIntroduction");
+       
+    },
+    //点击进阶返利
+    pressGradeRebate:function(){
+        app.ShortConnect(app.urlw + "Data/GetAllAgencys", {
+            uid: app.uid
+        }, "interJinjie");
+        // wx.navigateTo({
+        //     url: '../JinRebate/JinRebate',
+        // })
+    },
     /**
      * 生命周期函数--监听页面初次渲染完成
      */
@@ -75,8 +92,8 @@ Page({
         //     parent: this.data.shareParentUid,
         //     child: app.uid
         // },"agreeRank");
-
-        app.ShortConnect("http://192.168.1.49:3150/Data/AddAgency", {
+        console.log("44444");
+        app.ShortConnect(app.urlw+"Data/AddAgency", {
             parent: this.data.shareParentUid,
             child: app.uid
         }, "agree");
@@ -85,30 +102,30 @@ Page({
      * 用户点击右上角分享
      */
     onShareAppMessage: function (Object) {
-        console.log("onShareAppMessage4");
-        console.log(app.uid);
-        console.log(app.uid.toString());
-        // return {
-        //     title: '这里的秘密,你知道多少?我来帮你指点迷津',
-        //     path: 'pages/GetRebate/GetRebate'
-        // }
-        // return custom share data when user share.
-        var shareObj = {
-            desc: '距离成功只差一步，求少侠出手！',
-            title: '分享商城',
-            path: 'pages/GetRebate/GetRebate?uid=' + app.uid.toString(),
-            success: function (res) {
-                console.log("333");
-                // 转发成功之后的回调
-                if (res.errMsg == 'shareAppMessage:ok') {
+        // console.log("onShareAppMessage4");
+        // console.log(app.uid);
+        // console.log(app.uid.toString());
+        // // return {
+        // //     title: '这里的秘密,你知道多少?我来帮你指点迷津',
+        // //     path: 'pages/GetRebate/GetRebate'
+        // // }
+        // // return custom share data when user share.
+        // var shareObj = {
+        //     desc: '距离成功只差一步，求少侠出手！',
+        //     title: '分享商城',
+        //     path: 'pages/GetRebate/GetRebate?uid=' + app.uid.toString(),
+        //     success: function (res) {
+        //         console.log("333");
+        //         // 转发成功之后的回调
+        //         if (res.errMsg == 'shareAppMessage:ok') {
 
-                }
-            },
-            fail: function (res) {　　　　　　 // 转发失败之后的回调
-                console.log(res.errMsg);
-            },
-        }
-        console.log(shareObj);
-        return shareObj;
+        //         }
+        //     },
+        //     fail: function (res) {　　　　　　 // 转发失败之后的回调
+        //         console.log(res.errMsg);
+        //     },
+        // }
+        // console.log(shareObj);
+        // return shareObj;
     }
 })

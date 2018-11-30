@@ -1,2 +1,5 @@
 <!--pages/TwoFunction/TwoFunction.wxml-->
-<text>pages/TwoFunction/TwoFunction.wxml</text>
+<view class='imageParent' wx:for='{{arrayUrl}}'>
+    <image mode='widthFix' src='{{item}}' class='image'>
+    </image>
+</view>

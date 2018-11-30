@@ -1,0 +1,8 @@
+/* pages/MyOrderDetail/MyOrderDetail.wxss */
+
+.orderMsg{
+    position: relative;
+    width: 750rpx;
+    height: 430rpx;
+}
+

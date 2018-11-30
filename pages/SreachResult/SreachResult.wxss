@@ -1,0 +1,362 @@
+/* pages/SreachResult/SreachResult.wxss */
+
+.searchView {
+    position: relative;
+    width: 750rpx;
+    height: 84rpx;
+    display: flex;
+    align-items: center;
+}
+
+.searchDa {
+    position: absolute;
+    left: 30rpx;
+    width: 10rpx;
+}
+
+.sreachboxView {
+    position: absolute;
+    left: 15rpx;
+    width: 595rpx;
+    height: 50rpx;
+    display: flex;
+    align-items: center;
+    border-radius: 30px;
+    border-top: 2rpx solid #9f9f9f;
+    border-bottom: 2rpx solid #9f9f9f;
+    border-left: 2rpx solid #9f9f9f;
+    border-right: 2rpx solid #9f9f9f;
+}
+
+.searchIcon {
+    position: absolute;
+    left: 22rpx;
+    color: #959595;
+}
+
+.searchText {
+    position: absolute;
+    left: 70rpx;
+    width: 480rpx;
+    color: #000;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.clear {
+    position: absolute;
+    right: 10rpx;
+}
+
+.searchText1 {
+    position: absolute;
+    width: 100rpx;
+    right: 21rpx;
+    height: 50rpx;
+    background-color: #ba65d9;
+    color: #fff;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.typeView {
+    position: relative;
+    margin-top: 0rpx;
+    display: flex;
+    justify-content: center;
+    width: 750rpx;
+    height: 66rpx;
+}
+
+.typeView2 {
+    position: absolute;
+    top: 9rpx;
+    width: 509rpx;
+    display: flex;
+    justify-content: center;
+}
+
+.typeView1 {
+    position: absolute;
+    top: 9rpx;
+    width: 509rpx;
+    display: flex;
+    justify-content: space-between;
+}
+
+.typeView2 {
+    position: absolute;
+    top: 9rpx;
+    width: 509rpx;
+    display: flex;
+    justify-content: center;
+}
+
+.typeView3 {
+    position: absolute;
+    top: 9rpx;
+    width: 509rpx;
+    display: flex;
+    justify-content: center;
+}
+
+.chiheText {
+    position: relative;
+    margin-top: 0rpx;
+    padding: 0rpx 16rpx 0rpx 16rpx;
+}
+
+.gouText {
+    position: relative;
+    margin-top: 0rpx;
+    padding: 0rpx 16rpx 0rpx 16rpx;
+}
+
+.nullView {
+    position: absolute;
+    top: 0rpx;
+    width: 750rpx;
+    height: 2px;
+    background-color: #eee;
+}
+
+.tyoesonView1 {
+    position: absolute;
+    right: 25rpx;
+    top: 19rpx;
+    width: 162rpx;
+    display: flex;
+    justify-content: space-between;
+}
+
+.hotText {
+    position: relative;
+    padding: 10rpx 8rpx 0rpx 8rpx;
+}
+
+.zonheText {
+    position: relative;
+    padding: 10rpx 8rpx 0rpx 8rpx;
+}
+
+.textShare {
+    position: absolute;
+    top: 25rpx;
+    left: 20rpx;
+}
+
+.typesonView {
+    position: relative;
+    width: 750rpx;
+    height: 75rpx;
+    margin-top: 0rpx;
+}
+
+.scrollView {
+    position: absolute;
+    width: 750rpx;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.shopName1 {
+    position: absolute;
+    top: 56rpx;
+    left: 314rpx;
+}
+
+.shopPrice1 {
+    position: absolute;
+    left: 314rpx;
+    bottom: 43rpx;
+}
+
+.nullView1 {
+    position: absolute;
+    top: 0;
+    width: 750rpx;
+    height: 2px;
+    background-color: #eee;
+}
+
+.shpoIcon {
+    position: absolute;
+    bottom: 38rpx;
+    right: 39rpx;
+    width: 64rpx;
+}
+
+.zhidanIcon {
+    position: absolute;
+    bottom: 48rpx;
+    right: 230rpx;
+    width: 100rpx;
+}
+
+.shopPrice {
+    position: absolute;
+    top: 176rpx;
+    left: 314rpx;
+    text-decoration: line-through;
+}
+
+.shopDetail {
+    position: absolute;
+    left: 314rpx;
+    top: 92rpx;
+}
+
+.shopImage {
+    position: absolute;
+    top: 27rpx;
+    left: 30rpx;
+    width: 240rpx;
+}
+
+.shopView {
+    position: relative;
+    margin-top: 0rpx;
+    width: 750rpx;
+    height: 302rpx;
+    direction: flex;
+    align-items: center;
+}
+
+.scrollView1 {
+    position: absolute;
+    width: 750rpx;
+}
+
+.wenzhangView {
+    position: absolute;
+    left: 0;
+    width: 750rpx;
+    display: flex;
+    flex-direction: row;
+}
+
+.shopDetail {
+    position: absolute;
+    left: 314rpx;
+    top: 92rpx;
+}
+
+.shopDetailView {
+    position: relative;
+    margin-top: 7rpx;
+    width: 309rpx;
+    display: -webkit-box;
+    word-break: break-all;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    letter-spacing: 1px;
+    margin-left: 12rpx;
+}
+
+.authorName {
+    position: absolute;
+    left: 41rpx;
+}
+
+.authorImage {
+    position: absolute;
+    left: 0;
+    width: 32rpx;
+}
+
+.authorView {
+    position: relative;
+    margin-top: 7rpx;
+    width: 300rpx;
+    left: 12rpx;
+    height: 32rpx;
+    display: flex;
+    align-items: center;
+}
+
+.nullView2 {
+    position: relative;
+    margin-top: 0rpx;
+    width: 343rpx;
+    height: 10rpx;
+}
+
+.centerView {
+    position: relative;
+    margin-top: 0rpx;
+    width: 714rpx;
+    display: flex;
+    margin-left: 18rpx;
+    flex-direction: row;
+    justify-content: space-between;
+    overflow: hidden;
+}
+
+.leftView {
+    position: relative;
+    width: 343rpx;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.wenzhangImage {
+    position: absolute;
+    top: 0rpx;
+    width: 343rpx;
+}
+
+.seeIcon {
+    position: absolute;
+    left: 11rpx;
+    width: 26rpx;
+}
+
+.wenzhangImageView {
+    position: relative;
+    margin-top: 0rpx;
+    width: 343rpx;
+}
+
+.seeText {
+    position: absolute;
+    left: 65rpx;
+    color: #fff;
+}
+
+.seeView {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 128rpx;
+    height: 36rpx;
+    background-color: #1b1b1b;
+    display: flex;
+    align-items: center;
+    z-index: 10;
+}
+
+.rightView {
+    position: relative;
+    width: 343rpx;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.leftSon {
+    position: relative;
+    width: 343rpx;
+    margin-left: 0;
+    overflow: hidden;
+    border-radius: 10px;
+    background-color: white;
+    box-shadow: 0rpx 8rpx 8rpx #d0d0d0;
+    -webkit-box-shadow: 0rpx 8rpx 8rpx #d0d0d0;
+}

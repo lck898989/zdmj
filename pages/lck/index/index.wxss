@@ -1,4 +1,3 @@
-
 .weather-con,.weather,.ed-con,.dots,.type-parent{
     display: flex;
     flex-direction: row;
@@ -53,29 +52,51 @@
     left: 40rpx;
 }
 .swiper-stage{
-    background: #fff;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: nowrap;
+    position: relative;
+    padding: 0rpx 20rpx 20rpx 20rpx;
     height: 520rpx;
-    width: 750rpx;
+    background: #fff;
     border-bottom: 2rpx solid #f2f2f2;
 }
 .ed-con{
-    width: 730rpx;
+    width: 750rpx;
     height: 280rpx;
-    padding: 10rpx;
+    padding: 10rpx 0rpx;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+    flex-wrap: nowrap;
+}
+.wrap-con{
+    width: 738rpx;
+    height: 280rpx;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
     flex-wrap: wrap;
     position: relative;
+    margin-left: 1rpx;
 }
 .img-list{
     padding: 0rpx 10rpx 10rpx 0rpx;
 }
 .circle{
     position: absolute;
-    left: 267rpx;
+    left: 260rpx;
+    z-index: 1;
+    top: 30rpx;
     /* border: 10rpx solid #fff; */
 }
 .hot-today{
     margin-top: 5rpx;
-    height:495rpx;
+    height:500rpx;
     width: 700rpx;
     padding: 25rpx;
     border-bottom: 2rpx solid #f2f2f2;
@@ -93,12 +114,13 @@
 .swiper-con{
     position: relative;
     z-index: 2;
+    height:500rpx;
 }
 swiper{
-    height:389rpx;
-    margin-top: 20rpx;
+    height:500rpx;
+    margin-top: 0rpx;
 }
-.dots{
+.title .dots{
     justify-content: center;
     margin: 0 8rpx;
     position: absolute;
@@ -109,14 +131,14 @@ swiper{
 /*
  dot
 */
-.dot{
+.title .dots .dot{
     margin: 0 8rpx;
     height: 15rpx;
     width: 15rpx;
     background: #da91f5;
     border-radius: 15rpx;
 }
-.active{
+.title .dots .active{
     width: 40rpx;
     height: 15rpx;
     border-radius: 15rpx;
@@ -146,15 +168,12 @@ swiper{
     color:transparent;
 }
 .swiperIt{
-    width: 100rpx;
-    margin-right: 30rpx;
-    font-size: 40rpx;
+    width: 90rpx;
+    margin-right: 10rpx;
+    font-size: 35rpx;
     padding-top: 20rpx;
-    padding-left: 10rpx;
-    padding-right: 10rpx;
     display: inline-block;
     text-align: center;
-    font-weight: bolder;
 }
 .type-parent{
     justify-content: space-between;
@@ -164,16 +183,11 @@ swiper{
 }
 .typeactive{
     border-bottom:10rpx solid #da91f5;
+    font-weight: bold;
     display: inline-block;
 }
 .type-easy{
     padding: 0rpx 23rpx;
-    /* flex-wrap: wrap;
-    align-items: flex-start;
-    vertical-align: bottom; */
-    /*
-    两列显示
-    */
     column-count: 2;
     column-gap: 18rpx;
 
@@ -190,5 +204,379 @@ swiper{
     right: 0rpx;
     top: 0rpx;
     z-index: 1;
+}
+.img{
+    border-radius: 20rpx;
+    border: 10rpx solid #fff;
+}
+.wrap{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: nowrap;
+    position: relative;
+    height: 500rpx;
+    width: 710rpx;
+    background: #fff;
+    overflow: hidden;
+}
+.common{
+    position: absolute;
+}
+.imgCon0{
+    top:0rpx;
+    left: 0rpx;
+    z-index: 100;
+    transform: scale(1);
+}
+.imgCon1{
+    top: 5%;
+    left: 110rpx;
+    z-index: 80;
+    transform: scale(0.90);
+}
+.imgCon2{
+    top: 10%;
+    left: 210rpx;
+    transform: scale(0.80);
+    z-index: 60;
+}
+.imgCon3{
+    top: 15%;
+    left: 285rpx;
+    transform: scale(0.70);
+    z-index: 40;
+}
+.siangle{
+    width:0px;
+	height:0px;
+	border-width:15rpx;
+	border-style:solid;
+	border-color:transparent transparent transparent #a0a0a0;
+    margin-bottom: 10rpx;
+    margin-right: 30rpx;
+}
+.imgCon4{
+    top: 20%;
+    left: 400rpx;
+    transform: scale(0.6);
+    z-index:20;
+}
+.mask{
+    position: absolute;
+    top: 0rpx;
+    left: 0rpx;
+    background: #fff;
+    width: 480rpx;
+    height:480rpx;
+    opacity: 0.4;
+}
+.firstMask{
+    opacity: 0;
+}
+/*
+    动画效果隐藏向左展开最大时候的mask修改透明度由100 ---> 0 ,放大到1，其他的依次放大0.9,0.8
+*/
+.hideMask{
+    transform: scale(1);
+    animation: hidemask 1s normal;
+    -webkit-animation:hidemask 1s normal;
+    animation-iteration-count: 1;
+    -webkit-animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+    -webkit-animation-fill-mode: forwards;
+}
+/*
+    左移相关动画开始
+*/
+@keyframes hidemask{
+    from{
+        opacity: 0.5;
+    }to{
+        opacity: 0;
+    }
+}
+/*
+    动画效果
+    向左移动500rpx的距离，同时透明度由100 ----> 0
+
+*/
+.swiper-right{
+    animation: swiperRight 1s normal;
+    -webkit-animation:swiperRight 1s normal;
+    animation-iteration-count: 1;
+    -webkit-animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+    -webkit-animation-fill-mode: forwards;
+}
+@keyframes swiperRight{
+    from{
+        left: 0rpx;
+        opacity: 1;
+        z-index: 100;
+    }to{
+        left: -500rpx;
+        opacity: 0;
+        z-index: 90;
+    }
+}
+/*
+    动画效果：
+    第一张图片向左移动110rpx 放大到1
+
+*/
+.swiper-left{
+    animation: swiperLeft 1s normal;
+    -webkit-animation: swiperLeft 1s normal;
+    animation-iteration-count: 1;
+    -webkit-animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+    -webkit-animation-fill-mode: forwards;
+}
+@keyframes swiperLeft{
+    from{
+        top:5%;
+        left: 110rpx;
+        transform: scale(0.9);
+        z-index: 80;
+    }to{
+        top:0%;
+        left: 0rpx;
+        transform: scale(1);
+        z-index: 100;
+    }
+}
+.move-left0{
+    animation: moveLeft 1s normal;
+    -webkit-animation: moveLeft 1s normal;
+    animation-iteration-count: 1;
+    -webkit-animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+    -webkit-animation-fill-mode: forwards;
+}
+@keyframes moveLeft{
+    from{
+        left: 210rpx;
+        top: 10%;
+        transform: scale(0.8);
+    }to{
+        left: 110rpx;
+        top: 5%;
+        transform: scale(0.9);
+    }
+}
+.move-left1{
+    animation: moveLeft1 1s normal;
+    -webkit-animation: moveLeft1 1s normal;
+    animation-iteration-count: 1;
+    -webkit-animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+    -webkit-animation-fill-mode: forwards;
+}
+@keyframes moveLeft1{
+    from{
+        left: 280rpx;
+        top: 15%;
+        transform: scale(0.7);
+    }to{
+        left: 210rpx;
+        top: 10%;
+        transform: scale(0.8);
+    }
+}
+.move-left2{
+    animation: moveLeft2 1s normal;
+    -webkit-animation: moveLeft2 1s normal;
+    animation-iteration-count: 1;
+    -webkit-animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+    -webkit-animation-fill-mode: forwards;
+}
+@keyframes moveLeft2{
+    from{
+        left: 400rpx;
+        top: 20%;
+        transform: scale(0.6);
+    }to{
+        left: 285rpx;
+        top: 15%;
+        transform: scale(0.7);
+    }
+}
+/*
+    右移相关动画
+*/
+.move-right4{
+    animation: moveRight4 1s normal;
+    -webkit-animation: moveRight4 1s normal;
+    animation-fill-mode: forwards;
+    -webkit-animation-fill-mode: forwards;
+    animation-iteration-count: 1;
+    -webkit-animation-iteration-count: 1;
+}
+@keyframes moveRight4{
+    from{
+        left : -500rpx;
+        opacity: 0;
+        z-index: 90;
+    }to{
+        left : 0rpx;
+        opacity: 1;
+        z-index: 100;
+    }
+}
+.move-right0{
+    animation: moveRight0 1s normal;
+    -webkit-animation: moveRight0 1s normal;
+    animation-fill-mode: forwards;
+    -webkit-animation-fill-mode: forwards;
+    animation-iteration-count: 1;
+    -webkit-animation-iteration-count: 1;
+}
+@keyframes moveRight0{
+    from{
+        left : 0rpx;
+        z-index: 100;
+        transform: scale(1);
+        top: 0rpx;
+    }to{
+        left : 110rpx;
+        z-index: 80;
+        top: 5%;
+        transform: scale(0.9);
+    }
+}
+.move-right1{
+    animation: moveRight1 1s normal;
+    -webkit-animation: moveRight1 1s normal;
+    animation-fill-mode: forwards;
+    -webkit-animation-fill-mode: forwards;
+    animation-iteration-count: 1;
+    -webkit-animation-iteration-count: 1;
+}
+@keyframes moveRight1{
+    from{
+        left : 110rpx;
+        transform: scale(0.9);
+        z-index: 80;
+        top: 5%;
+    }to{
+        left : 210rpx;
+        transform: scale(0.8);
+        z-index: 60;
+        top: 10%;
+    }
+}
+.move-right2{
+    animation: moveRight2 1s normal;
+    -webkit-animation: moveRight2 1s normal;
+    animation-fill-mode: forwards;
+    -webkit-animation-fill-mode: forwards;
+    animation-iteration-count: 1;
+    -webkit-animation-iteration-count: 1;
+}
+@keyframes moveRight2{
+    from{
+        left : 210rpx;
+        transform: scale(0.8);
+        z-index: 60;
+        top: 10%;
+    }to{
+        left : 285rpx;
+        transform: scale(0.7);
+        z-index: 40;
+        top: 15%;
+    }
+}
+.move-right3{
+    animation: moveRight3 1s normal;
+    -webkit-animation: moveRight3 1s normal;
+    animation-fill-mode: forwards;
+    -webkit-animation-fill-mode: forwards;
+    animation-iteration-count: 1;
+    -webkit-animation-iteration-count: 1;
+}
+@keyframes moveRight3{
+    from{
+        left : 285rpx;
+        transform: scale(0.6);
+        z-index: 40;
+        top: 15%;
+    }to{
+        left : 400rpx;
+        transform: scale(0.4);
+        z-index: 20;
+        top: 20%;
+    }
+}
+.dots{
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: center;
+    margin: 0 8rpx;
+    position: absolute;
+    left: 0rpx;
+    right: 0rpx;
+    bottom: 15rpx;
+}
+.dot{
+    margin: 0 8rpx;
+    height: 15rpx;
+    width: 15rpx;
+    background: #da91f5;
+    border-radius: 15rpx;
+}
+.active{
+    width: 40rpx;
+    height: 15rpx;
+    border-radius: 15rpx;
+}
+.scrollView{
+    width: 750rpx;
+}
+.twoColCon{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: 704rpx;
+    padding: 0rpx 23rpx;
+}
+.type-con .scrollView .twoColCon .left-con{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-wrap: nowrap;
+    width: 342rpx;
+}
+.goTop{
+  position: fixed;
+  bottom: 50rpx;
+  padding: 20rpx;
+  right: 30rpx;
+}
+.loadText{
+    font-size: 25rpx;
+    color: #000;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    margin-bottom: 5rpx;
+}
+.centerText{
+
+}
+.lrWrapper{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: nowrap;
 }
 

@@ -1,0 +1,18 @@
+/* components/beforeLoadImg/beforeLoadImg.wxss */
+/*默认图片的容器*/
+.default-con{
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: nowrap;
+}
+.defaultImg{
+    
+}
+.before-load{
+    width: 0;
+    height: 0;
+    opacity: 0;
+}

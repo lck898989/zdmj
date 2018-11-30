@@ -1,1 +1,16 @@
 /* pages/WeiMaTwo/WeiMaTwo.wxss */
+.image{
+   width: 750rpx;
+   
+    
+ 
+   
+     
+  
+
+}
+
+.imageParent{
+   display: flex;
+   flex-direction:column;
+}

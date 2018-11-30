@@ -4,6 +4,7 @@ Page({
     data: {
         scopeHidden: true,
         loadHidden: true,
+        imageUrl:"",
 
     },
     //点击浏览商城
@@ -48,6 +49,9 @@ Page({
 
     },
     onLoad: function() {
+        this.setData({
+            imageUrl: app.imageUrl
+        })
         console.log("44444444444444444444444");
         if (app.isShare) {
             console.log("3333");

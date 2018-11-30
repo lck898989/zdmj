@@ -1,22 +1,114 @@
 /* pages/GetRebate/GetRebate.wxss */
 
-.myFriends{
+.myFriends {
 }
-.shareBox{
-    position:relative;
+
+.shareBox {
+    position: relative;
     width: 750rpx;
     height: 100px;
 }
-.agree{
+
+.agree {
     position: absolute;
     bottom: 0;
     left: 0;
-
-
 }
-.noAgree{
+
+.noAgree {
     position: absolute;
     bottom: 0;
     right: 0;
+}
 
+.acyivityImage {
+    position: relative;
+    margin-top: 0rpx;
+    width: 750rpx;
+}
+
+.acyivityView {
+    position: relative;
+    margin-top: 0rpx;
+    width: 750rpx;
+    height: 509rpx;
+}
+
+.mymoneyView {
+    background-color: white;
+    width: 750rpx;
+    height: 90rpx;
+    position: relative;
+    margin-top: 0rpx;
+    display: flex;
+    align-items: center;
+}
+
+.moneyImage {
+    position: absolute;
+    width: 43rpx;
+    left: 32rpx;
+}
+
+.textMyMoney {
+    position: absolute;
+    left: 104rpx;
+}
+
+.background {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background-color: #f2f2f2;
+}
+
+.dayuImage {
+    position: absolute;
+    right: 20rpx;
+    width: 25rpx;
+}
+
+.rumenRebate {
+    position: relative;
+    width: 750rpx;
+    height: 180rpx;
+    margin-top: 20rpx;
+}
+
+.rumenImage {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+}
+
+.rumenText {
+    position: absolute;
+    top: 41rpx;
+    left: 66rpx;
+    color: #31a2dc;
+}
+
+.jinjieText {
+    position: absolute;
+    top: 39rpx;
+    left: 66rpx;
+    color: #ec3c4d;
+}
+.jinjieImage {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+}
+
+.jinjieRebate {
+    position: relative;
+    width: 750rpx;
+    height: 230rpx;
+    margin-top: 20rpx;
 }

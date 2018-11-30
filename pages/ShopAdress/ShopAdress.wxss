@@ -1,1 +1,273 @@
 /* pages/ShopAdress/ShopAdress.wxss */
+
+.shopAdressView {
+    position: relative;
+    width: 750rpx;
+    background-color: #7f7f7f;
+}
+
+.shopName {
+    position: absolute;
+    left: 85rpx;
+}
+/* .wxParse-p{
+      font-size: 30rpx; 
+     text-indent:60rpx; 
+      
+}
+.wxParse-img{
+    width: 710rpx;
+    height: 710rpx;
+    position: relative;
+   
+    margin-left: -60rpx;
+} */
+.shoppingView {
+    position: relative;
+    width: 750rpx;
+    height: 70rpx;
+    background-color: white;
+    display: flex;
+    align-items: center;
+}
+
+.shoppayView {
+    position: relative;
+    width: 750rpx;
+    height: 120rpx;
+    background-color: white;
+    margin-top: 2rpx;
+    /* display: flex;
+    flex-wrap: wrap;
+    align-items: center; */
+}
+
+.yunfeiView {
+    position: absolute;
+    width: 750rpx;
+    height: 27rpx;
+    top: 27rpx;
+    background-color: white;
+    display: flex;
+    align-items: center;
+}
+
+.shifuView {
+    position: absolute;
+    width: 750rpx;
+    height: 27rpx;
+    bottom: 27rpx;
+    background-color: white;
+    display: flex;
+    align-items: center;
+}
+
+.yunqianText {
+    position: absolute;
+    right: 80rpx;
+}
+
+.yunfeiText {
+    position: absolute;
+    left: 25rpx;
+}
+
+.shifuText {
+    position: absolute;
+    left: 25rpx;
+}
+
+.orderMsgView {
+    position: relative;
+    margin-top: 0rpx;
+    width: 750rpx;
+    height: 450rpx;
+    background-color: #f2f2f2;
+}
+
+.shopAdress {
+    position: relative;
+    margin-top: 50rpx;
+    margin-left: 100rpx;
+    width: 50rpx;
+}
+
+.oneAdress {
+    position: relative;
+    margin-top: 100rpx;
+    margin-left: 0rpx;
+    width: 710rpx;
+    height: 65rpx;
+    /* background-color: red; */
+}
+
+.shouhuo1Text {
+    position: absolute;
+    top: -4rpx;
+    left: 155rpx;
+}
+
+/* .shousuoText {
+} */
+
+.wulieshiText {
+    position: absolute;
+}
+
+.icon1 {
+    position: absolute;
+    top: 0;
+    left: 100rpx;
+    width: 45rpx;
+}
+
+.text7 {
+    position: absolute;
+    top: 8rpx;
+    left: 117rpx;
+    width: 10rpx;
+    height: 10rpx;
+    background-color: #c0c0c0;
+    border-radius: 50rx;
+}
+.Data1{
+    position: absolute;
+    left: 20rpx;
+    top: -20rpx;
+    width: 70rpx;
+}
+.wuliuView1 {
+    position: relative;
+    width: 710rpx;
+    margin-left: 20rpx;
+    margin-top: 20rpx;
+    background-color: white;
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+.wuliuView {
+    position: relative;
+    width: 750rpx;
+    background-color: #f2f2f2;
+    overflow: hidden;
+}
+page{
+    background-color: #f2f2f2;
+}
+.kaifaText {
+    position: absolute;
+    top: 30rpx;
+    right: 25rpx;
+}
+
+.text1 {
+    position: absolute;
+    top: 91rpx;
+    left: 36rpx;
+}
+
+.text2 {
+    position: absolute;
+    top: 143rpx;
+    left: 36rpx;
+}
+
+.text3 {
+    position: absolute;
+    top: 196rpx;
+    left: 36rpx;
+}
+
+.text4 {
+    position: absolute;
+    top: 249rpx;
+    left: 36rpx;
+}
+
+.text5 {
+    position: absolute;
+    top: 302rpx;
+    left: 36rpx;
+}
+
+.text6 {
+    position: absolute;
+    top: 355rpx;
+    left: 36rpx;
+}
+
+.bianhaoText {
+    position: absolute;
+    top: 91rpx;
+    left: 36rpx;
+}
+
+.dingdanxinxiDext {
+    position: absolute;
+    top: 30rpx;
+    left: 36rpx;
+}
+
+.orderView {
+    position: absolute;
+    top: 20rpx;
+    left: 0rpx;
+    background-color: white;
+    width: 750rpx;
+    height: 430rpx;
+}
+
+orderMsgView1 {
+    position: absolute;
+    top: 20rpx;
+    left: 0rpx;
+    background-color: white;
+    width: 750rpx;
+    height: 430rpx;
+}
+
+.shiqianText {
+    position: absolute;
+    right: 100rpx;
+}
+
+.shopNumber {
+    position: absolute;
+    top: 105rpx;
+    right: 50rpx;
+}
+
+.shopNameText {
+    position: absolute;
+    top: 34rpx;
+    left: 187rpx;
+    right: 53rpx;
+}
+
+.shopView {
+    position: relative;
+    margin-top: 2rpx;
+    width: 750rpx;
+    height: 160rpx;
+    background-color: white;
+}
+
+.shopImage {
+    position: absolute;
+    top: 30rpx;
+    left: 51rpx;
+    width: 100rpx;
+}
+
+.DataText {
+    position: absolute;
+    right: 50rpx;
+    text-align: right;
+}
+
+.shoppingImage {
+    position: absolute;
+    left: 38rpx;
+    width: 30rpx;
+}

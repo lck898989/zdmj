@@ -9,17 +9,334 @@
     background-color: #808080;
 } */
 
+page {
+    background-color: #dadada;
+}
+
 .typeView {
     position: relative;
     width: 750rpx;
     height: 95rpx;
     background-color: white;
     display: flex;
-    justify-content: space-around;  
+    justify-content: space-around;
     /* align-items: center;
     flex-direction: row; */
 }
+
 .typeson {
     padding: 34rpx 0rpx 34rpx 0rpx;
     /* border-bottom: 4rpx solid #ff861a; */
+}
+
+.backgroundView {
+    position: relative;
+    width: 750rpx;
+    height: 20rpx;
+    margin-top: 0rpx;
+    background-color: #dadada;
+}
+
+.shopView {
+    position: relative;
+    width: 750rpx;
+    background-color: #dadada;
+    margin-top: 0rpx;
+}
+
+.topView {
+    position: relative;
+    margin-top: 0rpx;
+    width: 750rpx;
+    height: 80rpx;
+    background-color: white;
+    display: flex;
+    align-items: center;
+}
+
+.shopImage {
+    position: absolute;
+    left: 38rpx;
+    /* top: 24rpx; */
+    width: 30rpx;
+}
+
+.shopTextName {
+    position: absolute;
+    /* top: 28rpx; */
+    left: 85rpx;
+}
+
+.orderStateText {
+    position: absolute;
+    /* top: 28rpx; */
+    right: 39rpx;
+    color: #ff861a;
+}
+
+.shopMsgView {
+    position: relative;
+    margin-top: 2rpx;
+    width: 750rpx;
+    background-color: white;
+    height: 190rpx;
+}
+
+.shopMsgView1 {
+    position: relative;
+    margin-top: 0rpx;
+    width: 750rpx;
+    background-color: white;
+    height: 190rpx;
+}
+
+.shopImage1 {
+    position: absolute;
+    width: 150rpx;
+    top: 20rpx;
+    left: 31rpx;
+}
+
+.shopDetailText {
+    position: absolute;
+    top: 27rpx;
+    left: 204rpx;
+    display: -webkit-box;
+    word-break: break-all;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    letter-spacing: 1px;
+    /* text-decoration: underline; */
+}
+
+.orderBackGround {
+    width: 750rpx;
+    color: #dadada;
+}
+
+.shopSize {
+    position: absolute;
+    top: 113rpx;
+    left: 223rpx;
+}
+
+.shopType {
+    position: absolute;
+    top: 113rpx;
+    left: 304rpx;
+}
+
+.shopnumberText {
+    position: absolute;
+    right: 70rpx;
+    bottom: 50rpx;
+}
+
+.shoppriceMsg {
+    position: relative;
+    margin-top: 2rpx;
+    width: 750rpx;
+    height: 80rpx;
+    background-color: white;
+    display: flex;
+    align-items: center;
+}
+
+.oneShopNumber {
+    position: absolute;
+    left: 584rpx;
+    bottom: 10rpx;
+}
+
+.shopNumber {
+    position: absolute;
+    /* top: 28rpx; */
+    left: 394rpx;
+}
+
+.dingstateText {
+    position: absolute;
+    left: 50rpx;
+    color: #ff861a;
+}
+
+.Text1 {
+    position: absolute;
+    left: 100rpx;
+
+}
+
+.Text2 {
+    position: absolute;
+    left: 150rpx;
+    width: 32rpx;
+    height: 35rpx;
+     background-color: #b31227;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+
+.Text3 {
+    position: absolute;
+    left: 192rpx;
+   
+}
+
+.Text4 {
+    position: absolute;
+    left: 225rpx;
+    width: 32rpx;
+    height: 35rpx;
+     background-color: #b31227;
+       display: flex;
+    justify-content: center;
+    align-items: center;
+      color: white;
+}
+
+.Text5 {
+    position: absolute;
+    left: 265rpx;
+
+}
+
+.Text6 {
+    position: absolute;
+    left: 295rpx;
+    width: 32rpx;
+    height: 35rpx;
+   background-color: #b31227;
+       display: flex;
+    justify-content: center;
+    align-items: center;
+      color: white;
+}
+
+.Text7 {
+    position: absolute;
+    left: 335rpx;
+
+}
+
+.Text8 {
+    position: absolute;
+    left: 365rpx;
+    width: 32rpx;
+    height: 35rpx;
+   background-color: #b31227;
+       display: flex;
+    justify-content: center;
+    align-items: center;
+      color: white;
+}
+
+
+.Text9 {
+        position: absolute;
+    left: 405rpx;
+  
+}
+
+
+.stateButton1 {
+    position: absolute;
+    left: 531rpx;
+    width: 150rpx;
+    height: 40rpx;
+    border-bottom: 4rpx solid #ff861a;
+    border-top: 4rpx solid #ff861a;
+    border-left: 4rpx solid #ff861a;
+    border-right: 4rpx solid #ff861a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50px;
+    color: #ff861a;
+}
+
+.gongText {
+    position: absolute;
+    left: 394rpx;
+}
+
+.shifuText {
+    position: absolute;
+    left: 526rpx;
+}
+
+.stateButton2 {
+    position: absolute;
+    left: 350rpx;
+    width: 150rpx;
+    height: 40rpx;
+    border-bottom: 4rpx solid black;
+    border-top: 4rpx solid black;
+    border-left: 4rpx solid black;
+    border-right: 4rpx solid black;
+    color: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50px;
+}
+
+.shopPrice {
+    position: absolute;
+    /* top: 27rpx; */
+    left: 526rpx;
+}
+
+.buttonView {
+    position: relative;
+    margin-top: 2rpx;
+    width: 750rpx;
+    height: 80rpx;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    border-bottom: 1rpx solid #dadada;
+    /* border-radius: 30rpx;
+    border-bottom: 4rpx solid #ff861a;
+    border-top: 4rpx solid #ff861a;
+    border-left: 4rpx solid #ff861a;
+    border-right: 4rpx solid #ff861a;
+    display: flex;
+    justify-content :center;
+     align-items :center; */
+}
+
+.quxiaoOrder {
+    position: absolute;
+    /* top: 15rpx; */
+    right: 150rpx;
+    border-radius: 30rpx;
+    border-bottom: 4rpx solid black;
+    border-top: 4rpx solid black;
+    border-left: 4rpx solid black;
+    border-right: 4rpx solid black;
+    width: 100rpx;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.buttonText {
+    position: absolute;
+    /* top: 15rpx; */
+    right: 30rpx;
+    border-radius: 30rpx;
+    border-bottom: 4rpx solid #ff861a;
+    border-top: 4rpx solid #ff861a;
+    border-left: 4rpx solid #ff861a;
+    border-right: 4rpx solid #ff861a;
+    width: 100rpx;
+    display: flex;
+    color: #ff861a;
+    justify-content: center;
+    align-items: center;
+    /* height: 50rpx; */
 }

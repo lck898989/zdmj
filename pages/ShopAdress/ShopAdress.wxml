@@ -1,2 +1,65 @@
 <!--pages/ShopAdress/ShopAdress.wxml-->
-<text>pages/ShopAdress/ShopAdress.wxml</text>
+<!-- <text>pages/ShopAdress/ShopAdress.wxml</text> -->
+<view class='shopAdressView'>
+    <view class='shoppingView'>
+        <image class='shoppingImage' src='../../resources/shope_icon.png' mode='widthFix'></image>
+        <text class='shopName' style='font-size:23rpx'>{{orderJSON.shopmsg.store.sname}}</text>
+        <!-- <text class='DataText' style='font-size:19rpx'>2018-06-15</text> -->
+    </view>
+    <view class='shopView'>
+        <image class='shopImage' src='{{url+orderJSON.shopmsg.product.head[0]}}' mode='widthFix'></image>
+        <text class='shopNameText' space='ensp' style='font-size:23rpx'> {{orderJSON.shopmsg.product.pname}}</text>
+        <text class='shopNumber'>{{orderJSON.shopmsg.pcount}}件商品</text>
+    </view>
+    <view class='shoppayView'>
+        <view class='yunfeiView'>
+            <text style='font-size:22rpx;' class='yunfeiText'>免运费</text>
+            <!-- <text style='font-size:18rpx;' class='yunqianText'>￥0.00</text> -->
+        </view>
+        <view class='shifuView'>
+            <text space='ensp' style='font-size:27rpx;' class='shifuText'>实付款 (含运费)</text>
+            <text class='shiqianText' style='font-size:27rpx;color:#ff5000' space='ensp'>￥{{orderJSON.shopmsg.product.price}}</text>
+        </view>
+        <!-- <text class='yunfeiText'  style='font-size:22rpx'>运费</text> -->
+    </view>
+</view>
+
+<view class='orderMsgView'>
+    <view class='orderView'>
+        <text class='dingdanxinxiDext' style='font-size:27rpx;'>订单信息</text>
+        <text class='kaifaText'>开发票</text>
+        <text class='text1' space='ensp' style='font-size:22rpx;'>订单编号:    {{orderJSON.ordernumber}}</text>
+        <text class='text2' space='ensp' style='font-size:22rpx;'>下单时间:    {{orderJSON.ordertime}}</text>
+        <text class='text3' space='ensp' style='font-size:22rpx;'>支付方式:    微信支付</text>
+        <text class='text4' space='ensp' style='font-size:22rpx;'>付款时间:    {{orderJSON.paytime}}</text>
+        <text class='text5' space='ensp' style='font-size:22rpx;'>物流方式:    {{orderJSON.com}}</text>
+        <text class='text6' space='ensp' style='font-size:22rpx;'>运单编号:    {{orderJSON.phy_number}}</text>
+    </view>
+</view>
+
+<view class='wuliuView' >
+    <view class='wuliuView1'>
+        <block wx:for='{{shopAdressArray}}'>
+            <view class='oneAdress' wx:if='{{index==0}}' style='margin-top:60rpx;'>
+                <text class='wulieshiText'> </text>
+                <image class='icon1' mode='widthFix' wx:if='{{shopJSON.state>=3&&index==0}}' src='../../resources/微信图片_20181107193427.png'></image>
+                <text class='text7' wx:elif='{{shopJSON.state>=3&&index!=0}}'></text>
+                <image class='icon1' mode='widthFix' wx:elif='{{shopJSON.state<3&&index==0}}' src='../../resources/微信图片_20181108111508.png'></image>
+                <text class='text7' wx:elif='{{shopJSON.state<3&&index!=0}}'></text>
+                <text class='shouhuo1Text' style='font-size:24rpx;' space='ensp'>{{item.context}}</text>
+                <text class='Data1' style='font-size:20rpx'>{{item.time}}</text>
+            </view>
+            <view class='oneAdress' wx:else>
+                <text class='wulieshiText'> </text>
+                <image class='icon1' mode='widthFix' wx:if='{{shopJSON.state>=3&&index==0}}' src='../../resources/微信图片_20181107193427.png'></image>
+                <text class='text7' wx:elif='{{shopJSON.state>=3&&index!=0}}'></text>
+                <image class='icon1' mode='widthFix' wx:elif='{{shopJSON.state<3&&index==0}}' src='../../resources/微信图片_20181108111508.png'></image>
+                <text class='text7' wx:elif='{{shopJSON.state<3&&index!=0}}'></text>
+                <text class='shouhuo1Text' style='font-size:24rpx;' space='ensp'>{{item.context}}</text>
+                <text class='Data1' style='font-size:20rpx'>{{item.time}}</text>
+            </view>
+        </block>
+        <!-- <image class='shopAdress'  mode='widthFix'src='../../resources/微信图片_20181107193427.png'></image>
+        <text class='shousuoText'>[收货地址]某某市某某区 这里的参数字体是24地址全程</text> -->
+    </view>
+</view>

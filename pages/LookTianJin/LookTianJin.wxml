@@ -1,2 +1,5 @@
 <!--pages/LookTianJin/LookTianJin.wxml-->
-<text>pages/LookTianJin/LookTianJin.wxml</text>
+<view class='imageParent' wx:for='{{arrayUrl}}'>
+    <image mode='widthFix' src='{{item}}' class='image'>
+    </image>
+</view>

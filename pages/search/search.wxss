@@ -1,0 +1,528 @@
+/* pages/search/search.wxss */
+
+::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+    color: transparent;
+}
+
+.scrolView {
+    position: absolute;
+    top: 84rpx;
+    width: 750rpx;
+    height: 100px;
+}
+
+.searchView {
+    position: relative;
+    width: 750rpx;
+    height: 84rpx;
+    display: flex;
+    align-items: center;
+}
+
+.checkView {
+    position: relative;
+    width: 750rpx;
+    height: 117rpx;
+    margin-top: 0rpx;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.checkView1 {
+    position: absolute;
+    width: 750rpx;
+    height: 117rpx;
+    left: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.searchJinText {
+    position: absolute;
+    left: 17rpx;
+}
+
+.shopIcon {
+    position: absolute;
+    left: 30rpx;
+    width: 48rpx;
+}
+
+.resultNumberText {
+    position: absolute;
+    right: 30rpx;
+    color: #a0a0a0;
+}
+
+.shopName1 {
+    position: absolute;
+    top: 56rpx;
+    left: 314rpx;
+}
+
+.shopImage {
+    position: absolute;
+    top: 27rpx;
+    left: 30rpx;
+    width: 240rpx;
+}
+
+.mask {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #000;
+    opacity: 0.7;
+    overflow: hidden;
+    z-index: 1000;
+}
+.chooseImage {
+    position: absolute;
+    left: 20rpx;
+    width: 150rpx;
+}
+.choosePrice {
+    position: absolute;
+    left: 238rpx;
+    top: 38rpx;
+}
+.chooseShopName1 {
+    position: absolute;
+    top: 102rpx;
+    left: 238rpx;
+}
+.Icon {
+    position: absolute;
+    top: 17rpx;
+    right: 19rpx;
+    width: 32rpx;
+}
+.chooseShopView {
+    position: absolute;
+    top: 188rpx;
+    width: 750rpx;
+    height: 512rpx;
+    left: 0;
+}
+
+.fenleiText1 {
+    position: absolute;
+    left: 28rpx;
+}
+
+
+.typeView {
+    position: relative;
+    width: 750rpx;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}.typeView1 {
+    position: relative;
+    background-color: #eee;
+    color: #7d7d7d;
+    margin-top: 18rpx;
+    padding: 21rpx 48rpx 21rpx 48rpx;
+    margin-left: 19rpx;
+    border-radius: 10px;
+}
+
+.nullView7 {
+    position: relative;
+    width: 750rpx;
+    height: 21rpx;
+    background-color: white;
+}
+.shopNumberView {
+    position: relative;
+    margin-top: 0rpx;
+    width: 750rpx;
+    height: 64rpx;
+    display: flex;
+    align-items: center;
+}
+
+.goumaiText {
+    position: absolute;
+    left: 20rpx;
+}
+
+.jiaTrxt {
+    position: absolute;
+    right: 47rpx;
+    color: #404040;
+}
+
+.shopNumber {
+    position: absolute;
+    right: 139rpx;
+    top: 21rpx;
+}
+.jianTrxt {
+    position: absolute;
+    right: 218rpx;
+    top: 6rpx;
+}
+.sureView {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #b964d8;
+    bottom: 0;
+    left: 0;
+    width: 750rpx;
+    height: 100rpx;
+}
+.nullView6 {
+    position: relative;
+    margin-top: 0;
+    width: 750rpx;
+    height: 2rpx;
+    background-color: #eee;
+}
+.chooseShop {
+    position: relative;
+    width: 750rpx;
+    height: 188rpx;
+    display: flex;
+    align-items: center;
+}
+.buy-con {
+      position: fixed;
+    background-color: #fff;
+    width: 750rpx;
+    height: 800rpx;
+    bottom: 0rpx;
+    z-index: 2000;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+.shpoIcon {
+    position: absolute;
+    bottom: 38rpx;
+    right: 39rpx;
+    width: 64rpx;
+}
+.img{
+    margin-left: 20rpx;
+    margin-top: 20rpx;
+    border-radius: 20rpx;
+}
+.price-item{
+    margin-top: 20rpx;
+    margin-left: 15rpx;
+}
+.cancel-con{
+    position: absolute;
+    justify-self: flex-end;
+    top: 10px;
+    right: 20rpx;
+}
+.scc-con{
+    width: 100%;
+    height: 360rpx;
+}
+.lineTwo-con{
+    padding: 30rpx 0rpx;
+    padding-bottom: 0rpx;
+    margin-left: 30rpx;
+}
+.color-con{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    /* //允许换行 */
+    flex-wrap: wrap;
+    align-items: center;
+}
+.color-item{
+    margin-top: 20rpx;
+    margin-right: 20rpx;
+    background-color: #eee;
+    padding: 10rpx 30rpx;
+    border-radius: 10rpx;
+    font-size: 25rpx;
+}
+.countContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    align-items: center;
+    margin-top: 20rpx;
+    font-size: 30rpx;
+}
+.add-sub-con{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+    align-items: center;
+}
+.as-item{
+    margin-right: 5rpx;
+    padding: 10rpx 20rpx;
+}
+.addOrBuy{
+    width: 100%;
+    height:100rpx;
+    line-height: 100rpx;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+    align-items: center;
+    position: fixed;
+    bottom: 0rpx;
+    text-align: center;
+}
+.saveType,.saveBuy{
+    width: 100%;
+    background-color: #b964d8;
+    color: #fff;
+}
+.price-order-con{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+    align-items: flex-start;
+    height: 160rpx;
+    margin-top: 40rpx;
+    margin-left: 20rpx;
+}
+.lineOne-con{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+.tuijianText {
+    position: absolute;
+    top: 18rpx;
+    left: 17rpx;
+}
+
+shopViews {
+    position: relative;
+    margin-top: 0rpx;
+    width: 750rpx;
+    height: 340rpx;
+    background-color: red;
+}
+
+.zhidanIcon {
+    position: absolute;
+    bottom: 48rpx;
+    right: 230rpx;
+    width: 94rpx;
+}
+
+.shopPrice {
+    position: absolute;
+    top: 176rpx;
+    left: 314rpx;
+    text-decoration: line-through;
+}
+
+.shopPrice1 {
+    position: absolute;
+    left: 314rpx;
+    bottom: 43rpx;
+}
+
+.shopDetail {
+    position: absolute;
+    left: 314rpx;
+    top: 92rpx;
+}
+
+.shopView {
+    position: relative;
+    margin-top: 0rpx;
+    width: 750rpx;
+    height: 302rpx;
+}
+
+.shopName {
+    position: absolute;
+    left: 113rpx;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.nullView3 {
+    position: relative;
+    margin-top: 0;
+    width: 750rpx;
+    height: 18rpx;
+}
+
+.sreachResultView {
+    position: relative;
+    margin-top: 0rpx;
+    width: 750rpx;
+    height: 90rpx;
+    display: flex;
+    align-items: center;
+}
+
+.sreachjinParent {
+    position: relative;
+    margin-top: 0;
+    width: 750rpx;
+    display: flex;
+    direction: row;
+    flex-wrap: wrap;
+}
+
+.nullView {
+    position: absolute;
+    width: 750rpx;
+    height: 20rpx;
+}
+
+.nullView1 {
+    position: absolute;
+    top: 0;
+    width: 750rpx;
+    height: 2px;
+    background-color: #eee;
+}
+
+.hotView {
+    position: relative;
+    width: 750rpx;
+    height: 70rpx;
+}
+
+.remenText {
+    position: absolute;
+    left: 17rpx;
+}
+
+.sreachhotParent {
+    position: relative;
+    margin-top: 0;
+    width: 750rpx;
+    display: flex;
+    direction: row;
+    flex-wrap: wrap;
+}
+
+.sreachhotChild {
+    position: relative;
+    background-color: #eee;
+    color: #7d7d7d;
+    margin-top: 16rpx;
+    padding: 18rpx 32rpx 18rpx 32rpx;
+    margin-left: 30rpx;
+    border-radius: 20px;
+}
+
+.searchhotView {
+    position: absolute;
+    top: 20rpx;
+    width: 750rpx;
+    height: 50rpx;
+    display: flex;
+    align-items: center;
+}
+
+.sreachjinChild {
+    position: relative;
+    background-color: #eee;
+    color: #7d7d7d;
+    margin-top: 16rpx;
+    padding: 18rpx 32rpx 18rpx 32rpx;
+    margin-left: 30rpx;
+    border-radius: 20px;
+}
+
+.lajiImage {
+    position: absolute;
+    width: 28rpx;
+    right: 32rpx;
+    top: 10rpx;
+}
+
+.searchDa {
+    position: absolute;
+    left: 30rpx;
+    width: 10rpx;
+}
+
+.sreachJinView {
+    position: relative;
+    margin-top: 0rpx;
+    width: 750rpx;
+    height: 52rpx;
+    display: flex;
+    align-items: center;
+}
+
+.sreachboxView {
+    position: absolute;
+    left: 15rpx;
+    width: 595rpx;
+    height: 50rpx;
+    display: flex;
+    align-items: center;
+    border-radius: 30px;
+    border-top: 2rpx solid #9f9f9f;
+    border-bottom: 2rpx solid #9f9f9f;
+    border-left: 2rpx solid #9f9f9f;
+    border-right: 2rpx solid #9f9f9f;
+}
+
+.searchIcon {
+    position: absolute;
+    left: 22rpx;
+    color: #959595;
+}
+
+.searchText {
+    position: absolute;
+    left: 70rpx;
+    width: 480rpx;
+    color: #000;
+}
+
+.clear {
+    position: absolute;
+    right: 10rpx;
+}
+
+.clearView {
+    position: absolute;
+    right: 10rpx;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100px;
+    height: 100px;
+    background-color: red;
+}
+
+.searchText1 {
+    position: absolute;
+    width: 100rpx;
+    right: 21rpx;
+    height: 50rpx;
+    background-color: #ba65d9;
+    color: #fff;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

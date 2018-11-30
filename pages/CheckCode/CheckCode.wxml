@@ -10,6 +10,6 @@
         <text class="shopNumber" style="font-size:12px;">订单编号 ：{{codeMsg.orderNumber}}</text>
         <text class="xuyao" style="font-size:12px;">需要预约</text>
         <text class="code" style="font-size:16px;">您的体验码{{codeMsg.code}}</text>
-        <text  bindtap='pressPerson' class="talkPerson"  style="font-size:19px;">联系客服进行预订</text>
+        <text bindtap='pressPerson' class="talkPerson" style="font-size:19px;">联系客服进行预订</text>
     </view>
 </view>

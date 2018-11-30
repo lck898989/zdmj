@@ -1,11 +1,21 @@
-<!--pages/GetRebate/GetRebate.wxml-->
-<!-- <text>pages/GetRebate/GetRebate.wxml</text> -->
-<view class='myFriends' hidden="{{rebate}}">
-    我的亲友团
-    <button open-type="share" bindtap="" bindgetphonenumber="{{userBack1}}" class='shareCon'>邀请好友成为下级</button>
-</view>
-<view class='shareBox' hidden="{{shareHidden}}">
-    您的好友正在邀请您成为他的亲友团
-    <button class='agree' bindtap='agree'>接受</button>
-    <button class='noAgree'>不接受</button>
+
+<view class='background'>
+    <view class='acyivityView'>
+        <image class='acyivityImage' src='{{imageUrl+"fanli_1.jpg"}}' mode='widthFix'></image>
+    </view>
+    <view class='mymoneyView' bindtap='pressMyMoney'>
+        <image class='moneyImage' src='../../resources/qiaobao_icon1.png' mode='widthFix'></image>
+        <text class='textMyMoney' style='font-size:29rpx;'>我的钱包</text>
+        <image class='dayuImage' src='../../resources/icon_right.png' mode='widthFix'></image>
+    </view>
+    <view class='rumenRebate' bindtap='pressIntroduction'>
+        <image class='rumenImage' src='{{imageUrl+"fanli_2.png"}}'>
+            <text class='rumenText' style='font-size:27rpx;font-weight:900;'>入门返利</text>
+        </image>
+    </view>
+    <view class='jinjieRebate' bindtap='pressGradeRebate'>
+        <image class='jinjieImage' src='{{imageUrl+"fanli_3.png"}}'>
+            <text class='jinjieText' style='font-size:27rpx;font-weight:900;'>进阶返利</text>
+        </image>
+    </view>
 </view>

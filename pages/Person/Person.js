@@ -13,7 +13,7 @@ Page({
     //点击返回商城
     PressReturn: function() {
         wx.switchTab({
-            url: '../index/index'
+            url: '../indextwo/indextwo'
         })
     },
     /**

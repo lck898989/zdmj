@@ -1,12 +1,115 @@
 <!--pages/MyOrder/MyOrder.wxml-->
-
 <view class='typeView'>
     <block wx:for='{{typeArray}}'>
-        <text  class='typeson' style='color:#ff861a;font-size:27rpx; border-bottom: 4rpx solid #ff861a;' bindtap='pressType' id='{{index}}' wx:if='{{index==indexs}}'>{{item}}</text>
-        <text  class='typeson' style='color:#808080;font-size:27rpx' bindtap='pressType' id='{{index}}' wx:else>{{item}}</text>
+        <text class='typeson' style='color:#ff861a;font-size:27rpx; border-bottom: 4rpx solid #ff861a;' bindtap='pressType' id='{{index}}' wx:if='{{index==indexs}}'>{{item}}</text>
+        <text class='typeson' style='color:#808080;font-size:27rpx' bindtap='pressType' id='{{index}}' wx:else>{{item}}</text>
     </block>
 </view>
+<block wx:for='{{orderArray}}'>
+    <view class='shopView' wx:if='{{item.state==1}}' hidden='{{isHas}}' data-id='{{item.oid}}'>
+        <view class='backgroundView'></view>
+        <view class='topView'>
+            <image class='shopImage' mode='widthFix' src='../../resources/store.png'></image>
+            <text class='shopTextName' style='font-size:23rpx;'>{{item.orderItems[0][0].store.sname}}</text>
+            <text class='orderStateText' id='{{item.onumber}}' wx:if='{{item.state==1}}' bindtap='checkWu' style='font-size:23rpx;'>待付款</text>
 
-<view class='shopView'>
-    <view class='topView'></view>
-</view>
+        </view>
+        <block wx:for='{{item.orderItems[0]}}' wx:for-index="idx" wx:for-item="item1">
+            <view class='shopMsgView' wx:if='{{idx==0}}'>
+                <image class='shopImage1' src='{{url+item1.product.head[0]}}' mode='widthFix'></image>
+                <text class='shopDetailText' space='ensp' style='font-size:24rpx;'> {{item1.product.pname}}</text>
+                <text class='shopSize' style='font-size:20rpx;color:#808080' space='ensp'>{{item1.standard}}</text>
+                <!-- <text class='shopType' style='font-size:20rpx;'>款式{{item1.product.size.color}}</text> -->
+                <text class='shopnumberText' style='font-size:22rpx;'>{{item1.pcount}}件商品</text>
+            </view>
+            <view class='shopMsgView1' wx:else>
+                <image class='shopImage1' src='{{url+item1.product.head[0]}}' mode='widthFix'></image>
+                <text class='shopDetailText' space='ensp' style='font-size:24rpx;'> 【{{item1.product.pname}}】{{item1.product.info}}</text>
+                <text class='shopSize' style='font-size:20rpx;' space='ensp'>{{item1.standard}}</text>
+                <!-- <text class='shopType' style='font-size:20rpx;'>款式{{item1.product.size.color}}</text> -->
+                <text class='shopnumberText' style='font-size:22rpx;'>{{item1.pcount}}件商品</text>
+            </view>
+        </block>
+        <view class='shoppriceMsg'>
+            <text class='shopNumber' style='font-size:22rpx;'>共{{item.orderItems[0].length}}件商品</text>
+            <text class='shopPrice' space='ensp' style='font-size:22rpx;'>实付款: {{item.oaccount}}</text>
+        </view>
+        <view class='buttonView'>
+            <text class='buttonText' style='font-size:23rpx;' data-shopmsg='{{item.oid}}' bindtap='goPay' wx:if='{{item.state==1}}'>去付款</text>
+            <text class='quxiaoOrder' style='font-size:23rpx;' data-oid='{{item.oid}}' bindtap='quanxiaoOrder' wx:if='{{item.state==1}}'>取消订单</text>
+            <text class='Text1' style='font-size:23rpx;'>剩余</text>
+            <text class='Text2' style='font-size:23rpx;'>{{item.time.days}}</text>
+            <text class='Text3' style='font-size:23rpx;'>天</text>
+            <text class='Text4' style='font-size:23rpx;'>{{item.time.hous}}</text>
+            <text class='Text5' style='font-size:23rpx;'>时</text>
+            <text class='Text6' style='font-size:23rpx;'>{{item.time.mins}}</text>
+            <text class='Text7' style='font-size:23rpx;'>分</text>
+            <text class='Text8' style='font-size:23rpx;'>{{item.time.secs}}</text>
+            <text class='Text9' style='font-size:23rpx;'>秒</text>
+        </view>
+    </view>
+    <view wx:else hidden='{{isHas}}'>
+        <view class='backgroundView'></view>
+        <view class='topView'>
+            <image class='shopImage' mode='widthFix' src='../../resources/store.png'></image>
+            <text class='shopTextName' style='font-size:23rpx;'>{{item.orderItems[0][0].store.sname}}</text>
+        </view>
+        <block wx:for='{{item.orderItems[0]}}' wx:for-index="idx" wx:for-item="item1">
+            <view class='shopMsgView' wx:if='{{idx==0}}'>
+                <image class='shopImage1' src='{{url+item1.product.head[0]}}' mode='widthFix'></image>
+                <text class='shopDetailText' space='ensp' style='font-size:24rpx;'> {{item1.product.pname}}</text>
+                <text class='shopSize' style='font-size:20rpx;color:#808080' space='ensp'>{{item1.standard}}</text>
+                <!-- <text class='shopType' style='font-size:20rpx;'>款式{{item1.product.size.color}}</text> -->
+                <text class='shopnumberText' style='font-size:22rpx;' space='ensp'>数量 {{item1.pcount}}</text>
+                <text class='oneShopNumber' space='ensp' style='font-size:22rpx;'>总计:  ￥{{item1.product.price}}</text>
+            </view>
+            <view class='shopMsgView1' wx:else>
+                <image class='shopImage1' src='{{url+item1.product.head[0]}}' mode='widthFix'></image>
+                <text class='shopDetailText' space='ensp' style='font-size:24rpx;'> 【{{item1.product.pname}}】{{item1.product.info}}</text>
+                <text class='shopSize' style='font-size:20rpx;' space='ensp'>{{item1.standard}}</text>
+                <!-- <text class='shopType' style='font-size:20rpx;'>款式{{item1.product.size.color}}</text> -->
+                <text class='shopnumberText' style='font-size:22rpx;'>数量 {{item1.pcount}}</text>
+                <text class='oneShopNumber' space='ensp' style='font-size:22rpx;'>总计:  ￥{{item1.product.price}}</text>
+            </view>
+            <view class='shoppriceMsg'>
+                <block wx:if='{{item.state==2||item.state==2.5}}' style='font-size:23rpx;'>
+                    <text class='dingstateText' wx:if='{{item1.phy_state==11||item1.phy_state==12}}' style='font-size:23rpx;'>申请售后中</text>
+                    <text class='dingstateText' wx:elif="{{item1.phy_state==14}}" style='font-size:23rpx;'>退货/款完成</text>
+                    <text class='dingstateText' wx:else style='font-size:23rpx;'>未发货</text>
+                </block>
+                <block wx:if='{{item.state==3}}' style='font-size:23rpx;'>
+                    <text class='dingstateText' wx:if='{{item1.phy_state==11||item1.phy_state==12}}' style='font-size:23rpx;'>申请售后中</text>
+                    <text class='dingstateText' wx:elif="{{item1.phy_state==14}}" style='font-size:23rpx;'>退货/款完成</text>
+                    <text class='dingstateText' wx:elif="{{item1.phy_state>=-1&&item1.phy_state<3&&item.phy_number!='null'}}" style='font-size:23rpx;'>已发货</text>
+                      <text class='dingstateText' wx:elif="{{item1.phy_state>=3&&item1.phy_state<10}}" style='font-size:23rpx;'>已签收</text>
+                    <text class='dingstateText' wx:elif="{{item1.phy_number=='null'}}" style='font-size:23rpx;'>未发货</text>
+                    <text class='dingstateText' wx:else style='font-size:23rpx;'>已发货</text>
+                </block>
+                <block wx:if='{{item.state==4}}' style='font-size:23rpx;'>
+                    <text class='dingstateText' wx:if='{{item1.phy_state==11||item1.phy_state==12}}' style='font-size:23rpx;'>申请售后中</text>
+                    <text class='dingstateText' wx:elif="{{item1.phy_state==14}}" style='font-size:23rpx;'>退货/款完成</text>
+                    <text class='dingstateText' wx:elif="{{item1.phy_state==3}}" style='font-size:23rpx;'>已签收</text>
+                     <text class='stateButton2' style='font-size:23rpx;' data-id='{{item1.oitemid}}' bindtap='pressWei' wx:if='{{item1.phy_state>=3&&item1.phy_state<10}}'>确认收货</text>
+                     <text class='dingstateText' wx:elif="{{item1.phy_state==10}}" style='font-size:23rpx;'>已确认收货</text>
+                </block>
+                <block wx:if='{{item.state==5}}' style='font-size:23rpx;'>
+                    <text class='dingstateText' style='font-size:23rpx;'>已确认收货</text>
+                </block>
+                <!-- <block>
+                </block> -->
+                <!-- <text class='dingstateText' wx:elif='{{item1.phy_state>=-1&&item1.phy_state<3}}' style='font-size:23rpx;'>已发货</text>
+                <text class='dingstateText' wx:elif='{{item1.phy_state>=3&&item1.phy_state<10}}' style='font-size:23rpx;'>已签收</text> -->
+
+                <text class='stateButton1' style='font-size:23rpx;' bindtap='GoShopAdress' data-ordernumber='{{item.onumber}}' data-ordertime='{{item.ordertime}}' data-paytime='{{item.paytime}}' data-phy_number='{{item1.phy_number}}' data-wustate='{{item1.phy_number}}'
+                    data-shopmsg='{{item1}}' wx:if='{{item.state==2||item.state==2.5||item.state==3||item.state==4||item.state==5}}'>查看物流</text>
+                <!-- <text class='stateButton1' wx:elif='{{item.state==4}}' style='font-size:23rpx;'>确认签收</text> -->
+               
+                <!-- <text class='stateButton2' style='font-size:23rpx;'  data-id='{{item1.oitemid}}' bindtap='pressWei'wx:if='{{item1.phy_state>=3&&item1.phy_state<10}}'>已收货</text>  -->
+            </view>
+        </block>
+        <view class='buttonView'>
+            <text class='gongText' style='font-size:22rpx;'>共{{item.orderItems[0].length}}件商品</text>
+            <text class='shifuText' space='ensp' style='font-size:22rpx;'>实付款: {{item.oaccount}}</text>
+        </view>
+    </view>
+</block>

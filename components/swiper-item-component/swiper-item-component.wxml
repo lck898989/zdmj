@@ -1,17 +1,28 @@
 <!--components/swiper-item-component/swiper-item-component.wxml-->
+<view class='title-con'>
+    <view class='title'>
+        {{item.acttitle}}
+    </view>
+    <view class='desc'>
+        {{item.actinfo}}
+    </view>
+</view>
 <view class='con'>
     <view class='left-con'>
-        <image src='{{goods[0].headImg}}' style='width:260rpx;height:285rpx;' class='im'></image>
-        <view class='pname'>
-            {{goods[0].pname}}
-        </view>
-        <view class='price'>
-            ￥{{goods[0].price}}
+        <image-loader originalImage='{{imageHost}}{{goods[0].headImg}}' width='260rpx' height='285rpx' mode='' styleClass='border-top-left-radius: 10rpx;border-top-right-radius: 10rpx;'></image-loader>
+        <view class='np-con'>
+            <view class='pname'>
+                {{goods[0].pname}}
+            </view>
+            <view class='price'>
+                ￥{{goods[0].price}}
+            </view>
         </view>
     </view>
     <view class='right-con'>
         <view class='item'>
-            <image src='{{goods[1].headImg}}' style='width:430rpx;height:145rpx;' class='im'></image>
+            <!-- <image src='{{imageHost}}{{goods[1].headImg}}' style='width:430rpx;height:146rpx;' class='im'></image> -->
+            <image-loader originalImage='{{imageHost}}{{goods[1].headImg}}' width='430rpx' height='146rpx' mode='' styleClass='border-top-left-radius: 10rpx;border-top-right-radius: 10rpx;'></image-loader>
             <view class='item-row'>
                 <view class='pname_r'>
                     惊艳唇膏{{goods[1].pname}}
@@ -22,7 +33,8 @@
             </view>
         </view>
         <view class='item'>
-            <image src='{{goods[2].headImg}}' style='width:430rpx;height:145rpx;' class='im'></image>
+            <!-- <image src='{{imageHost}}{{goods[2].headImg}}' style='width:430rpx;height:146rpx;' class='im'></image> -->
+            <image-loader originalImage='{{imageHost}}{{goods[2].headImg}}' width='430rpx' height='146rpx' mode='' styleClass='border-top-left-radius: 10rpx;border-top-right-radius: 10rpx;'></image-loader>
             <view class='item-row'>
                 <view class='pname_r'>
                     惊艳唇膏{{goods[2].pname}}

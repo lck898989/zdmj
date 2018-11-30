@@ -1,6 +1,6 @@
 <view class='page-con'>
     perfact.wxml
-    <view class='stage'>
+    <!-- <view class='stage'>
         <view class='wrapper' bindtouchstart='start' bindtouchend='end'>
             <block wx:for='{{swiperList}}'>
                     <view wx:if='{{index !== 0}}' class='maskCon'>
@@ -15,6 +15,8 @@
                 <view data-i='{{index}}' bindtap='fn' class='dot {{index === currentImageIndex ? "active" : ""}}'></view>
             </block>
         </view>
-    </view>
+    </view> -->
+    <image-loader originalImage='http://bpic.588ku.com/templet_water_img/18/11/04/51baad1065555e9caa9e7b19482bea37.jpg' width='185rpx' height='145rpx' mode=''></image-loader>
 </view>
+
 

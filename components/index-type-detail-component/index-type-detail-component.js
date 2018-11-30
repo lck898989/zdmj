@@ -7,11 +7,16 @@ Component({
         easyItem : {
             type  : Object,
             value : {}
+        },
+        shadow : {
+            type  : String,
+            value : '#d0d0d0'
         }
     },
     ready : function(){
         console.log("data is ",this.data);
         console.log("easyItem is ",this.data.easyItem);
+        console.log("shadown is ",this.data.shadow);
     },
     /**
      * 组件的初始数据

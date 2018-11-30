@@ -1,26 +1,20 @@
 <!--pages/MyMoney/MyMoney.wxml-->
 
 
-<!-- <view class='showMoney'>
-    <text class='textQ'>钱包：</text>
-    <text class='intQ'>34元</text>
-</view>
-<text class='textT' bindtap='tixian'>提现</text>
-<text class='textM'>明细</text> -->
 <view class='MoneyView'>
     <view class='moneyTop'>
         <text class='textQian' style='font-size:30rpx'>钱包余额</text>
-        <image class='imageJinbi' src='../../resources/icon_sharenull.png' mode='widthFix'></image>
-        <text class='textMoney' style='font-size:92rpx'>￥6.00</text>
+        <image class='imageJinbi' src='../../resources/qiaobao_pic.png' mode='widthFix'></image>
+        <text class='textMoney' style='font-size:92rpx'>￥{{money}}</text>
     </view>
     <view class='tixianView'  bindtap='tixianButton'>
-        <image class='tixianImage' mode='widthFix'></image>
+        <image class='tixianImage' mode='widthFix' src='../../resources/qiaobao_icon1.png'></image>
         <text class='tixianT' style='font-size:28rpx'>提现</text>
-        <image class='dayu' src='../../icon_arrow.png' mode='widthFix'></image>
+        <image class='dayu' src='../../resources/icon_arrow.png' mode='widthFix'></image>
     </view>
     <view class='mingxiView'  bindtap='mingxiButton'>
-        <image class='mingxiImage' mode='widthFix'></image>
+        <image class='mingxiImage' mode='widthFix' src='../../resources/qiaobao_icon2.png'></image>
         <text class='mingxiText' style='font-size:28rpx'>明细</text>
-        <image class='dayu' src='../../icon_arrow.png' mode='widthFix'></image>
+        <image class='dayu' src='../../resources/icon_arrow.png' mode='widthFix'></image>
     </view>
 </view>

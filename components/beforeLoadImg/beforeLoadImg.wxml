@@ -1,0 +1,5 @@
+<view class='default-con' style='{{width ? "width:" + width : ""}};{{height ? "height:" + height : ""}};{{!finishLoadFlag ? "background:#f2f2f2;" : ""}}'>
+    <image wx:if='{{!finishLoadFlag}}' mode='{{mode}}' src='../../resources/img_blank.png' style='width:60rpx;height:60rpx;{{styleClass}}'></image>
+    <image mode='{{mode}}' src='{{originalImage}}' class='{{finishLoadFlag ? "" : "before-load"}}' bindload='goLoad' binderror='error' style='{{finishLoadFlag && width ? "width:" + width : ""}};{{finishLoadFlag && height ? "height:" + height : ""}};{{finishLoadFlag ? styleClass : ""}}'></image>
+    <!-- <button type='primary' bindtap='test'>测试</button> -->
+</view>

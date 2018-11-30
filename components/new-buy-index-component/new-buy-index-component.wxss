@@ -1,0 +1,59 @@
+/* components/new-buy-index-component/new-buy-index-component.wxss */
+.goods-con,.goods-parent,.price-con,.priceReal{
+    display:flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+}
+.goods-con{
+    width: 750rpx;
+    height: 275rpx;
+    border-top: 2rpx solid #f2f2f2;
+}
+.goods-parent{
+    justify-content: flex-start;
+    width: 690rpx;
+}
+.rightText,.pd-con{
+    display:flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+}
+.rightText{
+    padding-left: 30rpx;
+    width: 450rpx;
+    height: 210rpx;
+}
+.pd-con{
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: 420rpx;
+}
+.pname{
+    font-size: 30rpx;
+    color:#000; 
+}
+.desc{
+    font-size: 27rpx;
+    color: #aaa;
+}
+.price-con{
+    justify-content: space-between;
+    width: 420rpx;
+}
+.marketPrice{
+    color: #707070;
+    font-size: 25rpx;
+    text-decoration-line: line-through;
+}
+.priceReal{
+    justify-content: flex-start;
+}
+.price{
+    color: #ffcb05;
+    font-size: 33rpx;
+    margin-right: 5rpx;
+}

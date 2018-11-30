@@ -14,6 +14,8 @@
     height: 130rpx;
     width: 750rpx;
     background-color: white;
+    display: flex;
+    align-items: center;
 }
 .tixianState{
     position:relative;
@@ -21,25 +23,27 @@
     height: 100rpx;
     margin-top: 30rpx;
     background-color: white;
+    display: flex;
+    align-items: center;
 
 }
 .tixianText {
     position: absolute;
-    top: 51rpx;
+
     left: 50rpx;
 }
 
 .moneyImage {
     position: absolute;
-    top: 51rpx;
+  
     right: 166rpx;
-    width: 28rpx;
-    height: 28rpx;
+    width: 38rpx;
+    height: 35\8rpx;
 }
 
 .moneyText {
     position: absolute;
-    top: 52rpx;
+
     right: 50rpx;
   
 }
@@ -51,13 +55,14 @@ position: absolute;
 }
 .stateText1{
     position: absolute;
-     top: 35rpx;
-    right:70rpx;
+ 
+    right:80rpx;
 }
 .shibaiImage{
     position: absolute;
     right: 35rpx;
-    top:46rpx;
+
+    width: 30rpx;
 }
 .tixianView3
 {

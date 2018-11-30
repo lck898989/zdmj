@@ -1,5 +1,6 @@
 // components/swiper-item-component/swiper-item-component.js
 let app = getApp();
+import Const from '../../utils/Const.js'
 Component({
     /**
      * 组件的属性列表
@@ -8,9 +9,13 @@ Component({
         multipleSlots: true // 在组件定义时的选项中启用多slot支持
     },
     properties: {
+        item  : {
+            type  : Object,
+            value : {}
+        },
         goods : {
-            type : Array,
-            value: []
+            type  : Array,
+            value : []
         }
     },
     ready : function(){
@@ -20,7 +25,7 @@ Component({
      * 组件的初始数据
      */
     data: {
-
+        imageHost : Const.devHost
     },
 
     /**

@@ -1,16 +1,10 @@
 <!--pages/userInfo/userInfo.wxml-->
+
 <view class="scene">
     <view class="userInfo">
         <image mode='widthFix' class="userImage" src="{{userInfo.avatarUrl}}"></image>
         <text class="userName">{{userInfo.nickName}}</text>
     </view>
-    <!-- <view class="massage" bindtap='PressMessageMess'>
-        <text class='xiaoxitext'>消息通知</text>
-        <image class="msgImage" mode='widthFix' src="../../resources/message_bar.png">
-            <view class='msgNumberView' style='font-size:12px;color:white'>{{messageAllNumber}}</view>
-            <!-- <text class="number" style='font-size:12px;'>{{messageAllNumber}}</text> -->
-    <!-- </image>
-    </view>  -->
     <view bindtap='MyMoney' class="MyMoney">
         <text class='textmyqian'>我的钱包</text>
         <text class='jine'>￥{{money}}</text>
@@ -19,35 +13,13 @@
         <text class='textdingdan'>订单管理</text>
         <image class='dayuhao' mode='widthFix' src='../../resources/icon_arrow.png'></image>
     </view>
-    <view class='shouhouView' bindtap='shouhou'>售后申请</view>
+    <view class='shouhouView' bindtap='shouhou'><text class='shouhouText'>售后申请</text></view>
     <view class='myShopping' bindtap='PressMyShop'>
         <text class='textgowuche'>购物车</text>
         <text class='gouwuNumber'>{{shopNumber}}</text>
     </view>
-
-
     <button class="PersonMsg" open-type="contact">
         <text class='lianxikefu'>联系客服</text>
     </button>
-    <view class='guanzhuView' bindtap='PersonTalk'>
-        <text class='guanzhuText'>关注我们</text>
-    </view>
-
-    <view class='shareView' bindtap='turnShare'>
-        <text class='shareText'>分享记录</text>
-    </view>
-    <!-- <button class='' bindtap='aa'>物流</button> -->
-    <!-- <view bindtap='MtCode' class="mycode">
-        我的二维码
-        <image class="icon_code" mode='widthFix' src="../../resources/icon_code.png">
-        </image>
-    </view>
-    <button class="myJuan" bindtap='PressMy'>
-        我的优惠券
-        <image class="dayu" mode='widthFix' src="../../resources/icon_arrow.png"></image>
-    </button>
-    <button class="position" bindtap='PressPosition'> 收货地址
-        <image src="../../resources/icon_arrow.png" mode='widthFix' class="dayu"></image>
-    </button>
-    <button></button> -->
+    <button bindtap='tiaot'>天气</button>
 </view>

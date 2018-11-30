@@ -167,7 +167,10 @@
     align-items: center;
     margin-top: 20rpx;
 }
-
+.shouhouText{
+    position: absolute;
+    left: 20rpx;
+}
 .shouhouView {
     display: flex;
     position: relative;

@@ -40,7 +40,7 @@
             </block>
         </scroll-view> -->
     </view>
-    <scroll-view scroll-y="true" class="bottomView">
+    <scroll-view scroll-y="true" class="bottomView" scroll-top='{{shuGun}}' >
         <view class='conss' wx:for="{{userInfo}}">
             <image class="shopImage" id="{{item.commid}}" mode='widthFix' bindtap='TurnDetail' src="{{url+item.filepath}}">
                 <image class='sign1' wx:if="{{item.number>=10}}" src='../../resources/item_0.png'>

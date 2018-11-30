@@ -12,27 +12,30 @@
 .mingxiTop {
     position: relative;
     width: 750rpx;
-    height: 140rpx;
+    height: 130rpx;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .leijiText {
     position: absolute;
-    top: 57rpx;
+  
     left: 44rpx;
 }
 
 .jinbiImage {
     position: absolute;
-    top: 39rpx;
+    top: 48rpx;
     right: 166rpx;
-    width: 28rpx;
-    height: 28rpx;
+    width: 34rpx;
+
 }
 
 .money {
     position: absolute;
     width: 100rpx;
-    top: 52rpx;
+ 
     right: 50rpx;
 }
 
@@ -41,11 +44,14 @@
     width: 750rpx;
     height: 100rpx;
     background-color: white;
+    display: flex;
+
+    align-items: center;
 }
 
 .quanbutext {
     position: absolute;
-    top: 36rpx;
+ 
     left: 44rpx;
 }
 
@@ -74,9 +80,10 @@
 
 .msgView {
     position: relative;
-    background-color: gray;
+    background-color: #f2f2f2;
     height: 660rpx;
     width: 750rpx;
+    display: flex;align-items: center;
 }
 
 .msgSon {
@@ -85,6 +92,9 @@
     margin-top: 2rpx;
     width: 750rpx;
     height: 130rpx;
+    display: flex;
+    align-items: center;
+    
 }
 ::-webkit-scrollbar {
     width: 0;
@@ -95,31 +105,31 @@
 .successImage{
     position: absolute;
     left: 35rpx;
-    top: 43rpx; 
+  
     width: 35rpx;
 }
 .time{
     position: absolute;
     left: 98rpx;
-    top: 48rpx;
+  
 }
 .typeGetMoney{
     position: absolute;
-    top: 51rpx;
+   
     text-align: center;
-    right: 200rpx;
+    right: 115rpx;
 
 }
 .jine{
     position: absolute;
-    top: 51rpx;
+  
     right: 34rpx;
 }
 .tixianImage{
     position: absolute;
     top: 340rpx;
     right: 310rpx;
-    width: 90rpx;
+    width: 100rpx;
 
 }.a{
     position: absolute;
