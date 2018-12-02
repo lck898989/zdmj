@@ -1,12 +1,12 @@
 <!--components/index-type-detail-component/index-type-detail-component.wxml-->
 <view class="con" style='box-shadow: 0rpx 8rpx 8rpx {{shadow}};-webkit-box-shadow:0rpx 8rpx 8rpx {{shadow}};'>
-    <image-loader originalImage='{{easyItem.goodsPicture}}' width='343rpx' height='{{easyItem.height}}rpx' mode='widthFix' styleClass='border-top-left-radius: 10rpx;border-top-right-radius: 10rpx;'></image-loader>
-    <view class="text">{{easyItem.text}}</view>
+    <image-loader originalImage='{{imgHost}}{{easyItem.shopessayhead[0]}}' width='343rpx' height='{{easyItem.height}}rpx' mode='widthFix' styleClass='border-top-left-radius: 10rpx;border-top-right-radius: 10rpx;'></image-loader>
+    <view class="text">{{easyItem.shopintroduction}}</view>
     <view class="author-con">
         <!-- <image src='{{easyItem.authorAvatar}}' style="width:32rpx;height:32rpx;border-radius:32rpx;"></image> -->
-        <image-loader originalImage='{{easyItem.authorAvatar}}' width='32rpx' height='32rpx' mode='' styleClass='width:32rpx;height:32rpx;border-radius:32rpx;'></image-loader>
-        <view style="font-size:20rpx;margin-left:10rpx;">{{easyItem.author}}</view>
+        <image-loader originalImage='{{easyItem.wxhead}}' width='32rpx' height='32rpx' mode='' styleClass='width:32rpx;height:32rpx;border-radius:32rpx;'></image-loader>
+        <view style="font-size:20rpx;margin-left:10rpx;">{{easyItem.wxnickname}}</view>
     </view>
     <image src='../../resources/cover.png' style="width:128rpx;height:36rpx;" class="im_t"></image>
-    <text class="watched-count">{{easyItem.watched}}</text>
+    <text class="watched-count">{{easyItem.see}}</text>
 </view>

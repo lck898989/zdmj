@@ -68,11 +68,13 @@
     padding: 10rpx 5rpx;
 }
 .pname_r{
+    font-size: 25rpx;
     margin-left: 10rpx;
     color: #000;
     font-weight: bolder;
 }
 .price_r{
+    font-size: 25rpx;
     margin-right: 10rpx;
     color:#e7348e;
 }

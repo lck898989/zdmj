@@ -10,6 +10,7 @@ Page({
      */
     data: {
         imageHost: "https://shopfile.ykplay.com/",
+        serverImageHost : 'https://shop.ykplay.com/',
         pictureList: [
             'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1543244953214&di=9c5b79e78d8ea46348499084da98b1b9&imgtype=0&src=http%3A%2F%2Fimg.zcool.cn%2Fcommunity%2F0179155b5935ffa801215c8f20b8ec.jpg',
             'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1543245015029&di=137362d1fd7e2186afee81a7e96e1a56&imgtype=0&src=http%3A%2F%2Fimg.zcool.cn%2Fcommunity%2F01b8ba5adda421a80120927be45a32.jpg%401280w_1l_2o_100sh.jpg',

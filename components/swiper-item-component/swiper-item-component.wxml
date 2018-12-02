@@ -25,7 +25,7 @@
             <image-loader originalImage='{{imageHost}}{{goods[1].headImg}}' width='430rpx' height='146rpx' mode='' styleClass='border-top-left-radius: 10rpx;border-top-right-radius: 10rpx;'></image-loader>
             <view class='item-row'>
                 <view class='pname_r'>
-                    惊艳唇膏{{goods[1].pname}}
+                    {{goods[1].pname}}
                 </view>
                 <view class='price_r'>
                     ￥{{goods[1].price}}
@@ -37,7 +37,7 @@
             <image-loader originalImage='{{imageHost}}{{goods[2].headImg}}' width='430rpx' height='146rpx' mode='' styleClass='border-top-left-radius: 10rpx;border-top-right-radius: 10rpx;'></image-loader>
             <view class='item-row'>
                 <view class='pname_r'>
-                    惊艳唇膏{{goods[2].pname}}
+                    {{goods[2].pname}}
                 </view>
                 <view class='price_r'>
                     ￥{{goods[2].price}}

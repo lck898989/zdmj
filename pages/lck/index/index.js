@@ -73,18 +73,18 @@ Page({
         goods : [
             {
                 headImg: '../../resources/fanli_4.png',
-                price: 120,
-                pname: 'asdfasdfasd'
+                price: 100,
+                pname: '爽肤系列'
             },
             {
                 headImg: '../../resources/fanli_4.png',
-                price: 120,
-                pname: 'asdfasdfasd'
+                price: 150,
+                pname: '惊艳唇膏'
             },
             {
                 headImg: '../../resources/fanli_4.png',
-                price: 120,
-                pname: 'asdfasdfasd'
+                price: 500,
+                pname: '香水系列'
             },
         ],
         bannerType : [
@@ -213,6 +213,12 @@ Page({
         await this.getMainInfo();
         //请求推荐的商品
         let resData =await this.getType('0');
+        console.log("in onLoad resData is ",resData);
+        for(let m = 0;m < resData.length;m++){
+            if(resData[m].shopessayhead){
+                resData[m].shopessayhead = resData[m].shopessayhead.split(',');
+            }
+        }
         this.setData({
             dataArray : resData
         },()=>{
@@ -347,24 +353,15 @@ Page({
             this.data.col2H += imgHeight;
             col2.push(imageObj);
         }
-        // this.data.col1H += (col1.length) * 18 + 25;
-        // this.data.col2H += (col2.length) * 18 + 25;
-        console.log("col1 is ",col1);
-        console.log("col1H is ",this.data.col1H);
-        console.log("col2 is ",col2);
-        console.log("col2H is ",this.data.col2H);
         this.setData({
             col1H : this.data.col1H,
             col2H : this.data.col2H
         })
-        console.log("col1H is ",this.data.col1H);
-        console.log("col2H is ",this.data.col2H);
         if(this.data.col1H > this.data.col2H){
             this.data.scrollH = this.data.col1H;
         }else{
             this.data.scrollH = this.data.col2H;
         }
-        console.log("scrollH is ",this.data.scrollH);
         let data = {
             loadingCount: loadingCount,
             col1: col1,
@@ -461,6 +458,14 @@ Page({
     },
     //选择类型
     chooseType:async function(event){
+        //初始化列的数据
+        this.setData({
+            col1    : [],
+            col2    : [],
+            col1H   : 0,
+            col2H   : 0,
+            scrollH : 0
+        });
         let dataSet = event.currentTarget.dataset;
         let id = Number(dataSet.id);
         console.log("id is ",id);
@@ -481,60 +486,40 @@ Page({
             case 0:
                 this.data.page = 1;
                 res = await this.getType('0');
-                this.data.dataArray = res;
-                this.setData({
-                    bannerType: this.data.bannerType,
-                    dataArray: this.data.dataArray
-                })
                 break;
             case 1:
                 this.data.page = 1;
                 res = await this.getType('吃');
-                this.data.dataArray = res;
-                console.log("吃dataArray is ",this.data.dataArray);
-                // this.onImageLoad();
-                this.setData({
-                    bannerType: this.data.bannerType,
-                    dataArray: this.data.dataArray
-                })
+                console.log("吃 is ",res);
                 break;
             case 2:
                 this.data.page = 1;
                 res = await this.getType('喝');
-                this.data.dataArray = res;
-                this.setData({
-                    bannerType: this.data.bannerType,
-                    dataArray: this.data.dataArray
-                })
                 break;
             case 3:
                 this.data.page = 1;
                 res = await this.getType('玩');
-                this.data.dataArray = res;
-                this.setData({
-                    bannerType: this.data.bannerType,
-                    dataArray: this.data.dataArray
-                })
                 break;
             case 4:
                 this.data.page = 1;
                 res = await this.getType('乐');
-                this.data.dataArray = res;
-                this.setData({
-                    bannerType: this.data.bannerType,
-                    dataArray: this.data.dataArray
-                })
                 break;
             case 5:
                 this.data.page = 1;
                 res = await this.getType('购');
-                this.data.dataArray = res;
-                this.setData({
-                    bannerType: this.data.bannerType,
-                    dataArray: this.data.dataArray
-                })
                 break;
         }
+        this.data.dataArray = res;
+        for(let j = 0;j < this.data.dataArray.length;j++){
+            if(this.data.dataArray[j].shopessayhead){
+                this.data.dataArray[j].shopessayhead = this.data.dataArray[j].shopessayhead.split(',');
+            }
+        }
+        console.log("set 之前dataArray is ",this.data.dataArray);
+        this.setData({
+            bannerType: this.data.bannerType,
+            dataArray: this.data.dataArray
+        })
     },
     //向右移动
     moveStart: function (e) {
@@ -654,6 +639,15 @@ Page({
     },
     //跳转搜索界面
     enterSearch : function(e){
+        app.nearsreachArray = null;
+        app.hotsreachArray = null;
+        app.goodShop = null;
+        app.ShortConnect(app.urlw + "Data/GetSearch", {
+            uid: app.uid,
+        }, "InterSreach");
+        app.ShortConnect(app.urlw + "Data/GetRecommendProduct", {
+            page: 1,
+        }, "InterSreach1");
         wx.navigateTo({
             url: '../../../pages/search/search',
             success : function(){
@@ -736,7 +730,10 @@ Page({
             //         console.log("e is ",e);
             //     }
             // })
-            wx.switchTab({
+            // wx.switchTab({
+            //     url: '../shop/shop',
+            // })
+            wx.navigateTo({
                 url: '../shop/shop',
             })
         }

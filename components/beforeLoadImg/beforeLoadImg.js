@@ -1,4 +1,5 @@
 // components/beforeLoadImg/beforeLoadImg.js
+import Const from '../../utils/Const.js'
 Component({
     /**
      * 组件的属性列表
@@ -27,7 +28,8 @@ Component({
      * 组件的初始数据
      */
     data: {
-        finishLoadFlag : false
+        finishLoadFlag : false,
+        imgHost : Const.productionHost
     },
 
     /**

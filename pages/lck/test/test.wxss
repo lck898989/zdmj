@@ -67,6 +67,18 @@ view{
     transform: scale(0.6);
     z-index:20;
 }
+.right-most{
+    top: 25%;
+    left: 600rpx;
+    transform: scale(0.4);
+    z-index: 5;
+}
+/* .common:nth-child(6){
+    top: 25%;
+    left: 550rpx;
+    transform: scale(0.4);
+    z-index: 10;
+} */
 .mask{
     position: absolute;
     top: 10rpx;
@@ -120,7 +132,7 @@ view{
         opacity: 1;
         z-index: 100;
     }to{
-        left: -500rpx;
+        left: -500rpx;    
         opacity: 0;
         z-index: 90;
     }
@@ -208,110 +220,22 @@ view{
         transform: scale(0.7);
     }
 }
-/*
-    右移相关动画
-*/
-.move-right4{
-    animation: moveRight4 1s normal;
-    -webkit-animation: moveRight4 1s normal;
-    animation-fill-mode: forwards;
-    -webkit-animation-fill-mode: forwards;
+.move-left3{
+    z-index: -1;
+    animation: moveLeft3 1s normal;
+    -webkit-animation: moveLeft3 1s normal;
     animation-iteration-count: 1;
     -webkit-animation-iteration-count: 1;
-}
-@keyframes moveRight4{
-    from{
-        left : -500rpx;
-        opacity: 0;
-        z-index: 90;
-    }to{
-        left : 0rpx;
-        opacity: 1;
-        z-index: 100;
-    }
-}
-.move-right0{
-    animation: moveRight0 1s normal;
-    -webkit-animation: moveRight0 1s normal;
     animation-fill-mode: forwards;
     -webkit-animation-fill-mode: forwards;
-    animation-iteration-count: 1;
-    -webkit-animation-iteration-count: 1;
 }
-@keyframes moveRight0{
+@keyframes moveLeft3{
     from{
-        left : 0rpx;
-        z-index: 100;
+        left: -500rpx;
         transform: scale(1);
-        top: 0rpx;
     }to{
-        left : 110rpx;
-        z-index: 80;
-        top: 5%;
-        transform: scale(0.9);
-    }
-}
-.move-right1{
-    animation: moveRight1 1s normal;
-    -webkit-animation: moveRight1 1s normal;
-    animation-fill-mode: forwards;
-    -webkit-animation-fill-mode: forwards;
-    animation-iteration-count: 1;
-    -webkit-animation-iteration-count: 1;
-}
-@keyframes moveRight1{
-    from{
-        left : 110rpx;
-        transform: scale(0.9);
-        z-index: 80;
-        top: 5%;
-    }to{
-        left : 210rpx;
-        transform: scale(0.8);
-        z-index: 60;
-        top: 10%;
-    }
-}
-.move-right2{
-    animation: moveRight2 1s normal;
-    -webkit-animation: moveRight2 1s normal;
-    animation-fill-mode: forwards;
-    -webkit-animation-fill-mode: forwards;
-    animation-iteration-count: 1;
-    -webkit-animation-iteration-count: 1;
-}
-@keyframes moveRight2{
-    from{
-        left : 210rpx;
-        transform: scale(0.8);
-        z-index: 60;
-        top: 10%;
-    }to{
-        left : 285rpx;
-        transform: scale(0.7);
-        z-index: 40;
-        top: 15%;
-    }
-}
-.move-right3{
-    animation: moveRight3 1s normal;
-    -webkit-animation: moveRight3 1s normal;
-    animation-fill-mode: forwards;
-    -webkit-animation-fill-mode: forwards;
-    animation-iteration-count: 1;
-    -webkit-animation-iteration-count: 1;
-}
-@keyframes moveRight3{
-    from{
-        left : 285rpx;
+        left: 400rpx;
         transform: scale(0.6);
-        z-index: 40;
-        top: 15%;
-    }to{
-        left : 400rpx;
-        transform: scale(0.4);
-        z-index: 20;
-        top: 20%;
     }
 }
 .dots{

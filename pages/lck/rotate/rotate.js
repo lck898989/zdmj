@@ -20,33 +20,48 @@ Page({
         show: true,
         swiperList: [
             {
-                index : 0,
-                aurl: "../start/start",
+                index: 0,
+                aurl: "",
                 swpClass: "swp-left",
                 active: false,
-                imgsrc: "../../../resources/test.png",
+                imgsrc: "https://shop.ykplay.com/upload/activityhead/1543406417505.jpeg",
             },
             {
-                index : 1,
+                index: 1,
                 aurl: "#",
                 swpClass: "swp-right",
                 active: false,
-                imgsrc: "../../../resources/800.jpg"
+                imgsrc: "https://shop.ykplay.com/upload/activityhead/1543455702117.jpeg"
             },
             {
-                index : 2,
+                index: 2,
                 aurl: "#",
                 swpClass: "swp-right",
                 active: false,
-                imgsrc: "../../../resources/900.jpg"
+                imgsrc: "https://shop.ykplay.com/upload/activityhead/1543455729220.jpeg"
             },
             {
-                index : 3,
+                index: 3,
                 aurl: "#",
                 swpClass: "swp-right",
                 active: false,
-                imgsrc: "../../../resources/1000.jpg"
-            }],
+                imgsrc: "https://shop.ykplay.com/upload/activityhead/1543455754045.jpeg"
+            },
+            {
+                index: 4,
+                aurl: "#",
+                swpClass: "swp-right",
+                active: false,
+                imgsrc: "https://shop.ykplay.com/upload/activityhead/1543455771565.jpeg"
+            },
+            {
+                index: 5,
+                aurl: "#",
+                swpClass: "swp-right",
+                active: false,
+                imgsrc: "https://shop.ykplay.com/upload/activityhead/1543455794842.jpeg"
+            },
+        ],
         played: false,
         //滑动触点开始的时候
         startPoint : 0,

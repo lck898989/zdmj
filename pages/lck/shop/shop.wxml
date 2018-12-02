@@ -164,7 +164,7 @@
     <block wx:if='{{showWindow}}'>
         <view class='buy-con' catchtouchmove="ture" data-e='buy-con'>
             <view class='lineOne-con'>
-                <image src='{{imageHost}}{{currentGoods.head[0]}}' style='width:220rpx;height:220rpx;' class='img'></image>
+                <image src='{{serverImageHost}}{{currentGoods.head[0]}}' style='width:220rpx;height:220rpx;' class='img'></image>
                 <view class='price-order-con'>
                     <view class='price-item' style='font-size:40rpx;color:#ffcb05;font-weight:800;'>
                     ￥  {{currentGoods.oprice * count}}

@@ -1,11 +1,11 @@
 <!--pages/lck/test/test.wxml-->
-<view class='page-con'>
+<!-- <view class='page-con'>
     <view class='wrap'>
         <block wx:for='{{swiperList}}'>
             <!-- <block wx:if='{{index === 0}}'>
                 <image src='../../../resources/test.png' style='width:480rpx;height:480rpx;' class='img firstImg'></image>
             </block>
-            <block wx:else> -->
+            <block wx:else> 
             <view class='imgCon{{index}} common {{item.active ? item.swpClass : ""}}' bindtap='swapBtn' data-index='{{index}}'>
                 <image src='{{item.imgsrc}}' style='width:480rpx;height:480rpx;' class='img'></image>
                 <block wx:if='{{index !== 0}}'>
@@ -14,15 +14,11 @@
             </view>
         </block>
     </view>
-</view>
+</view> -->
 <view class='page-con'>
     <view class='wrap' bindtouchstart='moveStart' bindtouchend='moveEnd'>
         <block wx:for='{{swiperList}}'>
-            <!-- <block wx:if='{{index === 0}}'>
-                <image src='../../../resources/test.png' style='width:480rpx;height:480rpx;' class='img firstImg'></image>
-            </block>
-            <block wx:else> -->
-            <block wx:if='{{(item.active && item.swpClass !== "swiper-right" && item.swpClass !== "swiper-left" && item.swpClass !== "move-right4" && item.swpClass !== "move-right0") || !item.active}}'>
+            <block wx:if='{{(item.active && item.swpClass !== "swiper-right" && item.swpClass !== "swiper-left") || !item.active}}'>
                 <view class='imgCon{{index}} common {{item.active ? item.swpClass : ""}}' data-index='{{index}}'>
                     <image src='{{item.imgsrc}}' style='width:480rpx;height:480rpx;' class='img'></image>
                     <view class='mask {{index === 0 ? "firstMask" : ""}}'></view>
@@ -43,11 +39,3 @@
         </block>
     </view>
 </view>
-<!-- <block wx:for='{{swiperList}}'>
-    <block wx:if='{{(item.active && item.swpClass !== "swiper-right") || !item.active}}'>
-        <view class='imgCon{{index}}'></view>
-    </block>
-    <block wx:else>
-        <view class='{{item.swpClass}}'></view>
-    </block>
-</block> -->
