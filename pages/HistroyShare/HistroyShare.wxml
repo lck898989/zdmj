@@ -1,2 +1,53 @@
 <!--pages/HistroyShare/HistroyShare.wxml-->
-<view>暂未开放</view>
+<view class='all'>
+
+
+  <view class='wrap'>
+	<view>
+		<view class='date-show'>
+			
+			{{year}}年{{month}}月
+			<view class='rt-arrow' bindtap='nextMonth'>
+        →
+			</view>
+      <view class='lt-arrow' bindtap='lastMonth'>
+        ←
+			</view>
+		</view>
+	</view>
+	<view class='header'>
+		<view wx:for='{{date}}' class='weekMark'>{{item}}<view></view></view>
+	</view>
+	<view class='date-box'>
+		<view  wx:for='{{dateArr}}'  data-date='{{item.isToday}}' id='{"nyr":"{{item.isToday}}","riqi":"{{item.dateNum}}","month":"{{item.month}}","year":"{{item.year}}"}' bindtap='dianjidata'>	
+      <view hidden='{{isToday2 == item.isToday ? hide2 : hide1}}' class='{{isToday == item.isToday ? "nowDay" : ""}}'>		
+			  <view class='date-head'>
+				  <view>{{item.dateNum}}</view>
+          <!-- 这个是下方蓝点 -->
+          <view wx:if='{{isToday == item.isToday}}' class='nowDay2'>1</view>
+			  </view>
+        
+      </view>
+		</view>
+	</view>
+  
+  
+
+
+</view>
+  <view class='down'>
+    <block wx:if='{{LoadOk}}'>
+      <block wx:for='{{dete}}'>
+        <view class='time' id='{{index}}'>{{item.time}}</view>
+        <view class='connn'>
+          <block wx:for='{{item.data}}'>
+            <view class='conn'>
+              <index-type-detail-component easyItem='{{item}}' shadow='#949494' offeye='false'></index-type-detail-component>
+            </view>
+          </block>
+        </view>  
+      </block>
+    </block>
+  </view>
+
+</view>

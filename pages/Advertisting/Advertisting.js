@@ -32,7 +32,6 @@ Page({
       openid: app.serverOpenid,
       from:"zhidianmijin"
     },"checkTiXian"); 
- 
       console.log();
   },
 

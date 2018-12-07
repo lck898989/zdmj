@@ -65,7 +65,7 @@
     left: 314rpx;
 }
 
-.shopImage {
+ .shopImage {
     position: absolute;
     top: 27rpx;
     left: 30rpx;

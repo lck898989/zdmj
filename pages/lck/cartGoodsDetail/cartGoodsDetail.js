@@ -24,8 +24,6 @@ Page({
         BuyIt: false,
         //是否是默认选择的
         isDefaultChoosed: true,
-        //   colorChoosed : '',
-        //   sizeChoosed : '',
         typeArr: [],
         //二维数组
         typeValueArr: [],
@@ -37,7 +35,7 @@ Page({
         unselectBorder: '2rpx solid #eee',
         //发送服务器的商品大小信息
         sendServerSize: {
-
+            
         },
         //大小尺寸值数组
         sizeValueArr: [],
@@ -62,6 +60,8 @@ Page({
         //当前头图索引
         currentHeadImageIndex : 1,
         isSharePage : false,
+        //是否显示回到顶部按钮
+        floorStatus : false,
     },
 
     /**
@@ -360,7 +360,18 @@ Page({
     onReachBottom: function () {
 
     },
-
+    onPageScroll : function(e){
+        console.log(e);
+        if(e.scrollTop > 100){
+            this.setData({
+                floorStatus : true,
+            })
+        }else{
+            this.setData({
+                floorStatus : false
+            })
+        }
+    },
     /**
      * 用户点击右上角分享
      */
@@ -739,4 +750,25 @@ Page({
             slideStart: this.data.slideStart
         })
     },
+    //一键回到顶部
+    goTop: function (e) {
+        if (wx.pageScrollTo) {
+            wx.pageScrollTo({
+                scrollTop : 0,
+                duration  : 100
+            });
+        } else {
+            wx.showModal({
+                title: '提示',
+                content: '当前微信版本过低，暂无法使用该功能',
+            })
+        }
+    },
+    //回到首页
+    backIndex : function(e){
+        console.log("e is ",e);
+        wx.switchTab({
+            url: '../index/index',
+        });
+    }
 })

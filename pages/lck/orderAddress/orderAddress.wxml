@@ -1,13 +1,6 @@
 <!--pages/lck/address/address.wxml-->
 <view class="page-con">
-    <block wx:if='{{isChecked}}'>
-        <view class='index-manager' bindtap='addAdd'>
-            <image src='../../../resources/add.png' style='width:40rpx;height:40rpx;'></image>
-            <view style='margin-left:25rpx;color:#a272c7;font-size:35rpx;'>
-                添加新地址
-            </view>
-        </view>
-    </block>
+    
     <block wx:if='{{inputError}}'>
         <view class='error-con'>
             <view>
@@ -28,40 +21,55 @@
     <block wx:if='{{isChecked}}'>
         <view class="addContainer">
             <!--设置收货人信息(从服务器上拉取收货地址数据)for循环-->
-            <radio-group class='radio-group' bindchange='radioChange'>
+            <!-- <radio-group class='radio-group' bindchange='radioChange'> -->
                 <block wx:for='{{user}}'>
-                    <view class='add-manager radio-group' bindchange='radioChange'>
+                    <view class='add-manager radio-group' bindchange='radioChange' bindtap='dianjixuanze' id='{{index}}'>
                         <view class='circle-con'>
-                            <view class='before-circle' style='{{item.state === 0 ? "background-color:#863bb7;" : "background-color:#bfbfbf;"}}'>
-                                <view>
+                            <view class='before-circle'>
+                                <!-- <view>
                                     {{item.recipient[0]}}
-                                </view>
+                                </view> -->
+                                <view hidden='{{item.state === 0?false:true}}'>
+                                <image class='duigoutup' src='{{srcpduigou}}' style='height:auto' mode='widthFix'></image>
                             </view>
-                            <view wx:if='{{item.state === 0}}' class='defaultAdd'>
-                                默认
+                            <view hidden='{{item.state === 0?true:false}}'>
+                                <view class='yuanquan'></view>
+                            </view>
                             </view>
                         </view>
                         <view class="add-item">
-                            <view class="user-con">
+                            <!-- <view class="user-con"> -->
                                 <view class="n">
                                     {{item.recipient}}
                                 </view>
                                 <view class="p">
                                     {{item.phone}}
                                 </view>
-                            </view>
+                            <!-- </view> -->
                             <view class="add-info">
-                                {{item.district + item.detaildistrict}}
-                            </view>
+                            <text style='color:#b762d6' space='nbsp'>[{{item.type}}] </text>{{item.district + item.detaildistrict}}
                         </view>
+                            <!-- <view class="add-info">
+                                {{item.district + item.detaildistrict}}
+                            </view> -->
+                        </view>
+                        
                         <!--编辑地址-->
-                        <radio checked='{{item.state === 1 ? false : true}}' value='{{item.aid}}'></radio>
+                        <!-- <radio checked='{{item.state === 1 ? false : true}}' value='{{item.aid}}'></radio> -->
                     </view>
                 </block>
-            </radio-group>
+            <!-- </radio-group> -->
         </view>
+        <block wx:if='{{isChecked}}'>
+        <view class='index-manager' bindtap='addAdd'>
+            <image src='../../../resources/add.png' style='width:40rpx;height:40rpx;'></image>
+            <view style='margin-left:25rpx;color:#a272c7;font-size:35rpx;'>
+                添加新地址
+            </view>
+        </view>
+    </block>
         <!--确定选择该地址-->
-        <view class='ensure' bindtap='ensure'>
+        <view class='index-manager2' bindtap='ensure' style='margin-left:10rpx;color:white;font-size:35rpx;font-weight: 900;' >
             确定
         </view>
     </block>

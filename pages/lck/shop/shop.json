@@ -2,6 +2,7 @@
     "usingComponents": {
         "swiper-item-component": "/components/swiper-item-component/swiper-item-component",
         "index-type-detail-component": "/components/index-type-detail-component/index-type-detail-component",
-        "new-buy-index-component" : "/components/new-buy-index-component/new-buy-index-component"
+        "new-buy-index-component" : "/components/new-buy-index-component/new-buy-index-component",
+        "image-loader": "/components/beforeLoadImg/beforeLoadImg"
     }
 }

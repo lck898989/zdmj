@@ -1,0 +1,211 @@
+/* pages/zcw/user/user.wxss */
+.quanju{
+  position: absolute;
+  top: 0;
+  width: 750rpx;
+  bottom: 0;
+  background-color: #eeeeee
+}
+.daohang{
+  position: relative;
+  top: 0;
+  width: 750rpx;
+}
+.daohangtu{
+  width: 750rpx;
+}
+.userImage {
+    position: absolute;
+    top: 35rpx;
+    left: 48rpx;
+    width: 124rpx;
+    border-radius: 50px;
+    border-bottom: 4rpx solid #ffffff;
+    border-top: 4rpx solid #ffffff;
+    border-left: 4rpx solid #ffffff;
+    border-right: 4rpx solid #ffffff;
+}
+.userName {
+    position: absolute;
+    top: 50rpx;
+    left: 206rpx;
+}
+.ewm{
+  position: absolute;
+  width: 42rpx;
+  top: 34rpx;
+  right: 27rpx;
+}
+/* 个人信息 */
+.grxx{
+  position: relative;
+  margin-top: 20rpx;
+  width: 720rpx;
+  height: 150rpx;
+  margin-left: 15rpx;
+  border-radius: 20rpx;
+  background-color: white;
+}
+.txtqianbao{
+  position: absolute;
+  width: 238rpx;
+  height: 150rpx;
+  text-align: center;
+}
+.txtqian{
+  position: relative;
+  height: 40rpx;
+  margin-top: 30rpx;
+}
+.txtqian2{
+  position: relative;
+  height: 20rpx;
+}
+.txtwodehaoyou{
+  position: absolute;
+  
+  width: 238rpx;
+  height: 150rpx;
+  right: 0rpx;
+  text-align: center;
+}
+.txtshangpuquan{
+  position: absolute;
+  width: 238rpx;
+  height: 150rpx;
+  left: 240rpx;
+  text-align: center;
+}
+.fenge1{
+  position: absolute;
+  width: 2rpx;
+  height: 45rpx;
+  top: 53rpx;
+  left: 238rpx;
+  background-color: #c9c9c9;
+}
+.fenge2{
+  position: absolute;
+  width: 2rpx;
+  height: 45rpx;
+  top: 53rpx;
+  right: 238rpx;
+  background-color: #c9c9c9;
+}
+
+/* 我的订单 */
+.wddd{
+  position: relative;
+  margin-top: 16rpx;
+  width: 720rpx;
+  height: 240rpx;
+  margin-left: 15rpx;
+  border-radius: 20rpx;
+  background-color: white;
+}
+.txtdd{
+  position: absolute;
+  top: 20rpx;
+  left: 26rpx;
+}
+.dfk{
+  position: absolute;
+  top: 103rpx;
+  width: 238rpx;
+  height: 150rpx;
+  text-align: center;
+}
+.dsh{
+  position: absolute;
+  top: 103rpx;
+  width: 238rpx;
+  height: 150rpx;
+  left: 240rpx;
+  text-align: center;
+}
+.ywc{
+  position: absolute;
+  top: 103rpx;  
+  width: 238rpx;
+  height: 150rpx;
+  right: 0rpx;
+  text-align: center;
+}
+.wdddtu1{
+  width: 86rpx;
+}
+.wdddtu2{
+  width: 65rpx;
+}
+.wddd_ziti{
+  position: relative;
+  margin-top: -20rpx;
+}
+/* 滚动滑块 */
+::-webkit-scrollbar{
+    width:0;
+    height:0;
+    color:transparent;
+}
+.scrol{
+  position: relative;
+  width: 720rpx;
+  margin-left: 15rpx;
+  margin-top: 15rpx;
+  display: flex;
+  white-space: nowrap;
+  height: 150rpx;
+}
+.gdtu{
+  width: 300rpx;
+}
+.ziwuti{
+  width: 100rpx;
+  font-size: 35rpx;
+  display: inline-block;
+  text-align: center;
+  margin-right: 220rpx;
+  color: #fff;
+}
+/* 我的服务 */
+.wdfw{
+  position: relative;
+  margin-top: 16rpx;
+  width: 720rpx;
+  height: 240rpx;
+  margin-left: 15rpx;
+  border-radius: 20rpx;
+  background-color: white;
+}
+.shdz{
+  position: absolute;
+  top: 100rpx;  
+  width: 188rpx;
+  height: 150rpx;
+  left: 0rpx;
+  text-align: center;
+}
+.lxkf{
+  position: absolute;
+  top: 100rpx;  
+  width: 188rpx;
+  height: 150rpx;
+  left: 180rpx;
+  text-align: center;
+}
+.sz{
+  position: absolute;
+  top: 100rpx;  
+  width: 188rpx;
+  height: 150rpx;
+  right: 180rpx;
+  text-align: center;
+}
+.jjsx{
+  position: absolute;
+  top: 100rpx;  
+  width: 188rpx;
+  height: 150rpx;
+  right: 0rpx;
+  text-align: center;
+}

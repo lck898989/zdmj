@@ -2,7 +2,7 @@
 
 <view class="scene">
     <view class="userInfo">
-        <image mode='widthFix' class="userImage" src="{{userInfo.avatarUrl}}"></image>
+        <image mode='widthFix' class="userImage"  style='height:auto'src="{{userInfo.avatarUrl}}"></image>
         <text class="userName">{{userInfo.nickName}}</text>
     </view>
     <view bindtap='MyMoney' class="MyMoney">
@@ -11,7 +11,7 @@
     </view>
     <view class='orderButton' bindtap='orderButton'>
         <text class='textdingdan'>订单管理</text>
-        <image class='dayuhao' mode='widthFix' src='../../resources/icon_arrow.png'></image>
+        <image class='dayuhao' mode='widthFix' style='height:auto'src='../../resources/icon_arrow.png'></image>
     </view>
     <view class='shouhouView' bindtap='shouhou'><text class='shouhouText'>售后申请</text></view>
     <view class='myShopping' bindtap='PressMyShop'>
@@ -21,5 +21,5 @@
     <button class="PersonMsg" open-type="contact">
         <text class='lianxikefu'>联系客服</text>
     </button>
-    <button bindtap='tiaot'>天气</button>
+    <!-- <button bindtap='tiaot'>天气</button> -->
 </view>

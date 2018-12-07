@@ -126,6 +126,14 @@ view{
     animation-fill-mode: forwards;
     -webkit-animation-fill-mode: forwards;
 }
+.swiper-right-reverse{
+    animation: swiperRight 1s reverse;
+    -webkit-animation:swiperRight 1s reverse;
+    animation-iteration-count: 1;
+    -webkit-animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+    -webkit-animation-fill-mode: forwards;
+}
 @keyframes swiperRight{
     from{
         left: 0rpx;
@@ -145,6 +153,14 @@ view{
 .swiper-left{
     animation: swiperLeft 1s normal;
     -webkit-animation: swiperLeft 1s normal;
+    animation-iteration-count: 1;
+    -webkit-animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+    -webkit-animation-fill-mode: forwards;
+}
+.swiper-left-reverse{
+    animation: swiperLeft 1s reverse;
+    -webkit-animation: swiperLeft 1s reverse;
     animation-iteration-count: 1;
     -webkit-animation-iteration-count: 1;
     animation-fill-mode: forwards;
@@ -171,6 +187,14 @@ view{
     animation-fill-mode: forwards;
     -webkit-animation-fill-mode: forwards;
 }
+.move-left0-reverse{
+    animation: moveLeft 1s reverse;
+    -webkit-animation: moveLeft 1s reverse;
+    animation-iteration-count: 1;
+    -webkit-animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+    -webkit-animation-fill-mode: forwards;
+}
 @keyframes moveLeft{
     from{
         left: 210rpx;
@@ -185,6 +209,14 @@ view{
 .move-left1{
     animation: moveLeft1 1s normal;
     -webkit-animation: moveLeft1 1s normal;
+    animation-iteration-count: 1;
+    -webkit-animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+    -webkit-animation-fill-mode: forwards;
+}
+.move-left1-reverse{
+    animation: moveLeft1 1s reverse;
+    -webkit-animation: moveLeft1 1s reverse;
     animation-iteration-count: 1;
     -webkit-animation-iteration-count: 1;
     animation-fill-mode: forwards;
@@ -209,6 +241,14 @@ view{
     animation-fill-mode: forwards;
     -webkit-animation-fill-mode: forwards;
 }
+.move-left2-reverse{
+    animation: moveLeft2 1s reverse;
+    -webkit-animation: moveLeft2 1s reverse;
+    animation-iteration-count: 1;
+    -webkit-animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+    -webkit-animation-fill-mode: forwards;
+}
 @keyframes moveLeft2{
     from{
         left: 400rpx;
@@ -224,6 +264,15 @@ view{
     z-index: -1;
     animation: moveLeft3 1s normal;
     -webkit-animation: moveLeft3 1s normal;
+    animation-iteration-count: 1;
+    -webkit-animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+    -webkit-animation-fill-mode: forwards;
+}
+.move-left3-reverse{
+    z-index: -1;
+    animation: moveLeft3 1s reverse;
+    -webkit-animation: moveLeft3 1s reverse;
     animation-iteration-count: 1;
     -webkit-animation-iteration-count: 1;
     animation-fill-mode: forwards;

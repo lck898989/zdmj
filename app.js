@@ -1,173 +1,174 @@
-//app.js
-import Host from './utils/Const.js'
-App({
-    wenzhangShop: [],
-    sreacJson: null,
-    sreachPages: null,
-    nearsreachArray: null,
-    hotsreachArray: null,
-    //初始化购买的商品数量
-    buyNumber: null,
-    //
-    buyShopJson: null,
-    //计算该手机上rpx和px的换算比例
-    ratio: null,
-    //获取屏幕可见区域高度
-    seeHeight: null,
-    //判断是否开启过订单计时器
-    isStartOrder: false,
-    timeObject: [],
-    oidObject: [],
-    imageUrl: "https://shopfile.ykplay.com/resources/",
-    //初始化我的订单界面当前类型
-    orderIndexType: null,
-    //初始化我的订单访问数字
-    myOrderNumber: null,
-    //初始化订单信息
-    orderMsg: {},
-    shopJSON: {},
-    urlj: "http://sharetwo.ykplay.com",
-    hotEssay: [],
-    //初始化商品物流数组
-    shopAdressArray: [],
-    //初始化商品名
-    shopName: "",
-    dd: [1, 2],
-    //地址
-    adress: "",
-    shopNumber: "",
-    shopAllplice: "",
-    IndexTypeArray: null,
-    //初始化商品信息json
-    shopMsgJson: null,
-    //初始化文章json
-    wenzhangJson: null,
-    //初始化帮好友看到数组
-    helpFriends: [],
-    //初始化入门返利初始页数
-    rumenPage: 1,
-    //初始化热门商品数组
-    hotShop: null,
-    //初始化我的订单界面的初始页面数据
-    orderLoadPage: 1,
-    //初始化我的订单界面的总数据页数
-    orderPage: 1,
-    //初始化我的订单数组
-    myorderArray: null,
-    //初始化提现信息数组
-    arrayTixian: null,
-    access_token: "",
-    host: Host.productionHost,
-    urlw3: "http://shop.ykplay.com",
-    urlw2: "http://shop.ykplay.com/",
-    urlw: "https://shop.ykplay.com/",
-    //保存订单号
-    orderNumber: null,
-    //商户好
-    payPhone: 1487347762,
-    //
-    //用户信息
-    userInfo1: {
-        familyAddress: {
-            aid: null
-        },
-        wechatMsg: {
-
-
-
-
-        },
-    },
-    goodShop: null,
-    //支付detailInfo
-    detailInfo: null,
-    //吴世超openid
-    serverOpenid: null,
-    //微信返回的unid
-    unionId: null,
-    //吴世超uid
-    uid: null,
-    //获取登录sessionKey
-    sessionKey: null,
-    scoreHiddenLoad: null,
-    scoreHiddenScope: null,
-    isShareEnter: false,
-    //存取微信登录的code
-    loginCode: null,
-    //判断是否点击过一次免费领取
-    isPressGet: false,
-    //存取体验吗数据
-    codeMsg: {},
-    //存储微信头像
-    usetImage: "",
-    //存储微信姓名
-    userName: "",
-    detailShopMsg: null,
-    appid: "wxcf83376cf2f40081",
-    secret: "023dd5acd11fc01a88373dd77d4f9cf9",
-    url: "https://share.ykplay.com",
-    openid: "",
-    shopMsg: null,
-    isShare: false,
-    //初始化计时器对象
-    interval: null,
-    //帮助好友数组
-    helpFriend: [],
-    //判断是否获取回调
-    //存储用户信息
-    userInfo: {},
-    //好友数组
-    helpFriend: null,
-    //存储上家地址
-    cerchanAddress: "",
-    //保存商品订单号
-    shopNumber: "",
-    //客服二维码信息
-    serviceCode: null,
-    //用户二维码url
-    userCode: null,
-    //初始化我的分享界面的信息
-    myScene: 1,
-    detailShopMsg1: null,
-    //判断是否点击进入过一次我的分享界面
-    openShare: false,
-    //判断点击查看详情
-    isPressDetail: false,
-    onLaunch: function (res) {
-        //  let s = 1.2;
-        //  s=s.toString();
-        //  s.includes('.') // true
-        //  console.log(s.includes('.'));
-        //  var a = { "色号": "12"};
-        //  var b = { "颜色": "红"};
-        //  var keysa = Object.keys(a);
-        //  var keysb = Object.keys(b);
-        //  var e={};
-        //  for(let i=0;i<keysa.length;i++){
-        //      e[`${keysa[i]}`]=a[`${keysa[i]}`];
-        //  }
-        //  for (let i = 0; i < keysb.length; i++) {
-        //      e[`${keysb[i]}`] = b[`${keysb[i]}`];
-        //  }
-
-        var self = this;
-        wx.getSystemInfo({
-            success(res) {
-                self.ratio = 750 / res.windowWidth;
-                self.seeHeight = res.windowHeight;
-            }
-        })
-
-        //  var c="adasdasd";
-        // for(var i=0;i<=c.length-1;i++)
-        // {
-        //     console.log(c[i]);
-        // }
-        //  var c;
-        //  if(c==undefined||c==null)
-        //  {
-        //      console.log("222");
-        //  }
+ //app.js
+ import Host from './utils/Const.js'
+ App({
+     wenzhangShop:[],
+     sreacJson:null,
+     sreachPages:null,
+     nearsreachArray:null,
+     hotsreachArray:null,
+     //初始化购买的商品数量
+     buyNumber:null,
+     turnShopWen:{},
+     //
+     buyShopJson:null,
+     //计算该手机上rpx和px的换算比例
+     ratio: null,
+     //获取屏幕可见区域高度
+     seeHeight: null,
+     //判断是否开启过订单计时器
+     isStartOrder: false,   
+     timeObject: [],
+     oidObject: [],
+     imageUrl: "https://shopfile.ykplay.com/resources/",
+     //初始化我的订单界面当前类型
+     orderIndexType: null,
+     //初始化我的订单访问数字
+     myOrderNumber: null,
+     //初始化订单信息
+     orderMsg: {},
+     shopJSON: {},
+     urlj: "http://sharetwo.ykplay.com",
+     hotEssay: [],
+     //初始化商品物流数组
+     shopAdressArray: [],
+     //初始化商品名
+     shopName: "",
+     dd: [1, 2],
+     //地址
+     adress: "",
+     shopNumber: "",
+     shopAllplice: "",
+     IndexTypeArray: null,
+     //初始化商品信息json
+     shopMsgJson: null,
+     //初始化文章json
+     wenzhangJson: null,
+     //初始化帮好友看到数组
+     helpFriends: [],
+     //初始化入门返利初始页数
+     rumenPage: 1,
+     //初始化热门商品数组
+     hotShop: null,
+     //初始化我的订单界面的初始页面数据
+     orderLoadPage: 1,
+     //初始化我的订单界面的总数据页数
+     orderPage: 1,
+     //初始化我的订单数组
+     myorderArray: null,
+     //初始化提现信息数组
+     arrayTixian: null,
+     access_token: "",
+     host: Host.productionHost,
+     urlw3: "http://shop.ykplay.com",
+     urlw2: "http://shop.ykplay.com/",
+     urlw: "https://shop.ykplay.com/",
+     //保存订单号
+     orderNumber: null,
+     //商户好
+     payPhone: 1487347762,
+     //
+     //用户信息
+     userInfo1: {
+         familyAddress: {
+             aid: null
+         },
+         wechatMsg: {
+         },
+     },
+     goodShop:null,
+     //支付detailInfo
+     detailInfo: null,
+     //吴世超openid
+     serverOpenid: null,
+     //微信返回的unid
+     unionId: null,
+     //吴世超uid
+     uid: null,
+     //获取登录sessionKey
+     sessionKey: null,
+     scoreHiddenLoad: null,
+     scoreHiddenScope: null,
+     isShareEnter: false,
+     //存取微信登录的code
+     loginCode: null,
+     //判断是否点击过一次免费领取
+     isPressGet: false,
+     //存取体验吗数据
+     codeMsg: {},
+     //存储微信头像
+     usetImage: "",
+     //存储微信姓名
+     userName: "",
+     detailShopMsg: null,
+     appid: "wxcf83376cf2f40081",
+     secret: "023dd5acd11fc01a88373dd77d4f9cf9",
+     url: "https://share.ykplay.com",
+     openid: "",
+     shopMsg: null,
+     isShare: false,
+     //初始化计时器对象
+     interval: null,
+     //帮助好友数组
+     helpFriend: [],
+     //判断是否获取回调
+     //存储用户信息
+     userInfo: {},
+     //好友数组
+     helpFriend: null,
+     //存储上家地址
+     cerchanAddress: "",
+     //保存商品订单号
+     shopNumber: "",
+     //客服二维码信息
+     serviceCode: null,
+     //用户二维码url
+     userCode: null,
+     //初始化我的分享界面的信息
+     myScene: 1,
+     detailShopMsg1: null,
+     //判断是否点击进入过一次我的分享界面
+     openShare: false,
+     //判断点击查看详情
+     isPressDetail: false,
+     //判断天气情况
+     isDay : true,
+     onLaunch: function(res) {
+         let date = new Date();
+         let hours = date.getHours() + 1;
+         console.log("当前的时间是：",hours);
+         if(hours >= 18){
+             this.isDay = false;
+         }else{
+             this.isDay = true;
+         }
+         //判断天气情况
+         setInterval(function(){
+             let date = new Date();
+             let hours = date.getHours() + 1;
+             console.log("当前的时间是：",hours);
+             if(hours >= 18){
+                 this.isDay = false;
+             }else{
+                 this.isDay = true;
+             }
+         }.bind(this),30 * 60 * 1000);
+         var self = this;
+         wx.getSystemInfo({
+             success(res) {
+                 self.ratio = 750 / res.windowWidth;
+                 self.seeHeight = res.windowHeight;
+             }
+         })
+         //  var c="adasdasd";
+         // for(var i=0;i<=c.length-1;i++)
+         // {
+         //     console.log(c[i]);
+         // }
+         //  var c;
+         //  if(c==undefined||c==null)
+         //  {
+         //      console.log("222");
+         //  }
 
         // var a=[];
         // a.push(1);
@@ -176,7 +177,6 @@ App({
         console.log(this.userInfo1);
         var self = this;
         this.StartLongConnect();
-
         // 登录 
         wx.login({
             fail: function (res) {
@@ -328,7 +328,7 @@ App({
 
     },
     //与服务器断链接发送请求
-    ShortConnect(url1, data1, state) {
+    ShortConnect(url1, data1, state,callback) {
         console.log(state);
         var self = this;
         //发起网络请求
@@ -538,6 +538,7 @@ App({
                         })
                         break;
                     case "GetShopAdressNumber":
+
                         //  self.shopAdressArray = res.data.order.orderitems;
                         //  wx.navigateTo({
                         //      url: '../ShopAdress/ShopAdress',
@@ -557,13 +558,11 @@ App({
 
                         break;
                     case "interWenZhang":
-
-                        self.wenzhangJson = res.data.essay;
-                        if (self.setEssay) {
-                            console.log("555");
-                            self.setEssay(res);
-                        }
-
+                         self.wenzhangJson = res.data.essay;
+                         if (self.setEssay) {
+                           
+                             self.setEssay(res);
+                         }
                         break;
                     case "GetType":
                         self.IndexTypeArray = res.data.tabs;
@@ -777,7 +776,39 @@ App({
                         }
                         break;
                     case "getWenzhang":
-                        self.setJingArray(res);
+                        callback(res.data.essays);
+                        // if (res.data.essays.length % 2 == 0) {
+                        //     for (let i = 0; i <= res.data.essays.length - 1; i++) {
+                        //         if (i <= (res.data.essays.length / 2 - 1)) {
+                        //             this.setData({
+                        //                 col1: res.data.essays[i]
+                        //             })
+
+                        //         }
+                        //         else {
+                        //             this.setData({
+                        //                 col2: res.data.essays[i]
+                        //             })
+                        //         }
+                        //     }
+                         
+                        // }
+                        // else {
+                        //     for (let i = 0; i <= res.data.essays.length - 1; i++) {
+                        //         if (i <= (res.data.essays.length / 2 - 0.5)) {
+                        //             this.setData({
+                        //                 col1: res.data.essays[i]
+                        //             })
+
+                        //         }
+                        //         else {
+                        //             this.setData({
+                        //                 col2: res.data.essays[i]
+                        //             })
+                        //         }
+                        //     }
+                         
+                        // }
                         break;
                     //访问分享记录
                     case "shareMsg":
@@ -1197,6 +1228,7 @@ App({
                         self.setKaiQi(res);
                         break;
                     case "turnShopWen":
+                        self.shopWenZhangJson = res.data.shop;
                         self.wenzhangShop = res.data.shopproducts;
                         if (self.setwenzhangShop) {
                             self.setwenzhangShop(res);

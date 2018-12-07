@@ -1,4 +1,8 @@
-// pages/lck/play/play.js
+
+import regeneratorRuntime from '../../../utils/regenerator-runtime/runtime-module.js';
+import Request from '../../../utils/Request.js';
+import Const from '../../../utils/Const.js';
+let app = getApp();
 Page({
 
     /**
@@ -20,103 +24,27 @@ Page({
             },
             {
                 id: 1,
-                text: '酒店',
+                text: '快餐',
                 active: false
             },
             {
                 id: 2,
-                text: '景点',
+                text: '火锅',
                 active: false
             },
             {
                 id: 3,
-                text: '乐园',
+                text: '烧烤',
                 active: false
             },
             {
                 id: 4,
-                text: '旅行社',
+                text: '西餐',
                 active: false
             },
         ],
-        dataArray: [
-            {
-                id: 0,
-                watched: 257,
-                text: '这里的KTV包厢音响效果很好非常赞，环境也不错。',
-                author: 'lck',
-                authorAvatar: 'https://wx.qlogo.cn/mmopen/vi_32/bmtmeRwn3Sv5WcnbKaE7V3XFpLNwh0DjicwtJYzy997p451ibIy6tu8R05fRQOmibdlyCD2FPLpJNYnnZzic0JhDDw/132',
-                goodsPicture: '../../../resources/fanli_4.png'
-            },
-            {
-                id: 1,
-                watched: 1000,
-                text: '这里的KTV包厢音响效果很好非常赞，环境也不错。',
-                author: 'lck',
-                authorAvatar: 'https://wx.qlogo.cn/mmopen/vi_32/bmtmeRwn3Sv5WcnbKaE7V3XFpLNwh0DjicwtJYzy997p451ibIy6tu8R05fRQOmibdlyCD2FPLpJNYnnZzic0JhDDw/132',
-                goodsPicture: 'http://pic.qiantucdn.com/58pic/28/79/71/80P58PICPNScdhmZ9JE79_PIC2018.jpg'
-            },
-            {
-                id: 2,
-                watched: 70,
-                text: '这里的KTV包厢音响效果很好非常赞，环境也不错。',
-                author: 'lck',
-                authorAvatar: 'https://wx.qlogo.cn/mmopen/vi_32/bmtmeRwn3Sv5WcnbKaE7V3XFpLNwh0DjicwtJYzy997p451ibIy6tu8R05fRQOmibdlyCD2FPLpJNYnnZzic0JhDDw/132',
-                goodsPicture: '../../../resources/fanli_4.png'
-            },
-            {
-                id: 3,
-                watched: 60,
-                text: '这里的KTV包厢音响效果很好非常赞，环境也不错。',
-                author: 'lck',
-                authorAvatar: 'https://wx.qlogo.cn/mmopen/vi_32/bmtmeRwn3Sv5WcnbKaE7V3XFpLNwh0DjicwtJYzy997p451ibIy6tu8R05fRQOmibdlyCD2FPLpJNYnnZzic0JhDDw/132',
-                goodsPicture: '../../../resources/fanli_4.png'
-            },
-            {
-                id: 4,
-                watched: 10,
-                text: '这里的KTV包厢音响效果很好非常赞，环境也不错。环境nice,建议去',
-                author: 'lck',
-                authorAvatar: 'https://wx.qlogo.cn/mmopen/vi_32/bmtmeRwn3Sv5WcnbKaE7V3XFpLNwh0DjicwtJYzy997p451ibIy6tu8R05fRQOmibdlyCD2FPLpJNYnnZzic0JhDDw/132',
-                goodsPicture: 'http://pic.qiantucdn.com/58pic/28/79/71/80P58PICPNScdhmZ9JE79_PIC2018.jpg'
-            },
-            {
-                id: 5,
-                watched: 2,
-                text: '这里的KTV包厢音响效果很好非常赞，环境也不错。',
-                author: 'lck',
-                authorAvatar: 'https://wx.qlogo.cn/mmopen/vi_32/bmtmeRwn3Sv5WcnbKaE7V3XFpLNwh0DjicwtJYzy997p451ibIy6tu8R05fRQOmibdlyCD2FPLpJNYnnZzic0JhDDw/132',
-                goodsPicture: 'http://pic.qiantucdn.com/58pic/28/79/71/80P58PICPNScdhmZ9JE79_PIC2018.jpg'
-            },
-
-        ],
-        //模拟加载更能多数据
-        moreDataArray: [
-            {
-                id: 6,
-                watched: 60,
-                text: '这里的KTV包厢音响效果很好非常赞，环境也不错。',
-                author: 'lck',
-                authorAvatar: 'https://wx.qlogo.cn/mmopen/vi_32/bmtmeRwn3Sv5WcnbKaE7V3XFpLNwh0DjicwtJYzy997p451ibIy6tu8R05fRQOmibdlyCD2FPLpJNYnnZzic0JhDDw/132',
-                goodsPicture: '../../../resources/fanli_4.png'
-            },
-            {
-                id: 7,
-                watched: 10,
-                text: '这里的KTV包厢音响效果很好非常赞，环境也不错。环境nice,建议去',
-                author: 'lck',
-                authorAvatar: 'https://wx.qlogo.cn/mmopen/vi_32/bmtmeRwn3Sv5WcnbKaE7V3XFpLNwh0DjicwtJYzy997p451ibIy6tu8R05fRQOmibdlyCD2FPLpJNYnnZzic0JhDDw/132',
-                goodsPicture: 'http://pic.qiantucdn.com/58pic/28/79/71/80P58PICPNScdhmZ9JE79_PIC2018.jpg'
-            },
-            {
-                id: 8,
-                watched: 2,
-                text: '这里的KTV包厢音响效果很好非常赞，环境也不错。',
-                author: 'lck',
-                authorAvatar: 'https://wx.qlogo.cn/mmopen/vi_32/bmtmeRwn3Sv5WcnbKaE7V3XFpLNwh0DjicwtJYzy997p451ibIy6tu8R05fRQOmibdlyCD2FPLpJNYnnZzic0JhDDw/132',
-                goodsPicture: 'http://pic.qiantucdn.com/58pic/28/79/71/80P58PICPNScdhmZ9JE79_PIC2018.jpg'
-            },
-        ],
+        imgHost: Const.productionHost,
+        dataArray: [],
         // scorll-view的高度
         scrollH: 0,
         //图片的宽度
@@ -124,7 +52,7 @@ Page({
         //加载图片的数量
         loadingCount: 6,
         col1: [],
-
+        page : 1,
         // scorll-view的高度
         scrollH: 0,
         //图片的宽度
@@ -136,12 +64,13 @@ Page({
         ratio: 2,
         col1H: 0,
         col2H: 0,
-        backgroundColor: '#0a0707'
+        backgroundColor: '#0a0707',
+        loadText : '下拉获取更多文章...',
     },
     /**
      * 生命周期函数--监听页面加载
      */
-    onLoad: function (options) {
+    onLoad: async function (options) {
         let self = this;
         //获取到系统的信息
         wx.getSystemInfo({
@@ -157,7 +86,41 @@ Page({
                 })
                 console.log("scrollH is ", self.data.scrollH);
             }
-        })
+        });
+        //请求吃相关信息
+        let url = app.host + 'Data/GetHomeEOrP';
+        let data = {
+            page    : this.data.page,
+            shoptag : '吃',
+            uid     : app.uid
+        }
+        console.log("data is ",data);
+        let req = new Request(url,data,"POST","text");
+        let res = await req.sendRequest();
+        console.log("res is ",res);
+        if(res.data.shopessays.length === 0){
+            this.setData({
+                loadText: '已经到底了~~o(>_<)o ~~'
+            })
+        }else{
+            this.data.dataArray = res.data.shopessays;
+            this.setEssayHeadImage();
+            console.log("dataArray is ",this.data.dataArray);
+            this.setData({
+                dataArray : this.data.dataArray
+            });
+        }
+    },
+    setEssayHeadImage : function(){
+        for (let j = 0; j < this.data.dataArray.length; j++) {
+            //店铺文章
+            this.data.dataArray[j].productstype = 'shopessays';
+            if (this.data.dataArray[j].shopessayhead) {
+                if(typeof(this.data.dataArray[j].shopessayhead) === 'string'){
+                    this.data.dataArray[j].shopessayhead = this.data.dataArray[j].shopessayhead.split(',');
+                }
+            }
+        }
     },
     onImageLoad: function (e) {
         console.log("e is ", e);
@@ -174,12 +137,11 @@ Page({
         console.log("自适应的高度为：", imgHeight);
         let images = this.data.dataArray;
         let imageObj = null;
-
         for (let i = 0; i < images.length; i++) {
             console.log("images is ", images);
             console.log("imageId is ", typeof (imageId), imageId);
             let img = images[i];
-            if (img.id === imageId) {
+            if (img.shopeid === imageId) {
                 imageObj = img;
                 break;
             }
@@ -257,7 +219,9 @@ Page({
      * 页面上拉触底事件的处理函数
      */
     onReachBottom: function () {
-
+        this.data.page++;
+        console.log("page is ",this.data.page);
+        this.loadImages();
     },
 
     /**
@@ -265,6 +229,19 @@ Page({
      */
     onShareAppMessage: function () {
 
+    },
+    //view的下拉获取top位置信息
+    onPageScroll : function(e){
+        console.log(e);
+        if(e.scrollTop > 100){
+            this.setData({
+                floorStatus : true,
+            })
+        }else{
+            this.setData({
+                floorStatus : false
+            })
+        }
     },
     getIndex: function (e) {
         console.log("e is ", e);
@@ -275,6 +252,7 @@ Page({
     },
     //选择类型
     chooseType: function (event) {
+        this.data.page = 1;
         let dataSet = event.currentTarget.dataset;
         let id = Number(dataSet.id);
         console.log("id is ", id);
@@ -283,30 +261,15 @@ Page({
             let currentjson = this.data.bannerType[i];
             //当前的json id跟穿件来的id相同
             if (currentjson.id === id) {
-                currentjson.choosed = true;
+                currentjson.active = true;
             } else {
-                currentjson.choosed = false;
+                currentjson.active = false;
             }
         }
         this.setData({
-            bannerType: this.data.bannerType
-        })
-    },
-    //加载更多的图片
-    loadImages: function () {
-        wx.showLoading({
-            title: '数据正在赶来...',
-        })
-        console.log("dataArray is ", this.data.dataArray);
-        console.log("moredataArray is ", this.data.moreDataArray);
-        for (let i = 0; i < this.data.moreDataArray.length; i++) {
-            this.data.dataArray.push(this.data.moreDataArray[i]);
-        }
-        this.setData({
-            dataArray: this.data.dataArray
-        }, () => {
-            wx.hideLoading();
-        })
+            bannerType : this.data.bannerType,
+       });
+
     },
     //跳转搜索界面
     enterSearch: function (e) {
@@ -334,9 +297,58 @@ Page({
         }
     },
     //一键回到顶部
-    goTop: function () {
-        this.setData({
-            topNum: this.data.topNum = 0
-        })
+    goTop: function (e) {
+        if(wx.pageScrollTo){
+            wx.pageScrollTo({
+                scrollTop: 0,
+            })
+        }else{
+            wx.showModal({
+                title: '提示',
+                content: '当前微信版本过低，暂无法使用该功能',
+            })
+        }
+    },
+    //加载更多
+    loadImages : async function(){
+        let self = this;
+        //找出现在是哪个分类
+        let typeLen = this.data.bannerType.length;
+        let res = null;
+        let id = 0;
+        for (let m = 0; m < typeLen; m++) {
+            let currentBanner = this.data.bannerType[m];
+            let typeText = currentBanner.text;
+            //选中了哪个类别
+            if (currentBanner.active === true) {
+                console.log("当前选择的类型是：",typeText);
+                //请求吃相关信息
+                let url = app.host + 'Data/GetHomeEOrP';
+                let data = {
+                    page    : this.data.page,
+                    shoptag : '吃',
+                    uid     : app.uid
+                }
+                console.log("data is ",data);
+                let req = new Request(url,data,"POST","text");
+                let res = await req.sendRequest();
+                console.log("res is ",res);
+                if(res.data.shopessays.length === 0){
+                    this.setData({
+                        loadText: '已经到底了~~o(>_<)o ~~'
+                    });
+                }else{
+                    for(let i = 0;i < res.length;i++){
+                        this.data.dataArray.push(res[i]);
+                    }
+                    this.setEssayHeadImage();
+                    console.log("dataArray is ", this.data.dataArray);
+                    console.log("当前的模拟数字是：", this.data.simulateTimes);
+                    this.setData({
+                        dataArray: this.data.dataArray
+                    });
+                }
+            }
+        }
     }
 })

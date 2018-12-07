@@ -5,7 +5,7 @@
 <view class='mingxiView'>
     <view class='mingxiTop'>
         <text class='leijiText' style='font-size:26rpx;'>累积提现</text>
-        <image class='jinbiImage' src='../../resources/qiaobao_pic.png' mode='widthFix'></image>
+        <image class='jinbiImage' src='../../resources/qiaobao_pic.png' style='height:auto'mode='widthFix'></image>
         <!-- <image class='jinbiImage' style='width:26rpx;' src='../../main_personal_up.png' mode='widthFix'></image> -->
         <text class='money' style='font-size:37rpx;'>+{{money}}</text>
     </view>
@@ -17,8 +17,8 @@
     </view>
     <scroll-view class='msgView' scroll-y='true' hidden='{{hasMsg}}'>
         <view class='msgSon' wx:for='{{arrayTixian}}' bindtap='pressTixian' data-money="{{item.rebate}}" data-success="{{item.state}}" data-time="{{item.time}}" data-number="{{item.number}}">
-            <image class='successImage' mode='widthFix' src='../../resources/qiaobao_icon3.png' wx:if='{{item.state==1}}'></image>
-            <image class='successImage' mode='widthFix' src='../../resources/qiaobao_icon4.png' wx:else></image>
+            <image class='successImage' style='height:auto'mode='widthFix' src='../../resources/qiaobao_icon3.png' wx:if='{{item.state==1}}'></image>
+            <image class='successImage'  style='height:auto'style=''mode='widthFix' src='../../resources/qiaobao_icon4.png' wx:else></image>
             <text class='time' space='ensp'>{{item.time}}</text>
             <text class='typeGetMoney' style='font-size:25rpx;' wx:if='{{item.type==0}}'><block wx:if='{{item.state==1}}'>提现成功</block><block wx:else>提现失败</block></text>
             <text class='typeGetMoney' style='font-size:25rpx;' wx:elif='{{item.type==11}}'><block wx:if='{{item.state==1}}'>写手代理返利成功</block><block wx:else>写手代理返利失败</block></text>

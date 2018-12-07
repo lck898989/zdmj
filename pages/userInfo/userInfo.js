@@ -45,18 +45,18 @@
             //   wx.navigateTo({
             //       url: '../SreachResult/SreachResult',
             //   })
-              app.nearsreachArray =null;
-              app.hotsreachArray = null;
-              app.goodShop = null;
-              app.ShortConnect(app.urlw+"Data/GetSearch",{
-                  uid:app.uid,
-              },"InterSreach");
-              app.ShortConnect(app.urlw + "Data/GetRecommendProduct", {
-                 page:1,
-              }, "InterSreach1");
-               wx.navigateTo({
-                   url: '../search/search',
-               })
+            //   app.nearsreachArray =null;
+            //   app.hotsreachArray = null;
+            //   app.goodShop = null;
+            //   app.ShortConnect(app.urlw+"Data/GetSearch",{
+            //       uid:app.uid,
+            //   },"InterSreach");
+            //   app.ShortConnect(app.urlw + "Data/GetRecommendProduct", {
+            //      page:1,
+            //   }, "InterSreach1");
+            //    wx.navigateTo({
+            //        url: '../search/search',
+            //    })
           },
           //点击消息通知
           PressMessageMess: function() {

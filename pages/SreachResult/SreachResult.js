@@ -6,6 +6,8 @@ Page({
      * 页面的初始数据
      */
     data: {
+        shopNumber:1,
+        buyBoxHidden:true,
         url:"",
         sreachText: "",
         //初始化综合最热开关
@@ -20,11 +22,7 @@ Page({
         goodShop: [1, 2, 3, 4, 5],
         allproducts: [],
         allessays: [],
-
-
-
     },
-
     /**
      * 生命周期函数--监听页面加载
      */
@@ -32,22 +30,60 @@ Page({
         this.setData({
             url:app.urlw3
         })
-        console.log("SreachResult");
+        
         if (app.sreacJson) {
-            console.log("SreachResult1" + app.sreacJson.allproducts.length);
-            console.log("SreachResult1" + app.sreacJson.allessays.length);
+           
             for (let i = 0; i <= app.sreacJson.allessays.length-1;i++)
             {
                 if (app.sreacJson.allessays[i].productstype =="shopessays")
                 {
-                    app.sreacJson.allessays[i].shopessayhead = app.sreacJson.allessays[i].shopessayhead.split(",");
+                    if (app.sreacJson.allessays[i].essaycustom==1)
+                    {
+                        if (typeof app.sreacJson.allessays[i].essaycustomhead == "string") {
+                            console.log("SreachResult222" + JSON.stringify(app.sreacJson));
+                            app.sreacJson.allessays[i].essaycustomhead = app.sreacJson.allessays[i].essaycustomhead.split(",");
+                        }
+                       
+                    }
+                    else
+                    {
+                        if (typeof app.sreacJson.allessays[i].shopessayhead == "string") {
+                           
+                            app.sreacJson.allessays[i].shopessayhead = app.sreacJson.allessays[i].shopessayhead.split(",");
+                        }
+                      
+                    }
                 }
                 if (app.sreacJson.allessays[i].productstype == "essays") {
-                    app.sreacJson.allessays[i].essayhead = app.sreacJson.allessays[i].essayhead.split(",");
+                    console.log(i);
+                    if (app.sreacJson.allessays[i].essaycustom==1)
+                    {
+                        if (typeof app.sreacJson.allessays[i].essaycustomhead == "string") {
+                            app.sreacJson.allessays[i].essaycustomhead = app.sreacJson.allessays[i].essaycustomhead.split(",");
+                        }
+                    }
+                    else
+                    {
+                        if (typeof app.sreacJson.allessays[i].essayhead=="string")
+                        {
+                            console.log("SreachResult111" + JSON.stringify(app.sreacJson));
+                            app.sreacJson.allessays[i].essayhead = app.sreacJson.allessays[i].essayhead.split(",");
+                        }
+                      
+                    }
                 }  
             }
+            console.log(JSON.stringify(app.sreacJson.allproducts) + "allessays11111111111111");
+         
             for (let i = 0; i <= app.sreacJson.allproducts.length - 1; i++) {
-                app.sreacJson.allproducts[i].head = app.sreacJson.allproducts[i].head.split(",");
+                if (typeof app.sreacJson.allproducts[i].head=="string")
+                {
+                    app.sreacJson.allproducts[i].head = app.sreacJson.allproducts[i].head.split(",");
+                }
+                else
+                {
+
+                }
             }
             this.setData({
                 allproducts: app.sreacJson.allproducts,
@@ -157,15 +193,26 @@ Page({
                 console.log("SreachResult2" + res.data.allproducts.length.toString());
                 console.log("SreachResult2" + res.data.allessays.length.toString());
                 for (let i = 0; i <= res.data.allessays.length - 1; i++) {
-                    if (res.data.allessays[i].productstype=="essays")
-                    {
-                        res.data.allessays[i].essayhead = res.data.allessays[i].essayhead.split(",");
+                    if (res.data.allessays[i].productstype == "shopessays") {
+                        if (res.data.allessays[i].essaycustom == 1) {
+                            res.data.allessays[i].essaycustomhead = res.data.allessays[i].essaycustomhead.split(",");
+                        }
+                        else {
+                            console.log("SreachResult222" + JSON.stringify(app.sreacJson));
+                            res.data.allessays[i].shopessayhead = res.data.allessays[i].shopessayhead.split(",");
+                        }
                     }
-                    else
-                    {
-                        res.data.allessays[i].shopessayhead = res.data.allessays[i].shopessayhead.split(",");
+                    if (res.data.allessays[i].productstype == "essays") {
+                        if (res.data.allessays[i].essaycustom == 1) {
+                            res.data.allessays[i].essaycustomhead = res.data.allessays[i].essaycustomhead.split(",");
+                        }
+                        else {
+                            console.log("SreachResult111" + JSON.stringify(app.sreacJson));
+                            res.data.allessays[i].essayhead = res.data.allessays[i].essayhead.split(",");
+                        }
                     }
                 }
+           
                 for (let i = 0; i <= res.data.allproducts.length - 1; i++) {
                     res.data.allproducts[i].head =   res.data.allproducts[i].head.split(",");
                 }
@@ -351,6 +398,65 @@ Page({
         //获取每张图片的高度
 
     },
+
+    buyShop1: function (event) {
+        console.log(event.currentTarget.dataset.shop);
+        // event.currentTarget.dataset.shop.head = event.currentTarget.dataset.shop.head.split(",");
+        console.log(event.currentTarget.dataset.pid);
+        if (event.currentTarget.dataset.shop.openstandard == 1) {
+            // this.setData({
+            //     indexShopArray: event.currentTarget.dataset.shop,
+            // })
+            // app.ShortConnect(app.urlw + "Data/GetStandardByPid", {
+            //     pid: event.currentTarget.dataset.pid
+            // }, "setSreachSize");
+
+        } else {
+            var selectsize = JSON.parse(event.currentTarget.dataset.shop.size);
+            console.log(selectsize + "333333333333");
+            var keys = Object.keys(selectsize);
+            console.log(keys + "333333333333");
+            var selectsize1 = {};
+            for (let i = 0; i < keys.length; i++) {
+                var value = selectsize[`${keys[i]}`];
+                var keyss = keys[i].split(",");
+                var values = value.split("|");
+                for (let j = 0; j < keyss.length; j++) {
+                    selectsize1[keyss[j]] = values[j];
+                }
+            }
+            event.currentTarget.dataset.shop.size = selectsize1;
+            var typeValueArr1 = Object.values(event.currentTarget.dataset.shop.size);
+            var typeValueArr2 = [];
+            this.data.typeArr = Object.keys(event.currentTarget.dataset.shop.size);
+            for (let i = 0; i <= typeValueArr1.length - 1; i++) {
+                let typeValueJson = {};
+                console.log("typeArr is ", this.data.typeArr);
+                for (let j = 0; j < this.data.typeArr.length; j++) {
+                    typeValueJson[`${this.data.typeArr[j]}`] = [];
+                    let tempArr = typeValueJson[`${this.data.typeArr[j]}`];
+                    let tempJson = {}
+                    tempJson.mode = typeValueArr1[i];
+                    tempJson.touch = true;
+                    tempArr.push(tempJson);
+                }
+                // typeValueJson.mode = typeValueArr1[i];
+                // typeValueJson.touch = true;
+
+                typeValueArr2.push(typeValueJson);
+            }
+            
+            console.log("typeValueArr2 is ", typeValueArr2);
+            this.setData({
+                buyBoxHidden: false,
+                indexShopArray: event.currentTarget.dataset.shop,
+                typeArr: Object.keys(event.currentTarget.dataset.shop.size),
+                typeValueArr: typeValueArr2
+
+            })
+            console.log(this.data.buyBoxHidden + "333333333333");
+        }
+    },
     sreach: function() {
         app.goodShop=null;
         wx.navigateTo({
@@ -362,13 +468,49 @@ Page({
             url: '../search/search',
         })
     },
-    intetWenzhang: function(event) {
-        app.ShortConnect(app.urlw+"Data/GetShopProductsByShopEssayShopid",{
-            shopid: event.currentTarget.dataset.shopid
-        },"turnShopWen");
-        wx.navigateTo({
-            url: '../ShopActicle/ShopActicle',
+    cancel:function(){
+        this.setData({
+            buyBoxHidden:true
         })
+    },
+    add: function () {
+        this.setData({
+            shopNumber: this.data.shopNumber + 1
+        })
+    },
+    sub: function () {
+        if (this.data.shopNumber != 1) {
+            this.setData({
+                shopNumber: this.data.shopNumber - 1
+            })
+        }
+    },
+    intetWenzhang: function(event) {
+     
+        if (event.currentTarget.dataset.productstype =="essays")
+        {
+            console.log(event.currentTarget.dataset.shopurl);
+            app.wenzhangJson=null;
+            app.ShortConnect(app.urlw + "Data/GetEssayInfo", {
+                pid: event.currentTarget.dataset.shopjson.pid,
+                eid: event.currentTarget.dataset.shopjson.eid,
+                uid:app.uid
+            }, "interWenZhang");
+            wx.navigateTo({
+                url: '../ActicleScene/ActicleScene?essayhead=' + event.currentTarget.dataset.shopurl + "&title=" + event.currentTarget.dataset.title + "&authorurl=" + event.currentTarget.dataset.shopjson.wxhead + "&authorname=" + event.currentTarget.dataset.shopjson.wxnickname + "&pid=" + JSON.stringify(event.currentTarget.dataset.shopjson.pid) + "&eid=" + JSON.stringify(event.currentTarget.dataset.shopjson.eid),
+            })
+        }
+        if (event.currentTarget.dataset.productstype == "shopessays") {
+            var shopjson2 = encodeURIComponent(JSON.stringify(event.currentTarget.dataset.shopjson));
+            app.wenzhangShop = null;
+            app.ShortConnect(app.urlw + "Data/GetShopProductsByShopEssayShopid", {
+                shopid: event.currentTarget.dataset.shopid,
+                uid: app.uid
+            }, "turnShopWen");
+            wx.navigateTo({
+                url: '../ShopActicle/ShopActicle?shopurl=' + event.currentTarget.dataset.shopurl + '&introduction=' + event.currentTarget.dataset.title + "&shopjson=" + shopjson2,
+            })
+        }
     },
     /**
      * 生命周期函数--监听页面初次渲染完成

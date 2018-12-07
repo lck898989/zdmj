@@ -1,6 +1,7 @@
 {
     "usingComponents": {
         "swiper-item-component": "/components/swiper-item-component/swiper-item-component",
-        "index-type-detail-component": "/components/index-type-detail-component/index-type-detail-component"
+        "index-type-detail-component": "/components/index-type-detail-component/index-type-detail-component",
+        "image-loader": "/components/beforeLoadImg/beforeLoadImg"
     }
 }

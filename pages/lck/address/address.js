@@ -9,6 +9,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    srcpduigou: app.imageUrl + "icon_selected_1.png", 
      add : '',
      isChecked : true,
      editor    : false,
@@ -17,8 +18,10 @@ Page({
      phoneNumber : '',
      address : '',
      addressDetail : '',
-     //模拟服务器送来的数据
-      user : [],
+     //模拟服务器送来的数据  我的地址
+      user : [
+        //{ aid: 28, detaildistrict: "你理解", district: "天津市天津市宝坻区", phone: "18522467396", recipient: "你记", state: 1, uid: 3, lx: '公司' }, { aid: 28, detaildistrict: "你理解", district: "天津市天津市宝坻区", phone: "18522467396", recipient: "你记", state: 0, uid: 3,  lx: '家庭' }
+      ],
      //将要发送到服务器的收货地址
      inputError : false,
      //用户名没有输入
@@ -50,8 +53,10 @@ Page({
           title:'数据加载中',
       })
       console.log("onLoad");
+    console.log(this.data.user, "uuuuuuuuuuuuuuu")
       this.getAddressList();
       //不显示数据加载中
+    
       wx.hideLoading({
           
       })
@@ -62,7 +67,7 @@ Page({
       let url = app.host + 'Data/getAddressByUid';
       console.log("uid is ", app.uid);
       let data = {
-          uid : app.uid
+        uid:1 // uid : app.uid
       }
       let req = new Request(url, data, "POST", 'text');
       let res = await req.sendRequest();
@@ -70,6 +75,7 @@ Page({
       this.setData({
           user: res.data.address
       });
+      // console.log(this.data.user,"yyyyyyyyyyyyyyyyyyyyyyyyyy")
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

@@ -1,1 +1,159 @@
 /* pages/HistroyShare/HistroyShare.wxss */
+.all{
+  width: 750rpx;
+  overflow: auto;
+  background-color:#EEEEEE; 
+}
+.top{
+  position: relative;
+  width: 750rpx;
+  height: 500rpx;
+  background-color: rgb(0, 255, 255);
+  border-radius: 10rpx;
+  margin-bottom: 10rpx;
+}
+.down{
+  position: relative;
+  width: 750rpx;
+  overflow: auto;
+  border-radius: 10rpx;
+  
+}
+.time{
+  margin-left: 30rpx;
+  font-size: 28rpx;
+  color: #949494;
+  margin-bottom: 10rpx;
+}
+.connn{
+  width: 750rpx;
+  display: flex;
+  flex-wrap: wrap;
+}
+.conn{
+  width: auto;
+  padding-left: 23rpx;
+}
+.date-show{
+	position: relative;
+	width: 250rpx;
+	font-family: PingFang-SC-Regular;
+	font-size: 26rpx;
+	color: #282828;
+	text-align: center;
+	margin: 59rpx auto 10rpx;
+}
+.date-show2{
+	position: relative;
+	width: 750rpx;
+	font-family: PingFang-SC-Regular;
+	font-size: 40rpx;
+	color: #282828;
+	text-align: center;
+	margin: 10rpx auto 10rpx;
+}
+.lt-arrow,.rt-arrow{
+	position: absolute;
+	top: 0rpx;
+	width: 60rpx;
+	height: 60rpx;
+}
+.lt-arrow{
+	left: -110rpx;
+}
+.rt-arrow{
+	right: -100rpx;
+}
+.header{
+	font-size: 0;
+	padding: 0 24rpx;
+}
+.header>view{
+	display: inline-block;
+	width: 14.285%;
+	color: #333;
+	font-size: 30rpx;
+	text-align: center;
+	border-bottom: 1px solid #eff3f6;
+	padding: 39rpx 0;
+}
+.weekMark{
+	position: relative;
+  font-size: 24rpx;
+}
+.weekMark view{
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+}
+.date-box{
+	font-size: 0;
+	padding: 10rpx 0;
+}
+.date-box>view{
+	position: relative;
+	display: inline-block;
+	width: 14.285%;
+	color: #020202;
+	font-size: 40rpx;
+	text-align: center;
+	vertical-align: middle;
+	margin: 15rpx 0;
+}
+.date-head{
+	height: 36rpx;
+	line-height: 36rpx;
+	font-size: 24rpx;
+}
+.nowDay .date-head{
+	width: 36rpx;
+	border-radius: 50%;
+	text-align: center;
+	color: #fff;
+	background-color: #da91f5;
+	margin: 0 auto;
+}
+.date-weight{
+	font-size: 22rpx;
+	padding: 15rpx 0;
+}
+.nowDay .date-weight{
+	color: #da91f5;
+}
+.nowDay2{
+  width: 10rpx;
+  height: 10rpx;
+  margin-left: 13rpx;
+  margin-top: 10rpx;
+	border-radius: 50%;
+  color: #da91f5;
+  font-size: 1rpx;
+	background-color: #da91f5;
+}
+.one{
+	position: absolute;
+	bottom: 0;
+	right: 5rpx;
+	width: 20rpx;
+	height: 20rpx;
+	border-radius: 50%;
+	background-color: red;
+}
+.two{
+	position: absolute;
+	bottom: 30rpx;
+	right: 5rpx;
+	width: 20rpx;
+	height: 20rpx;
+	border-radius: 50%;
+	background-color: blue;
+}
+.te1{
+  position: relative;
+  margin-right: 20px;
+}
+.te2{
+  position: relative;
+  width: 250rpx;
+}

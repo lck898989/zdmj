@@ -31,6 +31,7 @@ Page({
 
     },
     onLoad: function(res) {
+        
         app.setKaiQi = res => {
             // var selectsize = JSON.parse(event.currentTarget.dataset.shop.size);
             // console.log(selectsize + "333333333333");
@@ -207,6 +208,7 @@ Page({
                     res.data.all[i].name = Object.keys(res.data.all[i])[0];
                     res.data.all[i].number = res.data.all[i][Object.keys(res.data.all[i])[0]];
                 }
+                console.log("setSreachArray");
                 this.setData({
                     sreachArray: res.data.all
                 })
@@ -309,7 +311,7 @@ Page({
                 typeValueArr: typeValueArr2
 
             })
-            console.log(JSON.stringify(typeValueArr2) + "333333333333");
+            console.log(this.data.buyBoxHidden+ "333333333333");
         }
     },
     clearSreach: function() {
@@ -355,10 +357,21 @@ Page({
             url: '../SreachResult/SreachResult?sreachText=' + this.data.sreachText,
         })
     },
+    //点击最近搜索
+    pressZuiSreach: function (event){
+        app.sreacJson = null;
+        app.ShortConnect(app.urlw + "Data/searchInfoByKeyWords", {
+            uid: app.uid,
+            page: 1,
+            keywords: event.currentTarget.dataset.id
+        }, "pressSreach");
+        wx.navigateTo({
+            url: '../SreachResult/SreachResult?sreachText=' + event.currentTarget.dataset.id,
+        })
+    },
     pressSreach:function(){
         if (this.data.sreachArray.length>0)
         {
-         
             app.sreacJson = null;
             app.ShortConnect(app.urlw + "Data/searchInfoByKeyWords", {
                 uid: app.uid,

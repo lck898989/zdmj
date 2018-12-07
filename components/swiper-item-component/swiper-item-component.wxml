@@ -1,48 +1,53 @@
 <!--components/swiper-item-component/swiper-item-component.wxml-->
-<view class='title-con'>
-    <view class='title'>
-        {{item.acttitle}}
-    </view>
-    <view class='desc'>
-        {{item.actinfo}}
-    </view>
-</view>
-<view class='con'>
-    <view class='left-con'>
-        <image-loader originalImage='{{imageHost}}{{goods[0].headImg}}' width='260rpx' height='285rpx' mode='' styleClass='border-top-left-radius: 10rpx;border-top-right-radius: 10rpx;'></image-loader>
-        <view class='np-con'>
-            <view class='pname'>
-                {{goods[0].pname}}
+<view class='outWrapper'>
+    <view class='hotContainer'>
+        <view class='title-con'>
+            <view class='title'>
+                {{item.acttitle}}
             </view>
-            <view class='price'>
-                ￥{{goods[0].price}}
+            <view class='desc'>
+                {{item.actinfo}}
             </view>
         </view>
-    </view>
-    <view class='right-con'>
-        <view class='item'>
-            <!-- <image src='{{imageHost}}{{goods[1].headImg}}' style='width:430rpx;height:146rpx;' class='im'></image> -->
-            <image-loader originalImage='{{imageHost}}{{goods[1].headImg}}' width='430rpx' height='146rpx' mode='' styleClass='border-top-left-radius: 10rpx;border-top-right-radius: 10rpx;'></image-loader>
-            <view class='item-row'>
-                <view class='pname_r'>
-                    {{goods[1].pname}}
+        <view class='con'>
+            <view class='left-con' bindtap='goDetail' data-index='0'>
+                <image-loader originalImage='{{imageHost}}{{goods[0].head}}' width='260rpx' height='285rpx' styleClass='border-top-left-radius: 10rpx;border-top-right-radius: 10rpx;'></image-loader>
+                <view class='np-con'>
+                    <view class='pname'>
+                        {{goods[0].pname}}
+                    </view>
+                    <view class='price'>
+                        ￥{{goods[0].price}}
+                    </view>
                 </view>
-                <view class='price_r'>
-                    ￥{{goods[1].price}}
+            </view>
+            <view class='right-con'>
+                <view class='item' bindtap='goDetail' data-index='1'>
+                    <!-- <image src='{{imageHost}}{{goods[1].head}}' style='width:430rpx;height:146rpx;' class='im'></image> -->
+                    <image-loader originalImage='{{imageHost}}{{goods[1].head}}' width='430rpx' height='146rpx' mode='widthFix' styleClass='border-top-left-radius: 10rpx;border-top-right-radius: 10rpx;'></image-loader>
+                    <view class='item-row'>
+                        <view class='pname_r'>
+                            {{goods[1].pname}}
+                        </view>
+                        <view class='price_r'>
+                            ￥{{goods[1].price}}
+                        </view>
+                    </view>
+                </view>
+                <view class='item' bindtap='goDetail' data-index='2'>
+                    <!-- <image src='{{imageHost}}{{goods[2].head}}' style='width:430rpx;height:146rpx;' class='im'></image> -->
+                    <image-loader originalImage='{{imageHost}}{{goods[2].head}}' width='430rpx' height='146rpx' mode='widthFix' styleClass='border-top-left-radius: 10rpx;border-top-right-radius: 10rpx;'></image-loader>
+                    <view class='item-row'>
+                        <view class='pname_r'>
+                            {{goods[2].pname}}
+                        </view>
+                        <view class='price_r'>
+                            ￥{{goods[2].price}}
+                        </view>
+                    </view>
                 </view>
             </view>
         </view>
-        <view class='item'>
-            <!-- <image src='{{imageHost}}{{goods[2].headImg}}' style='width:430rpx;height:146rpx;' class='im'></image> -->
-            <image-loader originalImage='{{imageHost}}{{goods[2].headImg}}' width='430rpx' height='146rpx' mode='' styleClass='border-top-left-radius: 10rpx;border-top-right-radius: 10rpx;'></image-loader>
-            <view class='item-row'>
-                <view class='pname_r'>
-                    {{goods[2].pname}}
-                </view>
-                <view class='price_r'>
-                    ￥{{goods[2].price}}
-                </view>
-            </view>
-        </view>
+        <image src='../../resources/img_hotbanner_01.png' mode='widthFix' style='width:355rpx;height:157rpx;' class='right_img'></image>
     </view>
 </view>

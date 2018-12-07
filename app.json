@@ -1,11 +1,11 @@
 {
+    
     "pages": [
-        "pages/lck/test/test",
-        "pages/lck/rotate/rotate",
         "pages/wxscope/wxscope",
         "pages/lck/testJing/perfact",
         "pages/search/search",
         "pages/lck/index/index",
+        "pages/lck/webview/webview",
         "pages/lck/shop/shop",
         "pages/ButReady/BuyReady",
         "pages/lck/ShopSuccess/ShopSuccess",
@@ -25,6 +25,7 @@
         "pages/lck/cartGoodsDetail/cartGoodsDetail",
         "pages/lck/editAddress/editAddress",
         "pages/lck/orderAddress/orderAddress",
+        "pages/lck/address/address",
         "pages/MyMoney/MyMoney",
         "pages/Message/Message",
         "pages/TiXian/TiXian",
@@ -42,16 +43,18 @@
         "pages/TIANQI/TIANQI",
         "pages/SreachResult/SreachResult",
         "pages/ShopActicle/ShopActicle",
-        "pages/HistroyShare/HistroyShare"
+        "pages/HistroyShare/HistroyShare",
+        "pages/zcw/user/user"
     ],
     "window": {
-        "navigationBarBackgroundColor": "#863bb7",
+        "navigationBarBackgroundColor": "white",
         "navigationBarTitleText": "指点迷津",
-        "navigationBarTextStyle": "white",
+        "navigationBarTextStyle": "black",
         "enablePullDownRefresh": true
     },
     "tabBar": {
         "selectedColor": "#863bb7",
+        "backgroundColor": "#fff",
         "list": [
             {
                 "pagePath": "pages/lck/index/index",
@@ -72,7 +75,7 @@
                 "text": "历史分享"
             },
             {
-                "pagePath": "pages/userInfo/userInfo",
+                "pagePath": "pages/zcw/user/user",
                 "iconPath": "resources/btn_mine_0.png",
                 "selectedIconPath": "resources/btn_mine_1.png",
                 "text": "我的"

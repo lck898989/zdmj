@@ -1,5 +1,5 @@
 <!--pages/lck/index/index.wxml-->
-<scroll-view class='page-con' scroll-y='true' bindscroll='scrollTop' scroll-top='{{topNum}}'>
+<view class='page-con'>
     <view class='weather-con'>
         <view class='weather-item'>
             <view class='weather'>
@@ -37,22 +37,18 @@
     <view class='swiper-stage'>
         <view class='wrap' bindtouchstart='moveStart' bindtouchend='moveEnd'>
             <block wx:for='{{swiperList}}'>
-                <!-- <block wx:if='{{index === 0}}'>
-                    <image src='../../../resources/test.png' style='width:480rpx;height:480rpx;' class='img firstImg'></image>
-                </block>
-                <block wx:else> -->
                 <block wx:if='{{(item.active && item.swpClass !== "swiper-right" && item.swpClass !== "swiper-left" && item.swpClass !== "move-right4" && item.swpClass !== "move-right0") || !item.active}}'>
-                    <view class='imgCon{{index}} common {{item.active ? item.swpClass : ""}}' data-index='{{index}}' data-jumpType='{{item.jumpType}}' data-websrc='{{item.aurl}}'>
-                        <!-- <image src='{{item.imgsrc}}' style='width:480rpx;height:480rpx;' class='img'></image> -->
-                        <image-loader originalImage='{{item.imgsrc}}' width='480rpx' height='480rpx' mode='' styleClass='border-radius: 20rpx;border: 10rpx solid #fff;'></image-loader>
+                    <view class='imgCon{{index}} common {{item.active ? item.swpClass : ""}}' data-pid='{{item.pid}}' data-ptype='{{item.ptype}}' catchtap='goDetail'>
+                        <image src='{{item.imgsrc}}' style='width:480rpx;height:480rpx;' class='img'></image>
+                        <!-- <image-loader originalImage='{{item.imgsrc}}' width='480rpx' height='480rpx' mode='' styleClass='border-radius: 30rpx;border: 10rpx solid #fff;' isGoCache='true'></image-loader> -->
                         <view class='mask {{index === 0 ? "firstMask" : ""}}'></view>
                     </view>
                 </block>
                 <!--item.active一定为true-->
                 <block wx:else>
-                    <view class='common {{item.active ? item.swpClass : ""}}' data-index='{{index}}' data-jumpType='{{item.jumpType}}' catchtap='enterD'>
-                        <!-- <image src='{{item.imgsrc}}' style='width:480rpx;height:480rpx;' class='img'></image> -->
-                        <image-loader originalImage='{{item.imgsrc}}' width='480rpx' height='480rpx' mode='' styleClass='border-radius: 20rpx;border: 10rpx solid #fff;' imgUrl='{{item.acturl}}' bindenterdetail='enterScrollImg'></image-loader>
+                    <view class='common {{item.active ? item.swpClass : ""}}' data-pid='{{item.pid}}' data-ptype='{{item.ptype}}' catchtap='goDetail'>
+                        <image src='{{item.imgsrc}}' style='width:480rpx;height:480rpx;' class='img'></image>
+                        <!-- <image-loader originalImage='{{item.imgsrc}}' width='480rpx' height='480rpx' mode='' styleClass='border-radius: 30rpx;border: 10rpx solid #fff;' isGoCache='true'></image-loader> -->
                         <view class='mask {{item.swpClass === "swiper-left" || item.swpClass === "move-right4" ? "hideMask" : ""}}'></view>
                     </view>
                 </block>
@@ -72,59 +68,79 @@
             <image src='../../../resources/btn_shop.png' style='width:220rpx;height:220rpx;z-index:3;' class='circle' catchtap='enterShop' data-id='shop'></image>
         </view>
     </view>
-    <view class='hot-today'>
-        <view class='title'>
-            <view class='swiper-con'>
-                <swiper current='{{swiperIndex}}' bindchange='swiperChaner' autoplay='true' circular='true'>
-                    <swiper-item wx:for='{{MainImageArr}}' style='height:385rpx;'>
-                        <swiper-item-component item='{{item}}' goods='{{item.goods}}'></swiper-item-component>
-                        <!-- <view>{{item.goods}}</view> -->
-                    </swiper-item>
-                </swiper>
-            </view>
-            <view class='dots'>
-                <block wx:for='{{MainImageArr}}' wx:key='unique'>
-                    <view data-i='{{index}}' bindtap='fn' class='dot {{index === swiperIndex ? "active" : ""}}'></view>
-                </block>
-            </view>
-        </view>
-        <image src='../../../resources/img_hotbanner_01.png' mode='widthFix' style='width:355rpx;height:157rpx;border-radius:10rpx;' class='right_img'></image>
+    <view class='swiper-con'>
+        <swiper current='{{swiperIndex}}' autoplay='true' circular='true' class='swiperCon' indicator-dots='true'>
+            <swiper-item wx:for='{{MainImageArr}}' style='height:385rpx;'>
+                <swiper-item-component item='{{item}}' goods='{{item.goods}}'></swiper-item-component>
+                <!-- <view>{{item.goods}}</view> -->
+            </swiper-item>
+        </swiper>
+        <!-- <view class='dots'>
+            <block wx:for='{{MainImageArr}}' wx:key='unique'>
+                <view data-i='{{index}}' bindtap='fn' class='dot {{index === swiperIndex ? "active" : ""}}'></view>
+            </block>
+        </view> -->
     </view>
     <view class='type-con'>
         <view class="type-parent">
-            <scroll-view scroll-x='true' style='width:600rpx;'
-            bindscroll='scrollEvent' scroll-with-animation='true' class='banner-type'>
+            <view class='banner-type'>
                 <view wx:for='{{bannerType}}' class='swiperIt {{item.choosed ? "typeactive" : ""}}' bindtap='chooseType' data-id='{{item.id}}'>
                     {{item.text}}
                 </view>
-            </scroll-view>
-            <view class='siangle'></view>
+            </view>
         </view>
         <view style="display:none">
-            <image wx:for="{{dataArray}}" wx:key="id" id="{{item.shopeid}}" src="{{imgHost}}{{item.shopessayhead}}" bindload="onImageLoad"></image>
+            <block wx:for="{{dataArray}}">
+                <!--商铺文章-->
+                <block wx:if='{{item.shopessayhead}}'>
+                    <block wx:if='{{item.shopessaycustom === 1 && item.shopessaycustomhead !==""}}'>
+                        <image wx:key="id" id="{{item.shopeid}}" src="{{imgHost}}{{item.shopessaycustomhead}}" bindload="onImageLoad"></image>
+                    </block>
+                    <block wx:else>
+                        <image wx:key="id" id="{{item.shopeid}}" src="{{imgHost}}{{item.shopessayhead[0]}}" bindload="onImageLoad"></image>
+                    </block>
+                </block>
+                <!--商品-->
+                <block wx:if='{{item.pid}}'>
+                    <block wx:if='{{item.custom === 1 && item.customhead !==""}}'>
+                        <image wx:key="id" id="{{item.pid}}" src="{{imgHost}}{{item.customhead}}" bindload="onImageLoad"></image>
+                    </block>
+                    <block wx:else>
+                        <image wx:key="id" id="{{item.pid}}" src="{{imgHost}}{{item.head[0]}}" bindload="onImageLoad"></image>
+                    </block>
+                </block>
+                <block wx:if='{{item.eid}}'>
+                    <block wx:if='{{item.essaycustom === 1 && item.essaycustomhead !==""}}'>
+                        <image wx:key="id" id="{{item.pid}}" src="{{imgHost}}{{item.essaycustomhead}}" bindload="onImageLoad"></image>
+                    </block>
+                    <block wx:else>
+                        <image wx:key="id" id="{{item.eid}}" src="{{imgHost}}{{item.essayhead[0]}}" bindload="onImageLoad"></image>
+                    </block>
+                </block>
+            </block>
         </view>
-        <view class='scrollView' scroll-y='true' style='height:{{scrollH}}rpx'>
+        <view class='scrollView'>
             <view class='lrWrapper'>
                 <view class='twoColCon'>
-                    <view class='left-con' style='width:342rpx;height:{{col1H}}rpx;margin-right:18rpx;'>
+                    <view class='left-con' style='width:342rpx;margin-right:18rpx;'>
                         <block wx:for='{{col1}}'>
                             <index-type-detail-component easyItem='{{item}}' bindenterDetail='enterDetail'></index-type-detail-component>
                         </block>
                     </view>
-                    <view class='left-con' style='width:342rpx;height:{{col2H}}rpx;'>
+                    <view class='right-con' style='width:342rpx;'>
                         <block wx:for='{{col2}}'>
                             <index-type-detail-component easyItem='{{item}}'></index-type-detail-component>
                         </block>
                     </view>
                 </view>
             </view>
-            <view class='loadText'>
-                <view class='centerText'>
-                    {{loadText}}
-                </view>
-            </view> 
         </view> 
     </view>
     <image src='../../../resources/btn_top.png' class='goTop' hidden='{{!floorStatus}}' bindtap='goTop' style='width:110rpx;height:110rpx;'/>
-</scroll-view>
+    <view class='loadText'>
+        <view class='centerText'>
+            {{loadText}}
+        </view>
+    </view> 
+</view>
 

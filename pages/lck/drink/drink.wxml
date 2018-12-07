@@ -1,4 +1,4 @@
-<scroll-view class='page-con' bindscrolltolower='loadImages' scroll-y='true' bindscroll='scrollTop' scroll-top='{{topNum}}'>
+<view class='page-con' bindscrolltolower='loadImages' scroll-y='true'>
     <view class='title-con'>
         <view class='text'>
             <view>
@@ -18,22 +18,22 @@
     </view>
     <!--轮播图-->
     <view class='swiper-con'>
-        <swiper bindchange='getIndex'>
+        <swiper autoplay='true' indicator-dots='true'>
             <swiper-item wx:for='{{pictureList}}' class='swiper-item'>
-                <image src='{{item}}' style='width:750rpx;height:750rpx;' mode='widthFix'></image>
+                <image-loader originalImage='{{item}}' width='750rpx' height='750rpx' mode='widthFix'></image-loader>
             </swiper-item>
         </swiper>
-        <view class='dots'>
+        <!-- <view class='dots'>
             <block wx:for='{{pictureList}}' wx:key='unique'>
                 <view data-i='{{index}}' bindtap='fn' class='dot {{index === swiperIndex ? "active" : ""}}'></view>
             </block>
-        </view>
+        </view> -->
     </view>
     <view class='type-con'>
         <view class="type-parent">
             <scroll-view scroll-x='true' style='width:635rpx;'
             bindscroll='scrollEvent' scroll-with-animation='true' class='banner-type'>
-                <view wx:for='{{bannerType}}' class='swiperIt {{item.choosed ? "typeactive" : ""}}' bindtap='chooseType' data-id='{{item.id}}'>
+                <view wx:for='{{bannerType}}' class='swiperIt {{item.active ? "typeactive" : ""}}' bindtap='chooseType' data-id='{{item.id}}'>
                     {{item.text}}
                 </view>
             </scroll-view>
@@ -41,23 +41,28 @@
         </view>
     </view>
     <view style="display:none">
-        <image wx:for="{{dataArray}}" wx:key="id" id="{{item.id}}" src="{{item.goodsPicture}}" bindload="onImageLoad"></image>
+        <image wx:for="{{dataArray}}" wx:key="id" id="{{item.shopeid}}" src="{{imgHost}}{{item.shopessayhead[0]}}" bindload="onImageLoad"></image>
     </view>
-    <view class='scrollView' scroll-y='true' style='height:{{scrollH}}rpx'>
+    <view class='scrollView' scroll-y='true'>
         <view class="lrWrapper">
-            <view class='twoColCon' style='height:{{scrollH}}rpx;'>
-                <view class='left-con' style='width:342rpx;height:{{col1H}}rpx;margin-right:18rpx;'>
+            <view class='twoColCon'>
+                <view class='left-con' style='width:342rpx;margin-right:18rpx;'>
                     <block wx:for='{{col1}}'>
-                        <index-type-detail-component easyItem='{{item}}' shadow='{{backgroundColor}}'></index-type-detail-component>
+                        <index-type-detail-component easyItem='{{item}}' bindenterDetail='enterDetail' shadow='{{backgroundColor}}'></index-type-detail-component>
                     </block>
                 </view>
-                <view class='left-con' style='width:342rpx;height:{{col2H}}rpx;'>
+                <view class='right-con' style='width:342rpx;'>
                     <block wx:for='{{col2}}'>
                         <index-type-detail-component easyItem='{{item}}' shadow='{{backgroundColor}}'></index-type-detail-component>
                     </block>
                 </view>
             </view>
         </view>
-    </view>
+    </view> 
     <image src='../../../resources/btn_top.png' class='goTop' hidden='{{!floorStatus}}' bindtap='goTop' style='width:110rpx;height:110rpx;'/>
-</scroll-view>
+    <view class='loadText'>
+        <view class='centerText'>
+            {{loadText}}
+        </view>
+    </view> 
+</view>

@@ -42,12 +42,44 @@ page{
     font-size: 35rpx;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
-    align-items: flex-start;
+    justify-content: flex-start;
+    align-items: center;
     flex-wrap: nowrap;
 }
+.te{
+  width: 60rpx;
+  border-radius: 5rpx;
+  color: #aaa;
+  margin-right: 24rpx;
+  border-bottom: 2rpx solid #aaa;
+    border-top: 2rpx solid #aaa;
+    border-left: 2rpx solid #aaa;
+    border-right: 2rpx solid #aaa;
+    text-align: center;
+}
+.te2{
+  width: 60rpx;
+  border-radius: 5rpx;
+  color: #cf82ec;
+  margin-right: 24rpx;
+  border-bottom: 2rpx solid #cf82ec;
+  border-top: 2rpx solid #cf82ec;
+  border-left: 2rpx solid #cf82ec;
+  border-right: 2rpx solid #cf82ec;
+  text-align: center;
+}
+.inp{
+  width: 566rpx;
+}
+.inp2{
+  width: 530rpx;
+}
+.xianzhi{
+  /* position: absolute; */
+  width:154rpx;
+}
 .save-container{
-    width:750rpx;
+    /* width:750rpx;
     height: 100rpx;
     line-height: 100rpx;
     display: flex;
@@ -57,7 +89,22 @@ page{
     flex-wrap: nowrap;
     position: fixed;
     bottom: 0rpx;
-    background-color: #fff;
+    background-color: #fff; */
+     width:730rpx;
+     color: #ffffff;
+     font-weight: 900;
+    margin-left: 10rpx;
+    margin-top: 10rpx;
+    border-radius: 10rpx;
+    padding:30rpx 0rpx;
+    position: fixed;
+    bottom: 18rpx;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    background-color: #b762d6;
+    flex-wrap: nowrap;
+    align-items: center;
 }
 .citypicker{
     margin-top: 100rpx;

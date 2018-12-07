@@ -1,0 +1,120 @@
+/* pages/zcw/friends/friends.wxss */
+.quanjubg{
+  position: absolute;
+  background-color: #ed2938;
+  width: 750rpx;
+  top: 0;
+  bottom: 0;  
+}
+.tu1{
+  width: 750rpx;
+}
+.guize{
+  position: relative;
+  margin-left: 35rpx;
+  width: 680rpx;
+  height: 530rpx;
+  border-radius: 10rpx;
+}
+.biaoti{
+  position: relative;
+  margin-top: 30rpx;
+  font-size: 34rpx;
+  font-weight: 900;
+  margin-bottom: 20rpx;
+}
+.biaoti2{
+  position: relative;
+  margin-top: 33rpx;
+  text-align: center;
+  margin-bottom: 13rpx;
+  font-size: 24rpx;
+  font-weight: 900;
+}
+.neirong{
+  width: 630rpx;
+  margin-left: 25rpx;
+  font-size: 23rpx;
+  font-weight: 900;
+  margin-bottom: 13rpx;
+  margin-top: 13rpx;
+  letter-spacing:5rpx;
+}
+.neirong2{
+  width: 630rpx;
+  margin-left: 25rpx;
+  line-height: 35rpx;
+  letter-spacing:5rpx;
+  font-size: 23rpx;
+}
+.sm{
+  width: 630rpx;
+  margin-top: 13rpx;
+  margin-left: 25rpx;
+  line-height: 35rpx;
+  letter-spacing:5rpx;
+  font-size: 23rpx;
+}
+
+.bianhao{
+  position: absolute;
+  left: 25rpx;
+}
+.zixiang{
+  position: relative;
+  width: 600rpx;
+  margin-left: 55rpx;
+}
+::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+    color: transparent;
+}
+.index-manager{
+
+    width:200rpx;
+    margin-left: 35rpx;
+    border-radius: 10rpx;
+    padding:30rpx 0rpx;
+    /* position: fixed; */
+    /* bottom: 18rpx; */
+    display: flex;
+    flex-direction: row;
+    /* justify-content: center; */
+    background-color: #9a9a9a ;
+    /* flex-wrap: nowrap; */
+    /* align-items: center; */
+}
+.kuangzi{
+  position: relative;
+  width: 750rpx;
+}
+.index-manager2{
+  position: absolute;
+    width:455rpx;
+    left: 255rpx;
+    top: 0;
+    border-radius: 10rpx;
+    padding:30rpx 0rpx;
+    /* position: fixed; */
+    /* bottom: 18rpx; */
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    background-color: #f7c539;
+    /* flex-wrap: nowrap; */
+    align-items: center;
+}
+.xialaxxwz{
+  position: relative;
+  width: 750rpx;
+  text-align: center;
+  font-size: 23rpx;
+}
+.wuhaoyou{
+  position: relative;
+  width: 680rpx;
+  text-align: center;
+  margin-top: 180rpx;
+  font-size: 30rpx;
+}

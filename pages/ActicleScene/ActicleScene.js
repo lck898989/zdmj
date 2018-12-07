@@ -22,6 +22,7 @@ Page({
         //初始化浏览数
         seeNumber: 0,
         shareNumber: 0,
+        bottomView:true,
         goods: null,
         shopJson:null,
         activityImage: ["https://share.ykplay.com/images/Index/a微信图片_20180927164654.jpg", "https://share.ykplay.com/images/Index/a微信图片_20180927164654.jpg"],
@@ -170,34 +171,36 @@ Page({
                 typeBttton: "share",
             })
             if (app.wenzhangJson) {
-                console.log(JSON.stringify(app.wenzhangJson) + "111111111111111111111");
+                console.log(options.shopurl+ "111111111111111111111");
                 var article = app.wenzhangJson.content;
-                let selectsize = JSON.parse(app.wenzhangJson.selectsize);
-                let keys=Object.keys(selectsize);
-                let selectsize1={};
-                for (let i = 0; i < keys.length; i++) {
-                    let value = selectsize[`${keys[i]}`];
-                    let keyss = keys[i].split(",");
-                    let values = value.split("|");
-                    for (let j = 0; j < keyss.length; j++) {
-                        selectsize1[keyss[j]] = values[j];
-                    }
-                }
-                console.log(JSON.stringify(selectsize1)+"333333333333");
+                // let selectsize = JSON.parse(app.wenzhangJson.selectsize);
+                // let keys=Object.keys(selectsize);
+                // let selectsize1={};
+                // for (let i = 0; i < keys.length; i++) {
+                //     let value = selectsize[`${keys[i]}`];
+                //     let keyss = keys[i].split(",");
+                //     let values = value.split("|");
+                //     for (let j = 0; j < keyss.length; j++) {
+                //         selectsize1[keyss[j]] = values[j];
+                //     }
+                // }
+                // console.log(JSON.stringify(selectsize1)+"333333333333");
                 var wenzhangJson1 = {};
-                wenzhangJson1.selectsize = selectsize1;
-                wenzhangJson1.essayhead = options.essayhead;
+                // wenzhangJson1.selectsize = selectsize1;
+                wenzhangJson1.essayhead = options.essayhead.split(",");
                 wenzhangJson1.product_head = app.wenzhangJson.product_head.split(",");
                 wenzhangJson1.profit = app.wenzhangJson.profit;
                 wenzhangJson1.product_name = app.wenzhangJson.product_name;
                 wenzhangJson1.essayuid = options.essayuid;
                 wenzhangJson1.see = app.wenzhangJson.see;
                 wenzhangJson1.time = app.wenzhangJson.time;
+                wenzhangJson1.time = app.wenzhangJson.time;
+                wenzhangJson1.rebate = app.wenzhangJson.rebate;
                 wenzhangJson1.product_price = app.wenzhangJson.product_price;
                 wenzhangJson1.title = options.title;
                 wenzhangJson1.authorurl = options.authorurl;
                 wenzhangJson1.authorname = options.authorname;
-                wenzhangJson1.product_head = app.wenzhangJson.product_head;
+                wenzhangJson1.product_head = app.wenzhangJson.product_head.split(",");
                 wenzhangJson1.otherprice = app.wenzhangJson.otherprice;
                 wenzhangJson1.shopurl = options.shopurl;
                 wenzhangJson1.pid = options.pid;
@@ -211,36 +214,37 @@ Page({
                     pid: this.data.wenzhangJson.pid
                 }, 'ActicleInterShop');
                 wxParse.wxParse('article', 'html', article, self);
-                console.log(JSON.stringify(this.data.wenzhangJson) + "、、、、、、、、、、、、、、、、、、、、");
+                console.log(typeof this.data.wenzhangJson.authorurl +"、、、、、、、、、、、、、、、、、、、、");
+                console.log(JSON.stringify(this.data.essayhead) + "、、、、、、、、、、、、、、、、、、、、");
                 // <view class='jingxuan' bindtap= 'acticleScene' data- pid='{{item.pid}}'  data- eid='{{item.eid}}' data- title='{{item.title}}' data- authorurl='{{url+item.author_head}}' data- authorname='{{item.author}}' data- shopurl='{{url+item.product_head}}' >
             } else {
                 app.setEssay = res => {
-                    console.log(typeof res.data.essay.selectsize+"!!!!!!!!!!!!!!!!!!!!");
-                    console.log(res.data.essay.selectsize + "!!!!!!!!!!!!!!!!!!!!");
+                    console.log(options.shopurl + "111111111111111111111");
                     var article = res.data.essay.content;
                     var wenzhangJson1 = {};
-                    let selectsize = JSON.parse(res.data.essay.selectsize);
-                    console.log(selectsize + "333333333333");
-                    let keys = Object.keys(selectsize);
-                    console.log(keys + "333333333333");
-                    let selectsize1 = {};
-                    for (let i=0;i<keys.length;i++) {
-                        let value = selectsize[`${keys[i]}`];
-                        let keyss=keys[i].split(",");
-                        let values=value.split("|");
-                        for(let j=0;j<keyss.length;j++){
-                            selectsize1[keyss[j]] = values[j];
-                        }                        
-                    }
-                    console.log(JSON.stringify(selectsize1) + "333333333333");
+                    // let selectsize = JSON.parse(res.data.essay.selectsize);
+                    // console.log(selectsize + "333333333333");
+                    // let keys = Object.keys(selectsize);
+                    // console.log(keys + "333333333333");
+                    // let selectsize1 = {};
+                    // for (let i=0;i<keys.length;i++) {
+                    //     let value = selectsize[`${keys[i]}`];
+                    //     let keyss=keys[i].split(",");
+                    //     let values=value.split("|");
+                    //     for(let j=0;j<keyss.length;j++){
+                    //         selectsize1[keyss[j]] = values[j];
+                    //     }                        
+                    // }
+                    // console.log(JSON.stringify(selectsize1) + "333333333333");
                     // wenzhangJson1.authorname = res.data.essay.authorname;
                     wenzhangJson1.product_name = res.data.essay.product_name;
-                    wenzhangJson1.selectsize = selectsize1;
+                    // wenzhangJson1.selectsize = selectsize1;
                     wenzhangJson1.otherprice = res.data.essay.otherprice;
                     wenzhangJson1.product_head = res.data.essay.product_head.split(",");
                     wenzhangJson1.essayhead = options.essayhead.split(",");
                     wenzhangJson1.see = res.data.essay.see;
                     wenzhangJson1.essayuid = options.essayuid;
+                    wenzhangJson1.rebate = res.data.essay.rebate;
                     wenzhangJson1.time = res.data.essay.time;
                     wenzhangJson1.product_price = res.data.essay.product_price;
                     wenzhangJson1.title = options.title;
@@ -260,7 +264,7 @@ Page({
                     if (this.setSee) {
                         this.setSee(this.data.wenzhangJson);
                     }
-                    console.log(typeof wenzhangJson1.essayhead + "!!!!!!!!!!!!!!!!!!!!");
+                    console.log(JSON.stringify(this.data.essayhead) + "、、、、、、、、、、、、、、、、、、、、");
                     wxParse.wxParse('article', 'html', article, self);
                     console.log(JSON.stringify(this.data.wenzhangJson) + "、、、、、、、、、、、、、、、、、、、、、、");
                 }
@@ -268,7 +272,22 @@ Page({
         }
 
     },
-
+    gunhdong: function (event){
+        if (parseInt(event.detail.scrollTop)>10)
+        {
+            console.log("33");
+            this.setData({
+                bottomView:false
+            })
+        }
+        else
+        {
+            this.setData({
+                bottomView: true
+            })
+        }
+        console.log(event.detail.scrollTop);
+    },
     /**
      * 生命周期函数--监听页面初次渲染完成
      */
@@ -338,19 +357,19 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow: function() {
-        app.buyNumber = this.data.shopNumber;
-        if (this.data.wenzhangJson) {
-            app.ShortConnect(app.urlw + 'Data/EssaySee', {
-                eid: this.data.wenzhangJson.eid
-            }, "SeeWen");
-        } else {
-            this.setSee = res => {
-                console.log("SeeWen1");
-                app.ShortConnect(app.urlw + 'Data/EssaySee', {
-                    eid: res.eid
-                }, "SeeWen");
-            }
-        }
+        // app.buyNumber = this.data.shopNumber;
+        // if (this.data.wenzhangJson) {
+        //     app.ShortConnect(app.urlw + 'Data/EssaySee', {
+        //         eid: this.data.wenzhangJson.eid
+        //     }, "SeeWen");
+        // } else {
+        //     this.setSee = res => {
+        //         console.log("SeeWen1");
+        //         app.ShortConnect(app.urlw + 'Data/EssaySee', {
+        //             eid: res.eid
+        //         }, "SeeWen");
+        //     }
+        // }
     },
 
     /**

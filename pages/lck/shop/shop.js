@@ -11,12 +11,6 @@ Page({
     data: {
         imageHost: "https://shopfile.ykplay.com/",
         serverImageHost : 'https://shop.ykplay.com/',
-        pictureList: [
-            'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1543244953214&di=9c5b79e78d8ea46348499084da98b1b9&imgtype=0&src=http%3A%2F%2Fimg.zcool.cn%2Fcommunity%2F0179155b5935ffa801215c8f20b8ec.jpg',
-            'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1543245015029&di=137362d1fd7e2186afee81a7e96e1a56&imgtype=0&src=http%3A%2F%2Fimg.zcool.cn%2Fcommunity%2F01b8ba5adda421a80120927be45a32.jpg%401280w_1l_2o_100sh.jpg',
-            'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1543245096167&di=f722e1beb0ecc7fb032d254816054167&imgtype=0&src=http%3A%2F%2Fi-2.kuaila.com%2F2018%2F11%2F25%2F3cbdb8ba-55b6-43c8-ab53-16c5cd0dc85b.jpg'
-
-        ],
         swiperIndex: 0,
         btnArr : [{
                     btnText     : '精品分享',
@@ -31,7 +25,6 @@ Page({
                     srcUnActive : '../../../resources/btn_shopping_0.png'
                   }
         ],
-
         btnActive: 'background: linear-gradient(to right,#e84e86,#644caf);background: -webkit - linear - gradient(to right, #e84e86, #644caf);',
         btnUnActive: 'background: linear-gradient(to right,#7d7d7d,#999999);background: -webkit - linear - gradient(to right, #7d7d7d, #999999);',
         //一级分类源数据
@@ -39,87 +32,17 @@ Page({
         //一级分类数组
         bannerType: [],
         //一级分类是否展开
-        isTopLevel : true,
+        isTopLevel : false,
         //二级分类数组
         secondLevels : [],
         //二级分类是否展开
         IsecondLevel : false,
         dataArray: [
-            {
-                id: 0,
-                watched: 257,
-                text: '这里的KTV包厢音响效果很好非常赞，环境也不错。',
-                author: 'lck',
-                authorAvatar: 'https://wx.qlogo.cn/mmopen/vi_32/bmtmeRwn3Sv5WcnbKaE7V3XFpLNwh0DjicwtJYzy997p451ibIy6tu8R05fRQOmibdlyCD2FPLpJNYnnZzic0JhDDw/132',
-                goodsPicture: '../../../resources/fanli_4.png'
-            },
-            {
-                id: 1,
-                watched: 1000,
-                text: '这里的KTV包厢音响效果很好非常赞，环境也不错。',
-                author: 'lck',
-                authorAvatar: 'https://wx.qlogo.cn/mmopen/vi_32/bmtmeRwn3Sv5WcnbKaE7V3XFpLNwh0DjicwtJYzy997p451ibIy6tu8R05fRQOmibdlyCD2FPLpJNYnnZzic0JhDDw/132',
-                goodsPicture: 'http://pic.qiantucdn.com/58pic/28/79/71/80P58PICPNScdhmZ9JE79_PIC2018.jpg'
-            },
-            {
-                id: 2,
-                watched: 70,
-                text: '这里的KTV包厢音响效果很好非常赞，环境也不错。',
-                author: 'lck',
-                authorAvatar: 'https://wx.qlogo.cn/mmopen/vi_32/bmtmeRwn3Sv5WcnbKaE7V3XFpLNwh0DjicwtJYzy997p451ibIy6tu8R05fRQOmibdlyCD2FPLpJNYnnZzic0JhDDw/132',
-                goodsPicture: '../../../resources/fanli_4.png'
-            },
-            {
-                id: 3,
-                watched: 60,
-                text: '这里的KTV包厢音响效果很好非常赞，环境也不错。',
-                author: 'lck',
-                authorAvatar: 'https://wx.qlogo.cn/mmopen/vi_32/bmtmeRwn3Sv5WcnbKaE7V3XFpLNwh0DjicwtJYzy997p451ibIy6tu8R05fRQOmibdlyCD2FPLpJNYnnZzic0JhDDw/132',
-                goodsPicture: '../../../resources/fanli_4.png'
-            },
-            {
-                id: 4,
-                watched: 10,
-                text: '这里的KTV包厢音响效果很好非常赞，环境也不错。环境nice,建议去',
-                author: 'lck',
-                authorAvatar: 'https://wx.qlogo.cn/mmopen/vi_32/bmtmeRwn3Sv5WcnbKaE7V3XFpLNwh0DjicwtJYzy997p451ibIy6tu8R05fRQOmibdlyCD2FPLpJNYnnZzic0JhDDw/132',
-                goodsPicture: 'http://pic.qiantucdn.com/58pic/28/79/71/80P58PICPNScdhmZ9JE79_PIC2018.jpg'
-            },
-            {
-                id: 5,
-                watched: 2,
-                text: '这里的KTV包厢音响效果很好非常赞，环境也不错。',
-                author: 'lck',
-                authorAvatar: 'https://wx.qlogo.cn/mmopen/vi_32/bmtmeRwn3Sv5WcnbKaE7V3XFpLNwh0DjicwtJYzy997p451ibIy6tu8R05fRQOmibdlyCD2FPLpJNYnnZzic0JhDDw/132',
-                goodsPicture: 'http://pic.qiantucdn.com/58pic/28/79/71/80P58PICPNScdhmZ9JE79_PIC2018.jpg'
-            },
+         
         ],
         //模拟加载更能多数据
         moreDataArray: [
-            {
-                id: 6,
-                watched: 60,
-                text: '这里的KTV包厢音响效果很好非常赞，环境也不错。',
-                author: 'lck',
-                authorAvatar: 'https://wx.qlogo.cn/mmopen/vi_32/bmtmeRwn3Sv5WcnbKaE7V3XFpLNwh0DjicwtJYzy997p451ibIy6tu8R05fRQOmibdlyCD2FPLpJNYnnZzic0JhDDw/132',
-                goodsPicture: '../../../resources/fanli_4.png'
-            },
-            {
-                id: 7,
-                watched: 10,
-                text: '这里的KTV包厢音响效果很好非常赞，环境也不错。环境nice,建议去',
-                author: 'lck',
-                authorAvatar: 'https://wx.qlogo.cn/mmopen/vi_32/bmtmeRwn3Sv5WcnbKaE7V3XFpLNwh0DjicwtJYzy997p451ibIy6tu8R05fRQOmibdlyCD2FPLpJNYnnZzic0JhDDw/132',
-                goodsPicture: 'http://pic.qiantucdn.com/58pic/28/79/71/80P58PICPNScdhmZ9JE79_PIC2018.jpg'
-            },
-            {
-                id: 8,
-                watched: 2,
-                text: '这里的KTV包厢音响效果很好非常赞，环境也不错。',
-                author: 'lck',
-                authorAvatar: 'https://wx.qlogo.cn/mmopen/vi_32/bmtmeRwn3Sv5WcnbKaE7V3XFpLNwh0DjicwtJYzy997p451ibIy6tu8R05fRQOmibdlyCD2FPLpJNYnnZzic0JhDDw/132',
-                goodsPicture: 'http://pic.qiantucdn.com/58pic/28/79/71/80P58PICPNScdhmZ9JE79_PIC2018.jpg'
-            },
+     
         ],
         backgroundColor : '#d0d0d0',
         goods : [],
@@ -141,7 +64,7 @@ Page({
         imageWidth: 342,
         //加载图片的数量
         loadingCount: 6,
-        col1: [],
+       
         col2: [],
         ratio: 2,
         col1H: 0,
@@ -165,6 +88,10 @@ Page({
         updateState : 0,
         sizeValueArr : [],
         isOk : false,
+        floorStatus : false,
+        //是否是全部
+        isAll : true,
+        HeadImageArr : []
     },
     topLevelArr: ["resources/btn_type_5.png","resources/btn_type_6.png", "resources/btn_type_1.png", "resources/btn_type_2.png", "resources/btn_type_4.png", "resources/btn_type_7.png", "resources/btn_type_3.png", "resources/btn_type_8.png", "resources/btn_type_9.png", "resources/btn_type_10.png"],
     //详细分类
@@ -180,6 +107,10 @@ Page({
      */
     onLoad: async function (options) {
         let self = this;
+        this.getAllDataArrayInShare(function(){
+            wx.hideLoading();
+        });
+        this.getScrollImages();
         //获取到系统的信息
         wx.getSystemInfo({
             success: function (res) {
@@ -194,7 +125,7 @@ Page({
                 })
                 console.log("scrollH is ", self.data.scrollH);
             }
-        })
+        });
         //通过tid获取
         console.log("tid is ",this.data.tid);
         //获得一级分类
@@ -202,7 +133,7 @@ Page({
         let oneClassData = {};
         let req = new Request(oneClassUrl,oneClassData,"POST","text");
         let res = await req.sendRequest();
-        // console.log("一级分类res is ",res);
+        console.log("一级分类res is ",res);
         for(let i = 0;i < res.data.tabs.length;i++){
             let tempJson = {
                 tid     : res.data.tabs[i].tid,
@@ -225,6 +156,174 @@ Page({
             topLevelSource : res.data.tabs            
         });
         console.log("bannerType is ",this.data.bannerType);
+        this.getAllType();
+        
+    },
+    //获得滚动图
+    getScrollImages: async function () {
+        let url = app.host + 'Data/GetProductPageActivityHead';
+        let data = {
+            type: 3
+        };
+        let req = new Request(url,data,"POST",'text');
+        let res = await req.sendRequest();
+        console.log("获取滚动图的res is ", res);
+        this.setData({
+            HeadImageArr : res.data.activitys
+        });
+    },
+    //滚动图跳转
+    goDetail: async function (e) {
+        console.log("-----> e is ", e);
+        //跳转网页
+        let pid = e.currentTarget.dataset.pid;
+        //跳转类型：商铺文章，商品文章，商品详情界面
+        //商品id
+        console.log("pid is ", pid);
+        let currentList = null;
+        let listLen = this.data.HeadImageArr.length;
+        for (let i = 0; i < listLen; i++) {
+            let tempList = this.data.HeadImageArr[i];
+            if (tempList.pid === pid) {
+                currentList = tempList;
+                break;
+            }
+        }
+        console.log("currentList is ", currentList);
+        console.log("jumptype is ", currentList.ptype);
+        let jumptype = currentList.ptype;
+        let url = '';
+        switch (jumptype) {
+            case '1':
+                let url = app.host + 'Data/GetProductByPid';
+                let data = {
+                    pid : pid,
+                    uid : app.uid
+                };
+                //跳转商品界面,获得对应pid的商品
+                let product = null;
+                let req = new Request(url, data, 'POST', 'text');
+                let res = await req.sendRequest();
+                console.log("product is ", res.data.product);
+                //对产品的头图进行分割
+                if (typeof(res.data.product.head) === 'string'){
+                    res.data.product.head = res.data.product.head.split(',');
+                }
+                wx.setStorage({
+                    key: 'goods',
+                    data: res.data.product,
+                });
+                wx.navigateTo({
+                    url: '../cartGoodsDetail/cartGoodsDetail',
+                })
+                break;
+            case '2':
+                //跳转到店铺文章
+                app.wenzhangShop = null;
+                app.ShortConnect(app.urlw + "Data/GetShopProductsByShopEssayShopid", {
+                    shopid: currentList.pid,
+                    uid: app.uid
+                }, "turnShopWen");
+                url = app.host + 'Data/GetShopProductsByShopEssayShopid';
+                data = {
+                    shopid: currentList.pid,
+                    uid: app.uid
+                }
+                console.log("data is ", data);
+                req = new Request(url, data, 'POST', 'text');
+                res = await req.sendRequest();
+                console.log("res is ", res);
+                console.log("shopWenZhangJson is ", app.shopWenZhangJson);
+                break;
+            case '3':
+                app.wenzhangJson = null;
+                app.ShortConnect(app.urlw + "Data/GetEssayInfo", {
+                    pid: currentList.pid,
+                    eid: currentList.pid,
+                    uid: app.uid
+                }, "interWenZhang");
+                url = app.host + 'Data/GetEssayInfo';
+                data = {
+                    pid: currentList.pid,
+                    eid: currentList.pid,
+                    uid: app.uid
+                }
+                console.log("data is ", data);
+                req = new Request(url, data, 'POST', 'text');
+                res = await req.sendRequest();
+                console.log("--->>res is ", res);
+                wx.navigateTo({
+                    url: '../../ActicleScene/ActicleScene?essayhead=' + res.data.essay.essayhead + '&title=' + res.data.essay.title + '&authorurl=' + res.data.essay.authorurl + '&authorname=' + res.data.essay.authorname + '&pid=' + currentList.pid + '&eid=' + res.data.essay.eid,
+                })
+                break;
+        }
+    },
+    //获取精品分享中的全部信息
+    getAllDataArrayInShare : function(callback){
+        wx.showLoading({
+            title: '数据加载中...',
+        });
+        let self = this;
+        app.ShortConnect(app.urlw + "Data/GetAllEssays", {
+            page: self.data.page
+        }, "getWenzhang", function (r) {
+            console.log("----adfasdf", r);
+            if(r.length > 0){
+                for (let i = 0; i <= r.length - 1; i++) {
+                    r[i].author_head = r[i].author_head.split(",");
+                    r[i].essayhead = r[i].essayhead.split(",");
+                    r[i].productstype = 'essays'
+                }
+                console.log("r is ", r);
+                for(let j = 0;j < r.length;j++){
+                    this.data.dataArray.push(r);
+                }
+                this.setData({
+                    dataArray: r
+                },()=>{
+                    callback();
+                });
+                console.log("dataArray is ", this.data.dataArray);
+            }else{
+                wx.hideLoading();
+                wx.showToast({
+                    title : '没有更多了',
+                    icon  : 'none'
+                })
+            }
+        }.bind(this));
+    },
+    //获得购首页的轮播图数组
+    // getScrollImage : async function(){
+    //     //显示全部商品
+    //     // let url = app.host + 'Data/';
+    //     // let data = {
+    //     //     uid: app.uid,
+    //     // }
+    //     // let req = new Request(url, data, 'POST', 'text');
+    //     // let res = await req.sendRequest();
+    //     // console.log("购首页的头图轮播是：", res);
+    // },
+    //获取全部下的所有商品信息
+    getAllType : async function(){
+        console.log("---Alltype is ------");
+        //显示全部商品
+        let url = app.host + 'Data/GetAllProductsByPage';
+        let data = {
+            uid: app.uid,
+            page: this.data.page
+        }
+        let req = new Request(url,data,'POST','text');
+        let res = await req.sendRequest();
+        console.log("---Alltype is res is ",res);
+        this.splitHeadImage(res.data.products);
+        for(let i = 0;i < res.data.products.length;i++){
+            this.data.goods.push(res.data.products[i]);
+        }
+        //将图片的头图分割成数组
+        this.setData({
+            goods : this.data.goods
+        });
     },
     //获得二级分类
     getTwoClass : async function(){
@@ -410,6 +509,19 @@ Page({
             showWindow: false,
         })
     },
+    //view的下拉获取top位置信息
+    onPageScroll: function (e) {
+        console.log(e);
+        if (e.scrollTop > 100) {
+            this.setData({
+                floorStatus: true,
+            })
+        } else {
+            this.setData({
+                floorStatus: false
+            })
+        }
+    },
     //进入商品详情
     enterDetail : function(e){
         console.log("enterDetail 组件内传递过来的数据是：e is ",e);
@@ -450,7 +562,7 @@ Page({
             console.log("images is ", images);
             console.log("imageId is ", typeof (imageId), imageId);
             let img = images[i];
-            if (img.id === imageId) {
+            if (img.pid === imageId) {
                 imageObj = img;
                 break;
             }
@@ -482,7 +594,8 @@ Page({
             col1: col1,
             col2: col2
         };
-
+        console.log(JSON.stringify(data.col1)+"////////////////////");
+        console.log(JSON.stringify(data.col2) +"////////////////////");
         if (!loadingCount) {
             data.images = [];
         }
@@ -527,40 +640,60 @@ Page({
      * 页面上拉触底事件的处理函数
      */
     onReachBottom: async function () {
+        wx.showLoading({
+            title: '数据正在赶来...',
+        })
+        
         if(this.data.isHot){
-            wx.showLoading({
-                title: '数据正在赶来...',
-            })
-            let url = '';
-            let data = {};
-            switch(this.data.updateState){
-                case 0 : 
-                    url = 'Data/GetProductsByT2id';
-                    data.page = ++this.data.page;
-                    break;
-            }
-            data.t2id = this.data.t2id;
-            console.log("上拉刷新的时候 data is ",data);
-            let req = new Request(app.host + url,data,"POST","text");
-            let res = await req.sendRequest();
-            if(res.data.products.length === 0){
+            if(this.data.isAll){
+                //点击了全部刷新的时候请求的方式不一样
+                this.data.page++;
+                this.getAllType();
                 wx.hideLoading();
-                wx.showToast({
-                    title : '已经到底了',
-                    icon  : 'none'
-                });
+                console.log("goods is ",this.data.goods);
             }else{
-                wx.hideLoading();
-                this.data.goods = this.addGoods(this.data.goods, res.data.products);
-                this.splitHeadImage(this.data.goods);
-                this.data.goods = Const.uniqObjInArray(this.data.goods);
-                this.setData({
-                    goods: this.data.goods
-                });
+                let url = '';
+                let data = {};
+                switch(this.data.updateState){
+                    case 0 : 
+                        url = 'Data/GetProductsByT2id';
+                        data.page = ++this.data.page;
+                        break;
+                }
+                data.t2id = this.data.t2id;
+                console.log("上拉刷新的时候 data is ",data);
+                let req = new Request(app.host + url,data,"POST","text");
+                let res = await req.sendRequest();
+                if(res.data.products.length === 0){
+                    wx.hideLoading();
+                    wx.showToast({
+                        title : '已经到底了',
+                        icon  : 'none'
+                    });
+                }else{
+                    wx.hideLoading();
+                    this.data.goods = this.addGoods(this.data.goods, res.data.products);
+                    this.splitHeadImage(this.data.goods);
+                    this.data.goods = Const.uniqObjInArray(this.data.goods);
+                    this.setData({
+                        goods: this.data.goods
+                    });
+                }
             }
 
+        }else{
+            if(this.data.isAll){
+                this.data.page++;
+                //获取全部的商品文章
+                this.getAllDataArrayInShare(function(){
+                    wx.hideLoading();
+                });
+            }else{
+
+            }
         }
     },
+    
     //追加商品
     addGoods: function (sourceArr, tempArr) {
         let len = tempArr.length;
@@ -618,40 +751,85 @@ Page({
         })
     },
     chooseBannerType: async function (event) {
+        let self = this;
         console.log("in chooseType event is ", event);
         console.log("bannerType is ",this.data.bannerType);
         let id = Number(event.currentTarget.dataset.id);
-        console.log("tid is ", id);
+        console.log("id is ", id);
         this.data.tid = id;
         wx.showLoading({
             title: '加载数据中...',
         })
-        this.setActiveByTid(id);
-        //根据tid获得t2id
-        await this.getT2idByTid(this.data.tid);
-        //重置page=1
-        this.data.page = 1;
-        let data = {
-            t2id: this.data.t2id,
-            page: this.data.page
+        if(id === -1){
+            for (let i = 0; i < this.data.bannerType.length;i++){
+                if(this.data.bannerType[i].tid === id){
+                    this.data.bannerType[i].choosed = true;
+                }else{
+                    this.data.bannerType[i].choosed = false;
+                }
+            }
+            if (this.data.isHot) {
+                this.setData({
+                    bannerType   : this.data.bannerType,
+                    isAll        : true,
+                    IsecondLevel : false,
+                    goods        : [],
+                    page         : 1
+                },()=>{
+                    wx.hideLoading();
+                });
+            }else if(this.data.isShare){
+                this.setData({
+                    bannerType: this.data.bannerType,
+                    isAll: true,
+                    IsecondLevel : false,
+                    goods : [],
+                    dataArray : [],
+                    col1 : [],
+                    col2 : [],
+                    page : 1
+                }, () => {
+                    wx.hideLoading();
+                    //请求服务器
+                    self.getAllDataArrayInShare();
+                });
+            }
+        }else{
+            this.setData({
+                isAll : false
+            });
         }
-        let url = 'Data/GetProductsByT2id'
-        let req = new Request(app.host + url, data, 'POST', 'text');
-        let res = await req.sendRequest();
-        wx.hideLoading();
-        console.log("in chooseType res is ", res);
-        if (res.data.products.length === 0) {
-            wx.showToast({
-                title: '暂时还没有该分类的商品...',
-                icon: 'none'
-            })
+        if(this.data.isAll){
+            //如果是全部的话就
+            this.getAllType();
+        }else{
+            this.setActiveByTid(id);
+            //根据tid获得t2id
+            await this.getT2idByTid(this.data.tid);
+            //重置page=1
+            this.data.page = 1;
+            let data = {
+                t2id: this.data.t2id,
+                page: this.data.page
+            }
+            let url = 'Data/GetProductsByT2id'
+            let req = new Request(app.host + url, data, 'POST', 'text');
+            let res = await req.sendRequest();
+            wx.hideLoading();
+            console.log("in chooseType res is ", res);
+            if (res.data.products.length === 0) {
+                wx.showToast({
+                    title: '暂时还没有该分类的商品...',
+                    icon: 'none'
+                })
+            }
+            this.splitHeadImage(res.data.products);
+            this.setData({
+                goods        : res.data.products,
+                bannerType   : this.data.bannerType,
+                IsecondLevel : true 
+            });
         }
-        this.splitHeadImage(res.data.products);
-        this.setData({
-            goods        : res.data.products,
-            bannerType   : this.data.bannerType,
-            IsecondLevel : true 
-        });
     },
     getT2idByTid : async function(tid){
         let typeUrl = 'Data/GetTab2ByTid';
@@ -668,7 +846,7 @@ Page({
     //选择二级分类
     chooset2Id : function(e){
         let dataSet = e.currentTarget.dataset;
-        let t2id = dataSet.t2id;
+        let t2id = dataSet.ttid;
         let tid = dataSet.tid;
         console.log("选择二级分类 t2id is ",t2id);
         this.setData({
@@ -762,19 +940,26 @@ Page({
         let dataSet = e.currentTarget.dataset;
         let typeName = dataSet.type;
         console.log("typeName is ",typeName);
+        this.setData({
+            dataArray : []
+        });
         if(typeName === '热卖商城'){
             this.data.isHot = true;
             this.data.isShare = false;
         }else if(typeName === '精品分享'){
             this.data.isShare = true;
             this.data.isHot = false;
+            //精品分享请求全部
+
+
         }
         console.log("isHot is ",this.data.isHot,"isShare is ",this.data.isShare);
         //重置page为1
         this.setData({
-            isHot   : this.data.isHot,
-            isShare : this.data.isShare,
-            page    : 1
+            isHot     : this.data.isHot,
+            isShare   : this.data.isShare,
+            page      : 1,
+            dataArray : []
         });
     },
     chooseItByCss : function(e){
@@ -890,10 +1075,17 @@ Page({
         }
     },
     //一键回到顶部
-    goTop: function () {
-        this.setData({
-            topNum: this.data.topNum = 0
-        })
+    goTop: function (e) {
+        if (wx.pageScrollTo) {
+            wx.pageScrollTo({
+                scrollTop: 0,
+            })
+        } else {
+            wx.showModal({
+                title: '提示',
+                content: '当前微信版本过低，暂无法使用该功能',
+            })
+        }
     },
     // //加载更多商品
     // loadMoreGoods : function(e){

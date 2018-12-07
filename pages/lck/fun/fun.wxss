@@ -3,8 +3,9 @@ page{
     background: #114300;
 }
 .page-con{
-    height: 100%;
-    position: relative;
+    height   : 100%;
+    position : relative;
+    width: 100%;
 }
 .title-con,.text{
     display: flex;
@@ -84,6 +85,13 @@ swiper{
 .scrollView{
     width: 750rpx;
 }
+.lrWrapper{
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+}
 .twoColCon{
     display: flex;
     flex-direction: row;
@@ -102,7 +110,7 @@ swiper{
     width: 342rpx;
 }
 .type-con{
-    width: 750rpx;
+    width: 380rpx;
 
 }
 /*
@@ -118,7 +126,7 @@ swiper{
     文字不会换行
     */
     white-space: nowrap;
-    padding-left: 45rpx;
+    padding-left: 55rpx;
     height: 100rpx;
 }
 /*
@@ -139,7 +147,7 @@ swiper{
     color: #fff;
 }
 .type-parent{
-    display: flex;
+    display:flex;
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
@@ -149,15 +157,15 @@ swiper{
     margin-right: 10rpx;
 }
 .typeactive{
-    border-bottom:10rpx solid #82c65d;
+    border-bottom:10rpx solid #1cbf25;
     font-weight: bold;
     display: inline-block;
 }
 .goTop{
-  position: fixed;
-  bottom: 50rpx;
-  padding: 20rpx;
-  right: 30rpx;
+    position: fixed;
+    bottom: 50rpx;
+    padding: 20rpx;
+    right: 30rpx;
 }
 .siangle{
     width:0px;
@@ -168,10 +176,48 @@ swiper{
     margin-bottom: 10rpx;
     margin-left: 25rpx;
 }
-.lrWrapper{
+.loadText{
+    width: 750rpx;
+    height: 50rpx;
+    position: absolute;
+    font-size: 25rpx;
+    color: #fff;
+    bottom: -35rpx;
+    left: 0rpx;
     display: flex;
-    flex-wrap: nowrap;
+    flex-direction: row;
     justify-content: center;
     align-items: center;
-    flex-direction: row;
+    flex-wrap: nowrap;
+}
+.centerText{
+    /* width:  */
+    width: 700rpx;
+    height: 50rpx;
+    text-align: center;
+    line-height: 50rpx;
+}
+.wx-swiper-dots.wx-swiper-dots-horizontal{
+    margin-bottom: 0rpx;
+    float: left;
+    text-align: center;
+}
+.wx-swiper-dot::before{
+    content: '';
+    flex-grow: 1;
+    background: #fff;
+    border-radius: 15rpx;
+    border: 0rpx;
+}
+.wx-swiper-dot.wx-swiper-dot{
+    width: 15rpx;
+    height: 15rpx;
+    border-radius: 15rpx;
+    background: #fff;
+}
+.wx-swiper-dot.wx-swiper-dot-active{
+    width: 40rpx;
+    height: 15rpx;
+    border-radius: 15rpx;
+    background: #fff;
 }

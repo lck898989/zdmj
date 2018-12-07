@@ -96,6 +96,7 @@
     color: #000;
     line-height: 45rpx;
     font-weight: 900;
+    vertical-align: top;
 }
 
 .nullView {
@@ -251,7 +252,6 @@
 .shopNumber {
     position: absolute;
     right: 139rpx;
-  
 }
 
 .mask {
@@ -390,8 +390,8 @@
 .nullView5 {
     position: relative;
     width: 750rpx;
-    height: 11rpx;
-    background-color: #ffffff;
+    height: 110rpx;
+    background-color: #fff;
 }
 
 .dayu {
@@ -399,25 +399,34 @@
 }
 
 .buyView {
-    position: relative;
+    position: fixed;
     width: 750rpx;
     height: 100rpx;
+    bottom: 0;
+    left: 0;
     display: flex;
-    margin-top: 0rpx;
-    justify-content: space-between;
+    justify-content:center;
+    z-index: 50;
 }
 
 .sharePrice {
     position: relative;
-    width: 312rpx;
+    width: 310rpx;
     height: 100rpx;
     display: flex;
     justify-content: center;
+    background-color: white;
 }
-
+.gundongView{
+    position: absolute;
+    left: 0;
+    right:0;
+    top: 0;
+    bottom: 0;
+}
 .shareView {
     position: relative;
-    width: 219rpx;
+    width: 220rpx;
     height: 100rpx;
     background-color: #f39800;
     color: #fff;
@@ -425,6 +434,7 @@
     justify-content: center;
     align-items: center;
     border-radius: 0;
+    z-index: 50;
 }
 
 .huodeText {
@@ -439,13 +449,14 @@
 
 .buy {
     position: relative;
-    width: 219rpx;
+    width: 220rpx;
     height: 100rpx;
     background-color: #b964d8;
     color: #fff;
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index: 50;
 }
 
 .shopView1 {
@@ -464,6 +475,7 @@
     border-left: 2rpx solid #9f9f9f;
     border-right: 2rpx solid #9f9f9f;
 }
+
 .shopPrice {
     position: absolute;
     top: 85rpx;
@@ -476,6 +488,13 @@
     top: 22rpx;
     left: 177rpx;
     color: #000;
+    display: -webkit-box;
+    word-break: break-all;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    letter-spacing: 1px;
 }
 
 .shopImage {
@@ -524,6 +543,7 @@
     height: 710rpx;
     position: relative;
     margin-left: -80rpx;
+    vertical-align: top;
 }
 
 .titleText {

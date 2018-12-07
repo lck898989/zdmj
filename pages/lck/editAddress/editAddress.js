@@ -15,6 +15,11 @@ Page({
    * 页面的初始数据
    */
   data: {
+    //地址类型
+      dzleixing:{
+          text : '公司',
+          id   : 1
+      },
      //当前修改的地址
      currentAdd : null,
      //是否显示默认地址
@@ -223,8 +228,9 @@ Page({
         //将用户id和收货地址id发送给服务器改变默认值
         let url = app.host + 'Data/EditState';
         let data = {
-            aid: aid,
-            uid: uid
+            aid   : aid,
+            uid   : uid,
+            state : this.data.currentAdd.state 
         }
         console.log("data is ",data);
         let req = new Request(url, data, "POST", 'text');
@@ -246,6 +252,7 @@ Page({
             aid: aid,
             uid: app.uid
         }
+        console.log("删除地址时候的data is ",data);
         let req = new Request(url, data, "POST", 'text');
         let res = await req.sendRequest();
         console.log("res is ", res);
@@ -270,6 +277,9 @@ Page({
         console.log("currentAdd is ",this.data.currentAdd);
         let url = app.host + 'Data/EditAddress';
         console.log("state is ",newAdd.state);
+        let dzType = newAdd.type;
+        console.log("dzType is ",dzType);
+        if(this.data.dzleixing)
         if(newAdd.recipient !== '' && newAdd.district !== '' && newAdd.detailDistrict !== '' && newAdd.phone !== ''){
             let data = {
                 address : {
@@ -279,7 +289,8 @@ Page({
                     district : newAdd.district,
                     detaildistrict : newAdd.detaildistrict,
                     recipient : newAdd.recipient,
-                    state : newAdd.state
+                    state : newAdd.state,
+                    "type" : dzType
                 }
             }
             let req = new Request(url,data,'POST','text');
@@ -301,6 +312,22 @@ Page({
         console.log("district is ",this.data.district);
         console.log("detailDistrict is ",this.data.detailDistrict);
         console.log("state is ",this.data.state);
+        console.log("地址类型是：", this.data.dzleixing);
+        let dzType = 0;
+        switch(this.data.dzleixing){
+            case '公司':
+                dzType = 1;
+                break;
+            case '住宅':
+                dzType = 2;
+                break;
+            case '学校':
+                dzType = 3;
+                break;
+            case '其他':
+                dzType = 4;
+                break;
+        }
         if(this.data.username !== '' && this.data.phoneNumber !== '' && this.data.district !== '' && this.data.detailDistrict !== ''){
             let url = app.host + 'Data/AddAddress'
             let data = {
@@ -310,7 +337,8 @@ Page({
                     district : this.data.address.province + this.data.address.city + this.data.address.district,
                     detaildistrict : this.data.detailDistrict,
                     uid : app.uid,
-                    state : this.data.state ? 0 : 1
+                    state : this.data.state ? 0 : 1,
+                    "type"  : dzType
                 }
             }
             console.log("data is ",data);
@@ -394,5 +422,17 @@ Page({
             })
         }
     }
+  },
+  //选择地址类型-张超伟
+  dzleixing2(e){
+    let id = e.currentTarget.dataset.id;
+    console.log(id);
+    console.log(JSON.parse(e.currentTarget.id));
+    this.setData({
+      dzleixing: {
+          text : JSON.parse(e.currentTarget.id).lx,
+          id   : parseInt(id)
+      }
+    })
   },
 })

@@ -21,37 +21,46 @@ Page({
         swiperList: [
             {
                 index: 0,
-                aurl: "../start/start",
+                aurl: "",
                 swpClass: "swp-left",
                 active: false,
-                imgsrc: "../../../resources/test.png",
+                imgsrc: "https://shop.ykplay.com/upload/activityhead/1543406417505.jpeg",
             },
             {
                 index: 1,
                 aurl: "#",
-                swpClass: "swp-right",
+                swpClass: "move-left",
                 active: false,
-                imgsrc: "../../../resources/800.jpg"
+                imgsrc: "https://shop.ykplay.com/upload/activityhead/1543455702117.jpeg"
             },
             {
                 index: 2,
                 aurl: "#",
-                swpClass: "swp-right",
+                swpClass: "move-left",
                 active: false,
-                imgsrc: "../../../resources/900.jpg"
+                imgsrc: "https://shop.ykplay.com/upload/activityhead/1543455729220.jpeg"
             },
             {
                 index: 3,
                 aurl: "#",
-                swpClass: "swp-right",
+                swpClass: "move-left",
                 active: false,
-                imgsrc: "../../../resources/1000.jpg"
-            }],
+                imgsrc: "https://shop.ykplay.com/upload/activityhead/1543455754045.jpeg"
+            },
+            {
+                index: 4,
+                aurl: "#",
+                swpClass: "move-left",
+                active: false,
+                imgsrc: "https://shop.ykplay.com/upload/activityhead/1543455771565.jpeg"
+            },
+        ],
         played: false,
         //滑动触点开始的时候
         startPoint: 0,
-        currentImageIndex: 0
-
+        currentImageIndex: 0,
+        startX : 0,
+        hasTap : false
     },
 
     /**
@@ -279,5 +288,25 @@ Page({
     },
     icon: function (e) {
         console.log("e is ", e);
+    },
+    start : function(e){
+        console.log("e is ",e);
+        this.data.startX = e.changedTouches[0].pageX;
+    },
+    end : function(e){
+        console.log("e is ",e);
+        let endX = e.changedTouches[0].pageX;
+        let offsetX = endX - this.data.startX;
+        console.log("hasTap is ",this.data.hasTap);
+        if(this.data.hasTap){
+            console.log("offsetX si ",offsetX);
+        }
+        // console.log("offsetX is ",offsetX);
+    },
+    click :function(e){
+        console.log("e is ",e);
+        this.setData({
+            hasTap : true
+        })
     }
 })

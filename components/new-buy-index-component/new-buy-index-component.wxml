@@ -18,7 +18,7 @@
                     </view>
                     <view class='priceReal'>
                         <view class='price'>
-                            ￥{{goods.oprice}}
+                            ￥{{goods.price}}
                         </view>
                         <image src='../../resources/img_jin.png' style='width:100rpx;height:25rpx;'></image>
                     </view>

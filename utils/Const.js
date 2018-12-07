@@ -1,5 +1,5 @@
 export default {
-    devHost: 'http://192.168.1.59:3150/',
+    devHost: 'http://192.168.1.177:3150/',
     productionHost: 'https://shop.ykplay.com/',
     //数组内容为基本类型去重
     uniq   : function(array){

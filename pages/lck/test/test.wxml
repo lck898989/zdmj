@@ -1,20 +1,3 @@
-<!--pages/lck/test/test.wxml-->
-<!-- <view class='page-con'>
-    <view class='wrap'>
-        <block wx:for='{{swiperList}}'>
-            <!-- <block wx:if='{{index === 0}}'>
-                <image src='../../../resources/test.png' style='width:480rpx;height:480rpx;' class='img firstImg'></image>
-            </block>
-            <block wx:else> 
-            <view class='imgCon{{index}} common {{item.active ? item.swpClass : ""}}' bindtap='swapBtn' data-index='{{index}}'>
-                <image src='{{item.imgsrc}}' style='width:480rpx;height:480rpx;' class='img'></image>
-                <block wx:if='{{index !== 0}}'>
-                    <view class='mask {{item.swpClass === "swiper-left" ? "hideMask" : ""}}'></view>
-                </block>
-            </view>
-        </block>
-    </view>
-</view> -->
 <view class='page-con'>
     <view class='wrap' bindtouchstart='moveStart' bindtouchend='moveEnd'>
         <block wx:for='{{swiperList}}'>

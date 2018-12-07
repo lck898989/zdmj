@@ -538,3 +538,27 @@ button::after{
     padding: 20rpx;
     right: 30rpx;
 }
+.wx-swiper-dots.wx-swiper-dots-horizontal{
+    margin-bottom: 0rpx;
+    float: left;
+    text-align: center;
+}
+.wx-swiper-dot::before{
+    content: '';
+    flex-grow: 1;
+    background: #fff;
+    border-radius: 15rpx;
+    border: 0rpx;
+}
+.wx-swiper-dot.wx-swiper-dot{
+    width: 15rpx;
+    height: 15rpx;
+    border-radius: 15rpx;
+    background: #fff;
+}
+.wx-swiper-dot.wx-swiper-dot-active{
+    width: 40rpx;
+    height: 15rpx;
+    border-radius: 15rpx;
+    background: #fff;
+}

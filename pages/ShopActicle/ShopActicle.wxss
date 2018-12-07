@@ -10,7 +10,7 @@
 .shoppingImageView {
     position: relative;
     width: 750rpx;
-    height: 1046rpx;
+    height: 750rpx;
 }
 
 .shoppingType {
@@ -405,9 +405,15 @@
     height: 100rpx;
     display: flex;
     margin-top: 0rpx;
-    justify-content: space-between;
+    justify-content:center;
 }
-
+.gundong{
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+}
 .sharePrice {
     position: relative;
     width: 312rpx;
@@ -528,7 +534,7 @@
     left: 30rpx;
     width: 690rpx;
     height: 80rpx;
-    color: #fff;
+    color: #ffffff;
     /* line-height: 15rpx; */
 }
 

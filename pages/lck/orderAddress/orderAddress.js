@@ -9,6 +9,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    srcpduigou: app.imageUrl + "icon_selected_1.png", 
      add : '',
      isChecked : true,
      editor    : false,
@@ -18,7 +19,9 @@ Page({
      address : '',
      addressDetail : '',
      //模拟服务器送来的数据
-      user : [],
+      user : [
+        // { aid: 28, detaildistrict: "你理解", district: "天津市天津市宝坻区", phone: "18522467396", recipient: "你记", state: 1, uid: 3, lx: '公司' }, { aid: 28, detaildistrict: "你理解", district: "天津市天津市宝坻区", phone: "18522467396", recipient: "你记", state: 0, uid: 3,  lx: '家庭' }
+      ],
      //将要发送到服务器的收货地址
      inputError : false,
      //用户名没有输入
@@ -89,7 +92,7 @@ Page({
   onShow: function (event) {
       console.log("in onShow user is ",this.data.user);
       console.log("event is ",event);
-      this.getAddressList();
+      // this.getAddressList();
   },
 
   /**
@@ -394,15 +397,7 @@ Page({
             choosedAdd : add
         })
     },
-    //确定选择该地址
-    ensure : function(event){
-        console.log("event is ",event);
-        console.log("choosedAdd is ",this.data.choosedAdd);
-        wx.setStorageSync('choosedAdd', this.data.choosedAdd);
-        wx.navigateTo({
-            url: '../order/order',
-        })
-    },
+    
     getAddByAid : function(aid){
         let add = null;
         let userLen = this.data.user.length;
@@ -413,6 +408,36 @@ Page({
             }
         }
         return add;
+    },
+
+
+  //确定选择该地址-需要修改代码
+  ensure: function (event) {
+    console.log("event is ", event);
+    console.log("choosedAdd is ", this.data.choosedAdd);
+    wx.setStorageSync('choosedAdd', this.data.choosedAdd);
+    wx.navigateTo({
+      url: '../order/order',
+    });
+  },
+    //点击选择事件需要添加代码-张超伟
+  dianjixuanze(e){
+    console.log(parseInt(e.currentTarget.id))
+    parseInt(e.currentTarget.id)
+    for(var i=0;i<this.data.user.length;i++){
+      this.data.user[i].state=1
+      //找到我点的是user中的谁
+      if (i == parseInt(e.currentTarget.id)){
+        this.data.user[i].state = 0
+        console.log("user is ",this.data.user[i]);
+        this.setData({
+            choosedAdd : this.data.user[i]
+        });
+      }
     }
+    this.setData({
+      user:this.data.user
+    })
+  },
 
 })

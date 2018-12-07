@@ -16,7 +16,12 @@
             </block>
         </view>
     </view> -->
-    <image-loader originalImage='http://bpic.588ku.com/templet_water_img/18/11/04/51baad1065555e9caa9e7b19482bea37.jpg' width='185rpx' height='145rpx' mode=''></image-loader>
+    <!-- <image-loader originalImage='http://bpic.588ku.com/templet_water_img/18/11/04/51baad1065555e9caa9e7b19482bea37.jpg' width='185rpx' height='145rpx' mode=''></image-loader> -->
+    <swiper class='swiper_container' indicator-dots='true' autoplay='true'>
+        <swiper-item class='item' wx:for='{{swiperList}}'>
+            <image style='width:750rpx;height:700rpx;' mode='widthFix' src='{{item.imgsrc}}'></image>
+        </swiper-item>
+    </swiper>
 </view>
 
 

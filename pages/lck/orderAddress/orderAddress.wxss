@@ -4,6 +4,7 @@ page{
 }
 .page-con{
     position: relative;
+    padding-bottom: 200rpx;
 }
 .back{
     margin-left: 30rpx;
@@ -41,6 +42,15 @@ radio .wx-radio-input.wx-radio-input-checked::before{
 .radio-con{
     width: 100%;
 }
+.yuanquan{
+    width: 28rpx;
+    height: 28rpx;
+    border-radius: 50rpx;
+    border-bottom: 4rpx solid #c9c9c9;
+    border-top: 4rpx solid #c9c9c9;
+    border-left: 4rpx solid #c9c9c9;
+    border-right: 4rpx solid #c9c9c9;
+}
 .index-manager{
     width:730rpx;
     margin-left: 10rpx;
@@ -65,7 +75,24 @@ radio .wx-radio-input.wx-radio-input-checked::before{
     line-height: 35rpx;
     text-align: center;
     color:#fff;
-    background-color: #863bb7;
+}
+.duigoutup{
+  width: 32rpx;
+}
+.index-manager2{
+    width:730rpx;
+    margin-left: 0rpx;
+    margin-top: 10rpx;
+    border-radius: 10rpx;
+    padding:30rpx 0rpx;
+    position: fixed;
+    bottom: 18rpx;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    background-color: #b762d6;
+    flex-wrap: nowrap;
+    align-items: center;
 }
 .defaultAdd{
     margin-top: 10rpx;
@@ -93,15 +120,15 @@ radio .wx-radio-input.wx-radio-input-checked::before{
 }
 .addContainer{
     margin-top: 10rpx;
-    padding-bottom: 20rpx;
+    /* padding-bottom: 20rpx; */
     background-color: #fff;
-    margin-bottom: 100rpx;
+    /* margin-bottom: 100rpx; */
 }
 .add-item{
     width: 520rpx;
     height: 120rpx;
     /* padding: 35rpx 30rpx; */
-    padding: 30rpx 15rpx;
+    padding: 30rpx 0rpx;
     color: #404040;
     /* background-color: red; */
     display: flex;
@@ -112,15 +139,17 @@ radio .wx-radio-input.wx-radio-input-checked::before{
 }
 .n{
     font-size: 35rpx;
-    font-weight: 500;
+    font-weight: 900;
+    margin-top: 22rpx;
 }
 .p{
+  margin-top: 10rpx;
     font-size:25rpx;
     color:#646464;
 }
 .user-con{
     width: 100%;
-    display: flex;
+    /* display: flex; */
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;

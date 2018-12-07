@@ -1,11 +1,10 @@
 <!--pages/search/search.wxml-->
-
 <view class='mask' animation='{{backAnimaData}}' hidden='{{buyBoxHidden}}' catchtouchmove='test' data-e='mask'></view>
 <view class='searchView'>
     <!-- <image class='searchDa' mode='widthFix' src='../../resources/icon_right.png'></image> -->
     <view class='sreachboxView'>
         <icon type='search' size='15' class='searchIcon'></icon>
-        <input class='searchText' style='font-size:22rpx;font-weight:900;' bindinput='sreach'  placeholder='输入商户或商品名称' value='{{sreachText}}' maxlength='18'></input>
+        <input class='searchText' style='font-size:22rpx;font-weight:900;' bindinput='sreach' placeholder='输入商户或商品名称' value='{{sreachText}}' maxlength='18'></input>
         <icon class='clear' size='15' wx:if='{{sreachText.length>=1}}' bindtap='clearSreach' type='clear'></icon>
     </view>
     <text class='searchText1' style='font-size:24rpx' bindtap='pressSreach'>搜索</text>
@@ -13,10 +12,10 @@
 <scroll-view class='scrolView' bindscrolltolower='reshshData' scroll-y='true' style='height:{{scrolViewHeight}}px' wx:if="{{sreachText.length==0}}">
     <view class='sreachJinView'>
         <text class='searchJinText' style='font-size:28rpx;font-weight:900;'>最近搜索</text>
-        <image class='lajiImage' mode='widthFix' src='../../resources/gouwuche_icon2.png' bindtap='clearNear'></image>
+        <image class='lajiImage' mode='widthFix' src='../../resources/gouwuche_icon2.png' style='height:auto' bindtap='clearNear'></image>
     </view>
     <view class="sreachjinParent">
-        <view class='sreachjinChild' wx:for='{{nearSreach}}' style='font-size:22rpx;font-weight:900;'>{{item.keyword}}</view>
+        <view class='sreachjinChild' wx:for='{{nearSreach}}' data-id='{{item.keyword}}' bindtap='pressZuiSreach' style='font-size:22rpx;font-weight:900;'>{{item.keyword}}</view>
     </view>
     <view class='hotView'>
         <view class='nullView'></view>
@@ -25,43 +24,44 @@
         </view>
     </view>
     <view class="sreachhotParent">
-        <view class='sreachhotChild' wx:for='{{hotSreach}}' style='font-size:22rpx;font-weight:900;'>{{item.keyword}}</view>
+        <view class='sreachhotChild' wx:for='{{hotSreach}}' style='font-size:22rpx;font-weight:900;' data-id='{{item.keyword}}' bindtap='pressZuiSreach'>{{item.keyword}}</view>
     </view>
     <view class='nullView3'></view>
     <block wx:for='{{goodShop}}' wx:for-index='idx'>
         <view class='shopView' style='height:340rpx;' wx:if='{{idx==0}}' data-pid='{{item.pid}}' bindtap='buyShop'>
             <text class='tuijianText' style='font-size:28rpx;color:#000000;font-weight:900;'>推荐商品</text>
             <view class='nullView1'></view>
-            <image class='shopImage' style='top:61rpx;' mode='widthFix' src='{{url+item.head[0]}}'></image>
+            <image class='shopImage' style='top:61rpx;height:auto' mode='widthFix' src='{{url+item.head[0]}}'></image>
             <text class='shopName1' style='font-size:29rpx;color:#000000;font-weight:900;top:103rpx;'>{{item.pname}}</text>
             <!-- <text class='shopDetail' style='font-size:25rpx;color:#aaaaaa;font-weight:900;top:141rpx;'>阿打算大所多</text> -->
             <text class='shopPrice' space='ensp' style='font-size:23rpx;color:#707070;font-weight:900;top:224rpx;'>市场价 ￥{{item.otherprice}}</text>
             <text class="shopPrice1" style='font-size:32rpx;color:#ffcb05;font-weight:900;'>￥{{item.price}}</text>
-            <image class='shpoIcon' catchtap='buyShop1' mode='widthFix' data-shop='{{item}}' data-pid='{{item.pid}}' src='../../resources/btn_buy.png'></image>
-            <image class='zhidanIcon' mode='widthFix' src='../../resources/img_jin.png'></image>
+            <image class='shpoIcon' catchtap='buyShop1' style='height:auto' mode='widthFix' data-shop='{{item}}' data-pid='{{item.pid}}' src='../../resources/btn_buy.png'></image>
+            <image class='zhidanIcon' mode='widthFix' style='height:auto' src='../../resources/img_jin.png'></image>
         </view>
         <view class='shopView' wx:else bindtap='buyShop' data-pid='{{item.pid}}'>
             <view class='nullView1'></view>
-            <image class='shopImage' mode='widthFix' src='{{url+item.head[0]}}'></image>
+            <image class='shopImage' mode='widthFix' style='height:auto' src='{{url+item.head[0]}}'></image>
             <text class='shopName1' style='font-size:29rpx;color:#000000;font-weight:900;'>{{item.pname}}</text>
             <!-- <text class='shopDetail' style='font-size:25rpx;color:#aaaaaa;font-weight:900;'>阿打算大所多</text> -->
             <text class='shopPrice' space='ensp' style='font-size:23rpx;color:#707070;font-weight:900;'>市场价 {{item.otherprice}}</text>
             <text class="shopPrice1" style='font-size:32rpx;color:#ffcb05;font-weight:900;'>￥{{item.price}}</text>
-            <image class='shpoIcon' catchtap='buyShop1' mode='widthFix' data-shop='{{item}}' data-pid='{{item.pid}}' src='../../resources/btn_buy.png'></image>
-            <image class='zhidanIcon' mode='widthFix' src='../../resources/img_jin.png'></image>
+            <image class='shpoIcon' catchtap='buyShop1' mode='widthFix' style='height:auto' data-shop='{{item}}' data-pid='{{item.pid}}' src='../../resources/btn_buy.png'></image>
+            <image class='zhidanIcon' mode='widthFix' style='height:auto' src='../../resources/img_jin.png'></image>
         </view>
     </block>
 </scroll-view>
 <scroll-view class='scrolView' scroll-y='true' scroll-top='{{scrolltop}}' style='height:{{scrolViewHeight}}px' wx:if="{{sreachText.length>0}}">
     <view class='sreachResultView' wx:for='{{sreachArray}}' bindtap='turnSreach' data-id='{{i.keywords}}' wx:for-item="i">
         <view class='nullView1'></view>
-         <block wx:if='{{i.type.length==2}}'>
+        <block wx:if='{{i.type.length==2}}'>
             <image class='shopIcon' mode='widthFix' src='../../resources/ico_type_3.png'></image>
         </block>
         <block wx:else>
-           <image class='shopIcon' wx:if='{{i.type[0]=="product"}}' mode='widthFix' src='../../resources/ico_type_2.png'></image>
-             <image class='shopIcon' wx:if='{{i.type[0]=="essay"}}' mode='widthFix' src='../../resources/ico_type_1.png'></image>
-        </block> 
+            <image class='shopIcon' wx:if='{{i.type[0]=="product"}}' mode='widthFix' src='../../resources/ico_type_2.png'></image>
+            <image class='shopIcon' wx:if='{{i.type[0]=="essay"}}' mode='widthFix' src='../../resources/ico_type_1.png'></image>
+            <image class='shopIcon' wx:if='{{i.type[0]=="shopessay"}}' mode='widthFix' src='../../resources/ico_type_1.png'></image>
+        </block>
         <view class='shopName'>
             <block wx:for='{{i.hasArray}}' wx:for-item="j" wx:for-index='index1'>
                 <block wx:for='{{i.name}}' wx:for-item="k" wx:for-index='index2'>

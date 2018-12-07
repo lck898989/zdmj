@@ -11,30 +11,38 @@
     <view style='width:100%;background-color:#fff;'>
         <view class="editor-con">
             <view class='editor-item'>
-                <input type="text" placeholder='{{isAddress ? "收货人" : currentAdd.recipient}}' bindinput='getEditUser' bindblur='checkName' data-user='{{isAddress ? "add" : ""}}'/>
+            <view class='xianzhi' style='font-size:25rpx;'>收货人</view>
+                <input class='inp' type="text" style='font-size:25rpx;' placeholder='{{isAddress ? "收货人" : currentAdd.recipient}}' bindinput='getEditUser' bindblur='checkName' data-user='{{isAddress ? "add" : ""}}'/>
             </view>
             <view class='editor-item'>
-                <view>
-                    <input type="text" placeholder='{{isAddress ? "请输入电话号码" : currentAdd.phone}}' bindinput='getEditPhone' bindfocus='checkName' bindblur='checkNumber' data-user='{{isAddress ? "add" : ""}}'/>
-                </view>
-                <view id='phone_type' style='color:#bebebe'>
+             <view class='xianzhi' style='font-size:25rpx;'>手机号码</view>
+                    <input class='inp2' style='font-size:25rpx;' type="text" placeholder='{{isAddress ? "请输入电话号码" : currentAdd.phone}}' bindinput='getEditPhone' bindfocus='checkName' bindblur='checkNumber' data-user='{{isAddress ? "add" : ""}}'/>
+                <view id='phone_type'  style='font-size:25rpx;color:#bebebe'>
                     +86
                 </view>
             </view>
             <view class='editor-item'>
-                <view>
+            <view class='xianzhi' style='font-size:25rpx;'>所在城市</view>
                     <!-- <view>{{currentAdd.district}}</view> -->
-                    <input type="text" placeholder="{{isAddress ? addressText : currentAdd.district}}" bindfocus='showAddress' style='width:600rpx;' value='{{address.province}}{{address.city}}{{address.district}}' data-user='{{isAddress ? "add" : ""}}'/>
-                </view>
+                    <input class='inp' style='font-size:25rpx;' type="text" placeholder="{{isAddress ? addressText : currentAdd.district}}" bindfocus='showAddress' value='{{address.province}}{{address.city}}{{address.district}}' data-user='{{isAddress ? "add" : ""}}'/>
+                
             </view>
             <view class='editor-item'>
-                <input type="text" placeholder="{{isAddress ? addressDetail : currentAdd.detaildistrict}}" bindinput='getEditAddressDetail' style='width:700rpx' data-user='{{isAddress ? "add" : ""}}'/>
+            <view class='xianzhi' style='font-size:25rpx;'>详细地址</view>
+                <input class='inp' style='font-size:25rpx;' type="text" placeholder="{{isAddress ? addressDetail : currentAdd.detaildistrict}}" bindinput='getEditAddressDetail' data-user='{{isAddress ? "add" : ""}}'/>
+            </view>
+            <view class='editor-item'>
+            <view class='xianzhi'  style='font-size:25rpx;'>地址类型</view>
+                <view class='{{dzleixing.text=="公司"?"te2":"te"}}' style='font-size:22rpx;' id='{"lx":"公司"}' bindtap='dzleixing2' data-id='1'>公司</view>
+                <view class='{{dzleixing.text=="住宅"?"te2":"te"}}' style='font-size:22rpx;' id='{"lx":"住宅"}' bindtap='dzleixing2' data-id='2'>住宅</view>
+                <view class='{{dzleixing.text=="学校"?"te2":"te"}}' style='font-size:22rpx;' id='{"lx":"学校"}' bindtap='dzleixing2' data-id='3'>学校</view>
+                <view class='{{dzleixing.text=="其他"?"te2":"te"}}' style='font-size:22rpx;' id='{"lx":"其他"}' bindtap='dzleixing2' data-id='4'>其他</view>
             </view>
         </view>
     </view>
     <view class='set-default'>
         <!--设置默认地址-->
-        <view class='default-left'>
+        <view class='default-left'  style='font-size:25rpx;'>
             设为默认地址
         </view>
         <view class='default-right'>

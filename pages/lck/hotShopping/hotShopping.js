@@ -488,7 +488,6 @@ Page({
         app.ShortConnect(app.urlw + "Data/GetAllEssays", {
             page: this.data.jingIndex
         }, "getWenzhang");
-
     },
     //显示更多分类，下拉菜单
     showMore: function () {

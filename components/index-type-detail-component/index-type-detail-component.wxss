@@ -26,7 +26,8 @@
 .author-con{
     width: 100%;
     flex-direction: row;
-    margin-top:5rpx;margin-left:10rpx;
+    margin-top:5rpx;
+    margin-left:25rpx;
 }
 .im{
     border-top-left-radius: 10rpx;
@@ -46,8 +47,9 @@
     font-size: 25rpx;
 }
 .text{
-    font-size:25rpx;margin-top:5rpx;margin-left:10rpx;
-    height: 70rpx;
+    font-size:25rpx;
+    margin-left:10rpx;
+    margin-top: 5rpx;
     width: 320rpx;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -57,4 +59,16 @@
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
+}
+.rebeat-con{
+    align-self: flex-end;
+    margin-right: 10rpx;
+}
+.rebeat-text{
+    font-size: 25rpx;
+    color: #8f8f8f;
+}
+.rebeat-money{
+    color: #f39800;
+    font-size: 30rpx;
 }

@@ -1,0 +1,21 @@
+<!--pages/zcw/myfriends/myfriends.wxml-->
+<view class='quanjubg'>
+ <image class='tu1' src='{{srcp}}' style='height:auto' mode='widthFix'/>
+  <scroll-view class='guize' scroll-y >
+    <view class='biaoti'>如何获取奖励</view>
+    <view class='neirong'>方法一</view>
+    <view class='neirong2'>在指点迷津小程序中，挑选您中意的商品或文章，把它分享给<text style='color:#ff6600'>好友</text>或分享到<text style='color:#ff6600'>朋友圈</text>，当您的好友确认并收货后，您即可获得一笔丰厚的<text style='color:#ff6600'>分享奖励</text>！</view>
+    <view class='neirong'>方法二</view>
+    <view class='neirong2'>将任意商品或文章分享给<text style='color:#ff6600'>好友</text>或分享到<text style='color:#ff6600'>朋友圈</text>，邀请TA成为您的伙伴，当TA获得分享奖励后您同样也可以有一笔<text style='color:#ff6600'>丰厚的酬劳</text>！</view>
+    <view class='biaoti2'>特殊声明</view>
+    <view class='sm'>
+    <text class='bianhao'>1、</text><view class='zixiang'>通过不正当手段获得的奖励,指点迷津平台有权撤销获奖励者奖励及相关订单；</view>
+    </view>
+    <view class='sm'>
+    <text class='bianhao'>2、</text><view class='zixiang'>每个用户只能被邀请一次，仅以接受第一位邀请者为有效邀请，邀请关系不可解除、替换；</view>
+    </view>
+    <view class='sm'>
+    <text class='bianhao'>3、</text><view class='zixiang'>在法律许可的范围内，指点迷津平台有权利对本次活动做出解释；</view>
+    </view>
+  </scroll-view>
+</view>

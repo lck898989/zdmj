@@ -1,0 +1,23 @@
+<!--pages/zcw/friends/friends.wxml-->
+<view class='quanjubg'>
+ <image class='tu1' src='{{srcp}}' style='height:auto' mode='widthFix'/>
+          <view class='kuangzi'>
+          <view class='index-manager' bindtap='addAdd'>
+            <view style='margin-left:34rpx;color:white;font-size:35rpx;font-weight: 900;'>
+                奖励规则
+            </view>
+          </view>
+          <view class='index-manager2' bindtap='addAdd'>
+            <view style='margin-left:34rpx;color:white;font-size:35rpx;font-weight: 900;'>
+                立即邀请好友
+            </view>
+          </view>
+          </view>
+  <scroll-view class='guize' scroll-y >
+    <view class='biaoti'><text space='nbsp' style='color:white'>已邀请好友  ({{friend.length}})</text></view>
+    <view hidden='{{hide}}' class='wuhaoyou'>还没邀请过好友</view>
+    <view wx:for='{{friend}}'></view>
+  </scroll-view>
+  <view class='xialaxxwz'>下拉获取更多信息....</view>
+</view>
+

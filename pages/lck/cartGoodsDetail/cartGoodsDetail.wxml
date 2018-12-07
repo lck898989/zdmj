@@ -1,14 +1,15 @@
 <block wx:if='{{showBuyCon}}' >
     <view class='mask' animation='{{backAnimaData}}' catchtouchmove='test' data-e='mask'></view>
 </block>
-<scroll-view class='{{showBuyCon ? "page-con-showbuy" : "page-con"}}'>
+<view class='{{showBuyCon ? "page-con-showbuy" : "page-con"}}'>
     <view>
         <view class='swiper-con' >
             <swiper bindchange='swiperWhere' style="width:750rpx;height:750rpx;">
                 <block wx:for='{{goodsImageList}}'>
                     <swiper-item>
                         <view class='img-con'>
-                            <image src='{{imageHost}}{{item}}' style='width:750rpx;height:750rpx;'></image>
+                            <!-- <image src='{{imageHost}}{{item}}' style='width:750rpx;height:750rpx;'></image> -->
+                            <image-loader originalImage='{{imageHost}}{{item}}' width='750rpx' height='750rpx' mode='widthFix'></image-loader>
                         </view>
                     </swiper-item>
                 </block>
@@ -95,6 +96,14 @@
             <view class='buy-now' bindtap='showBuyCon' id='buyit'>
                 立即购买
             </view> -->
+            <view class='index-p'>
+                <view bindtap='backIndex' class='index-con'>
+                    <image src='../../../resources/btn_main_0.png' style='width:30rpx;height:30rpx;'></image>
+                    <view class='backindex'>
+                        回首页
+                    </view>
+                </view>
+            </view>
             <button class='share' open-type='share'>
                 分享
             </button>
@@ -167,4 +176,5 @@
             </view>
         </view>
     </block>
-</scroll-view>
+    <image src='../../../resources/btn_top.png' class='goTop' hidden='{{!floorStatus}}' bindtap='goTop' style='width:110rpx;height:110rpx;'/>
+</view>

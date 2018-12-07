@@ -16,14 +16,14 @@
         </view>
         <block wx:for='{{item.orderItems[0]}}' wx:for-index="idx" wx:for-item="item1">
             <view class='shopMsgView' wx:if='{{idx==0}}'>
-                <image class='shopImage1' src='{{url+item1.product.head[0]}}' mode='widthFix'></image>
+                <image class='shopImage1' src='{{url+item1.product.head[0]}}' style='height:auto' mode='widthFix'></image>
                 <text class='shopDetailText' space='ensp' style='font-size:24rpx;'> {{item1.product.pname}}</text>
                 <text class='shopSize' style='font-size:20rpx;color:#808080' space='ensp'>{{item1.standard}}</text>
                 <!-- <text class='shopType' style='font-size:20rpx;'>款式{{item1.product.size.color}}</text> -->
                 <text class='shopnumberText' style='font-size:22rpx;'>{{item1.pcount}}件商品</text>
             </view>
             <view class='shopMsgView1' wx:else>
-                <image class='shopImage1' src='{{url+item1.product.head[0]}}' mode='widthFix'></image>
+                <image class='shopImage1' src='{{url+item1.product.head[0]}}' style='height:auto' mode='widthFix'></image>
                 <text class='shopDetailText' space='ensp' style='font-size:24rpx;'> 【{{item1.product.pname}}】{{item1.product.info}}</text>
                 <text class='shopSize' style='font-size:20rpx;' space='ensp'>{{item1.standard}}</text>
                 <!-- <text class='shopType' style='font-size:20rpx;'>款式{{item1.product.size.color}}</text> -->
@@ -56,7 +56,7 @@
         </view>
         <block wx:for='{{item.orderItems[0]}}' wx:for-index="idx" wx:for-item="item1">
             <view class='shopMsgView' wx:if='{{idx==0}}'>
-                <image class='shopImage1' src='{{url+item1.product.head[0]}}' mode='widthFix'></image>
+                <image class='shopImage1' src='{{url+item1.product.head[0]}}' style='height:auto' mode='widthFix'></image>
                 <text class='shopDetailText' space='ensp' style='font-size:24rpx;'> {{item1.product.pname}}</text>
                 <text class='shopSize' style='font-size:20rpx;color:#808080' space='ensp'>{{item1.standard}}</text>
                 <!-- <text class='shopType' style='font-size:20rpx;'>款式{{item1.product.size.color}}</text> -->
@@ -64,7 +64,7 @@
                 <text class='oneShopNumber' space='ensp' style='font-size:22rpx;'>总计:  ￥{{item1.product.price}}</text>
             </view>
             <view class='shopMsgView1' wx:else>
-                <image class='shopImage1' src='{{url+item1.product.head[0]}}' mode='widthFix'></image>
+                <image class='shopImage1' src='{{url+item1.product.head[0]}}' style='height:auto' mode='widthFix'></image>
                 <text class='shopDetailText' space='ensp' style='font-size:24rpx;'> 【{{item1.product.pname}}】{{item1.product.info}}</text>
                 <text class='shopSize' style='font-size:20rpx;' space='ensp'>{{item1.standard}}</text>
                 <!-- <text class='shopType' style='font-size:20rpx;'>款式{{item1.product.size.color}}</text> -->

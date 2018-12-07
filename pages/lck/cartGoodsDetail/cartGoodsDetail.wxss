@@ -273,21 +273,16 @@ page{
     font-size: 30rpx;
 }
 .addCart,.addCartn{
-    color: #ec8413;
-    width: 375rpx;
-    font-size: 40rpx;
-}
-.addCartn{
-    width: 350rpx;
+    background-color: #f39800;
+    color: #fff;
+    width: 200rpx;
+    font-size: 35rpx;
 }
 .buyNow,.buyNown{
-    width: 375rpx;
-    background-color: #b31227;
-    font-size: 40rpx;
+    width: 200rpx;
+    background-color: #b964d8;
+    font-size: 35rpx;
     color: #fff;
-}
-.buyNown{
-    width: 350rpx;
 }
 .addOrBuy{
     width: 100%;
@@ -349,4 +344,43 @@ button::after{
         拼接的图片顶部对齐
     */
     vertical-align: top;
+}
+/*
+    回首页的功能按钮
+*/
+.backIndex{
+    white-space: nowrap;
+    width: 50rpx;
+}
+.goTop{
+    position: fixed;
+    bottom: 100rpx;
+    padding: 20rpx;
+    right: 30rpx;
+}
+.index-p{
+    width: 100rpx;
+    height: 100rpx;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: nowrap;
+}
+.index-con{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: nowrap;
+    border-right: 2rpx solid #c9c9c9;
+    padding-right: 15rpx;
+}
+.backindex{
+    color: #626262;
+    font-size: 15rpx;
+    width: 60rpx;
+    height: 30rpx;
+    line-height: 30rpx;
 }

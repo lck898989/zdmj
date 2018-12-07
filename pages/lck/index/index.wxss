@@ -1,3 +1,9 @@
+.page-con{
+    position: relative;
+    padding-bottom: 10rpx;
+    width: 100%;
+    height: 100%;
+}
 .weather-con,.weather,.ed-con,.dots,.type-parent{
     display: flex;
     flex-direction: row;
@@ -52,7 +58,7 @@
     left: 40rpx;
 }
 .swiper-stage{
-    display: flex;
+    margin-top: 20rpx;
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
@@ -94,11 +100,10 @@
     top: 30rpx;
     /* border: 10rpx solid #fff; */
 }
-.hot-today{
+/* .hot-today{
     margin-top: 5rpx;
-    height:500rpx;
-    width: 700rpx;
-    padding: 25rpx;
+    height:550rpx;
+    width: 750rpx;
     border-bottom: 2rpx solid #f2f2f2;
     background: linear-gradient(#da91f5,#fcf5fe);
     border-top-left-radius: 30rpx;
@@ -110,15 +115,17 @@
     color: #a531d0;
     font-size: 30rpx;
     z-index: 2;
-}
+} */
 .swiper-con{
+    width: 100%;
     position: relative;
     z-index: 2;
-    height:500rpx;
+    /* background: linear-gradient(#da91f5,#fcf5fe); */
 }
 swiper{
-    height:500rpx;
+    height:550rpx;
     margin-top: 0rpx;
+    /* background: linear-gradient(#da91f5,#fcf5fe); */
 }
 .title .dots{
     justify-content: center;
@@ -147,16 +154,16 @@ swiper{
     商品种类
 */
 .banner-type{
+    width:600rpx;
     display: flex;
-    /* flex-direction: row;
+    flex-direction: row;
     flex-wrap: nowrap;
     justify-content: space-around;
-    align-items: center; */
+    align-items: center;
     /*
     文字不会换行
     */
     white-space: nowrap;
-    padding-left: 68rpx;
     height: 100rpx;
 }
 /*
@@ -168,15 +175,17 @@ swiper{
     color:transparent;
 }
 .swiperIt{
-    width: 90rpx;
+    /* width: 90rpx; */
     margin-right: 10rpx;
     font-size: 35rpx;
     padding-top: 20rpx;
+    padding-left: 15rpx;
+    padding-right: 15rpx;
     display: inline-block;
     text-align: center;
 }
 .type-parent{
-    justify-content: space-between;
+    justify-content: center;
 }
 .rightArrow{
     margin-right: 10rpx;
@@ -190,7 +199,6 @@ swiper{
     padding: 0rpx 23rpx;
     column-count: 2;
     column-gap: 18rpx;
-
 }
 
 .typeDetail-con:nth-child(2n+1){
@@ -199,14 +207,9 @@ swiper{
 .typeDetail-con:nth-child(2n){
     margin-right: 0rpx;
 }
-.right_img{
-    position: absolute;
-    right: 0rpx;
-    top: 0rpx;
-    z-index: 1;
-}
+
 .img{
-    border-radius: 20rpx;
+    border-radius: 30rpx;
     border: 10rpx solid #fff;
 }
 .wrap{
@@ -265,12 +268,13 @@ swiper{
 }
 .mask{
     position: absolute;
-    top: 0rpx;
-    left: 0rpx;
+    top: 10rpx;
+    left: 10rpx;
     background: #fff;
     width: 480rpx;
     height:480rpx;
     opacity: 0.4;
+    border-radius: 20rpx;
 }
 .firstMask{
     opacity: 0;
@@ -303,22 +307,27 @@ swiper{
 
 */
 .swiper-right{
-    animation: swiperRight 1s normal;
-    -webkit-animation:swiperRight 1s normal;
+    animation: swiperRight 0.8s normal;
+    -webkit-animation:swiperRight 0.8s normal;
+    animation-iteration-count: 1;
+    -webkit-animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+    -webkit-animation-fill-mode: forwards;
+}
+/*左移渐隐反向播放动画*/
+.swiper-right-reverse{
+    animation: swiperRight 0.8s reverse;
+    -webkit-animation:swiperRight 0.8s reverse;
     animation-iteration-count: 1;
     -webkit-animation-iteration-count: 1;
     animation-fill-mode: forwards;
     -webkit-animation-fill-mode: forwards;
 }
 @keyframes swiperRight{
-    from{
-        left: 0rpx;
-        opacity: 1;
-        z-index: 100;
-    }to{
+    to{
         left: -500rpx;
         opacity: 0;
-        z-index: 90;
+        z-index: 80;
     }
 }
 /*
@@ -327,8 +336,16 @@ swiper{
 
 */
 .swiper-left{
-    animation: swiperLeft 1s normal;
-    -webkit-animation: swiperLeft 1s normal;
+    animation: swiperLeft 0.8s normal;
+    -webkit-animation: swiperLeft 0.8s normal;
+    animation-iteration-count: 1;
+    -webkit-animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+    -webkit-animation-fill-mode: forwards;
+}
+.swiper-left-reverse{
+    animation: swiperLeft 0.8s reverse;
+    -webkit-animation: swiperLeft 0.8s reverse;
     animation-iteration-count: 1;
     -webkit-animation-iteration-count: 1;
     animation-fill-mode: forwards;
@@ -348,8 +365,16 @@ swiper{
     }
 }
 .move-left0{
-    animation: moveLeft 1s normal;
-    -webkit-animation: moveLeft 1s normal;
+    animation: moveLeft 0.8s normal;
+    -webkit-animation: moveLeft 0.8s normal;
+    animation-iteration-count: 1;
+    -webkit-animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+    -webkit-animation-fill-mode: forwards;
+}
+.move-left0-reverse{
+    animation: moveLeft 0.8s reverse;
+    -webkit-animation: moveLeft 0.8s reverse;
     animation-iteration-count: 1;
     -webkit-animation-iteration-count: 1;
     animation-fill-mode: forwards;
@@ -367,8 +392,16 @@ swiper{
     }
 }
 .move-left1{
-    animation: moveLeft1 1s normal;
-    -webkit-animation: moveLeft1 1s normal;
+    animation: moveLeft1 0.8s normal;
+    -webkit-animation: moveLeft1 0.8s normal;
+    animation-iteration-count: 1;
+    -webkit-animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+    -webkit-animation-fill-mode: forwards;
+}
+.move-left1-reverse{
+    animation: moveLeft1 0.8s reverse;
+    -webkit-animation: moveLeft1 0.8s reverse;
     animation-iteration-count: 1;
     -webkit-animation-iteration-count: 1;
     animation-fill-mode: forwards;
@@ -386,8 +419,16 @@ swiper{
     }
 }
 .move-left2{
-    animation: moveLeft2 1s normal;
-    -webkit-animation: moveLeft2 1s normal;
+    animation: moveLeft2 0.8s normal;
+    -webkit-animation: moveLeft2 0.8s normal;
+    animation-iteration-count: 1;
+    -webkit-animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+    -webkit-animation-fill-mode: forwards;
+}
+.move-left2-reverse{
+    animation: moveLeft2 0.8s reverse;
+    -webkit-animation: moveLeft2 0.8s reverse;
     animation-iteration-count: 1;
     -webkit-animation-iteration-count: 1;
     animation-fill-mode: forwards;
@@ -404,110 +445,31 @@ swiper{
         transform: scale(0.7);
     }
 }
-/*
-    右移相关动画
-*/
-.move-right4{
-    animation: moveRight4 1s normal;
-    -webkit-animation: moveRight4 1s normal;
-    animation-fill-mode: forwards;
-    -webkit-animation-fill-mode: forwards;
+.move-left3{
+    z-index: -1;
+    animation: moveLeft3 0.8s normal;
+    -webkit-animation: moveLeft3 0.8s normal;
     animation-iteration-count: 1;
     -webkit-animation-iteration-count: 1;
-}
-@keyframes moveRight4{
-    from{
-        left : -500rpx;
-        opacity: 0;
-        z-index: 90;
-    }to{
-        left : 0rpx;
-        opacity: 1;
-        z-index: 100;
-    }
-}
-.move-right0{
-    animation: moveRight0 1s normal;
-    -webkit-animation: moveRight0 1s normal;
     animation-fill-mode: forwards;
     -webkit-animation-fill-mode: forwards;
+}
+.move-left3-reverse{
+    z-index: -1;
+    animation: moveLeft3 0.8s reverse;
+    -webkit-animation: moveLeft3 0.8s reverse;
     animation-iteration-count: 1;
     -webkit-animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+    -webkit-animation-fill-mode: forwards;
 }
-@keyframes moveRight0{
+@keyframes moveLeft3{
     from{
-        left : 0rpx;
-        z-index: 100;
+        left: -500rpx;
         transform: scale(1);
-        top: 0rpx;
     }to{
-        left : 110rpx;
-        z-index: 80;
-        top: 5%;
-        transform: scale(0.9);
-    }
-}
-.move-right1{
-    animation: moveRight1 1s normal;
-    -webkit-animation: moveRight1 1s normal;
-    animation-fill-mode: forwards;
-    -webkit-animation-fill-mode: forwards;
-    animation-iteration-count: 1;
-    -webkit-animation-iteration-count: 1;
-}
-@keyframes moveRight1{
-    from{
-        left : 110rpx;
-        transform: scale(0.9);
-        z-index: 80;
-        top: 5%;
-    }to{
-        left : 210rpx;
-        transform: scale(0.8);
-        z-index: 60;
-        top: 10%;
-    }
-}
-.move-right2{
-    animation: moveRight2 1s normal;
-    -webkit-animation: moveRight2 1s normal;
-    animation-fill-mode: forwards;
-    -webkit-animation-fill-mode: forwards;
-    animation-iteration-count: 1;
-    -webkit-animation-iteration-count: 1;
-}
-@keyframes moveRight2{
-    from{
-        left : 210rpx;
-        transform: scale(0.8);
-        z-index: 60;
-        top: 10%;
-    }to{
-        left : 285rpx;
-        transform: scale(0.7);
-        z-index: 40;
-        top: 15%;
-    }
-}
-.move-right3{
-    animation: moveRight3 1s normal;
-    -webkit-animation: moveRight3 1s normal;
-    animation-fill-mode: forwards;
-    -webkit-animation-fill-mode: forwards;
-    animation-iteration-count: 1;
-    -webkit-animation-iteration-count: 1;
-}
-@keyframes moveRight3{
-    from{
-        left : 285rpx;
+        left: 400rpx;
         transform: scale(0.6);
-        z-index: 40;
-        top: 15%;
-    }to{
-        left : 400rpx;
-        transform: scale(0.4);
-        z-index: 20;
-        top: 20%;
     }
 }
 .dots{
@@ -558,19 +520,28 @@ swiper{
   bottom: 50rpx;
   padding: 20rpx;
   right: 30rpx;
+  z-index: 1000;
 }
 .loadText{
+    width: 750rpx;
+    height: 50rpx;
+    position: absolute;
     font-size: 25rpx;
     color: #000;
+    bottom: -35rpx;
+    left: 0rpx;
     display: flex;
-    flex-wrap: nowrap;
+    flex-direction: row;
     justify-content: center;
     align-items: center;
-    flex-direction: row;
-    margin-bottom: 5rpx;
+    flex-wrap: nowrap;
 }
 .centerText{
-
+    /* width:  */
+    width: 700rpx;
+    height: 50rpx;
+    text-align: center;
+    line-height: 50rpx;
 }
 .lrWrapper{
     display: flex;
@@ -578,5 +549,46 @@ swiper{
     justify-content: center;
     align-items: center;
     flex-wrap: nowrap;
+}
+.test{
+    position: absolute;
+    left: 0rpx;
+    bottom: 0rpx;
+}
+.swiperCon{
+    position: relative;
+    width: 100%;
+    border-top-left-radius: 30rpx;
+    border-top-right-radius: 30rpx;
+    background: linear-gradient(#da91f5,#fcf5fe);
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: row;
+}
+.wx-swiper-dots.wx-swiper-dots-horizontal{
+    margin-bottom: -10rpx;
+    float: left;
+    text-align: center;
+}
+.wx-swiper-dot::before{
+    content: '';
+    flex-grow: 1;
+    background: #da91f5;
+    border-radius: 15rpx;
+    border: 0rpx;
+}
+.wx-swiper-dot.wx-swiper-dot{
+    width: 15rpx;
+    height: 15rpx;
+    border-radius: 15rpx;
+    background: #da91f5;
+}
+.wx-swiper-dot.wx-swiper-dot-active{
+    width: 40rpx;
+    height: 15rpx;
+    border-radius: 15rpx;
+    background: #da91f5;
 }
 
