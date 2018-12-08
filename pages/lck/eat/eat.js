@@ -9,11 +9,7 @@ Page({
      * 页面的初始数据
      */
     data: {
-        pictureList: [
-            'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1543244953214&di=9c5b79e78d8ea46348499084da98b1b9&imgtype=0&src=http%3A%2F%2Fimg.zcool.cn%2Fcommunity%2F0179155b5935ffa801215c8f20b8ec.jpg',
-            'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1543245015029&di=137362d1fd7e2186afee81a7e96e1a56&imgtype=0&src=http%3A%2F%2Fimg.zcool.cn%2Fcommunity%2F01b8ba5adda421a80120927be45a32.jpg%401280w_1l_2o_100sh.jpg',
-            'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1543245096167&di=f722e1beb0ecc7fb032d254816054167&imgtype=0&src=http%3A%2F%2Fi-2.kuaila.com%2F2018%2F11%2F25%2F3cbdb8ba-55b6-43c8-ab53-16c5cd0dc85b.jpg'
-
+        HeadImageArr: [
         ],
         swiperIndex: 0,
         bannerType: [
@@ -72,6 +68,7 @@ Page({
      */
     onLoad: async function (options) {
         let self = this;
+        this.getScrollImages();
         //获取到系统的信息
         wx.getSystemInfo({
             success: function (res) {
@@ -110,6 +107,20 @@ Page({
                 dataArray : this.data.dataArray
             });
         }
+    },
+    //获得滚动图
+    getScrollImages: async function () {
+        let url = app.host + 'Data/GetShopPageActivityHead';
+        let data = {
+            type: 3,
+            tag: 1
+        };
+        let req = new Request(url, data, "POST", 'text');
+        let res = await req.sendRequest();
+        console.log("获取滚动图的res is ", res);
+        this.setData({
+            HeadImageArr: res.data.activitys
+        });
     },
     setEssayHeadImage : function(){
         for (let j = 0; j < this.data.dataArray.length; j++) {

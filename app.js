@@ -432,7 +432,7 @@
                     case "ActicleInterShop":
                         console.log("acticleIntershop is ",res.data);
                         self.shopMsgJson = res.data.product;
-                        callback(self.shopMsgJson);
+                        callback(res.data.product);
                         console.log(JSON.stringify(self.shopMsgJson) + "ActicleInterShop");
                         if (self.setShopArrayJson) {
                             self.setShopArrayJson(res)
@@ -1231,6 +1231,7 @@
                         break;
                     case "turnShopWen":
                         self.shopWenZhangJson = res.data.shop;
+                        callback(res.data.shop);
                         self.wenzhangShop = res.data.shopproducts;
                         if (self.setwenzhangShop) {
                             self.setwenzhangShop(res);

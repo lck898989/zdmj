@@ -38,7 +38,9 @@ Page({
          infoError : false,
      },
      //从订单里面修改地址
-     order_address : false
+     order_address : false,
+     //所在城市字段
+     locationAdd : ''
   },
 
   /**
@@ -58,17 +60,38 @@ Page({
             isAddress : true
         })
     }else{
+        //编辑地址
         this.setData({
             currentAdd: JSON.parse(options.currentAdd)
         });
         console.log("currentAdd is ", this.data.currentAdd);
+        let addType = this.data.currentAdd.type;
+        switch(addType){
+            case 1:
+                this.data.dzleixing.text = '公司';
+                this.data.dzleixing.id   = 1;
+                break;
+            case 2:
+                this.data.dzleixing.text = '住宅';
+                this.data.dzleixing.id = 2;
+                break;
+            case 3:
+                this.data.dzleixing.text = '学校';
+                this.data.dzleixing.id = 3;
+                break;
+            case 4:
+                this.data.dzleixing.text = '其他';
+                this.data.dzleixing.id = 4;
+                break;            
+        }
         wx.showLoading({
             title: '数据加载中',
         });
         console.log("onLoad");
         // this.data.currentAdd.district = cityData[0].name + cityData[0].sub[0].name + cityData[0].sub[0].sub[0].name;
         this.setData({
-            currentAdd: this.data.currentAdd
+            currentAdd: this.data.currentAdd,
+            dzleixing : this.data.dzleixing
         })
         wx.hideLoading({
 
@@ -127,7 +150,14 @@ Page({
       if(this.data.isAddress){
         console.log("address is ",this.data.address);
         if(this.data.address !== undefined){
-          this.data.district = this.data.address.province + this.data.address.city + this.data.address.district;
+          if(this.data.address.street.includes('区')){
+            this.data.district = this.data.address.province + this.data.address.city + this.data.address.district;
+          }else if(this.data.address.street !== ''){
+              this.data.district = this.data.address.province + this.data.address.city + this.data.address.district + this.data.address.street;
+          }
+          this.setData({
+              district : this.data.district
+          })
         }
       }
   },
@@ -260,12 +290,17 @@ Page({
             //删除地址成功
             wx.showToast({
                 title: `${res.data.msg}`,
+            });
+            wx.redirectTo({
+                url: '../address/address',
             })
+
         }
     },
   //保存修改后的地址
   saveEditAdd :async function(event){
       let dataSet = event.currentTarget.dataset;
+      let id = dataSet.id;
       let self = this;
       //编辑地址
       if(dataSet.user === ''){
@@ -277,9 +312,8 @@ Page({
         console.log("currentAdd is ",this.data.currentAdd);
         let url = app.host + 'Data/EditAddress';
         console.log("state is ",newAdd.state);
-        let dzType = newAdd.type;
+        let dzType = this.data.dzleixing.id;
         console.log("dzType is ",dzType);
-        if(this.data.dzleixing)
         if(newAdd.recipient !== '' && newAdd.district !== '' && newAdd.detailDistrict !== '' && newAdd.phone !== ''){
             let data = {
                 address : {
@@ -293,6 +327,7 @@ Page({
                     "type" : dzType
                 }
             }
+            console.log("编辑地址时候发送到服务器的数据 data is ",data);
             let req = new Request(url,data,'POST','text');
             let res = await req.sendRequest();
             console.log(res);

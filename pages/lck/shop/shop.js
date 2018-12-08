@@ -49,7 +49,7 @@ Page({
         //以及分类id
         tid   : null,
         //一级分类下的二级分类
-        t2id : 0,
+        t2id : -2,
         page : 1,
         // scorll-view的高度
         scrollH: 0,
@@ -163,7 +163,8 @@ Page({
     getScrollImages: async function () {
         let url = app.host + 'Data/GetProductPageActivityHead';
         let data = {
-            type: 3
+            type : 3,
+            tag  : 0
         };
         let req = new Request(url,data,"POST",'text');
         let res = await req.sendRequest();
@@ -219,21 +220,32 @@ Page({
                 break;
             case '2':
                 //跳转到店铺文章
+                console.log("进入商铺文章详情");
+                data = {
+                    shopid : pid,
+                    uid    : app.uid
+                }
+                let shopjson2 = encodeURIComponent(JSON.stringify(this.data.easyItem));
                 app.wenzhangShop = null;
                 app.ShortConnect(app.urlw + "Data/GetShopProductsByShopEssayShopid", {
-                    shopid: currentList.pid,
+                    shopid: pid,
                     uid: app.uid
-                }, "turnShopWen");
-                url = app.host + 'Data/GetShopProductsByShopEssayShopid';
-                data = {
-                    shopid: currentList.pid,
-                    uid: app.uid
-                }
-                console.log("data is ", data);
-                req = new Request(url, data, 'POST', 'text');
-                res = await req.sendRequest();
-                console.log("res is ", res);
-                console.log("shopWenZhangJson is ", app.shopWenZhangJson);
+                }, "turnShopWen",function(r){
+                    console.log("r is ",r);
+                    if(JSON.stringify(r) === '{}'){
+
+                    }else{
+                        wx.navigateTo({
+                            url: '',
+                        })
+                    }
+                });
+                // let shopurl = this.data.easyItem.shopessayhead;
+                // let introduction = this.data.easyItem.shopintroduction;
+                // let shopjson = shopjson2;
+                // wx.navigateTo({
+                //     url: '../../ShopActicle/ShopActicle?shopurl=' + shopurl + '&introduction=' + introduction + '&shopjson=' + shopjson2,
+                // })
                 break;
             case '3':
                 app.wenzhangJson = null;
@@ -511,7 +523,6 @@ Page({
     },
     //view的下拉获取top位置信息
     onPageScroll: function (e) {
-        console.log(e);
         if (e.scrollTop > 100) {
             this.setData({
                 floorStatus: true,
@@ -567,7 +578,6 @@ Page({
                 break;
             }
         }
-
         imageObj.height = imgHeight;
         console.log("imageObj is ", imageObj);
         let loadingCount = this.data.loadingCount - 1;
@@ -652,32 +662,36 @@ Page({
                 wx.hideLoading();
                 console.log("goods is ",this.data.goods);
             }else{
-                let url = '';
-                let data = {};
-                switch(this.data.updateState){
-                    case 0 : 
-                        url = 'Data/GetProductsByT2id';
-                        data.page = ++this.data.page;
-                        break;
-                }
-                data.t2id = this.data.t2id;
-                console.log("上拉刷新的时候 data is ",data);
-                let req = new Request(app.host + url,data,"POST","text");
-                let res = await req.sendRequest();
-                if(res.data.products.length === 0){
-                    wx.hideLoading();
-                    wx.showToast({
-                        title : '已经到底了',
-                        icon  : 'none'
-                    });
+                if(this.data.t2id !== -2){
+                    let url = '';
+                    let data = {};
+                    switch(this.data.updateState){
+                        case 0 : 
+                            url = 'Data/GetProductsByT2id';
+                            data.page = ++this.data.page;
+                            break;
+                    }
+                    data.t2id = this.data.t2id;
+                    console.log("上拉刷新的时候 data is ",data);
+                    let req = new Request(app.host + url,data,"POST","text");
+                    let res = await req.sendRequest();
+                    if(res.data.products.length === 0){
+                        wx.hideLoading();
+                        wx.showToast({
+                            title : '已经到底了',
+                            icon  : 'none'
+                        });
+                    }else{
+                        wx.hideLoading();
+                        this.splitHeadImage(res.data.products);
+                        this.data.goods = this.addGoods(this.data.goods, res.data.products);
+                        this.data.goods = Const.uniqObjInArray(this.data.goods);
+                        this.setData({
+                            goods: this.data.goods
+                        });
+                    }
                 }else{
                     wx.hideLoading();
-                    this.data.goods = this.addGoods(this.data.goods, res.data.products);
-                    this.splitHeadImage(this.data.goods);
-                    this.data.goods = Const.uniqObjInArray(this.data.goods);
-                    this.setData({
-                        goods: this.data.goods
-                    });
                 }
             }
 
@@ -750,13 +764,13 @@ Page({
             bannerType: this.data.bannerType
         })
     },
+    //点击一级分类
     chooseBannerType: async function (event) {
         let self = this;
-        console.log("in chooseType event is ", event);
-        console.log("bannerType is ",this.data.bannerType);
         let id = Number(event.currentTarget.dataset.id);
-        console.log("id is ", id);
         this.data.tid = id;
+        this.data.t2id = -2;
+        this.data.page = 1;
         wx.showLoading({
             title: '加载数据中...',
         })
@@ -827,7 +841,7 @@ Page({
             this.setData({
                 goods        : res.data.products,
                 bannerType   : this.data.bannerType,
-                IsecondLevel : true 
+                IsecondLevel : true
             });
         }
     },
@@ -843,12 +857,14 @@ Page({
             secondLevels : typeRes.data.tab2s
         })
     },
-    //选择二级分类
+    //点击选择二级分类
     chooset2Id : function(e){
         let dataSet = e.currentTarget.dataset;
         let t2id = dataSet.ttid;
         let tid = dataSet.tid;
+        this.data.page = 1;
         console.log("选择二级分类 t2id is ",t2id);
+        console.log("当前的页数是:",this.data.page);
         this.setData({
             t2id         : t2id,
             IsecondLevel : false
@@ -910,7 +926,7 @@ Page({
     loadImages: function () {
         wx.showLoading({
             title: '数据正在赶来...',
-        })
+        });
         console.log("dataArray is ", this.data.dataArray);
         console.log("moredataArray is ", this.data.moreDataArray);
         for (let i = 0; i < this.data.moreDataArray.length; i++) {

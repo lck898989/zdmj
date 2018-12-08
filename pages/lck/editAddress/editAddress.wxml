@@ -24,7 +24,7 @@
             <view class='editor-item'>
             <view class='xianzhi' style='font-size:25rpx;'>所在城市</view>
                     <!-- <view>{{currentAdd.district}}</view> -->
-                    <input class='inp' style='font-size:25rpx;' type="text" placeholder="{{isAddress ? addressText : currentAdd.district}}" bindfocus='showAddress' value='{{address.province}}{{address.city}}{{address.district}}' data-user='{{isAddress ? "add" : ""}}'/>
+                    <input class='inp' style='font-size:25rpx;' type="text" placeholder="{{isAddress ? addressText : currentAdd.district}}" bindfocus='showAddress' value='{{district}}' data-user='{{isAddress ? "add" : ""}}'/>
                 
             </view>
             <view class='editor-item'>

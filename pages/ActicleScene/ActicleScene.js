@@ -1,5 +1,7 @@
 // pages/ActicleScene/ActicleScene.js
 import wxParse from '../../wxParse/wxParse.js'
+import regeneratorRuntime from '../../utils/regenerator-runtime/runtime-module.js';
+import Request from '../../utils/Request';
 var app = getApp();
 Page({
 
@@ -331,6 +333,7 @@ Page({
         //     url: '../lck/order/order',
         // })
     },
+    //进入商品详情
     shopButton: function () {
         let self = this;
         // this.setData({
@@ -346,13 +349,32 @@ Page({
         } else {
             console.log("22222222222222222222222222" + JSON.stringify(app.wenzhangJson));
             // wx.setStorageSync("goods", app.wenzhangJson);
+            console.log("app.wenzhangJson is ",self.data.wenzhangJson);
             console.log("pid is ",self.data.wenzhangJson.pid);
+            // let url = app.host + 'Data/GetProductByPid';
+            // let data = {
+            //     pid: self.data.wenzhangJson.pid,
+            //     uid: app.uid
+            // };
+            // //跳转商品界面,获得对应pid的商品
+            // let product = null;
+            // let req = new Request(url, data, 'POST', 'text');
+            // let res = await req.sendRequest();
+            // console.log("product is ", res.data.product);
+
             app.ShortConnect(app.urlw + "Data/GetProductByPid", {
                 pid : self.data.wenzhangJson.pid,
+                uid : app.uid
             }, 'ActicleInterShop',function(r){
                 console.log("r is ",r);
-                wx.navigateTo({
-                    url: '../lck/cartGoodsDetail/cartGoodsDetail?interSource=0' + "&inter=wenzhang" + "&essayuid=" + self.data.essayuid
+                wx.setStorage({
+                    key: 'goods',
+                    data: r,
+                    success : function(){
+                        wx.navigateTo({
+                            url: '../lck/cartGoodsDetail/cartGoodsDetail?interSource=0' + "&inter=wenzhang" + "&essayuid=" + self.data.essayuid
+                        });
+                    }
                 })
             });
         }

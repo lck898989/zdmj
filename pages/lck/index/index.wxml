@@ -49,7 +49,7 @@
                     <view class='common {{item.active ? item.swpClass : ""}}' data-pid='{{item.pid}}' data-ptype='{{item.ptype}}' catchtap='goDetail'>
                         <image src='{{item.imgsrc}}' style='width:480rpx;height:480rpx;' class='img'></image>
                         <!-- <image-loader originalImage='{{item.imgsrc}}' width='480rpx' height='480rpx' mode='' styleClass='border-radius: 30rpx;border: 10rpx solid #fff;' isGoCache='true'></image-loader> -->
-                        <view class='mask {{item.swpClass === "swiper-left" || item.swpClass === "move-right4" ? "hideMask" : ""}}'></view>
+                        <view class='mask {{item.swpClass === "swiper-left" ? "hideMask" : ""}}'></view>
                     </view>
                 </block>
             </block>

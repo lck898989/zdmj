@@ -270,13 +270,25 @@ Page({
             case '1' :
                 let url = app.host + 'Data/GetProductByPid';
                 let data = {
-
+                    pid: pid,
+                    uid: app.uid
                 };
                 //跳转商品界面,获得对应pid的商品
                 let product = null;
-                let req = new Request(url,data,'POST','text');
+                let req = new Request(url, data, 'POST', 'text');
                 let res = await req.sendRequest();
-                console.log("product is ",res);
+                console.log("product is ", res.data.product);
+                //对产品的头图进行分割
+                if (typeof (res.data.product.head) === 'string') {
+                    res.data.product.head = res.data.product.head.split(',');
+                }
+                wx.setStorage({
+                    key: 'goods',
+                    data: res.data.product,
+                });
+                wx.navigateTo({
+                    url: '../cartGoodsDetail/cartGoodsDetail',
+                })
                 break;
             case '2' :
                 //跳转到店铺文章
@@ -317,7 +329,7 @@ Page({
                 res = await req.sendRequest();
                 console.log("--->>res is ",res);
                 wx.navigateTo({
-                    url: '../../ActicleScene/ActicleScene?essayhead=' + res.data.essay.essayhead + '&title=' + res.data.essay.title + '&authorurl=' + res.data.essay.authorurl + '&authorname=' + res.data.essay.authorname + '&pid=' + currentList.pid + '&eid=' + res.data.essay.eid,
+                    url: '../../ActicleScene/ActicleScene?essayhead=' + res.data.essay.essayhead + '&title=' + res.data.essay.title + '&authorurl=' + res.data.essay.authorurl + '&authorname=' + res.data.essay.authorname + '&pid=' + res.data.essay.pid + '&eid=' + res.data.essay.eid,
                 })
                 break;     
         }

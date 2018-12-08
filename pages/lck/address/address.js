@@ -67,7 +67,7 @@ Page({
       let url = app.host + 'Data/getAddressByUid';
       console.log("uid is ", app.uid);
       let data = {
-        uid:1 // uid : app.uid
+        uid : app.uid
       }
       let req = new Request(url, data, "POST", 'text');
       let res = await req.sendRequest();

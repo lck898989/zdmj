@@ -198,26 +198,34 @@ page{
     overflow: hidden;
 }
 .lineOne-con{
+    position: relative;
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
     justify-content: flex-start;
     align-items: flex-start;
 }
+.img{
+   margin-left: 20rpx;
+   margin-top: 20rpx;
+   border-radius: 20rpx;
+}
 .price-order-con{
+    position: relative;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     flex-wrap: nowrap;
     align-items: flex-start;
-    margin-left: 275rpx;
     height: 160rpx;
+    margin-top: 40rpx;
+    margin-left: 20rpx;
 }
 .cancel-con{
     position: absolute;
     justify-self: flex-end;
-    top: 12rpx;
-    right: 0rpx;
+    top: 20rpx;
+    right: 20rpx;
 }
 .price-item{
     /* margin-left: 20rpx;
@@ -233,6 +241,8 @@ page{
     height: 800rpx;
     bottom: 0rpx;
     z-index: 2000;
+    border-top-left-radius: 20rpx;
+    border-top-right-radius: 20rpx;
 }
 .scc-con{
     width: 100%;
@@ -279,7 +289,6 @@ page{
     font-size: 30rpx;
 }
 .as-item{
-    background-color: #eee;
     margin-right: 5rpx;
     padding: 10rpx 20rpx;
 }
@@ -298,10 +307,8 @@ page{
     text-align: center;
 }
 .saveBuy{
-    width: 90%;
-    background-color: #b31227;
-    margin-left:5%; 
-    border-radius: 100rpx;
+    width: 100%;
+    background-color: #b964d8;
     color: #fff;
 }
 .typeModify{

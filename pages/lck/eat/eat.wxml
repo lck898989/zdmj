@@ -18,10 +18,10 @@
     </view>
     <!--轮播图-->
     <view class='swiper-con'>
-        <swiper indicator-dots='true' autoplay='true'>
-            <swiper-item wx:for='{{pictureList}}' class='swiper-item'>
+        <swiper indicator-dots='true' autoplay='true' circular='true'>
+            <swiper-item wx:for='{{HeadImageArr}}' class='swiper-item'>
                 <!-- <image src='{{item}}' style='width:750rpx;height:auto;' mode='widthFix'></image> -->
-                <image-loader originalImage='{{item}}' width='750rpx' height='750rpx' mode='widthFix'></image-loader>
+                <image-loader originalImage='{{imgHost}}{{item.acthead}}' width='750rpx' height='750rpx' mode='widthFix'></image-loader>
             </swiper-item>
         </swiper>
         <!-- <view class='dots'>

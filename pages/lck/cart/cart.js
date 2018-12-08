@@ -640,6 +640,31 @@ Page({
                 thisPrice: (this.data.cartsItem.product.price / this.data.cartsItem.count).toFixed(2)
             });
         } else {
+            console.log("product is ", this.data.product);
+            let sizeJson = JSON.parse(this.data.product.size);
+            this.data.typeArr = Object.keys(sizeJson);
+            for(let i =0;i < this.data.typeArr.length;i++){
+                let tempJson = {};
+                let tempKey = this.data.typeArr[i];
+                tempJson[`${tempKey}`] = []; //盛放颜色对应的数组
+                let valueArr = sizeJson[tempKey].split(',');//以|分割数组
+                for(let j = 0;j < valueArr.length;j++){
+                    let innerTempJson = {};
+                    innerTempJson.mode = valueArr[j];
+                    console.log("-->>>",this.data.choosedType)
+                    if (this.data.choosedType[`${tempKey}`] === valueArr[j]) {
+                        //选中状态
+                        innerTempJson.touch = true;
+                    } else {
+                        //未选中状态
+                        innerTempJson.touch = false;
+                    }
+                    tempJson[`${tempKey}`].push(innerTempJson);
+                }
+                this.data.typeValueArr.push(tempJson);
+            }
+            console.log("无规格的商品的typeValueArr is ",this.data.typeValueArr);
+            console.log("无规格的商品的typeArr is ", this.data.typeArr);
             this.setData({
                 showBuyCon: true,
                 product: this.data.product,
@@ -652,6 +677,50 @@ Page({
                 thisPrice: (this.data.cartsItem.product.price / this.data.cartsItem.count).toFixed(2)
             })
         }
+    },
+    setTypeArrAndTypeValueArr : function(categoryArr){
+        let categoryLen = categoryArr.length;
+        for (let i = 0; i < categoryLen; i++) {
+            let keys = Object.keys(categoryArr[i]);
+            console.log("keys is ", keys);
+            //把规格存进数组
+            for (let m = 0; m < keys.length; m++) {
+                let keyObj = keys[m];
+                this.data.typeArr.push(keyObj);
+                // console.log("种类的值是：", categoryArr[i][`${keyObj}`]);
+                let le = categoryArr[i][`${keyObj}`].length;
+                let tempJson = {};
+                console.log("le is ", le);
+                tempJson[`${keyObj}`] = [];
+                for (let a = 0; a < le; a++) {
+                    // console.log("种类值是：", categoryArr[i][`${keyObj}`][a]);
+                    let innerJson = {
+
+                    }
+                    innerJson.mode = categoryArr[i][`${keyObj}`][a];
+                    console.log("choosedType is ", this.data.choosedType);
+                    let typeKeys = Object.keys(this.data.choosedType);
+                    for (let s = 0; s < typeKeys.length; s++) {
+                        console.log(this.data.choosedType[typeKeys[s]]);
+                        if (this.data.choosedType[typeKeys[s]] === categoryArr[i][`${keyObj}`][a]) {
+                            //选中状态
+                            innerJson.touch = true;
+                        } else {
+                            //未选中状态
+                            innerJson.touch = false;
+                        }
+                    }
+                    // //检查商品中的size_choosed中的value值是否与该
+                    // innerJson.touch = false;
+
+                    tempJson[`${keyObj}`].push(innerJson);
+                }
+                this.data.typeValueArr.push(tempJson);
+            }
+        }
+        let keys = Object.keys(categoryArr);
+        console.log("typeArr is ", this.data.typeArr);
+        console.log("typeValueArr is ", this.data.typeValueArr);
     },
     //选择商品的型号
     chooseType: function (event) {

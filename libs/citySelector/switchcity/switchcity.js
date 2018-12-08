@@ -137,7 +137,8 @@ Page({
   },
 
   bindCounty: function(e) {
-    console.log(e);
+    let self =this;
+    console.log("点击街道时候e is ",e);
     this.setData({ county: e.currentTarget.dataset.city })
     // appInstance.globalData.defaultCounty = this.data.county
     // console.log(appInstance.globalData.defaultCounty);
@@ -148,7 +149,8 @@ Page({
         url: `https://apis.map.qq.com/ws/geocoder/v1/?address=${address}&key=${config.key}`,
         success: (res) => {
             console.log("请求地址解析成功" + `https://apis.map.qq.com/ws/geocoder/v1/?address=${address}&key=${config.key}`);
-            console.log(res)
+            console.log("点击街道时候请求的回应 res is ",res);
+            res.data.result.address_components.street = self.data.county;
             //设置数据到上个页面
             var pages = getCurrentPages();
             var prevPage = pages[pages.length - 2];  //上一个页面
@@ -187,6 +189,7 @@ Page({
         // console.log(res.data.result[0]);
         that.setData({
           countyList: res.data.result[0],
+          condition : true
         })
         // console.log(that.data.countyList);
         console.log("请求区县成功"+`https://apis.map.qq.com/ws/district/v1/getchildren?&id=${code}&key=${config.key}`);
