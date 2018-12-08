@@ -128,7 +128,7 @@ Page({
         let isNullObj = (JSON.stringify(options) === '{}');
         console.log("是空对象吗？",isNullObj);
         //通过分享得来的
-        if (!isNullObj) {
+        if (!isNullObj && options.share == 0) {
             try {
                 console.log("options is ", options);
                 let goodsObj = options.goods;
@@ -385,7 +385,7 @@ Page({
             return {
                 title: "指点迷津",
                 desc: 'a good app for tianjin area',
-                path: '/pages/lck/cartGoodsDetail/cartGoodsDetail?goods=' + JSON.stringify(this.data.goods),
+                path: '/pages/lck/cartGoodsDetail/cartGoodsDetail?goods=' + JSON.stringify(this.data.goods)+'&share='+0,
                 success: function (res) {
                     console.log("分享成功，res is ", res);
                     let shareTickets = res.shareTickets;

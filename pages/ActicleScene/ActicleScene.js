@@ -331,26 +331,30 @@ Page({
         //     url: '../lck/order/order',
         // })
     },
-    shopButton: function() {
+    shopButton: function () {
+        let self = this;
         // this.setData({
-        //     buyBoxHidden: false,
+        // buyBoxHidden: false,
         // })
         if (app.isShare) {
             app.ShortConnect(app.urlw + "Data/GetProductByPid", {
-                pid: this.data.wenzhangJson.pid
+                pid: self.data.wenzhangJson.pid
             }, 'ActicleInterShop');
             wx.navigateTo({
-                url: '../lck/cartGoodsDetail/cartGoodsDetail?transpondUid=' + this.data.transpondUid + "&interSource=2" + "&inter=wenzhang" + "&essayuid=" + this.data.essayuid,
+                url: '../lck/cartGoodsDetail/cartGoodsDetail?transpondUid=' + self.data.transpondUid + "&interSource=2" + "&inter=wenzhang" + "&essayuid=" + self.data.essayuid,
             })
         } else {
             console.log("22222222222222222222222222" + JSON.stringify(app.wenzhangJson));
-            wx.setStorageSync("goods", app.wenzhangJson);
+            // wx.setStorageSync("goods", app.wenzhangJson);
+            console.log("pid is ",self.data.wenzhangJson.pid);
             app.ShortConnect(app.urlw + "Data/GetProductByPid", {
-                pid: this.data.wenzhangJson.pid
-            }, 'ActicleInterShop');
-            wx.navigateTo({
-                url: '../lck/cartGoodsDetail/cartGoodsDetail?interSource=0' + "&inter=wenzhang" + "&essayuid=" + this.data.essayuid
-            })
+                pid : self.data.wenzhangJson.pid,
+            }, 'ActicleInterShop',function(r){
+                console.log("r is ",r);
+                wx.navigateTo({
+                    url: '../lck/cartGoodsDetail/cartGoodsDetail?interSource=0' + "&inter=wenzhang" + "&essayuid=" + self.data.essayuid
+                })
+            });
         }
     },
     /**

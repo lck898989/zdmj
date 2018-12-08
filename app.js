@@ -430,7 +430,9 @@
                         self.ShowShopDate(res);
                         break;
                     case "ActicleInterShop":
+                        console.log("acticleIntershop is ",res.data);
                         self.shopMsgJson = res.data.product;
+                        callback(self.shopMsgJson);
                         console.log(JSON.stringify(self.shopMsgJson) + "ActicleInterShop");
                         if (self.setShopArrayJson) {
                             self.setShopArrayJson(res)
