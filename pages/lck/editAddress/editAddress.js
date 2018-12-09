@@ -349,7 +349,7 @@ Page({
         console.log("state is ",this.data.state);
         console.log("地址类型是：", this.data.dzleixing);
         let dzType = 0;
-        switch(this.data.dzleixing){
+        switch(this.data.dzleixing.text){
             case '公司':
                 dzType = 1;
                 break;

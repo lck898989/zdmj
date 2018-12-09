@@ -94,12 +94,18 @@ Page({
         let req = new Request(url, data, "POST", "text");
         let res = await req.sendRequest();
         console.log("res is ", res);
-        this.data.dataArray = res.data.shopessays;
-        this.setEssayHeadImage();
-        console.log("dataArray is ", this.data.dataArray);
-        this.setData({
-            dataArray: this.data.dataArray
-        });
+        if (res.data.shopessays.length === 0) {
+            this.setData({
+                loadText: '抱歉还没有该分类文章~~o(>_<)o ~~'
+            })
+        } else {
+            this.data.dataArray = res.data.shopessays;
+            this.setEssayHeadImage();
+            console.log("dataArray is ", this.data.dataArray);
+            this.setData({
+                dataArray: this.data.dataArray
+            });
+        }
     },
     //获得滚动图
     getScrollImages: async function () {

@@ -49,13 +49,6 @@
                 <image src='../../../resources/btn_share_0.png' style='width:350rpx;height:100rpx;' bindtap='chooseIt' data-type='精品分享'></image>
                 <image src='../../../resources/btn_shopping_1.png' style='width:350rpx;height:100rpx;' bindtap='chooseIt' data-type='热卖商城'></image>
             </block>
-            <!-- <block wx:for='{{btnArr}}'>
-                <image src='{{item.active ? item.srcActive : item.srcUnActive}}' style='width:350rpx;height:100rpx;' bindtap='chooseIt' data-type='{{item.btnText}}'></image>
-                <view class='jingpin' style='{{item.active ? btnActive : btnUnActive}}' bindtap='chooseIt' data-type='{{item.btnText}}'>
-                    <image src='{{item.src}}' class='share_icon' style='width:50rpx;height:50rpx;margin-right:20rpx;'></image>
-                    <view class='share_text'>{{item.btnText}}</view>
-                </view> 
-            </block> -->
         </view>
     </view>
     <view class='type-parent'>

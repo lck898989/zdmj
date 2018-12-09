@@ -282,7 +282,6 @@ Page({
             console.log("----adfasdf", r);
             if(r.length > 0){
                 for (let i = 0; i <= r.length - 1; i++) {
-                    r[i].author_head = r[i].author_head.split(",");
                     r[i].essayhead = r[i].essayhead.split(",");
                     r[i].productstype = 'essays'
                 }
@@ -358,17 +357,19 @@ Page({
         }
     },
     getTid : function(e){
+        this.data.page = 1;
         let dataSet = e.currentTarget.dataset;
         let tid = dataSet.tid;
         let self = this;
         this.setData({
-            tid : tid,
-
+            tid  : tid,
+            t2id : -2 
         },()=>{
             console.log("关闭一级分类标签");
             this.setActiveByTid(tid);
             self.setData({
-                IsecondLevel : true
+                IsecondLevel : true,
+                isAll        : false
             });
             //设置二级分类数据
             console.log("in getTid tid is ",tid);

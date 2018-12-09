@@ -97,7 +97,7 @@ Page({
         console.log("res is ",res);
         if(res.data.shopessays.length === 0){
             this.setData({
-                loadText: '已经到底了~~o(>_<)o ~~'
+                loadText: '抱歉还没有该分类文章~~o(>_<)o ~~'
             })
         }else{
             this.data.dataArray = res.data.shopessays;

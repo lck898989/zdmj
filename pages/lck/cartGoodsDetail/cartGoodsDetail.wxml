@@ -1,4 +1,4 @@
-<block wx:if='{{showBuyCon}}' >
+<block wx:if='{{showBuyCon}}' bindtap='cancel'>
     <view class='mask' animation='{{backAnimaData}}' catchtouchmove='test' data-e='mask'></view>
 </block>
 <view class='{{showBuyCon ? "page-con-showbuy" : "page-con"}}'>
