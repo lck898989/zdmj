@@ -25,7 +25,7 @@
     <!--轮播图-->
     <view class='swiper-con'>
         <swiper autoplay='true' indicator-dots='true' circular>
-            <swiper-item wx:for='{{HeadImageArr}}' class='swiper-item'>
+            <swiper-item wx:for='{{HeadImageArr}}' class='swiper-item' wx:key='headImageItem'>
                 <view bindtap='goDetail' data-pid='{{item.pid}}'>
                     <image-loader originalImage='{{serverImageHost}}{{item.acthead}}' width='750rpx' height='750rpx' mode='widthFix'></image-loader>
                 </view>
@@ -51,11 +51,11 @@
             </block>
         </view>
     </view>
-    <view class='type-parent'>
+    <view class='type-parent' style='{{topLevelStyle}}'>
         <view class='type-con'>
             <view class="type-parent">
                 <scroll-view scroll-x='true' style='width:635rpx;'
-                bindscroll='scrollEvent' scroll-with-animation='true' class='banner-type'>
+                bindscroll='scrollEvent' scroll-with-animation='true' class='banner-type'  bindscroll='scroll' scroll-left='{{scrollLeftDis}}'>
                     <view wx:for='{{bannerType}}' class='swiperIt {{item.choosed ? "typeactive" : ""}}' bindtap='chooseBannerType' data-id='{{item.tid}}'>
                         {{item.text}}
                     </view>
@@ -65,7 +65,7 @@
             <view class='siangle' bindtap='detailClass'></view>
             <view wx:if='{{isTopLevel}}' class='topLevel-con'>
                 <view class='class-title'>
-                    <view style='margin-left:10rpx;'>
+                    <view style='margin-left:10rpx;font-size:30rpx;'>
                         详细类别
                     </view>
                     <view class='siangle-bottom' bindtap='hideTopLevel'></view>
@@ -113,17 +113,11 @@
                     </block>
                 </view>
             </view>
-            <!-- <view wx:else class='topLevle-con'>
-            
-            </view> -->
-            <!-- <view wx:if='{{isTopLevel}}' class='topLevel-con'>
-
-            </view> -->
         </view>
         <!--二级分类显示区域-->
         <view wx:if='{{IsecondLevel}}' class='secondLevel-con'>
             <block wx:for='{{secondLevels}}'>
-                <view class='secondLevel-item' data-ttid='{{item.t2id}}' data-tid='{{item.tid}}' bindtap='chooset2Id'>
+                <view class='secondLevel-item' data-ttid='{{item.t2id}}' data-tid='{{item.tid}}' bindtap='chooset2Id' style='{{item.active ? "border: 2rpx solid #863bb7;background: #ecceff;color: #b25bd2;" : ""}}'>
                     {{item.t2name}}
                 </view>
             </block>
@@ -131,28 +125,27 @@
     </view>
     <block wx:if='{{!isHot}}'>
         <view style="display:none">
-            <image wx:for="{{dataArray}}" wx:key="id" id="{{item.pid}}" src="{{serverImageHost}}{{item.essayhead[0]}}" bindload="onImageLoad"></image>
+            <image wx:for="{{newAddEssays}}" wx:key="id" id="{{item.pid}}" src="{{item.essaycustom === 1 ? (serverImageHost+item.essaycustomhead) : (serverImageHost + item.essayhead[0])}}" bindload="onImageLoad" data-last='{{index === newAddEssays.length - 1 ? true : false}}'></image>
         </view>
-        <view class='scrollView' scroll-y='true' style='height:{{scrollH}}rpx'>
-            <view class='twoColCon' style='height:{{scrollH}}rpx;'>
+        <view class='scrollView' scroll-y='true'>
+            <view class='twoColCon'>
                 <view class='left-con' style='width:342rpx;margin-right:18rpx;'>
-                    <block wx:for='{{col1}}'>
+                    <block wx:for='{{col1}}' wx:key='col1Item'>
                         <index-type-detail-component easyItem='{{item}}' shadow='{{backgroundColor}}'></index-type-detail-component>
                     </block>
-                    
                 </view>
                 <view class='left-con' style='width:342rpx;'>
-                    <block wx:for='{{col2}}'>
+                    <block wx:for='{{col2}}' wx:key='col2Item'>
                         <index-type-detail-component easyItem='{{item}}' shadow='{{backgroundColor}}'></index-type-detail-component>
                     </block>
                 </view>
             </view>
-        </view> 
+        </view>
     </block>
     <block wx:else>
         <!--使用组件进行显示-->
         <scroll-view scroll-y='true'>
-            <block wx:for='{{goods}}'>
+            <block wx:for='{{goods}}' wx:key='goodsItem'>
                 <new-buy-index-component goods='{{item}}' bindaddcart='myevent' bindenterDetail='enterDetail'></new-buy-index-component>
             </block>
         </scroll-view>
@@ -215,4 +208,9 @@
         </view>
     </block>
     <image src='../../../resources/btn_top.png' class='goTop' hidden='{{!floorStatus}}' bindtap='goTop' style='width:110rpx;height:110rpx;'/>
+    <view class='loadText'>
+        <view class='centerText'>
+            {{loadText}}
+        </view>
+    </view> 
 </view>

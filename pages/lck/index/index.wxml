@@ -36,11 +36,10 @@
     </view>
     <view class='swiper-stage'>
         <view class='wrap' bindtouchstart='moveStart' bindtouchend='moveEnd'>
-            <block wx:for='{{swiperList}}'>
+            <block wx:for='{{swiperList}}' wx:key='a'>
                 <block wx:if='{{(item.active && item.swpClass !== "swiper-right" && item.swpClass !== "swiper-left" && item.swpClass !== "move-right4" && item.swpClass !== "move-right0") || !item.active}}'>
                     <view class='imgCon{{index}} common {{item.active ? item.swpClass : ""}}' data-pid='{{item.pid}}' data-ptype='{{item.ptype}}' catchtap='goDetail'>
                         <image src='{{item.imgsrc}}' style='width:480rpx;height:480rpx;' class='img'></image>
-                        <!-- <image-loader originalImage='{{item.imgsrc}}' width='480rpx' height='480rpx' mode='' styleClass='border-radius: 30rpx;border: 10rpx solid #fff;' isGoCache='true'></image-loader> -->
                         <view class='mask {{index === 0 ? "firstMask" : ""}}'></view>
                     </view>
                 </block>
@@ -48,7 +47,6 @@
                 <block wx:else>
                     <view class='common {{item.active ? item.swpClass : ""}}' data-pid='{{item.pid}}' data-ptype='{{item.ptype}}' catchtap='goDetail'>
                         <image src='{{item.imgsrc}}' style='width:480rpx;height:480rpx;' class='img'></image>
-                        <!-- <image-loader originalImage='{{item.imgsrc}}' width='480rpx' height='480rpx' mode='' styleClass='border-radius: 30rpx;border: 10rpx solid #fff;' isGoCache='true'></image-loader> -->
                         <view class='mask {{item.swpClass === "swiper-left" ? "hideMask" : ""}}'></view>
                     </view>
                 </block>
@@ -62,7 +60,7 @@
     </view>
     <view class='ed-con'>
         <view class='wrap-con'>
-            <block wx:for='{{imageArr}}'>
+            <block wx:for='{{imageArr}}' wx:key='b'>
                 <image src='{{item.src}}' style='width:{{item.width}}rpx;height:134rpx;{{index % 2 === 0 ? "margin-right:10rpx;" : ""}} margin-bottom:10rpx;z-index:2;' bindtap='enterEDPFS' data-id='{{item.id}}'></image>
             </block>
             <image src='../../../resources/btn_shop.png' style='width:220rpx;height:220rpx;z-index:3;' class='circle' catchtap='enterShop' data-id='shop'></image>
@@ -70,7 +68,7 @@
     </view>
     <view class='swiper-con'>
         <swiper current='{{swiperIndex}}' autoplay='true' circular='true' class='swiperCon' indicator-dots='true'>
-            <swiper-item wx:for='{{MainImageArr}}' style='height:385rpx;'>
+            <swiper-item wx:for='{{MainImageArr}}' style='height:385rpx;' wx:key='f'>
                 <swiper-item-component item='{{item}}' goods='{{item.goods}}'></swiper-item-component>
                 <!-- <view>{{item.goods}}</view> -->
             </swiper-item>
@@ -84,13 +82,13 @@
     <view class='type-con'>
         <view class="type-parent">
             <view class='banner-type'>
-                <view wx:for='{{bannerType}}' class='swiperIt {{item.choosed ? "typeactive" : ""}}' bindtap='chooseType' data-id='{{item.id}}'>
+                <view wx:for='{{bannerType}}' class='swiperIt {{item.choosed ? "typeactive" : ""}}' bindtap='chooseType' data-id='{{item.id}}' wx:key='c'>
                     {{item.text}}
                 </view>
             </view>
         </view>
         <view style="display:none">
-            <block wx:for="{{dataArray}}">
+            <block wx:for="{{newAddEssays}}" wx:key='d'>
                 <!--商铺文章-->
                 <block wx:if='{{item.shopessayhead}}'>
                     <block wx:if='{{item.shopessaycustom === 1 && item.shopessaycustomhead !==""}}'>
@@ -101,7 +99,7 @@
                     </block>
                 </block>
                 <!--商品-->
-                <block wx:if='{{item.pid}}'>
+                <block wx:if='{{item.head}}'>
                     <block wx:if='{{item.custom === 1 && item.customhead !==""}}'>
                         <image wx:key="id" id="{{item.pid}}" src="{{imgHost}}{{item.customhead}}" bindload="onImageLoad"></image>
                     </block>
@@ -109,7 +107,7 @@
                         <image wx:key="id" id="{{item.pid}}" src="{{imgHost}}{{item.head[0]}}" bindload="onImageLoad"></image>
                     </block>
                 </block>
-                <block wx:if='{{item.eid}}'>
+                <block wx:if='{{item.essayhead}}'>
                     <block wx:if='{{item.essaycustom === 1 && item.essaycustomhead !==""}}'>
                         <image wx:key="id" id="{{item.pid}}" src="{{imgHost}}{{item.essaycustomhead}}" bindload="onImageLoad"></image>
                     </block>
@@ -123,12 +121,12 @@
             <view class='lrWrapper'>
                 <view class='twoColCon'>
                     <view class='left-con' style='width:342rpx;margin-right:18rpx;'>
-                        <block wx:for='{{col1}}'>
+                        <block wx:for='{{col1}}' wx:key='d'>
                             <index-type-detail-component easyItem='{{item}}' bindenterDetail='enterDetail'></index-type-detail-component>
                         </block>
                     </view>
                     <view class='right-con' style='width:342rpx;'>
-                        <block wx:for='{{col2}}'>
+                        <block wx:for='{{col2}}' wx:key='e'>
                             <index-type-detail-component easyItem='{{item}}'></index-type-detail-component>
                         </block>
                     </view>

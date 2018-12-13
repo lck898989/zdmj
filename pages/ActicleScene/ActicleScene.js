@@ -24,9 +24,9 @@ Page({
         //初始化浏览数
         seeNumber: 0,
         shareNumber: 0,
-        bottomView:true,
+        bottomView: true,
         goods: null,
-        shopJson:null,
+        shopJson: null,
         activityImage: ["https://share.ykplay.com/images/Index/a微信图片_20180927164654.jpg", "https://share.ykplay.com/images/Index/a微信图片_20180927164654.jpg"],
         index: 1,
         shop: {
@@ -46,7 +46,7 @@ Page({
         shopNumber: 1,
         buyBoxHidden: true
     },
-    wxchatScope: function() {
+    wxchatScope: function () {
         wx.getSetting({
             success(res) {
                 //当授权时
@@ -59,14 +59,14 @@ Page({
             }
         })
     },
-    
-    pressSure:function(){
+
+    pressSure: function () {
         let data = {
             uid: app.uid,
             pid: this.data.wenzhangJson.pid,
             size: this.data.wenzhangJson.selectsize,
             count: this.data.shopNumber,
-         
+
         }
         if (app.isShare) {
             data.source = 2
@@ -79,26 +79,24 @@ Page({
         data.price = this.data.wenzhangJson.product_price * this.data.shopNumber;
         let orderA = [];
         orderA.push(data);
-        if(app.isShare)
-        {
+        if (app.isShare) {
             wx.navigateTo({
                 url: '../lck/order/order?interSource=2',
             });
         }
-        else
-        {
+        else {
             wx.navigateTo({
                 url: '../lck/order/order?interSource=0',
             });
         }
     },
-    pressClose:function(){
+    pressClose: function () {
         this.setData({
-            buyBoxHidden:true,
-            shopNumber:1
+            buyBoxHidden: true,
+            shopNumber: 1
         })
     },
-    changeSwiper: function(event) {
+    changeSwiper: function (event) {
         this.setData({
             index: parseInt(event.detail.current) + 1,
         })
@@ -107,19 +105,19 @@ Page({
      * 生命周期函数--监听页面加载
      */
     //减少商品数量
-    sub: function() {
+    sub: function () {
         if (this.data.count > 1) {
             this.setData({
                 count: this.data.count - 1
             })
         }
     },
-    add: function() {
+    add: function () {
         this.setData({
             count: this.data.count + 1
         })
     },
-    onLoad: function(options) {
+    onLoad: function (options) {
         this.setData({
             url: app.urlw3
         })
@@ -173,7 +171,7 @@ Page({
                 typeBttton: "share",
             })
             if (app.wenzhangJson) {
-                console.log(options.shopurl+ "111111111111111111111");
+                console.log(options.shopurl + "111111111111111111111");
                 var article = app.wenzhangJson.content;
                 // let selectsize = JSON.parse(app.wenzhangJson.selectsize);
                 // let keys=Object.keys(selectsize);
@@ -216,7 +214,7 @@ Page({
                     pid: this.data.wenzhangJson.pid
                 }, 'ActicleInterShop');
                 wxParse.wxParse('article', 'html', article, self);
-                console.log(typeof this.data.wenzhangJson.authorurl +"、、、、、、、、、、、、、、、、、、、、");
+                console.log(typeof this.data.wenzhangJson.authorurl + "、、、、、、、、、、、、、、、、、、、、");
                 console.log(JSON.stringify(this.data.essayhead) + "、、、、、、、、、、、、、、、、、、、、");
                 // <view class='jingxuan' bindtap= 'acticleScene' data- pid='{{item.pid}}'  data- eid='{{item.eid}}' data- title='{{item.title}}' data- authorurl='{{url+item.author_head}}' data- authorname='{{item.author}}' data- shopurl='{{url+item.product_head}}' >
             } else {
@@ -274,16 +272,14 @@ Page({
         }
 
     },
-    gunhdong: function (event){
-        if (parseInt(event.detail.scrollTop)>10)
-        {
+    gunhdong: function (event) {
+        if (parseInt(event.detail.scrollTop) > 10) {
             console.log("33");
             this.setData({
-                bottomView:false
+                bottomView: false
             })
         }
-        else
-        {
+        else {
             this.setData({
                 bottomView: true
             })
@@ -293,15 +289,15 @@ Page({
     /**
      * 生命周期函数--监听页面初次渲染完成
      */
-    onReady: function() {
+    onReady: function () {
 
     },
-    cancel: function() {
+    cancel: function () {
         this.setData({
             buyBoxHidden: true
         })
     },
-    pressX:function(){
+    pressX: function () {
         this.setData({
             buyBoxHidden: true,
         })
@@ -322,7 +318,7 @@ Page({
             app.buyNumber = this.data.shopNumber;
         }
     },
-    buy: function() {
+    buy: function () {
         this.setData({
             buyBoxHidden: false,
         })
@@ -349,8 +345,8 @@ Page({
         } else {
             console.log("22222222222222222222222222" + JSON.stringify(app.wenzhangJson));
             // wx.setStorageSync("goods", app.wenzhangJson);
-            console.log("app.wenzhangJson is ",self.data.wenzhangJson);
-            console.log("pid is ",self.data.wenzhangJson.pid);
+            console.log("app.wenzhangJson is ", self.data.wenzhangJson);
+            console.log("pid is ", self.data.wenzhangJson.pid);
             // let url = app.host + 'Data/GetProductByPid';
             // let data = {
             //     pid: self.data.wenzhangJson.pid,
@@ -363,14 +359,14 @@ Page({
             // console.log("product is ", res.data.product);
 
             app.ShortConnect(app.urlw + "Data/GetProductByPid", {
-                pid : self.data.wenzhangJson.pid,
-                uid : app.uid
-            }, 'ActicleInterShop',function(r){
-                console.log("r is ",r);
+                pid: self.data.wenzhangJson.pid,
+                uid: app.uid
+            }, 'ActicleInterShop', function (r) {
+                console.log("r is ", r);
                 wx.setStorage({
                     key: 'goods',
                     data: r,
-                    success : function(){
+                    success: function () {
                         wx.navigateTo({
                             url: '../lck/cartGoodsDetail/cartGoodsDetail?interSource=0' + "&inter=wenzhang" + "&essayuid=" + self.data.essayuid
                         });
@@ -382,7 +378,7 @@ Page({
     /**
      * 生命周期函数--监听页面显示
      */
-    onShow: function() {
+    onShow: function () {
         // app.buyNumber = this.data.shopNumber;
         // if (this.data.wenzhangJson) {
         //     app.ShortConnect(app.urlw + 'Data/EssaySee', {
@@ -401,35 +397,35 @@ Page({
     /**
      * 生命周期函数--监听页面隐藏
      */
-    onHide: function() {
+    onHide: function () {
 
     },
 
     /**
      * 生命周期函数--监听页面卸载
      */
-    onUnload: function() {
+    onUnload: function () {
 
     },
 
     /**
      * 页面相关事件处理函数--监听用户下拉动作
      */
-    onPullDownRefresh: function() {
+    onPullDownRefresh: function () {
 
     },
 
     /**
      * 页面上拉触底事件的处理函数
      */
-    onReachBottom: function() {
+    onReachBottom: function () {
 
     },
 
     /**
      * 用户点击右上角分享
      */
-    onShareAppMessage: function() {
+    onShareAppMessage: function () {
         var self = this;
         var shopmsg1 = encodeURIComponent(JSON.stringify(this.data.wenzhangJson));
         console.log(JSON.stringify(this.data.wenzhangJson));
@@ -439,7 +435,7 @@ Page({
                     var shareUid = null;
                     //当授权时
                     if (res.authSetting['scope.userInfo']) {
-                        var shardUid=app.uid.toString();
+                        var shardUid = app.uid.toString();
                     }
                     else {
                         var shardUid = this.data.transpondUid;
@@ -471,7 +467,7 @@ Page({
                 desc: '距离成功只差一步，求少侠出手！',
                 title: '分享商城',
                 path: 'pages/ActicleScene/ActicleScene?uid=' + app.uid.toString() + "&wenzhangJson=" + shopmsg1 + "&essayuid=" + this.data.essayuid,
-                success: function(res) {
+                success: function (res) {
                     // 转发成功之后的回调
                     if (res.errMsg == 'shareAppMessage:ok') {
                         console.log('shareAppMessage:ok');
@@ -480,7 +476,7 @@ Page({
                         }, "shareWenZhang");
                     }
                 },
-                fail: function(res) {　　　　　　 // 转发失败之后的回调
+                fail: function (res) {　　　　　　 // 转发失败之后的回调
                     console.log(res.errMsg);
                 },
             }

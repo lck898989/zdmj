@@ -1,5 +1,6 @@
 // pages/zcw/user/user.js
 var app = getApp()
+import Const from '../../../utils/Const.js'
 Page({
 
   /**
@@ -153,6 +154,38 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
+
+  },
+  //生成二维码
+  generateQcode : function(e){
+    //   console.log("access_token is ",app.access_token);
+      let acUrl = 'https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=' + Const.appid + '&secret='+Const.appSecret;
+      console.log("acUrl is ",acUrl);
+      wx.request({
+          url: acUrl,
+          method : 'GET',
+          success : function(res){
+              console.log("res is ",res);
+              let accessToken = res.data.access_token;
+              let scene = app.uid;
+              let url = 'https://api.weixin.qq.com/wxa/getwxacodeunlimit?access_token=' + accessToken;
+              wx.request({
+                    url    : url,
+                    method : 'POST',
+                    data : {
+                        scene : scene
+                    },
+                    success : function(res){
+                        console.log("res is ",res);
+                        //图片二进制内容
+                        wx.arrayBufferToBase64(res.data);
+                        // let binaryImg = res.data;
+                        // console.log("re is ",re);
+                    }
+              })
+
+          }
+      })
 
   }
 })

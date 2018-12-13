@@ -27,23 +27,29 @@ page{
     align-items: center;
     justify-content: space-around;
     background: #fff;
+    padding-top: 10rpx;
+    border-top: 2rpx solid #f2f2f2;
 }
 .goods-con{
-    margin-top: 121rpx;
+    margin-top: 90rpx;
 }
 .saleaf-text{
     display: flex;
     flex-direction: row;
-    justify-content: space-start;
+    justify-content: flex-start;
     background: #fff;
     margin-bottom: 2rpx;
     align-items: center;
+    padding: 15rpx 24rpx;
+}
+.storeName{
+    font-size: 26rpx;
+    margin-left: 20rpx;
 }
 .orderNum{
-    margin-left: 30rpx;
     font-size: 25rpx;
     color: #6b6b6b;
-    padding: 20rpx 0rpx;
+    padding: 0rpx 0rpx;
     height: 44rpx;
     line-height: 44rpx;
     display: flex;
@@ -55,43 +61,59 @@ page{
     text-overflow: ellipsis;
     width: 170rpx; */
 }
+.footWrapper{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: nowrap;
+    background: #fff;
+    padding: 10rpx 30rpx;
+    height: 80rpx;
+}
+.orderWrapper{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-wrap: nowrap;
+}
 .saleafter-con{
-    width: 100%;
+    width: 690rpx;
     /* height: 40rpx; */
     background: #fff;
     display: flex;
-    padding: 13rpx 0rpx;
+    padding: 13rpx 30rpx;
     justify-content: flex-end;
 }
 .saleafter{
-    margin-right: 55rpx;
     font-size: 25rpx;
-    color: #b31227;
+    color: #b964d8;
     padding: 6rpx 20rpx;
     border-radius: 10rpx;
-    border: 2rpx solid #b31227;
-    line-height: 55rpx;
+    border: 2rpx solid #b964d8;
+    line-height: 38rpx;
     text-align: center;
-    height: 55rpx;
-    width: 160rpx;
+    height: 38rpx;
+    width: 120rpx;
 }
 .sale-com{
     margin-bottom: 4rpx;
 }
-.orderItem{
-    width: 180rpx;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    flex-wrap: nowrap;
-}
 .record-status{
     display: flex;
     flex-direction: row;
-    justify-content: flex-end;
+    justify-content: flex-start;
     align-items: center;
     flex-wrap: nowrap;
-    padding: 10rpx 10rpx;
+    padding: 10rpx 45rpx;
     background: #fff;
+    position: relative;
+}
+.enterProgress{
+    position: absolute;
+    right: 0rpx;
+    margin-right: 30rpx;
 }
 .writeExpressOrder{
     display: flex;

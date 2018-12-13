@@ -1,7 +1,9 @@
 {
-    
     "pages": [
         "pages/wxscope/wxscope",
+        "pages/lck/saleService/saleService",
+        "pages/lck/newCart/newCart",
+        "pages/zcw/user/user",
         "pages/lck/testJing/perfact",
         "pages/search/search",
         "pages/lck/index/index",
@@ -14,7 +16,6 @@
         "pages/GetRebate/GetRebate",
         "pages/TixianMingxi/TixianMingxi",
         "pages/lck/hotShopping/hotShopping",
-        "pages/lck/saleService/saleService",
         "pages/lck/applyProgress/applyProgress",
         "pages/lck/applySaleAfter/applySaleAfter",
         "pages/lck/searchDetail/searchDetail",
@@ -43,8 +44,7 @@
         "pages/TIANQI/TIANQI",
         "pages/SreachResult/SreachResult",
         "pages/ShopActicle/ShopActicle",
-        "pages/HistroyShare/HistroyShare",
-        "pages/zcw/user/user"
+        "pages/HistroyShare/HistroyShare"
     ],
     "window": {
         "navigationBarBackgroundColor": "white",
@@ -63,7 +63,7 @@
                 "text": "首页"
             },
             {
-                "pagePath": "pages/lck/cart/cart",
+                "pagePath": "pages/lck/newCart/newCart",
                 "iconPath": "resources/btn_cart_0.png",
                 "selectedIconPath": "resources/btn_cart_1.png",
                 "text": "购物车"

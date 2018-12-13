@@ -56,25 +56,27 @@ button{
 }
 .server-type{
     background: #fff;
-    height: 200rpx;
+    height: 100rpx;
     color:#404040;
+    padding: 15rpx 25rpx;
 }
 .headS{
-    font-size: 25rpx;
-    font-weight: 600;
-    padding: 25rpx;
+    font-size: 30rpx;
+    font-weight: bolder;
+    margin-bottom: 10rpx;
 }
 .type-list{
-    margin-top: 21rpx;
     margin-left: 24rpx;
 }
 .change{
     font-size: 25rpx;
-    width: 157rpx;
-    height: 62rpx;
-    line-height: 62rpx;
-    color: #de3c45;
-    border: 2rpx solid #de3c45;
+    width: 200rpx;
+    height: 50rpx;
+    line-height: 50rpx;
+    border-radius: 10rpx;
+    color: #b25bd2;
+    border: 2rpx solid #863bb7;
+    background: #ecceff;
     text-align: center;
 }
 .image-con{
@@ -95,7 +97,7 @@ button{
     justify-content: space-between;
 }
 .goods-con{
-    margin-top: 25rpx;    
+    margin-top: 10rpx;    
 }
 .title-back{
     margin-left: 35rpx;
@@ -103,13 +105,15 @@ button{
 }
 .question-con{
     background:#fff;
-    margin-top: 25rpx;
+    margin-top: 10rpx;
     position: relative;
+    padding-bottom: 20rpx;
 }
 .question_title{
     font-size: 30rpx;
-    color: #575757;
-    padding: 35rpx 0rpx;
+    color: #000;
+    padding-top: 20rpx;
+    font-weight: bolder;
 }
 .question-page{
     margin-left: 25rpx;
@@ -123,6 +127,8 @@ button{
     font-size: 30rpx;
     /* height: 240rpx;  */
     /* padding: 28rpx 18rpx; */
+    border-radius: 10rpx;
+
 }
 textarea{
     padding: 28rpx 0rpx 0rpx 18rpx;
@@ -130,6 +136,9 @@ textarea{
 .textContainer .textA{
     padding: 28rpx 0rpx 0rpx 18rpx;
     background: red;
+}
+.textA{
+    border-radius: 10rpx;
 }
 .limit{
     position: absolute;
@@ -163,6 +172,9 @@ textarea{
     margin-left: -25rpx;
     width: 750rpx;
     background-color: #fff;
+    display: flex;
+    flex-direction: row;
+
 }
 .textContainer{
     position: relative;
@@ -190,10 +202,14 @@ textarea{
     margin-bottom: 35rpx;
     margin-left: 50rpx;
     text-align: center;
-    font-size: 30rpx;
+    font-size: 25rpx;
     padding: 15rpx 20rpx;
-    color: #b31227;
-    border: 2rpx solid #b31227;
+    color: #b25bd2;
+    border: 2rpx solid #863bb7;
+    background: #ecceff;
+    height: 20rpx;
+    line-height: 20rpx;
+    border-radius: 10rpx;
 }
 .detail-info{
     font-size: 25rpx;
@@ -224,22 +240,22 @@ textarea{
     margin-bottom: 40rpx;
 }
 .server-detail{
-    font-size: 30rpx;
+    font-size: 25rpx;
     color: #abafb2;
 }
 .submit{
-    width:360rpx;
-    height: 95rpx;
-    background: #b31227;
-    color: #fff; 
-    line-height: 95rpx;
-    margin: 0 auto;
+    width:700rpx;
+    height: 94rpx;
+    background: #cc7eea;
+    color: #fff;
+    font-weight: bolder;
+    line-height: 94rpx;
     text-align: center;
     border-radius: 10rpx;
     margin-top: 75rpx;
 }
 .submit-con{
-    padding: 29rpx 40rpx 40rpx 40rpx;
+    padding: 29rpx 25rpx 20rpx 25rpx;
 }
 .reasonCon{
     width: 750rpx;
@@ -253,30 +269,35 @@ textarea{
 .line-reason{
    padding-top: 30rpx;
    justify-content: flex-start;
-   margin-bottom: 60rpx;
+   margin-bottom: 25rpx;
    background: #fff;
 }
 .reason-title{
     margin: 0 auto;
-    color: #999999;
-    
+    color: #000;
+    font-weight: bolder;
 }
 .reasonD-con{
     background: #fff;
 }
+.changeGoods,.reason-item{
+    display : flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: nowrap;
+}
 .changeGoods{
     background: #fff;
     font-size: 30rpx;
-    width: 60rpx;
+    width: 706rpx;
     padding: 0rpx 0rpx 30rpx 0rpx;
-    border-bottom: 4rpx solid #b31227;
     margin-left: 25rpx;
 }
 .reason-detail{
-    height: 600rpx;
+    height: 636rpx;
     background: #fff;
-    margin-top: 2rpx;
-    padding: 40rpx 22rpx 0rpx 20rpx;
+    padding: 20rpx 22rpx 0rpx 20rpx;
 }
 .reason-item{
     margin-bottom: 60rpx;
@@ -303,4 +324,17 @@ textarea{
 }
 .add{
     margin-left: 10rpx;
+}
+.comfirm-btn{
+    width: 100%;
+    margin-bottom: 20rpx;
+    background: #cc7fe9;
+    color:#fff;
+    font-size: 40rpx;
+    text-align: center;
+    height: 94rpx;
+    line-height: 94rpx;
+    font-weight: bolder;
+    border-radius: 10rpx;
+    margin-top: 80rpx;
 }

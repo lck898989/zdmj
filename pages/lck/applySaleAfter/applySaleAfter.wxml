@@ -28,7 +28,7 @@
             <text slot='beforeCount' bindtap='subCount' class='sub' data-c='{{goods.count}}'>-</text>
             <text slot='afterCount' bindtap='addCount' class='add' data-c='{{goods.count}}'>+</text>
             <view slot='footer' class='footer'>
-                <view>
+                <view style='font-size:30rpx;font-weight:bolder;'>
                     申请原因
                 </view>
                 <view class='chooseResonse' bindtap='chooseReason'>
@@ -39,10 +39,10 @@
                     </block>
                     <block wx:else>
                         <view style='color:#404040'>
-                            {{reason}}
+                            {{reason.text}}
                         </view>
                     </block>
-                    <image src='../../../resources/ellipsis.png' style='width:32rpx;height:35rpx;margin-left:30rpx;'></image>
+                    <image src='../../../resources/icon_right.png' style='width:20rpx;height:25rpx;margin-left:30rpx;'></image>                                                                                      
                 </view>
             </view>
         </saleAfter-component>
@@ -54,7 +54,7 @@
                 问题描述
             </view>
             <view class='textContainer'>
-                <textarea  placeholder-class='textA' class='textArea' bindinput='textAreaInput'>
+                <textarea  placeholder-class='textA' class='textArea' bindinput='textAreaInput' placeholder='请描述申请售后服务的具体原因'>
                     <cover-view>
                         
                     </cover-view>
@@ -77,7 +77,8 @@
             </view>
             
             <view class='camera-con'>
-                <image src='../../../resources/camera.png' style='width:45rpx;height:40rpx;margin-top:20rpx;margin-left:25rpx;' bindtap='uploadImage'></image>
+                <image src='../../../resources/video.png' style='width:40rpx;height:30rpx;margin-top:20rpx;margin-left:25rpx;' bindtap='uploadImage'></image>
+                <image src='../../../resources/camera.png' style='width:40rpx;height:30rpx;margin-top:20rpx;margin-left:25rpx;' bindtap='uploadImage'></image>
             </view>
         </view>
     </view>
@@ -85,7 +86,7 @@
     <block wx:if='{{backGoodsType.msg === "退货" || backGoodsType.msg === "退款"}}'>
         <view class='backType-con'>
             <view class='title-back'>
-                商品退回方式        
+                退换货方式        
             </view>
             <view class='backThirdSoler'>
                 快递至第三方卖家
@@ -143,16 +144,31 @@
                     <cover-view class='reason-title'>
                         申请原因
                     </cover-view>
-                        <cover-image src='../../../resources/Cancel.png' style='width:40rpx;height:40rpx;margin-right:40rpx;' bindtap='cancel'></cover-image>
                     </cover-view>
                     <cover-view class='changeGoods'>
-                        {{backGoodsType.msg}}
+                        <cover-view>
+                            {{backGoodsType.msg}}
+                        </cover-view>
+                        <cover-image src='https://shopfile.ykplay.com/resources/icon_selected_1.png' style='width:34rpx;height:34rpx;'>
+</cover-image>
                     </cover-view>
                 </cover-view>
                 <cover-view class='reason-detail'>
-                <cover-view wx:for='{{reasonList}}' class='reason-item' bindtap='chooseTheReason' data-reason='{{item}}'>
-                    {{item}}
-                </cover-view>
+                    <cover-view wx:for='{{reasonList}}' class='reason-item' bindtap='chooseTheReason' data-reason='{{item}}'>
+                        <cover-view>{{item.text}}</cover-view>
+                        <block wx:if='{{!item.active}}'>
+                            <cover-image src='https://shopfile.ykplay.com/resources/icon_selected_0.png' style='width:34rpx;height:34rpx;'>
+</cover-image>
+                        </block>
+                        <block wx:else>
+                            <cover-image src='https://shopfile.ykplay.com/resources/icon_selected_1.png' style='width:34rpx;height:34rpx;'>
+</cover-image>
+                        </block>
+                    </cover-view>
+                    <cover-view class='comfirm-btn' bindtap='confirmReason'>
+                        确定
+                    </cover-view>
+                    
             </cover-view>
         </cover-view>
     </block>

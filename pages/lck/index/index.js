@@ -132,6 +132,11 @@ Page({
         //滚动视图可以滚动
         canRoll : false,
         //节点选择器对象
+        //在onImageLoad里面只渲染那些新增的文章，渲染完成之后添加到文章列表中去
+        newAddEssays: [],
+        timer : 0,
+        //自动播放
+        autoPlay : false
     },
 
     /**
@@ -194,11 +199,21 @@ Page({
             }
         }
         this.setData({
-            dataArray: resData
+            newAddEssays : resData
         }, () => {
-            console.log("dataArray is ", this.data.dataArray);
+            console.log("newAddEssays is ", self.data.newAddEssays);
         })
         wx.hideLoading();
+        //自动播放轮播图
+        if(!this.data.autoPlay){
+            this.data.timer = setInterval(function(){
+                this.moveLeft(1);
+            }.bind(this),4000);
+            console.log("timer is ",this.data.timer);
+            this.setData({
+                autoPlay : true
+            });
+        }
     },
     //获得首页的分类信息
     getType: async function (tag) {
@@ -236,10 +251,6 @@ Page({
         } else {
             return res.data.shopessays;
         }
-
-        // this.setData({
-
-        // })
     },
     //进入滚动图的详情
     enterScrollImg: function (e) {
@@ -407,73 +418,72 @@ Page({
         })
     },
     onImageLoad: function (e) {
-        console.log("e is ", e);
-        let self = this;
+        let isLast = e.currentTarget.dataset.last;
+        console.log("isLast is ", isLast);
         let imageId = Number(e.currentTarget.id);
-        let oImgW = e.detail.width;         //图片原始宽度
-        let oImgH = e.detail.height;        //图片原始高度
+        let oImgW = e.detail.width;           //图片原始宽度
+        let oImgH = e.detail.height;          //图片原始高度
         let imgWidth = this.data.imageWidth;  //图片设置的宽度
-        let scale = imgWidth / oImgW;        //比例计算
-        let imgHeight = oImgH * scale;      //自适应高度
-        let images = this.data.dataArray;
-        console.log("images is ",images);
+        let scale = imgWidth / oImgW;         //比例计算
+        let imgHeight = oImgH * scale;        //自适应高度
+        //新请求的文章数据
+        let images = this.data.newAddEssays;
+        let imageLen = images.length;
         let imageObj = null;
-        for (let i = 0; i < images.length; i++) {
-            console.log("imageId is ", typeof (imageId), imageId);
+        for (let i = 0; i < imageLen; i++) {
             let img = images[i];
-            if (img.shopeid && img.shopeid === imageId){
+            if (img.shopeid && img.shopeid === imageId) {
                 imageObj = img;
                 break;
-            }else if(img.pid && img.pid === imageId){
+            } else if (img.pid && img.pid === imageId) {
                 imageObj = img;
-            }else if(img.eid && img.eid === imageId){
+            } else if (img.eid && img.eid === imageId) {
                 imageObj = img;
             }
         }
-        imageObj.height = imgHeight;
-        let loadingCount = this.data.loadingCount - 1;
-        let col1 = this.data.col1;
-        let col2 = this.data.col2;
-        console.log("selector is ",this.data.selector);
-        
-        //只要第一列的列高度小于第二列就往第一列放，否则往第二列放
-        if (this.data.col1H <= this.data.col2H) {
-            this.data.col1H += imgHeight;
-            col1.push(imageObj);
-        } else {
-            this.data.col2H += imgHeight;
-            col2.push(imageObj);
+        if(imageObj !== null){
+            imageObj.height = imgHeight;
+            console.log("imageObj is ", imageObj);
+            let loadingCount = this.data.loadingCount - 1;
+            let col1 = this.data.col1;
+            let col2 = this.data.col2;
+            //只要第一列的列高度小于第二列就往第一列放，否则往第二列放
+            if (this.data.col1H <= this.data.col2H) {
+                this.data.col1H += imgHeight;
+                col1.push(imageObj);
+            } else {
+                this.data.col2H += imgHeight;
+                col2.push(imageObj);
+            }
+            console.log("col1 is ", col1);
+            console.log("col1H is ", this.data.col1H);
+            console.log("col2 is ", col2);
+            console.log("col2H is ", this.data.col2H);
+            this.setData({
+                col1H: this.data.col1H,
+                col2H: this.data.col2H
+            })
+            let data = {
+                loadingCount: loadingCount,
+                col1: col1,
+                col2: col2
+            };
+            console.log(JSON.stringify(data.col1) + "////////////////////");
+            console.log(JSON.stringify(data.col2) + "////////////////////");
+            if (!loadingCount) {
+                data.images = [];
+            }
+            this.setData(data, () => {
+                wx.hideLoading();
+            });
+            if (isLast) {
+                //渲染完图片之后将新加的文章添加到文章列表中去
+                this.data.dataArray.push(...this.data.newAddEssays);
+                this.setData({
+                    dataArray: this.data.dataArray
+                })
+            }
         }
-        this.setData({
-            col1H: this.data.col1H,
-            col2H: this.data.col2H
-        })
-        if (this.data.col1H > this.data.col2H) {
-            this.data.scrollH = this.data.col1H;
-        } else {
-            this.data.scrollH = this.data.col2H;
-        }
-        //获取节点的信息
-        // let nodeSelected = nodeInfo.selectViewport();
-        let selector = wx.createSelectorQuery();
-        let twoColConNode = selector.select('.lrWrapper');
-        twoColConNode.boundingClientRect(function (res) {
-            console.log("in twoColCon res is ", res);
-            console.log("<-- height is ", res.height);
-            // self.data.col1H = res.height;
-        }).exec();
-        let data = {
-            loadingCount: loadingCount,
-            col1: col1,
-            col2: col2,
-            scrollH: this.data.scrollH
-        };
-        
-        console.log("scrollH is ", this.data.scrollH);
-        if (!loadingCount) {
-            data.images = [];
-        }
-        this.setData(data);
     },
     /**
      * 生命周期函数--监听页面初次渲染完成
@@ -486,14 +496,21 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow: function () {
-
+        //自动轮播设置
+        if(!this.data.autoPlay){
+            this.data.timer = setInterval(function(){
+                this.moveLeft(1);
+            }.bind(this),4000);
+            this.data.autoPlay = true;
+        }
     },
 
     /**
      * 生命周期函数--监听页面隐藏
      */
     onHide: function () {
-
+        this.data.autoPlay = false;
+        clearInterval(this.data.timer);
     },
 
     /**
@@ -510,7 +527,6 @@ Page({
 
     },
     onPageScroll : function(e){
-        console.log(e);
         if(e.scrollTop > 100){
             this.setData({
                 floorStatus : true,
@@ -580,12 +596,12 @@ Page({
         //将dataArray设置空为了让数据绑定来刷新新的数据！！！！！！！！
         //初始化列的数据
         this.setData({
-            col1: [],
-            col2: [],
-            col1H: 0,
-            col2H: 0,
-            scrollH: 0,
-            dataArray : []
+            col1         : [],
+            col2         : [],
+            col1H        : 0,
+            col2H        : 0,
+            scrollH      : 0,
+            newAddEssays : []
         });
         let dataSet = event.currentTarget.dataset;
         let id = Number(dataSet.id);
@@ -631,32 +647,32 @@ Page({
                 res = await this.getType('购');
                 break;
         }
-        this.data.dataArray = res;
+        this.data.newAddEssays = res;
         console.log("id is ",id);
         this.setEssayHeadImage(id);
-        console.log("set 之前dataArray is ", this.data.dataArray);
+        console.log("set 之前newAddEssays is ", this.data.newAddEssays);
         this.setData({
-            dataArray: this.data.dataArray
+            newAddEssays: this.data.newAddEssays
         },()=>{
             wx.hideLoading();
         })
     },
     setEssayHeadImage : function(id){
-        for (let j = 0; j < this.data.dataArray.length; j++) {
+        for (let j = 0; j < this.data.newAddEssays.length; j++) {
             if (id === 1 || id === 2 || id === 3 || id === 4) {
-                this.data.dataArray[j].productstype = 'shopessays';
+                this.data.newAddEssays[j].productstype = 'shopessays';
             }
-            if (this.data.dataArray[j].shopessayhead) {
-                if(typeof(this.data.dataArray[j].shopessayhead) === 'string'){
-                    this.data.dataArray[j].shopessayhead = this.data.dataArray[j].shopessayhead.split(',');
+            if (this.data.newAddEssays[j].shopessayhead) {
+                if(typeof(this.data.newAddEssays[j].shopessayhead) === 'string'){
+                    this.data.newAddEssays[j].shopessayhead = this.data.newAddEssays[j].shopessayhead.split(',');
                 }
-            } else if (this.data.dataArray[j].head) {
-                if (typeof(this.data.dataArray[j].head) === 'string') {
-                    this.data.dataArray[j].head = this.data.dataArray[j].head.split(',');
+            } else if (this.data.newAddEssays[j].head) {
+                if (typeof(this.data.newAddEssays[j].head) === 'string') {
+                    this.data.newAddEssays[j].head = this.data.newAddEssays[j].head.split(',');
                 }
-            } else if (this.data.dataArray[j].essayhead) {
-                if (typeof(this.data.dataArray[j].essayhead) === 'string') {
-                    this.data.dataArray[j].essayhead = this.data.dataArray[j].essayhead.split(',');
+            } else if (this.data.newAddEssays[j].essayhead) {
+                if (typeof(this.data.newAddEssays[j].essayhead) === 'string') {
+                    this.data.newAddEssays[j].essayhead = this.data.newAddEssays[j].essayhead.split(',');
                 }
             }
         }
@@ -822,14 +838,12 @@ Page({
                 loadText: '已经到底了~~o(>_<)o ~~'
             })
         }else{
-            for(let i = 0;i < res.length;i++){
-                this.data.dataArray.push(res[i]);
-            }
+            this.data.newAddEssays = res;
             this.setEssayHeadImage(id);
-            console.log("dataArray is ", this.data.dataArray);
+            console.log("newAddEssays is ", this.data.newAddEssays);
             console.log("当前的模拟数字是：", this.data.simulateTimes);
             this.setData({
-                dataArray: this.data.dataArray
+                newAddEssays: this.data.newAddEssays
             }, () => {
                 wx.hideLoading();
             })

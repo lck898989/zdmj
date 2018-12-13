@@ -30,10 +30,12 @@ view{
 }
 .page-con{
     position: relative;
+    width: 100vw;
 }
 .page-con-showbuy{
     height: 100vh;
     position: relative;
+    width: 100vw;
 }
 .title-con,.text,.class-title,.class-arr,.class-item,.secondLevel-con{
     display: flex;
@@ -141,6 +143,7 @@ swiper{
 .type-con{
     width: 750rpx;
     position: relative;
+    background: #fff;
 }
 .topLevel-con{
     position: absolute;
@@ -197,6 +200,7 @@ swiper{
     padding: 0rpx 0rpx 25rpx 0rpx;
     flex-wrap: wrap;
     margin-left: 25rpx;
+    background: #fff;
 }
 .secondLevel-item{
     width: 100rpx;
@@ -309,10 +313,10 @@ swiper{
 .siangle-bottom{
     width:0px;
 	height:0px;
-	border-width:15rpx;
+	border-width:20rpx;
 	border-style:solid;
 	border-color:transparent transparent #a0a0a0 transparent;
-    margin-top: 10rpx;
+    margin-top: -15rpx;
     margin-right: 10rpx;
 }
 .buy-con{
@@ -562,4 +566,30 @@ button::after{
     height: 15rpx;
     border-radius: 15rpx;
     background: #fff;
+}
+.secondLevelActive{
+    border: 2rpx solid #863bb7;
+    background: #ecceff;
+    color: #b25bd2;
+}
+.loadText{
+    width: 750rpx;
+    height: 50rpx;
+    position: absolute;
+    font-size: 25rpx;
+    color: #000;
+    bottom: -35rpx;
+    left: 0rpx;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: nowrap;
+}
+.centerText{
+    /* width:  */
+    width: 700rpx;
+    height: 50rpx;
+    text-align: center;
+    line-height: 50rpx;
 }

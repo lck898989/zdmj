@@ -5,7 +5,7 @@
     <image src='{{arraytu.dh_dh}}' class='daohangtu'  style='height:auto' mode='widthFix'/>
     <image mode='widthFix' class="userImage"  style='height:auto'src="{{userInfo.avatarUrl}}"/>
     <text class="userName" style='font-size:46rpx;color:white;font-weight:900;'>{{userInfo.nickName}}</text>
-    <image src='{{arraytu.dh_ewm}}' class='ewm'  style='height:auto' mode='widthFix'/>
+    <image src='{{arraytu.dh_ewm}}' class='ewm'  style='width:42rpx;height:auto' mode='widthFix' bindtap='generateQcode'/>
   </view>
   <!-- 个人信息 -->
   <view class='grxx'>

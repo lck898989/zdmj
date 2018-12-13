@@ -33,6 +33,7 @@ page{
 }
 .process-leftd{
     font-size: 30rpx;
+    font-weight: bolder;
 }
 .process-right{
     width:750rpx;
@@ -51,6 +52,7 @@ page{
     padding: 35rpx 0rpx 20rpx 0rpx;
     border-bottom: 2rpx solid #f2f2f2;
     font-size: 30rpx;
+    font-weight: bolder;
 }
 .bottom-text{
     width: 700rpx;
@@ -67,7 +69,7 @@ page{
     width: 750rpx;
     position: fixed;
     bottom: 0rpx;
-    height: 115rpx;
+    height: 80rpx;
     background: #fff;
     margin-top: 25rpx;
     display: flex;
@@ -77,14 +79,13 @@ page{
 }
 .applyDelete{
     font-weight: 500;
-    margin-right: 20rpx;
-    width: 140rpx;
-    height: 72rpx;
-    line-height: 72rpx;
-    font-size: 25rpx;
-    border: 2rpx solid #525252;
-    border-radius: 10rpx;
+    width: 200rpx;
+    height: 80rpx;
+    line-height: 80rpx;
+    font-size: 35rpx;
     text-align: center;
+    color: #fff;
+    background: #b964d8;
 }
 .order{
     font-size: 30rpx;
@@ -118,8 +119,8 @@ page{
     top: 5rpx;
 }
 .in{
-    border: 2rpx solid #f65c60;
-    background: #f65c60;
+    border: 2rpx solid #8fc31f;
+    background: #8fc31f;
     width: 28rpx;
     height:28rpx;
     margin-left: 35rpx;

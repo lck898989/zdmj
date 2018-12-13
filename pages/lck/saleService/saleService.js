@@ -27,11 +27,11 @@ Page({
       isApplyRecord : false,
       headText :`font-size: 30rpx;
         color: #383838;
-        padding: 30rpx 0rpx;`,
+        padding: 10rpx 10rpx;`,
       redText  : `font-size: 30rpx;
-        color : #b31227;
-        padding: 30rpx 0rpx;
-        border-bottom:2rpx solid #b31227;`,
+        color : #b964d8;
+        padding: 10rpx 10rpx;
+        border-bottom:4rpx solid #b964d8;font-weight:bold;`,
       //售后申请page
       saleAfterPage : 1,
       //正在申请page
@@ -170,6 +170,9 @@ Page({
 
   },
   chooseTitle : async function(e){
+    wx.showLoading({
+        title: '数据加载中...',
+    })
     console.log("e is ",e);
     let dataSet = e.currentTarget.dataset;
     let text = dataSet.text;
@@ -189,16 +192,28 @@ Page({
       saleHeadText : this.data.saleHeadText,
     })
     console.log("saleHeadText is ",this.data.saleHeadText);
-    //向服务器请求信息
+    //向服务器请求信息重置相关信息
     switch(text){
         case '申请售后':
+            this.data.saleAfterPage = 1;
             this.getSaleAfterList();
+            this.setData({
+                saleOrderArray : []
+            });
             break;
         case '正在申请':
+            this.data.applyingPage = 1;
             this.getApplyingList();
+            this.setData({
+                applyingOrderArr : []
+            });
             break;
         case '申请记录':
+            this.data.applyRecordPage = 1;
             this.getApplyRecord();
+            this.setData({
+                applyRecord : []
+            });
             break;
     }
     this.setData({
@@ -208,9 +223,6 @@ Page({
     //获取售后列表
     getSaleAfterList: async function () {
         this.data.saleAfterPage = 1;
-        wx.showLoading({
-            title: '数据加载中...',
-        })
         console.log("saleAfterPage is ",this.data.saleAfterPage);
         this.setData({
             isSaleAfter: true,
@@ -228,6 +240,7 @@ Page({
             uid: app.uid,
             page: this.data.saleAfterPage
         }
+        // console.log("uid is ",app.uid);
         if (data.uid !== null) {
             let req = new Request(url, data, 'POST', 'text');
             let res = await req.sendRequest();
@@ -261,33 +274,39 @@ Page({
                     let products = [];
                     //遍历订单项
                     for (let j = 0; j < orderItemsLen; j++) {
-                        let headImg = orders[i].orderItems[j].product.head.split(',')[0];
-                        let count = orders[i].orderItems[j].pcount;
-                        let pname = orders[i].orderItems[j].product.pname;
-                        let price = orders[i].orderItems[j].product.price;
-                        let oitemid = orders[i].orderItems[j].oitemid;
-                        let oid = orders[i].orderItems[j].oid;
-                        let product = {
-                            headImg: headImg,
-                            count: count,
-                            pname: pname,
-                            price: price,
-                            oitemid: oitemid,
-                            oid: oid
+                        if(orders[i].orderItems[j].product){
+                            let headImg = orders[i].orderItems[j].product.head.split(',')[0];
+                            let count = orders[i].orderItems[j].pcount;
+                            let pname = orders[i].orderItems[j].product.pname;
+                            let price = orders[i].orderItems[j].product.price;
+                            let oitemid = orders[i].orderItems[j].oitemid;
+                            let oid = orders[i].orderItems[j].oid;
+                            let size = JSON.parse(orders[i].orderItems[j].product.size);
+                            let product = {
+                                headImg  : headImg,
+                                count    : count,
+                                pname    : pname,
+                                price    : price,
+                                oitemid  : oitemid,
+                                oid      : oid,
+                                size     : size
+                            }
+                            products.push(product);
                         }
-                        products.push(product);
                     }
                     saleOrderView.products = products;
                     // res.data.orders[i].ordertime = time;
                     this.data.saleOrderArray.push(saleOrderView);
                 }
                 console.log("saleOrderArray is ", this.data.saleOrderArray);
-                this.data.saleOrderArray = Const.uniqObjInArray(this.data.saleOrderArray);
+                // this.data.saleOrderArray = Const.uniqObjInArray(this.data.saleOrderArray);
                 wx.hideLoading();
                 this.setData({
                     saleOrderArray: this.data.saleOrderArray
+                },()=>{
                 })
             } else {
+                wx.hideLoading();
                 //没有可以售后的订单信息
                 wx.showToast({
                     title: res.data.msg,
@@ -298,9 +317,6 @@ Page({
     },
     //获取正在申请的列表等待运营进行审核
     getApplyingList: async function () {
-        wx.showLoading({
-            title: '数据加载中...',
-        })
         this.data.applyingPage = 1;
         //检查第一页有没有内容如果没有内容就证明没有正在审核的商品了
         this.setData({
@@ -345,28 +361,33 @@ Page({
                 questionDes: applyingSaleDates[i].info
             }
             let products = [];
-            let productTemp = {
-                pname: applyingSaleDates[i].orderItems[0].product.pname,
-                headImg: applyingSaleDates[i].orderItems[0].product.head.split(',')[0],
-                price: applyingSaleDates[i].orderItems[0].product.price,
-                count: applyingSaleDates[i].orderItems[0].pcount,
-                oitemid: applyingSaleDates[i].orderItems[0].oitemid,
-                oid: applyingSaleDates[i].orderItems[0].oid
+            if (applyingSaleDates[i].orderItems[0].product !== null){
+                let productTemp = {
+                    pname: applyingSaleDates[i].orderItems[0].product.pname,
+                    headImg: applyingSaleDates[i].orderItems[0].product.head.split(',')[0],
+                    price: applyingSaleDates[i].orderItems[0].product.price,
+                    count: applyingSaleDates[i].orderItems[0].pcount,
+                    oitemid: applyingSaleDates[i].orderItems[0].oitemid,
+                    oid: applyingSaleDates[i].orderItems[0].oid,
+                    size: JSON.parse(applyingSaleDates[i].orderItems[0].product.size)
+                }
+                products.push(productTemp);
+                applyingView.products = products;
+                this.data.applyingOrderArr.push(applyingView);
             }
-            products.push(productTemp);
-            applyingView.products = products;
-            this.data.applyingOrderArr.push(applyingView);
         }
         console.log("applyingOrderArr is ", this.data.applyingOrderArr);
         console.log("去重后的applyingOrderArr is ", Const.uniqObjInArray(this.data.applyingOrderArr));
         this.data.applyingOrderArr = Const.uniqObjInArray(this.data.applyingOrderArr);
+        this.setData({
+            applyingOrderArr : this.data.applyingOrderArr
+        },()=>{
+            wx.hideLoading();
+        })
     },
     //获取申请的记录
     getApplyRecord: async function () {
         this.data.applyRecordPage = 1;
-        wx.showLoading({
-            title: '数据加载中...',
-        })
         console.log("applyRecordPage is ",this.data.applyRecordPage);
         console.log("获取申请记录信息");
         this.setData({
@@ -410,21 +431,22 @@ Page({
                 progressRes: applyingSaleDates[i].progress
             }
             let products = [];
-            let productTemp = {
-                pname: applyingSaleDates[i].orderItems[0].product.pname,
-                headImg: applyingSaleDates[i].orderItems[0].product.head.split(',')[0],
-                price: applyingSaleDates[i].orderItems[0].product.price,
-                count: applyingSaleDates[i].orderItems[0].pcount,
-                oitemid: applyingSaleDates[i].orderItems[0].oitemid,
-                oid: applyingSaleDates[i].orderItems[0].oid
+            if (applyingSaleDates[i].orderItems[0].product){
+                let productTemp = {
+                    pname: applyingSaleDates[i].orderItems[0].product.pname,
+                    headImg: applyingSaleDates[i].orderItems[0].product.head.split(',')[0],
+                    price: applyingSaleDates[i].orderItems[0].product.price,
+                    count: applyingSaleDates[i].orderItems[0].pcount,
+                    oitemid: applyingSaleDates[i].orderItems[0].oitemid,
+                    oid: applyingSaleDates[i].orderItems[0].oid,
+                    size: JSON.parse(applyingSaleDates[i].orderItems[0].product.size)
+                }
+                products.push(productTemp);
+                applyingView.products = products;
+                this.data.applyRecord.push(applyingView);
             }
-            products.push(productTemp);
-            applyingView.products = products;
-            this.data.applyRecord.push(applyingView);
         }
         console.log("applyRecord is ", this.data.applyRecord);
-        console.log("去重后的applyRecord is ", Const.uniqObjInArray(this.data.applyRecord));
-        this.data.applyRecord = Const.uniqObjInArray(this.data.applyRecord);
         wx.hideLoading();
         this.setData({
             applyRecord: this.data.applyRecord
@@ -457,7 +479,9 @@ Page({
     },
     //查看审核进度
     enterProgress : function(event){
+        console.log("isApplyRecord is ",this.data.applyRecord);
         let dataSet = event.currentTarget.dataset;
+        console.log("oitemid is ",dataSet.oitemid);
         let oitemid = Number(dataSet.oitemid);
         console.log("oitemid is ",oitemid);
         // console

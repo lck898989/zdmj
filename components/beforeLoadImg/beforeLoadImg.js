@@ -17,7 +17,6 @@ Component({
     },
     lifetime : {
         created : function(){
-            console.log("imagLoader was created");
         },
         //组件数据准备完毕
         ready : function(){
@@ -46,8 +45,6 @@ Component({
         goLoad : function(e){
             let self = this;
             // console.log("in imageLoad e is ",e);
-            console.log("in imageLoad e is ",e);
-            console.log("in imageLoad isGoCache is ",this.data.isGoCache);
             if(this.data.isGoCache === 'true'){
                 console.log("in imageLoad originalImage is ",self.data.originalImage);
                 //将图片的url缓存到本地

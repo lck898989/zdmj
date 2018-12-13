@@ -17,6 +17,7 @@ Page({
         myshoppingPage: 1,
         //初始化我的鼓购物车数据总页数
         myshopallPage: 0,
+        imgHost : 'https://shopfile.ykplay.com/resources/',
         host: app.host,
         imageHost: Host.productionHost,
         //是否为店铺选中状态
@@ -77,12 +78,17 @@ Page({
         cartsItem: {},
         //当前选择商品的价格
         thisPrice: 0,
+        //当前的市场价
+        marketPrice : 0,
         //总价
         totalPrice: 0,
+        //市场总价
+        marketTotalPrice : 0,
         //选中的商品个数
-        totalCount: 0
+        totalCount: 0,
+        //购物车源数据
+        sourceCarts : []
     },
-
     /**
      * 获得购物车里面的购物车对象
      * @param  {Number} pid 商品id
@@ -108,9 +114,6 @@ Page({
         }
         return null;
     },
-    //   getCartsItemByPidAndSid : function(pid,sid){
-
-    //   },
     chooseStore: function (event) {
         let dataSet = event.currentTarget.dataset;
         let storeIndex = dataSet.storeindex;
@@ -175,30 +178,51 @@ Page({
         console.log("cartsItem is ", cartsItem);
         //价格为
         console.log(cartsItemArr[goodsIndex].product.price);
-        // if(cartsItemArr[j].pid === pid && cartsItemArr[j].product.sid === sid){
-        //     console.log("__>>>",cartsItemArr[j].product.price);
-        //     console.log("totalPrice is ",this.data.totalPrice);
-        //     // this.data.totalPriceArr.push(cartsItemArr[j].product.price);
-        //     break;
-        // }
         console.log("carts is ", this.data.carts);
         let priceSum = 0;
+        let totalMarketPrice = 0;
         let totalCount = 0;
         for (let i = 0; i < this.data.carts[`${storeItem}`].data.length; i++) {
             let cartsItem = this.data.carts[[`${storeItem}`]].data[i];
             if (cartsItem.choosed === true) {
                 //把价格取出来
                 let price = cartsItem.product.price;
+                let marketPrice = cartsItem.product.otherprice;
                 priceSum += price;
+                totalMarketPrice += marketPrice;
                 totalCount++;
                 console.log("price is ", price);
             }
         }
         console.log("sum is ", priceSum);
+        console.log("totalMarketPrice is ",totalMarketPrice);
         this.setData({
-            carts: this.data.carts,
-            totalPrice: priceSum,
-            totalCount: totalCount
+            carts            : this.data.carts,
+            totalPrice       : priceSum,
+            totalCount       : totalCount,
+            marketTotalPrice : totalMarketPrice
+        });
+        this.setStoreActive(cartsItemArr,storeItem);
+    },
+    //设置单单选择商品的时候设置商铺的选择状态
+    setStoreActive : function(cartsItemArr,storeItem){
+        let cartsItemArrLen = cartsItemArr.length;
+        let productChoosed = 0;
+        for (let k = 0; k < cartsItemArrLen; k++) {
+            let tempProduct = cartsItemArr[k];
+            if (tempProduct.choosed) {
+                productChoosed++;
+            }
+        }
+        if (productChoosed === cartsItemArrLen) {
+            this.data.carts[`${storeItem}`].choosed = true;
+        } else {
+            this.data.carts[`${storeItem}`].choosed = false;
+        }
+        //检查商铺的选中状态
+        this.checkAllChoseByStore();
+        this.setData({
+            carts: this.data.carts
         });
     },
     //选择商品
@@ -213,7 +237,6 @@ Page({
                 isGoodsChoosed: !this.data.isGoodsChoosed,
                 choosedGoodsColor: this.data.isGoodsChoosed ? '#ec0023' : '#bbb'
             })
-
         }
     },
     //删除购物车中的该商品
@@ -235,7 +258,7 @@ Page({
         })
         
     },
-    /**
+    /*
      * 生命周期函数--监听页面初次渲染完成
      */
     onReady: function () {
@@ -246,13 +269,20 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow: async function () {
+        //重置相关参数
         this.setData({
             storeArr   : [],
             goodsCount : 0,
             storeList: [],
             carts: [],
-            products : []
+            products : [],
+            thisPrice : 0,
+            totalPrice : 0,
+            marketTotalPrice : 0,
+            marketPrice : 0,
+            sourceCarts : []
         })
+        this.data.marketTotalPrice
         console.log("商品数量是：", this.data.goodsCount);
         //请求购物车里面的商品
         let url = app.host + 'Data/CartList';
@@ -261,13 +291,10 @@ Page({
             uid: app.uid,
             page: 1
         }
+        console.log("data is ",reqCartListData);
         let req = new Request(url, reqCartListData, 'POST', 'text');
         let res = await req.sendRequest();
-        // console.log("res is ", res.data.carts);
-        // this.data.groups = res.data.groups;
-        // this.setData({
-        //     groups: this.data.groups
-        // })
+        console.log("res is ",res);
         let tempCarts = {
 
         }
@@ -277,31 +304,30 @@ Page({
         console.log("-------------------");
         for (let m in res.data.carts) {
             console.log("m is ", m);
+            let sCartJson = {};
+            // this.data.sourceCarts.push()
+            sCartJson[`${m}`] = [];
             //将该键值对应的商店的商品的size属性设置为对象
             console.log(res.data.carts[m]);
             let storeProductLen = res.data.carts[m].length;
             //商铺状态是未选中状态
             let tempJ = {};
             tempJ.choosed = false;
+            console.log("storeProductLen is ",storeProductLen);
             for (let j = 0; j < storeProductLen; j++) {
+                let scartJsonArr = {};
                 let itemTemp = res.data.carts[m][j];
+                scartJsonArr.pid = itemTemp.pid;
+                scartJsonArr.count = itemTemp.count;
+                scartJsonArr.price = itemTemp.product.price;
+                scartJsonArr.otherPrice = itemTemp.product.otherprice;
+                sCartJson[`${m}`].push(scartJsonArr);
                 //该购物车项的默认选择状态是false
                 res.data.carts[m][j].choosed = false;
                 itemTemp.size = JSON.parse(itemTemp.size);
-                //   let sizeValues = Object.values(itemTemp.size).join(';');
-                //   itemTemp.size = sizeValues;
-                //   console.log("sizeValues is ",sizeValues);
                 itemTemp.product.head = itemTemp.product.head.split(',');
-                //将
-                //   for(let k = 0;k<sizeKeys.length;k++){
-                //       itemTemp[`${sizeKeys[k]}`] = itemTemp.size[`${sizeKeys[k]}`];
-                //   }
                 console.log("itemTemp.product is ", itemTemp);
-                //   itemTemp.product.size = JSON.parse(itemTemp.product.size);
-                //   //商品未选中状态
-                //   itemTemp.choosed = false;
                 console.log("carts[m][j] is ", res.data.carts[m][j]);
-
             }
             console.log("carts[m]'s size is ", res.data.carts[m]);
             //将商家的键值保存起来
@@ -309,11 +335,12 @@ Page({
             tempJ.data = res.data.carts[m];
             console.log("tempJ is ", tempJ);
             res.data.carts[m] = tempJ;
-
+            this.data.sourceCarts.push(sCartJson);
         }
+        console.log("sourceCarts is ",this.data.sourceCarts);
         this.setData({
-            storeList: this.data.storeList,
-            carts: res.data.carts,
+            storeList     : this.data.storeList,
+            carts         : res.data.carts,
         });
         //将所有产品根据键值取出来
         let storeLen = this.data.storeList.length;
@@ -475,13 +502,6 @@ Page({
         let pid = Number(dataSet.pid);
         console.log("storeId is ", storeId);
         console.log("goodsId is ", goodsId);
-        //   let pid = Number(dataSet.pid);
-        //   let sid = Number(dataSet.sid);
-        //   this.data.pid = pid;
-        //   this.data.sid = sid;
-        //   this.data.cartsItem = this.getCartItemFromCarts(pid,sid);
-        //   console.log("购物车项是：",this.data.cartsItem);
-        //   //选择的规格
         this.data.choosedType = dataSet.choosed;
         //   console.log("choosedType is ",this.data.choosedType);
         let choosedArr = Object.keys(this.data.choosedType);
@@ -556,7 +576,7 @@ Page({
                 sid: this.data.sid,
                 choosedType: this.data.choosedType,
                 cartsItem: this.data.cartsItem,
-                thisPrice: (this.data.cartsItem.product.price / this.data.cartsItem.count).toFixed(2)
+                thisPrice: Host.DIV(this.data.cartsItem.product.price, this.data.cartsItem.count).toFixed(2)
             });
         } else {
             console.log("product is ", this.data.product);
@@ -593,7 +613,7 @@ Page({
                 sid: this.data.sid,
                 choosedType: this.data.choosedType,
                 cartsItem: this.data.cartsItem,
-                thisPrice: (this.data.cartsItem.product.price / this.data.cartsItem.count).toFixed(2)
+                thisPrice: Host.DIV(this.data.cartsItem.product.price, this.data.cartsItem.count).toFixed(2)
             })
         }
     },
@@ -654,13 +674,6 @@ Page({
         let tag = targetArr[2];
         console.log("index is ", index);
         console.log("tag is ", tag);
-        //   let choosedTypeKeys = Object.keys(this.data.choosedType);
-        //   for(let j = 0;j < choosedTypeKeys.length;j++){
-        //       console.log("选中的键值是：",choosedTypeKeys[j]);
-        //       //获得value值
-        //       let choosedvalue = this.data.choosedType[choosedTypeKeys[j]]
-        //       console.log("选中的种类值是：",choosedvalue);
-        //   }
         //在typeValueArr中找到mode为id的这个对象并设置该对象的touch属性为true
         let testData = this.data.typeValueArr;
         console.log("testData is ", testData);
@@ -685,22 +698,6 @@ Page({
                 })
                 console.log("---------------->>>>", this.data.cartsItem);
                 this.data.cartsItem.size[`${tag}`] = choosedCategory;
-                // if(this.data.pid !== 0 && this.data.sid !== 0 ){
-                //   console.log("pid is ",this.data.pid,"sid is ",this.data.sid);
-                //   console.log("carts is ",this.data.carts);
-                //   let cartsItem = this.getCartItemFromCarts(this.data.pid,this.data.sid,tag);
-                //   console.log("购物车项是：",cartsItem);
-                //   console.log("cartsItem is ",cartsItem);
-                //   console.log("cartsItem's size is ",cartsItem.size);
-                //   cartsItem.size[`${tag}`] = choosedCategory;
-
-                //   // let cartsItemArr = cartsItem.split(";");
-                //   // cartsItem.size = testData[index][`${tag}`][j].mode;
-                //   //刷新购物车内容
-                //   this.setData({
-                //       carts : this.data.carts
-                //   })
-                // }
                 console.log("该尺寸类型是否被选中：", testData[index][`${tag}`][j].touch);
             } else {
                 //将其他的touch重置为false
@@ -813,17 +810,43 @@ Page({
             this.data.cartsItem.count -= 1;
             for (let i = 0; i < this.data.storeList.length; i++) {
                 let tempCartsItem = this.data.carts[this.data.storeList[i]];
-                for (let j = 0; j < tempCartsItem.length; j++) {
-                    if (this.data.cartsItem.cid === tempCartsItem[j].cid && this.data.cartsItem.pid === tempCartsItem[j].pid) {
-                        tempCartsItem[j].count = this.data.cartsItem.count;
-                        tempCartsItem[j].product.price = this.data.thisPrice * tempCartsItem[j].count.toFixed(2);
+                let cartsItemArr = tempCartsItem.data;
+                let len = cartsItemArr.length;
+                for (let j = 0; j < len; j++) {
+                    if (this.data.cartsItem.cid === cartsItemArr[j].cid && this.data.cartsItem.pid === cartsItemArr[j].pid) {
+                        cartsItemArr[j].count = this.data.cartsItem.count;
+                        cartsItemArr[j].product.price = Host.MUL(this.data.thisPrice,cartsItemArr[j].count);
+                        cartsItemArr[j].product.otherprice = Host.MUL(this.data.marketPrice,cartsItemArr[j].count);
                     }
                 }
             }
+            //如果是选中状态的话就更新总价信息
+            if (this.data.cartsItem.choosed) {
+                this.data.totalPrice = Host.SUB(this.data.totalPrice,this.data.thisPrice);
+                this.data.marketTotalPrice = Host.SUB(this.data.marketTotalPrice,this.data.marketPrice);
+                this.setData({
+                    totalPrice: this.data.totalPrice,
+                    marketTotalPrice: this.data.marketTotalPrice
+                })
+            }
         }
-        this.data.cartsItem.product.price = this.data.thisPrice * this.data.cartsItem.count.toFixed(2);
+        this.data.cartsItem.product.price = Host.MUL(this.data.thisPrice, this.data.cartsItem.count);
         this.setData({
             cartsItem: this.data.cartsItem,
+        })
+       
+    },
+    //减少商品的数量
+    subInPage : function(e){
+        let pid = Number(e.currentTarget.dataset.pid);
+        console.log("pid is ",pid);
+        //获取thisPrice
+        this.getSourcePriceByPid(pid);
+        //获取cartsItem
+        this.getCartsItemByPid(pid);
+        this.sub();
+        this.setData({
+            carts : this.data.carts
         })
     },
     add: function () {
@@ -832,25 +855,102 @@ Page({
         this.data.cartsItem.count += 1;
         for (let i = 0; i < this.data.storeList.length; i++) {
             let tempCartsItem = this.data.carts[this.data.storeList[i]];
-            for (let j = 0; j < tempCartsItem.length; j++) {
-                if (this.data.cartsItem.cid === tempCartsItem[j].cid && this.data.cartsItem.pid === tempCartsItem[j].pid) {
-                    console.log("tempCartsItem[j] is ", tempCartsItem[j]);
-                    tempCartsItem[j].count = this.data.cartsItem.count;
-                    tempCartsItem[j].product.price = this.data.thisPrice * tempCartsItem[j].count.toFixed(2);
+            console.log("tempCartsItem is ",tempCartsItem.data);
+            let cartsItemArr = tempCartsItem.data;
+            let len = cartsItemArr.length;
+            for (let j = 0; j < len; j++) {
+                if (this.data.cartsItem.cid === cartsItemArr[j].cid && this.data.cartsItem.pid === cartsItemArr[j].pid) {
+                    console.log("cartsItemArr[j] is ", cartsItemArr[j]);
+                    cartsItemArr[j].count = this.data.cartsItem.count;
+                    cartsItemArr[j].product.price = Host.MUL(this.data.thisPrice, cartsItemArr[j].count);
+                    cartsItemArr[j].product.otherprice = Host.MUL(this.data.marketPrice, cartsItemArr[j].count);
                 }
             }
         }
-        this.data.cartsItem.product.price = this.data.thisPrice * this.data.cartsItem.count.toFixed(2);
+        this.data.cartsItem.product.price = Host.MUL(this.data.thisPrice, this.data.cartsItem.count);
         this.setData({
-            cartsItem: this.data.cartsItem,
+            cartsItem : this.data.cartsItem,
         })
         console.log("this.carts is ", this.data.carts);
+        if(this.data.cartsItem.choosed){
+            this.data.totalPrice = Host.ADD(this.data.totalPrice,this.data.thisPrice);
+            this.data.marketTotalPrice = Host.ADD(this.data.marketTotalPrice,this.data.marketPrice);
+            console.log("totalPrice is ",this.data.totalPrice);
+            console.log("marketTotalPrice is ",this.data.marketTotalPrice);
+            this.setData({
+                totalPrice       : this.data.totalPrice,
+                marketTotalPrice : this.data.marketTotalPrice
+            })
+        }
+    },
+    //增加商品的数量,如果商品的选中状态为true的时候更新下面的合计的费用和总价信息
+    addInPage : function(e){
+        let pid = Number(e.currentTarget.dataset.pid);
+        console.log("pid is ", pid);
+        //获取thisPrice
+        this.getSourcePriceByPid(pid);
+        //获取cartsItem
+        this.getCartsItemByPid(pid);
+        console.log("price is ",this.data.thisPrice);
+        console.log("cartsItem is ",this.data.cartsItem);
+        this.add();
+        this.setData({
+            carts : this.data.carts
+        });
+    },
+    getCartsItemByPid : function(pid){
+        for (let i = 0; i < this.data.storeList.length; i++) {
+            let tempCartsItem = this.data.carts[this.data.storeList[i]];
+            console.log("tempCartsItem is ", tempCartsItem);
+            for (let j = 0; j < tempCartsItem.data.length; j++) {
+                console.log("tempCartsItem[j] is ", tempCartsItem.data[j]);
+                if (pid === tempCartsItem.data[j].pid) {
+                    this.data.cartsItem = tempCartsItem.data[j];
+                    console.log("cartsItem is ", this.data.cartsItem);
+                    break;
+                }
+            }
+        }
+    },
+    //根据pid获取价格
+    getSourcePriceByPid : function(pid){
+        for (let i = 0; i < this.data.storeList.length; i++) {
+            console.log("sourceCarts is ",this.data.sourceCarts);
+            let tempCartsItem = this.data.sourceCarts[i][this.data.storeList[i]];
+            console.log("tempCartsItem is ", tempCartsItem);
+            for (let j = 0; j < tempCartsItem.length; j++) {
+                console.log("tempCartsItem[j] is ", tempCartsItem[j]);
+                if (pid === tempCartsItem[j].pid) {
+                    this.data.thisPrice = tempCartsItem[j].price;
+                    this.data.marketPrice = tempCartsItem[j].otherPrice;
+                    break;
+                }
+            }
+        }
+        console.log("thisPrice is ",this.data.thisPrice);
     },
     //依据商店名字选择所有的商品
     selectAllByStoreName: function (event) {
         console.log("event is ", event);
         let storeName = event.currentTarget.id;
         console.log("this.data.carts is ", this.data.carts);
+        
+        // //当所有商店被选中的话就将全选设置为true否则为false
+        // for(let i=0;i < this.data.storeList.length;i++){
+        //     console.log("storeName is ",this.data.storeList[i]);
+        //     let storePArr = this.data.carts[this.data.storeList[i]];
+        //     console.log("storePArr is ",storePArr);
+        //     console.log("choosed is ",storePArr.choosed);
+        //     if(storePArr.choosed){
+        //         ++choosedStore;
+        //     }
+        // }
+        // console.log("choosedStore is ",choosedStore);
+        // if(choosedStore === this.data.storeList.length){
+        //     this.setData({
+        //         isFullChoosed : true
+        //     });
+        // }
         this.chooseStoreByName(storeName);
     },
     chooseStoreByName: function (storeName) {
@@ -860,23 +960,48 @@ Page({
         productArr.choosed = !productArr.choosed;
         let productLen = productArr.data.length;
         let priceSum = 0;
+        let totalMarketPrice = 0;
         let totalCount = 0;
         for (let i = 0; i < productLen; i++) {
             let productItem = productArr.data[i];
             console.log("product item is ", productItem);
             productItem.choosed = !productItem.choosed;
             if (productItem.choosed) {
-                priceSum += productItem.product.price;
+                priceSum = Host.ADD(priceSum,productItem.product.price);
+                totalMarketPrice = Host.ADD(totalMarketPrice,productItem.product.otherprice);
                 //总商品数相加
                 totalCount++;
             }
         }
-        priceSum = priceSum.toFixed(2);
         this.setData({
-            carts: this.data.carts,
-            totalPrice: priceSum,
-            totalCount: totalCount
+            carts            : this.data.carts,
+            totalPrice       : priceSum,
+            totalCount       : totalCount,
+            marketTotalPrice : totalMarketPrice
         })
+        this.checkAllChoseByStore();
+    },
+    checkAllChoseByStore : function(){
+        let choosedStore = 0;
+        for (let i = 0; i < this.data.storeList.length; i++) {
+            console.log("storeName is ", this.data.storeList[i]);
+            let storePArr = this.data.carts[this.data.storeList[i]];
+            console.log("storePArr is ", storePArr);
+            console.log("choosed is ", storePArr.choosed);
+            if (storePArr.choosed) {
+                ++choosedStore;
+            }
+        }
+        console.log("choosedStore is ", choosedStore);
+        if (choosedStore === this.data.storeList.length) {
+            this.setData({
+                isFullChoosed: true
+            });
+        } else {
+            this.setData({
+                isFullChoosed: false
+            })
+        }
     },
     //全选商品包括商店
     selectAllChange: function (event) {

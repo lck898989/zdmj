@@ -1,7 +1,7 @@
 {
 	"description": "项目配置文件。",
 	"setting": {
-		"urlCheck": true,
+		"urlCheck": false,
 		"es6": true,
 		"postcss": true,
 		"minified": true,
@@ -11,7 +11,7 @@
 	"compileType": "miniprogram",
 	"libVersion": "2.4.1",
 	"appid": "wxcf83376cf2f40081",
-	"projectname": "zdmj_2",
+	"projectname": "zdmj_backup",
 	"isGameTourist": false,
 	"condition": {
 		"search": {

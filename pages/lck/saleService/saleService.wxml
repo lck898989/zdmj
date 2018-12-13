@@ -9,23 +9,35 @@
         <block wx:if='{{isSaleAfter}}' wx:for='{{saleOrderArray}}'>
             <view class='sale-com'>
                 <view class='saleaf-text'>
-                    <view class='orderNum'>
+                    <image src='https://shopfile.ykplay.com/resources/ico_type_1.png' style='width:30rpx;height:30rpx;'></image>
+                    <view class='storeName'>
+                        指点迷津-自营店
+                    </view>
+                    <!-- <view class='orderNum'>
                         <view>订单编号：</view>
                         <view class='orderItem'>{{item.onumber}}</view>
                     </view>
                     <view class='orderNum'>
                         <view>下单时间：</view>
                         <view class='orderItemTime'>{{item.ordertime}}</view>
-                    </view>
+                    </view> -->
                 </view>
                 <!--显示商品的详情-->
                 <block wx:for='{{item.products}}' wx:for-item='innerItem'>
                     <saleAfter-component goods='{{innerItem}}'>
-                        <view slot='footer'>
-                            <view class='saleafter-con'>
-                                <view class='saleafter' bindtap='applyAfterSale' data-oitemid='{{innerItem.oitemid}}'>
-                                    申请售后
+                        <view slot='footer' class='footWrapper'>
+                            <view class='orderWrapper'>
+                                <view class='orderNum'>
+                                    <view>订单编号：</view>
+                                <view class='orderItem'>{{item.onumber}}</view>
                                 </view>
+                                <view class='orderNum'>
+                                    <view>下单时间：</view>
+                                    <view class='orderItemTime'>{{item.ordertime}}</view>
+                                </view>                               
+                            </view>    
+                            <view class='saleafter' bindtap='applyAfterSale' data-oitemid='{{innerItem.oitemid}}'>
+                                申请售后
                             </view>
                         </view>
                     </saleAfter-component>
@@ -67,25 +79,22 @@
                         <view>服务编号：</view>
                         <view class='orderItem'>{{item.serviceNumber}}</view>
                     </view>
-                    <view class='orderNum'>
-                        <view>服务类型：</view>
-                        <view class='orderItemTime'>{{item.serviceType}}</view>
-                    </view>
                 </view>
                 <!--显示商品的详情-->
                 <block wx:for='{{item.products}}' wx:for-item='innerItem'>
                     <saleAfter-component goods='{{innerItem}}'>
                         <view slot='footer'>
-                            <view class='record-status'>
+                            <view class='record-status' bindtap='enterProgress' bind-oitemid='{{innerItem.oitemid}}'>
                                 <block wx:if='{{item.progressRes === 2 || item.progressRes === 5}}'>
                                     <image src='../../../resources/zq.png' style='width:25rpx;height:25rpx;margin-right:50rpx;'></image>
                                 </block>
                                 <block wx:if='{{item.progressRes === 10}}'>
                                     <image src='../../../resources/err.png' style='width:25rpx;height:25rpx;margin-right:20rpx;'></image>
                                 </block>
-                                <view style='color:#404040;font-size:30rpx;'>
+                                <view style='color:#404040;font-size:30rpx;white-space:nowrap'>
                                     {{item.progressMsg}}
                                 </view>
+                                <image src='../../../resources/icon_right.png' style='width:20rpx;height:25rpx;' class='enterProgress'></image>
                             </view>
                         </view>
                     </saleAfter-component>

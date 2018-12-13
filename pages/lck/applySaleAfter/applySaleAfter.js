@@ -21,7 +21,27 @@ Page({
       //缩略图数组
       screenshotArray : [],
       showReason : false,
-      reasonList : ['质量问题','商品与页面描述不符','误购','卖家发错货'],
+      reasonList : [
+          {
+              text   : '质量问题',
+              active : false,
+          },
+          {
+              text: '商品与页面描述不符',
+              active: false,
+          },
+          {
+              text   : '误购',
+              active : false,
+          },
+          {
+              text: '卖家发错货',
+              active: false,
+          },
+          {
+              text   : '其他',
+              active : false,
+          }],
       //退换货原因
       reason : '',
       host : app.host,
@@ -184,10 +204,19 @@ Page({
      let dataSet = event.currentTarget.dataset;
      let reason = dataSet.reason;
      console.log("reason is ",reason);
+     for(let i = 0;i < this.data.reasonList.length;i++){
+         if(this.data.reasonList[i].text === reason.text){
+             this.data.reasonList[i].active = true;
+         }else{
+             this.data.reasonList[i].active = false;
+         }
+     }
      this.setData({
-         reason : reason
+         reason     : reason,
+         reasonList : this.data.reasonList
      });
-     this.cancel();
+     console.log("reasonLIst is ",this.data.reasonList);
+    //  this.cancel();
   },
   //选择收货地址
   chooseAdd : function(){
@@ -212,9 +241,9 @@ Page({
           accept   : this.data.receptInfo['收货人'],
           phone    : this.data.receptInfo['手机号'],
           question :  this.data.questionDescription,
-          reason   : this.data.reason,
+          reason   : this.data.reason.text,
           add      : '上海市',
-          oitemid: self.data.goods.oitemid,
+          oitemid  : self.data.goods.oitemid,
           uid      : app.uid,
           typ      : self.data.backGoodsType.type,
           backcount: self.data.backcount
@@ -397,5 +426,10 @@ Page({
       this.setData({
         backcount : this.data.backcount
       })
+  },
+  confirmReason :function(e){
+      console.log("e is ",e);
+      //取消弹窗
+      this.cancel();
   }
 })

@@ -1,0 +1,412 @@
+/* pages/lck/cart/cart.wxss */
+page{
+    background-color: #f2f2f2;
+}
+.mask{
+  width: 750rpx;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: #000;
+  opacity: 0.7;
+  overflow: hidden;
+  z-index: 1000;
+}
+.page-con{
+    position: relative;
+    overflow: hidden;
+}
+.page-con-showbuy{
+    height: 100vh;
+}
+.cart-head{
+    width: 100%;
+    height: 72rpx;
+    line-height:72rpx;
+    font-size: 30rpx;
+    background-color: #fff;
+    color: #808080;
+    margin-bottom: 20rpx;
+}
+.store-container{
+    width: 750rpx;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+    align-items: center;
+    background-color: #fff;
+    margin-bottom: 20rpx;
+}
+.storeName-item-p{
+    width: 660rpx;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: nowrap;
+}
+.arrow-right{
+    margin-left: 300rpx;
+}
+.storeName-item,.goodsTop,.realPay,.expressFee{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+.storename-con{
+    width: 640rpx;
+    height: 40rpx;
+    line-height: 40rpx;
+    padding: 20rpx 30rpx;
+}
+.icon_con{
+    margin-left: 20rpx;
+    margin-right: 20rpx;
+}
+.checkbox-con{
+    width: 720rpx;
+    padding: 20rpx 0rpx 20rpx 30rpx;
+    border-top: 2rpx solid #f2f2f2;
+    border-bottom: 2rpx solid #f2f2f2;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: nowrap;
+    /* background-color: greenyellow; */
+}
+.imagecontainer{
+    margin-left: 10rpx;
+}
+.store-detail{
+    width: 720rpx;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+    align-items: center;
+}
+.right-text-con{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+    align-items: center;
+    margin-left: 30rpx;
+    font-size: 25rpx;
+}
+.right-line-one{
+    width: 400rpx;
+    height:40rpx;
+    /* display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+    align-items: center; */
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    align-self: flex-start;
+}
+.right-line-con{
+    width: 480rpx;
+    /* background: greenyellow; */
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    align-items: center;
+}
+.editor{
+    margin-right: 20rpx;
+    background-color: #ec0023;
+    color : #fff;
+    padding: 10rpx 20rpx;
+}
+.count-control{
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    flex-direction: row;
+    align-items: center;
+    width : 100%;
+}
+.colorType{
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    flex-direction: row;
+    align-items: center;
+}
+.count-item{
+    border: 1px solid #eee;
+    margin-right: 10rpx;
+    padding: 10rpx 20rpx;
+}
+.real-count{
+    margin-right: 10rpx;
+}
+.delete{
+    color : #fff;
+    background-color: #ec0023;
+    padding: 10rpx 20rpx;
+    margin-right: 10rpx;
+}
+.settle-con{
+    width: 100%;
+    height: 60rpx;
+    justify-self: flex-end;
+    padding: 20rpx 0rpx;
+    margin-top: 10rpx;
+    background-color:#fff;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    flex-direction: row;
+    align-items: center;
+    position: fixed;
+    bottom: 0px;
+}
+.left-con{
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    flex-direction: row;
+    align-items: center;
+}
+.settle{
+    height: 80rpx;
+    line-height: 80rpx;
+    width: 160rpx;
+    font-size: 30rpx;
+    text-align: center;
+    background-color: #b964d8;
+    color : #fff;
+    padding: 10rpx 0rpx;
+}
+.goodList{
+    margin-bottom: 100rpx;
+}
+.selectAll-con{
+    
+}
+.imageContainer{
+    /* margin-left: 30rpx; */
+    border: 10rpx solid #fff;
+    /* align-items: flex-end;
+    margin-bottom: 60rpx; */
+    z-index: 4000;
+    position: fixed;
+    top: 310rpx;
+    left: 30rpx;
+    overflow: hidden;
+}
+.lineOne-con{
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+.img{
+   margin-left: 20rpx;
+   margin-top: 20rpx;
+   border-radius: 20rpx;
+}
+.price-order-con{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+    align-items: flex-start;
+    height: 160rpx;
+    margin-top: 40rpx;
+    margin-left: 20rpx;
+}
+.cancel-con{
+    position: absolute;
+    justify-self: flex-end;
+    top: 20rpx;
+    right: 20rpx;
+}
+.price-item{
+    /* margin-left: 20rpx;
+    padding-top: 50rpx; */
+    margin-top: 20rpx;
+    margin-left: 15rpx;
+}
+.buy-con{
+    position: fixed;
+    overflow: hidden;
+    background-color: #fff;
+    width: 100%;
+    height: 800rpx;
+    bottom: 0rpx;
+    z-index: 2000;
+    border-top-left-radius: 20rpx;
+    border-top-right-radius: 20rpx;
+}
+.scc-con{
+    width: 100%;
+    height: 450rpx;
+}
+.lineTwo-con{
+    padding: 40rpx 0rpx;
+    margin-left: 30rpx;
+}
+.color-con{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    /* //允许换行 */
+    flex-wrap: wrap;
+    align-items: center;
+}
+.color-item{
+    margin-top: 20rpx;
+    margin-right: 20rpx;
+    background-color: #eee;
+    padding: 10rpx 30rpx;
+    border-radius: 10rpx;
+    font-size: 25rpx;
+}
+.choosed{
+    background-color: #ec0023;
+    color: #fff;
+}
+.add-sub-con{
+    margin-right: 20rpx;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+    align-items: center;
+}
+.countContainer{
+    margin-top: 20rpx;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    align-items: center;
+    font-size: 30rpx;
+}
+.as-item{
+    margin-right: 5rpx;
+    padding: 10rpx 20rpx;
+}
+.addOrBuy{
+    width: 100%;
+    height:100rpx;
+    line-height: 100rpx;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+    align-items: center;
+    position: fixed;
+    bottom: 0rpx;
+    margin: auto;
+    text-align: center;
+}
+.saveBuy{
+    width: 100%;
+    background-color: #b964d8;
+    color: #fff;
+}
+.typeModify{
+    background-color:rgba(0, 0, 0, 0.1);
+    padding: 5rpx 5rpx;
+    border-radius: 10rpx;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+    align-items: center;
+    font-size: 23rpx;
+}
+.zeroSource-con{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-right: 30rpx;
+    justify-content: flex-start;
+    align-items: center;
+    margin-top: 30rpx;
+}
+.zeroSource{
+    
+    font-size: 30rpx;
+    margin-left: 30rpx;
+    padding: 10rpx 20rpx;
+    color: #863bb7;
+    background-color: #ede2f4;
+    border-radius: 10rpx;
+    border: 2rpx solid #863bb7;
+    margin-bottom: 20rpx;
+}
+.marketPrice{
+    text-decoration-line: line-through;
+    color: #707070;
+    font-size: 25rpx; 
+    align-self: flex-start;
+}
+.goodsTop{
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    background: #fff;
+    height: 100rpx;
+    padding: 0rpx 30rpx;
+    font-size: 30rpx;
+    border-bottom: 2rpx solid #f2f2f2;
+}
+/* .leftText,.rightText{
+    font-size: 25rpx;
+} */
+.lineW{
+    background: #fff;
+    font-size: 30rpx;
+    height: 80rpx;
+    padding: 10rpx 0rpx;
+    border-bottom: 2rpx solid #f2f2f2;
+}
+.realPay{
+    justify-content: space-between;
+    padding: 0 30rpx;
+}
+.expressFee{
+    justify-content: space-between;
+    padding: 0 30rpx;
+}
+.topPrice{
+    height: 56rpx;
+    background: #fff;
+    font-size: 30rpx;
+    text-align: right;
+    padding-right: 34rpx;
+}
+.marClass{
+    color:#808080;font-size:30rpx;margin-left:20rpx;
+    text-decoration-line: line-through;
+}
+.rightArrow{
+    width: 0rpx;
+    height: 0rpx;
+    border-width: 10rpx;
+    border-style: solid;
+    border-color: transparent transparent transparent #fff;
+    margin-top: 6rpx;
+}
+.settle-wraper{
+    width: 200rpx;
+    background: #b964d8;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+}

@@ -8,12 +8,15 @@
             <view class='top-text'>
                 <text>【{{goods.pname}}】</text>
             </view>
+            <view class='type-wrapper'>
+                <text wx:for='{{goods.size}}'>{{item}}</text>
+            </view>
             <view class='bottom-text'>
-                <view>
-                    价格： ￥{{goods.price}}
+                <view style='color:#b964d8'>
+                    ￥{{goods.price}}
                 </view>
                 <view style='margin-left:40rpx;'>
-                    <view>数量： <slot name='beforeCount'></slot>{{goods.count}}<slot name='afterCount'></slot></view>
+                    <view><slot name='beforeCount'></slot>×{{goods.count}}<slot name='afterCount'></slot></view>
                 </view>
             </view>
             <!--需要动态添加的元素在这里添加-->
