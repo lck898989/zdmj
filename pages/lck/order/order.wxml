@@ -1,12 +1,43 @@
 <!--pages/lck/order/order.wxml-->
 <view class='page-con' hidden='{{sceneView}}'>
     <view class='order-con'>
-        <view class='order-head'>
+        <!-- <view class='order-head'>
             订单信息
+        </view> -->
+        <view class='address-con'>
+            <image src='../../../resources/address_bar.png' style='width:750rpx; height:190rpx;' class='add-back'></image>
+            <view class='address-detail-con'>
+                <view style='padding-left:10rpx;padding-right:10rpx;z-index:400;margin-left:20rpx;'>
+                    <image src='https://shopfile.ykplay.com/resources/btn_mine_adds.png' style='width:50rpx;height:50rpx;'></image>
+                </view>
+                <view class='address-detail' style='z-index:600;'>
+                    <block wx:if='{{add === null}}'>
+                        <view bindtap='enterAddress'>暂时没有收货地址添加一个吧</view>
+                    </block>
+                    <block wx:else>
+                        <view class='recept-info'>
+                            <view class='user-phone'>
+                                <view class='recept-item'>
+                                    收货人：{{add.recipient}}
+                                </view>
+                                <view>
+                                    {{add.phone}}
+                                </view>
+                            </view>
+                            <view class='recept-item'>
+                                {{add.district}}{{add.detaildistrict}}
+                            </view>
+                        </view>
+                    </block>
+                </view>
+                <view class='addManager' bindtap='enterAddress'>
+                    <image src='../../../resources/icon_right.png' style='width:25rpx;height:30rpx;'></image>
+                </view>
+            </view>
         </view>
         <block wx:if='{{loadDataOk}}'>
             <block wx:for='{{orderArray}}'>
-                <view class='order-detail'>
+                <!-- <view class='order-detail'>
                     <image src='{{imageHost}}{{item.head}}' style='width:190rpx;height:190rpx;margin-left:17rpx;' class='img-con'></image>
                     <view class='goods-style'>
                         <view class='goods-item' style='font-size:31rpx;color:#404040;margin-bottom:10rpx;'>
@@ -31,6 +62,25 @@
                             </view>
                         </view>
                     </view>
+                </view> -->
+                 <view class='list-con'>
+                    <image class='img-con' src="{{imageHost}}{{item.head}}" style="width:190rpx;height:190rpx;margin-left:17rpx;"></image>
+                    <view class='text-con'>
+                        <view class='top-text'>
+                            <text>{{item.pname}}</text>
+                        </view>
+                        <view class='type-wrapper'>
+                            <text wx:for='{{item.size}}'>{{item}}</text>
+                        </view>
+                        <view class='bottom-text'>
+                            <view style='color:#b964d8'>
+                                ￥{{item.price}}
+                            </view>
+                            <view style='margin-left:40rpx;'>
+                                <view>×{{item.count}}</view>
+                            </view>
+                        </view> 
+                    </view>
                 </view>
             </block>
         </block>
@@ -43,41 +93,13 @@
             暂无可用
         </view>
     </view>
-    <view class='address-con'>
-        <image src='../../../resources/address_bar.png' style='width:750rpx; height:190rpx;' class='add-back'></image>
-        <view class='address-detail-con'>
-            <view style='padding-left:10rpx;padding-right:10rpx;z-index:400;margin-left:20rpx;'>
-                <image src='../../../resources/location.png' style='width:50rpx;height:50rpx;'></image>
-            </view>
-            <view class='address-detail' style='z-index:600;'>
-                <block wx:if='{{add === null}}'>
-                    <view bindtap='enterAddress'>暂时没有收货地址添加一个吧</view>
-                </block>
-                <block wx:else>
-                    <view class='recept-info'>
-                        <view class='user-phone'>
-                            <view class='recept-item'>
-                                收货人：{{add.recipient}}
-                            </view>
-                            <view>
-                                {{add.phone}}
-                            </view>
-                        </view>
-                        <view class='recept-item'>
-                            {{add.district}}{{add.detaildistrict}}
-                        </view>
-                    </view>
-                </block>
-            </view>
-            <view class='addManager' bindtap='enterAddress'>></view>
-        </view>
-    </view>
+    
     <view class='youhui' style='border-bottom:1px solid #fff;background-color:#fff;margin-top:10rpx;margin-bottom:2rpx;'>
         <view>
             配送方式
         </view>
         <view>
-            免运费  >
+            包邮
         </view>
     </view>
     <view class='youhui sayToSaller' style='border-bottom:1px solid #fff;background-color:#fff;margin-bottom:10rpx;'>
@@ -97,16 +119,24 @@
         </view>
         <view class='order-total'>
             <view style='margin-right:20rpx;'>
-                共计：
+                小计：
             </view>
-            <view style='font-size:35rpx;color:#b31227;font-weight:800;'>
+            <view style='font-size:35rpx;color:#b964d8;font-weight:800;'>
                 ￥ {{totalPrice}}
             </view>
         </view>
     </view>
     <view class='pay-con'>
+        <view class='sum'>
+            <view>
+                合计
+            </view>
+            <view style='font-size:32rpx;color:#b964d8;'>
+                ￥{{totalPrice}}
+            </view>
+        </view>
         <view class='pay' bindtap='pay'>
-            立即支付
+            提交订单
         </view>
     </view>
 </view>
