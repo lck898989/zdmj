@@ -25,9 +25,7 @@ Page({
         shareParentUid: "",
         buttonText: "",
         url: "http://192.168.1.61:3150"
-
     },
-
     changeBottom: function() {
         app.ShortConnect("http://192.168.1.64:3150/Data/AddAgency", {
             parent: this.data.shareParentUid,

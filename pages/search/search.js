@@ -30,8 +30,12 @@ Page({
         unselectBorder: '2rpx solid #eee',
 
     },
+  onShow:function(res){
+ 
+
+  },
     onLoad: function(res) {
-        
+    
         app.setKaiQi = res => {
             // var selectsize = JSON.parse(event.currentTarget.dataset.shop.size);
             // console.log(selectsize + "333333333333");

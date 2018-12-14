@@ -9,6 +9,11 @@ Page({
    * 页面的初始数据
    */
   data: {
+      url:"",
+      isleftDa:true,
+    //判断当前选中的index
+    index1:null,
+    day:null,
    page:1,
    dete:null,
    LoadOk:false,
@@ -33,14 +38,21 @@ Page({
     todamo1: 0,
     toyear1: 0,
     leixing: '0',
+    dete: [],
+    timeList:[],
+
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: async function (options) {
-    let resData = await this.getType('0');
+      this.setData({
+          url: app.urlw3
+      })
+    console.log("onload");
     console.log("in onLoad resData is ", resData);
+    let resData = await this.getType('0');
     for (let m = 0; m < resData.length; m++) {
       if (resData[m].shopessayhead) {
         resData[m].shopessayhead = resData[m].shopessayhead.split(',');
@@ -49,9 +61,6 @@ Page({
       }
     }
     //console.log("看这里:",JSON.stringify(resData[0]));
-    let a = [{ time: '12月6日', data: [{ shopeid: 1, shoptitle: "测试文章", shopessayhead: ["/upload/shopessayhead/1544064715664.jpeg"], shopauthor: "e6a8b1e6a183e88081e4b8b8e5ad90", shopauthoruid: 4, shopintroduction: "", see: 0, forword: 0, shopid: 4, txt: "<p>测试测试测试测试测试测试测试测试测试测试测试测试测试测试</p>", time: "2018-12-06 10:51:55", shopessaycustom: 0, shopessaycustomhead: "", wxnickname: "樱桃老丸子", wxhead: "https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLzmEaKe0UdUaXWjd9hD7vDaibiaDibvfI3DzZ7yFmGydelDJQMvv6NRdibI6Eza2YubHGDzMLib5uZ8ZQ/132", productstype: "shopessays", shop: { shopid: 4, shopname: "量贩式KTV", shophead: "/upload/shophead/1543578245838.jpeg", shoptype: 1, businessarea: "天津", shopaddress: "测试商品", shopphone: "12345678900", opentime: "周一至周五5:00-19:00", shoptag: "乐", entertime: "2018-11-30 19:44:05", bankcard: "6228480262942471117", available: "true", earnings: 0, bank: "中国农业银行", bankname: "吕俊锋", shoptname: "西餐" }, products: [{ shoppid: 8, head: "/upload/head2/1543578920789.png", shoppname: "便携式榨汁机果汁机", shopprice: 454, shopoprice: 233, shopprofit: 221, count: 100, info: "121", sales: 0, shopid: 4, starttime: "2018-11-21 00:00:00", endtime: "2018-12-21 00:00:00", type: 2, sequence: -1, putaway: "up", usefullife: 24 }], rebate: "110.50" }, { shopeid: 1, shoptitle: "测试文章", shopessayhead: ["/upload/shopessayhead/1544064715664.jpeg"], shopauthor: "e6a8b1e6a183e88081e4b8b8e5ad90", shopauthoruid: 4, shopintroduction: "", see: 0, forword: 0, shopid: 4, txt: "<p>测试测试测试测试测试测试测试测试测试测试测试测试测试测试</p>", time: "2018-12-06 10:51:55", shopessaycustom: 0, shopessaycustomhead: "", wxnickname: "樱桃老丸子", wxhead: "https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLzmEaKe0UdUaXWjd9hD7vDaibiaDibvfI3DzZ7yFmGydelDJQMvv6NRdibI6Eza2YubHGDzMLib5uZ8ZQ/132", productstype: "shopessays", shop: { shopid: 4, shopname: "量贩式KTV", shophead: "/upload/shophead/1543578245838.jpeg", shoptype: 1, businessarea: "天津", shopaddress: "测试商品", shopphone: "12345678900", opentime: "周一至周五5:00-19:00", shoptag: "乐", entertime: "2018-11-30 19:44:05", bankcard: "6228480262942471117", available: "true", earnings: 0, bank: "中国农业银行", bankname: "吕俊锋", shoptname: "西餐" }, products: [{ shoppid: 8, head: "/upload/head2/1543578920789.png", shoppname: "便携式榨汁机果汁机", shopprice: 454, shopoprice: 233, shopprofit: 221, count: 100, info: "121", sales: 0, shopid: 4, starttime: "2018-11-21 00:00:00", endtime: "2018-12-21 00:00:00", type: 2, sequence: -1, putaway: "up", usefullife: 24 }], rebate: "110.50" }, { shopeid: 1, shoptitle: "测试文章", shopessayhead: ["/upload/shopessayhead/1544064715664.jpeg"], shopauthor: "e6a8b1e6a183e88081e4b8b8e5ad90", shopauthoruid: 4, shopintroduction: "", see: 0, forword: 0, shopid: 4, txt: "<p>测试测试测试测试测试测试测试测试测试测试测试测试测试测试</p>", time: "2018-12-06 10:51:55", shopessaycustom: 0, shopessaycustomhead: "", wxnickname: "樱桃老丸子", wxhead: "https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLzmEaKe0UdUaXWjd9hD7vDaibiaDibvfI3DzZ7yFmGydelDJQMvv6NRdibI6Eza2YubHGDzMLib5uZ8ZQ/132", productstype: "shopessays", shop: { shopid: 4, shopname: "量贩式KTV", shophead: "/upload/shophead/1543578245838.jpeg", shoptype: 1, businessarea: "天津", shopaddress: "测试商品", shopphone: "12345678900", opentime: "周一至周五5:00-19:00", shoptag: "乐", entertime: "2018-11-30 19:44:05", bankcard: "6228480262942471117", available: "true", earnings: 0, bank: "中国农业银行", bankname: "吕俊锋", shoptname: "西餐" }, products: [{ shoppid: 8, head: "/upload/head2/1543578920789.png", shoppname: "便携式榨汁机果汁机", shopprice: 454, shopoprice: 233, shopprofit: 221, count: 100, info: "121", sales: 0, shopid: 4, starttime: "2018-11-21 00:00:00", endtime: "2018-12-21 00:00:00", type: 2, sequence: -1, putaway: "up", usefullife: 24 }], rebate: "110.50" }] }, { time: '12月6日', data: [{ shopeid: 1, shoptitle: "测试文章", shopessayhead: ["/upload/shopessayhead/1544064715664.jpeg"], shopauthor: "e6a8b1e6a183e88081e4b8b8e5ad90", shopauthoruid: 4, shopintroduction: "", see: 0, forword: 0, shopid: 4, txt: "<p>测试测试测试测试测试测试测试测试测试测试测试测试测试测试</p>", time: "2018-12-06 10:51:55", shopessaycustom: 0, shopessaycustomhead: "", wxnickname: "樱桃老丸子", wxhead: "https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLzmEaKe0UdUaXWjd9hD7vDaibiaDibvfI3DzZ7yFmGydelDJQMvv6NRdibI6Eza2YubHGDzMLib5uZ8ZQ/132", productstype: "shopessays", shop: { shopid: 4, shopname: "量贩式KTV", shophead: "/upload/shophead/1543578245838.jpeg", shoptype: 1, businessarea: "天津", shopaddress: "测试商品", shopphone: "12345678900", opentime: "周一至周五5:00-19:00", shoptag: "乐", entertime: "2018-11-30 19:44:05", bankcard: "6228480262942471117", available: "true", earnings: 0, bank: "中国农业银行", bankname: "吕俊锋", shoptname: "西餐" }, products: [{ shoppid: 8, head: "/upload/head2/1543578920789.png", shoppname: "便携式榨汁机果汁机", shopprice: 454, shopoprice: 233, shopprofit: 221, count: 100, info: "121", sales: 0, shopid: 4, starttime: "2018-11-21 00:00:00", endtime: "2018-12-21 00:00:00", type: 2, sequence: -1, putaway: "up", usefullife: 24 }], rebate: "110.50" }, { shopeid: 1, shoptitle: "测试文章", shopessayhead: ["/upload/shopessayhead/1544064715664.jpeg"], shopauthor: "e6a8b1e6a183e88081e4b8b8e5ad90", shopauthoruid: 4, shopintroduction: "", see: 0, forword: 0, shopid: 4, txt: "<p>测试测试测试测试测试测试测试测试测试测试测试测试测试测试</p>", time: "2018-12-06 10:51:55", shopessaycustom: 0, shopessaycustomhead: "", wxnickname: "樱桃老丸子", wxhead: "https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLzmEaKe0UdUaXWjd9hD7vDaibiaDibvfI3DzZ7yFmGydelDJQMvv6NRdibI6Eza2YubHGDzMLib5uZ8ZQ/132", productstype: "shopessays", shop: { shopid: 4, shopname: "量贩式KTV", shophead: "/upload/shophead/1543578245838.jpeg", shoptype: 1, businessarea: "天津", shopaddress: "测试商品", shopphone: "12345678900", opentime: "周一至周五5:00-19:00", shoptag: "乐", entertime: "2018-11-30 19:44:05", bankcard: "6228480262942471117", available: "true", earnings: 0, bank: "中国农业银行", bankname: "吕俊锋", shoptname: "西餐" }, products: [{ shoppid: 8, head: "/upload/head2/1543578920789.png", shoppname: "便携式榨汁机果汁机", shopprice: 454, shopoprice: 233, shopprofit: 221, count: 100, info: "121", sales: 0, shopid: 4, starttime: "2018-11-21 00:00:00", endtime: "2018-12-21 00:00:00", type: 2, sequence: -1, putaway: "up", usefullife: 24 }], rebate: "110.50" }] }, { time: '12月6日', data: [{ shopeid: 1, shoptitle: "测试文章", shopessayhead: ["/upload/shopessayhead/1544064715664.jpeg"], shopauthor: "e6a8b1e6a183e88081e4b8b8e5ad90", shopauthoruid: 4, shopintroduction: "", see: 0, forword: 0, shopid: 4, txt: "<p>测试测试测试测试测试测试测试测试测试测试测试测试测试测试</p>", time: "2018-12-06 10:51:55", shopessaycustom: 0, shopessaycustomhead: "", wxnickname: "樱桃老丸子", wxhead: "https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLzmEaKe0UdUaXWjd9hD7vDaibiaDibvfI3DzZ7yFmGydelDJQMvv6NRdibI6Eza2YubHGDzMLib5uZ8ZQ/132", productstype: "shopessays", shop: { shopid: 4, shopname: "量贩式KTV", shophead: "/upload/shophead/1543578245838.jpeg", shoptype: 1, businessarea: "天津", shopaddress: "测试商品", shopphone: "12345678900", opentime: "周一至周五5:00-19:00", shoptag: "乐", entertime: "2018-11-30 19:44:05", bankcard: "6228480262942471117", available: "true", earnings: 0, bank: "中国农业银行", bankname: "吕俊锋", shoptname: "西餐" }, products: [{ shoppid: 8, head: "/upload/head2/1543578920789.png", shoppname: "便携式榨汁机果汁机", shopprice: 454, shopoprice: 233, shopprofit: 221, count: 100, info: "121", sales: 0, shopid: 4, starttime: "2018-11-21 00:00:00", endtime: "2018-12-21 00:00:00", type: 2, sequence: -1, putaway: "up", usefullife: 24 }], rebate: "110.50" }, { shopeid: 1, shoptitle: "测试文章", shopessayhead: ["/upload/shopessayhead/1544064715664.jpeg"], shopauthor: "e6a8b1e6a183e88081e4b8b8e5ad90", shopauthoruid: 4, shopintroduction: "", see: 0, forword: 0, shopid: 4, txt: "<p>测试测试测试测试测试测试测试测试测试测试测试测试测试测试</p>", time: "2018-12-06 10:51:55", shopessaycustom: 0, shopessaycustomhead: "", wxnickname: "樱桃老丸子", wxhead: "https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLzmEaKe0UdUaXWjd9hD7vDaibiaDibvfI3DzZ7yFmGydelDJQMvv6NRdibI6Eza2YubHGDzMLib5uZ8ZQ/132", productstype: "shopessays", shop: { shopid: 4, shopname: "量贩式KTV", shophead: "/upload/shophead/1543578245838.jpeg", shoptype: 1, businessarea: "天津", shopaddress: "测试商品", shopphone: "12345678900", opentime: "周一至周五5:00-19:00", shoptag: "乐", entertime: "2018-11-30 19:44:05", bankcard: "6228480262942471117", available: "true", earnings: 0, bank: "中国农业银行", bankname: "吕俊锋", shoptname: "西餐" }, products: [{ shoppid: 8, head: "/upload/head2/1543578920789.png", shoppname: "便携式榨汁机果汁机", shopprice: 454, shopoprice: 233, shopprofit: 221, count: 100, info: "121", sales: 0, shopid: 4, starttime: "2018-11-21 00:00:00", endtime: "2018-12-21 00:00:00", type: 2, sequence: -1, putaway: "up", usefullife: 24 }], rebate: "110.50" }] }];
-    this.setData({dete:a});
-    console.log('模拟数据:',a);
    ///////////////////////////////////////日历
     let now = new Date();
     let year = now.getFullYear();
@@ -63,9 +72,231 @@ Page({
     this.setData({
       year: year,
       month: month,
+      day: now.getDate().toString(),
       isToday: '' + year + month + now.getDate(),
       jinri: '' + year + (month.toString().length == 1 ? '0' + month.toString() : month.toString()) + dataxianzairiqi
     })
+    if (this.setHistroyCall)
+    {
+      this.setHistroyCall();
+    }
+    app.setHistroy = res => {
+      var keys = Object.keys(res.data.sharerecords);
+      var values = Object.values(res.data.sharerecords);
+      var data1=[];
+      for (let i = 0; i <= keys.length - 1; i++) {
+          var dataSon = {};
+              for (let j = 0; j <= values.length - 1; j++) {
+                  if(i==j)
+                  {
+                      let time = keys[i].split("-");
+                      time = this.subZero(time[1]) + "月" + this.subZero(time[2]) + "日";
+                      dataSon.time = time;
+                      dataSon.msg = values[j];
+                      data1.push(dataSon);   
+                  }
+              }
+      }
+      this.setData({
+        dete: data1
+      })
+      for (let i = 0; i <= this.data.dete.length - 1;i++)
+      {
+          for (let j = 0; j <= this.data.dete[i].msg.length-1;j++)
+          {
+              if (this.data.dete[i].msg[j].producttype =="shopessay")
+              {
+                //   if (this.data.dete[i].msg[j].shopessay[rebate] == undefined)
+                //   {
+                //       this.data.dete[i].msg[j].shopessay.rebate=0.40;
+                //   }
+                  if (this.data.dete[i].msg[j].shopessay.shopessaycustom==1)
+                  {
+                      this.data.dete[i].msg[j].shopessay.shopessaycustomhead = this.data.dete[i].msg[j].shopessay.shopessaycustomhead.split(",");
+                      this.data.dete[i].msg[j].shopessay.shopessayhead = this.data.dete[i].msg[j].shopessay.shopessayhead.split(",");
+                  }
+                  else
+                  {
+                      this.data.dete[i].msg[j].shopessay.shopessayhead = this.data.dete[i].msg[j].shopessay.shopessayhead.split(",");
+                  }
+              }
+              else if (this.data.dete[i].msg[j].producttype == "essay")
+              {
+                //   if (this.data.dete[i].msg[j].essay[rebate] == undefined) {
+                //       this.data.dete[i].msg[j].essay.rebate = 0.40;
+                //   }
+                  if (this.data.dete[i].msg[j].essay.essaycustom == 1) {
+                      this.data.dete[i].msg[j].essay.essaycustomhead = this.data.dete[i].msg[j].essay.essaycustomhead.split(",");
+                      this.data.dete[i].msg[j].essay.essayhead = this.data.dete[i].msg[j].essay.essayhead.split(",");
+                  }
+                  else {
+                      this.data.dete[i].msg[j].essay.essayhead = this.data.dete[i].msg[j].essay.essayhead.split(",");
+                  }
+              }
+              else
+              {
+                //   if (this.data.dete[i].msg[j].product[rebate] == undefined) {
+                //       this.data.dete[i].msg[j].product.rebate = 0.40;
+                //   }
+                  this.data.dete[i].msg[j].product.head = this.data.dete[i].msg[j].product.head.split(",");
+              }
+          }
+      }
+      this.setData({
+          dete: this.data.dete
+      })
+   
+      for (let i = 0; i <= this.data.dete.length-1;i++)
+      {
+          console.log(this.data.dete[i].msg.length+"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+          if (this.data.dete[i].msg.length % 2 == 0) {
+              let leftArray1 = [];
+              let rightArray1 = [];
+              for (let j = 0; j <= this.data.dete[i].msg.length - 1; j ++) {
+                  if (j <= (this.data.dete[i].msg.length / 2 - 1)) {
+                      leftArray1.push(this.data.dete[i].msg[j]);
+                      this.data.dete[i].leftArray = leftArray1;
+                      console.log(JSON.stringify(this.data.dete[i].leftArray)+"\\\\\\\\\\\\\\\\\\");
+                  }
+                  else {
+                      rightArray1.push(this.data.dete[i].msg[j]);
+                      this.data.dete[i].rightArray = rightArray1;
+              
+                  }
+                  if (j == this.data.dete[i].msg.length - 1)
+                  {
+               
+                  }
+              }
+          }
+          else {
+              let leftArray1 = [];
+              let rightArray1 = [];
+              for (let j = 0; j <= this.data.dete[i].msg.length - 1; j++) {
+                  if (j <= (this.data.dete[i].msg.length / 2 - 0.5)) {
+                      leftArray1.push(this.data.dete[i].msg[j]);
+                      this.data.dete[i].leftArray = leftArray1;
+                
+                     
+                  }
+                  else {
+                      rightArray1.push(this.data.dete[i].msg[j]);
+                      this.data.dete[i].rightArray = rightArray1;
+                  
+                  }
+                  if (j == this.data.dete[i].msg.length - 1) {
+                     
+                  }
+              }
+          }
+      }
+      this.setData({
+          dete: this.data.dete
+      })
+      console.log(JSON.stringify(this.data.dete) + "---------------------------");
+      for (let k = 0; k <= this.data.dete.length-1;k++)
+      {
+          if (this.data.dete[k].leftArray != null&& this.data.dete[k].rightArray != null)
+          {
+              for (let i = 0; i <= this.data.dete[k].leftArray.length - 1; i++) {
+                  console.log(i + "iiiiiiiiiiiii");
+                  for (let j = 0; j <= this.data.dete[k].rightArray.length - 1; j++) {
+                      if (i == j) {
+                          if (this.data.dete[k].leftArray[i].height > this.data.dete[k].rightArray[j].height) {
+                              if (this.data.isleftDa) {
+                                  this.setData({
+                                      isleftDa: false,
+                                  })
+                                  break;
+                              } else {
+                                  var leftNumber = this.data.dete[k].leftArray[i];
+                                  this.data.dete[k].leftArray[i] = this.data.dete[k].rightArray[j];
+                                  this.data.dete[k].rightArray[j] = leftNumber;
+                                  this.setData({
+                                      isleftDa: true,
+                                  })
+                              }
+                          } else if (this.data.dete[k].leftArray[i].height < this.data.dete[k].rightArray[j].height) {
+                              if (this.data.isleftDa) {
+                                  var leftNumber = this.data.dete[k].leftArray[i];
+                                  this.data.dete[k].leftArray[i] = this.data.dete[k].rightArray[j];
+                                  this.data.dete[k].rightArray[j] = leftNumber;
+                                  this.setData({
+                                      isleftDa: false,
+                                  })
+                              } else {
+                                  this.setData({
+                                      isleftDa: true,
+                                  })
+                                  break;
+                              }
+                          }
+                      }
+                  }
+              }
+             
+          }
+      }
+    }
+    app.setHistroyData = res => {
+      
+      var timeList = [];
+      for (let j = 0; j <= res.data.timeList.length - 1; j++) {
+        res.data.timeList[j] = res.data.timeList[j].split("-");
+        if (res.data.timeList[j][1][0] == '0') {
+          res.data.timeList[j][1] = res.data.timeList[j][1][1];
+        }
+        if (res.data.timeList[j][2][0] == '0') {
+          res.data.timeList[j][2] = res.data.timeList[j][2][1];
+        }
+        timeList.push(res.data.timeList[j][0] + res.data.timeList[j][1] + res.data.timeList[j][2]);
+      }
+      this.setData({
+          timeList: timeList
+      })
+      for (let i = 0; i <= this.data.dateArr.length - 1; i++) {
+        this.data.dateArr[i].istrue = false;
+      }
+    
+      for (let i = 0; i <= this.data.dateArr.length - 1; i++) {
+        for (let j = 0; j <= timeList.length - 1; j++) {
+          if (this.data.dateArr[i].isToday == timeList[j]) {
+            this.data.dateArr[i].istrue = true;
+          }
+        }
+      }
+      this.setData({
+        dateArr: this.data.dateArr
+      })
+    }
+  },
+  //刷新dataArr
+  refushData:function(){
+    //   var timeList = [];
+    //   for (let j = 0; j <= this.data.timeList.length - 1; j++) {
+    //       this.data.timeList[j] = this.data.timeList[j].split("-");
+    //       if (this.data.timeList[j][1][0] == '0') {
+    //           this.data.timeList[j][1] = this.data.timeList[j][1][1];
+    //       }
+    //       if (this.data.timeList[j][2][0] == '0') {
+    //           this.data.timeList[j][2] = this.data.timeList[j][2][1];
+    //       }
+    //       timeList.push(this.data.timeList[j][0] + this.data.timeList[j][1] + this.data.timeList[j][2]);
+    //   }
+      for (let i = 0; i <= this.data.dateArr.length - 1; i++) {
+          this.data.dateArr[i].istrue = false;
+      }
+
+      for (let i = 0; i <= this.data.dateArr.length - 1; i++) {
+          for (let j = 0; j <= this.data.timeList.length - 1; j++) {
+              if (this.data.dateArr[i].isToday == this.data.timeList[j]) {
+                  this.data.dateArr[i].istrue = true;
+              }
+          }
+      }
+      this.setData({
+          dateArr: this.data.dateArr
+      })
   },
   //获得首页的分类信息
   getType: async function (tag) {
@@ -103,6 +334,21 @@ Page({
 
     // })
   },
+  addZero:function(a){
+    if(a.length==1)
+    {
+      a="0"+a;
+    }
+    return a;
+  },
+  subZero:function(a){
+    if(a.length==2&&a[0]=='0')
+    {
+      a=a[1];
+    }
+    return a;
+
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -114,9 +360,55 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
-  },
+    console.log("onShow");
+    if(this.data.day==null)
+    {
+      this.setHistroyCall = res => {
+        let day = this.data.year.toString() + "-" + this.addZero(this.data.month.toString()) + "-" + this.addZero(this.data.day);
 
+        app.ShortConnect(app.urlw + "Data/GetShareRecordDate", {
+          uid: app.uid
+        }, "getHistroyData");
+        app.ShortConnect(app.urlw + "Data/GetShareRecordStartByDay", {
+          day: day,
+          uid: app.uid,
+          page: 2
+        }, "getHistroy");
+      }
+
+    }
+    else
+    {
+      let day = this.data.year.toString() + "-" + this.addZero(this.data.month.toString()) + "-" + this.addZero(this.data.day);
+
+      app.ShortConnect(app.urlw + "Data/GetShareRecordDate", {
+        uid: app.uid
+      }, "getHistroyData");
+      app.ShortConnect(app.urlw + "Data/GetShareRecordStartByDay", {
+        day: day,
+        uid: app.uid,
+        page: 2
+      }, "getHistroy");
+    }
+  },
+  getHeight: function (event) {
+      var width = event.detail.width;
+      var height = event.detail.height;
+      if (event.currentTarget.dataset.type == "left") {
+          this.data.dete[event.currentTarget.dataset.ids].leftArray[event.currentTarget.dataset.id].height = 343 * height / width;
+          this.setData({
+              dete: this.data.dete
+          })
+      }
+      if (event.currentTarget.dataset.type == "right") {
+          this.data.dete[event.currentTarget.dataset.ids].rightArray[event.currentTarget.dataset.id].height = 343 * height / width;
+          this.setData({
+              dete: this.data.dete
+          })
+      }
+      console.log(JSON.stringify(this.data.dete) + "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+      //获取每张图片的高度
+  },
   /**
    * 生命周期函数--监听页面隐藏
    */
@@ -193,6 +485,10 @@ Page({
     let nowYear = nowDate.getFullYear();
     let nowMonth = nowDate.getMonth() + 1;
     let nowWeek = nowDate.getDay();
+    console.log(nowYear+"=================");
+    console.log(nowMonth + "=================");
+    console.log(nowWeek + "=================");
+
     let getYear = setYear || nowYear;
     let getMonth = setMonth >= 0 ? (setMonth + 1) : nowMonth;
 
@@ -214,9 +510,12 @@ Page({
     let month = this.data.month - 2 < 0 ? 11 : this.data.month - 2;
     this.setData({
       year: year,
-      month: (month + 1)
+      month: (month + 1),
+      index1: null
     })
     this.dateInit(year, month);
+    this.refushData();
+    console.log(this.data.dateArr);
   },
   nextMonth: function () {
     //全部时间的月份都是按0~11基准，显示月份才+1
@@ -224,17 +523,47 @@ Page({
     let month = this.data.month > 11 ? 0 : this.data.month;
     this.setData({
       year: year,
-      month: (month + 1)
+      month: (month + 1),
+      index1:null
     })
     this.dateInit(year, month);
+     this.refushData();
+    console.log(this.data.dateArr);
   },
 
-
+ 
   //点击日期事件
   dianjidata(e) {
-    var k = JSON.parse(e.currentTarget.id);
-    console.log(k)
-    this.dianjishouyi2(k)
+    if (JSON.parse(e.currentTarget.id).istrue == "true" && JSON.parse(e.currentTarget.id).nyr != this.data.isToday)
+    {
+      // this.data.dateArr[JSON.parse(e.currentTarget.id).index].ischoose=true;
+      this.setData({
+        dateArr: this.data.dateArr,
+        index1: JSON.parse(e.currentTarget.id).index
+      })
+      var k = JSON.parse(e.currentTarget.id);
+      let day = k.year + "-" + this.addZero(k.month) + "-" + this.addZero(k.riqi);
+      app.ShortConnect(app.urlw + "Data/GetShareRecordStartByDay", {
+        day: day,
+        uid: app.uid,
+        page: 1
+      }, "getHistroy");
+      // console.log(k)
+      // this.dianjishouyi2(k)
+    }
+    else
+    {
+      wx.showToast({
+        title: '这一天没有分享哦',//提示文字
+        duration: 2000,//显示时长
+        mask: false,//是否显示透明蒙层，防止触摸穿透，默认：false  
+        icon: 'success', //图标，支持"success"、"loading"  
+        success: function () { },//接口调用成功
+        fail: function () { },  //接口调用失败的回调函数  
+        complete: function () { } //接口调用结束的回调函数  
+      })
+    }
+
   },
   dianjishouyi2(e) {
       this.setData({

@@ -1,0 +1,62 @@
+/* pages/zcw/qianbao/qbsy.wxss */
+.quanju{
+  position: absolute;
+  top: 0;
+  width: 750rpx;
+  bottom: 0;
+  background-color: #eeeeee
+}
+.daohang{
+  position: relative;
+  top: 0;
+  width: 750rpx;
+  text-align: center;
+}
+.daohangtu{
+  width: 750rpx;
+}
+.daohangtu2{
+  width: 185rpx;
+  margin-top: -100rpx;
+}
+
+.mingxi{
+  position: relative;
+  text-align: center;
+  width: 750rpx;
+  margin-top: 40rpx;
+}
+.jine{
+  position: relative;
+  margin-top: 35rpx;
+}
+.index-manager2{
+    width:600rpx;
+    margin-left: 75rpx;
+    margin-top: 10rpx;
+    border-radius: 10rpx;
+    padding:30rpx 0rpx;
+    position: fixed;
+    bottom: 115rpx;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    background-color: #b3b3b3;
+    flex-wrap: nowrap;
+    align-items: center;
+}
+.index-manager{
+    width:600rpx;
+    margin-left: 75rpx;
+    margin-top: 10rpx;
+    border-radius: 10rpx;
+    padding:30rpx 0rpx;
+    position: fixed;
+    bottom: 233rpx;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    background-color: #b762d6;
+    flex-wrap: nowrap;
+    align-items: center;
+}

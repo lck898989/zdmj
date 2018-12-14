@@ -75,7 +75,7 @@ Page({
                 }
                 if (isHas)
                 {
-                    this.countDown();
+                    // this.countDown();
                     app.isStartOrder=true;
                 }
             }
@@ -89,7 +89,7 @@ Page({
                     }
                 }
                 if (isHas) {
-                    this.countDown();
+                    // this.countDown();
                 }
             }
           
@@ -119,7 +119,7 @@ Page({
                     }
                     if (isHas) {
                        
-                        this.countDown();
+                        // this.countDown();
                         app.isStartOrder = true;
                     }
                 }
@@ -133,7 +133,7 @@ Page({
                         }
                     }
                     if (isHas) {
-                        this.countDown();
+                        // this.countDown();
 
                     }
                     

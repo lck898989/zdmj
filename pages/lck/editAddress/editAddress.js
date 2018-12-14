@@ -367,13 +367,13 @@ Page({
             let url = app.host + 'Data/AddAddress'
             let data = {
                 address : {
-                    recipient : this.data.username,
-                    phone : this.data.phoneNumber,
-                    district : this.data.address.province + this.data.address.city + this.data.address.district,
+                    recipient      : this.data.username,
+                    phone          : this.data.phoneNumber,
+                    district       : this.data.address.province + this.data.address.city + this.data.address.district,
                     detaildistrict : this.data.detailDistrict,
-                    uid : app.uid,
-                    state : this.data.state ? 0 : 1,
-                    "type"  : dzType
+                    uid            : app.uid,
+                    state          : this.data.state ? 0 : 1,
+                    "type"         : dzType
                 }
             }
             console.log("data is ",data);

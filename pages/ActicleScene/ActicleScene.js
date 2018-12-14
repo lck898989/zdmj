@@ -79,6 +79,7 @@ Page({
         data.price = this.data.wenzhangJson.product_price * this.data.shopNumber;
         let orderA = [];
         orderA.push(data);
+        wx.setStorageSync('orderArray', orderA);
         if (app.isShare) {
             wx.navigateTo({
                 url: '../lck/order/order?interSource=2',
@@ -273,7 +274,7 @@ Page({
 
     },
     gunhdong: function (event) {
-        if (parseInt(event.detail.scrollTop) > 10) {
+        if (parseInt(event.detail.scrollTop) > 20) {
             console.log("33");
             this.setData({
                 bottomView: false
@@ -331,6 +332,7 @@ Page({
     },
     //进入商品详情
     shopButton: function () {
+        
         let self = this;
         // this.setData({
         // buyBoxHidden: false,
@@ -421,7 +423,11 @@ Page({
     onReachBottom: function () {
 
     },
-
+    turnIndex:function(){
+        wx.reLaunch({
+            url: '../lck/index/index'
+        })
+    },
     /**
      * 用户点击右上角分享
      */

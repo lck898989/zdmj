@@ -1,0 +1,26 @@
+<!--pages/zcw/qianbao/qbsy.wxml-->
+<view class='quanju'>
+  <!-- 导航栏 -->
+  <view class='daohang'>
+    <image src='{{arraytu.dh_dh}}' class='daohangtu'  style='height:auto' mode='widthFix'/>
+    <image src='{{arraytu.dh_qb}}' class='daohangtu2'  style='height:auto' mode='widthFix'/>
+  </view>
+  <!-- 钱包余额显示 -->
+  <view class='mingxi'>
+    <view><text  style='font-size:29rpx;'>钱包余额</text></view>
+    <view class='jine'><text  style='font-size:75rpx;font-weight:900;'>￥{{money}}</text></view>
+  </view>
+  <!-- 按钮 -->
+  <view class='index-manager' bindtap='wytx'>
+            <view style='margin-left:34rpx;color:white;font-size:35rpx;font-weight: 900;'>
+                我要提现
+            </view>
+  </view>
+  <view class='index-manager2' bindtap='cxmx'>
+            <view style='margin-left:34rpx;color:white;font-size:35rpx;font-weight: 900;'>
+                查询明细
+            </view>
+  </view>
+  <view class='bt_tx'></view>
+  <view class='bt_mx'></view>
+</view>

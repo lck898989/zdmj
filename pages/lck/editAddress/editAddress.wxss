@@ -37,8 +37,8 @@ page{
 .editor-item{
     margin-top: 30rpx;
     width:100%;
-    border-bottom: 1px solid #aaa;
-    padding-bottom: 30rpx;
+    border-bottom: 2px solid #f2f2f2;
+    padding: 0rpx 12rpx 35rpx 12rpx;
     font-size: 35rpx;
     display: flex;
     flex-direction: row;
@@ -77,34 +77,25 @@ page{
 .xianzhi{
   /* position: absolute; */
   width:154rpx;
+  margin-right: 40rpx;
 }
 .save-container{
-    /* width:750rpx;
-    height: 100rpx;
-    line-height: 100rpx;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: nowrap;
-    position: fixed;
-    bottom: 0rpx;
-    background-color: #fff; */
-     width:730rpx;
-     color: #ffffff;
-     font-weight: 900;
-    margin-left: 10rpx;
+    width:700rpx;
+    color: #ffffff;
+    font-weight: 900;
+    margin-left: 25rpx;
     margin-top: 10rpx;
     border-radius: 10rpx;
-    padding:30rpx 0rpx;
     position: fixed;
-    bottom: 18rpx;
+    bottom: 340rpx;
     display: flex;
     flex-direction: row;
     justify-content: center;
     background-color: #b762d6;
     flex-wrap: nowrap;
     align-items: center;
+    height:94rpx;
+    line-height: 94rpx;
 }
 .citypicker{
     margin-top: 100rpx;
@@ -164,11 +155,15 @@ page{
     background-color: #f2f2f2;
 }
 .deleteAdd{
-    width: 690rpx;
-    height: 30rpx;
-    line-height:30rpx;
-    background-color: #ffe5e5;
-    padding: 30rpx;
-    font-size: 35rpx;
-    color: #ff8787;
+    margin-left: 25rpx;
+    width: 700rpx;
+    height: 94rpx;
+    line-height:94rpx;
+    background-color: #b3b3b3;
+    font-size: 40rpx;
+    color: #fff;
+    border-radius: 10rpx;
+    text-align: center;
+    font-weight: bolder;
+    margin-top: 160rpx;
 }

@@ -1,0 +1,65 @@
+<!--pages/zcw/shezhi/zhezhi.wxml-->
+<view class='quanjubg'>
+  <view class='tou'>
+    <image class='toutu' src='{{srcp}}' style='height:auto' mode='widthFix'/>
+    <view>指点迷津</view>
+    <view>v2.0</view>
+  </view>
+
+
+  <view class='hang'>
+    <view class='biaoti'>昵称</view>
+    <view class="nrzi">{{userInfo.nickName}}</view>
+  </view>
+
+
+  <view class='hang'>
+    <view class='biaoti'>手机号码</view>
+    <view class="nrzi2"></view>
+    <image class='nrtu' src='{{srcp1}}' style='height:auto' mode='widthFix'/>
+  </view>
+
+
+  <view class='hang'>
+    <view class='biaoti'>实名管理</view>
+    <view class="nrzi2" style='color:#a6a6a6'>请前往实名</view>
+    <image class='nrtu' src='{{srcp1}}' style='height:auto' mode='widthFix'/>
+  </view>
+
+  <view class='xiabu'>
+
+
+    <view class='hang'>
+      <view class='biaoti'>意见与反馈</view>
+      <image class='nrtu' src='{{srcp1}}' style='height:auto' mode='widthFix'/>
+    </view>
+
+
+    <view class='hang'>
+      <view class='biaoti'>用户协议</view>
+      <image class='nrtu' src='{{srcp1}}' style='height:auto' mode='widthFix'/>
+    </view>
+
+
+    <view class='hang'>
+      <view class='biaoti'>隐私政策</view>
+      <image class='nrtu' src='{{srcp1}}' style='height:auto' mode='widthFix'/>
+    </view>
+
+
+    <view class='hang'>
+      <view class='biaoti'>免责声明</view>
+      <image class='nrtu' src='{{srcp1}}' style='height:auto' mode='widthFix'/>
+    </view>
+
+  </view>
+
+
+<!-- 回首页按钮 -->
+  <view class='index-manager'>
+    <view style='color:white;font-size:35rpx;'>
+      回首页
+    </view>
+  </view>
+
+</view>

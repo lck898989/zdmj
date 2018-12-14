@@ -1,4 +1,5 @@
 // pages/zcw/friends/friends.js
+import Const from '../../../utils/Const.js';
 var app = getApp()
 Page({
 
@@ -6,40 +7,14 @@ Page({
    * 页面的初始数据
    */
   data: {
+    buyBoxHidden:true,
     hide:false,
     srcp: app.imageUrl + 'img_myfriend_BG.png',
-    friend:[
-      app.imageUrl + 'img_myfriend_BG.png',
-      app.imageUrl + 'img_myfriend_BG.png',
-      app.imageUrl + 'img_myfriend_BG.png',
-      app.imageUrl + 'img_myfriend_BG.png',
-      app.imageUrl + 'img_myfriend_BG.png',
-      app.imageUrl + 'img_myfriend_BG.png',
-      app.imageUrl + 'img_myfriend_BG.png',
-      app.imageUrl + 'img_myfriend_BG.png',
-      app.imageUrl + 'img_myfriend_BG.png',
-      app.imageUrl + 'img_myfriend_BG.png',
-      app.imageUrl + 'img_myfriend_BG.png',
-      app.imageUrl + 'img_myfriend_BG.png',
-      app.imageUrl + 'img_myfriend_BG.png',
-      app.imageUrl + 'img_myfriend_BG.png',
-      app.imageUrl + 'img_myfriend_BG.png',
-      app.imageUrl + 'img_myfriend_BG.png',
-      app.imageUrl + 'img_myfriend_BG.png',
-      app.imageUrl + 'img_myfriend_BG.png',
-      app.imageUrl + 'img_myfriend_BG.png',
-      app.imageUrl + 'img_myfriend_BG.png',
-      app.imageUrl + 'img_myfriend_BG.png',
-      app.imageUrl + 'img_myfriend_BG.png',
-      app.imageUrl + 'img_myfriend_BG.png',
-      app.imageUrl + 'img_myfriend_BG.png',
-      app.imageUrl + 'img_myfriend_BG.png',
-      app.imageUrl + 'img_myfriend_BG.png',
-      app.imageUrl + 'img_myfriend_BG.png',
-      app.imageUrl + 'img_myfriend_BG.png',
-      app.imageUrl + 'img_myfriend_BG.png',
-      app.imageUrl + 'img_myfriend_BG.png',
-    ],
+      //头像数组
+      friend: [
+         
+      ],
+      imageHost : 'https://shopfile.ykplay.com/resources/ico_Lv'
   },
 
   /**
@@ -50,7 +25,22 @@ Page({
       hide: this.data.friend.length==0?false:true,
     })
   },
-
+  addAdd1:function(){
+      wx.navigateTo({
+          url: '../myfriends/myfriends',
+      })
+  },
+    addAdd:function(){
+        this.setData({
+            buyBoxHidden:false
+        })
+        
+    },
+    pressNull:function(){
+        this.setData({
+            buyBoxHidden: true
+        })
+    },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

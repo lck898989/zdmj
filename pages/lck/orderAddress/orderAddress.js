@@ -409,18 +409,28 @@ Page({
         }
         return add;
     },
-
-
   //确定选择该地址-需要修改代码
   ensure: function (event) {
     console.log("event is ", event);
     console.log("choosedAdd is ", this.data.choosedAdd);
     wx.setStorageSync('choosedAdd', this.data.choosedAdd);
-    wx.navigateTo({
-      url: '../order/order',
+    let pages = getCurrentPages();
+    console.log("pages is ",pages);
+    let pagesA = getCurrentPages();
+    let pageLen = pagesA.length;
+    let orderIndex = 0;
+    for(let i = 0;i < pageLen;i++){
+        if(pages[i].route === 'pages/lck/order/order'){
+            orderIndex = i;
+        }
+    }
+    console.log("orderIndex is ",orderIndex);
+    console.log("需要跳转的长度为：",pageLen - orderIndex);
+    wx.navigateBack({
+        delta : pageLen - 1 - orderIndex,
     });
   },
-    //点击选择事件需要添加代码-张超伟
+  //点击选择事件需要添加代码-张超伟
   dianjixuanze(e){
     console.log(parseInt(e.currentTarget.id))
     parseInt(e.currentTarget.id)
@@ -428,7 +438,7 @@ Page({
       this.data.user[i].state=1
       //找到我点的是user中的谁
       if (i == parseInt(e.currentTarget.id)){
-        this.data.user[i].state = 0
+        this.data.user[i].state = 0;
         console.log("user is ",this.data.user[i]);
         this.setData({
             choosedAdd : this.data.user[i]

@@ -3,8 +3,6 @@
   position: absolute;
   background-color: #ed2938;
   width: 750rpx;
-  top: 0;
-  bottom: 0;  
 }
 .tu1{
   width: 750rpx;
@@ -16,12 +14,57 @@
   height: 530rpx;
   border-radius: 10rpx;
 }
+
+.mask {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #000;
+    opacity: 0.7;
+    overflow: hidden;
+    z-index: 5;
+}
+
+.yaoqingFriend{
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 100;
+    width: 750rpx;
+    height: 240rpx;
+    background-color: white;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+     border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+    justify-content: center;
+
+}
+.weixinText{
+    position: absolute;
+    bottom: 24rpx;
+    color: #595959;
+}
+.weixinImage{
+    position: absolute;
+    top: 88rpx;
+    width: 90rpx;
+}
+.woyaoText{
+    position: absolute;
+    top: 21rpx; 
+    color: #000000;
+}
 .biaoti{
   position: relative;
   margin-top: 30rpx;
   font-size: 34rpx;
   font-weight: 900;
   margin-bottom: 20rpx;
+  margin-left:40rpx;
 }
 .biaoti2{
   position: relative;
@@ -109,12 +152,34 @@
   position: relative;
   width: 750rpx;
   text-align: center;
-  font-size: 23rpx;
+  font-size: 25rpx;
+  color:#fff;
 }
 .wuhaoyou{
   position: relative;
   width: 680rpx;
   text-align: center;
   margin-top: 180rpx;
-  font-size: 30rpx;
+  font-size: 32rpx;
+  color:#fff;
+}
+.headWrapper{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: wrap;
+    width:700rpx;
+}
+.friendItem{
+    width: 106rpx;
+    /* background: #fff; */
+    position: relative;
+    margin-bottom: 20rpx;
+    margin-right: 10rpx;
+}
+.level{
+    position: absolute;
+    bottom: 0rpx;
+    right:0rpx;
 }

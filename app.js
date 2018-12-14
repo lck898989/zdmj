@@ -415,7 +415,8 @@
 
                         }
                         break;
-                    case "getuserInfo":
+
+                    case "getuserInfo1":
                         self.setUserInfo11(res);
                         break;
                     case "getMyQian":
@@ -769,6 +770,12 @@
                                 self.getCode(res);
                             }
                         }
+                        break;
+                    case "getHistroyData":
+                        self.setHistroyData(res);
+                        break;
+                    case "getHistroy":
+                        self.setHistroy(res);
                         break;
                     case "myshop":
                         if (res.data.msg == "查询结果为空") {
@@ -1237,6 +1244,15 @@
                             self.setwenzhangShop(res);
                         }
                         break;
+                    case "GetAllMessage2":
+
+                        self.MingXiaRRAY = res.data.informs;
+                        console.log(self.MingXiaRRAY + "!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+                        if (self.GetAllMessage1) {
+
+                            self.GetAllMessage1(res);
+                        }
+                        break;    
                 }
             },
         })

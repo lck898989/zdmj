@@ -23,9 +23,6 @@
                                             {{outItem}}
                                         </view>
                                     </view>
-                                    <!-- <view style="margin-right:35rpx;color:#808080;">
-                                        >
-                                    </view> -->
                                 </view>
                             </view>
                         </view>
@@ -52,8 +49,8 @@
                                             市场价￥{{innerItem.product.otherprice}}
                                         </view>
                                         <view class='right-line-con' catchtap='test'>
-                                            <view class='typeActive' style='color:#ffcb05;font-weight:600;'>
-                                                ￥ {{innerItem.product.price}}
+                                            <view class='typeActive' style='color:#ffcb05;font-weight:bolder;font-size:30rpx;'>
+                                                ￥{{innerItem.product.price}}
                                             </view>
                                             <view class='add-sub-con' style='margin-right:30rpx;'>
                                                 <image src='{{imgHost}}btn_shopping_minus.png' style='width:32rpx;height:32rpx;'bindtap='subInPage' data-pid='{{innerItem.pid}}' data-sid='{{innerItem.product.sid}}'></image>
@@ -133,14 +130,14 @@
     <block wx:if='{{showBuyCon}}'>
         <view class='buy-con' catchtouchmove="ture" data-e='buy-con'>
             <view class='lineOne-con'>
-                <image src='{{imageHost}}{{product.head[0]}}' style='width:220rpx;height:220rpx;'></image>
+                <image src='{{imageHost}}{{product.head[0]}}' style='width:150rpx;height:150rpx;margin-left:20rpx;margin-top:20rpx;border-radius:20rpx;color:#ffcb05'></image>
                 <view class='price-order-con'>
-                    <view class='price-item' style='font-size:35rpx;color:#b31227;font-weight:800;'>
+                    <view class='price-item' style='font-size:35rpx;color:#ffcb05;font-weight:800;'>
                        ￥{{cartsItem.product.price}}
                     </view>
-                    <view style='font-size:25rpx;color:#404040'>
+                    <!-- <view style='font-size:25rpx;color:#404040'>
                         库存{{cartsItem.product.counts}}
-                    </view>
+                    </view> -->
                     <view class='colorType' style='font-size:25rpx;color:#404040'>
                         已选:<text wx:for='{{choosedType}}'>{{item}}</text>
                     </view>

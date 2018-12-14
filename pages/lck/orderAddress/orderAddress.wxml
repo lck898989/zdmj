@@ -46,9 +46,18 @@
                                     {{item.phone}}
                                 </view>
                             <!-- </view> -->
-                            <view class="add-info">
-                            <text style='color:#b762d6' space='nbsp'>[{{item.type}}] </text>{{item.district + item.detaildistrict}}
-                        </view>
+                            <view wx:if='{{item.type === 1}}' class="add-info">
+                                <text style='color:#b762d6' space='nbsp'>[公司] </text>{{item.district + item.detaildistrict}}
+                            </view>
+                            <view wx:if='{{item.type === 2}}' class="add-info">
+                                <text style='color:#b762d6' sp1ace='nbsp'>[住宅] </text>{{item.district + item.detaildistrict}}
+                            </view>
+                            <view wx:if='{{item.type === 3}}' class="add-info">
+                                <text style='color:#b762d6' space='nbsp'>[学校] </text>{{item.district + item.detaildistrict}}
+                            </view>
+                            <view wx:if='{{item.type === 4}}' class="add-info">
+                                <text style='color:#b762d6' space='nbsp'>[其他] </text>{{item.district + item.detaildistrict}}
+                            </view>
                             <!-- <view class="add-info">
                                 {{item.district + item.detaildistrict}}
                             </view> -->

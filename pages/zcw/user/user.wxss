@@ -114,6 +114,8 @@
   width: 238rpx;
   height: 150rpx;
   text-align: center;
+  display: flex;
+  justify-content: center;
 }
 .dsh{
   position: absolute;
@@ -122,6 +124,8 @@
   height: 150rpx;
   left: 240rpx;
   text-align: center;
+  display: flex;
+  justify-content: center;
 }
 .ywc{
   position: absolute;
@@ -130,6 +134,8 @@
   height: 150rpx;
   right: 0rpx;
   text-align: center;
+    display: flex;
+  justify-content: center;
 }
 .wdddtu1{
   width: 86rpx;
@@ -139,7 +145,27 @@
 }
 .wddd_ziti{
   position: relative;
-  margin-top: -20rpx;
+  margin-top: -60rpx;
+}
+.lianxi{
+  position: absolute;
+  border-radius: 0;
+  background-color:#ffffff;
+  width: 88rpx;
+  height: 100rpx;
+  left: 222rpx;
+  bottom: 47rpx;
+ z-index: 10;
+ opacity: 0;
+  }
+  .wddd_ziti1{
+     position: relative;
+       margin-top: -100rpx;
+       
+}
+.wddd_ziti1{
+   position: relative;
+  margin-top: -100rpx;
 }
 /* 滚动滑块 */
 ::-webkit-scrollbar{
@@ -184,7 +210,9 @@
   height: 150rpx;
   left: 0rpx;
   text-align: center;
+  background-color: #ffffff;
 }
+ button::after{ border: none; }
 .lxkf{
   position: absolute;
   top: 100rpx;  
@@ -192,6 +220,14 @@
   height: 150rpx;
   left: 180rpx;
   text-align: center;
+  border-radius: 0;
+  background-color: #ffffff;
+
+}
+.daifukuan{
+    position: absolute;
+    top: 100rpx;
+ 
 }
 .sz{
   position: absolute;
@@ -200,6 +236,7 @@
   height: 150rpx;
   right: 180rpx;
   text-align: center;
+  background-color: #ffffff;
 }
 .jjsx{
   position: absolute;
@@ -208,4 +245,5 @@
   height: 150rpx;
   right: 0rpx;
   text-align: center;
+  background-color: #ffffff;
 }

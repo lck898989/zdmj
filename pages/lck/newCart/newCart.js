@@ -268,7 +268,7 @@ Page({
     /**
      * 生命周期函数--监听页面显示
      */
-    onShow: async function () {
+    onShow: function () {
         //重置相关参数
         this.setData({
             storeArr   : [],
@@ -280,92 +280,111 @@ Page({
             totalPrice : 0,
             marketTotalPrice : 0,
             marketPrice : 0,
-            sourceCarts : []
+            sourceCarts : [],
+            myshoppingPage : 1,
+            isChoosed : false,
+            goodsCount : 0,
         })
         this.data.marketTotalPrice
         console.log("商品数量是：", this.data.goodsCount);
         //请求购物车里面的商品
+        this.getCartList();
+    },
+    //获取购物车列表并且初始化一些信息
+    getCartList : async function(){
+        //请求购物车里面的商品
         let url = app.host + 'Data/CartList';
         console.log("url is ", url);
         let reqCartListData = {
-            uid: app.uid,
-            page: 1
+            uid  : app.uid,
+            page : 1
         }
-        console.log("data is ",reqCartListData);
+        console.log("data is ", reqCartListData);
         let req = new Request(url, reqCartListData, 'POST', 'text');
-        let res = await req.sendRequest();
-        console.log("res is ",res);
-        let tempCarts = {
+        // req.sendRequest().catch()
+        try {
+            let res = await req.sendRequest();
+            console.log("res is ", res);
+            let tempCarts = {
 
-        }
-        for (let key in res.data.carts) {
-            console.log("key is ", key);
-        }
-        console.log("-------------------");
-        for (let m in res.data.carts) {
-            console.log("m is ", m);
-            let sCartJson = {};
-            // this.data.sourceCarts.push()
-            sCartJson[`${m}`] = [];
-            //将该键值对应的商店的商品的size属性设置为对象
-            console.log(res.data.carts[m]);
-            let storeProductLen = res.data.carts[m].length;
-            //商铺状态是未选中状态
-            let tempJ = {};
-            tempJ.choosed = false;
-            console.log("storeProductLen is ",storeProductLen);
-            for (let j = 0; j < storeProductLen; j++) {
-                let scartJsonArr = {};
-                let itemTemp = res.data.carts[m][j];
-                scartJsonArr.pid = itemTemp.pid;
-                scartJsonArr.count = itemTemp.count;
-                scartJsonArr.price = itemTemp.product.price;
-                scartJsonArr.otherPrice = itemTemp.product.otherprice;
-                sCartJson[`${m}`].push(scartJsonArr);
-                //该购物车项的默认选择状态是false
-                res.data.carts[m][j].choosed = false;
-                itemTemp.size = JSON.parse(itemTemp.size);
-                itemTemp.product.head = itemTemp.product.head.split(',');
-                console.log("itemTemp.product is ", itemTemp);
-                console.log("carts[m][j] is ", res.data.carts[m][j]);
             }
-            console.log("carts[m]'s size is ", res.data.carts[m]);
-            //将商家的键值保存起来
-            this.data.storeList.push(m);
-            tempJ.data = res.data.carts[m];
-            console.log("tempJ is ", tempJ);
-            res.data.carts[m] = tempJ;
-            this.data.sourceCarts.push(sCartJson);
-        }
-        console.log("sourceCarts is ",this.data.sourceCarts);
-        this.setData({
-            storeList     : this.data.storeList,
-            carts         : res.data.carts,
-        });
-        //将所有产品根据键值取出来
-        let storeLen = this.data.storeList.length;
-        for (let k = 0; k < storeLen; k++) {
-            let key = this.data.storeList[k];
-            let value = res.data.carts[key];
-            console.log("products--value is ", value);
-            let valueLen = value.data.length;
-            for (let j = 0; j < valueLen; j++) {
-                let productItem = value.data[j].product;
-                //将选择的该商品规格加入到产品列表中
-                value.data[j].product.size_choosed = value.data[j].size;
-                console.log("value[j] is ", value.data[j].product.size_choosed);
-                this.data.products.push(productItem);
+            for (let key in res.data.carts) {
+                console.log("key is ", key);
             }
-        }
-        this.setData({
-            products: this.data.products
-        },()=>{
-            wx.hideLoading();
-        })
+            console.log("-------------------");
+            for (let m in res.data.carts) {
+                console.log("m is ", m);
+                let sCartJson = {};
+                // this.data.sourceCarts.push()
+                sCartJson[`${m}`] = [];
+                //将该键值对应的商店的商品的size属性设置为对象
+                console.log(res.data.carts[m]);
+                let storeProductLen = res.data.carts[m].length;
+                //商铺状态是未选中状态
+                let tempJ = {};
+                tempJ.choosed = false;
+                console.log("storeProductLen is ", storeProductLen);
+                for (let j = 0; j < storeProductLen; j++) {
+                    let scartJsonArr = {};
+                    let itemTemp = res.data.carts[m][j];
 
-        console.log("products is ", this.data.products);
+                    //该购物车项的默认选择状态是false
+                    res.data.carts[m][j].choosed = false;
+                    itemTemp.size = JSON.parse(itemTemp.size);
+                    itemTemp.product.head = itemTemp.product.head.split(',');
+                    //real price
+                    itemTemp.realPrice = itemTemp.product.price;
+                    scartJsonArr.price = itemTemp.product.price;
+                    scartJsonArr.otherPrice = itemTemp.product.otherprice;
+                    itemTemp.product.price = Host.MUL(itemTemp.product.price, itemTemp.count);
+                    itemTemp.product.otherprice = Host.MUL(itemTemp.product.otherprice, itemTemp.count);
+                    itemTemp.marketPrice = itemTemp.product.otherprice;
+                    scartJsonArr.pid = itemTemp.pid;
+                    scartJsonArr.count = itemTemp.count;
+                    sCartJson[`${m}`].push(scartJsonArr);
+                    console.log("itemTemp.product is ", itemTemp);
+                    console.log("carts[m][j] is ", res.data.carts[m][j]);
+                }
+                console.log("carts[m]'s size is ", res.data.carts[m]);
+                //将商家的键值保存起来
+                this.data.storeList.push(m);
+                tempJ.data = res.data.carts[m];
+                console.log("tempJ is ", tempJ);
+                res.data.carts[m] = tempJ;
+                this.data.sourceCarts.push(sCartJson);
+            }
+            console.log("sourceCarts is ", this.data.sourceCarts);
+            this.setData({
+                storeList: this.data.storeList,
+                carts: res.data.carts,
+            });
+            //将所有产品根据键值取出来
+            let storeLen = this.data.storeList.length;
+            for (let k = 0; k < storeLen; k++) {
+                let key = this.data.storeList[k];
+                let value = res.data.carts[key];
+                console.log("products--value is ", value);
+                let valueLen = value.data.length;
+                for (let j = 0; j < valueLen; j++) {
+                    let productItem = value.data[j].product;
+                    //将选择的该商品规格加入到产品列表中
+                    value.data[j].product.size_choosed = value.data[j].size;
+                    console.log("value[j] is ", value.data[j].product.size_choosed);
+                    this.data.products.push(productItem);
+                }
+            }
+            this.setData({
+                products: this.data.products
+            }, () => {
+                wx.hideLoading();
+            })
+        } catch (e) {
+            console.log("e is ", e);
+            wx.showToast({
+                title: '购物车为空',
+            })
+        }
     },
-
     /**
      * 生命周期函数--监听页面隐藏
      */
@@ -829,6 +848,24 @@ Page({
                     marketTotalPrice: this.data.marketTotalPrice
                 })
             }
+        }else{
+            let self = this;
+            wx.showModal({
+                title: '提示',
+                content: '是否要删除该购物车项',
+                success : function(res){
+                    if(res.confirm){
+                        //用户点击确定删除该购物车项
+                        //给服务器发送消息
+                        self.data.cartsItem.count = 0;
+                     
+                        self.updateGoodsCounts();
+                        //重新获取购物车列表
+                    }else if(res.cancel){
+                        console.log("用户点击了取消");
+                    }
+                }
+            })
         }
         this.data.cartsItem.product.price = Host.MUL(this.data.thisPrice, this.data.cartsItem.count);
         this.setData({
@@ -847,7 +884,8 @@ Page({
         this.sub();
         this.setData({
             carts : this.data.carts
-        })
+        });
+        this.updateGoodsCounts();
     },
     add: function () {
         console.log("增加商品");
@@ -880,11 +918,11 @@ Page({
             this.setData({
                 totalPrice       : this.data.totalPrice,
                 marketTotalPrice : this.data.marketTotalPrice
-            })
+            });
         }
     },
     //增加商品的数量,如果商品的选中状态为true的时候更新下面的合计的费用和总价信息
-    addInPage : function(e){
+    addInPage : async function(e){
         let pid = Number(e.currentTarget.dataset.pid);
         console.log("pid is ", pid);
         //获取thisPrice
@@ -897,6 +935,41 @@ Page({
         this.setData({
             carts : this.data.carts
         });
+        this.updateGoodsCounts();
+    },
+    //更新购物车的数量
+    updateGoodsCounts : async function(){
+        //向服务器发送购买的数量
+        let url = app.host + 'Data/UpdateCartCount';
+        let data = {
+            cid   : this.data.cartsItem.cid,
+            count : this.data.cartsItem.count,
+        };
+        console.log("data is ",data);
+        let req = new Request(url,data,'POST','text');
+        let res = await req.sendRequest();
+        console.log("res");
+        if(this.data.cartsItem.count === 0){
+            wx.showToast({
+                title: res.data.msg,
+            });
+            this.setData({
+                storeArr: [],
+                goodsCount: 0,
+                storeList: [],
+                carts: [],
+                products: [],
+                thisPrice: 0,
+                totalPrice: 0,
+                marketTotalPrice: 0,
+                marketPrice: 0,
+                sourceCarts: [],
+                myshoppingPage: 1,
+                isChoosed: false,
+                goodsCount: 0,
+            });
+            this.getCartList();
+        }
     },
     getCartsItemByPid : function(pid){
         for (let i = 0; i < this.data.storeList.length; i++) {
@@ -923,6 +996,8 @@ Page({
                 if (pid === tempCartsItem[j].pid) {
                     this.data.thisPrice = tempCartsItem[j].price;
                     this.data.marketPrice = tempCartsItem[j].otherPrice;
+                    console.log("thisPrice is ",this.data.thisPrice);
+                    console.log("marketPrice is ",this.data.marketPrice);
                     break;
                 }
             }

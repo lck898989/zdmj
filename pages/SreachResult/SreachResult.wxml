@@ -36,7 +36,6 @@
         </view>
     </view>
 </block>
-
 <view class='typesonView'>
     <view class='nullView'></view>
     <text class='textShare' style='font-size:22rpx;color:#a0a0a0;font-weight:900;' wx:if='{{buttonParentType==false}}'>共有{{allessays.length}}篇分享文章</text>

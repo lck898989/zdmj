@@ -130,8 +130,7 @@ Page({
                         }
                     }
                 }
-                console.log(this.data.leftArray.length + "!!!!!!!!!!!!!!");
-                console.log(this.data.rightArray.length + "!!!!!!!!!!!!!!");
+            
               
             } else {
                 if (this.data.allproducts.length > 0) {
@@ -184,8 +183,7 @@ Page({
                             }
                         }
                     }
-                    console.log(this.data.leftArray.length + "!!!!!!!!!!!!!!");
-                    console.log(this.data.rightArray.length + "!!!!!!!!!!!!!!");
+                   
                 }
             }
         } else {
@@ -264,8 +262,7 @@ Page({
                             }
                         }
                     }
-                    console.log(this.data.leftArray.length + "!!!!!!!!!!!!!!");
-                    console.log(this.data.rightArray.length + "!!!!!!!!!!!!!!");
+               
                 } else {
                     if (this.data.allproducts.length > 0) {
                         this.setData({
@@ -502,7 +499,8 @@ Page({
         }
         if (event.currentTarget.dataset.productstype == "shopessays") {
             var shopjson2 = encodeURIComponent(JSON.stringify(event.currentTarget.dataset.shopjson));
-            app.wenzhangShop = null;
+            // app.wenzhangShop = null;
+            app.shopWenZhangJson=null;
             app.ShortConnect(app.urlw + "Data/GetShopProductsByShopEssayShopid", {
                 shopid: event.currentTarget.dataset.shopid,
                 uid: app.uid

@@ -212,5 +212,5 @@
         <view class='centerText'>
             {{loadText}}
         </view>
-    </view> 
+    </view>
 </view>

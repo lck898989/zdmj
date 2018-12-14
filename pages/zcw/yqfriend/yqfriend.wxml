@@ -1,0 +1,17 @@
+<!--pages/zcw/yqfriend/yqfriend.wxml-->
+<view class='quanjubg'>
+ <image class='tu1' src='{{srcp}}' style='height:auto' mode='widthFix'/>
+  <view class='kuai'>
+    <image class='guize' src='{{srcp1}}' style='height:auto' mode='widthFix'/>
+    <view class='wenzi1'>亲爱的朋友:</view>
+    <view class='wenzi2'>展信安！我正在组建一个优惠亲友团。</view>
+    <view class='wenzi3'>加入亲友团福利多多哦，你还在等什么呢？</view>
+    <view class='wenzi4'>别犹豫了，快来加入吧！</view>
+    <view class='wenzi5'>你的小伙伴:</view>
+  </view>
+     <view class='index-manager' bindtap='addAdd'>
+            <view style='color:white;font-size:35rpx;'>
+                马上加入
+            </view>
+        </view>
+</view>

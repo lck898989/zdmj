@@ -1,0 +1,68 @@
+/* pages/zcw/shezhi/zhezhi.wxss */
+.quanjubg{
+  position: absolute;
+  width: 750rpx;
+  top: 0;
+  bottom: 0;
+  background-color: #eeeeee;
+}
+.tou{
+  margin-top: 2rpx;
+  width: 750rpx;
+  height: 300rpx;
+  text-align: center;
+  font-size: 25rpx;
+  color: #7d7d7d;
+  background-color: white;
+}
+.toutu{
+  width: 76rpx;
+  margin-top: 75rpx;
+}
+.hang{
+  position: relative;
+  width: 750rpx;
+  margin-bottom: 2rpx;
+  background-color: #ffffff;
+  display: flex;
+  align-items: center;
+}
+.biaoti{
+  margin-left: 50rpx;
+  padding: 30rpx 0rpx;
+  font-size: 30rpx;
+}
+.nrzi{
+  position: absolute;
+  right: 50rpx;
+  /* padding: 20rpx 0rpx; */
+  font-size: 30rpx;
+}
+.nrzi2{
+  position: absolute;
+  right: 100rpx;
+  /* padding: 20rpx 0rpx; */
+  font-size: 30rpx;
+}
+.nrtu{
+  position: absolute;
+  width: 15rpx;
+  right: 50rpx;
+}
+.xiabu{
+  margin-top: 10rpx;
+}
+.index-manager{
+    width:700rpx;
+    margin-left: 25rpx;
+    margin-top: 50rpx;
+    border-radius: 10rpx;
+    background-color: #ce80ea;
+    padding:30rpx 0rpx;
+    font-weight: 900;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: nowrap;
+    align-items: center;
+}

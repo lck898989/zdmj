@@ -6,18 +6,18 @@
         </view> -->
         <view class='address-con'>
             <image src='../../../resources/address_bar.png' style='width:750rpx; height:190rpx;' class='add-back'></image>
-            <view class='address-detail-con'>
+            <view class='address-detail-con'  bindtap='enterAddress'>
                 <view style='padding-left:10rpx;padding-right:10rpx;z-index:400;margin-left:20rpx;'>
                     <image src='https://shopfile.ykplay.com/resources/btn_mine_adds.png' style='width:50rpx;height:50rpx;'></image>
                 </view>
                 <view class='address-detail' style='z-index:600;'>
                     <block wx:if='{{add === null}}'>
-                        <view bindtap='enterAddress'>暂时没有收货地址添加一个吧</view>
+                        <view bindtap='enterAddress' class='enterAddress'>点击此处添加一个收获地址</view>
                     </block>
                     <block wx:else>
                         <view class='recept-info'>
                             <view class='user-phone'>
-                                <view class='recept-item'>
+                                <view>
                                     收货人：{{add.recipient}}
                                 </view>
                                 <view>
@@ -25,14 +25,25 @@
                                 </view>
                             </view>
                             <view class='recept-item'>
+                                收货地址:
+                                <text wx:if='{{add.type === 1}}' style='color:#b762d6'>[公司]</text>
+                                <text wx:if='{{add.type === 2}}' style='color:#b762d6'>[住宅]</text>
+                                <text wx:if='{{add.type === 3}}' style='color:#b762d6'>[学校]</text>
+                                <text wx:if='{{add.type === 4}}' style='color:#b762d6'>[其他]</text>
                                 {{add.district}}{{add.detaildistrict}}
                             </view>
                         </view>
                     </block>
                 </view>
-                <view class='addManager' bindtap='enterAddress'>
+                <view class='addManager'>
                     <image src='../../../resources/icon_right.png' style='width:25rpx;height:30rpx;'></image>
                 </view>
+            </view>
+        </view>
+        <view class='saleaf-text'>
+            <image src='https://shopfile.ykplay.com/resources/ico_type_1.png' style='width:30rpx;height:30rpx;'></image>
+            <view class='storeName'>
+                指点迷津-自营店
             </view>
         </view>
         <block wx:if='{{loadDataOk}}'>

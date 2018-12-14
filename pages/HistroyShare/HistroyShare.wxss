@@ -1,8 +1,189 @@
 /* pages/HistroyShare/HistroyShare.wxss */
 .all{
-  width: 750rpx;
+
   overflow: auto;
   background-color:#EEEEEE; 
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right:0;
+}
+.whiteView{
+  position: absolute;
+  top: 30rpx;
+  right: 35rpx;
+  width: 60rpx;
+  height: 60rpx;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #ffffff;
+}
+.nullView{
+  position: relative;
+  width: 750rpx;
+  height: 60rpx;
+  margin-top: -60rpx;
+  z-index: 1;
+ 
+}
+.icon{
+  width: 24rpx;
+}
+.data1{
+  position: relative;
+  width: 750rpx;
+  height: 20rpx;
+  display: flex;
+  align-items: center;
+}
+.data1Text{
+  position: absolute;
+  left: 32rpx;
+}
+.centerView {
+    position: relative;
+    margin-top: 0rpx;
+    width: 714rpx;
+    display: flex;
+    margin-left: 18rpx;
+    flex-direction: row;
+    justify-content: space-between;
+    overflow: hidden;
+}
+.leftSon {
+    position: relative;
+    width: 343rpx;
+    margin-left: 0;
+    /* overflow: hidden; */
+    border-radius: 10px;
+    background-color: white;
+    box-shadow: 0rpx 8rpx 8rpx #d0d0d0;
+    -webkit-box-shadow: 0rpx 8rpx 8rpx #d0d0d0;
+}
+
+.dataParent{
+    position: relative;
+    width: 750rpx;
+    overflow: hidden;
+    margin-top: 20rpx;
+}
+.seeView {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 128rpx;
+    height: 36rpx;
+    background-color: #1b1b1b;
+    display: flex;
+    align-items: center;
+    z-index: 10;
+}
+.leftView {
+    position: relative;
+    width: 343rpx;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+.seeIcon {
+    position: absolute;
+    left: 11rpx;
+    width: 26rpx;
+}
+
+.seeText {
+    position: absolute;
+    left: 65rpx;
+    color: #fff;
+}
+.wenzhangImageView {
+    position: relative;
+    margin-top: 0rpx;
+    width: 343rpx;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+}
+.wenzhangImage {
+    position: absolute;
+    top: 0rpx;
+    width: 343rpx;
+    border-top-left-radius: 10px;
+       border-top-right-radius: 10px;
+}
+.jianliView{
+    position: relative;
+    width: 343rpx;
+    height: 30rpx;
+    display: flex;
+    background-color: #ffffff;
+    align-items: flex-end;
+}
+.jiangliPrice{
+    position: absolute;
+    left: 212rpx;
+    top: -4rpx;
+    text-align: left;
+    display: flex;
+    align-items: flex-end;
+}
+.jiangliText{
+    position: absolute;
+    left: 166rpx;
+
+}
+.nullView3{
+    position: relative;
+    width: 343rpx;
+    height: 8rpx;
+    background-color: #ffffff;
+}
+.shopDetailView {
+    position: relative;
+    margin-top: 7rpx;
+    width: 309rpx;
+    display: -webkit-box;
+    word-break: break-all;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    letter-spacing: 1px;
+    margin-left: 12rpx;
+}
+.authorView {
+    position: relative;
+    margin-top: 7rpx;
+    width: 300rpx;
+    left: 12rpx;
+    height: 32rpx;
+    display: flex;
+    align-items: center;
+}
+.authorName {
+    position: absolute;
+    left: 41rpx;
+}
+
+.nullView2 {
+    position: relative;
+    margin-top: 0rpx;
+    width: 343rpx;
+    height: 10rpx;
+}
+.rightView {
+    position: relative;
+    width: 343rpx;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+.authorImage {
+    position: absolute;
+    left: 0;
+    width: 32rpx;
 }
 .top{
   position: relative;
@@ -19,6 +200,12 @@
   border-radius: 10rpx;
   
 }
+.nullView1{
+  /* position: relative;
+  width: 750rpx;
+  height: 24rpx;
+  background-color: #eeeeee; */
+}
 .time{
   margin-left: 30rpx;
   font-size: 28rpx;
@@ -29,6 +216,12 @@
   width: 750rpx;
   display: flex;
   flex-wrap: wrap;
+}
+.wrap{
+  background-color: #ffffff;
+  position: relative;
+  margin-top: 0;
+  overflow: hidden;
 }
 .conn{
   width: auto;
@@ -74,7 +267,7 @@
 	color: #333;
 	font-size: 30rpx;
 	text-align: center;
-	border-bottom: 1px solid #eff3f6;
+	/* border-bottom: 1px solid #eff3f6; */
 	padding: 39rpx 0;
 }
 .weekMark{
@@ -87,24 +280,51 @@
 	left: 0;
 	width: 100%;
 }
+.dataSon{
+  position: relative;
+  margin-top: 0rpx;
+}
 .date-box{
-	font-size: 0;
-	padding: 10rpx 0;
+  position: relative;
+  width: 700rpx;
+  margin-left: 24rpx;
+  display: flex;
+  flex-direction: row;
+  
+  flex-wrap: wrap;
+  overflow: hidden;
+	/* font-size: 0;
+	padding: 10rpx 0; */
 }
 .date-box>view{
-	position: relative;
+	/* position: relative;
 	display: inline-block;
-	width: 14.285%;
+	width: 100.5rpx;
 	color: #020202;
 	font-size: 40rpx;
 	text-align: center;
 	vertical-align: middle;
-	margin: 15rpx 0;
+	margin: 15rpx 0; */
 }
 .date-head{
-	height: 36rpx;
-	line-height: 36rpx;
-	font-size: 24rpx;
+  position: relative;
+  margin-top: 0rpx; 
+	height: 64rpx;
+   width: 100rpx;
+   display: flex;
+   justify-content: center;
+}
+.number{
+  position: absolute;
+  top: 0;
+  width: 45rpx;
+  height: 45rpx;
+   border-radius: 50%; 
+  color: #000000;
+  font-size:23rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .nowDay .date-head{
 	width: 36rpx;
@@ -124,11 +344,12 @@
 .nowDay2{
   width: 10rpx;
   height: 10rpx;
-  margin-left: 13rpx;
-  margin-top: 10rpx;
+  /* margin-left: 13rpx;
+  margin-top: 10rpx; */
 	border-radius: 50%;
   color: #da91f5;
-  font-size: 1rpx;
+  position: absolute;
+  bottom: 5rpx;
 	background-color: #da91f5;
 }
 .one{

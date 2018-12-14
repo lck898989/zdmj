@@ -102,7 +102,7 @@
 .nullView {
     position: relative;
     width: 750rpx;
-    height: 37rpx;
+    height: 18rpx;
 }
 
 .shopPrice1 {
@@ -390,14 +390,32 @@
 .nullView5 {
     position: relative;
     width: 750rpx;
-    height: 110rpx;
+    height: 250rpx;
     background-color: #fff;
 }
 
 .dayu {
     position: absolute;
 }
+.backImage{
+  position: absolute;
+  width:48rpx;
+  top: 12rpx;
+}
+.backtext{
+  position: absolute;
+  bottom: 18rpx;
+  color: #626262;
+}
 
+.nullView8{
+  position: absolute;
+  right:0;
+  width: 2px;
+  height: 62rpx;
+  background-color: #c9c9c9;
+  top: 20rpx;
+}
 .buyView {
     position: fixed;
     width: 750rpx;
@@ -408,7 +426,16 @@
     justify-content:center;
     z-index: 50;
 }
+.backIndex{
+  position: relative;
+  width: 100rpx;
+  height: 100rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #ffffff;
 
+}
 .sharePrice {
     position: relative;
     width: 310rpx;
@@ -460,20 +487,24 @@
 }
 
 .shopView1 {
-    overflow: hidden;
-    position: relative;
-    width: 720rpx;
+     background-color: #ffffff;
+     overflow: hidden;
+     position: fixed;
+    width: 750rpx;
     height: 150rpx;
-    margin-top: 0rpx;
-    margin-left: 13rpx;
+    bottom: 100rpx;
+    left: 0rpx;
+    /* margin-top: 0rpx;
+    margin-left: 13rpx; */
     /* background-color: #ffffff; */
-    border-radius: 8px;
+    /* border-radius: 8px; */
     display: flex;
     align-items: center;
-    border-top: 2rpx solid #9f9f9f;
+    /* border-top: 2rpx solid #9f9f9f;
     border-bottom: 2rpx solid #9f9f9f;
     border-left: 2rpx solid #9f9f9f;
-    border-right: 2rpx solid #9f9f9f;
+    border-right: 2rpx solid #9f9f9f; */
+    z-index: 50;
 }
 
 .shopPrice {

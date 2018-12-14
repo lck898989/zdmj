@@ -16,6 +16,11 @@
   height: 650rpx;
   background-color: white;
   border-radius: 10rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: wrap;
 }
 .biaoti{
   position: relative;

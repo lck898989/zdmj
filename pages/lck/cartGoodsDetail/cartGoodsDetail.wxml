@@ -125,7 +125,7 @@
                 <image src='{{imageHost}}{{goods.head[0]}}' style='width:220rpx;height:220rpx;' class='img'></image>
                 <view class='price-order-con'>
                     <view class='price-item' style='font-size:40rpx;color:#ffcb05;font-weight:800;'>
-                    ￥  {{goods.oprice * count}}
+                    ￥  {{goods.price * count}}
                     </view>
                     <view class='price-item' style='font-size:30rpx;color:#404040'>
                         已选:

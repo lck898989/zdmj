@@ -1,21 +1,65 @@
 <!--pages/TixianMingxi/TixianMingxi.wxml-->
 <view class='tixianmingxiView'>
     <view class='money'>
-        <text class='tixianText' style='font-size:26rpx;'>提现金额</text>
-        <image class='moneyImage' mode='widthFix' style='height:auto' src='../../resources/qiaobao_pic.png'></image>
-        <text class='moneyText'>{{money1}}</text>
+        <text class='tixianText' style='font-size:28rpx;' wx:if='{{type==1}}'>收益金额</text>
+        <text class='tixianText' style='font-size:28rpx;' wx:if='{{type==0}}'>提现金额</text>
+        <text class='tixianText' style='font-size:28rpx;' wx:if='{{type==3}}'>支付金额</text>
+        <image class='moneyImage' mode='widthFix' style='height:auto' wx:if='{{type==1}}' src='{{srcp1}}'></image>
+        <image class='moneyImage' mode='widthFix' style='height:auto' wx:if='{{type==0}}' src='{{srcp2}}'></image>
+        <image class='moneyImage' mode='widthFix' style='height:auto' wx:if='{{type==3}}' src='{{srcp3}}'></image>
+        <text class='moneyText' style='font-size:40rpx;font-weight:900;color:#f39800' wx:if='{{type==1}}'>￥{{money1}}</text>
+        <text class='moneyText' style='font-size:40rpx;font-weight:900;color:#22ac38' wx:if='{{type==0}}'>￥{{money1}}</text>
+        <text class='moneyText' style='font-size:40rpx;font-weight:900;color:#e5004f' wx:if='{{type==3}}'>￥{{money1}}</text>
     </view>
     <view class='tixianState'>
-        <text class='stateText' style='font-size:26rpx;'>提现状态</text>
-        <text class='stateText1' style='color:red;font-size:26rpx;' wx:if='{{success==0}}'>提现失败</text>
-        <text class='stateText1' style='color:#7ccd7e;font-size:26rpx;' wx:else>提现成功</text>
-        <image class='shibaiImage' src='../../resources/qiaobao_icon5.png'  style='height:auto' wx:if='{{success==0}}' mode='widthFix'></image>
-        <image class='shibaiImage' src='../../resources/select_2.png' style='height:auto' wx:else mode='widthFix'></image>
+        <text class='stateText' style='font-size:26rpx;' wx:if='{{type==1}}'>收益来源</text>
+        <text class='stateText' style='font-size:26rpx;' wx:if='{{type==0}}'>提现状态</text>
+        <text class='stateText' style='font-size:26rpx;' wx:if='{{type==3}}'>支付目的</text>
+        <block wx:if='{{type==0}}'>
+            <text class='stateText1' style='font-size:26rpx;' wx:if='{{state==1}}'>提现成功</text>
+            <text class='stateText1' style='color:red;font-size:26rpx;right:65rpx;' wx:if='{{state==0}}'>提现失败</text>
+            <image class='shibaiImage' src='../../resources/qiaobao_icon5.png' style='height:auto' wx:if='{{state==0}}' mode='widthFix'></image>
+        </block>
+        <block wx:if='{{type==1}}'>
+            <text class='stateText1' style='color:red;font-size:26rpx;' wx:if='{{detailtype==0}}'>分享商品</text>
+            <text class='stateText1' style='color:red;font-size:26rpx;' wx:if='{{tdetailtypeype==1}}'>分享文章</text>
+        </block>
+        <text class='stateText1' style='color:red;font-size:26rpx;' wx:if='{{type==3}}'>商城支付-抵用现金</text>
+        <!-- <text class='stateText1' style='color:#7ccd7e;font-size:26rpx;' wx:else>提现成功</text> -->
     </view>
     <view class='tixianView3'>
-        <text class='timetext' style='font-size:26rpx;'>时间</text>
-        <text class='time' style='font-size:21rpx;'>{{time}}</text>
-        <text class='numberText' style='font-size:26rpx;'>提现单号</text>
-        <text class='number' style='font-size:21rpx;'>{{number}}</text>
+        <view class='timeView'>
+            <text class='timetext' style='font-size:26rpx;' space='ensp'>时  间</text>
+            <text class='time' style='font-size:26rpx;'>{{time}}</text>
+        </view>
+
+        <block wx:if='{{type==3}}'>
+            <block wx:for='{{products}}'>
+                <view class='xinxi' wx:if='{{index==0}}'>
+                    <text class='numberText' style='font-size:26rpx;' wx:if='{{type==1}}' space='ensp'>文  章</text>
+                    <text class='numberText' style='font-size:26rpx;' wx:if='{{type==0}}'>提现单号</text>
+                    <text class='numberText' style='font-size:26rpx;' wx:if='{{type==3}}'>购买商品</text>
+                    <text class='number' style='font-size:26rpx;' wx:if='{{type==0}}'>{{number}}</text>
+                    <text class='number' style='font-size:26rpx;' wx:if='{{type==1}}'>{{item.pname}}</text>
+                    <text class='number' style='font-size:26rpx;' wx:if='{{type==3}}'>{{item.pname}}</text>
+                </view>
+                <view class='xinxi' wx:else>
+                    <text class='number' style='font-size:26rpx;' wx:if='{{type==1}}'>{{item.pname}}</text>
+                    <text class='number' style='font-size:26rpx;' wx:if='{{type==3}}'>{{item.pname}}</text>
+                </view>
+            </block>
+        </block>
+        <block wx:else>
+            <view class='xinxi'>
+                <text class='numberText' style='font-size:26rpx;' wx:if='{{type==1}}' space='ensp'>文  章</text>
+                <text class='numberText' style='font-size:26rpx;' wx:if='{{type==0}}'>提现单号</text>
+                <text class='numberText' style='font-size:26rpx;' wx:if='{{type==3}}'>购买商品</text>
+                <text class='number' style='font-size:26rpx;' wx:if='{{type==0}}'>{{number}}</text>
+                <text class='number' style='font-size:26rpx;' wx:if='{{type==1}}'>{{item.pname}}</text>
+                <text class='number' style='font-size:26rpx;' wx:if='{{type==3}}'>{{item.pname}}</text>
+            </view>
+        </block>
+        <view class='nullView3'></view>
+
     </view>
 </view>

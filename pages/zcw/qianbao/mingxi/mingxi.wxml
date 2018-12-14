@@ -1,0 +1,221 @@
+<!--pages/zcw/qianbao/mingxi/mingxi.wxml-->
+<view class='tou'>
+    <view class='neibu'>筛选</view>
+    <view class='neibu2' hidden='{{hid1}}' bindtap='shuaxin' id='0'>
+        <image class='tutou' src='{{srcp1}}' style='height:auto' mode='widthFix' />
+        <view class='neibu2'> 收入</view>
+    </view>
+    <view class='neibu2' hidden='{{!hid1}}' bindtap='shuaxin' id='0'>
+        <image class='tutou' src='{{srcp5}}' style='height:auto' mode='widthFix' />
+        <view class='neibu2' style='color:#7d7d7d'> 收入</view>
+    </view>
+
+    <view class='neibu3' hidden='{{hid2}}' bindtap='shuaxin' id='1'>
+        <image class='tutou' src='{{srcp2}}' style='height:auto' mode='widthFix' />
+        <view class='neibu3'> 提现</view>
+    </view>
+    <view class='neibu3' hidden='{{!hid2}}' bindtap='shuaxin' id='1'>
+        <image class='tutou' src='{{srcp6}}' style='height:auto' mode='widthFix' />
+        <view class='neibu3' style='color:#7d7d7d'> 提现</view>
+    </view>
+    <view class='neibu4' hidden='{{hid3}}' bindtap='shuaxin' id='2'>
+        <image class='tutou' src='{{srcp3}}' style='height:auto' mode='widthFix' />
+        <view class='neibu4'>支付</view>
+    </view>
+    <view class='neibu4' hidden='{{!hid3}}' bindtap='shuaxin' id='2'>
+        <image class='tutou' src='{{srcp7}}' style='height:auto' mode='widthFix' />
+        <view class='neibu4' style='color:#7d7d7d'>支付</view>
+    </view>
+    <view class='neibu5'>
+        <image class='tutou2' src='{{srcp4}}' style='height:auto' mode='widthFix' />
+    </view>
+</view>
+
+<scroll-view scroll-y='true' class='bottomView' style='height:{{bottomHeight}}px'>
+    <!-- 日期和本日起内容一起循环？   加入for循环 -->
+    <view wx:for='{{dataArray}}'>
+        <view class='bull'>
+            <view class='riqi'>{{item.time[0]}}-{{item.time[1]}}</view>
+            <view class='riqi2'>
+                <text space='nbsp'>收入 ￥{{item.income}} 提现 ￥{{item.withdraw}}   支出 ￥{{item.pay}}</text>
+            </view>
+        </view>
+
+        <!-- 本日起内的所有内容   加入for循环 -->
+        <block wx:for='{{item.content}}' wx:for-index="index1" wx:for-item="item1"  bindtap='turndetail'>
+            <view class='ssss' wx:if='{{item1.type==0}}' hidden='{{hid2}}'  data-number='{{item1.number}}'bindtap='turndetail' data-state='{{item1.state}}' data-type='{{item1.type}}' data-rebate='{{item1.rebate}}' data-time='{{item1.time}}'>
+                <!-- 需要修改图片逻辑 -->
+                <image class='neibutupian' wx:if='{{item1.type==0}}' src='{{srcp2}}' style='height:auto' mode='widthFix' />
+                <image class='neibutupian' wx:if='{{item1.type==1}}' src='{{srcp1}}' style='height:auto' mode='widthFix' />
+                <image class='neibutupian' wx:if='{{item1.type==3}}' src='{{srcp3}}' style='height:auto' mode='widthFix' />
+                <view class='zibt3' wx:if='{{item1.type==0}}'>
+                    <text style='color:#22ac38' wx:if='{{item1.state==1}}'>-￥{{item1.rebate}}</text>
+                    <text style='color:#22ac38' wx:else>+￥{{item1.rebate}}</text>
+                </view>
+                <view class='zibt3' wx:if='{{item1.type==1}}'>
+                    <text style='color:#f39800' wx:if='{{item1.state==1}}'>+￥{{item1.rebate}}</text>
+                    <text style='color:#f39800' wx:else>-￥{{item1.rebate}}</text>
+                </view>
+                <view class='zibt3' wx:if='{{item1.type==3}}'>
+                    <text style='color:#e5004f' wx:if='{{item1.state==1}}'>-￥{{item1.rebate}}</text>
+                    <text style='color:#e5004f' wx:else>+￥{{item1.rebate}}</text>
+                </view>
+                <view class='tixianjg'>
+                    <block wx:if='{{item1.type==0}}'>
+                        <view class='zibt' wx:if='{{item1.state==1}}'>
+                            <text style='font-weight: 900;'>成功提现</text>
+                        </view>
+                        <view class='zibt' wx:else>
+                            <text style='font-weight: 900;color:#ec5561'>提现失败</text>
+                        </view>
+                    </block>
+                    <block wx:if='{{item1.type==1}}'>
+                        <block wx:if='{{item1.detailtype==0}}'>
+                            <view class='zibt' wx:if='{{item1.state==1}}'>
+                                <text style='font-weight: 900;'>分享收益-商品</text>
+                            </view>
+                            <view class='zibt' wx:else>
+                                <text style='font-weight: 900;color:#ec5561'>分享收益-商品失败</text>
+                            </view>
+                        </block>
+                        <block wx:if='{{item1.detailtype==1}}'>
+                            <view class='zibt' wx:if='{{item1.state==1}}'>
+                                <text style='font-weight: 900;'>分享收益-文章</text>
+                            </view>
+                            <view class='zibt' wx:else>
+                                <text style='font-weight: 900;color:#ec5561'>分享收益-文章失败</text>
+                            </view>
+                        </block>
+                    </block>
+                    <block wx:if='{{item1.type==3}}'>
+                        <view class='zibt' wx:if='{{item1.state==1}}'>
+                            <text style='font-weight: 900;'>商城购买-支付</text>
+                        </view>
+                        <view class='zibt' wx:else>
+                            <text style='font-weight: 900;color:#ec5561'>商品购买-支付失败</text>
+                        </view>
+                    </block>
+                    <view class='zibt2'>
+                        <text style='color:#7d7d7d' space='ensp'>{{item1.time1[1]}}-{{item1.time1[2]}}  {{item1.time2[0]}}:{{item1.time2[1]}}</text>
+                    </view>
+                </view>
+            </view>
+            <view class='ssss' wx:if='{{item1.type==1}}' hidden='{{hid1}}'  data-number='{{item1.number}}' data-products='{{item1.products}}' bindtap='turndetail' data-state='{{item1.state}}' data-rebate='{{item1.rebate}}'data-detailtype='{{item1.detailtype}}' data-type='{{item1.type}}'  data-time='{{item1.time}}'>
+                <!-- 需要修改图片逻辑 -->
+                <image class='neibutupian' wx:if='{{item1.type==0}}' src='{{srcp2}}' style='height:auto' mode='widthFix' />
+                <image class='neibutupian' wx:if='{{item1.type==1}}' src='{{srcp1}}' style='height:auto' mode='widthFix' />
+                <image class='neibutupian' wx:if='{{item1.type==3}}' src='{{srcp3}}' style='height:auto' mode='widthFix' />
+                <view class='zibt3' wx:if='{{item1.type==0}}'>
+                    <text style='color:#22ac38' wx:if='{{item1.state==1}}'>-￥{{item1.rebate}}</text>
+                    <text style='color:#22ac38' wx:else>+￥{{item1.rebate}}</text>
+                </view>
+                <view class='zibt3' wx:if='{{item1.type==1}}'>
+                    <text style='color:#f39800' wx:if='{{item1.state==1}}'>+￥{{item1.rebate}}</text>
+                    <text style='color:#f39800' wx:else>-￥{{item1.rebate}}</text>
+                </view>
+                <view class='zibt3' wx:if='{{item1.type==3}}'>
+                    <text style='color:#e5004f' wx:if='{{item1.state==1}}'>-￥{{item1.rebate}}</text>
+                    <text style='color:#e5004f' wx:else>+￥{{item1.rebate}}</text>
+                </view>
+                <view class='tixianjg'>
+                    <block wx:if='{{item1.type==0}}'>
+                        <view class='zibt' wx:if='{{item1.state==1}}'>
+                            <text style='font-weight: 900;'>成功提现</text>
+                        </view>
+                        <view class='zibt' wx:else>
+                            <text style='font-weight: 900;color:#ec5561'>提现失败</text>
+                        </view>
+                    </block>
+                    <block wx:if='{{item1.type==1}}'>
+                        <block wx:if='{{item1.detailtype==0}}'>
+                            <view class='zibt' wx:if='{{item1.state==1}}'>
+                                <text style='font-weight: 900;'>分享收益-商品</text>
+                            </view>
+                            <view class='zibt' wx:else>
+                                <text style='font-weight: 900;color:#ec5561'>分享收益-商品失败</text>
+                            </view>
+                        </block>
+                        <block wx:if='{{item1.detailtype==1}}'>
+                            <view class='zibt' wx:if='{{item1.state==1}}'>
+                                <text style='font-weight: 900;'>分享收益-文章</text>
+                            </view>
+                            <view class='zibt' wx:else>
+                                <text style='font-weight: 900;color:#ec5561'>分享收益-文章失败</text>
+                            </view>
+                        </block>
+                    </block>
+                    <block wx:if='{{item1.type==3}}'>
+                        <view class='zibt' wx:if='{{item1.state==1}}'>
+                            <text style='font-weight: 900;'>商城购买-支付</text>
+                        </view>
+                        <view class='zibt' wx:else>
+                            <text style='font-weight: 900;color:#ec5561'>商品购买-支付失败</text>
+                        </view>
+                    </block>
+                    <view class='zibt2'>
+                        <text style='color:#7d7d7d' space='ensp'>{{item1.time1[1]}}-{{item1.time1[2]}}  {{item1.time2[0]}}:{{item1.time2[1]}}</text>
+                    </view>
+                </view>
+
+            </view>
+            <view class='ssss' wx:if='{{item1.type==3}}' hidden='{{hid3}}' bindtap='turndetail'  data-products='{{item1.products}}'  data-state='{{item1.state}}'data-rebate='{{item1.rebate}}' data-type='{{item1.type}}'  data-time='{{item1.time}}'>
+                <!-- 需要修改图片逻辑 -->
+                <image class='neibutupian' wx:if='{{item1.type==0}}' src='{{srcp2}}' style='height:auto' mode='widthFix' />
+                <image class='neibutupian' wx:if='{{item1.type==1}}' src='{{srcp1}}' style='height:auto' mode='widthFix' />
+                <image class='neibutupian' wx:if='{{item1.type==3}}' src='{{srcp3}}' style='height:auto' mode='widthFix' />
+                <view class='zibt3' wx:if='{{item1.type==0}}'>
+                    <text style='color:#22ac38' wx:if='{{item1.state==1}}'>-￥{{item1.rebate}}</text>
+                    <text style='color:#22ac38' wx:else>+￥{{item1.rebate}}</text>
+                </view>
+                <view class='zibt3' wx:if='{{item1.type==1}}'>
+                    <text style='color:#f39800' wx:if='{{item1.state==1}}'>+￥{{item1.rebate}}</text>
+                    <text style='color:#f39800' wx:else>-￥{{item1.rebate}}</text>
+                </view>
+                <view class='zibt3' wx:if='{{item1.type==3}}'>
+                    <text style='color:#e5004f' wx:if='{{item1.state==1}}'>-￥{{item1.rebate}}</text>
+                    <text style='color:#e5004f' wx:else>+￥{{item1.rebate}}</text>
+                </view>
+                <view class='tixianjg'>
+                    <block wx:if='{{item1.type==0}}'>
+                        <view class='zibt' wx:if='{{item1.state==1}}'>
+                            <text style='font-weight: 900;'>成功提现</text>
+                        </view>
+                        <view class='zibt' wx:else>
+                            <text style='font-weight: 900;color:#ec5561'>提现失败</text>
+                        </view>
+                    </block>
+                    <block wx:if='{{item1.type==1}}'>
+                        <block wx:if='{{item1.detailtype==0}}'>
+                            <view class='zibt' wx:if='{{item1.state==1}}'>
+                                <text style='font-weight: 900;'>分享收益-商品</text>
+                            </view>
+                            <view class='zibt' wx:else>
+                                <text style='font-weight: 900;color:#ec5561'>分享收益-商品失败</text>
+                            </view>
+                        </block>
+                        <block wx:if='{{item1.detailtype==1}}'>
+                            <view class='zibt' wx:if='{{item1.state==1}}'>
+                                <text style='font-weight: 900;'>分享收益-文章</text>
+                            </view>
+                            <view class='zibt' wx:else>
+                                <text style='font-weight: 900;color:#ec5561'>分享收益-文章失败</text>
+                            </view>
+                        </block>
+                    </block>
+                    <block wx:if='{{item1.type==3}}'>
+                        <view class='zibt' wx:if='{{item1.state==1}}'>
+                            <text style='font-weight: 900;'>商城购买-支付</text>
+                        </view>
+                        <view class='zibt' wx:else>
+                            <text style='font-weight: 900;color:#ec5561'>商品购买-支付失败</text>
+                        </view>
+                    </block>
+                    <view class='zibt2'>
+                        <text style='color:#7d7d7d' space='ensp'>{{item1.time1[1]}}-{{item1.time1[2]}}  {{item1.time2[0]}}:{{item1.time2[1]}}</text>
+                    </view>
+                </view>
+
+            </view>
+        </block>
+    </view>
+</scroll-view>

@@ -56,9 +56,8 @@ Page({
         console.log(this.data.user, "uuuuuuuuuuuuuuu")
         this.getAddressList();
         //不显示数据加载中
-
         wx.hideLoading({
-
+            
         })
 
     },

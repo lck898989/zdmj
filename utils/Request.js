@@ -12,7 +12,6 @@ export default class Request {
     sendRequest() {
         let self = this;
         return new Promise(function (resolve, reject) {
-            console.log("url is ",self.url);
             wx.request({
                 url: self.url,
                 data: self.data,

@@ -5,7 +5,6 @@ import Host from '../../../utils/Const.js';
 // import userInfo from '../../userInfo/userInfo.js';
 import regeneratorRuntime from '../../../utils/regenerator-runtime/runtime-module.js'
 Page({
-
   /**
    * 页面的初始数据
    */
@@ -29,6 +28,8 @@ Page({
       //总价
       totalPrice : 0,
       essayuid:0,
+      //取地址完成
+      getAdd : null
   },
 
   /**
@@ -38,36 +39,49 @@ Page({
     wx.showLoading({
         title: '数据加载中...',
     })
-    if (this.data.add === null) {
-        console.log("开始请求地址信息。。。。");
-        let url = app.host + 'Data/getAddressByUid';
-        console.log("in onLoad uid is ",app.uid);
-        let data = {
-            uid: app.uid
-        }
-        let req = new Request(url, data, "POST", 'text');
-        let res = await req.sendRequest();
-        console.log("res is ", res.data.address);
-        let addressArr = res.data.address;
-        if (addressArr !== null) {
-            let len = addressArr.length;
-            for (let i = 0; i < len; i++) {
-                console.log("地址项是： ", addressArr[i]);
-                if (addressArr[i].state === 0) {
-                    console.log("找到默认地址： ", addressArr[i]);
-                    //将该地址取出来显示
-                    this.setData({
-                        add: addressArr[i]
-                    });
-                    app.userInfo1.familyAddress = this.data.add;
-                    console.log("add is ", this.data.add);
-                }
-            }
-        }else{
+    console.log(this.data.add);
+    console.log("getAdd is ",this.data.getAdd);
+    if(this.data.add === null) {
+          console.log("开始请求地址信息。。。。");
+          let url = app.host + 'Data/getAddressByUid';
+          console.log("in onLoad uid is ", app.uid);
+          let data = {
+              uid: app.uid
+          }
+          let req = new Request(url, data, "POST", 'text');
+          let res = await req.sendRequest();
+          console.log("res is ", res.data.address);
+          let addressArr = res.data.address;
+          if (addressArr !== null) {
+              let len = addressArr.length;
+              //非默认地址的数组
+              let modeArr = [];
+              for (let i = 0; i < len; i++) {
+                  console.log("地址项是： ", addressArr[i]);
+                  if (addressArr[i].state === 0) {
+                      console.log("找到默认地址： ", addressArr[i]);
+                      //将该地址取出来显示
+                      this.setData({
+                          add: addressArr[i]
+                      });
+                      app.userInfo1.familyAddress = this.data.add;
+                      console.log("add is ", this.data.add);
+                  }else{
+                      modeArr.push(addressArr[i]);
+                  }
+              }
+              console.log("add is ",this.data.add);
+              console.log("modeArr is ",modeArr);
+              if(!this.data.add){
+                  this.setData({
+                      add : modeArr[0]
+                  })
+              }
+          }else {
             this.setData({
-                add : null
+                add: null
             })
-        }
+          }
     }
     let self = this;
     console.log(options.interSource + "!!!!!!!!!!!!!!!!!!!!!!!!!!!!1");
@@ -76,7 +90,7 @@ Page({
             this.setData({
                 interView: options.inter,
                 oid: options.oid
-            })
+            });
             break;
         case "wenzhang":
             this.setData({
@@ -183,7 +197,6 @@ Page({
   onReady: function() {
     
   },
-
   /**
    * 生命周期函数--监听页面显示
    */
@@ -195,12 +208,13 @@ Page({
       console.log("orderArray is ",this.data.orderArray);
       let choosedAdd = wx.getStorageSync('choosedAdd');
       console.log("选择的地址是：",choosedAdd);
-      this.setData({
-          add : choosedAdd
-      })
-      let pageStack = getCurrentPages();
-      console.log("pageStack is ",pageStack);
-      console.log("**********************");
+      if(choosedAdd){
+        this.setData({
+            add : choosedAdd
+        })
+        wx.removeStorageSync('choosedAdd');
+        console.log("add is ",this.data.add);
+      }
   },
 
   /**
@@ -238,9 +252,12 @@ Page({
   },
   enterAddress: function(event) {
     console.log("event si ", event);
-    wx.redirectTo({
-      url: '../orderAddress/orderAddress',
+    wx.navigateTo({
+        url: '../orderAddress/orderAddress',
     })
+    // wx.redirectTo({
+    //   url: '../orderAddress/orderAddress',
+    // })
   },
   //获取商家留言
   getNote : function(event){

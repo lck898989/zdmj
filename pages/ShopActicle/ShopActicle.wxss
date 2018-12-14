@@ -391,7 +391,7 @@
 .nullView5 {
     position: relative;
     width: 750rpx;
-    height: 11rpx;
+    height: 110rpx;
     background-color: #0d0909;
 }
 
@@ -400,12 +400,15 @@
 }
 
 .buyView {
-    position: relative;
+    position: fixed;
     width: 750rpx;
     height: 100rpx;
     display: flex;
-    margin-top: 0rpx;
+    bottom: 0;
+    /* margin-top: 0rpx; */
     justify-content:center;
+    z-index: 50;
+    background-color: #ffffff;
 }
 .gundong{
     position: absolute;
@@ -416,7 +419,7 @@
 }
 .sharePrice {
     position: relative;
-    width: 312rpx;
+    width: 250rpx;
     height: 100rpx;
     display: flex;
     justify-content: center;
@@ -424,13 +427,14 @@
 
 .shareView {
     position: relative;
-    width: 219rpx;
+    width: 200rpx;
     height: 100rpx;
     background-color: #f39800;
     color: #fff;
     display: flex;
     justify-content: center;
     align-items: center;
+    border-radius: 0;
 }
 
 .huodeText {
@@ -442,10 +446,38 @@
     position: absolute;
     bottom: 12rpx;
 }
+.nullView8{
+  position: absolute;
+  right:0;
+  width: 2px;
+  height: 62rpx;
+  background-color: #c9c9c9;
+  top: 20rpx;
+}
+.backImage{
+  position: absolute;
+  width:48rpx;
+  top: 12rpx;
+}
+.backtext{
+  position: absolute;
+  bottom: 18rpx;
+  color: #626262;
+}
+.backIndex{
+  position: relative;
+  width: 100rpx;
+  height: 100rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #ffffff;
+
+}
 
 .buy {
      position: relative;
-    width: 219rpx;
+    width: 200rpx;
     height: 100rpx;
     background-color: #b964d8;
     color: #fff;

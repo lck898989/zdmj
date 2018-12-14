@@ -11,7 +11,8 @@
 
 .money {
     position: relative;
-    height: 130rpx;
+    height: 120rpx;
+    margin-top: 2px;
     width: 750rpx;
     background-color: white;
     display: flex;
@@ -30,33 +31,33 @@
 .tixianText {
     position: absolute;
 
-    left: 50rpx;
+    left: 124rpx;
 }
 
 .moneyImage {
     position: absolute;
   
-    right: 166rpx;
-    width: 38rpx;
-    height: 35\8rpx;
+    left: 30rpx;
+    width: 72rpx;
+  
 }
 
 .moneyText {
     position: absolute;
-
-    right: 50rpx;
+     text-align: right;
+    right: 27rpx;
   
 }
 
 .stateText {
 position: absolute;
     top: 35rpx;
-    left: 50rpx;
+    left: 40rpx;
 }
 .stateText1{
     position: absolute;
  
-    right:80rpx;
+    right:25rpx;
 }
 .shibaiImage{
     position: absolute;
@@ -64,32 +65,53 @@ position: absolute;
 
     width: 30rpx;
 }
+.timeView{
+    position: relative;
+    width: 750rpx;
+    height: 57rpx;
+    display: flex;
+    align-items: flex-end;
+}
 .tixianView3
 {
     position: relative;
     width: 750rpx;
-    height: 160rpx;
+
     margin-top: 2rpx;
     background-color: white;
 }
 .timetext{
     position: absolute;
-    top: 39rpx;
+  
     left: 40rpx;
+}
+
+.nullView3{
+    position: relative;
+    width: 750rpx;
+    height: 27rpx;
+    background-color: white;    
+}
+.xinxi{
+    position: relative;
+    width: 750rpx;
+    height: 54rpx;
+    display: flex;
+    align-items: flex-end;
 }
 .time{
     position: absolute;
-    top: 39rpx;
+
     right:35rpx;    
 }
 .numberText{
     position: absolute;
-    bottom: 39rpx;
+ 
     left: 40rpx;
 }
 .number{
     position: absolute;
-    bottom: 39rpx;
+   
     right: 35rpx;
 }
 

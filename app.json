@@ -1,11 +1,13 @@
 {
+    
     "pages": [
         "pages/wxscope/wxscope",
-        "pages/lck/saleService/saleService",
-        "pages/lck/newCart/newCart",
-        "pages/zcw/user/user",
+        "pages/lck/address/address",
+        "pages/zcw/friends/friends",
+        "pages/zcw/myfriends/myfriends",
         "pages/search/search",
         "pages/lck/index/index",
+        "pages/lck/newCart/newCart",
         "pages/lck/webview/webview",
         "pages/lck/shop/shop",
         "pages/ButReady/BuyReady",
@@ -14,17 +16,21 @@
         "libs/citySelector/switchcity/switchcity",
         "pages/GetRebate/GetRebate",
         "pages/TixianMingxi/TixianMingxi",
+        "pages/lck/saleService/saleService",
         "pages/lck/applyProgress/applyProgress",
         "pages/lck/applySaleAfter/applySaleAfter",
         "pages/lck/searchDetail/searchDetail",
         "pages/userInfo/userInfo",
+        "pages/zcw/qianbao/qbsy",
+        "pages/zcw/shezhi/zhezhi",
+        "pages/zcw/qianbao/tixian/tixian",
+        "pages/zcw/qianbao/mingxi/mingxi",
         "pages/lck/order/order",
         "pages/lck/cart/cart",
         "pages/Advertisting/Advertisting",
         "pages/lck/cartGoodsDetail/cartGoodsDetail",
         "pages/lck/editAddress/editAddress",
         "pages/lck/orderAddress/orderAddress",
-        "pages/lck/address/address",
         "pages/MyMoney/MyMoney",
         "pages/Message/Message",
         "pages/TiXian/TiXian",
@@ -42,13 +48,20 @@
         "pages/TIANQI/TIANQI",
         "pages/SreachResult/SreachResult",
         "pages/ShopActicle/ShopActicle",
-        "pages/HistroyShare/HistroyShare"
+        "pages/HistroyShare/HistroyShare",
+        "pages/zcw/user/user"
     ],
     "window": {
         "navigationBarBackgroundColor": "white",
         "navigationBarTitleText": "指点迷津",
         "navigationBarTextStyle": "black",
         "enablePullDownRefresh": true
+    },
+    "networkTimeout": {
+      "request": 5000,
+      "connectSocket": 20000,
+      "uploadFile": 20000,
+      "downloadFile": 20000
     },
     "tabBar": {
         "selectedColor": "#863bb7",
