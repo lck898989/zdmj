@@ -161,6 +161,10 @@ page{
 .price-item{
     margin-top: 20rpx;
     margin-left: 15rpx;
+    width:350rpx;
+    white-space: nowrap;
+    text-overflow:ellipsis;
+    overflow: hidden;
 }
 .cancel-con{
     position: absolute;

@@ -27,7 +27,7 @@ Page({
      //是不是添加地址
      isAddress : false,
      addressText : "请输入收货地址所在的省市区",
-     addressDetail : "请输入详细地址包括门牌号等信息",
+     addressDetail : "道路/小区/写字楼/楼号/单元/门牌号",
      //添加地址的时候需要的信息
      username : '',
      phoneNumber : '',
@@ -40,7 +40,8 @@ Page({
      //从订单里面修改地址
      order_address : false,
      //所在城市字段
-     locationAdd : ''
+     locationAdd : '',
+     imgHost : 'https://shopfile.ykplay.com/resources/'
   },
 
   /**
@@ -248,26 +249,39 @@ Page({
   //设置默认地址
     setDefault : async function(event){
         console.log("event is ",event);
-        let isDefaultAdd = event.detail.value;
-        console.log("是否选中了：",isDefaultAdd);
-        this.data.currentAdd.state = isDefaultAdd ? 0 : 1;
-        //向服务器发送设置改地址为默认地址
-        let aid = this.data.currentAdd.aid;
-        console.log("aid is ",aid);
-        let uid = app.uid;
-        //将用户id和收货地址id发送给服务器改变默认值
-        let url = app.host + 'Data/EditState';
-        let data = {
-            aid   : aid,
-            uid   : uid,
-            state : this.data.currentAdd.state 
-        }
-        console.log("data is ",data);
-        let req = new Request(url, data, "POST", 'text');
-        let res = await req.sendRequest();
-        console.log("in changeEvent res is ", res);
-        if (res.data.encode === 0) {
-            console.log("adfadfasd");
+        let dataSet = event.currentTarget.dataset;
+        let isDefaultAdd = dataSet.tag;
+        this.data.state = (isDefaultAdd === 'true' ? true : false);
+        //编辑地址的时候
+        if(!this.data.isAddress){
+            this.data.currentAdd.state = (isDefaultAdd === 'true' ? 0 : 1);
+            //向服务器发送设置改地址为默认地址
+            let aid = this.data.currentAdd.aid;
+            console.log("aid is ",aid);
+            let uid = app.uid;
+            //将用户id和收货地址id发送给服务器改变默认值
+            let url = app.host + 'Data/EditState';
+            let data = {
+                aid   : aid,
+                uid   : uid,
+                state : this.data.currentAdd.state 
+            }
+            console.log("data is ",data);
+            let req = new Request(url, data, "POST", 'text');
+            let res = await req.sendRequest();
+            console.log("in changeEvent res is ", res);
+            if (res.data.encode === 0) {
+                console.log("adfadfasd");
+            }
+            this.setData({
+                currentAdd : this.data.currentAdd,
+            })
+        }else{
+            console.log("state is ",this.data.state);
+            //增加地址的时候
+            this.setData({
+                state : this.data.state
+            })
         }
     },
     getDefault : function(event){

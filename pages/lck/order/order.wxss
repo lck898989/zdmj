@@ -281,6 +281,10 @@ page{
     padding: 5rpx 30rpx;
     border-radius: 5rpx;
     margin-bottom: 10rpx;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-box-orient:vertical;
+    -webkit-line-clamp:2;
 }
 .footer{
     height: 80rpx;
@@ -315,4 +319,9 @@ page{
     font-weight: 900;
     font-size: 32rpx;
     color:red;
+}
+textarea{
+    width:550rpx;
+    height:60rpx;
+    padding: 20rpx 0rpx 0rpx 10rpx;
 }

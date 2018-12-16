@@ -100,27 +100,10 @@
     top: 30rpx;
     /* border: 10rpx solid #fff; */
 }
-/* .hot-today{
-    margin-top: 5rpx;
-    height:550rpx;
-    width: 750rpx;
-    border-bottom: 2rpx solid #f2f2f2;
-    background: linear-gradient(#da91f5,#fcf5fe);
-    border-top-left-radius: 30rpx;
-    border-top-right-radius: 30rpx;
-    position: relative;
-    z-index:1;
-}
-.title{
-    color: #a531d0;
-    font-size: 30rpx;
-    z-index: 2;
-} */
 .swiper-con{
     width: 100%;
     position: relative;
     z-index: 2;
-    /* background: linear-gradient(#da91f5,#fcf5fe); */
 }
 swiper{
     height:550rpx;
@@ -239,6 +222,9 @@ swiper{
     z-index: 80;
     transform: scale(0.90);
 }
+.imgCon1 .mask{
+    opacity: 0.4;
+}
 .imgCon2{
     top: 10%;
     left: 210rpx;
@@ -290,10 +276,12 @@ swiper{
 */
 .hideMask{
     transform: scale(1);
-    animation: hidemask 2s normal;
-    -webkit-animation:hidemask 2s normal;
+    animation: hidemask 0.6s normal;
+    -webkit-animation:hidemask 0.6s normal;
     animation-iteration-count: 1;
     -webkit-animation-iteration-count: 1;
+    animation-timing-function: linear;
+    -webkit-animation-timing-function: linear;
     animation-fill-mode: forwards;
     -webkit-animation-fill-mode: forwards;
 }
@@ -313,8 +301,8 @@ swiper{
 
 */
 .swiper-right{
-    /* animation: swiperRight 0.8s normal;
-    -webkit-animation:swiperRight 0.8s normal;
+    /* animation: swiperRight 0.6s normal;
+    -webkit-animation:swiperRight 0.6s normal;
     animation-iteration-count: 1;
     -webkit-animation-iteration-count: 1;
     animation-fill-mode: forwards;
@@ -325,14 +313,19 @@ swiper{
 }
 /*左移渐隐反向播放动画*/
 .swiper-right-reverse{
-    animation: swiperRight 0.8s reverse;
-    -webkit-animation:swiperRight 0.8s reverse;
-    animation-iteration-count: 1;
-    -webkit-animation-iteration-count: 1;
+    animation: swiperRight 0.65s reverse;
+    -webkit-animation:swiperRight 0.65s reverse;
+    /* -webkit-animation-timing-function: linear;
+    animation-timing-function:linear; */
     animation-fill-mode: forwards;
     -webkit-animation-fill-mode: forwards;
 }
 @keyframes swiperRight{
+    from{
+        left: 0rpx;
+        opacity: 1;
+        z-index: 100;
+    }
     to{
         left: -500rpx;
         opacity: 0;

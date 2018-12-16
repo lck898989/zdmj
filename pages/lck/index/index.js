@@ -163,6 +163,12 @@ Page({
         let success = function (data) {
             console.log("天气数据是：", data);
             let weather = data.originalData.results[0].weather_data[0];
+            let dayIcon = data.originalData.results[0].weather_data[0].dayPictureUrl;
+            let nightIcon = data.originalData.results[0].weather_data[0].nightPictureUrl;
+            let dayUrl = self.getWeatherName(dayIcon);
+            let nightUrl = self.getWeatherName(nightIcon);
+            console.log("dayUrl is ",dayUrl);
+            console.log("nightUrl is ",nightUrl);
             self.setData({
                 weatherData: weather
             });
@@ -214,6 +220,12 @@ Page({
                 autoPlay : true
             });
         }
+    },
+    //获取百度地图返回的天气信息字符串
+    getWeatherName : function(weatherInfo){
+        let weatherIndex = weatherInfo.indexOf('weather');
+        let res = weatherInfo.substr(weatherIndex);
+        return res;
     },
     //获得首页的分类信息
     getType: async function (tag) {
@@ -496,6 +508,7 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow: function () {
+        console.log("开启自动轮播");
         //自动轮播设置
         if(!this.data.autoPlay){
             this.data.timer = setInterval(function(){
@@ -509,6 +522,7 @@ Page({
      * 生命周期函数--监听页面隐藏
      */
     onHide: function () {
+        console.log("关闭自动轮播",this.data.timer);
         this.data.autoPlay = false;
         clearInterval(this.data.timer);
     },

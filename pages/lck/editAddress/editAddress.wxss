@@ -24,6 +24,7 @@ page{
 }
 .page-con{
     width: 100%;
+    margin-top: 12rpx;
 }
 .editor-con{
     width: 90%;

@@ -2,15 +2,15 @@
 <view class="con" style='box-shadow: 0rpx 8rpx 8rpx {{shadow}};-webkit-box-shadow:0rpx 8rpx 8rpx {{shadow}};' bindtap='enterGoodsOrStore'>
     <!--店铺文章-->
     <block wx:if='{{isShopEssays}}'>
-        <image-loader originalImage='{{imgHost}}{{headImg}}' width='343rpx' height='{{easyItem.height}}rpx' mode='widthFix' styleClass='border-top-left-radius: 10rpx;border-top-right-radius: 10rpx;border-bottom:2rpx solid #f2f2f2;'></image-loader>
+        <image-loader originalImage='{{imgHost}}{{headImg}}' width='343rpx' height='{{easyItem.height}}rpx' mode='widthFix' styleClass='border-top-left-radius: 10rpx;border-top-right-radius: 10rpx;border-bottom:2rpx solid #f2f2f2;' seeCount='{{easyItem.see}}'></image-loader>
     </block>
     <!--商品文章信息-->
     <block wx:if='{{isEssays}}'>
-        <image-loader originalImage='{{imgHost}}{{headImg}}' width='343rpx' height='{{easyItem.height}}rpx' mode='widthFix' styleClass='border-top-left-radius: 10rpx;border-top-right-radius: 10rpx;border-bottom:2rpx solid #f2f2f2;'></image-loader>
+        <image-loader originalImage='{{imgHost}}{{headImg}}' width='343rpx' height='{{easyItem.height}}rpx' mode='widthFix' styleClass='border-top-left-radius: 10rpx;border-top-right-radius: 10rpx;border-bottom:2rpx solid #f2f2f2;' seeCount='{{easyItem.see}}'></image-loader>
     </block>
     <!--商品信息-->
     <block wx:if='{{isProduct}}'>
-        <image-loader originalImage='{{imgHost}}{{headImg}}' width='343rpx' height='{{easyItem.height}}rpx' mode='widthFix' styleClass='border-top-left-radius: 10rpx;border-top-right-radius: 10rpx;border-bottom:2rpx solid #f2f2f2;'></image-loader>
+        <image-loader originalImage='{{imgHost}}{{headImg}}' width='343rpx' height='{{easyItem.height}}rpx' mode='widthFix' styleClass='border-top-left-radius: 10rpx;border-top-right-radius: 10rpx;border-bottom:2rpx solid #f2f2f2;' seeCount='{{easyItem.see}}'></image-loader>
     </block>
     <view wx:if='{{isShopEssays}}' class="text">{{easyItem.shopintroduction}}</view>
     <view wx:if='{{isEssays}}' class="text">{{easyItem.title}}</view>
@@ -24,6 +24,8 @@
         <text class='rebeat-text'>分享奖励</text>
         <text class='rebeat-money'>￥{{easyItem.rebate}}</text>
     </view>
-    <image src='../../resources/cover.png' style="width:128rpx;height:36rpx;" class="im_t"></image>
-    <text class="watched-count">{{easyItem.see}}</text>
+    <view class='watched-con'>
+        <image src='../../resources/cover.png' style="width:128rpx;height:36rpx;" class="im_t"></image>
+        <text class="watched-count">{{easyItem.see}}</text>
+    </view>
 </view>

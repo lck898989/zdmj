@@ -48,32 +48,6 @@
         </view>
         <block wx:if='{{loadDataOk}}'>
             <block wx:for='{{orderArray}}'>
-                <!-- <view class='order-detail'>
-                    <image src='{{imageHost}}{{item.head}}' style='width:190rpx;height:190rpx;margin-left:17rpx;' class='img-con'></image>
-                    <view class='goods-style'>
-                        <view class='goods-item' style='font-size:31rpx;color:#404040;margin-bottom:10rpx;'>
-                            {{item.pname}}
-                        </view>
-                        <view class='goods-item' style='color:#808080;margin-bottom:20rpx;'>
-                            <view wx:for='{{item.size}}' wx:for-item='innerItem' style='margin-right:25rpx;font-size:30rpx;'>
-                                {{innerItem}}
-                            </view>
-                        </view>
-                        <view class='goods-price'>
-                            <view style='margin-right:25rpx;font-size:35rpx;color:#b31227;font-weight:800'>
-                                ￥ {{item.price}}
-                            </view>
-                            <view class='order-right-count'>
-                                <view style='margin-right:20rpx;'>
-                                    数量
-                                </view>
-                                <view>
-                                    {{item.count}}
-                                </view>
-                            </view>
-                        </view>
-                    </view>
-                </view> -->
                  <view class='list-con'>
                     <image class='img-con' src="{{imageHost}}{{item.head}}" style="width:190rpx;height:190rpx;margin-left:17rpx;"></image>
                     <view class='text-con'>
@@ -114,9 +88,9 @@
         </view>
     </view>
     <view class='youhui sayToSaller' style='border-bottom:1px solid #fff;background-color:#fff;margin-bottom:10rpx;'>
-            <view style='color:#404040;width:150rpx;'>买家留言:</view>
-            <view style='margin-left:15rpx;'>
-                <input type='text' placeholder='有什么想提醒卖家的话' bindinput='getNote' confirm-type='search' bindconfirm='sendNote' bindblur='sendNote'></input>
+            <view style='color:#404040;width:150rpx;white-space:nowrap'>买家留言:</view>
+            <view style='margin-left:15rpx;width:540rpx;height:80rpx;'>
+                <textarea type='text' placeholder='有什么想提醒卖家的话' bindinput='getNote' confirm-type='search' bindconfirm='sendNote' bindblur='sendNote' placeholder-style='padding-top:20rpx;margin-left:10rpx;'></textarea>
             </view>
     </view>
     <view class='youhui count-price' style='border-bottom:1px solid #fff;background-color:#fff;'>

@@ -33,19 +33,6 @@
     border-top-left-radius: 10rpx;
     border-top-right-radius: 10rpx;
 }
-.im_t{
-    border-top-right-radius: 10rpx;
-    position: absolute;
-    top: 0rpx;
-    right: 0rpx;
-}
-.watched-count{
-    position: absolute;
-    top: 0rpx;
-    right: 35rpx;
-    color:#fff;
-    font-size: 25rpx;
-}
 .text{
     font-size:25rpx;
     margin-left:10rpx;
@@ -71,4 +58,23 @@
 .rebeat-money{
     color: #f39800;
     font-size: 30rpx;
+}
+.watched-con{
+    position: absolute;
+    top: 0rpx;
+    right: 0rpx;
+    vertical-align: top;
+}
+.watched-count{
+    position: absolute;
+    top: 0rpx;
+    right: 35rpx;
+    color:#fff;
+    font-size: 25rpx;
+}
+.im_t{
+    border-top-right-radius: 10rpx;
+    position: absolute;
+    top: -2rpx;
+    right: 0rpx;
 }
