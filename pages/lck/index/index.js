@@ -169,6 +169,8 @@ Page({
             let nightUrl = self.getWeatherName(nightIcon);
             console.log("dayUrl is ",dayUrl);
             console.log("nightUrl is ",nightUrl);
+            weather.dayUrl = 'https://shopfile.ykplay.com/resources/' + dayUrl;
+            weather.nightUrl = 'https://shopfile.ykplay.com/resources/' + nightUrl;
             self.setData({
                 weatherData: weather
             });

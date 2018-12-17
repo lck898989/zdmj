@@ -4,7 +4,6 @@ import Const from '../../../utils/Const';
 let app = getApp();
 import regeneratorRuntime from '../../../utils/regenerator-runtime/runtime-module.js';
 Page({
-
     /**
      * 页面的初始数据
      */
@@ -293,6 +292,9 @@ Page({
                     callback();
                 });
                 console.log("newAddEssays is ", this.data.newAddEssays);
+                this.setData({
+                    loadText : '上拉获取更多文章...'
+                })
             }else{
                 wx.hideLoading();
                 this.setData({
@@ -348,6 +350,11 @@ Page({
         console.log("products is ", res1.data.products);
         this.splitHeadImage(res1.data.products);
         console.log("goods is ", res1.data.products);
+        if(res1.data.products.length === 0){
+            this.setData({
+                loadText : '暂时还没有该分类的商品...'
+            });
+        }
         this.setData({
             goods: res1.data.products
         });
@@ -376,12 +383,22 @@ Page({
             });
             //设置二级分类数据
             console.log("in getTid tid is ",tid);
-            self.getT2idByTid(tid);
-            let essayData = await self.getShareEssayByTid();
-            console.log("essayData is ",essayData);
-            self.setData({
-                newAddEssays : essayData
-            })
+            if(this.data.isShare){
+                self.getT2idByTid(tid);
+                let essayData = await self.getShareEssayByTid();
+                console.log("essayData is ",essayData);
+                self.setData({
+                    newAddEssays : essayData
+                });
+            }else{
+                let goodsArr = await this.getProductsByTid();
+                //分割头图
+                this.splitHeadImage(goodsArr);
+                console.log("goodsArr is ",goodsArr);
+                self.setData({
+                    goods : goodsArr
+                });
+            }
         });
         this.hideTopLevel();
     },
@@ -390,7 +407,6 @@ Page({
         this.data.IsecondLevel
         this.setData({
             isTopLevel   : false,
-            // IsecondLevel : false,
         })
     },
     //自定义组件触发的事件加入购物车或者是直接购买
@@ -565,8 +581,13 @@ Page({
                 this.data.topLevelStyle = '';
                 this.data.topLevelFloat = false;
                 this.setData({
-                    floorStatus: false,
-                    topLevelStyle: this.data.topLevelStyle
+                    floorStatus   : false,
+                    topLevelStyle : this.data.topLevelStyle
+                });
+            }else{
+                //设置回顶部的悬浮球消失
+                this.setData({
+                    floorStatus   : false
                 });
             }
         }
@@ -600,7 +621,6 @@ Page({
     },
     onImageLoad: function (e) {
         let isLast = e.currentTarget.dataset.last;
-        console.log("isLast is ",isLast);
         let imageId = Number(e.currentTarget.id);
         let oImgW = e.detail.width;           //图片原始宽度
         let oImgH = e.detail.height;          //图片原始高度
@@ -612,8 +632,6 @@ Page({
         let imageLen = images.length;
         let imageObj = null;
         for (let i = 0; i < imageLen; i++) {
-            console.log("images is ", images);
-            console.log("imageId is ", typeof (imageId), imageId);
             let img = images[i];
             if (img.pid === imageId) {
                 imageObj = img;
@@ -705,6 +723,9 @@ Page({
         })
         let self = this;
         if(this.data.isHot){
+            this.setData({
+                loadText : '上拉显示更多商品...'
+            })
             if(this.data.isAll){
                 //点击了全部刷新的时候请求的方式不一样
                 this.data.page++;
@@ -740,6 +761,22 @@ Page({
                         });
                     }
                 }else{
+                    this.data.page++;
+                    // wx.hideLoading();
+                    //刷新一级分类下的商品信息
+                    let newProducts = await this.getProductsByTid();
+                    console.log("new Products is ",newProducts);
+                    this.splitHeadImage(newProducts);
+                    if(newProducts.length !== 0){
+                        this.data.goods.push(...newProducts);
+                        this.setData({
+                            goods : this.data.goods
+                        });
+                    }else{
+                        this.setData({
+                            loadText: '已经到底了~~o(>_<)o ~~'
+                        })
+                    }
                     wx.hideLoading();
                 }
             }
@@ -755,6 +792,7 @@ Page({
                     self.getAllDataArrayInShare(function(){});
                 });
             }else{
+                this.data.newAddEssays = [];
                 if(this.data.t2id === -2){
                     //说明还没有点击二级分类
                     console.log("this.data.tid is ",this.data.tid);
@@ -773,9 +811,17 @@ Page({
                         this.setData({
                             loadText: '已经到底了~~o(>_<)o ~~'
                         })
-                    }
-                    for(let i = 0;i < res.data.essays.length;i++){
-                        this.data.dataArray.push(res.data.essays[i]);
+                    }else{
+                        //对文章头图进行处理
+                        for(let i = 0;i < res.data.essays.length;i++){
+                            res.data.essays[i].essayhead = res.data.essays[i].essayhead.split(',');
+                        }
+                        this.setData({
+                            newAddEssays : res.data.essays
+                        })
+                        this.setData({
+                            loadText : '上拉获取更多文章...'
+                        })
                     }
                 }else{
                     let t2idEssay = await this.getSecondLevelEssayByT2id();
@@ -784,14 +830,15 @@ Page({
                         this.setData({
                             loadText: '已经到底了~~o(>_<)o ~~'
                         });
-                    }
-                    for(let j = 0;j < t2idEssay.length;j++){
-                        this.data.dataArray.push(t2idEssay);
+                    }else{
+                        this.setData({
+                            newAddEssays : t2idEssay
+                        });
+                        this.setData({
+                            loadText : '上拉获取更能多文章...'
+                        });
                     }
                 }
-                this.setData({
-                    dataArray : this.data.dataArray
-                })
             }
         }
     },
@@ -863,6 +910,7 @@ Page({
         let self = this;
         let id = Number(event.currentTarget.dataset.id);
         this.data.tid = id;
+        console.log("in chooseBannerType tid is ",this.data.tid);
         this.data.t2id = -2;
         this.data.page = 1;
         wx.showLoading({
@@ -923,19 +971,20 @@ Page({
                 page: this.data.page
             }
             if(this.data.isHot){
-                let url = 'Data/GetProductsByT2id'
-                let req = new Request(app.host + url, data, 'POST', 'text');
-                let res = await req.sendRequest();
+                //获得一级分类下的所有商品
+                let tidProducts = await this.getProductsByTid();
+                this.splitHeadImage(tidProducts);
+                console.log("tidProducts is ",tidProducts);
+                console.log("goods is ",this.data.goods);
+                this.data.goods = tidProducts;
                 wx.hideLoading();
-                console.log("in chooseType res is ", res);
-                if (res.data.products.length === 0) {
+                if (tidProducts.length === 0) {
                     this.setData({
                         loadText: '暂时还没有该分类的商品...'
                     });
                 }
-                this.splitHeadImage(res.data.products);
                 this.setData({
-                    goods        : res.data.products,
+                    goods        : this.data.goods,
                     bannerType   : this.data.bannerType,
                     IsecondLevel : true
                 });
@@ -952,6 +1001,20 @@ Page({
                 }
             }
         }
+    },
+    //根据tid获取一级分类下的商品
+    getProductsByTid : async function(){
+        console.log("in getProductsByTid is ",this.data.tid);
+        let url = app.host + 'Data/GetProductsByTid';
+        let data = {
+            page : this.data.page,
+            tid  : this.data.tid
+        }
+        console.log("data is ",data);
+        let req = new Request(url,data,'POST','text');
+        let res = await req.sendRequest();
+        console.log("res is ",res);
+        return res.data.products;
     },
     //根据tid获取所有的商品文章
     getShareEssayByTid : async function(){
@@ -1027,6 +1090,9 @@ Page({
         })
         console.log("选择二级分类 t2id is ", t2id);
         if(this.data.isHot){
+            this.setData({
+                goods : []
+            })
             //根据二级分类获取到商品信息
             this.getTwoClass();
             console.log("选择二级分类后的商品是：",this.data.goods);
@@ -1156,6 +1222,7 @@ Page({
             dataArray    : [],
             col1         : [],
             col2         : [],
+            goods        : [],
             col1H        : 0,
             col2H        : 0,
         });
@@ -1195,15 +1262,23 @@ Page({
                         });
                     }
                 } else {
-                    wx.hideLoading();
+                    //请求tid对应的商品
+                    let tidProducts = await this.getProductsByTid();
+                    //分割头图
+                    this.splitHeadImage(tidProducts);
+                    this.setData({
+                        goods : tidProducts
+                    });
+                    
                 }
             }
         }else if(typeName === '精品分享'){
-            this.data.page = 1;
+            this.data.page = 0;
             this.data.isShare = true;
             this.data.isHot = false;
             //精品分享请求全部
             if (this.data.isAll) {
+                this.data.page = 1;
                 this.setData({
                     newAddEssays: []
                 }, () => {
@@ -1212,46 +1287,47 @@ Page({
                     self.getAllType();
                 });
             } else {
-                if (this.data.t2id === -2) {
-                    //说明还没有点击二级分类
-                    console.log("this.data.tid is ", this.data.tid);
-                    let url = app.host + 'Data/GetAllEssayByTid';
-                    let data = {
-                        tid: this.data.tid,
-                        page: this.data.page,
-                        uid: app.uid
-                    }
-                    console.log("page is ", this.data.page);
-                    let req = new Request(url, data, 'POST', 'text');
-                    let res = await req.sendRequest();
-                    console.log("请求一级分类文章的 res is ", res.data.essays);
-                    if (res.data.essays.length === 0) {
-                        wx.hideLoading();
-                        this.setData({
-                            loadText: '已经到底了~~o(>_<)o ~~'
-                        })
-                    }else{
-                        for (let i = 0; i < res.data.essays.length; i++) {
-                            this.data.dataArray.push(res.data.essays[i]);
-                        }
-                        this.data.newAddEssays = res.data.essays;
-                    }
-                } else {
-                    let t2idEssay = await this.getSecondLevelEssayByT2id();
-                    this.data.newAddEssays = t2idEssay;
-                    wx.hideLoading();
-                    if (t2idEssay.length === 0) {
-                        this.setData({
-                            loadText: '已经到底了~~o(>_<)o ~~'
-                        })
-                    }
-                    for (let j = 0; j < t2idEssay.length; j++) {
-                        this.data.dataArray.push(t2idEssay);
-                    }
-                }
-                this.setData({
-                    newAddEssays : this.data.newAddEssays
-                })
+                // if (this.data.t2id === -2) {
+                //     //说明还没有点击二级分类
+                //     console.log("this.data.tid is ", this.data.tid);
+                //     let url = app.host + 'Data/GetAllEssayByTid';
+                //     let data = {
+                //         tid: this.data.tid,
+                //         page: this.data.page,
+                //         uid: app.uid
+                //     }
+                //     console.log("page is ", this.data.page);
+                //     let req = new Request(url, data, 'POST', 'text');
+                //     let res = await req.sendRequest();
+                //     console.log("请求一级分类文章的 res is ", res.data.essays);
+                //     if (res.data.essays.length === 0) {
+                //         wx.hideLoading();
+                //         this.setData({
+                //             loadText: '已经到底了~~o(>_<)o ~~'
+                //         })
+                //     }else{
+                //         let essayArr = res.data.essays;
+                //         for (let i = 0; i < essayArr.length; i++) {
+                //             res.data.essays[i].essayhead = res.data.essays[i].essayhead.split(',');
+                //         }
+                //         this.data.newAddEssays = res.data.essays;
+                //     }
+                // } else {
+                //     let t2idEssay = await this.getSecondLevelEssayByT2id();
+                //     this.data.newAddEssays = t2idEssay;
+                //     wx.hideLoading();
+                //     if (t2idEssay.length === 0) {
+                //         this.setData({
+                //             loadText: '已经到底了~~o(>_<)o ~~'
+                //         })
+                //     }
+                //     for (let j = 0; j < t2idEssay.length; j++) {
+                //         this.data.dataArray.push(t2idEssay);
+                //     }
+                // }
+                // this.setData({
+                //     newAddEssays : this.data.newAddEssays
+                // })
             }
         }
         console.log("isHot is ",this.data.isHot,"isShare is ",this.data.isShare);
@@ -1259,7 +1335,6 @@ Page({
         this.setData({
             isHot     : this.data.isHot,
             isShare   : this.data.isShare,
-            page      : 1,
         });
     },
     chooseItByCss : function(e){

@@ -19,6 +19,9 @@ Component({
         console.log("data is ",this.data);
         console.log("easyItem is ",this.data.easyItem);
         console.log("shadown is ",this.data.shadow);
+        //对图片的高度取整
+        this.data.easyItem.height = Math.round(this.data.easyItem.height);
+        console.log("图片的高度是：",this.data.easyItem.height);
         if(this.data.easyItem.productstype === 'shopessays'){
             this.data.isShopEssays = true;
             this.data.isEssays = false;
@@ -118,7 +121,9 @@ Component({
                     pid : self.data.easyItem.pid,
                     eid : self.data.easyItem.eid,
                     uid : app.uid
-                }, "interWenZhang");
+                }, "interWenZhang",function(r){
+                    console.log("商品文章 r is ",r);
+                });
                 let essayhead = this.data.easyItem.essayhead;
                 // let essayuid = this.data.easyItem.e
                 let title = this.data.easyItem.title;
@@ -128,7 +133,7 @@ Component({
                 let pid = this.data.easyItem.pid;
                 let eid = this.data.easyItem.eid;
                 wx.navigateTo({
-                    url: '../../ActicleScene/ActicleScene?essayhead='+essayhead + '&title='+title + '&authorurl='+authorurl + 'authorname='+authorname + '&pid='+pid + '&eid='+eid,
+                    url: '../../ActicleScene/ActicleScene?essayhead='+essayhead + '&title='+title + '&authorurl='+authorurl + '&authorname='+authorname + '&pid='+pid + '&eid='+eid,
                 })
                 
             }else if(this.data.isShopEssays){
@@ -142,7 +147,9 @@ Component({
                 app.ShortConnect(app.urlw + "Data/GetShopProductsByShopEssayShopid", {
                     shopid: this.data.easyItem.shopid,
                     uid: app.uid
-                }, "turnShopWen");
+                }, "turnShopWen",function(r){
+                    console.log("商铺文章 r is ",r);
+                });
                 let shopurl = this.data.easyItem.shopessayhead;
                 let introduction = this.data.easyItem.shopintroduction;
                 let shopjson = shopjson2;

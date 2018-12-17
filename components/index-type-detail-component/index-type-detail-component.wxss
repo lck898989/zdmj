@@ -75,6 +75,6 @@
 .im_t{
     border-top-right-radius: 10rpx;
     position: absolute;
-    top: -2rpx;
+    top: 0rpx;
     right: 0rpx;
 }

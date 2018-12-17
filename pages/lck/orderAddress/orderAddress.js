@@ -39,7 +39,9 @@ Page({
      condition: false,
      choosedAddColor : '#ec0023',
      unChoosedAddColor : '#eee',
-     choosedAdd : null
+     choosedAdd : null,
+     page       : 1,
+     loadText   : '下拉获取更多地址信息...'
 
   },
 
@@ -66,18 +68,33 @@ Page({
       let url = app.host + 'Data/getAddressByUid';
       console.log("uid is ", app.uid);
       let data = {
-          uid: app.uid
+          uid  : app.uid,
+          page : this.data.page 
       }
       let req = new Request(url, data, "POST", 'text');
       let res = await req.sendRequest();
       //不显示数据加载中
       wx.hideLoading({
-
+          
       })
       console.log("res is ", res.data.address);
-      this.setData({
-          user: res.data.address
-      });
+      if(res.data.address){
+        this.data.user.push(...res.data.address);
+        this.setData({
+            user: res.data.address
+        });
+      }else{
+          if(this.data.page === 1){
+            wx.showToast({
+                title : '地址列表空空如也,快去添加一个吧！',
+                icon  : 'none'
+            });
+          }else{
+              this.setData({
+                  loadText : '没有更多地址了...'
+              });
+          }
+      }
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -120,7 +137,8 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-
+      this.data.page++;
+      this.getAddressList();
   },
   stopEvent : function(event){
       console.log("in stop event is ",event);

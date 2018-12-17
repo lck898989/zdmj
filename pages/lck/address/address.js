@@ -38,7 +38,8 @@ Page({
         //  values: [0, 0, 0],
         condition: false,
         choosedAddColor: '#ec0023',
-        unChoosedAddColor: '#eee'
+        unChoosedAddColor: '#eee',
+        page : 1,
     },
 
     /**
@@ -59,22 +60,25 @@ Page({
         wx.hideLoading({
             
         })
-
     },
     getAddressList: async function () {
         //请求所有收货地址的数据
         let url = app.host + 'Data/getAddressByUid';
         console.log("uid is ", app.uid);
         let data = {
-            uid: app.uid
+            uid  : app.uid,
+            page : this.data.page
         }
         let req = new Request(url, data, "POST", 'text');
         let res = await req.sendRequest();
         console.log("res is ", res.data.address);
+        // if(res.data.address){
+        //     this.data.user.push(...res.data.address);
+        // }
+        console.log("user is ",this.data.user);
         this.setData({
             user: res.data.address
         });
-        // console.log(this.data.user,"yyyyyyyyyyyyyyyyyyyyyyyyyy")
     },
     /**
      * 生命周期函数--监听页面初次渲染完成
@@ -116,8 +120,27 @@ Page({
     /**
      * 页面上拉触底事件的处理函数
      */
-    onReachBottom: function () {
-
+    onReachBottom: async function () {
+        this.data.page++;
+        // this.getAddressList();
+        //请求所有收货地址的数据
+        let url = app.host + 'Data/getAddressByUid';
+        console.log("uid is ", app.uid);
+        let data = {
+            uid: app.uid,
+            page: this.data.page
+        }
+        console.log("data is ",data);
+        let req = new Request(url, data, "POST", 'text');
+        let res = await req.sendRequest();
+        console.log("res is ", res.data.address);
+        //追加地址项
+        if(res.data.address){
+            this.data.user.push(...res.data.address);
+        }
+        this.setData({
+            user : this.data.user
+        });
     },
     stopEvent: function (event) {
         console.log("in stop event is ", event);

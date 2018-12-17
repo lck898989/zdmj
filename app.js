@@ -562,9 +562,9 @@
                         break;
                     case "interWenZhang":
                          self.wenzhangJson = res.data.essay;
+                         callback(self.wenzhangJson);
                          if (self.setEssay) {
-                           
-                             self.setEssay(res);
+                            self.setEssay(res);
                          }
                         break;
                     case "GetType":

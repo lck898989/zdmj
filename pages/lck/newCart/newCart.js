@@ -426,9 +426,6 @@ Page({
         } catch (e) {
             console.log("e is ", e);
             wx.hideLoading();
-            wx.showToast({
-                title: '购物车为空',
-            })
         }
     },
     /**

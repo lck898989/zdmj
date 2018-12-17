@@ -1,7 +1,12 @@
 <view class='goods-con' bindtap='enterDetail' data-id='{{goods.pid}}'>
     <view class='goods-parent'>
         <!-- <image src='{{host}}{{goods.head[0]}}' style='width:240rpx;height:240rpx;border-radius:10rpx;'></image> -->
-        <image-loader originalImage='{{host}}{{goods.head[0]}}' width='240rpx' height='240rpx' mode='' styleClass='border-radius:10rpx;'></image-loader>
+        <block wx:if='{{goods.custom === 0}}'>
+            <image-loader originalImage='{{host}}{{goods.head[0]}}' width='240rpx' height='240rpx' mode='' styleClass='border-radius:10rpx;'></image-loader>
+        </block>
+        <block wx:if='{{goods.custom === 1 && goods.customhead !== ""}}'>
+            <image-loader originalImage='{{host}}{{goods.customhead}}' width='240rpx' height='240rpx' mode='' styleClass='border-radius:10rpx;'></image-loader>
+        </block>
         <view class='rightText'>
             <view class='pd-con'>
                 <view class='pname'>

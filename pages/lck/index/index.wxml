@@ -8,10 +8,10 @@
                 </view>
                 <view class='weather'>
                     <block wx:if='{{app.isDay}}'>
-                        <image-loader originalImage='{{weatherData.dayPictureUrl}}' width='100rpx' height='75rpx' mode='' styleClass=''></image-loader>
+                        <image-loader originalImage='{{weatherData.dayUrl}}' width='75rpx' height='75rpx' mode='' styleClass=''></image-loader>
                     </block>
                     <block wx:else>
-                        <image-loader originalImage='{{weatherData.nightPictureUrl}}' width='100rpx' height='75rpx' mode='' styleClass=''></image-loader>
+                        <image-loader originalImage='{{weatherData.nightUrl}}' width='75rpx' height='75rpx' mode='' styleClass=''></image-loader>
                     </block>
                     <view class='weatherDesc'>
                         <view>

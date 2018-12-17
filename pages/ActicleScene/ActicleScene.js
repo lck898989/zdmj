@@ -213,7 +213,9 @@ Page({
                 })
                 app.ShortConnect(app.urlw + "Data/GetProductByPid", {
                     pid: this.data.wenzhangJson.pid
-                }, 'ActicleInterShop');
+                }, 'ActicleInterShop',function(r){
+                    console.log("r is ",r);
+                });
                 wxParse.wxParse('article', 'html', article, self);
                 console.log(typeof this.data.wenzhangJson.authorurl + "、、、、、、、、、、、、、、、、、、、、");
                 console.log(JSON.stringify(this.data.essayhead) + "、、、、、、、、、、、、、、、、、、、、");

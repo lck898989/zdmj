@@ -64,12 +64,12 @@
             </block>
         </view>
     </view>
-    <view wx:if='{{!isAddress}}' class='deleteAdd' bindtap='deleteAdd'>
-        删除收货地址
-    </view>
     <view class="save-container" bindtap='saveEditAdd' data-user='{{isAddress ? "add" : ""}}'>
         <view>
             保存收货地址
         </view>
+    </view>
+    <view wx:if='{{!isAddress}}' class='deleteAdd' bindtap='deleteAdd'>
+        删除收货地址
     </view>
 </view>

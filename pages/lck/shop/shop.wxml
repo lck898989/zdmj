@@ -32,11 +32,6 @@
                 <!-- <image src='{{serverImageHost}}{{item.acthead}}' style='width:750rpx;height:750rpx;' mode='widthFix'></image> -->
             </swiper-item>
         </swiper>
-        <!-- <view class='dots'>
-            <block wx:for='{{pictureList}}' wx:key='unique'>
-                <view data-i='{{index}}' bindtap='fn' class='dot {{index === swiperIndex ? "active" : ""}}'></view>
-            </block>
-        </view> -->
     </view>
     <!--精品分享和热卖商城-->
     <view class='jr-con-p'>
@@ -115,7 +110,7 @@
             </view>
         </view>
         <!--二级分类显示区域-->
-        <view wx:if='{{IsecondLevel}}' class='secondLevel-con'>
+        <view wx:if='{{IsecondLevel}}' class='secondLevel-con' style='{{isShare ? (newAddEssays.length === 0 ? "margin-bottom:100rpx;" : "") : (goods.length === 0 ? "margin-bottom:100rpx;" : "")}}'>
             <block wx:for='{{secondLevels}}'>
                 <view class='secondLevel-item' data-ttid='{{item.t2id}}' data-tid='{{item.tid}}' bindtap='chooset2Id' style='{{item.active ? "border: 2rpx solid #863bb7;background: #ecceff;color: #b25bd2;" : ""}}'>
                     {{item.t2name}}
@@ -209,6 +204,9 @@
     </block>
     <image src='../../../resources/btn_top.png' class='goTop' hidden='{{!floorStatus}}' bindtap='goTop' style='width:110rpx;height:110rpx;'/>
     <view class='loadText'>
+        <!-- <view wx:if='{{dataArray.length === 0}}' class='emptyGoodsCon'>
+            
+        </view> -->
         <view class='centerText'>
             {{loadText}}
         </view>

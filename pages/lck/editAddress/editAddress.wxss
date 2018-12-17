@@ -39,7 +39,7 @@ page{
     margin-top: 30rpx;
     width:100%;
     border-bottom: 2px solid #f2f2f2;
-    padding: 0rpx 12rpx 35rpx 12rpx;
+    padding: 0rpx 12rpx 30rpx 12rpx;
     font-size: 35rpx;
     display: flex;
     flex-direction: row;
@@ -85,10 +85,9 @@ page{
     color: #ffffff;
     font-weight: 900;
     margin-left: 25rpx;
-    margin-top: 10rpx;
     border-radius: 10rpx;
+    margin-top: 48rpx;
     position: fixed;
-    bottom: 340rpx;
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -130,7 +129,7 @@ page{
 .set-default{
     /* margin-top: 40rpx; */
     width: 680rpx;
-    padding:18rpx 35rpx;
+    padding:10rpx 35rpx;
     height: 90rpx;
     font-size: 30rpx;
     display:flex;

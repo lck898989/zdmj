@@ -70,13 +70,16 @@
             <!-- </radio-group> -->
         </view>
         <block wx:if='{{isChecked}}'>
-        <view class='index-manager' bindtap='addAdd'>
-            <image src='../../../resources/add.png' style='width:40rpx;height:40rpx;'></image>
-            <view style='margin-left:25rpx;color:#bfbfbf;font-size:35rpx;'>
-                添加新地址
+            <view class='index-manager' bindtap='addAdd'>
+                <image src='../../../resources/add.png' style='width:40rpx;height:40rpx;'></image>
+                <view style='margin-left:25rpx;color:#bfbfbf;font-size:35rpx;'>
+                    添加新地址
+                </view>
             </view>
+        </block>
+        <view class='loadText-con'>
+            
         </view>
-    </block>
         <!--确定选择该地址-->
         <view class='index-manager2' bindtap='ensure' style='margin-left:10rpx;color:white;font-size:35rpx;font-weight: 900;' >
             确认选择

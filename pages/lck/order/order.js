@@ -43,45 +43,18 @@ Page({
     console.log("getAdd is ",this.data.getAdd);
     if(this.data.add === null) {
           console.log("开始请求地址信息。。。。");
-          let url = app.host + 'Data/getAddressByUid';
+        let url = app.host + 'Data/GetAddressByUidAndState0';
           console.log("in onLoad uid is ", app.uid);
           let data = {
-              uid: app.uid
+              uid  : app.uid,
           }
           let req = new Request(url, data, "POST", 'text');
           let res = await req.sendRequest();
           console.log("res is ", res.data.address);
-          let addressArr = res.data.address;
-          if (addressArr !== null) {
-              let len = addressArr.length;
-              //非默认地址的数组
-              let modeArr = [];
-              for (let i = 0; i < len; i++) {
-                  console.log("地址项是： ", addressArr[i]);
-                  if (addressArr[i].state === 0) {
-                      console.log("找到默认地址： ", addressArr[i]);
-                      //将该地址取出来显示
-                      this.setData({
-                          add: addressArr[i]
-                      });
-                      app.userInfo1.familyAddress = this.data.add;
-                      console.log("add is ", this.data.add);
-                  }else{
-                      modeArr.push(addressArr[i]);
-                  }
-              }
-              console.log("add is ",this.data.add);
-              console.log("modeArr is ",modeArr);
-              if(!this.data.add){
-                  this.setData({
-                      add : modeArr[0]
-                  })
-              }
-          }else {
-            this.setData({
-                add: null
-            })
-          }
+          let address = res.data.address;
+          this.setData({
+              add : address
+          })     
     }
     let self = this;
     console.log(options.interSource + "!!!!!!!!!!!!!!!!!!!!!!!!!!!!1");

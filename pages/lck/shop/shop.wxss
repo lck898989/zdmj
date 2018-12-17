@@ -199,7 +199,7 @@ swiper{
     width: 750rpx;
     padding: 0rpx 0rpx 25rpx 0rpx;
     flex-wrap: wrap;
-    margin-left: 25rpx;
+    padding-left: 25rpx;
     background: #fff;
 }
 .secondLevel-item{
@@ -542,6 +542,7 @@ button::after{
     bottom: 50rpx;
     padding: 20rpx;
     right: 30rpx;
+    z-index: 1000;
 }
 .wx-swiper-dots.wx-swiper-dots-horizontal{
     margin-bottom: 0rpx;
@@ -581,7 +582,7 @@ button::after{
     bottom: -35rpx;
     left: 0rpx;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     flex-wrap: nowrap;
@@ -592,4 +593,9 @@ button::after{
     height: 50rpx;
     text-align: center;
     line-height: 50rpx;
+}
+.emptyGoodsCon{
+    height: 300rpx;
+    background: #fff;
+    width: 100%;
 }
