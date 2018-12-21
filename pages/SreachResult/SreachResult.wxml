@@ -54,7 +54,7 @@
                 <block wx:if='{{item.productstype=="shopessays"}}'>
                     <view class='leftSon' bindtap='intetWenzhang' data-title='{{item.shoptitle}}' data-productstype='{{item.productstype}}' data-shopjson='{{item}}' data-introduction='{{item.shopintroduction}}' data-shopurl='{{item.shopessayhead}}' data-shopid='{{item.shopid}}' wx:if='{{index==0}}' style='margin-top:0rpx;'>
                         <view class='seeView'>
-                            <image mode='widthFix' class='seeIcon' style='height:auto' src='../../resources/jingxuan_1.png'></image>
+                            <image mode='widthFix' class='seeIcon' style='height:auto' src='../../resources/ico_eye.png'></image>
                             <text class='seeText' style='font-size:19rpx;font-weight:900'>{{item.see}}</text>
                         </view>
                         <view class='wenzhangImageView' style='height:{{item.height}}rpx'>
@@ -75,7 +75,7 @@
                     </view>
                     <view class='leftSon' bindtap='intetWenzhang' data-title='{{item.title}}' data-productstype='{{item.productstype}}' data-shopjson='{{item}}' data-introduction='{{item.shopintroduction}}' data-shopurl='{{item.shopessayhead}}' data-shopid='{{item.shopid}}' wx:else style='margin-top:18rpx;'>
                         <view class='seeView'>
-                            <image mode='widthFix' class='seeIcon' style='height:auto' src='../../resources/jingxuan_1.png'></image>
+                            <image mode='widthFix' class='seeIcon' style='height:auto' src='../../resources/ico_eye.png'></image>
                             <text class='seeText' style='font-size:19rpx;font-weight:900'>{{item.see}}</text>
                         </view>
                         <view class='wenzhangImageView' style='height:{{item.height}}rpx'>
@@ -98,7 +98,7 @@
                 <block wx:if='{{item.productstype=="essays"}}'>
                       <view class='leftSon' bindtap='intetWenzhang'  data-title='{{item.title}}'data-productstype='{{item.productstype}}' data-shopjson='{{item}}' data-introduction='{{item.introduction}}'  data-shopurl='{{item.essayhead}}' wx:if='{{index==0}}' style='margin-top:0rpx;'>
                         <view class='seeView'>
-                            <image mode='widthFix' class='seeIcon' style='height:auto' src='../../resources/jingxuan_1.png'></image>
+                            <image mode='widthFix' class='seeIcon' style='height:auto' src='../../resources/ico_eye.png'></image>
                             <text class='seeText' style='font-size:19rpx;font-weight:900'>{{item.see}}</text>
                         </view>
                         <view class='wenzhangImageView' style='height:{{item.height}}rpx'>
@@ -118,7 +118,7 @@
                     </view>  
                       <view class='leftSon' bindtap='intetWenzhang'  data-title='{{item.title}}'data-productstype='{{item.productstype}}' wx:else data-shopjson='{{item}}' data-introduction='{{item.introduction}}' data-shopurl='{{item.essayhead}}' style='margin-top:18rpx;'>
                         <view class='seeView'>
-                            <image mode='widthFix' class='seeIcon' style='height:auto' src='../../resources/jingxuan_1.png'></image>
+                            <image mode='widthFix' class='seeIcon' style='height:auto' src='../../resources/ico_eye.png'></image>
                             <text class='seeText' style='font-size:19rpx;font-weight:900'>{{item.see}}</text>
                         </view>
                         <view class='wenzhangImageView' style='height:{{item.height}}rpx'>
@@ -130,7 +130,7 @@
                         </view>
 
                         <view class='authorView'>
-                            <image class='authorImage' mode='widthFix' src='{{item.wxhead}}' style='height:auto'></image>
+                            <image class='authorImage' src='{{item.wxhead}}'></image>
                             <text class='authorName' style='font-size:16rpx;color:#898989;font-weight:900'>{{item.wxnickname}}</text>
                         </view>
                         <view class='nullView2'></view>
@@ -141,9 +141,9 @@
         <view class='rightView'>
             <block wx:for='{{rightArray}}'>
                 <block wx:if='{{item.productstype=="shopessays"}}'>
-                    <view class='leftSon' bindtap='intetWenzhang' data-shopurl='{{item.shopessayhead}}' data-shopjson='{{item}}'data-title='{{item.shoptitle}}' data-productstype='{{item.productstype}}' wx:if='{{index==0}}' style='margin-top:0rpx;'>
+       <view class='leftSon' bindtap='intetWenzhang' data-shopurl='{{item.shopessayhead}}' data-shopjson='{{item}}'data-title='{{item.shoptitle}}' data-productstype='{{item.productstype}}' wx:if='{{index==0}}' style='margin-top:0rpx;'>
                         <view class='seeView'>
-                            <image mode='widthFix' class='seeIcon' style='height:auto' src='../../resources/jingxuan_1.png'></image>
+                            <image mode='widthFix' class='seeIcon' style='height:auto' src='../../resources/ico_eye.png'></image>
                             <text class='seeText' style='font-size:19rpx;font-weight:900'>{{item.see}}</text>
                         </view>
                         <view class='wenzhangImageView' style='height:{{item.height}}rpx'>
@@ -164,7 +164,7 @@
                     </view>
                     <view class='leftSon' wx:else bindtap='intetWenzhang'   data-shopurl='{{item.shopessayhead}}'data-shopjson='{{item}}' data-title='{{item.shoptitle}}' data-productstype='{{item.productstype}}' style='margin-top:18rpx;'>
                         <view class='seeView'>
-                            <image mode='widthFix' class='seeIcon' style='height:auto' src='../../resources/jingxuan_1.png'></image>
+                            <image mode='widthFix' class='seeIcon' style='height:auto' src='../../resources/ico_eye.png'></image>
                             <text class='seeText' style='font-size:19rpx;font-weight:900'>{{item.see}}</text>
                         </view>
                         <view class='wenzhangImageView' style='height:{{item.height}}rpx'>
@@ -187,7 +187,7 @@
                 <block wx:if='{{item.productstype=="essays"}}'>
                     <view class='leftSon' bindtap='intetWenzhang' data-shopjson='{{item}}'  data-shopurl='{{item.essayhead}}'data-title='{{item.title}}'data-productstype='{{item.productstype}}' wx:if='{{index==0}}' style='margin-top:0rpx;'>
                         <view class='seeView'>
-                            <image mode='widthFix' class='seeIcon' style='height:auto' src='../../resources/jingxuan_1.png'></image>
+                            <image mode='widthFix' class='seeIcon' style='height:auto' src='../../resources/ico_eye.png'></image>
                             <text class='seeText' style='font-size:19rpx;font-weight:900'>{{item.see}}</text>
                         </view>
                         <view class='wenzhangImageView' style='height:{{item.height}}rpx'>
@@ -208,7 +208,7 @@
                     </view> 
                     <view class='leftSon' wx:else bindtap='intetWenzhang'  data-shopurl='{{item.essayhead}}' data-shopjson='{{item}}' data-title='{{item.title}}' data-productstype='{{item.productstype}}' style='margin-top:18rpx;'>
                         <view class='seeView'>
-                            <image mode='widthFix' class='seeIcon' style='height:auto' src='../../resources/jingxuan_1.png'></image>
+                            <image mode='widthFix' class='seeIcon' style='height:auto' src='../../resources/ico_eye.png'></image>
                             <text class='seeText' style='font-size:19rpx;font-weight:900'>{{item.see}}</text>
                         </view>
                         <view class='wenzhangImageView' style='height:{{item.height}}rpx'>

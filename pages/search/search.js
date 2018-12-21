@@ -113,16 +113,9 @@ Page({
             })
             wx.hideLoading();
         }
-        if (res.inter == "0") {
-            this.setData({
-                sreachText: res.sreachText
-            })
-            app.ShortConnect(app.urlw + "Data/searchShop", {
-                sreachText: this.data.sreachText
-            }, "searchText");
-        }
+     
         if (app.nearsreachArray) {
-            this.setData({
+            this.setData({ 
                 nearSreach: app.nearsreachArray,
                 hotSreach: app.hotsreachArray,
             })
@@ -140,8 +133,12 @@ Page({
             }
         }
         if (app.goodShop) {
+            console.log(JSON.stringify(app.goodShop)+"###################################");
             for (let i = 0; i <= app.goodShop.length - 1; i++) {
-                app.goodShop[i].head = app.goodShop[i].head.split(",");
+                if (typeof app.goodShop[i].head=="string")
+                {
+                    app.goodShop[i].head = app.goodShop[i].head.split(",");
+                }
             }
             // for (let k = 0; k <= app.goodShop.length - 1; k++) {
             //     let selectsize = JSON.parse(app.goodShop[k].size);
@@ -222,6 +219,16 @@ Page({
                 console.log(this.data.sreachArray);
             }
         }
+        if (res.inter == "0") {
+            console.log(res.sreachText + "---------------------------------");
+            this.setData({
+                sreachText: res.sreachText
+            })
+
+            app.ShortConnect(app.urlw + "Data/searchShop", {
+                searchText: this.data.sreachText
+            }, "searchText");
+        }
         console.log(app.seeHeight);
         console.log(app.ratio);
         this.setData({
@@ -252,7 +259,7 @@ Page({
         app.shopMsgJson = null;
         app.ShortConnect(app.urlw + "Data/GetProductByPid", {
             pid: event.currentTarget.dataset.pid
-        }, 'ActicleInterShop');
+        }, 'ActicleInterShop',function(r){});
         wx.navigateTo({
             url: '../lck/cartGoodsDetail/cartGoodsDetail'
         })
@@ -355,22 +362,24 @@ Page({
         app.ShortConnect(app.urlw + "Data/searchInfoByKeyWords", {
             uid:app.uid,
             page:1,
+            type: 0,
             keywords: event.currentTarget.dataset.id
         }, "pressSreach");
         wx.navigateTo({
-            url: '../SreachResult/SreachResult?sreachText=' + this.data.sreachText,
+            url: '../SreachResult/SreachResult?sreachText=' + event.currentTarget.dataset.id + "&keywords=" + event.currentTarget.dataset.id,
         })
     },
     //点击最近搜索
     pressZuiSreach: function (event){
         app.sreacJson = null;
         app.ShortConnect(app.urlw + "Data/searchInfoByKeyWords", {
-            uid: app.uid,
+            uid: app.uid,   
             page: 1,
+            type:0,
             keywords: event.currentTarget.dataset.id
         }, "pressSreach");
         wx.navigateTo({
-            url: '../SreachResult/SreachResult?sreachText=' + event.currentTarget.dataset.id,
+            url: '../SreachResult/SreachResult?sreachText=' + event.currentTarget.dataset.id + "&keywords=" + event.currentTarget.dataset.id,
         })
     },
     pressSreach:function(){
@@ -380,10 +389,11 @@ Page({
             app.ShortConnect(app.urlw + "Data/searchInfoByKeyWords", {
                 uid: app.uid,
                 page: 1,
+                type: 0,
                 keywords: this.data.sreachArray[0].keywords
             }, "pressSreach");
             wx.navigateTo({
-                url: '../SreachResult/SreachResult?sreachText=' + this.data.sreachText,
+                url: '../SreachResult/SreachResult?sreachText=' + this.data.sreachText + "&keywords=" + this.data.sreachText ,
             })     
         }       
     },

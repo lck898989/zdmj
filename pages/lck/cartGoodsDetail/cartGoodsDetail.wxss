@@ -161,10 +161,6 @@ page{
 .price-item{
     margin-top: 20rpx;
     margin-left: 15rpx;
-    width:350rpx;
-    white-space: nowrap;
-    text-overflow:ellipsis;
-    overflow: hidden;
 }
 .cancel-con{
     position: absolute;
@@ -325,17 +321,19 @@ page{
 }
 button{
     background: #fff;
+    border-radius: 0rpx;
 }
 button::after{
     border:0;
+    border-radius: 0rpx;
 }
 .share{
-    width: 100rpx;
-    height: 100rpx;
-    line-height: 100rpx;
-    font-size: 25rpx;
-    padding: 0rpx 20rpx;
+    width: 250rpx;
+    height: 64rpx;
+    line-height: 64rpx;
+    font-size: 35rpx;
     text-align: center;
+    border-left: 2rpx solid #c9c9c9;
     /* background: red; */
 }
 .img-detail{
@@ -355,6 +353,7 @@ button::after{
 .backIndex{
     white-space: nowrap;
     width: 50rpx;
+    font-size: 18rpx;
 }
 .goTop{
     position: fixed;
@@ -378,12 +377,12 @@ button::after{
     justify-content: center;
     align-items: center;
     flex-wrap: nowrap;
-    border-right: 2rpx solid #c9c9c9;
+    /* border-right: 2rpx solid #c9c9c9; */
     padding-right: 15rpx;
 }
 .backindex{
     color: #626262;
-    font-size: 15rpx;
+    font-size: 18rpx;
     width: 60rpx;
     height: 30rpx;
     line-height: 30rpx;

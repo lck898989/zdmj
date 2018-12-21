@@ -186,6 +186,15 @@ page{
 }
 .sayToSaller{
     justify-content: flex-start;
+    position: relative;
+    padding: 15rpx 30rpx 15rpx 42rpx;
+    font-size: 30rpx;
+    color:#808080;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    z-index: 400;
 }
 .order-total{
     display: flex;
@@ -322,6 +331,5 @@ page{
 }
 textarea{
     width:550rpx;
-    height:60rpx;
-    padding: 20rpx 0rpx 0rpx 10rpx;
+    /* padding: 20rpx 0rpx 0rpx 10rpx; */
 }

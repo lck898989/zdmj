@@ -1,128 +1,161 @@
 /* pages/zcw/qianbao/mingxi/mingxi.wxss */
-.quanju{
-  position: absolute;
-  top: 0;
-  width: 750rpx;
-  bottom: 0;
-  background-color: #eeeeee
-}
-.tou{
-     position: relative;
-  display: flex;
-  /* margin-top: 2rpx; */
-  align-items: center;
-   height: 74rpx;
-  background-color: white;
+
+.quanju {
+    position: absolute;
+    top: 0;
+    width: 750rpx;
+    bottom: 0;
+    background-color: #eee;
 }
 
-.bottomView{
+.tou {
+    position: relative;
+    display: flex;
+    /* margin-top: 2rpx; */
+    align-items: center;
+    height: 74rpx;
+    background-color: white;
+}
+
+.bottomView1 {
     position: relative;
     width: 750rpx;
-    height: 500rpx;
-}
-.tutou{
-  width: 60rpx;
-  padding:21rpx 0rpx;
-  margin-left: 20rpx;
-}
-.tutou2{
-  width: 40rpx;
-  margin-top: -5rpx;
-  margin-left: 20rpx;
-}
-.neibu{
-  margin-left: 30rpx;
-  font-size: 24rpx;
-  display: flex;
-  align-items: center;
-  color: #7d7d7d;
-  width: 150rpx;
-}
-.neibu2{
-  margin-left: 8rpx;
-  font-size: 24rpx;
-  display: flex;
-  align-items: center;
-  color: #f39800;
-  width: 150rpx;
-}
-.neibu3{
-  margin-left: 8rpx;
-  font-size: 24rpx;
-  display: flex;
-  align-items: center;
-   color: #22ac38;
-   width: 150rpx;
-}
-.neibu4{
-  margin-left: 8rpx;
-  font-size: 24rpx;
-  display: flex;
-  align-items: center;
-   color: #e5004f;
-   width: 150rpx;
-}
-.neibu5{
-  margin-left: 80rpx;
-  width: 180rpx;
-  height: 45rpx;
-  border-left: 4rpx solid #c9c9c9;
+    background-color: #eee;
+ justify-content: center;
+    display: flex;
 }
 
-.bull{
+.bottomView {
+    position: relative;
+    width: 750rpx;
+}
+
+.tutou {
+    width: 60rpx;
+    padding: 21rpx 0rpx;
+    margin-left: 20rpx;
+}
+
+.tutou2 {
+    width: 40rpx;
+    margin-top: -5rpx;
+    margin-left: 20rpx;
+}
+
+.neibu {
+    margin-left: 30rpx;
+    font-size: 24rpx;
+    display: flex;
+    align-items: center;
+    color: #7d7d7d;
+    width: 150rpx;
+}
+
+.neibu2 {
+    margin-left: 8rpx;
+    font-size: 24rpx;
+    display: flex;
+    align-items: center;
+    color: #f39800;
+    width: 150rpx;
+}
+
+.neibu3 {
+    margin-left: 8rpx;
+    font-size: 24rpx;
+    display: flex;
+    align-items: center;
+    color: #22ac38;
+    width: 150rpx;
+}
+
+.meiyuouText {
+    position: absolute;
+    top: 554rpx;
+    color: #959595;
+}
+
+.icon {
+    position: absolute;
+    top: 357rpx;
+    width: 160rpx;
+}
+
+.neibu4 {
+    margin-left: 8rpx;
+    font-size: 24rpx;
+    display: flex;
+    align-items: center;
+    color: #e5004f;
+    width: 150rpx;
+}
+
+.neibu5 {
+    margin-left: 80rpx;
+    width: 180rpx;
+    height: 45rpx;
+    border-left: 4rpx solid #c9c9c9;
+}
+
+.bull {
     position: relative;
     width: 750rpx;
     height: 82rpx;
-    background-color: #eeeeee;
-}
-.riqi{
-  font-size: 30rpx;
-  margin-left: 32rpx;
-  margin-top: 17rpx;
-  font-weight: 900;
-}
-.riqi2{
-  font-size: 25rpx;
-  margin-left: 32rpx;
-  margin-top: 5rpx;
-  margin-bottom: 15rpx;
-  color: #7d7d7d;
-}
-.tixianjg{
-  position: relative;
-  margin-left: 150rpx;
-  width: 600rpx;
-  border-bottom: 1rpx solid #c9c9c9;
-  
+    background-color: #eee;
 }
 
-.ssss{
-   position: relative;
-  background-color:white;
-  width: 750rpx;
-  
+.riqi {
+    font-size: 30rpx;
+    margin-left: 32rpx;
+    margin-top: 17rpx;
+    font-weight: 900;
 }
-.zibt{
-  position: relative;
-  padding-top: 20rpx;
-  font-size: 30rpx;
+
+.riqi2 {
+    font-size: 25rpx;
+    margin-left: 32rpx;
+    margin-top: 5rpx;
+    margin-bottom: 15rpx;
+    color: #7d7d7d;
 }
-.zibt2{
-  position: relative;
-  margin-top: 5rpx;
-  font-size: 25rpx;
-  padding-bottom: 20rpx;
+
+.tixianjg {
+    position: relative;
+    margin-left: 150rpx;
+    width: 600rpx;
+    border-bottom: 1rpx solid #c9c9c9;
 }
-.zibt3{
-  position: absolute;
-  right: 25rpx;
-  font-size: 40rpx;
-  font-weight: 900;
-  top: 30rpx;
+
+.ssss {
+    position: relative;
+    background-color: white;
+    width: 750rpx;
 }
-.neibutupian{
-  position: absolute;
-  left: 36rpx;
-  top: 25rpx;
-  width: 70rpx;
+
+.zibt {
+    position: relative;
+    padding-top: 20rpx;
+    font-size: 30rpx;
+}
+
+.zibt2 {
+    position: relative;
+    margin-top: 5rpx;
+    font-size: 25rpx;
+    padding-bottom: 20rpx;
+}
+
+.zibt3 {
+    position: absolute;
+    right: 25rpx;
+    font-size: 40rpx;
+    font-weight: 900;
+    top: 30rpx;
+}
+
+.neibutupian {
+    position: absolute;
+    left: 36rpx;
+    top: 25rpx;
+    width: 70rpx;
 }

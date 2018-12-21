@@ -1,5 +1,5 @@
 <block wx:if='{{showBuyCon}}' bindtap='cancel'>
-    <view class='mask' animation='{{backAnimaData}}' catchtouchmove='test' data-e='mask'></view>
+    <view class='mask' animation='{{backAnimaData}}' catchtouchmove='test' data-e='mask' bindtap='cancel'></view>
 </block>
 <view class='{{showBuyCon ? "page-con-showbuy" : "page-con"}}'>
     <view>
@@ -98,14 +98,14 @@
             </view> -->
             <view class='index-p'>
                 <view bindtap='backIndex' class='index-con'>
-                    <image src='../../../resources/btn_main_0.png' style='width:30rpx;height:30rpx;'></image>
+                    <image src='../../../resources/btn_main_0.png' style='width:40rpx;height:40rpx;'></image>
                     <view class='backindex'>
                         回首页
                     </view>
                 </view>
             </view>
-            <button class='share' open-type='share'>
-                分享
+            <button class='share' open-type='share' hover-class='none'>
+                立即分享
             </button>
             <!--判断尺寸是否选择完毕-->
             <view wx:if='{{!isSharePage}}' class='addCartn' bindtap='showBuyCon' id='addcart'>
@@ -125,7 +125,7 @@
                 <image src='{{imageHost}}{{goods.head[0]}}' style='width:220rpx;height:220rpx;' class='img'></image>
                 <view class='price-order-con'>
                     <view class='price-item' style='font-size:40rpx;color:#ffcb05;font-weight:800;'>
-                    ￥  {{goods.price * count}}
+                    ￥  {{goods.price}}
                     </view>
                     <view class='price-item' style='font-size:30rpx;color:#404040'>
                         已选:
@@ -138,7 +138,9 @@
             </view>
             <scroll-view class='scc-con' scroll-y>
                 <block wx:for='{{typeArr}}' wx:for-index='outIndex' wx:for-item='outItem'>
-                    <view class='lineTwo-con'>
+                    <block wx:if='{{!allDefault}}'>
+                        <!--规格都是默认的-->
+                        <view class='lineTwo-con'>
                         <view style='font-size:30rpx;'>
                             {{outItem}}
                         </view>
@@ -150,6 +152,8 @@
                             </block>
                         </view>
                     </view>
+                    </block>
+                    
                 </block>
             </scroll-view>
             <view class='countContainer'>

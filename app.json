@@ -1,5 +1,4 @@
 {
-    
     "pages": [
         "pages/wxscope/wxscope",
         "pages/lck/address/address",
@@ -25,6 +24,7 @@
         "pages/zcw/shezhi/zhezhi",
         "pages/zcw/qianbao/tixian/tixian",
         "pages/zcw/qianbao/mingxi/mingxi",
+        "pages/zcw/JinRebate/JinRebate",
         "pages/lck/order/order",
         "pages/lck/cart/cart",
         "pages/Advertisting/Advertisting",
@@ -57,12 +57,7 @@
         "navigationBarTextStyle": "black",
         "enablePullDownRefresh": true
     },
-    "networkTimeout": {
-      "request": 20000,
-      "connectSocket": 20000,
-      "uploadFile": 20000,
-      "downloadFile": 20000
-    },
+    
     "tabBar": {
         "selectedColor": "#863bb7",
         "backgroundColor": "#fff",

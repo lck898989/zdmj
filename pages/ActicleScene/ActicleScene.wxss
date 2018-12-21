@@ -411,7 +411,7 @@
 .nullView8{
   position: absolute;
   right:0;
-  width: 2px;
+  width: 2rpx;
   height: 62rpx;
   background-color: #c9c9c9;
   top: 20rpx;
@@ -487,13 +487,14 @@
 }
 
 .shopView1 {
+    border-radius: 10px;
      background-color: #ffffff;
      overflow: hidden;
      position: fixed;
-    width: 750rpx;
+    width: 730rpx;
     height: 150rpx;
     bottom: 100rpx;
-    left: 0rpx;
+    left: 10rpx;
     /* margin-top: 0rpx;
     margin-left: 13rpx; */
     /* background-color: #ffffff; */
@@ -526,7 +527,9 @@
     overflow: hidden;
     text-overflow: ellipsis;
     letter-spacing: 1px;
+
 }
+ button::after{border: none;} 
 
 .shopImage {
     position: absolute;
@@ -595,11 +598,13 @@
     height: 48rpx;
 }
 
-.authorImage {
+.authorImage1 {
     position: absolute;
     top: 0;
     left: 30rpx;
     width: 48rpx;
+    height: 48rpx;
+    border-radius: 96rpx;
 }
 
 .authorName {

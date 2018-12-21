@@ -209,7 +209,7 @@
     position: absolute;
     bottom: 38rpx;
     right: 39rpx;
-    width: 64rpx;
+    width: 70rpx;
 }
 .img{
     margin-left: 20rpx;
@@ -323,9 +323,9 @@ shopViews {
 
 .zhidanIcon {
     position: absolute;
-    bottom: 48rpx;
-    right: 230rpx;
-    width: 94rpx;
+    bottom: 55rpx;
+    right: 245rpx;
+    width: 92rpx;
 }
 
 .shopPrice {

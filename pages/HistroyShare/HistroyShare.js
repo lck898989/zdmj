@@ -9,6 +9,11 @@ Page({
    * 页面的初始数据
    */
   data: {
+    //
+    indexYear:null,
+    indexMonth:null,
+    //判断是否是当前月
+    ismonth:true,
       url:"",
       isleftDa:true,
     //判断当前选中的index
@@ -70,12 +75,16 @@ Page({
     dataxianzairiqi = dataxianzairiqi.toString().length == 1 ? '0' + dataxianzairiqi.toString() : dataxianzairiqi.toString()
     this.dateInit();
     this.setData({
+      indexYear: year,
+      indexMonth: month,
       year: year,
       month: month,
       day: now.getDate().toString(),
       isToday: '' + year + month + now.getDate(),
       jinri: '' + year + (month.toString().length == 1 ? '0' + month.toString() : month.toString()) + dataxianzairiqi
     })
+    console.log(this.data.year+"\\\\\\\\\\\\\\\\");
+    console.log(this.data.month + "\\\\\\\\\\\\\\\\");
     if (this.setHistroyCall)
     {
       this.setHistroyCall();
@@ -372,7 +381,7 @@ Page({
         app.ShortConnect(app.urlw + "Data/GetShareRecordStartByDay", {
           day: day,
           uid: app.uid,
-          page: 2
+          page: 1
         }, "getHistroy");
       }
 
@@ -387,7 +396,7 @@ Page({
       app.ShortConnect(app.urlw + "Data/GetShareRecordStartByDay", {
         day: day,
         uid: app.uid,
-        page: 2
+        page: 1
       }, "getHistroy");
     }
   },
@@ -513,6 +522,16 @@ Page({
       month: (month + 1),
       index1: null
     })
+    if (this.data.year == this.data.indexYear && this.data.month == this.data.indexMonth) {
+      this.setData({
+        ismonth: true
+      })
+    }
+    else {
+      this.setData({
+        ismonth: false
+      })
+    }
     this.dateInit(year, month);
     this.refushData();
     console.log(this.data.dateArr);
@@ -526,6 +545,18 @@ Page({
       month: (month + 1),
       index1:null
     })
+    if (this.data.year == this.data.indexYear && this.data.month == this.data.indexMonth)
+    {
+      this.setData({
+        ismonth:true
+      })
+    }
+    else
+    {
+      this.setData({
+        ismonth: false
+      })
+    }
     this.dateInit(year, month);
      this.refushData();
     console.log(this.data.dateArr);

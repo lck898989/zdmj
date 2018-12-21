@@ -92,7 +92,26 @@
   right: 238rpx;
   background-color: #c9c9c9;
 }
-
+.quanbuText{
+  position: absolute;
+  left: 0rpx;
+  text-align: left;
+ 
+}
+.dayu{
+  position: absolute;
+  right: 22rpx;
+  width: 13rpx;
+}
+.quanbuView{
+  position: absolute;
+  top: 28rpx;
+  right: 0rpx;
+  width: 156rpx;
+  height: 24rpx;
+  display: flex;
+  align-items: center;
+}
 /* 我的订单 */
 .wddd{
   position: relative;
@@ -111,7 +130,8 @@
 .dfk{
   position: absolute;
   top: 103rpx;
-  width: 238rpx;
+  left: 0;
+  width: 180rpx;
   height: 150rpx;
   text-align: center;
   display: flex;
@@ -120,9 +140,9 @@
 .dsh{
   position: absolute;
   top: 103rpx;
-  width: 238rpx;
+  width: 188rpx;
   height: 150rpx;
-  left: 240rpx;
+  left: 180rpx;
   text-align: center;
   display: flex;
   justify-content: center;
@@ -130,7 +150,17 @@
 .ywc{
   position: absolute;
   top: 103rpx;  
-  width: 238rpx;
+  width: 180rpx;
+  height: 150rpx;
+  left: 360rpx;
+  text-align: center;
+    display: flex;
+  justify-content: center;
+}
+.tuihuo{
+    position: absolute;
+  top: 103rpx;  
+  width: 180rpx;
   height: 150rpx;
   right: 0rpx;
   text-align: center;
@@ -138,7 +168,7 @@
   justify-content: center;
 }
 .wdddtu1{
-  width: 86rpx;
+  width: 62rpx;
 }
 .wdddtu2{
   width: 65rpx;
@@ -226,7 +256,7 @@
 }
 .daifukuan{
     position: absolute;
-    top: 100rpx;
+    top: 72rpx;
  
 }
 .sz{

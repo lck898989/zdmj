@@ -47,7 +47,12 @@
                 <block wx:else>
                     <view class='common {{item.active ? item.swpClass : ""}}' data-pid='{{item.pid}}' data-ptype='{{item.ptype}}' catchtap='goDetail'>
                         <image src='{{item.imgsrc}}' style='width:480rpx;height:480rpx;' class='img'></image>
-                        <view class='mask {{item.swpClass === "swiper-left" ? "hideMask" : ""}}'></view>
+                        <block wx:if='{{item.swpClass === "swiper-left"}}'>
+                            <view class='mask hideMask'></view>
+                        </block>
+                        <block wx:if='{{item.swpClass === "swiper-right"}}'>
+                            <view class='mask hideMask-reverse'></view>
+                        </block>
                     </view>
                 </block>
             </block>
@@ -92,27 +97,27 @@
                 <!--商铺文章-->
                 <block wx:if='{{item.shopessayhead}}'>
                     <block wx:if='{{item.shopessaycustom === 1 && item.shopessaycustomhead !==""}}'>
-                        <image wx:key="id" id="{{item.shopeid}}" src="{{imgHost}}{{item.shopessaycustomhead}}" bindload="onImageLoad"></image>
+                        <image wx:key="id" id="{{item.shopeid}}-{{index}}" src="{{imgHost}}{{item.shopessaycustomhead}}" bindload="onImageLoad" data-last='{{index === (newAddEssays.length - 1) ? true : false}}'></image>
                     </block>
                     <block wx:else>
-                        <image wx:key="id" id="{{item.shopeid}}" src="{{imgHost}}{{item.shopessayhead[0]}}" bindload="onImageLoad"></image>
+                        <image wx:key="id" id="{{item.shopeid}}-{{index}}" src="{{imgHost}}{{item.shopessayhead[0]}}" bindload="onImageLoad" data-last='{{index === (newAddEssays.length - 1) ? true : false}}'></image>
                     </block>
                 </block>
                 <!--商品-->
                 <block wx:if='{{item.head}}'>
                     <block wx:if='{{item.custom === 1 && item.customhead !==""}}'>
-                        <image wx:key="id" id="{{item.pid}}" src="{{imgHost}}{{item.customhead}}" bindload="onImageLoad"></image>
+                        <image wx:key="id" id="{{item.pid}}-{{index}}" src="{{imgHost}}{{item.customhead}}" bindload="onImageLoad" data-last='{{index === (newAddEssays.length - 1) ? true : false}}'></image>
                     </block>
                     <block wx:else>
-                        <image wx:key="id" id="{{item.pid}}" src="{{imgHost}}{{item.head[0]}}" bindload="onImageLoad"></image>
+                        <image wx:key="id" id="{{item.pid}}-{{index}}" src="{{imgHost}}{{item.head[0]}}" bindload="onImageLoad" data-last='{{index === (newAddEssays.length - 1) ? true : false}}'></image>
                     </block>
                 </block>
                 <block wx:if='{{item.essayhead}}'>
                     <block wx:if='{{item.essaycustom === 1 && item.essaycustomhead !==""}}'>
-                        <image wx:key="id" id="{{item.pid}}" src="{{imgHost}}{{item.essaycustomhead}}" bindload="onImageLoad"></image>
+                        <image wx:key="id" id="{{item.eid}}-{{index}}" src="{{imgHost}}{{item.essaycustomhead}}" bindload="onImageLoad" data-last='{{index === (newAddEssays.length - 1) ? true : false}}'></image>
                     </block>
                     <block wx:else>
-                        <image wx:key="id" id="{{item.eid}}" src="{{imgHost}}{{item.essayhead[0]}}" bindload="onImageLoad"></image>
+                        <image wx:key="id" id="{{item.eid}}-{{index}}" src="{{imgHost}}{{item.essayhead[0]}}" bindload="onImageLoad" data-last='{{index === (newAddEssays.length - 1) ? true : false}}'></image>
                     </block>
                 </block>
             </block>
@@ -135,10 +140,13 @@
         </view> 
     </view>
     <image src='../../../resources/btn_top.png' class='goTop' hidden='{{!floorStatus}}' bindtap='goTop' style='width:110rpx;height:110rpx;'/>
-    <view class='loadText'>
-        <view class='centerText'>
-            {{loadText}}
-        </view>
-    </view> 
+    <view class='loading-con'>
+        <image wx:if='{{!loadOver}}' src='../../../resources/loader.gif' style='width:48rpx;height:48rpx' class='loading'></image>
+        <view class='loadText'>
+            <view class='centerText'>
+                {{loadText}}
+            </view>
+        </view> 
+    </view>
 </view>
 

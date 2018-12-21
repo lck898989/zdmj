@@ -13,7 +13,7 @@
     <view class='shoppingTitleView'>
         <text class='titleText' style='font-size:32rpx;font-weight:900'>{{wenzhangJson.title}}</text>
         <view class='authorView'>
-            <image class='authorImage' mode='widthFix' src='{{wenzhangJson.authorurl}}'></image>
+            <image class='authorImage1' mode='widthFix' src='{{wenzhangJson.authorurl}}'></image>
             <text class='authorName' style='font-size:23rpx;font-weight:900'>{{wenzhangJson.authorname}}</text>
             <text class='wenzhangData' style='font-size:16rpx;font-weight:900' space='ensp'>11月22日      18:27</text>
             <image class='seeIcon' mode='widthFix' style='height:auto' src='../../resources/ico_eye_2.png'></image>

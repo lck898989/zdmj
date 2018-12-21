@@ -436,7 +436,7 @@
     align-items: center;
     border-radius: 0;
 }
-
+ button::after{ border:none;} 
 .huodeText {
     position: absolute;
     top: 12rpx;
@@ -449,7 +449,7 @@
 .nullView8{
   position: absolute;
   right:0;
-  width: 2px;
+  width: 2rpx;
   height: 62rpx;
   background-color: #c9c9c9;
   top: 20rpx;

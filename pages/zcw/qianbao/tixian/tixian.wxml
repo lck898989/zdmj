@@ -2,47 +2,82 @@
 <view class='quanju'>
   <!-- 导航栏 -->
   <view class='daohang'>
-    <image src='{{arraytu.dh_dh}}' class='daohangtu'  style='height:auto' mode='widthFix'/>
-    <image src='{{arraytu.dh_qb}}' class='daohangtu2'  style='height:auto' mode='widthFix'/>
+    <image src='{{arraytu.dh_dh}}' class='daohangtu' style='height:auto' mode='widthFix' />
+    <image src='../../../../resources/ico_money_1.png' class='daohangtu2' style='height:auto' mode='widthFix' />
   </view>
 
   <view class='mingxi'>
-    <view><text  style='font-size:29rpx;'>钱包余额</text></view>
-    <view class='jine'><text  style='font-size:75rpx;font-weight:900;'>￥{{money}}</text></view>
+    <view>
+      <text style='font-size:29rpx;'>钱包余额</text>
+    </view>
+    <view class='jine'>
+      <text style='font-size:75rpx;font-weight:900;'>￥{{money}}</text>
+    </view>
   </view>
-
-
   <view>
-    <image hidden='{{xianzhong==0?false:true}}' src='{{arraytu.xz_dj}}' class='jiaobiao'  style='height:auto' mode='widthFix'/>
+    <image hidden='{{xianzhong==0?false:true}}' src='{{arraytu.xz_dj}}' class='jiaobiao' style='height:auto' mode='widthFix' />
     <view hidden='{{xianzhong==0?true:false}}' class='yuanquan jiaobiao'></view>
-    <view class='mingxi2'  id='0' bindtap='xuanz'>
-      <view class='tixiananniu1'><text class='wenzi' style='color: #7d7d7d'>30</text> <text class='wenziyuan' style='color: #7d7d7d'>元</text></view>
+    <view class='mingxi2' id='0' bindtap='xuanz'>
+      <view class='tixiananniu1' style='  border-bottom: 1rpx solid #c9c9c9;   border-top: 1rpx solid #c9c9c9;  border-left: 1rpx solid #c9c9c9; border-right: 1rpx solid #c9c9c9;' wx:if="{{threeJson.color=='gray'}}">
+        <text class='wenzi' style='color: #7d7d7d'>30</text>
+        <text class='wenziyuan' style='color: #7d7d7d'>元</text>
+      </view>
+      <view class='tixiananniu1'  style=' border-bottom: 1rpx solid #c9c9c9;   border-top: 1rpx solid #c9c9c9; border-left: 1rpx solid #c9c9c9;border-right: 1rpx solid #c9c9c9; background-color: #ecceff;'wx:elif="{{threeJson.color=='zi'}}">
+        <text class='wenzi' style='color: #b25bd2'>30</text>
+        <text class='wenziyuan' style='color:#b25bd2'>元</text>
+      </view>
+      <view class='tixiananniu1' style='  border-bottom: 1rpx solid #c9c9c9;    border-top: 1rpx solid #c9c9c9;   border-left: 1rpx solid #c9c9c9;    border-right: 1rpx solid #c9c9c9;  background-color: #ffaeae;' wx:elif="{{threeJson.color=='red'}}">
+        <text class='wenzi' style='color:  #f37777'>30</text>
+        <text class='wenziyuan' style='color: #f37777'>元</text>
+      </view>
     </view>
   </view>
 
 
   <view>
-    <image hidden='{{xianzhong==1?false:true}}' src='{{arraytu.xz_dj}}' class='jiaobiao2'  style='height:auto' mode='widthFix'/>
+    <image hidden='{{xianzhong==1?false:true}}' src='{{arraytu.xz_dj}}' class='jiaobiao2' style='height:auto' mode='widthFix' />
     <view hidden='{{xianzhong==1?true:false}}' class='yuanquan jiaobiao2'></view>
     <view class='mingxi2' id='1' bindtap='xuanz'>
-      <view class='tixiananniu2'><text class='wenzi' style='color:#b25bd2'>50</text> <text class='wenziyuan' style='color: #b25bd2'>元</text></view>
+      <view class='tixiananniu2' style='  border-bottom: 1rpx solid #c9c9c9;   border-top: 1rpx solid #c9c9c9;  border-left: 1rpx solid #c9c9c9; border-right: 1rpx solid #c9c9c9;' wx:if="{{fiveJson.color=='gray'}}">
+        <text class='wenzi' style='color: #7d7d7d'>50</text>
+        <text class='wenziyuan' style='color: #7d7d7d'>元</text>
+      </view>
+      <view class='tixiananniu2'  style=' border-bottom: 1rpx solid #c9c9c9;   border-top: 1rpx solid #c9c9c9; border-left: 1rpx solid #c9c9c9;border-right: 1rpx solid #c9c9c9; background-color: #ecceff;' wx:elif="{{fiveJson.color=='zi'}}">
+        <text class='wenzi' style='color: #b25bd2'>50</text>
+        <text class='wenziyuan' style='color:#b25bd2'>元</text>
+      </view>
+      <view class='tixiananniu2' style='  border-bottom: 1rpx solid #c9c9c9;    border-top: 1rpx solid #c9c9c9;   border-left: 1rpx solid #c9c9c9;    border-right: 1rpx solid #c9c9c9;  background-color: #ffaeae;' wx:elif="{{fiveJson.color=='red'}}">
+        <text class='wenzi' style='color:  #f37777'>50</text>
+        <text class='wenziyuan' style='color: #f37777'>元</text>
+      </view>
     </view>
   </view>
-  
+
 
   <view>
-    <image hidden='{{xianzhong==2?false:true}}' src='{{arraytu.xz_dj}}' class='jiaobiao2'  style='height:auto' mode='widthFix'/>
+    <image hidden='{{xianzhong==2?false:true}}' src='{{arraytu.xz_dj}}' class='jiaobiao2' style='height:auto' mode='widthFix' />
     <view hidden='{{xianzhong==2?true:false}}' class='yuanquan jiaobiao2'></view>
     <view class='mingxi2' id='2' bindtap='xuanz'>
-      <view class='tixiananniu3'><text class='wenzi' style='color: #f37777' >100</text> <text class='wenziyuan' style='color: #f37777'>元</text></view>
+      <view class='tixiananniu3' style='  border-bottom: 1rpx solid #c9c9c9;   border-top: 1rpx solid #c9c9c9;  border-left: 1rpx solid #c9c9c9; border-right: 1rpx solid #c9c9c9;' wx:if="{{oneHundredJson.color=='gray'}}">
+        <text class='wenzi' style='color: #7d7d7d'>100</text>
+        <text class='wenziyuan' style='color: #7d7d7d'>元</text>
+      </view>
+      <view class='tixiananniu3'  style=' border-bottom: 1rpx solid #c9c9c9;   border-top: 1rpx solid #c9c9c9; border-left: 1rpx solid #c9c9c9;border-right: 1rpx solid #c9c9c9; background-color: #ecceff;' wx:elif="{{oneHundredJson.color=='zi'}}">
+        <text class='wenzi' style='color: #b25bd2'>100</text>
+        <text class='wenziyuan' style='color:#b25bd2'>元</text>
+      </view>
+      <view class='tixiananniu3' style='  border-bottom: 1rpx solid #c9c9c9;    border-top: 1rpx solid #c9c9c9;   border-left: 1rpx solid #c9c9c9;    border-right: 1rpx solid #c9c9c9;  background-color: #ffaeae;' wx:elif="{{oneHundredJson.color=='red'}}">
+        <text class='wenzi' style='color:  #f37777'>100</text>
+        <text class='wenziyuan' style='color: #f37777'>元</text>
+      </view>
     </view>
   </view>
-    <view class='mingxi2 wenzi3'>
+  <view class='mingxi2 wenzi3'>
     提现金额低于30元时,不能提现,提现金额将直接发放到“微信-我的钱包”
+  </view>
+  <view class='index-manager' bindtap='pressSure'>
+    <view style='color:white;font-size:35rpx;font-weight:900'>
+      确认提现
     </view>
-        <view class='index-manager' bindtap='pressSure'>
-            <view style='color:white;font-size:35rpx;font-weight:900'>
-               确认提现
-            </view>
-        </view>
+  </view>
 </view>

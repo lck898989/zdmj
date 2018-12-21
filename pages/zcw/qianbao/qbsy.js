@@ -32,6 +32,7 @@ Page({
   //明细按钮调用的方法
   cxmx() {
       app.MingXiaRRAY=null;
+      app.encode=null;
       app.ShortConnect(app.urlw + "Data/GetAllInformByUid", {
           uid: app.uid,
          

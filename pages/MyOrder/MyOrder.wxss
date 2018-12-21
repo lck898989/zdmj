@@ -10,22 +10,24 @@
 } */
 
 page {
-    background-color: #dadada;
+    background-color: #eee;
 }
 
 .typeView {
     position: relative;
     width: 750rpx;
-    height: 95rpx;
+    margin-top: 4rpx;
+    height: 60rpx;
     background-color: white;
     display: flex;
     justify-content: space-around;
-    /* align-items: center;
-    flex-direction: row; */
+    align-items: center;
+    flex-direction: row;
 }
 
 .typeson {
-    padding: 34rpx 0rpx 34rpx 0rpx;
+    padding: 11rpx 15rpx 11rpx 15rpx;
+    color: #000;
     /* border-bottom: 4rpx solid #ff861a; */
 }
 
@@ -34,7 +36,7 @@ page {
     width: 750rpx;
     height: 20rpx;
     margin-top: 0rpx;
-    background-color: #dadada;
+    background-color: #eee;
 }
 
 .shopView {
@@ -48,17 +50,54 @@ page {
     position: relative;
     margin-top: 0rpx;
     width: 750rpx;
-    height: 80rpx;
+    height: 58rpx;
     background-color: white;
     display: flex;
     align-items: center;
+}
+
+.priceson {
+    position: absolute;
+    left: 204rpx;
+    top: 140rpx;
+    color: #b964d8;
 }
 
 .shopImage {
     position: absolute;
     left: 38rpx;
     /* top: 24rpx; */
-    width: 30rpx;
+    width: 32rpx;
+}
+
+.dingdanhaoText {
+    position: absolute;
+    top: 10rpx;
+    color: #707070;
+    left: 376rpx;
+}
+
+.jiaoyiText {
+    position: absolute;
+    left: 376rpx;
+    bottom: 6rpx;
+    color: #707070;
+}
+
+.jiaoyiText1 {
+    position: absolute;
+    right: 20rpx;
+    bottom: 6rpx;
+    text-align: right;
+    color: #707070;
+}
+
+.dingdanhaoText1 {
+    position: absolute;
+    top: 10rpx;
+    color: #707070;
+    right: 20rpx;
+    text-align: right;
 }
 
 .shopTextName {
@@ -67,27 +106,70 @@ page {
     left: 85rpx;
 }
 
+.orderTimeText {
+    position: absolute;
+    right: 155rpx;
+    color: #707070;
+}
+
+.daifukuanIcon {
+    position: absolute;
+    right: 88rpx;
+    width: 32rpx;
+}
+
 .orderStateText {
     position: absolute;
     /* top: 28rpx; */
-    right: 39rpx;
-    color: #ff861a;
+    right: 12rpx;
+    color: #b964d8;
 }
+.wuliuText2{
+    position: absolute;
+    top: 0rpx;
+    left: 31rpx;
+    color:#707070;
+}
+.wuliuorderText1{
+    position: absolute;
+    top: 24rpx;
+    left: 154rpx;
+        color: #707070;
 
+
+}
+.wuliuText1{
+    position: absolute;
+    top: 0rpx;
+    left: 154rpx;
+    color: #707070;
+
+}
+.wuliuorderText{
+    position: absolute;
+    top: 24rpx;
+    left:31rpx;
+    color:#707070;
+}
+.wulieText{
+    position: absolute;
+    bottom: 0;
+    width: 750rpx;
+    height: 56rpx;
+}
 .shopMsgView {
     position: relative;
     margin-top: 2rpx;
     width: 750rpx;
     background-color: white;
-    height: 190rpx;
+    height: 246rpx;
 }
-
 .shopMsgView1 {
     position: relative;
     margin-top: 0rpx;
     width: 750rpx;
     background-color: white;
-    height: 190rpx;
+    height: 246rpx;
 }
 
 .shopImage1 {
@@ -104,7 +186,7 @@ page {
     display: -webkit-box;
     word-break: break-all;
     -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
+    -webkit-line-clamp: 1;
     overflow: hidden;
     text-overflow: ellipsis;
     letter-spacing: 1px;
@@ -118,8 +200,26 @@ page {
 
 .shopSize {
     position: absolute;
-    top: 113rpx;
-    left: 223rpx;
+    top: 74rpx;
+    left: 204rpx;
+    /* width: 0; */
+    color: #707070;
+    /* width: 260rpx; */
+    background-color: #e5e5e5;
+    line-height: 12px;
+    padding: 6rpx 33rpx 6rpx 33rpx;
+}
+
+.shopSize1 {
+    position: absolute;
+    top: 74rpx;
+    left: 204rpx;
+    /* width: 0; */
+    color: #707070;
+    width: 260rpx;
+    background-color: #e5e5e5;
+    line-height: 12px;
+    padding: 6rpx 33rpx 6rpx 33rpx;
 }
 
 .shopType {
@@ -130,8 +230,9 @@ page {
 
 .shopnumberText {
     position: absolute;
-    right: 70rpx;
-    bottom: 50rpx;
+    right: 25rpx;
+    color: #707070;
+    top: 140rpx;
 }
 
 .shoppriceMsg {
@@ -146,8 +247,9 @@ page {
 
 .oneShopNumber {
     position: absolute;
-    left: 584rpx;
-    bottom: 10rpx;
+    left: 204rpx;
+    top:140rpx;
+    color: #b964d8;
 }
 
 .shopNumber {
@@ -158,14 +260,15 @@ page {
 
 .dingstateText {
     position: absolute;
-    left: 50rpx;
-    color: #ff861a;
+     text-align: right;
+    right:19rpx;
+    top: 189rpx;
+    color: #b964d8;
 }
 
 .Text1 {
     position: absolute;
     left: 100rpx;
-
 }
 
 .Text2 {
@@ -173,7 +276,7 @@ page {
     left: 150rpx;
     width: 32rpx;
     height: 35rpx;
-     background-color: #b31227;
+    background-color: #b31227;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -183,7 +286,6 @@ page {
 .Text3 {
     position: absolute;
     left: 192rpx;
-   
 }
 
 .Text4 {
@@ -191,17 +293,16 @@ page {
     left: 225rpx;
     width: 32rpx;
     height: 35rpx;
-     background-color: #b31227;
-       display: flex;
+    background-color: #b31227;
+    display: flex;
     justify-content: center;
     align-items: center;
-      color: white;
+    color: white;
 }
 
 .Text5 {
     position: absolute;
     left: 265rpx;
-
 }
 
 .Text6 {
@@ -209,17 +310,16 @@ page {
     left: 295rpx;
     width: 32rpx;
     height: 35rpx;
-   background-color: #b31227;
-       display: flex;
+    background-color: #b31227;
+    display: flex;
     justify-content: center;
     align-items: center;
-      color: white;
+    color: white;
 }
 
 .Text7 {
     position: absolute;
     left: 335rpx;
-
 }
 
 .Text8 {
@@ -227,20 +327,17 @@ page {
     left: 365rpx;
     width: 32rpx;
     height: 35rpx;
-   background-color: #b31227;
-       display: flex;
+    background-color: #b31227;
+    display: flex;
     justify-content: center;
     align-items: center;
-      color: white;
+    color: white;
 }
-
 
 .Text9 {
-        position: absolute;
+    position: absolute;
     left: 405rpx;
-  
 }
-
 
 .stateButton1 {
     position: absolute;
@@ -265,36 +362,38 @@ page {
 
 .shifuText {
     position: absolute;
-    left: 526rpx;
+    left: 505rpx;   
 }
 
 .stateButton2 {
     position: absolute;
-    left: 350rpx;
-    width: 150rpx;
-    height: 40rpx;
-    border-bottom: 4rpx solid black;
+    right: 0;
+    bottom: 0;
+    width: 180rpx;
+    height: 50rpx;
+    background-color: #b964d8;
+    /* border-bottom: 4rpx solid black;
     border-top: 4rpx solid black;
     border-left: 4rpx solid black;
-    border-right: 4rpx solid black;
-    color: black;
-    display: flex;
+    border-right: 4rpx solid black; */
+    color: #ffffff;
+     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 50px;
+    /* border-radius: 50px;  */
 }
 
 .shopPrice {
     position: absolute;
     /* top: 27rpx; */
-    left: 526rpx;
+    left: 496rpx;
 }
 
 .buttonView {
     position: relative;
     margin-top: 2rpx;
     width: 750rpx;
-    height: 80rpx;
+    height: 56rpx;
     background-color: white;
     display: flex;
     align-items: center;
@@ -312,13 +411,13 @@ page {
 .quxiaoOrder {
     position: absolute;
     /* top: 15rpx; */
-    right: 150rpx;
-    border-radius: 30rpx;
-    border-bottom: 4rpx solid black;
+    left: 421rpx;
+    /* border-radius: 30rpx; *//* border-bottom: 4rpx solid black;
     border-top: 4rpx solid black;
     border-left: 4rpx solid black;
-    border-right: 4rpx solid black;
-    width: 100rpx;
+    border-right: 4rpx solid black; */
+    height: 100%;
+    color: #7c7c7c;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -327,15 +426,19 @@ page {
 .buttonText {
     position: absolute;
     /* top: 15rpx; */
-    right: 30rpx;
-    border-radius: 30rpx;
-    border-bottom: 4rpx solid #ff861a;
+    right: 0rpx;
+    width: 200rpx;
+    /* width: 200rpx;
+    
+    border-radius: 30rpx; */
+    background-color: #b964d8;
+    /* border-bottom: 4rpx solid #ff861a;
     border-top: 4rpx solid #ff861a;
     border-left: 4rpx solid #ff861a;
-    border-right: 4rpx solid #ff861a;
-    width: 100rpx;
+    border-right: 4rpx solid #ff861a; */
+    height: 100%;
     display: flex;
-    color: #ff861a;
+    color: #fff;
     justify-content: center;
     align-items: center;
     /* height: 50rpx; */

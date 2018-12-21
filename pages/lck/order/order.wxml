@@ -87,10 +87,11 @@
             包邮
         </view>
     </view>
-    <view class='youhui sayToSaller' style='border-bottom:1px solid #fff;background-color:#fff;margin-bottom:10rpx;'>
+    <view class='sayToSaller' style='border-bottom:1px solid #fff;background-color:#fff;margin-bottom:10rpx;'>
             <view style='color:#404040;width:150rpx;white-space:nowrap'>买家留言:</view>
-            <view style='margin-left:15rpx;width:540rpx;height:80rpx;'>
-                <textarea type='text' placeholder='有什么想提醒卖家的话(最多50字)' bindinput='getNote' confirm-type='search' bindconfirm='sendNote' bindblur='sendNote' placeholder-style='padding-top:20rpx;margin-left:10rpx;' maxlength='50'></textarea>
+            <view style='margin-left:15rpx;width:540rpx;'>
+                <!---->
+                <textarea type='text' placeholder='有什么想提醒卖家的话(最多50字)' bindinput='getNote' confirm-type='search' bindconfirm='sendNote' bindblur='sendNote' maxlength='50' auto-height='true'></textarea>
             </view>
     </view>
     <view class='youhui count-price' style='border-bottom:1px solid #fff;background-color:#fff;'>

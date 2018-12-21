@@ -190,8 +190,8 @@ Page({
             let cartsItem = this.data.carts[[`${storeItem}`]].data[i];
             if (cartsItem.choosed === true) {
                 //把价格取出来
-                let price = cartsItem.product.price;
-                let marketPrice = cartsItem.product.otherprice;
+                let price = cartsItem.totalPrice;
+                let marketPrice = cartsItem.totalMaketPrice;
                 priceSum += price;
                 totalMarketPrice += marketPrice;
                 totalCount++;
@@ -288,6 +288,7 @@ Page({
             myshoppingPage : 1,
             isChoosed : false,
             goodsCount : 0,
+            count      : 0
         })
         this.data.marketTotalPrice
         console.log("商品数量是：", this.data.goodsCount);
@@ -350,6 +351,10 @@ Page({
                     for (let j = 0; j < storeProductLen; j++) {
                         let scartJsonArr = {};
                         let itemTemp = res.data.carts[m][j];
+                        //商品的总价
+                        itemTemp.totalPrice = itemTemp.product.price * itemTemp.count;
+                        //商品市场总价
+                        itemTemp.totalMaketPrice = itemTemp.product.otherprice * itemTemp.count;
                         //该购物车项的默认选择状态是false
                         res.data.carts[m][j].choosed = false;
                         itemTemp.size = JSON.parse(itemTemp.size);
@@ -358,8 +363,8 @@ Page({
                         itemTemp.realPrice = itemTemp.product.price;
                         scartJsonArr.price = itemTemp.product.price;
                         scartJsonArr.otherPrice = itemTemp.product.otherprice;
-                        itemTemp.product.price = Host.MUL(itemTemp.product.price, itemTemp.count);
-                        itemTemp.product.otherprice = Host.MUL(itemTemp.product.otherprice, itemTemp.count);
+                        // itemTemp.product.price = Host.MUL(itemTemp.product.price, itemTemp.count);
+                        // itemTemp.product.otherprice = Host.MUL(itemTemp.product.otherprice, itemTemp.count);
                         itemTemp.marketPrice = itemTemp.product.otherprice;
                         scartJsonArr.pid = itemTemp.pid;
                         scartJsonArr.count = itemTemp.count;
@@ -865,8 +870,8 @@ Page({
                 for (let j = 0; j < len; j++) {
                     if (this.data.cartsItem.cid === cartsItemArr[j].cid && this.data.cartsItem.pid === cartsItemArr[j].pid) {
                         cartsItemArr[j].count = this.data.cartsItem.count;
-                        cartsItemArr[j].product.price = Host.MUL(this.data.thisPrice,cartsItemArr[j].count);
-                        cartsItemArr[j].product.otherprice = Host.MUL(this.data.marketPrice,cartsItemArr[j].count);
+                        // cartsItemArr[j].product.price = Host.MUL(this.data.thisPrice,cartsItemArr[j].count);
+                        // cartsItemArr[j].product.otherprice = Host.MUL(this.data.marketPrice,cartsItemArr[j].count);
                     }
                 }
             }
@@ -898,7 +903,8 @@ Page({
                 }
             })
         }
-        this.data.cartsItem.product.price = Host.MUL(this.data.thisPrice, this.data.cartsItem.count);
+        this.data.cartsItem.totalPrice = Host.MUL(this.data.thisPrice, this.data.cartsItem.count);
+        this.data.cartsItem.totalMaketPrice = Host.MUL(this.data.marketPrice,this.data.cartsItem.count);
         this.setData({
             cartsItem: this.data.cartsItem,
         })
@@ -931,12 +937,11 @@ Page({
                 if (this.data.cartsItem.cid === cartsItemArr[j].cid && this.data.cartsItem.pid === cartsItemArr[j].pid) {
                     console.log("cartsItemArr[j] is ", cartsItemArr[j]);
                     cartsItemArr[j].count = this.data.cartsItem.count;
-                    cartsItemArr[j].product.price = Host.MUL(this.data.thisPrice, cartsItemArr[j].count);
-                    cartsItemArr[j].product.otherprice = Host.MUL(this.data.marketPrice, cartsItemArr[j].count);
                 }
             }
         }
-        this.data.cartsItem.product.price = Host.MUL(this.data.thisPrice, this.data.cartsItem.count);
+        this.data.cartsItem.totalPrice = Host.MUL(this.data.thisPrice, this.data.cartsItem.count);
+        this.data.cartsItem.totalMaketPrice = Host.MUL(this.data.marketPrice,this.data.cartsItem.count);
         this.setData({
             cartsItem : this.data.cartsItem,
         })
@@ -1061,8 +1066,8 @@ Page({
                 productItem.choosed = false;
             }
             if (productItem.choosed) {
-                priceSum = Host.ADD(priceSum,productItem.product.price);
-                totalMarketPrice = Host.ADD(totalMarketPrice,productItem.product.otherprice);
+                priceSum = Host.ADD(priceSum,productItem.totalPrice);
+                totalMarketPrice = Host.ADD(totalMarketPrice,productItem.totalMaketPrice);
                 //总商品数相加
                 totalCount++;
             }

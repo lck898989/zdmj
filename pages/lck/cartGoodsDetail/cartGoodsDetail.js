@@ -62,6 +62,8 @@ Page({
         isSharePage : false,
         //是否显示回到顶部按钮
         floorStatus : false,
+        //全部是默认的
+        allDefault : false,
     },
 
     /**
@@ -105,7 +107,10 @@ Page({
             console.log(app.shopMsgJson);
             console.log(typeof app.shopMsgJson.head + "=========================");
             var a = JSON.stringify(app.shopMsgJson.head).split(",");
-
+            // wx.setStorage({
+            //     key: 'goods',
+            //     data: app.shopMsgJson,
+            // })
             console.log(app.shopMsgJson.head + "=========================");
             this.setData({
                 goods: app.shopMsgJson,
@@ -143,8 +148,7 @@ Page({
                 this.initGoodsInfo();
                 this.setData({
                     isSharePage : true
-                })
-                
+                });
             } catch (e) {
                 console.log(e);
             }
@@ -167,6 +171,9 @@ Page({
                     self.initGoodsInfo();
                     wx.removeStorageSync('goods');
                 },
+                fail : function(){
+                    wx.hideLoading();
+                }
             });
         }
     },
@@ -308,6 +315,22 @@ Page({
                 });
             }
         }
+        let defaultCount = 0;
+        for(let k = 0;k < this.data.typeValueArr.length;k++){
+            let itemType = this.data.typeValueArr[k];
+            let key = this.data.typeArr[k];
+            let tempJson = itemType[`${key}`];
+            for(let m = 0;m < tempJson.length;m++){
+                if(tempJson[m] === '默认'){
+                    defaultCount++;
+                }                
+            }
+        }
+        if(defaultCount === this.data.typeArr.length){
+            this.setData({
+                allDefault : true
+            })
+        }
     },
     //显示当前头图的索引
     swiperWhere : function(event){
@@ -396,6 +419,54 @@ Page({
                 }
             }
         }
+    },
+    //选择规格
+    chooseStand: function (event) {
+        //无规格商品
+        console.log("event is ", event);
+        console.log("event.id is ", event.currentTarget.id);
+        let target = event.currentTarget.id;
+        let targetArr = target.split('-');
+        let targetValue = targetArr[0];
+        let index = targetArr[1];
+        let tag = targetArr[2];
+        console.log("sendServerSize is ", this.data.sendServerSize);
+        console.log("index is ", index);
+        console.log("tag is ", tag);
+        //在typeValueArr中找到mode为id的这个对象并设置该对象的touch属性为true
+        let testData = this.data.typeValueArr;
+        console.log("testData is ", testData);
+        let len = testData.length;
+        console.log("len is ", len);
+        let find = false;
+        let innerLen = testData[index][`${tag}`].length;
+        console.log("innerLen is ", innerLen);
+        for (let j = 0; j < innerLen; j++) {
+            if (testData[index][`${tag}`][j].mode === targetValue) {
+                console.log("找到了");
+                testData[index][`${tag}`][j].touch = !testData[index][`${tag}`][j].touch;
+                console.log("该尺寸类型是否被选中：", testData[index][`${tag}`][j].touch);
+                if (testData[index][`${tag}`][j].touch) {
+                    //动态添加属性
+                    this.data.sendServerSize[`${tag}`] = targetValue;
+                } else {
+                    console.log("该属性需要删除！");
+                    //删除该属性
+                    delete this.data.sendServerSize[`${tag}`];
+                }
+                console.log("sendServerSize obj is ", this.data.sendServerSize);
+                console.log("index is ", index);
+            } else {
+                //将其他的touch重置为false
+                testData[index][`${tag}`][j].touch = false;
+            }
+        }
+        console.log("typeValueArr is ", this.data.typeValueArr);
+        this.setData({
+            typeValueArr: testData,
+            sendServerSize: this.data.sendServerSize,
+            sizeValueArr: this.data.sizeValueArr,
+        });
     },
     test: function (event, item) {
         let dataSet = event.currentTarget.dataset;

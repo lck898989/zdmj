@@ -10,7 +10,13 @@ Page({
     srcp1: app.imageUrl + 'ico_arrow.png',
     userInfo: {},
   },
+  backUSER: function(){
+    console.log("33");
+    wx.navigateBack({
+      delta: getCurrentPages()[getCurrentPages().length-2] 
+    })
 
+  },
   /**
    * 生命周期函数--监听页面加载
    */

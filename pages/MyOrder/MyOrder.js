@@ -25,6 +25,33 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function(options) {
+        switch (options.indexs)
+        {
+            case "0":
+                this.setData({
+                    indexs: parseInt(options.indexs)
+
+                })
+                   break;
+            case "1":
+                this.setData({
+                    indexs: parseInt(options.indexs)
+
+                })
+                break;
+            case "2":
+                this.setData({
+                    indexs: parseInt(options.indexs)
+
+                })
+                break;
+            case "3":
+                this.setData({
+                    indexs: parseInt(options.indexs)
+
+                })
+                break;
+        }
         // app.setUpda = res => {
         //     this.setData({
         //         indexs:res
@@ -41,10 +68,23 @@ Page({
             console.log("???????????????????1");
             for (var i = 0; i <= app.myorderArray.length - 1; i++) {
                 for (var j = 0; j <= app.myorderArray[i].orderItems[0].length - 1; j++) {
-                    // app.myorderArray[i].orderItems[0][j].product.size = JSON.parse(app.myorderArray[i].orderItems[0][j].product.size);
+                    // app.myorderArray[i].orderItems[0][j].product.size = JSON.parse(app.myorderArray[i].orderItems[0][j].product.size);                  
                     app.myorderArray[i].orderItems[0][j].standard = app.myorderArray[i].orderItems[0][j].standard.replace("|", "  ");
-                    var c = app.myorderArray[i].orderItems[0][j].product.head.split(",");
-                    app.myorderArray[i].orderItems[0][j].product.head = c;
+                    if (typeof app.myorderArray[i].orderItems[0][j].product.head=="string")
+                    {
+                        var c = app.myorderArray[i].orderItems[0][j].product.head.split(",");
+
+                        app.myorderArray[i].orderItems[0][j].product.head = c;
+
+                    }
+                 
+                    let size = Object.values(JSON.parse(app.myorderArray[i].orderItems[0][j].product.size));
+                    let size1="";
+                    for (let k = 0; k <= size.length-1;k++)
+                    {
+                        size1 = size1 + size[k];
+                    }
+                    app.myorderArray[i].orderItems[0][j].product.size = size1;
                     console.log();
                 }
             }
@@ -95,6 +135,7 @@ Page({
           
         } else {
             app.setMyOrder = res => {
+                console.log("???????????????????2");
             
                 for (var i = 0; i <= res.data.orders.length - 1; i++) {
                     for (var j = 0; j <= res.data.orders[i].orderItems[0].length - 1; j++) {
@@ -124,7 +165,7 @@ Page({
                     }
                 }
                 else {
-                    console.log("???????????????????2");
+                 
                     clearTimeout(js);
                     var isHas = false;
                     for (let i = 0; i <= res.data.orders.length - 1; i++) {
@@ -160,7 +201,9 @@ Page({
                     isHas: false
                 })
                 console.log(JSON.stringify(this.data.orderArray));
+                console.log(JSON.stringify(this.data.orderArray) + "==================================");
             }
+         
             app.orderPage = res.data.pages;
             wx.hideLoading();
         }
@@ -533,7 +576,6 @@ Page({
     },
     pressWei: function(event) {
         wx.showModal({
-
             title: '提示',
             content: "点击确认收货后该商品无法退货",
             success: function(res) {
@@ -547,7 +589,6 @@ Page({
             }
         })
         console.log(event.currentTarget.dataset.id);
-
     },
     checkWu: function(event) {
         console.log(event.currentTarget.id);

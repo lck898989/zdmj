@@ -6,13 +6,84 @@
 }
 .tu1{
   width: 750rpx;
+  height: 252rpx;
+}
+.wenzi1{
+   position: absolute;
+  top: 40rpx;
+  left: 70rpx;
+  
+}
+.wenzi2{
+  position: absolute;
+  top: 110rpx;
+  left: 140rpx;
+}
+.wenzi3{
+  position: absolute;
+  top: 180rpx;
+  left: 70rpx;
+}
+.shareauthor{
+  position: absolute;
+  top: -13rpx;
+  left: 200rpx;
+  height: 23rpx;
+  
+}
+.shareData{
+  position: absolute;
+  bottom: 23rpx;
+  left: 200rpx;
+  height: 15rpx;
+
+
+}
+.wenzi4{
+  position: absolute;
+  top: 250rpx;
+  left: 70rpx;
+}
+.shareimage{
+  position: absolute;
+  width: 49rpx;
+  right: 169rpx;
+}
+.nideText{
+  position: absolute;
+  left: 0;
+}
+.wenzi5{
+  position: absolute;
+  bottom: 50rpx;
+  right: 0rpx;
+  display: flex;
+ align-items: center;
+  width: 360rpx;
+  height: 50rpx;
+}
+.guize1{
+  position: relative;
+  width: 680rpx;
+}
+.quanjubg1{
+  position: absolute;
+  background-color: #ed2938;
+  width: 750rpx;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;  
+}
+page{
+    background-color:  #ed2938;
 }
 .guize{
   position: relative;
   margin-left: 35rpx;
   width: 680rpx;
-  height: 530rpx;
-  border-radius: 10rpx;
+  height: 470rpx;
+  border-radius:10rpx;
 }
 
 .mask {
@@ -35,7 +106,7 @@
     z-index: 100;
     width: 750rpx;
     height: 240rpx;
-    background-color: white;
+    background-color:#ffffff;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
      border-bottom-left-radius: 0px;
@@ -45,7 +116,7 @@
 }
 .weixinText{
     position: absolute;
-    bottom: 24rpx;
+    bottom: 10rpx;
     color: #595959;
 }
 .weixinImage{
@@ -55,7 +126,7 @@
 }
 .woyaoText{
     position: absolute;
-    top: 21rpx; 
+    top: 10rpx; 
     color: #000000;
 }
 .biaoti{
@@ -113,6 +184,42 @@
     height: 0;
     color: transparent;
 }
+/* .button1{
+    position: absolute;
+    
+    background-color:  #f7c032;
+
+} */
+.index-manager1{
+    width:450rpx;
+    margin-left: 150rpx;
+    margin-top: 10rpx;
+    border-radius: 20rpx;
+    background-color: #f7c032;
+    font-weight: 900;
+    padding:10rpx 0rpx;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: nowrap;
+    align-items: center;
+}
+.kuai{
+  position: relative;
+  width: 680rpx;
+  margin-left: 35rpx;
+  margin-top: 50rpx;
+  line-height: 60rpx;
+  font-size: 30rpx;
+}
+.loadView {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background-color: #292424;
+}
 .index-manager{
 
     width:200rpx;
@@ -149,10 +256,11 @@
     align-items: center;
 }
 .xialaxxwz{
-  position: relative;
+  position: absolute;
   width: 750rpx;
   text-align: center;
   font-size: 25rpx;
+  bottom: 10rpx;
   color:#fff;
 }
 .wuhaoyou{
@@ -180,6 +288,6 @@
 }
 .level{
     position: absolute;
-    bottom: 0rpx;
+    bottom: 7rpx;
     right:0rpx;
 }

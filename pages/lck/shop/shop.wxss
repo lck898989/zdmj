@@ -482,17 +482,27 @@ swiper{
     line-height: 100rpx;
     display: flex;
     flex-direction: row;
-    justify-content: flex-start;
+    justify-content: space-around;
     flex-wrap: nowrap;
     align-items: center;
     position: fixed;
     bottom: 0rpx;
     text-align: center;
 }
+.addCartn{
+    background-color: #f39800;
+    color: #fff;
+    width: 250rpx;
+    font-size: 35rpx;
+}
 .saveType,.saveBuy{
     width: 100%;
     background-color: #b964d8;
     color: #fff;
+}
+.saveBuy{
+    width:250rpx;
+    font-size: 35rpx;
 }
 .AB{
     position: absolute;

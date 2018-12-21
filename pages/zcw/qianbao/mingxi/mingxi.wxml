@@ -30,8 +30,11 @@
         <image class='tutou2' src='{{srcp4}}' style='height:auto' mode='widthFix' />
     </view>
 </view>
-
-<scroll-view scroll-y='true' class='bottomView' style='height:{{bottomHeight}}px'>
+<view class='bottomView1' style='height:{{bottomHeight}}px' wx:if='{{hasMsg==false}}' >
+  <image class='icon' src='../../../../resources/ico_detail_norecord.png'  mode='widthFix' style='auto'></image>
+  <text class='meiyuouText' style='font-size:26rpx;font-weight:900'>没有任何记录</text>
+</view>
+<scroll-view scroll-y='true' class='bottomView' style='height:{{bottomHeight}}px' wx:if='{{hasMsg}}' >
     <!-- 日期和本日起内容一起循环？   加入for循环 -->
     <view wx:for='{{dataArray}}'>
         <view class='bull'>

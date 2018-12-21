@@ -142,6 +142,7 @@ Component({
                     shopid : this.data.easyItem.shopid,
                     uid    : app.uid
                 }
+                console.log("easyItem is ",this.data.easyItem);
                 let shopjson2 = encodeURIComponent(JSON.stringify(this.data.easyItem));
                 app.wenzhangShop = null;
                 app.ShortConnect(app.urlw + "Data/GetShopProductsByShopEssayShopid", {
@@ -151,7 +152,7 @@ Component({
                     console.log("商铺文章 r is ",r);
                 });
                 let shopurl = this.data.easyItem.shopessayhead;
-                let introduction = this.data.easyItem.shopintroduction;
+                let introduction = this.data.easyItem.shoptitle;
                 let shopjson = shopjson2;
                 wx.navigateTo({
                     url: '../../ShopActicle/ShopActicle?shopurl='+ shopurl + '&introduction=' + introduction + '&shopjson='+shopjson2,

@@ -1,174 +1,184 @@
- //app.js
- import Host from './utils/Const.js'
- App({
-     wenzhangShop:[],
-     sreacJson:null,
-     sreachPages:null,
-     nearsreachArray:null,
-     hotsreachArray:null,
-     //初始化购买的商品数量
-     buyNumber:null,
-     turnShopWen:{},
-     //
-     buyShopJson:null,
-     //计算该手机上rpx和px的换算比例
-     ratio: null,
-     //获取屏幕可见区域高度
-     seeHeight: null,
-     //判断是否开启过订单计时器
-     isStartOrder: false,   
-     timeObject: [],
-     oidObject: [],
-     imageUrl: "https://shopfile.ykplay.com/resources/",
-     //初始化我的订单界面当前类型
-     orderIndexType: null,
-     //初始化我的订单访问数字
-     myOrderNumber: null,
-     //初始化订单信息
-     orderMsg: {},
-     shopJSON: {},
-     urlj: "http://sharetwo.ykplay.com",
-     hotEssay: [],
-     //初始化商品物流数组
-     shopAdressArray: [],
-     //初始化商品名
-     shopName: "",
-     dd: [1, 2],
-     //地址
-     adress: "",
-     shopNumber: "",
-     shopAllplice: "",
-     IndexTypeArray: null,
-     //初始化商品信息json
-     shopMsgJson: null,
-     //初始化文章json
-     wenzhangJson: null,
-     //初始化帮好友看到数组
-     helpFriends: [],
-     //初始化入门返利初始页数
-     rumenPage: 1,
-     //初始化热门商品数组
-     hotShop: null,
-     //初始化我的订单界面的初始页面数据
-     orderLoadPage: 1,
-     //初始化我的订单界面的总数据页数
-     orderPage: 1,
-     //初始化我的订单数组
-     myorderArray: null,
-     //初始化提现信息数组
-     arrayTixian: null,
-     access_token: "",
-     host: Host.productionHost,
-     urlw3: "http://shop.ykplay.com",
-     urlw2: "http://shop.ykplay.com/",
-     urlw: "https://shop.ykplay.com/",
-     //保存订单号
-     orderNumber: null,
-     //商户好
-     payPhone: 1487347762,
-     //
-     //用户信息
-     userInfo1: {
-         familyAddress: {
-             aid: null
-         },
-         wechatMsg: {
-         },
-     },
-     goodShop:null,
-     //支付detailInfo
-     detailInfo: null,
-     //吴世超openid
-     serverOpenid: null,
-     //微信返回的unid
-     unionId: null,
-     //吴世超uid
-     uid: null,
-     //获取登录sessionKey
-     sessionKey: null,
-     scoreHiddenLoad: null,
-     scoreHiddenScope: null,
-     isShareEnter: false,
-     //存取微信登录的code
-     loginCode: null,
-     //判断是否点击过一次免费领取
-     isPressGet: false,
-     //存取体验吗数据
-     codeMsg: {},
-     //存储微信头像
-     usetImage: "",
-     //存储微信姓名
-     userName: "",
-     detailShopMsg: null,
-     appid: "wxcf83376cf2f40081",
-     secret: "023dd5acd11fc01a88373dd77d4f9cf9",
-     url: "https://share.ykplay.com",
-     openid: "",
-     shopMsg: null,
-     isShare: false,
-     //初始化计时器对象
-     interval: null,
-     //帮助好友数组
-     helpFriend: [],
-     //判断是否获取回调
-     //存储用户信息
-     userInfo: {},
-     //好友数组
-     helpFriend: null,
-     //存储上家地址
-     cerchanAddress: "",
-     //保存商品订单号
-     shopNumber: "",
-     //客服二维码信息
-     serviceCode: null,
-     //用户二维码url
-     userCode: null,
-     //初始化我的分享界面的信息
-     myScene: 1,
-     detailShopMsg1: null,
-     //判断是否点击进入过一次我的分享界面
-     openShare: false,
-     //判断点击查看详情
-     isPressDetail: false,
-     //判断天气情况
-     isDay : true,
-     onLaunch: function(res) {
-         let date = new Date();
-         let hours = date.getHours() + 1;
-         console.log("当前的时间是：",hours);
-         if(hours >= 18){
-             this.isDay = false;
-         }else{
-             this.isDay = true;
-         }
-         //判断天气情况
-         setInterval(function(){
-             let date = new Date();
-             let hours = date.getHours() + 1;
-             console.log("当前的时间是：",hours);
-             if(hours >= 18){
-                 this.isDay = false;
-             }else{
-                 this.isDay = true;
-             }
-         }.bind(this),30 * 60 * 1000);
-         var self = this;
-         wx.getSystemInfo({
-             success(res) {
-                 self.ratio = 750 / res.windowWidth;
-                 self.seeHeight = res.windowHeight;
-             }
-         })
-         //  var c="adasdasd";
-         // for(var i=0;i<=c.length-1;i++)
-         // {
-         //     console.log(c[i]);
-         // }
-         //  var c;
-         //  if(c==undefined||c==null)
-         //  {
-         //      console.log("222");
-         //  }
+//app.js
+import Host from './utils/Const.js'
+App({
+    globalData: { userInfo:null},
+    isScope: false,
+    encode:null,
+    MingXiaRRAY: [],
+    pressButton: "",
+    wenzhangShop: [],
+    sreacJson: null,
+    sreachPages: null,
+    nearsreachArray: null,
+    hotsreachArray: null,
+    //初始化购买的商品数量
+    buyNumber: null,
+    turnShopWen: {},
+    //
+    buyShopJson: null,
+    //计算该手机上rpx和px的换算比例
+    ratio: null,
+    //获取屏幕可见区域高度
+    seeHeight: null,
+    //判断是否开启过订单计时器
+    isStartOrder: false,
+    timeObject: [],
+    oidObject: [],
+    imageUrl: "https://shopfile.ykplay.com/resources/",
+    //初始化我的订单界面当前类型
+    orderIndexType: null,
+    //初始化我的订单访问数字
+    myOrderNumber: null,
+    //初始化订单信息
+    orderMsg: {},
+    shopJSON: {},
+    urlj: "http://sharetwo.ykplay.com",
+    hotEssay: [],
+    //初始化商品物流数组
+    shopAdressArray: [],
+    //初始化商品名
+    shopName: "",
+    dd: [1, 2],
+    //地址
+    adress: "",
+    shopNumber: "",
+    shopAllplice: "",
+    IndexTypeArray: null,
+    //初始化商品信息json
+    shopMsgJson: null,
+    //初始化文章json
+    wenzhangJson: null,
+    //初始化帮好友看到数组
+    helpFriends: [],
+    //初始化入门返利初始页数
+    rumenPage: 1,
+    //初始化热门商品数组
+    hotShop: null,
+    //初始化我的订单界面的初始页面数据
+    orderLoadPage: 1,
+    //初始化我的订单界面的总数据页数
+    orderPage: 1,
+    //初始化我的订单数组
+    myorderArray: null,
+    //初始化提现信息数组
+    arrayTixian: null,
+    access_token: "",
+    host: Host.productionHost,
+    urlw3: "http://shop.ykplay.com",
+    urlw2: "http://shop.ykplay.com/",
+    urlw: "https://shop.ykplay.com/",
+    //保存订单号
+    orderNumber: null,
+    //商户好
+    payPhone: 1487347762,
+    //
+    //用户信息
+    userInfo1: {
+        familyAddress: {
+            aid: null
+        },
+        wechatMsg: {},
+    },
+    goodShop: null,
+    //支付detailInfo
+    detailInfo: null,
+    //吴世超openid
+    serverOpenid: null,
+    //微信返回的unid
+    unionId: null,
+    //吴世超uid
+    uid: null,
+    //获取登录sessionKey
+    sessionKey: null,
+    scoreHiddenLoad: null,
+    scoreHiddenScope: null,
+    isShareEnter: false,
+    //存取微信登录的code
+    loginCode: null,
+    //判断是否点击过一次免费领取
+    isPressGet: false,
+    //存取体验吗数据
+    codeMsg: {},
+    //存储微信头像
+    usetImage: "",
+    //存储微信姓名
+    userName: "",
+    detailShopMsg: null,
+    appid: "wxcf83376cf2f40081",
+    secret: "023dd5acd11fc01a88373dd77d4f9cf9",
+    url: "https://share.ykplay.com",
+    openid: "",
+    shopMsg: null,
+    isShare: false,
+    //初始化计时器对象
+    interval: null,
+    //帮助好友数组
+    helpFriend: [],
+    //判断是否获取回调
+    //存储用户信息
+    userInfo: {},
+    //好友数组
+    helpFriend: null,
+    //存储上家地址
+    cerchanAddress: "",
+    //保存商品订单号
+    shopNumber: "",
+    //客服二维码信息
+    serviceCode: null,
+    //用户二维码url
+    userCode: null,
+    //初始化我的分享界面的信息
+    myScene: 1,
+    detailShopMsg1: null,
+    //判断是否点击进入过一次我的分享界面
+    openShare: false,
+    //判断点击查看详情
+    isPressDetail: false,
+    //判断天气情况
+    isDay: true,
+    //计时器数组
+    intervelArr : [],
+    onLaunch: function (res) {
+
+        if (res.scene == 1007 || res.scene == 1008) {
+            self.isShare = true;
+        }
+        let date = new Date();
+        let hours = date.getHours() + 1;
+        console.log("当前的时间是：", hours);
+        if (hours >= 18) {
+            this.isDay = false;
+        } else {
+            this.isDay = true;
+        }
+        //判断天气情况
+        setInterval(function () {
+            let date = new Date();
+            let hours = date.getHours() + 1;
+            console.log("当前的时间是：", hours);
+            if (hours >= 18) {
+                this.isDay = false;
+            } else {
+                this.isDay = true;
+            }
+        }.bind(this), 30 * 60 * 1000);
+        var self = this;
+        wx.getSystemInfo({
+            success(res) {
+                self.ratio = 750 / res.windowWidth;
+                self.seeHeight = res.windowHeight;
+            }
+        })
+        //  var c="adasdasd";
+        // for(var i=0;i<=c.length-1;i++)
+        // {
+        //     console.log(c[i]);
+        // }
+        //  var c;
+        //  if(c==undefined||c==null)
+        //  {
+        //      console.log("222");
+        //  }
 
         // var a=[];
         // a.push(1);
@@ -328,7 +338,7 @@
 
     },
     //与服务器断链接发送请求
-    ShortConnect(url1, data1, state,callback) {
+    ShortConnect(url1, data1, state, callback) {
         console.log(state);
         var self = this;
         //发起网络请求
@@ -401,12 +411,14 @@
                                 success(res) {
                                     //当授权时
                                     if (res.authSetting['scope.userInfo']) {
+                                   
                                         console.log("============");
                                         self.ShouQuan();
                                     } else {
                                         if (self.isShare) {
                                             console.log("---------------");
                                             self.setacticle(res);
+                                          self.isNoShou1();
                                         }
                                     }
                                 }
@@ -415,7 +427,6 @@
 
                         }
                         break;
-
                     case "getuserInfo1":
                         self.setUserInfo11(res);
                         break;
@@ -431,22 +442,21 @@
                         self.ShowShopDate(res);
                         break;
                     case "ActicleInterShop":
-                        console.log("acticleIntershop is ",res.data);
+                        console.log("acticleIntershop is ", res.data);
                         self.shopMsgJson = res.data.product;
+                      
                         callback(res.data.product);
                         console.log(JSON.stringify(self.shopMsgJson) + "ActicleInterShop");
                         if (self.setShopArrayJson) {
+                            wx.setStorage({
+                                key: 'goods',
+                                data: res.data.product,
+                            })
                             self.setShopArrayJson(res)
                         }
                         break;
                     case "GetAllMessage1":
-                        if (res.data.encode == -1) {
-                            self.setMingxiNull();
-
-
-                        } else {
-                            self.setMingXiMsg(res);
-                        }
+                        self.setMingXiMsg(res);
 
                         break;
                     case "getShopDi":
@@ -561,29 +571,44 @@
 
                         break;
                     case "interWenZhang":
-                         self.wenzhangJson = res.data.essay;
-                         callback(self.wenzhangJson);
-                         if (self.setEssay) {
+                        self.wenzhangJson = res.data.essay;
+                        if (self.setEssay) {
+
                             self.setEssay(res);
-                         }
+                        }
                         break;
                     case "GetType":
-                        self.IndexTypeArray = res.data.tabs;
-                        if (self.setIndexTypeArray) {
-                            self.setIndexTypeArray(res);
-                        }
+                        // self.IndexTypeArray = res.data.tabs;
+                        // if (self.setIndexTypeArray) {
+                        //     self.setIndexTypeArray(res);
+                        // }
                         break;
                     case "liginSuccess":
                         if (res.data.desc == "用户合法登录") {
-                            self.ShortConnect(self.urlw + 'Data/GetTabs', {}, "GetType");
+                            // self.ShortConnect(self.urlw + 'Data/GetTabs', {}, "GetType");
                             if (self.isShare) {
-
+                            //   if (self.isShouQuan1)
+                            //   {
+                            //     self.isShouQuan1();
+                            //   }
+                            console.log("1111111111111111111111111111");
+                                if (self.pressButton == "buy") {
+                                    self.showBox();
+                                }
+                                console.log("2222222222222222222222222222222");
                                 if (self.setJoin) {
                                     self.setJoin(res);
                                 }
+                                console.log("3333333333333333333333333333");
                                 if (self.agreeActicleShou) {
                                     self.agreeActicleShou(res);
                                 }
+                                console.log("4444444444444444444444444444444");
+                              if (self.setshared)
+                              {
+                                self.setshared(self.globalData.userInfo);
+                              }
+                                console.log("55555555555555555555555555555555");
                                 self.openid = res.data.userInfo.wxopenId;
                                 console.log(res.data.userInfo.openid);
                                 self.unionId = res.data.userInfo.unionId;
@@ -595,7 +620,7 @@
                                 console.log(res.data.userInfo.openid);
                                 self.unionId = res.data.userInfo.unionId;
                                 self.uid = res.data.userInfo.uid;
-                                console.log(res.data.userInfo.uid + "???????????????????????");
+                                console.log(JSON.stringify(res.data.userInfo) + "???????????????????????");
                                 self.serverOpenid = res.data.userInfo.openid;
                                 self.ShortConnect("https://pay.ykplay.com/user/reg", {
                                     openid: self.serverOpenid
@@ -623,7 +648,7 @@
                         if (self.isShare) {
 
                         } else {
-                            wx.reLaunch({
+                          wx.switchTab({
                                 url: '../lck/index/index',
                             })
                         }
@@ -771,12 +796,6 @@
                             }
                         }
                         break;
-                    case "getHistroyData":
-                        self.setHistroyData(res);
-                        break;
-                    case "getHistroy":
-                        self.setHistroy(res);
-                        break;
                     case "myshop":
                         if (res.data.msg == "查询结果为空") {
                             self.setFalse1(res);
@@ -800,7 +819,7 @@
                         //             })
                         //         }
                         //     }
-                         
+
                         // }
                         // else {
                         //     for (let i = 0; i <= res.data.essays.length - 1; i++) {
@@ -816,7 +835,7 @@
                         //             })
                         //         }
                         //     }
-                         
+
                         // }
                         break;
                     //访问分享记录
@@ -988,13 +1007,13 @@
                                 title: '提示',
                                 content: res.data.msg,
                                 success: function (res) {
-                                    if (res.confirm) {
-                                        wx.switchTab({
-                                            url: '../indextwo/indextwo'
-                                        })
-                                    } else if (res.cancel) {
-                                        console.log('用户点击取消')
-                                    }
+                                    // if (res.confirm) {
+                                    //     wx.switchTab({
+                                    //         url: '../indextwo/indextwo'
+                                    //     })
+                                    // } else if (res.cancel) {
+                                    //     console.log('用户点击取消')
+                                    // }
                                 }
                             })
                         } else {
@@ -1012,15 +1031,26 @@
                             })
                         }
                         break;
-                    case "GetAllMessage":
-                        self.arrayTixian = res.data.informs;
-                        if (self.setarrayTixian) {
-                            self.setarrayTixian(res);
+                    case "GetAllMessage2":
+                        self.encode=res.data.encode;
+                        if(res.data.encode==-1)
+                        {
+                            if (self.setMingxiNull)
+                            {
+                                self.setMingxiNull();
+                            }
+                           
+                        
                         }
-                        if (res.data.msg == "消息为空") {
-                            self.setmingxiFalse(res);
+                        else
+                        {
+                            self.MingXiaRRAY = res.data.informs;
+                            console.log(self.MingXiaRRAY + "!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+                            if (self.GetAllMessage1) {
+                                self.GetAllMessage1(res);
+                            }
                         }
-
+                        
                         break;
                     case "interorder":
                         self.myorderArray = res.data.orders;
@@ -1034,18 +1064,13 @@
                     case "interorder1":
                         if (res.data.encode == -1) {
                             self.setNullButton();
-
                         } else {
                             self.myorderArray = res.data.orders;
                             self.orderPage = res.data.pages;
                             if (self.setMyOrder) {
                                 self.setMyOrder(res);
                             }
-
-
                         }
-
-
                         break;
                     case "getmyOrder":
                         if (res.data.encode == -1) {
@@ -1054,14 +1079,20 @@
                         } else {
                             for (var i = 0; i <= res.data.orders.length - 1; i++) {
                                 for (var j = 0; j <= res.data.orders[i].orderItems[0].length - 1; j++) {
+                                    let size = Object.values(JSON.parse(res.data.orders[i].orderItems[0][j].product.size));
+                                    let size1 = "";
+                                    for (let k = 0; k <= size.length - 1; k++) {
+                                        size1 = size1 + size[k];
+                                    }
+                                    res.data.orders[i].orderItems[0][j].product.size = size1;
                                     var c = res.data.orders[i].orderItems[0][j].product.head.split(",");
                                     res.data.orders[i].orderItems[0][j].product.head = c;
                                     // res.data.orders[i].orderItems[0][j].product.size = JSON.parse(res.data.orders[i].orderItems[0][j].product.size);
-                                    res.data.orders[i].orderItems[0][j].standard = res.data.orders[i].orderItems[0][j].standard.replace("|", "  ");
+                                    res.data.orders[i].orderItems[0][j].standard = res.data.orders[i].orderItems[0][j].standard.replace("|", "");
                                 }
                             }
+                            console.log(JSON.stringify(res.data.orders)+"///////////////////////////////////");
                             self.getOrderArray(res);
-
                         }
                         break;
                     case "getMyShopping":
@@ -1110,7 +1141,7 @@
                             self.helpFriends = res.data.agencys;
                         }
                         wx.navigateTo({
-                            url: '../JinRebate/JinRebate',
+                            url: '../friends/friends',
                         })
                         break;
                     case "0":
@@ -1158,7 +1189,7 @@
                     case "checkTiXian":
                         console.log("5555");
                         wx.redirectTo({
-                            url: '../TiXian/TiXian?inter=tixian' + "&msg=" + res.data.msg + "&money=" + res.data.wallet,
+                            url: '../zcw/qianbao/tixian/tixian?inter=tixian' + "&msg=" + res.data.msg + "&money=" + res.data.oldwallet.toString(),
                         })
                         break;
                     case "sureGet":
@@ -1244,15 +1275,19 @@
                             self.setwenzhangShop(res);
                         }
                         break;
-                    case "GetAllMessage2":
-
-                        self.MingXiaRRAY = res.data.informs;
-                        console.log(self.MingXiaRRAY + "!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-                        if (self.GetAllMessage1) {
-
-                            self.GetAllMessage1(res);
-                        }
-                        break;    
+                    case "getHistroyData":
+                        self.setHistroyData(res);
+                        break;
+                    case "getHistroy":
+                        self.setHistroy(res);
+                        break;
+                    case "pressOne":
+                        self.setShopEssayData(res);
+                        callback(res)
+                        break;
+                    case "pressTwo":
+                        self.setShopEssayData2(res);
+                        break;
                 }
             },
         })
@@ -1273,7 +1308,7 @@
         this.globalData.userInfo = res.userInfo;
         console.log(this.openid + "6666666666");
         res.sessionKey = this.sessionKey;
-        console.log(res.userInfo);
+        console.log(JSON.stringify(res.userInfo)+"=====================================");
         this.ShortConnect("https://newaccount.ykplay.com/ykLogin/UserInfoLogin", {
             bindingType: "1",
             app: "zhidianmijin",
@@ -1285,5 +1320,21 @@
     },
     globalData: {
         userInfo: null
+    },
+    //检查最后一次操作是否超过了5秒
+    checkTime : function(callback){
+      console.log("intervelArr is ",this.intervelArr);
+      //开启一个计时器，如果计时器的时间大于5s的时候重新开启轮播图
+      let tempIntervel = setInterval(function(){
+          for(let i = 0;i < this.intervelArr.length;i++){
+              //将所有的计时器停掉
+              clearInterval(this.intervelArr[i]);
+          }
+          this.intervelArr = [];
+          //告诉index.js文件5秒用户没有操作了
+          callback('stop');
+      }.bind(this),5000);
+      //把tempIntervel添加到intervel数组中去
+      this.intervelArr.push(tempIntervel);
     }
 })

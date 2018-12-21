@@ -56,10 +56,9 @@
 
 
 <!-- 回首页按钮 -->
-  <view class='index-manager'>
-    <view style='color:white;font-size:35rpx;'>
-      回首页
+  <view class='index-manager' bindtap='backUSER' >
+    <view style='color:white;font-size:35rpx;' >
+      返回上一页 
     </view>
   </view>
-
 </view>

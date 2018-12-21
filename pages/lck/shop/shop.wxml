@@ -1,5 +1,5 @@
 <block wx:if='{{showWindow}}' >
-    <view class='mask' catchtouchmove='test' data-e='mask'></view>
+    <view class='mask' catchtouchmove='test' data-e='mask' bindtap='cancel'></view>
 </block>
 <view class='{{showWindow ? "page-con-showbuy" : "page-con"}}'>
     <block wx:if='{{isTopLevel}}' >
@@ -110,7 +110,7 @@
             </view>
         </view>
         <!--二级分类显示区域-->
-        <view wx:if='{{IsecondLevel}}' class='secondLevel-con' style='{{isShare ? (newAddEssays.length === 0 ? "margin-bottom:100rpx;" : "") : (goods.length === 0 ? "margin-bottom:100rpx;" : "")}}'>
+        <view wx:if='{{IsecondLevel}}' class='secondLevel-con'>
             <block wx:for='{{secondLevels}}'>
                 <view class='secondLevel-item' data-ttid='{{item.t2id}}' data-tid='{{item.tid}}' bindtap='chooset2Id' style='{{item.active ? "border: 2rpx solid #863bb7;background: #ecceff;color: #b25bd2;" : ""}}'>
                     {{item.t2name}}
@@ -151,7 +151,7 @@
                 <image src='{{serverImageHost}}{{currentGoods.head[0]}}' style='width:220rpx;height:220rpx;' class='img'></image>
                 <view class='price-order-con'>
                     <view class='price-item' style='font-size:40rpx;color:#ffcb05;font-weight:800;'>
-                    ￥  {{currentGoods.oprice * count}}
+                    ￥  {{currentGoods.price}}
                     </view>
                     <view class='price-item' style='font-size:30rpx;color:#404040'>
                         已选:
@@ -195,9 +195,15 @@
                 </view>
             </view>
             <view class='addOrBuy'>
+                <button class='share' open-type='share'>
+                    分享
+                </button>
+                <view class='addCartn' bindtap='addCart' id ='addcart'>
+                    加入购物车
+                </view>
                 <!--检查是否点击过购物车和立即购买按钮-->
                 <view class='saveBuy' bindtap='confirm' id='buyit'>
-                    确定
+                    立即购买
                 </view>
             </view>
         </view>

@@ -3,7 +3,7 @@
   <!-- 导航栏 -->
   <view class='daohang'>
     <image src='{{arraytu.dh_dh}}' class='daohangtu'  style='height:auto' mode='widthFix'/>
-    <image src='{{arraytu.dh_qb}}' class='daohangtu2'  style='height:auto' mode='widthFix'/>
+    <image src='../../../resources/ico_money_1.png' class='daohangtu2'  style='height:auto' mode='widthFix'/>
   </view>
   <!-- 钱包余额显示 -->
   <view class='mingxi'>

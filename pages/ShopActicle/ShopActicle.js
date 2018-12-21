@@ -45,7 +45,7 @@ Page({
         })
         var shopmsg2 = JSON.parse(decodeURIComponent(options.shopjson));
         options.shopurl = options.shopurl.split(",");
-        if (app.shopWenZhangJson) {
+        if (app.shopWenZhangJson && app.wenzhangShop) {
             console.log("11111111111111111111111111111d");
             if (app.wenzhangShop.length > 0) {
                 for (let i = 0; i <= app.wenzhangShop.length - 1; i++) {
@@ -244,7 +244,6 @@ Page({
                 }, "SeeWen");
             }
         }
-
     },
 
     /**

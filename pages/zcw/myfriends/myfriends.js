@@ -7,7 +7,6 @@ Page({
    */
   data: {
     srcp: app.imageUrl + 'img_myfriend_BG.png',
-    
   },
 
   /**

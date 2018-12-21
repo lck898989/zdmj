@@ -2,39 +2,68 @@
 <view class='quanju'>
   <!-- 导航栏 -->
   <view class='daohang'>
-    <image src='{{arraytu.dh_dh}}' class='daohangtu'  style='height:auto' mode='widthFix'/>
-    <image mode='widthFix' class="userImage"  style='height:auto'src="{{userInfo.avatarUrl}}"/>
+    <image src='{{arraytu.dh_dh}}' class='daohangtu' style='height:auto' mode='widthFix' />
+    <image mode='widthFix' class="userImage" style='height:auto' src="{{userInfo.avatarUrl}}" />
     <text class="userName" style='font-size:46rpx;color:white;font-weight:900;'>{{userInfo.nickName}}</text>
-    <image src='{{arraytu.dh_ewm}}' class='ewm'  style='height:auto' mode='widthFix'/>
+    <!-- <image src='{{arraytu.dh_ewm}}' class='ewm' style='height:auto' mode='widthFix' /> -->
   </view>
   <!-- 个人信息 -->
   <view class='grxx'>
     <view class='fenge1'></view>
     <view class='fenge2'></view>
     <view class='txtqianbao' bindtap='grxx_qb'>
-      <view class='txtqian'><text style='font-size:35rpx;color:black;font-weight:900;'>￥{{money}}</text></view>
-      <view  class='txtqian2'><text style='font-size:23rpx;color:#7d7d7d'>钱包</text></view>
+      <view class='txtqian'>
+        <text style='font-size:35rpx;color:black;font-weight:900;'>￥{{money}}</text>
+      </view>
+      <view class='txtqian2'>
+        <text style='font-size:23rpx;color:#7d7d7d'>钱包</text>
+      </view>
     </view>
     <!-- 商铺券 -->
     <view class='txtshangpuquan' bindtap='grxx_spq'>
-      <view class='txtqian'><text style='font-size:35rpx;color:black;font-weight:900;'>0</text></view>
-      <view  class='txtqian2'><text style='font-size:23rpx;color:#7d7d7d'>商铺券</text></view>
+      <view class='txtqian'>
+        <text style='font-size:35rpx;color:black;font-weight:900;'>0</text>
+      </view>
+      <view class='txtqian2'>
+        <text style='font-size:23rpx;color:#7d7d7d'>商铺券</text>
+      </view>
     </view>
     <!-- 我的好友 -->
     <view class='txtwodehaoyou' bindtap='grxx_wdhy'>
-      <view class='txtqian'><text style='font-size:35rpx;color:black;font-weight:900;'>0</text></view>
-      <view  class='txtqian2'><text style='font-size:23rpx;color:#7d7d7d'>我的好友</text></view>
+      <view class='txtqian'>
+        <text style='font-size:35rpx;color:black;font-weight:900;'>0</text>
+      </view>
+      <view class='txtqian2'>
+        <text style='font-size:23rpx;color:#7d7d7d'>我的好友</text>
+      </view>
     </view>
   </view>
   <!-- 我的订单 -->
   <view class='wddd'>
-    <text style='font-size:33rpx;font-weight:900;' class='txtdd'>我的订单</text>
+    <view class='quanbuView' bindtap='wddd_dfk1'>
+      <text class='quanbuText' style='font-size:24rpx;color:#bfbfbf;font-weight:900'>全部订单</text>
+      <image class='dayu' mode='widthFix' style='height:auto' src='../../../resources/icon_arrow.png'> </image>
+    </view>
+    <text style='font-size:34rpx;font-weight:900;' class='txtdd'>我的订单</text>
     <!-- 待付款 -->
-    <view class='dfk' bindtap='wddd_dfk'><image class='wdddtu1' src='{{arraytu.dd_dfk}}' style='height:auto' mode='widthFix'/><text  class='daifukuan'style='font-size:23rpx;color:#7d7d7d'>待付款</text></view>
+    <view class='dfk' bindtap='wddd_dfk'>
+      <image class='wdddtu1' src='{{arraytu.dd_dfk}}' style='height:auto' mode='widthFix' />
+      <text class='daifukuan' style='font-size:23rpx;color:#7d7d7d'>待付款</text>
+    </view>
     <!-- 待收货 -->
-    <view class='dsh' bindtap='wddd_dsh'><image class='wdddtu1' src='{{arraytu.dd_dsh}}' style='height:auto' mode='widthFix'/><text  class='daifukuan'style='font-size:23rpx;color:#7d7d7d'>待收货</text></view>
+    <view class='dsh' bindtap='wddd_dsh'>
+      <image class='wdddtu1' src='{{arraytu.dd_dsh}}' style='height:auto' mode='widthFix' />
+      <text class='daifukuan' style='font-size:23rpx;color:#7d7d7d'>待收货</text>
+    </view>
     <!-- 已完成 -->
-    <view class='ywc' bindtap='wddd_ywc'><image class='wdddtu1' src='{{arraytu.dd_ywc}}' style='height:auto' mode='widthFix'/><text  class='daifukuan' style='font-size:23rpx;color:#7d7d7d'>已完成</text></view>
+    <view class='ywc' bindtap='wddd_ywc'>
+      <image class='wdddtu1' src='{{arraytu.dd_ywc}}' style='height:auto' mode='widthFix' />
+      <text class='daifukuan' style='font-size:23rpx;color:#7d7d7d'>已完成</text>
+    </view>
+    <view class='tuihuo' bindtap='shouhou'>
+      <image class='wdddtu1' src='../../../resources/btn_mine_refund.png' style='height:auto' mode='widthFix' />
+      <text class='daifukuan' style='font-size:23rpx;color:#7d7d7d'>退款/售后</text>
+    </view>
   </view>
   <!-- 滚动滑块 -->
   <!-- <scroll-view scroll-x='true' class='scrol'
@@ -46,14 +75,34 @@
   <!-- 我的服务 -->
   <view class='wddd'>
     <text style='font-size:33rpx;font-weight:900;' class='txtdd'>我的服务</text>
-    <button class='lianxi' 	open-type="contact"></button>
+    <button class='lianxi' open-type="contact"></button>
     <!-- 收货地址 -->
-    <button class='shdz' bindtap='fw_shdz'><image class='wdddtu2' src='{{arraytu.fw_shdz}}' style='height:auto' mode='widthFix'/><view class='wddd_ziti'><text style='font-size:23rpx;color:#7d7d7d'>收货地址</text></view></button>
+    <button class='shdz' bindtap='fw_shdz'>
+      <image class='wdddtu2' src='{{arraytu.fw_shdz}}' style='height:auto' mode='widthFix' />
+      <view class='wddd_ziti'>
+        <text style='font-size:23rpx;color:#7d7d7d'>收货地址</text>
+      </view>
+    </button>
     <!-- 联系客服 -->
-    <button class='lxkf' open-type='contact' bindtap='fw_kf'><image class='wdddtu2' src='{{arraytu.fw_kf}}' style='height:auto' mode='widthFix'/><view class='wddd_ziti'><text style='font-size:23rpx;color:#7d7d7d'>联系客服</text></view></button>
+    <button class='lxkf' open-type='contact' bindtap='fw_kf'>
+      <image class='wdddtu2' src='{{arraytu.fw_kf}}' style='height:auto' mode='widthFix' />
+      <view class='wddd_ziti'>
+        <text style='font-size:23rpx;color:#7d7d7d'>联系客服</text>
+      </view>
+    </button>
     <!-- 设置 -->
-    <button class='sz' bindtap='fw_sz'><image class='wdddtu2' src='{{arraytu.fw_sz}}' style='height:auto' mode='widthFix'/><view class='wddd_ziti'><text style='font-size:23rpx;color:#7d7d7d'>设置</text></view></button>
+    <button class='sz' bindtap='fw_sz'>
+      <image class='wdddtu2' src='{{arraytu.fw_sz}}' style='height:auto' mode='widthFix' />
+      <view class='wddd_ziti'>
+        <text style='font-size:23rpx;color:#7d7d7d'>设置</text>
+      </view>
+    </button>
     <!-- 即将上线 -->
-    <button class='jjsx' bindtap='fw_jjsx'><image class='wdddtu2' src='{{arraytu.fw_jjsx}}' style='height:auto' mode='widthFix'/><view class='wddd_ziti'><text style='font-size:23rpx;color:#7d7d7d'>即将上线</text></view></button>
+    <button class='jjsx' bindtap='fw_jjsx'>
+      <image class='wdddtu2' src='{{arraytu.fw_jjsx}}' style='height:auto' mode='widthFix' />
+      <view class='wddd_ziti'>
+        <text style='font-size:23rpx;color:#7d7d7d'>即将上线</text>
+      </view>
+    </button>
   </view>
 </view>

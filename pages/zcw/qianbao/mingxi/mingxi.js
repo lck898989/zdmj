@@ -6,6 +6,7 @@ Page({
      * 页面的初始数据
      */
     data: {
+        hasMsg:true,
         dataArray: [],
         hid1: false,
         hid2: false,
@@ -76,42 +77,79 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function(options) {
+        if (app.encode)
+        {
+            this.setData({
+                hasMsg: false
+            })
+        }
+        else
+        {
+            app.setMingxiNull = res => {
+                this.setData({
+                    hasMsg: false
+                })
+            }
+        }
+        
         console.log(app.MingXiaRRAY + "????????????????????????????");
         if (app.MingXiaRRAY) {
-            for (let i = 0; i <= app.MingXiaRRAY.length - 1; i++) {
-                if (typeof app.MingXiaRRAY[i].time == "string") {
-                    app.MingXiaRRAY[i].time = app.MingXiaRRAY[i].time.split("-");
-                }
+            if (app.MingXiaRRAY.length>0)
+            {
+                for (let i = 0; i <= app.MingXiaRRAY.length - 1; i++) {
+                    if (typeof app.MingXiaRRAY[i].time == "string") {
+                        app.MingXiaRRAY[i].time = app.MingXiaRRAY[i].time.split("-");
+                    }
 
-                for (let j = 0; j <= app.MingXiaRRAY[i].content.length - 1; j++) {
-                    let time = app.MingXiaRRAY[i].content[j].time.split(" ");
-                    console.log(time + "///////////////");
-                    app.MingXiaRRAY[i].content[j].time1 = time[0].split("-");
-                    console.log(app.MingXiaRRAY[i].content[j].time1 + "///////////////");
-                    app.MingXiaRRAY[i].content[j].time2 = time[1].split(":");
-                    console.log(app.MingXiaRRAY[i].content[j].time2 + "///////////////");
-                }
-
-            }
-            this.setData({
-                dataArray: app.MingXiaRRAY
-            })
-            console.log(JSON.stringify(this.data.dataArray) + "onLoad");
-        } else {
-            app.GetAllMessage1 = res => {
-                for (let i = 0; i <= res.data.informs.length - 1; i++) {
-                    res.data.informs[i].time = res.data.informs[i].time.split("-");
-                    for (let j = 0; j <= res.data.informs[i].content.length - 1; j++) {
-                        let time = res.data.informs[i].content[j].time.split(" ");
-                        res.data.informs[i].content[j].time1 = time[0].split("-");
-                        res.data.informs[i].content[j].time2 = time[1].split(":");
+                    for (let j = 0; j <= app.MingXiaRRAY[i].content.length - 1; j++) {
+                        let time = app.MingXiaRRAY[i].content[j].time.split(" ");
+                        console.log(time + "///////////////");
+                        app.MingXiaRRAY[i].content[j].time1 = time[0].split("-");
+                        console.log(app.MingXiaRRAY[i].content[j].time1 + "///////////////");
+                        app.MingXiaRRAY[i].content[j].time2 = time[1].split(":");
+                        console.log(app.MingXiaRRAY[i].content[j].time2 + "///////////////");
                     }
 
                 }
                 this.setData({
-                    dataArray: res.data.informs
+                    dataArray: app.MingXiaRRAY
                 })
                 console.log(JSON.stringify(this.data.dataArray) + "onLoad");
+
+            }
+            else
+            {
+                this.setData({
+                    hasMsg:false
+                })
+            }
+            
+        } else {
+            app.GetAllMessage1 = res => {
+                if (res.data.informs.length>0)
+                {
+                    for (let i = 0; i <= res.data.informs.length - 1; i++) {
+                        res.data.informs[i].time = res.data.informs[i].time.split("-");
+                        for (let j = 0; j <= res.data.informs[i].content.length - 1; j++) {
+                            let time = res.data.informs[i].content[j].time.split(" ");
+                            res.data.informs[i].content[j].time1 = time[0].split("-");
+                            res.data.informs[i].content[j].time2 = time[1].split(":");
+                        }
+
+                    }
+                    this.setData({
+                        dataArray: res.data.informs
+                    })
+                    console.log(JSON.stringify(this.data.dataArray) + "onLoad");
+                }
+                else
+                {
+                    this.setData({
+                        hasMsg: false
+                    })
+
+                }
+               
             }
         }
 

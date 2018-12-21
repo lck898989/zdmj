@@ -162,13 +162,13 @@ Page({
       });
 
   },
-
   /**
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
 
   },
+  //选择申请售后，正在申请，申请记录按钮
   chooseTitle : async function(e){
     wx.showLoading({
         title: '数据加载中...',
@@ -196,24 +196,24 @@ Page({
     switch(text){
         case '申请售后':
             this.data.saleAfterPage = 1;
-            this.getSaleAfterList();
             this.setData({
                 saleOrderArray : []
             });
+            this.getSaleAfterList();
             break;
         case '正在申请':
             this.data.applyingPage = 1;
-            this.getApplyingList();
             this.setData({
                 applyingOrderArr : []
             });
+            this.getApplyingList();
             break;
         case '申请记录':
             this.data.applyRecordPage = 1;
-            this.getApplyRecord();
             this.setData({
                 applyRecord : []
             });
+            this.getApplyRecord();
             break;
     }
     this.setData({

@@ -42,19 +42,19 @@ Page({
     console.log(this.data.add);
     console.log("getAdd is ",this.data.getAdd);
     if(this.data.add === null) {
-          console.log("开始请求地址信息。。。。");
+        console.log("开始请求地址信息。。。。");
         let url = app.host + 'Data/GetAddressByUidAndState0';
-          console.log("in onLoad uid is ", app.uid);
-          let data = {
-              uid  : app.uid,
-          }
-          let req = new Request(url, data, "POST", 'text');
-          let res = await req.sendRequest();
-          console.log("res is ", res.data.address);
-          let address = res.data.address;
-          this.setData({
-              add : address
-          })     
+        console.log("in onLoad uid is ", app.uid);
+        let data = {
+            uid  : app.uid,
+        }
+        let req = new Request(url, data, "POST", 'text');
+        let res = await req.sendRequest();
+        console.log("res is ", res.data.address);
+        let address = res.data.address;
+        this.setData({
+            add : address
+        });    
     }
     let self = this;
     console.log(options.interSource + "!!!!!!!!!!!!!!!!!!!!!!!!!!!!1");

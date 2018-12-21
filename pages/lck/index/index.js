@@ -114,7 +114,9 @@ Page({
         //加载图片的数量
         loadingCount: 6,
         col1: [],
+        realCol1 : [],
         col2: [],
+        realCol2 : [],
         ratio: 2,
         col1H: 0,
         col2H: 0,
@@ -136,7 +138,13 @@ Page({
         newAddEssays: [],
         timer : 0,
         //自动播放
-        autoPlay : false
+        autoPlay : false,
+        //用户是否操作轮播图了
+        userOperation : false,
+        //加载完毕
+        loadOver : false,
+        //是否点击了分类，点击分类默认是请求了数据的这样就不会再执行onReachBottom方法导致少显示一页的内容
+        click : true
     },
 
     /**
@@ -204,16 +212,19 @@ Page({
                 resData[m].shopessayhead = resData[m].shopessayhead.split(',');
             }else if(resData[m].head){
                 resData[m].head = resData[m].head.split(',');
+            }else if(resData[m].essayhead){
+                resData[m].essayhead = resData[m].essayhead.split(',');
             }
         }
         this.setData({
-            newAddEssays : resData
+            newAddEssays : resData,
+            click        : false
         }, () => {
             console.log("newAddEssays is ", self.data.newAddEssays);
         })
         wx.hideLoading();
-        //自动播放轮播图
-        if(!this.data.autoPlay){
+        //自动播放轮播图并且用户没有操作
+        if(!this.data.autoPlay && !this.data.autoPlay){
             this.data.timer = setInterval(function(){
                 this.moveLeft(1);
             }.bind(this),4000);
@@ -431,10 +442,12 @@ Page({
             MainImageArr: this.data.MainImageArr
         })
     },
-    onImageLoad: function (e) {
+    onImageLoad: async function (e) {
         let isLast = e.currentTarget.dataset.last;
         console.log("isLast is ", isLast);
-        let imageId = Number(e.currentTarget.id);
+        let imageId = Number(e.currentTarget.id.split('-')[0]);
+        let imageIndex = Number(e.currentTarget.id.split('-')[1]);
+        console.log("imageIndex is ",imageIndex);
         let oImgW = e.detail.width;           //图片原始宽度
         let oImgH = e.detail.height;          //图片原始高度
         let imgWidth = this.data.imageWidth;  //图片设置的宽度
@@ -457,6 +470,8 @@ Page({
         }
         if(imageObj !== null){
             imageObj.height = imgHeight;
+            //记录下该图片是第几个被加载的
+            imageObj.index = imageIndex;
             console.log("imageObj is ", imageObj);
             let loadingCount = this.data.loadingCount - 1;
             let col1 = this.data.col1;
@@ -480,22 +495,28 @@ Page({
             let data = {
                 loadingCount: loadingCount,
                 col1: col1,
-                col2: col2
+                col2: col2,
+                loadOver: true
             };
-            console.log(JSON.stringify(data.col1) + "////////////////////");
-            console.log(JSON.stringify(data.col2) + "////////////////////");
             if (!loadingCount) {
                 data.images = [];
             }
-            this.setData(data, () => {
+            await this.setData(data, () => {
                 wx.hideLoading();
             });
             if (isLast) {
+                console.log("col1 is ", col1);
+                console.log("col2 is ", col2);
                 //渲染完图片之后将新加的文章添加到文章列表中去
-                this.data.dataArray.push(...this.data.newAddEssays);
-                this.setData({
-                    dataArray: this.data.dataArray
-                })
+                // this.data.dataArray.push(...this.data.newAddEssays);
+                //对col1的每个元素进行排序和col2的每个元素进行排序
+                // this.setData({
+                //     col1     : this.data.col1,
+                //     col2     : this.data.col2,
+                //     loadOver : true
+                // },()=>{
+                //     wx.hideLoading();
+                // })
             }
         }
     },
@@ -512,7 +533,7 @@ Page({
     onShow: function () {
         console.log("开启自动轮播");
         //自动轮播设置
-        if(!this.data.autoPlay){
+        if(!this.data.autoPlay && !this.data.userOperation){
             this.data.timer = setInterval(function(){
                 this.moveLeft(1);
             }.bind(this),4000);
@@ -555,12 +576,19 @@ Page({
     },
 
     /**
+     * 
      * 页面上拉触底事件的处理函数
+     * 
      */
     onReachBottom: function () {
-        this.data.page++;
-        console.log("page is ",this.data.page);
-        this.loadImages();
+        if(!this.data.click){
+            this.data.page++;
+            console.log("page is ",this.data.page);
+            this.setData({
+                loadOver : false
+            })
+            this.loadImages();
+        }
     },
 
     /**
@@ -575,11 +603,11 @@ Page({
         console.log(event.detail.current);
         this.setData({
             currentIndex: event.detail.current
-        })
+        });
     },
     //获取当前经纬度
     getLocation: function () {
-        let selft = this;
+        let self = this;
         wx.getLocation({
             success: function (res) {
                 console.log("res is ", res);
@@ -596,7 +624,7 @@ Page({
         console.log("--->>>", event.detail.current);
         this.setData({
             swiperIndex: event.detail.current
-        })
+        });
     },
     scrollEvent: function (event) {
         console.log("在横向滚动视图中event is ", event);
@@ -604,12 +632,13 @@ Page({
     //选择类型
     chooseType: async function (event) {
         wx.showLoading({
-            title: '数据正在赶来的路上...',
+            title: '数据加载中...',
         });
         this.setData({
             loadText : '下拉获取更多文章...'
-        })
-        //将dataArray设置空为了让数据绑定来刷新新的数据！！！！！！！！
+        });
+        let self = this;
+        //将dataArray设置空为了让数据绑定来刷新新的数据
         //初始化列的数据
         this.setData({
             col1         : [],
@@ -617,11 +646,13 @@ Page({
             col1H        : 0,
             col2H        : 0,
             scrollH      : 0,
-            newAddEssays : []
+            newAddEssays : [],
+            click        : true
         });
         let dataSet = event.currentTarget.dataset;
         let id = Number(dataSet.id);
         console.log("id is ", id);
+        let res = null;
         console.log("type of id is ", typeof id);
         let typeLen = this.data.bannerType.length;
         for (let i = 0; i < typeLen; i++) {
@@ -634,9 +665,10 @@ Page({
             }
         }
         this.setData({
-            bannerType : this.data.bannerType
+            bannerType : this.data.bannerType,
+            loadOver   : false,
+            page       : 0
         })
-        let res = null;
         switch (id) {
             case 0:
                 this.data.page = 1;
@@ -664,14 +696,23 @@ Page({
                 break;
         }
         this.data.newAddEssays = res;
-        console.log("id is ",id);
-        this.setEssayHeadImage(id);
-        console.log("set 之前newAddEssays is ", this.data.newAddEssays);
-        this.setData({
-            newAddEssays: this.data.newAddEssays
-        },()=>{
+        if(this.data.newAddEssays.length === 0){
             wx.hideLoading();
-        })
+            this.setData({
+                loadOver : true,
+                loadText : '已经到底了~~o(>_<)o ~~'
+            });
+        }else{
+            console.log("id is ",id);
+            this.setEssayHeadImage(id);
+            console.log("set 之前newAddEssays is ", this.data.newAddEssays);
+            this.setData({
+                newAddEssays : this.data.newAddEssays,
+                click        : false
+            },()=>{
+                wx.hideLoading();
+            })
+        }
     },
     setEssayHeadImage : function(id){
         for (let j = 0; j < this.data.newAddEssays.length; j++) {
@@ -698,11 +739,30 @@ Page({
         console.log("e is ", e);
         this.data.startPoint = e.changedTouches[0].pageX;
         console.log("startPoint is ", this.data.startPoint);
+        //关闭自动播放
+        this.data.autoPlay = false;
+        clearInterval(this.data.timer);
+        //记录用户操作
+        this.data.userOperation = true;
+        //记录最后一次点击的时间
+        let lastTouchTime = new Date().getTime();
+        console.log("最后一次触发的时间是：",lastTouchTime);
+        //开始计时是否超过5s用户未操作
+        app.checkTime(function(){
+            console.log("5s用户未操作了，可以开启自动轮播图了");
+            console.log("this is ",this);
+            this.data.autoPlay = true;
+            this.data.userOperation = false;
+            this.data.timer = setInterval(function(){
+                this.moveLeft(1);
+            }.bind(this),4000);
+        }.bind(this));
     },
     moveEnd: function (e) {
         let isLeft = false;
         let isRight = false;
         console.log("in end e is ", e);
+        // this.data.userOperation = true;
         let endPoint = e.changedTouches[0].pageX;
         // console.log("是否向左移动？", (endPoint - this.data.startPoint) <  ? (isLeft = true) : (isRight = true));
         console.log("移动了", endPoint - this.data.startPoint);
@@ -850,16 +910,19 @@ Page({
         }
         console.log("res is ", res);
         if(res.length === 0){
+            wx.hideLoading();
             this.setData({
-                loadText: '已经到底了~~o(>_<)o ~~'
-            })
+                loadText : '已经到底了~~o(>_<)o ~~',
+                loadOver : true
+            });
         }else{
             this.data.newAddEssays = res;
             this.setEssayHeadImage(id);
             console.log("newAddEssays is ", this.data.newAddEssays);
             console.log("当前的模拟数字是：", this.data.simulateTimes);
             this.setData({
-                newAddEssays: this.data.newAddEssays
+                newAddEssays : this.data.newAddEssays,
+                
             }, () => {
                 wx.hideLoading();
             })

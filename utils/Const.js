@@ -130,5 +130,12 @@ export default {
         r1 = Number(arg1.toString().replace(".", ""))
         r2 = Number(arg2.toString().replace(".", ""))
         return (r1 / r2) * Math.pow(10, t2 - t1);
+    },
+    //对象数组排序
+    sortObjArr : function(arr){
+        arr.sort(function(a,b){
+            return a.index - b.index;
+        });
+        return arr;
     }
 }

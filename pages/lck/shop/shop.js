@@ -23,7 +23,7 @@ Page({
                     srcActive   : '../../../resources/btn_shopping_1.png',
                     srcUnActive : '../../../resources/btn_shopping_0.png'
                   }
-        ],
+                ],
         btnActive: 'background: linear-gradient(to right,#e84e86,#644caf);background: -webkit - linear - gradient(to right, #e84e86, #644caf);',
         btnUnActive: 'background: linear-gradient(to right,#7d7d7d,#999999);background: -webkit - linear - gradient(to right, #7d7d7d, #999999);',
         //一级分类源数据
@@ -391,6 +391,7 @@ Page({
                     newAddEssays : essayData
                 });
             }else{
+                self.getT2idByTid(tid);
                 let goodsArr = await this.getProductsByTid();
                 //分割头图
                 this.splitHeadImage(goodsArr);
@@ -750,7 +751,7 @@ Page({
                         wx.hideLoading();
                         this.setData({
                             loadText: '已经到底了~~o(>_<)o ~~'
-                        })
+                        });
                     }else{
                         wx.hideLoading();
                         this.splitHeadImage(res.data.products);
@@ -770,7 +771,8 @@ Page({
                     if(newProducts.length !== 0){
                         this.data.goods.push(...newProducts);
                         this.setData({
-                            goods : this.data.goods
+                            goods     : this.data.goods,
+                            loadText  : '没有更多商品...'
                         });
                     }else{
                         this.setData({
@@ -780,7 +782,6 @@ Page({
                     wx.hideLoading();
                 }
             }
-
         }else{
             this.data.page++;
             if(this.data.isAll){
@@ -855,8 +856,27 @@ Page({
     /**
      * 用户点击右上角分享
      */
-    onShareAppMessage: function () {
+    onShareAppMessage: function (ops) {
+        console.log("ops is ", ops);
+        if (ops.from === 'button') {
+            console.log("分享的商品是：", this.data.currentGoods);
+            //改变来源商品分享得来的
+            this.data.currentGoods.resources = 1;
+            console.log("分享出去的商品是：", this.data.currentGoods);
+            return {
+                title: "指点迷津",
+                desc: 'a good app for tianjin area',
+                path: '/pages/lck/cartGoodsDetail/cartGoodsDetail?goods=' + JSON.stringify(this.data.currentGoods) + '&share=' + 0,
+                success: function (res) {
+                    console.log("分享成功，res is ", res);
+                    let shareTickets = res.shareTickets;
+                    console.log(shareTickets);
+                    if (!res.shareTickets) {
 
+                    }
+                }
+            }
+        }
     },
     getIndex: function (e) {
         console.log("e is ", e);
@@ -1461,5 +1481,104 @@ Page({
                 content: '当前微信版本过低，暂无法使用该功能',
             });
         }
+    },
+    //加入购物车
+    addCart : async function(e){
+        let url = app.host + 'Data/AddCart';
+        let pid = this.data.currentGoods.pid;
+        console.log("pid is ", pid);
+        console.log("uid is ", app.uid);
+        console.log("currentGoods is ",this.data.currentGoods);
+        let data = this.checkData(pid);
+        console.log("data is ",data);
+        if (this.data.currentGoods.openstandard !== 1) {
+            //一种规格的商品默认是选择的
+            this.data.isOk = true;
+            
+        }
+        console.log("data is ", data);
+        if (this.data.isOk) {
+            this.setData({
+                //尺寸颜色都已经选择了
+                isChooseType: true
+            });
+
+            //将对象的值取出来
+            this.data.sizeValueArr = Object.values(this.data.sendServerSize);
+            console.log("sizeValueArr is ", this.data.sizeValueArr);
+            console.log("data is ", data);
+            console.log(data.size.size);
+            console.log(data.size.color);
+            if (data.uid !== null) {
+                let req = new Request(url, data, "POST", "text");
+                let res = await req.sendRequest();
+                console.log("res is ", res);
+                if (res.data.encode === 0) {
+                    //弹框
+                    wx.showToast({
+                        title: '加入购物车成功',
+                    });
+                    //让弹框不显示
+                    this.cancel();
+                }
+            } else {
+                wx.showToast({
+                    title: '请登录小程序!',
+                    icon: 'none'
+                })
+            }
+        }
+    },
+    //检查加入购物车或者立即购买的时候选择的数据是否合法
+    checkData: function (pid) {
+        let cancel = '';
+        if (arguments.length === 2) {
+            cancel = arguments[1];
+        }
+        let data = {
+            uid: app.uid,
+            pid: pid,
+            size: this.data.sendServerSize,
+            count: this.data.count,
+            source: 0,
+        }
+        console.log("typeArr is ", this.data.typeArr);
+        let typeA = this.data.typeArr;
+        let typeLen = this.data.typeArr.length;
+        console.log("data.size is ", this.data.sendServerSize);
+        let checkNum = 0;
+        for (let i = 0; i < typeLen; i++) {
+            console.log("i --->> ", `${typeA[i]}`);
+            console.log("--->>>", data.size[`${typeA[i]}`]);
+            console.log("--->>> <<<", data.size[`${typeA[i]}`] === undefined);
+            let hasThisProperty = data.size.hasOwnProperty(`${typeA[i]}`);
+            console.log("有没有改属性：", hasThisProperty);
+            if (hasThisProperty) {
+                checkNum++;
+            }
+        }
+        console.log('checkNum is ', checkNum);
+        if (checkNum === typeLen) {
+            console.log("所有类型都已经选择");
+            this.setData({
+                isOk: true
+            })
+        } else {
+            console.log("类型没有选择完")
+            this.setData({
+                isOk: false
+            })
+        }
+        console.log("isOk is ", this.data.isOk);
+        //规格没有选择正确或者是没有选择足够
+        if (!this.data.isOk && cancel !== 'cancel') {
+            if (this.data.goods.openstandard === 1) {
+                wx.showToast({
+                    title: '请选择规格',
+                    icon: 'none'
+                })
+            }
+        }
+        return data;
     },
 })

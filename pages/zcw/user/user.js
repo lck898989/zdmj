@@ -34,7 +34,11 @@ Page({
 
 
 
-
+  shouhou:function(){
+    wx.navigateTo({
+      url: '../../lck/saleService/saleService',
+    })
+  },
     //个人信息中的钱包按钮点击事件
     grxx_qb() {
         wx.navigateTo({
@@ -50,58 +54,74 @@ Page({
 
     //个人信息中的我的好友按钮点击事件
     grxx_wdhy() {
-        wx.navigateTo({
-            url: '../friends/friends',
-        })
+        app.ShortConnect(app.urlw + "Data/GetAllAgencys", {
+            uid: app.uid
+        }, "interJinjie");
+        // wx.navigateTo({
+        //     url: '../friends/friends',
+        // })
         console.log('你点击了我的好友')
+    },
+    wddd_dfk1(){
+        app.orderLoadPage = 1;
+        console.log(app.orderLoadPage);
+        app.orderIndexType = 0;
+        app.myorderArray = null;
+        app.ShortConnect(app.urlw + "Data/GetOrdersByUid", {
+            uid: app.uid,
+            page: app.orderLoadPage
+        }, "interorder1");
+        wx.navigateTo({
+            url: '../../MyOrder/MyOrder?indexs=0',
+        })
     },
     //我的订单中待付款按钮点击事件
     wddd_dfk() {
-        app.orderLoadPage = 1;
-        console.log(app.orderLoadPage);
-        app.orderIndexType = 0;
         app.myorderArray = null;
-        app.ShortConnect(app.urlw + "Data/GetOrdersByUid", {
+        app.orderLoadPage = 1;
+        app.ShortConnect(app.urlw + "Data/GetOrdersByUidAndState", {
             uid: app.uid,
-            page: app.orderLoadPage
+            page: 1,
+            state: 1
         }, "interorder1");
+      
+        app.orderIndexType = 1;
         wx.navigateTo({
-            url: '../../MyOrder/MyOrder',
+            url: '../../MyOrder/MyOrder?indexs=1',
         })
-
         console.log('你点击了待付款')
     },
-
     //我的订单中待收货按钮点击事件
     wddd_dsh() {
-        app.orderLoadPage = 1;
-        console.log(app.orderLoadPage);
-        app.orderIndexType = 0;
         app.myorderArray = null;
-        app.ShortConnect(app.urlw + "Data/GetOrdersByUid", {
+        app.orderLoadPage = 1;
+        app.ShortConnect(app.urlw + "Data/GetOrdersByUidAndState", {
             uid: app.uid,
-            page: app.orderLoadPage
+            page: 1,
+            state: 3
         }, "interorder1");
+
+        app.orderIndexType = 1;
         wx.navigateTo({
-            url: '../../MyOrder/MyOrder',
+            url: '../../MyOrder/MyOrder?indexs=2',
         })
         console.log('你点击了待收货')
     },
 
     //我的订单中已完成按钮点击事件
     wddd_ywc() {
+        app.myorderArray=null;
         app.orderLoadPage = 1;
-        console.log(app.orderLoadPage);
-        app.orderIndexType = 0;
-        app.myorderArray = null;
-        app.ShortConnect(app.urlw + "Data/GetOrdersByUid", {
+        app.ShortConnect(app.urlw + "Data/GetOrdersByUidAndState", {
             uid: app.uid,
-            page: app.orderLoadPage
+            page: 1,
+            state: 5
         }, "interorder1");
+        app.orderIndexType = 1;
         wx.navigateTo({
-            url: '../../MyOrder/MyOrder',
+            url: '../../MyOrder/MyOrder?indexs=3',
         })
-        console.log('你点击了已完成')
+        console.log('你点击了待收货')
     },
 
 
@@ -216,6 +236,24 @@ Page({
      * 用户点击右上角分享
      */
     onShareAppMessage: function() {
+      var shareObj = {
+        desc: '距离成功只差一步，求少侠出手！',
+        title: '分享商城',
+        path: 'pages/zcw/user/user',
+        success: function (res) {
 
+          // 转发成功之后的回调
+          if (res.errMsg == 'shareAppMessage:ok') {
+            console.log("???????2");
+          }
+        },
+        fail: function (res) {　　　　　　 // 转发失败之后的回调
+          console.log(res.errMsg + "???????");
+        },
+        complete: function (res) {
+          console.log(res.errMsg + "???????1");
+        }
+      }
+      return shareObj;
     }
 })

@@ -1,44 +1,62 @@
 <!--pages/zcw/friends/friends.wxml-->
-<view class='quanjubg'>
- <image class='tu1' src='{{srcp}}' style='height:auto' mode='widthFix'/>
-          <view class='kuangzi'>
-          <view class='index-manager' bindtap='addAdd1'>
+<view class='quanjubg' hidden="{{rebate}}">
+    <image class='tu1' src='{{srcp2}}' style='height:auto' mode='widthFix' />
+    <view class='kuangzi'>
+        <view class='index-manager' bindtap='addAdd1'>
             <view style='margin-left:34rpx;color:white;font-size:35rpx;font-weight: 900;'>
                 奖励规则
             </view>
-          </view>
-          <view class='index-manager2' bindtap='addAdd'  style='margin-left:34rpx;color:white;font-size:35rpx;font-weight: 900;'>
-             立即邀请好友
-          </view>
-          </view>
-    <view class='biaoti'><text space='nbsp' style='color:white'>已邀请好友  ({{friend.length}})</text></view>
-  <scroll-view class='guize' scroll-y >
-    <view wx:if='{{friend.length==0}}'class='wuhaoyou'>暂无任何邀请好友</view>
-    <view class='headWrapper' wx:else>
-        <view wx:for='{{friend}}' class='friendItem'>
-            <image src='{{item.head}}' style='width:90rpx;height:90rpx;border-radius:90rpx;border:4rpx solid #fff'></image>
-            <image class='level' src='{{imageHost}}{{item.level}}.png' style='width:52rpx;height:22rpx;'></image> 
         </view>
-        <view wx:for='{{friend}}' class='friendItem'>
-            <image src='{{item.head}}' style='width:90rpx;height:90rpx;border-radius:90rpx;border:4rpx solid #fff'></image>
-            <image class='level' src='{{imageHost}}{{item.level}}.png' style='width:52rpx;height:22rpx;'></image> 
-        </view>
-        <view wx:for='{{friend}}' class='friendItem'>
-            <image src='{{item.head}}' style='width:90rpx;height:90rpx;border-radius:90rpx;border:4rpx solid #fff'></image>
-            <image class='level' src='{{imageHost}}{{item.level}}.png' style='width:52rpx;height:22rpx;'></image> 
-        </view>
-        <view wx:for='{{friend}}' class='friendItem'>
-            <image src='{{item.head}}' style='width:90rpx;height:90rpx;border-radius:90rpx;border:4rpx solid #fff'></image>
-            <image class='level' src='{{imageHost}}{{item.level}}.png' style='width:52rpx;height:22rpx;'></image> 
+        <view class='index-manager2' bindtap='addAdd' style='margin-left:34rpx;color:white;font-size:35rpx;font-weight: 900;'>
+            立即邀请好友
         </view>
     </view>
+    <view class='biaoti'>
+        <text space='nbsp' style='color:white'>已邀请好友  ({{friend.length}})</text>
+    </view>
+    <view class='guize' wx:if='{{friend.length==0}}' style='height:{{heights}}px'>
+     <view  class='wuhaoyou'>暂无任何邀请好友</view>
+    </view>
+    <scroll-view class='guize' scroll-y  wx:if='{{friend.length>0}}' style='height:{{heights}}px'>
+        <!-- <view wx:if='{{friend.length==0}}' class='wuhaoyou'>暂无任何邀请好友</view> -->
+        <view class='headWrapper' >
+            <view wx:for='{{friend}}' class='friendItem'>
+                <image src='{{item.wxhead}}' style='width:90rpx;height:90rpx;border-radius:90rpx;border:4rpx solid #fff'></image>
+                <image class='level' wx:if='{{item.level==1}}' src='../../../resources/ico_Lv1.png' style='width:52rpx;height:22rpx;'></image>
+                <image class='level' wx:if='{{item.level==2}}' src='../../../resources/ico_Lv2.png' style='width:52rpx;height:22rpx;'></image>
+            </view>
+        </view>
+    </scroll-view>
     <view class='xialaxxwz' wx:if='{{friend.length>0}}'>下拉获取更多信息....</view>
-  </scroll-view>
 </view>
-<button class='yaoqingFriend'  hidden='{{buyBoxHidden}}'  open-type='share'>
-   <text class='woyaoText' style='font-size:29rpx;font-weight:900'>我要分享</text>
-   <image class='weixinImage' mode='widthFix' src="../../resources/icon_weixin(1).png"></image>
-   <text class='weixinText' style='font-size:23rpx;font-weight:900'>微信好友</text>
+<button class='yaoqingFriend' hidden='{{buyBoxHidden}}' open-type='share'>
+    <text class='woyaoText' style='font-size:29rpx;font-weight:900'>我要分享</text>
+    <image class='weixinImage' mode='widthFix' src="../../../resources/ico_WX.png"></image>
+    <text class='weixinText' style='font-size:23rpx;font-weight:900'>微信好友</text>
 </button>
 
-<view class='mask' animation='{{backAnimaData}}' hidden='{{buyBoxHidden}}' bindtap='pressNull' catchtouchmove='test' data-e='mask'></view>  
+<view class='mask' animation='{{backAnimaData}}' hidden='{{buyBoxHidden}}' bindtap='pressNull' catchtouchmove='test' data-e='mask'></view>
+
+
+<!--pages/zcw/yqfriend/yqfriend.wxml-->
+<view class='quanjubg1' hidden="{{shareHidden}}">
+    <image class='tu1' src='{{srcp2}}' style='height:auto' mode='widthFix' />
+    <view class='kuai'>
+        <image class='guize1' src='{{srcp1}}' style='height:auto' mode='widthFix' />
+        <view class='wenzi1'>亲爱的朋友:</view>
+        <view class='wenzi2'>{{userMsg}}！我正在组建一个优惠亲友团。</view>
+        <view class='wenzi3'>加入亲友团福利多多哦，你还在等什么呢？</view>
+        <view class='wenzi4'>别犹豫了，快来加入吧！</view>
+
+        <view class='wenzi5'>
+            <text class='nideText' style='font-size:24rpx'>你的小伙伴:</text>
+            <image class='shareimage' mode='widthFix' src='{{wechatImage}}'></image>
+            <text class='shareauthor' style='font-size:23rpx;font-weight:900'>{{wechatName}}</text>
+            <text class='shareData' style='font-size:16rpx;color:#898989;font-weight:900'>{{year}}月{{day}}日</text>
+        </view>
+    </view>
+    <button class='index-manager1' style='color:white;font-size:35rpx;' open-type='{{typeButton}}' bindtap='{{joinBotton}}' bindgetuserinfo='{{userInfo}}'>
+        {{buttonText}}
+    </button>
+</view>
+<view class='loadView' hidden='{{loadHidden}}'></view>

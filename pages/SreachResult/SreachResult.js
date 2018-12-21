@@ -22,6 +22,7 @@ Page({
         goodShop: [1, 2, 3, 4, 5],
         allproducts: [],
         allessays: [],
+        keywords:"",
     },
     /**
      * 生命周期函数--监听页面加载
@@ -210,13 +211,14 @@ Page({
                         }
                     }
                 }
-           
                 for (let i = 0; i <= res.data.allproducts.length - 1; i++) {
                     res.data.allproducts[i].head =   res.data.allproducts[i].head.split(",");
                 }
                 this.setData({
                     allproducts: res.data.allproducts,
                     allessays: res.data.allessays,
+                    leftArray:[],
+                    rightArray:[],
                 })
                 if (this.data.allproducts.length > 0 && this.data.allessays.length > 0) {
                     var allArray = [];
@@ -262,6 +264,8 @@ Page({
                             }
                         }
                     }
+                    console.log(JSON.stringify(this.data.leftArray) + "!!!!!!!!!!!!!!");
+                    console.log(JSON.stringify(this.data.rightArray) + "!!!!!!!!!!!!!!");
                
                 } else {
                     if (this.data.allproducts.length > 0) {
@@ -316,8 +320,7 @@ Page({
                                 }
                             }
                         }
-                        console.log(this.data.leftArray.length + "!!!!!!!!!!!!!!");
-                        console.log(JSON.stringify(this.data.rightArray) + "!!!!!!!!!!!!!!");
+                      
                     }
                 }
             }
@@ -325,7 +328,9 @@ Page({
 
         console.log(options.sreachText);
         this.setData({
-            sreachText: options.sreachText
+            sreachText: options.sreachText,
+            keywords: options.keywords,
+
         })
         for (let i = 0; i <= this.data.leftArray.length - 1; i++) {
             for (let j = 0; j <= this.data.rightArray.length - 1; j++) {
@@ -387,13 +392,10 @@ Page({
             this.setData({
                 rightArray: this.data.rightArray
             })
-
         }
-        console.log(event.detail);
-        console.log(event.currentTarget.dataset.id);
-        console.log(event.currentTarget.dataset.type);
+        console.log(JSON.stringify(this.data.leftArray) + "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+        console.log(JSON.stringify(this.data.rightArray) + "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
         //获取每张图片的高度
-
     },
 
     buyShop1: function (event) {
@@ -501,10 +503,11 @@ Page({
             var shopjson2 = encodeURIComponent(JSON.stringify(event.currentTarget.dataset.shopjson));
             // app.wenzhangShop = null;
             app.shopWenZhangJson=null;
+            app.wenzhangShop=null;
             app.ShortConnect(app.urlw + "Data/GetShopProductsByShopEssayShopid", {
                 shopid: event.currentTarget.dataset.shopid,
                 uid: app.uid
-            }, "turnShopWen");
+            }, "turnShopWen",function(res){});
             wx.navigateTo({
                 url: '../ShopActicle/ShopActicle?shopurl=' + event.currentTarget.dataset.shopurl + '&introduction=' + event.currentTarget.dataset.title + "&shopjson=" + shopjson2,
             })
@@ -515,26 +518,40 @@ Page({
      */
     pressParentType: function() {
         if (this.data.buttonParentType) {
+            console.log("333");
             this.setData({
                 buttonParentType: false
             })
         } else {
+           
             this.setData({
-                buttonParentType: true
+                buttonParentType: true,
             })
-
         }
     },
     pressTypeSon: function() {
         if (this.data.buttonsonType) {
+            console.log("111");
             this.setData({
                 buttonsonType: false
             })
+            app.ShortConnect(app.urlw + "Data/searchInfoByKeyWords", {
+                uid: app.uid,
+                page: 1,
+                type: 0,
+                keywords: this.data.keywords
+            }, "pressSreach");
+          
         } else {
+            app.ShortConnect(app.urlw + "Data/searchInfoByKeyWords", {
+                uid: app.uid,
+                page: 1,
+                type: 1,
+                keywords: this.data.keywords
+            }, "pressSreach");
             this.setData({
                 buttonsonType: true
             })
-
         }
     },
     onReady: function() {

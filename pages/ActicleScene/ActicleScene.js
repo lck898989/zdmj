@@ -213,9 +213,7 @@ Page({
                 })
                 app.ShortConnect(app.urlw + "Data/GetProductByPid", {
                     pid: this.data.wenzhangJson.pid
-                }, 'ActicleInterShop',function(r){
-                    console.log("r is ",r);
-                });
+                }, 'ActicleInterShop',function(r){});
                 wxParse.wxParse('article', 'html', article, self);
                 console.log(typeof this.data.wenzhangJson.authorurl + "、、、、、、、、、、、、、、、、、、、、");
                 console.log(JSON.stringify(this.data.essayhead) + "、、、、、、、、、、、、、、、、、、、、");
@@ -263,7 +261,7 @@ Page({
                     })
                     app.ShortConnect(app.urlw + "Data/GetProductByPid", {
                         pid: this.data.wenzhangJson.pid
-                    }, 'ActicleInterShop');
+                    }, 'ActicleInterShop',function(r){});
                     if (this.setSee) {
                         this.setSee(this.data.wenzhangJson);
                     }
@@ -384,18 +382,18 @@ Page({
      */
     onShow: function () {
         // app.buyNumber = this.data.shopNumber;
-        // if (this.data.wenzhangJson) {
-        //     app.ShortConnect(app.urlw + 'Data/EssaySee', {
-        //         eid: this.data.wenzhangJson.eid
-        //     }, "SeeWen");
-        // } else {
-        //     this.setSee = res => {
-        //         console.log("SeeWen1");
-        //         app.ShortConnect(app.urlw + 'Data/EssaySee', {
-        //             eid: res.eid
-        //         }, "SeeWen");
-        //     }
-        // }
+        if (this.data.wenzhangJson) {
+            app.ShortConnect(app.urlw + 'Data/EssaySee', {
+                eid: this.data.wenzhangJson.eid
+            }, "SeeWen");
+        } else {
+            this.setSee = res => {
+                console.log("SeeWen1");
+                app.ShortConnect(app.urlw + 'Data/EssaySee', {
+                    eid: res.eid
+                }, "SeeWen");
+            }
+        }
     },
 
     /**
@@ -457,7 +455,8 @@ Page({
                             // 转发成功之后的回调
                             if (res.errMsg == 'shareAppMessage:ok') {
                                 app.ShortConnect(app.urlw + "Data/EssayForword", {
-                                    eid: self.data.wenzhangJson.eid
+                                    eid: self.data.wenzhangJson.eid,
+                                  uid: app.uid
                                 }, "shareWenZhang");
                             }
                         },
@@ -480,8 +479,10 @@ Page({
                     if (res.errMsg == 'shareAppMessage:ok') {
                         console.log('shareAppMessage:ok');
                         app.ShortConnect(app.urlw + "Data/EssayForword", {
-                            eid: self.data.wenzhangJson.eid
+                            eid: self.data.wenzhangJson.eid,
+                            uid:app.uid
                         }, "shareWenZhang");
+                 
                     }
                 },
                 fail: function (res) {　　　　　　 // 转发失败之后的回调

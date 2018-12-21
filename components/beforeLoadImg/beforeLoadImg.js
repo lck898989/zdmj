@@ -13,9 +13,7 @@ Component({
         mode : String,
         styleClass : String,
         //是否存储进缓存
-        isGoCache : String,
-        //多少人看过该商品
-        seeCount : Number
+        isGoCache : String
     },
     lifetime : {
         created : function(){

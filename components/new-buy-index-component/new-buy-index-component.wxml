@@ -13,7 +13,7 @@
                     {{goods.pname}}
                 </view>
                 <view class='desc'>
-                    
+                    {{goods.abstract}}
                 </view>        
             </view>
             <view class='price-con'>

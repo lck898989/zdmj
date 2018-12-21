@@ -45,39 +45,39 @@
   justify-content: center;
   width: 400rpx;
   border-radius: 20rpx;
-    border-bottom: 1rpx solid #c9c9c9;
+    /* border-bottom: 1rpx solid #c9c9c9;
     border-top: 1rpx solid #c9c9c9;
     border-left: 1rpx solid #c9c9c9;
-    border-right: 1rpx solid #c9c9c9;
+    border-right: 1rpx solid #c9c9c9; */
 
 }
 .tixiananniu2{
   margin-top: 20rpx;
   position: relative;
-  background-color: #ecceff;
+  /* background-color: #ecceff; */
   display: flex;
   text-align: center;
   justify-content: center;
   width: 400rpx;
   border-radius: 20rpx;
-    border-bottom: 1rpx solid #c9c9c9;
+    /* border-bottom: 1rpx solid #c9c9c9;
     border-top: 1rpx solid #c9c9c9;
     border-left: 1rpx solid #c9c9c9;
-    border-right: 1rpx solid #c9c9c9;
+    border-right: 1rpx solid #c9c9c9; */
 }
 .tixiananniu3{
   margin-top: 20rpx;
   position: relative;
-  background-color: #ffaeae;
+  /* background-color: #ffaeae; */
   display: flex;
   text-align: center;
   justify-content: center;
   width: 400rpx;
   border-radius: 20rpx;
-    border-bottom: 1rpx solid #c9c9c9;
+    /* border-bottom: 1rpx solid #c9c9c9;
     border-top: 1rpx solid #c9c9c9;
     border-left: 1rpx solid #c9c9c9;
-    border-right: 1rpx solid #c9c9c9;
+    border-right: 1rpx solid #c9c9c9; */
 }
 .wenzi{
   padding: 27rpx 0rpx;

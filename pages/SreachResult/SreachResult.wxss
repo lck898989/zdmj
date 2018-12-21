@@ -167,6 +167,14 @@
     position: absolute;
     top: 56rpx;
     left: 314rpx;
+    width: 400rpx;
+    display: -webkit-box;
+    word-break: break-all;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    letter-spacing: 1px;
 }
 
 .shopPrice1 {
@@ -401,6 +409,8 @@
     position: absolute;
     left: 0;
     width: 32rpx;
+    height: 32rpx;
+    border-radius: 64rpx;
 }
 
 .authorView {
