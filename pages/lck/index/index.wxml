@@ -92,7 +92,7 @@
                 </view>
             </view>
         </view>
-        <view style="display:none">
+        <!-- <view style="display:none">
             <block wx:for="{{newAddEssays}}" wx:key='d'>
                 <!--商铺文章-->
                 <block wx:if='{{item.shopessayhead}}'>
@@ -103,25 +103,6 @@
                         <image wx:key="id" id="{{item.shopeid}}-{{index}}" src="{{imgHost}}{{item.shopessayhead[0]}}" bindload="onImageLoad" data-last='{{index === (newAddEssays.length - 1) ? true : false}}'></image>
                     </block>
                 </block>
-                <!--商品-->
-                <block wx:if='{{item.head}}'>
-                    <block wx:if='{{item.custom === 1 && item.customhead !==""}}'>
-                        <image wx:key="id" id="{{item.pid}}-{{index}}" src="{{imgHost}}{{item.customhead}}" bindload="onImageLoad" data-last='{{index === (newAddEssays.length - 1) ? true : false}}'></image>
-                    </block>
-                    <block wx:else>
-                        <image wx:key="id" id="{{item.pid}}-{{index}}" src="{{imgHost}}{{item.head[0]}}" bindload="onImageLoad" data-last='{{index === (newAddEssays.length - 1) ? true : false}}'></image>
-                    </block>
-                </block>
-                <block wx:if='{{item.essayhead}}'>
-                    <block wx:if='{{item.essaycustom === 1 && item.essaycustomhead !==""}}'>
-                        <image wx:key="id" id="{{item.eid}}-{{index}}" src="{{imgHost}}{{item.essaycustomhead}}" bindload="onImageLoad" data-last='{{index === (newAddEssays.length - 1) ? true : false}}'></image>
-                    </block>
-                    <block wx:else>
-                        <image wx:key="id" id="{{item.eid}}-{{index}}" src="{{imgHost}}{{item.essayhead[0]}}" bindload="onImageLoad" data-last='{{index === (newAddEssays.length - 1) ? true : false}}'></image>
-                    </block>
-                </block>
-            </block>
-        </view>
         <view class='scrollView'>
             <view class='lrWrapper'>
                 <view class='twoColCon'>

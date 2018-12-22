@@ -114,9 +114,7 @@ Page({
         //加载图片的数量
         loadingCount: 6,
         col1: [],
-        realCol1 : [],
         col2: [],
-        realCol2 : [],
         ratio: 2,
         col1H: 0,
         col2H: 0,
@@ -233,6 +231,7 @@ Page({
                 autoPlay : true
             });
         }
+        this.updateWeaterFall();
     },
     //获取百度地图返回的天气信息字符串
     getWeatherName : function(weatherInfo){
@@ -442,83 +441,39 @@ Page({
             MainImageArr: this.data.MainImageArr
         })
     },
-    onImageLoad: async function (e) {
-        let isLast = e.currentTarget.dataset.last;
-        console.log("isLast is ", isLast);
-        let imageId = Number(e.currentTarget.id.split('-')[0]);
-        let imageIndex = Number(e.currentTarget.id.split('-')[1]);
-        console.log("imageIndex is ",imageIndex);
-        let oImgW = e.detail.width;           //图片原始宽度
-        let oImgH = e.detail.height;          //图片原始高度
-        let imgWidth = this.data.imageWidth;  //图片设置的宽度
-        let scale = imgWidth / oImgW;         //比例计算
-        let imgHeight = oImgH * scale;        //自适应高度
-        //新请求的文章数据
-        let images = this.data.newAddEssays;
-        let imageLen = images.length;
-        let imageObj = null;
-        for (let i = 0; i < imageLen; i++) {
-            let img = images[i];
-            if (img.shopeid && img.shopeid === imageId) {
-                imageObj = img;
-                break;
-            } else if (img.pid && img.pid === imageId) {
-                imageObj = img;
-            } else if (img.eid && img.eid === imageId) {
-                imageObj = img;
-            }
-        }
-        if(imageObj !== null){
-            imageObj.height = imgHeight;
-            //记录下该图片是第几个被加载的
-            imageObj.index = imageIndex;
-            console.log("imageObj is ", imageObj);
-            let loadingCount = this.data.loadingCount - 1;
+    //创建瀑布流
+    updateWeaterFall : function(){
+        console.log("newAddEssays is ",this.data.newAddEssays);
+        console.log("dixio is ",this.data.ratio);
+        let addEssaysLen = this.data.newAddEssays.length;
+        for(let i = 0;i < addEssaysLen;i++){
+            let imgW = this.data.newAddEssays[i].width;
+            let imgH = this.data.newAddEssays[i].height;
+            let imgWidth = this.data.imageWidth;
+            let scale = imgWidth / imgW;
+            //自适应高度
+            let imgHeight = imgH * scale;
+            this.data.newAddEssays[i].height = imgHeight;
             let col1 = this.data.col1;
             let col2 = this.data.col2;
             //只要第一列的列高度小于第二列就往第一列放，否则往第二列放
             if (this.data.col1H <= this.data.col2H) {
                 this.data.col1H += imgHeight;
-                col1.push(imageObj);
+                col1.push(this.data.newAddEssays[i]);
             } else {
                 this.data.col2H += imgHeight;
-                col2.push(imageObj);
-            }
-            console.log("col1 is ", col1);
-            console.log("col1H is ", this.data.col1H);
-            console.log("col2 is ", col2);
-            console.log("col2H is ", this.data.col2H);
-            this.setData({
-                col1H: this.data.col1H,
-                col2H: this.data.col2H
-            })
-            let data = {
-                loadingCount: loadingCount,
-                col1: col1,
-                col2: col2,
-                loadOver: true
-            };
-            if (!loadingCount) {
-                data.images = [];
-            }
-            await this.setData(data, () => {
-                wx.hideLoading();
-            });
-            if (isLast) {
-                console.log("col1 is ", col1);
-                console.log("col2 is ", col2);
-                //渲染完图片之后将新加的文章添加到文章列表中去
-                // this.data.dataArray.push(...this.data.newAddEssays);
-                //对col1的每个元素进行排序和col2的每个元素进行排序
-                // this.setData({
-                //     col1     : this.data.col1,
-                //     col2     : this.data.col2,
-                //     loadOver : true
-                // },()=>{
-                //     wx.hideLoading();
-                // })
+                col2.push(this.data.newAddEssays[i]);
             }
         }
+        this.setData({
+            col1     : this.data.col1,
+            col2     : this.data.col2,
+            loadOver : true,
+            click    : false
+        },()=>{
+
+        })
+        console.log('in createWeaterFall newAddEssays is ',this.data.newAddEssays);
     },
     /**
      * 生命周期函数--监听页面初次渲染完成
@@ -580,14 +535,15 @@ Page({
      * 页面上拉触底事件的处理函数
      * 
      */
-    onReachBottom: function () {
+    onReachBottom: async function () {
         if(!this.data.click){
             this.data.page++;
             console.log("page is ",this.data.page);
             this.setData({
                 loadOver : false
             })
-            this.loadImages();
+            await this.loadImages();
+            this.updateWeaterFall();
         }
     },
 
@@ -699,8 +655,9 @@ Page({
         if(this.data.newAddEssays.length === 0){
             wx.hideLoading();
             this.setData({
-                loadOver : true,
-                loadText : '已经到底了~~o(>_<)o ~~'
+                loadOver     : true,
+                loadText     : '已经到底了~~o(>_<)o ~~',
+                newAddEssays : []
             });
         }else{
             console.log("id is ",id);
@@ -713,6 +670,7 @@ Page({
                 wx.hideLoading();
             })
         }
+        this.updateWeaterFall();
     },
     setEssayHeadImage : function(id){
         for (let j = 0; j < this.data.newAddEssays.length; j++) {
@@ -912,8 +870,9 @@ Page({
         if(res.length === 0){
             wx.hideLoading();
             this.setData({
-                loadText : '已经到底了~~o(>_<)o ~~',
-                loadOver : true
+                loadText     : '已经到底了~~o(>_<)o ~~',
+                loadOver     : true,
+                newAddEssays : []
             });
         }else{
             this.data.newAddEssays = res;
@@ -922,7 +881,6 @@ Page({
             console.log("当前的模拟数字是：", this.data.simulateTimes);
             this.setData({
                 newAddEssays : this.data.newAddEssays,
-                
             }, () => {
                 wx.hideLoading();
             })
