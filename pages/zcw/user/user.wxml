@@ -5,7 +5,7 @@
     <image src='{{arraytu.dh_dh}}' class='daohangtu' style='height:auto' mode='widthFix' />
     <image mode='widthFix' class="userImage" style='height:auto' src="{{userInfo.avatarUrl}}" />
     <text class="userName" style='font-size:46rpx;color:white;font-weight:900;'>{{userInfo.nickName}}</text>
-    <!-- <image src='{{arraytu.dh_ewm}}' class='ewm' style='height:auto' mode='widthFix' /> -->
+    <image src='{{arraytu.dh_ewm}}' class='ewm' style='height:auto' mode='widthFix' bindtap='createCode'/>
   </view>
   <!-- 个人信息 -->
   <view class='grxx'>
@@ -101,8 +101,13 @@
     <button class='jjsx' bindtap='fw_jjsx'>
       <image class='wdddtu2' src='{{arraytu.fw_jjsx}}' style='height:auto' mode='widthFix' />
       <view class='wddd_ziti'>
-        <text style='font-size:23rpx;color:#7d7d7d'>即将上线</text>
+        <text style='font-size:23rpx;color:#7d7d7d'>帮助说明</text>
       </view>
     </button>
   </view>
+  <canvas canvas-id='qrcode-canvas' style='width:600rpx;height:400rpx;' class='code-canvas'>
+     <!-- <image src='{{url}}'></image> -->
+  </canvas>
+  <!-- <image src='{{url}}'></image> -->
+  <!-- <image src='https://shop.ykplay.com/Data/create_qrcode?url=https://shop.ykplay.com/BMS/qrcodeInfo&shopoid=6&verificationcode=400915045745' style='width:300rpx;height:300rpx;'></image> -->
 </view>

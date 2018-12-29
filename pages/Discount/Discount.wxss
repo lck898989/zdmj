@@ -1,0 +1,146 @@
+/* pages/Discount/Discount.wxss */
+
+.shoppingMsg {
+    display: flex;
+    align-items: center;
+    position: relative;
+    width: 750rpx;
+    height: 100rpx;
+}
+
+/* .nullView1 {
+    position: absolute;
+    width: 750rpx;
+    height: 2px;
+} */
+
+.shoppingImage {
+    position: absolute;
+    width: 84rpx;
+    border-radius: 8px;
+    left: 22rpx;
+}
+
+.shoppingName {
+    position: absolute;
+    left: 127rpx;
+    top: 13rpx;
+    color: #fff;
+}
+
+.shoppingType {
+    position: absolute;
+    top: 30rpx;
+    left: 325rpx;
+    color: #fff;
+}
+
+.background {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+}
+
+.text1 {
+    position: absolute;
+    width: 750rpx;
+    top: 187rpx;
+    text-align: center;
+    letter-spacing: 5rpx;
+}
+
+.text2 {
+    position: absolute;
+    top: 235rpx;
+    width: 750rpx;
+    text-align: center;
+    letter-spacing: 5rpx;
+}
+
+.text4 {
+    position: absolute;
+    top: 466rpx;
+    width: 422rpx;
+    height: 72rpx;
+    left: 163rpx;
+    border-bottom: 3rpx solid #b964d8;
+}
+.buttonsure{
+    position: absolute;
+    top: 629rpx;
+    width: 500rpx;
+    height: 94rpx;
+    left: 125rpx;
+    background-color: #b964d8;
+    color: #ffffff;
+    display: flex;
+    justify-content: center;
+     align-items: center;
+     border-radius: 10rpx;
+}
+.text3 {
+    position: absolute;
+    top: 288rpx;
+    text-align: center;
+    width: 750rpx;
+    height: 40rpx;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+.input1 {
+    position: absolute;
+    width: 330rpx;
+    right: 0;
+    top: 0;
+}
+
+.fuhao {
+    position: absolute;
+    top: 20rpx;
+    left: 13rpx;
+}
+
+.leftText {
+    letter-spacing: 5rpx;
+}
+
+.rightText {
+    letter-spacing: 5rpx;
+}
+
+.zhe {
+    display: flex;
+    align-items: flex-end;
+    position: relative;
+    top: 7rpx;
+    letter-spacing: 5rpx;
+    padding: 0rpx 9rpx 0rpx 9rpx;
+
+}
+
+.shu {
+    position: absolute;
+    top: 31rpx;
+    width: 2rpx;
+    height: 28rpx;
+    background-color: #fff;
+    left: 385rpx;
+}
+
+.shoppingAdress1 {
+    position: absolute;
+    left: 127rpx;
+    color: #fff;
+    bottom: 15rpx;
+}
+
+.shoppingAdress {
+    position: absolute;
+    top: 31rpx;
+    left: 400rpx;
+    color: #fff;
+}

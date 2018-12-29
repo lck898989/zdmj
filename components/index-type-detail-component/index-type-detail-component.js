@@ -13,6 +13,10 @@ Component({
         shadow : {
             type  : String,
             value : '#d0d0d0'
+        },
+        isShowUser : {
+            type  : Boolean,
+            value : false
         }
     },
     ready : function(){

@@ -1,6 +1,7 @@
 /* pages/lck/cart/cart.wxss */
 page{
     background-color: #f2f2f2;
+    position: relative;
 }
 .mask{
   width: 750rpx;
@@ -16,6 +17,7 @@ page{
 .page-con{
     position: relative;
     overflow: hidden;
+    padding-bottom: 100rpx;
 }
 .page-con-showbuy{
     height: 100vh;
@@ -157,11 +159,9 @@ page{
     margin-right: 10rpx;
 }
 .settle-con{
-    width: 100%;
-    height: 60rpx;
-    justify-self: flex-end;
-    padding: 20rpx 0rpx;
-    margin-top: 10rpx;
+    width: 750rpx;
+    height: 100rpx;
+    margin-top: 100rpx;
     background-color:#fff;
     display: flex;
     flex-wrap: nowrap;
@@ -169,7 +169,7 @@ page{
     flex-direction: row;
     align-items: center;
     position: fixed;
-    bottom: 0px;
+    bottom: 0rpx;
 }
 .left-con{
     display: flex;

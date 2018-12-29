@@ -2,14 +2,14 @@
 <view class='mask' animation='{{backAnimaData}}' hidden='{{buyBoxHidden}}' catchtouchmove='test' data-e='mask'></view>
 <import src="/wxParse/wxParse.wxml" />
 <scroll-view class='gundongView' scroll-y='true' bindscroll='gunhdong'>
-    <swiper class="shoppingImageView" bindchange='changeSwiper' scroll-x="true" autoplay='true' circular='true'>
+    <swiper class="shoppingImageView" bindchange='changeSwiper' style='height:{{heightSwiper[index-1]}}rpx' scroll-x="true" autoplay='true' circular='true'>
         <swiper-item class="activityViewSon" wx:for="{{wenzhangJson.essayhead}}" bindtap='PressSwiper' id="{{index}}">
-            <image src="{{url+item}}" class="imageActivity"></image>
+            <image src="{{url+item}}" class="imageActivity" mode='widthFix' data-id='{{index}}' bindload='loadImage'></image>
         </swiper-item>
+        <view class='indexLun' style='font-size:22rpx'>
+            {{index}}/{{wenzhangJson.essayhead.length}}
+        </view>
     </swiper>
-    <view class='indexLun' style='font-size:22rpx'>
-        {{index}}/{{wenzhangJson.essayhead.length}}
-    </view>
     <view class='shoppingTitleView'>
         <text class='titleText' style='font-size:32rpx;font-weight:900'>{{wenzhangJson.title}}</text>
         <view class='authorView'>
@@ -20,7 +20,7 @@
             <text class='seeNumber' style='font-size:20rpx;font-weight:900'>{{wenzhangJson.see}}</text>
         </view>
     </view>
-    <view class='authorTextView'>
+     <view class='authorTextView'>
         <template is="wxParse" data="{{wxParseData:article.nodes}}" />
     </view>
     <!-- <view class='nullView' style='background:#ffffff'></view> -->
@@ -43,17 +43,20 @@
             <image class='dayu' mode='widthFix' style='width:11rpx' src='../../resources/ico_arrow.png'></image>
         </view>
     </view>
-
     <view class='nullView5' style='color:#0d0909'></view>
     <view class='buyView'>
-        <view class='backIndex' bindtap='turnIndex'>
-            <image class='backImage' style='height:auto' src='../../resources/btn_main_0.png' mode='widthFix'></image>
-            <text class='backtext' style='font-size:18rpx'>回首页</text>
-            <view class='nullView8'></view>
+        <view class='backIndexparent'>
+            <view class='backIndex' bindtap='turnIndex'>
+                <image class='backImage' style='height:auto' src='../../resources/btn_main_1.png' mode='widthFix'></image>
+                <text class='backtext' style='font-size:18rpx'>回首页</text>
+                <view class='nullView8'></view>
+            </view>
         </view>
         <view class='sharePrice'>
-            <text class='huodeText' style='font-size:28rpx;font-weight:900;color:#878787'>分享可获得</text>
-            <text class='getPriceText' style='font-size:30rpx;font-weight:900;color:#f39800'>￥{{wenzhangJson.rebate}}</text>
+            <view class='sharePrice1'>
+                <text class='huodeText' style='font-size:28rpx;font-weight:900;color:#878787'>分享可获得</text>
+                <text class='getPriceText' style='font-size:30rpx;font-weight:900;color:#f39800'>￥{{wenzhangJson.rebate}}</text>
+            </view>
         </view>
         <button class='shareView' open-type='share' style='font-size:32rpx;font-weight:900;color:#ffffff'>马上分享</button>
         <view class='buy' style='font-size:32rpx;font-weight:900;color:#ffffff' bindtap='buy'>

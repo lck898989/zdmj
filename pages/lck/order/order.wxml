@@ -42,7 +42,10 @@
         </view>
         <view class='saleaf-text'>
             <image src='https://shopfile.ykplay.com/resources/ico_type_1.png' style='width:30rpx;height:30rpx;'></image>
-            <view class='storeName'>
+            <view class='storeName'  wx:if='{{interView=="wenzhang"}}'>
+            {{shopname}}
+            </view>
+            <view class='storeName' wx:else>
                 指点迷津-自营店
             </view>
         </view>
@@ -54,7 +57,10 @@
                         <view class='top-text'>
                             <text>{{item.pname}}</text>
                         </view>
-                        <view class='type-wrapper'>
+                        <view class='type-wrapper1'  space='ensp'wx:if='{{item.iswenzhang}}'>
+                        有效期: 至{{item.endtime}}
+                        </view>
+                        <view class='type-wrapper' wx:else>
                             <text wx:for='{{item.size}}'>{{item}}</text>
                         </view>
                         <view class='bottom-text'>

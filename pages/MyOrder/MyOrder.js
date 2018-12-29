@@ -17,6 +17,7 @@ Page({
         isPull: false,
         //判断是否有数据
         isHas: true,
+        
         text: "未确认收货",
         timeObject: [],
         oidObject: [],
@@ -68,16 +69,13 @@ Page({
             console.log("???????????????????1");
             for (var i = 0; i <= app.myorderArray.length - 1; i++) {
                 for (var j = 0; j <= app.myorderArray[i].orderItems[0].length - 1; j++) {
-                    // app.myorderArray[i].orderItems[0][j].product.size = JSON.parse(app.myorderArray[i].orderItems[0][j].product.size);                  
+                    // app.myorderArray[i].orderItems[0][j].product.size = JSON.parse(app.myorderArray[i].orderItems[0][j].product.size)                
                     app.myorderArray[i].orderItems[0][j].standard = app.myorderArray[i].orderItems[0][j].standard.replace("|", "  ");
                     if (typeof app.myorderArray[i].orderItems[0][j].product.head=="string")
                     {
                         var c = app.myorderArray[i].orderItems[0][j].product.head.split(",");
-
                         app.myorderArray[i].orderItems[0][j].product.head = c;
-
                     }
-                 
                     let size = Object.values(JSON.parse(app.myorderArray[i].orderItems[0][j].product.size));
                     let size1="";
                     for (let k = 0; k <= size.length-1;k++)
@@ -85,6 +83,14 @@ Page({
                         size1 = size1 + size[k];
                     }
                     app.myorderArray[i].orderItems[0][j].product.size = size1;
+                    if (app.myorderArray[i].orderItems[0][j].product.size.includes("默认"))
+                    {
+                        app.myorderArray[i].orderItems[0][j].product.isMoren=false;
+                    }
+                    else
+                    {
+                        app.myorderArray[i].orderItems[0][j].product.isMoren = true;
+                    }
                     console.log();
                 }
             }
@@ -136,13 +142,24 @@ Page({
         } else {
             app.setMyOrder = res => {
                 console.log("???????????????????2");
-            
                 for (var i = 0; i <= res.data.orders.length - 1; i++) {
                     for (var j = 0; j <= res.data.orders[i].orderItems[0].length - 1; j++) {
                         // res.data.orders[i].orderItems[0][j].product.size = JSON.parse(res.data.orders[i].orderItems[0][j].product.size);
                         res.data.orders[i].orderItems[0][j].standard = res.data.orders[i].orderItems[0][j].standard.replace("|", "  ");
                         var c = res.data.orders[i].orderItems[0][j].product.head.split(",");
                         res.data.orders[i].orderItems[0][j].product.head = c;
+                        let size = Object.values(JSON.parse(res.data.orders[i].orderItems[0][j].product.size));
+                        let size1 = "";
+                        for (let k = 0; k <= size.length - 1; k++) {
+                            size1 = size1 + size[k];
+                        }
+                        res.data.orders[i].orderItems[0][j].product.size = size1;
+                        if (res.data.orders[i].orderItems[0][j].product.size.includes("默认")) {
+                            res.data.orders[i].orderItems[0][j].product.isMoren = false;
+                        }
+                        else {
+                            res.data.orders[i].orderItems[0][j].product.isMoren = true;
+                        }
                         console.log();
                     }
                 }
@@ -189,7 +206,7 @@ Page({
                     orderArray1.push(res.data.orders[i]);
                 }
                 this.setData({
-                    orderArray: orderArray1,
+                    orderArray: orderArray1, 
                     isPull: false,
                     isHas: false
                 })
@@ -203,11 +220,9 @@ Page({
                 console.log(JSON.stringify(this.data.orderArray));
                 console.log(JSON.stringify(this.data.orderArray) + "==================================");
             }
-         
             app.orderPage = res.data.pages;
             wx.hideLoading();
         }
-    
     },
     timeFormat(param) { //小于10的格式化函数
         return param < 10 ? '0' + param : param;
@@ -446,7 +461,7 @@ Page({
             // })
         } else {
             app.orderMsg.ordernumber = event.currentTarget.dataset.ordernumber;
-            app.orderMsg.ordertime = event.currentTarget.dataset.ordernumber;
+            app.orderMsg.ordertime = event.currentTarget.dataset.ordertime;
             app.orderMsg.paytime = event.currentTarget.dataset.paytime;
             app.orderMsg.phy_number = event.currentTarget.dataset.phy_number;
             app.orderMsg.shopmsg = event.currentTarget.dataset.shopmsg;
@@ -458,7 +473,6 @@ Page({
                 phy_number: event.currentTarget.dataset.wustate
             }, "getShopDi");
         }
-
     },
     /**
      * 生命周期函数--监听页面初次渲染完成

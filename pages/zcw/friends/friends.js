@@ -313,10 +313,13 @@ Page({
         } else {
             shareUid = this.data.shareParentUid;
         }
+        let srcp2 = this.data.srcp2;
         console.log(shareUid+"==============");
         var shareObject = {
+        
             desc: '距离成功只差一步，求少侠出手！',
             title: '分享商城',
+            imageUrl: srcp2,
             path: '/pages/zcw/friends/friends?uid=' + shareUid + "&nickName=" + app.globalData.userInfo.nickName + "&avatarUrl=" + app.globalData.userInfo.avatarUrl + "&year=" + year.toString() + "&day=" + day.toString(),
             // path: 'pages/zcw/user/user',
             success: function(res) {
@@ -334,7 +337,5 @@ Page({
             }
         }
         return shareObject;
-
-
     }
 })

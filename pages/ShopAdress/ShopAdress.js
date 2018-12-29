@@ -24,6 +24,7 @@ Page({
           orderJSON: app.orderMsg,
           url: app.urlw3
       })
+      console.log(JSON.stringify(this.data.orderJSON));
       console.log(this.data.shopAdressArray);
     //   app.ShortConnect(app.urlw +"Data/InquireLogisticsByNumber",{
     //       phy_number: this.data.shopAdressArray[1].phy_number

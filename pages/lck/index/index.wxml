@@ -23,13 +23,13 @@
                     </view>
                 </view>
             </view>
-            <view class='week'> 
+            <view class='week'>
                 <text>{{weatherData.date}}</text>
             </view>
         </view>
-        <view class='search-con'>
-            <view class='input-con'>
-                <input class='input' placeholder='搜索...' bindfocus='enterSearch'></input>
+        <view class='search-con' bindtap='enterSearch'>
+            <view class='input-con input' bindtap='enterSearch'>
+                搜索...
             </view>
             <image class='search-icon' src='../../../resources/search_icon.png' style='width:30rpx;height:30rpx;'></image>
         </view>
@@ -108,12 +108,12 @@
                 <view class='twoColCon'>
                     <view class='left-con' style='width:342rpx;margin-right:18rpx;'>
                         <block wx:for='{{col1}}' wx:key='d'>
-                            <index-type-detail-component easyItem='{{item}}' bindenterDetail='enterDetail'></index-type-detail-component>
+                            <index-type-detail-component easyItem='{{item}}' bindenterDetail='enterDetail' isShowUSer='{{isShowUser}}'></index-type-detail-component>
                         </block>
                     </view>
                     <view class='right-con' style='width:342rpx;'>
                         <block wx:for='{{col2}}' wx:key='e'>
-                            <index-type-detail-component easyItem='{{item}}'></index-type-detail-component>
+                            <index-type-detail-component easyItem='{{item}}' isShowUser='{{isShowUser}}'></index-type-detail-component>
                         </block>
                     </view>
                 </view>

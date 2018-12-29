@@ -6,6 +6,7 @@ Page({
      * 页面的初始数据
      */
     data: {
+        pname:null,
         number: null,
         products: null,
         state: null,
@@ -23,10 +24,12 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function(options) {
-        if (options.type == "3") {
+
+        if (options.type == "3" || options.type == "1") {
            this.setData({
                products: JSON.parse(options.products),
            })
+            console.log(JSON.stringify(this.data.products));
         }
         this.setData({
             money1: parseFloat(options.rebate),
@@ -35,6 +38,7 @@ Page({
             detailtype: parseInt(options.detailtype),
             state: parseInt(options.state),
             number: options.number,
+     
 
         })
 

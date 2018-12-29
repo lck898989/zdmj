@@ -7,9 +7,11 @@ Page({
      * 页面的初始数据
      */
     data: {
+        scanCode:[],
+        heightSwiper:[],
         bottomView: true,
         url: "",
-        activityImage: ["https://share.ykplay.com/images/Index/a微信图片_20180927164654.jpg", "https://share.ykplay.com/images/Index/a微信图片_20180927164654.jpg"],
+        activityImage: [],
         index: 1,
         shop: {
             "article": "<p>&nbsp;&nbsp;&nbsp;&nbsp;威锋网无法安达市大大大多啊大大多安达市大大多撒啊敖德萨多撒多撒奥大多</p><p><img src=\"https://shop.ykplay.com/images/ueditor/1058932542901719040.jpg\" title=\"\" alt=\"TB1uZAahwHqK1RjSZJnXXbNLpXa-440-180.jpg\"/></p><p>&nbsp;&nbsp;&nbsp;&nbsp;不买都不好意思。安达市大所大所大大所多所</p>"
@@ -38,6 +40,20 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
+        this.setData({
+            scanCode:[4,2,9]
+        })
+        // app.ShortConnect(app.urlw+"Data/");
+
+        // scene 需要使用 decodeURIComponent 才能获取到生成二维码时传入的 scene
+        if (app.isSao)
+        {   
+            this.setData({
+
+            })
+            scene = decodeURIComponent(options.scene);
+            console.log(JSON.stringify(scene)+"===========================");
+        }
         // app.ShortConnect(app.urlw+"Data/AddShopOrder",{
         // },);
         this.setData({
@@ -46,10 +62,13 @@ Page({
         var shopmsg2 = JSON.parse(decodeURIComponent(options.shopjson));
         options.shopurl = options.shopurl.split(",");
         if (app.shopWenZhangJson && app.wenzhangShop) {
-            console.log("11111111111111111111111111111d");
             if (app.wenzhangShop.length > 0) {
                 for (let i = 0; i <= app.wenzhangShop.length - 1; i++) {
-                    app.wenzhangShop[i].head = app.wenzhangShop[i].head.split(",");
+                    if (typeof app.wenzhangShop[i].head=="string")
+                    {
+                        app.wenzhangShop[i].head = app.wenzhangShop[i].head.split(",");
+                    }
+                  
                     app.wenzhangShop[i].isOpen = false;
                 }
                 this.setData({
@@ -70,6 +89,7 @@ Page({
                 shopHead: options.shopurl,
                 shopIntroduction: options.introduction,
             })
+            console.log(JSON.stringify(this.data.shopJSon)+"11111111111111111111111111111d");
             var article = this.data.shopJSon1.txt;
             wxParse.wxParse('article', 'html', article, this);
 
@@ -77,10 +97,13 @@ Page({
         } else {
 
             app.setwenzhangShop = res => {
-                console.log("11111111111111111111111111111f");
                 if (res.data.shopproducts.length > 0) {
                     for (let i = 0; i <= res.data.shopproducts.length - 1; i++) {
-                        res.data.shopproducts[i].head = res.data.shopproducts[i].head.split(",");
+                        if (typeof res.data.shopproducts[i].head =="string")
+                        {
+                            res.data.shopproducts[i].head = res.data.shopproducts[i].head.split(",");
+                        }
+                    
                         res.data.shopproducts[i].isOpen = false;
                     }
                     this.setData({
@@ -88,6 +111,7 @@ Page({
                         onePlice: res.data.shopproducts[0].shopprice,
                         chooseShop: res.data.shopproducts[0]
                     })
+                   
 
                 }
 
@@ -104,15 +128,11 @@ Page({
                     shopHead: options.shopurl,
                     shopIntroduction: options.introduction,
                 })
+                console.log(JSON.stringify(this.data.shopJSon) + "11111111111111111111111111111f");
                 var article = this.data.shopJSon1.txt;
                 wxParse.wxParse('article', 'html', article, this);
-
-
-
             }
         }
-
-
     },
     gunhdong: function (event) {
         if (parseInt(event.detail.scrollTop) > 10) {
@@ -151,6 +171,16 @@ Page({
             })
         }
     },
+    loadImage: function (event) {
+        let heightSwiper = this.data.heightSwiper;
+        //计算此图片加载完是的高度
+        let heightImage = 750 * event.detail.height / event.detail.width;
+        heightSwiper[event.target.dataset.id] = heightImage;
+        console.log(JSON.stringify(heightSwiper) + "=========================");
+        this.setData({
+            heightSwiper: heightSwiper
+        })
+    },
     changeSwiper: function (event) {
         this.setData({
             index: parseInt(event.detail.current) + 1,
@@ -168,45 +198,51 @@ Page({
      * 生命周期函数--监听页面初次渲染完成
      */
     pressSure: function (event) {
-        // let data = {
-        //     uid: app.uid,
-        //     pid: this.data.wenzhangJson.pid,
-        //     size: this.data.wenzhangJson.selectsize,
-        //     count: this.data.shopNumber,
-
-        // }
-        // if (app.isShare) {
-        //     data.source = 2
-        // }
-        // else {
-        //     data.source = 0;
-        // }
-        // data.head = this.data.wenzhangJson.product_head[0];
-        // data.pname = this.data.wenzhangJson.product_name;
-        // data.price = this.data.wenzhangJson.product_price * this.data.shopNumber;
-        // let orderA = [];
-        // orderA.push(data);
-        app.ShortConnect(app.urlw + "Data/AddShopOrder", {
-            shopid: this.data.shopJSon.shopid.toString(),
-            shoppid: this.data.chooseShop.shoppid.toString(),
-            pcount: this.data.shopNumber.toString(),
+        
+        let data = {
             uid: app.uid,
-            buysource: 0,
-            fromuid: 0,
-            shopessayuid: this.data.shopJSon1.shopauthoruid.toString(),
-            shopeid: this.data.shopJSon1.shopeid.toString()
-        }, "pay");
-        console.log(JSON.stringify(this.data.shopJSon));
-        // if (app.isShare) {
-        //     wx.navigateTo({
-        //         url: '../lck/order/order?interSource=2&shoppid=' + this.data.chooseShop.shoppid.toString() + "&pcount=" + this.data.shopNumber.toString() + "&shopeid=" + this.data.shopJSon1.shopeid.toString() + "&shopid=" + this.data.shopJSon.shopid.toString() + "&shopessayuid=" + this.data.shopJSon1.shopauthoruid.toString(),
-        //     });
-        // }
-        // else {
-        //     wx.navigateTo({
-        //         url: '../lck/order/order?interSource=0&shoppid=' + this.data.chooseShop.shoppid.toString() + "&pcount=" + this.data.shopNumber.toString() + "&shopeid=" + this.data.shopJSon1.shopeid.toString() + "&shopid=" + this.data.shopJSon.shopid.toString() + "&shopessayuid=" + this.data.shopJSon1.shopauthoruid.toString(),
-        //     });
-        // }
+          
+            count: this.data.shopNumber,
+
+        }
+        if (app.isShare) {
+            data.source = 2
+        }
+        else {
+            data.source = 0;
+        }
+        let endtime = this.data.chooseShop.endtime;
+        endtime = endtime.split(" ");
+        data.endtime = endtime[0];
+        data.head = this.data.chooseShop.head[0];
+        data.pname = this.data.chooseShop.shoppname;
+        data.price = this.data.onePlice * this.data.shopNumber;
+        data.iswenzhang=true;
+        let orderA = [];
+        orderA.push(data);
+        wx.setStorageSync('orderArray', orderA);
+        // app.ShortConnect(app.urlw + "Data/AddShopOrder", {
+        //     shopid: this.data.shopJSon.shopid.toString(),
+        //     shoppid: this.data.chooseShop.shoppid.toString(),
+        //     pcount: this.data.shopNumber.toString(),
+        //     uid: app.uid,
+        //     buysource: 0,
+        //     fromuid: 0, 
+        //     shopessayuid: this.data.shopJSon1.shopauthoruid.toString(),
+        //     shopeid: this.data.shopJSon1.shopeid.toString()
+        // }, "pay");
+
+        // console.log(JSON.stringify(this.data.shopJSon));
+        if (app.isShare) {
+            wx.navigateTo({
+                url: '../lck/order/order?interSource=2&shoppid=' + this.data.chooseShop.shoppid.toString() + "&pcount=" + this.data.shopNumber.toString() + "&shopeid=" + this.data.shopJSon1.shopeid.toString() + "&shopid=" + this.data.shopJSon.shopid.toString() + "&essayuid=" + this.data.shopJSon1.shopauthoruid.toString() + "&pcount=" + this.data.shopNumber.toString() + "&shopname=" + this.data.shopJSon.shopname,
+            });
+        }
+        else {
+            wx.navigateTo({
+                url: '../lck/order/order?interSource=0&shoppid=' + this.data.chooseShop.shoppid.toString() + "&pcount=" + this.data.shopNumber.toString() + "&shopeid=" + this.data.shopJSon1.shopeid.toString() + "&shopid=" + this.data.shopJSon.shopid.toString() + "&essayuid=" + this.data.shopJSon1.shopauthoruid.toString() + "&pcount=" + this.data.shopNumber.toString() + "&inter=wenzhang" + "&shopname=" + this.data.shopJSon.shopname,
+            });
+        }
     },
 
     pressDetail: function (event) {
@@ -226,7 +262,13 @@ Page({
     onReady: function () {
 
     },
-
+ 
+    turnDazhe:function(){
+        console.log(JSON.stringify(this.data.shopJSon));
+        wx.navigateTo({
+            url: '../Discount/Discount?shopid=' + this.data.shopJSon.shopid.toString() + "&shopJSon=" + JSON.stringify(this.data.shopJSon),
+        })       
+    },
     /**
      * 生命周期函数--监听页面显示
      */

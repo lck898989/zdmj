@@ -1,27 +1,27 @@
 <!--pages/HistroyShare/HistroyShare.wxml-->
 <scroll-view class='all' scroll-y='true'>
     <view class='wrap'>
-        <view class='data'>
-            <view class='date-show'>
+        <view class='data' hidden='{{isHidden}}'>
+            <view class='date-show' style='font-weight:900;color:#000000'>
                 {{year}}年{{month}}月
-                <view class='rt-arrow'  wx:if='{{ismonth==false}}'bindtap='nextMonth'>
+                <view class='rt-arrow'  wx:if='{{ismonth==false}}'bindtap='nextMonth' style='font-weight:900;color:#000000' >
                     →
                 </view>
                   <view class='rt-arrow' style='color:#c9c9c9' wx:else>
                     →
                 </view>
-                <view class='lt-arrow' bindtap='lastMonth'>
+                <view class='lt-arrow' bindtap='lastMonth' style='font-weight:900;color:#000000'>
                     ←
                 </view>
             </view>
         </view>
         <view class='header'>
-            <view wx:for='{{date}}' class='weekMark'>{{item}}
+            <view wx:for='{{date}}' class='weekMark' style='color:#c9c9c9;font-weight:900'>{{item}}
                 <view></view>
             </view>
         </view>
         <view class='date-box'>
-            <view wx:for='{{dateArr}}' data-date='{{item.isToday}}' id='{"nyr":"{{item.isToday}}","riqi":"{{item.dateNum}}","month":"{{item.month}}","year":"{{item.year}}","istrue":"{{item.istrue}}","index":"{{index}}"}' bindtap='dianjidata'>
+            <view wx:for='{{dateArr}}' wx:if='{{item.isShow}}' data-date='{{item.isToday}}' id='{"nyr":"{{item.isToday}}","riqi":"{{item.dateNum}}","month":"{{item.month}}","year":"{{item.year}}","istrue":"{{item.istrue}}","index":"{{index}}"}' bindtap='dianjidata'>
                 <view class='date-head'>
                     <view class='number' wx:if='{{item.isToday==isToday}}' style='color:#ffffff;background-color:#da91f5;'>{{item.dateNum}}</view>
                     <view class='number' wx:elif='{{index==index1}}' style='color:#ffffff;background-color:#863bb7;'>{{item.dateNum}}</view>
@@ -33,14 +33,17 @@
         </view>
     </view>
     <view class='nullView'>
-        <view class='whiteView'>
+        <view class='whiteView' bindtap='shousuoBox'>
             <image class='icon' src='../../resources/arrow-bottom.png' style='height:auto' mode='widthFix'></image>
         </view>
     </view>
     <view class='nullView1'></view>
-    <view class='dataParent' wx:for='{{dete}}'>
+    <view class='nullData' wx:if='{{hiddenData}}'>
+       <text  style='font-size:26rpx;color:#959595'>暂无商品</text>
+    </view>
+    <view class='dataParent' wx:for='{{dete}}' wx:if='{{hiddenData==false}}'>
         <view class='data1'>
-            <text class='data1Text' style='font-size:20rpx;'>{{item.time}}</text>
+            <text class='data1Text' style='font-size:20rpx;color:#959595;font-weight:900'>{{item.time}}</text>
         </view>
         <view class='centerView'>
             <view class='leftView'>

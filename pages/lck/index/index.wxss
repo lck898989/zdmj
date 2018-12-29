@@ -49,8 +49,10 @@
     border: 2rpx solid #959595;
     border-radius: 50rpx;
     height: 50rpx;
+    line-height: 50rpx;
     font-size: 25rpx;
     padding-left: 75rpx;
+    color:#959595;
 }
 .search-icon{
     position: absolute;
@@ -177,6 +179,7 @@ swiper{
     border-bottom:10rpx solid #da91f5;
     font-weight: bold;
     display: inline-block;
+    color: #da91f5;
 }
 .type-easy{
     padding: 0rpx 23rpx;

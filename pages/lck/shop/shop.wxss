@@ -1,6 +1,7 @@
 /* pages/lck/play/play.wxss */
 page{
     background: #fff;
+    width:750rpx;
 }
 .mask{
   width: 750rpx;
@@ -45,12 +46,14 @@ view{
     justify-content: flex-start;
 }
 .title-con{
+    width:714rpx;
     position: relative;
     padding: 15rpx 18rpx;
     z-index: 25;
     background: #fff;
 }
 .text{
+    width: 714rpx;
     font-size: 35rpx;
     color: #000;
     margin-left: 275rpx;
@@ -64,23 +67,22 @@ view{
 }
 .search-con{
     width: 210rpx;
-    padding: 0rpx 20rpx;
     position: relative;
-    margin-left: 80rpx;
 }
 .input{
     width:100rpx;
     border: 2rpx solid #9f9f9f;
     border-radius: 50rpx;
     height: 50rpx;
+    line-height: 50rpx;
     font-size: 25rpx;
-    padding-left: 50rpx;
+    padding-left: 60rpx;
     color: #9f9f9f;
 }
 .search-icon{
     position: absolute;
     top: 15rpx;
-    left: 40rpx;
+    left: 20rpx;
 }
 swiper{
     height:750rpx;

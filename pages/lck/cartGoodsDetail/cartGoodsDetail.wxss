@@ -104,6 +104,7 @@ page{
     justify-content: space-between;
     align-items: center;
     flex-direction: row;
+    white-space: nowrap;
 }
 .arrow-right{
     position: absolute;
@@ -117,6 +118,7 @@ page{
     justify-content: flex-start;
     align-items: center;
     flex-direction: row;
+    white-space: nowrap;
 }
 .cart-con{
     margin-left: 20rpx;
@@ -354,6 +356,7 @@ button::after{
     white-space: nowrap;
     width: 50rpx;
     font-size: 18rpx;
+    color: #b964d8;
 }
 .goTop{
     position: fixed;
@@ -381,7 +384,7 @@ button::after{
     padding-right: 15rpx;
 }
 .backindex{
-    color: #626262;
+    color: #b964d8;
     font-size: 18rpx;
     width: 60rpx;
     height: 30rpx;

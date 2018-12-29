@@ -1,7 +1,7 @@
 <!--pages/MyOrder/MyOrder.wxml-->
 <view class='typeView'>
     <block wx:for='{{typeArray}}'>
-        <text class='typeson' style='color:#b964d8;font-size:27rpx;border-bottom:4px solid #b964d8;font-weight:900' bindtap='pressType' id='{{index}}' wx:if='{{index==indexs}}'>{{item}}</text>
+        <text class='typeson1' style='color:#b964d8;font-size:27rpx;border-bottom:4px solid #b964d8;font-weight:900;' bindtap='pressType' id='{{index}}' wx:if='{{index==indexs}}'>{{item}}</text>
         <text class='typeson' style='color:#000000;font-size:27rpx' bindtap='pressType' id='{{index}}' wx:else>{{item}}</text>
     </block>
 </view>
@@ -19,8 +19,8 @@
             <view class='shopMsgView' wx:if='{{idx==0}}'>
                 <image class='shopImage1' src='{{url+item1.product.head[0]}}' style='height:auto' mode='widthFix'></image>
                 <text class='shopDetailText' space='ensp' style='font-size:24rpx;font-weight:900'>{{item1.product.pname}}</text>
-                <text class='shopSize' style='font-size:16rpx;color:#808080;font-weight:900' space='ensp' wx:if='{{item1.product.size.length<=16}}'>{{item1.product.size}}</text>
-                <text class='shopSize1' style='font-size:16rpx;color:#808080;font-weight:900' space='ensp' wx:else>{{item1.product.size}}</text>
+                <text class='shopSize' style='font-size:16rpx;color:#808080;font-weight:900' space='ensp' wx:if='{{item1.product.size.length<=16&&item1.product.isMoren}}'>{{item1.product.size}}</text>
+                <text class='shopSize1' style='font-size:16rpx;color:#808080;font-weight:900' space='ensp' wx:elif='{{item1.product.size.length>16&&item1.product.isMoren}}'>{{item1.product.size}}</text>
                 <!-- <text class=''></text> -->
                 <!-- <text class='shopType' style='font-size:20rpx;'>款式{{item1.product.size.color}}</text> -->
                 <text class='shopnumberText' style='font-size:22rpx;' space='ensp'>x {{item1.pcount}}</text>
@@ -29,8 +29,8 @@
             <view class='shopMsgView1' wx:else>
                 <image class='shopImage1' src='{{url+item1.product.head[0]}}' style='height:auto' mode='widthFix'></image>
                 <text class='shopDetailText' space='ensp' style='font-size:24rpx;font-weight:900'>{{item1.product.pname}}</text>
-                <text class='shopSize' style='font-size:16rpx;color:#808080;font-weight:900' space='ensp' wx:if='{{item1.product.size.length<=16}}'>{{item1.product.size}}</text>
-                <text class='shopSize1' style='font-size:16rpx;color:#808080;font-weight:900' space='ensp' wx:else>{{item1.product.size}}</text>
+               <text class='shopSize' style='font-size:16rpx;color:#808080;font-weight:900' space='ensp' wx:if='{{item1.product.size.length<=16&&item1.product.isMoren}}'>{{item1.product.size}}</text>
+                <text class='shopSize1' style='font-size:16rpx;color:#808080;font-weight:900' space='ensp' wx:elif='{{item1.product.size.length>16&&item1.product.isMoren}}'>{{item1.product.size}}</text>
                 <!-- <text class='shopType' style='font-size:20rpx;'>款式{{item1.product.size.color}}</text> -->
                 <text class='shopnumberText' style='font-size:22rpx;' space='ensp'>x {{item1.pcount}}</text>
                 <text class='priceson' style='font-size:24rpx;font-weight:900'>￥{{item1.product.price}}</text>
@@ -69,8 +69,8 @@
                     data-shopmsg='{{item1}}' >
                 <image class='shopImage1' src='{{url+item1.product.head[0]}}' style='height:auto' mode='widthFix'></image>
                 <text class='shopDetailText' space='ensp' style='font-size:24rpx;font-weight:900'>{{item1.product.pname}}</text>
-                <text class='shopSize' style='font-size:20rpx;color:#808080' space='ensp' wx:if='{{item1.standard.length<=16}}'>{{item1.standard}}</text>
-                <text class='shopSize' style='font-size:20rpx;color:#808080' space='ensp' wx:else>{{item1.standard}}</text>
+                <text class='shopSize' style='font-size:16rpx;color:#808080;font-weight:900' space='ensp' wx:if='{{item1.product.size.length<=16&&item1.product.isMoren}}'>{{item1.product.size}}</text>
+                <text class='shopSize1' style='font-size:16rpx;color:#808080;font-weight:900' space='ensp' wx:elif='{{item1.product.size.length>16&&item1.product.isMoren}}'>{{item1.product.size}}</text>
                 <!-- <text class='shopType' style='font-size:20rpx;'>款式{{item1.product.size.color}}</text> -->
                 <text class='shopnumberText' style='font-size:22rpx;' space='ensp'>x {{item1.pcount}}</text>
                 <text class='oneShopNumber' space='ensp' style='font-size:24rpx;font-weight:900'>￥{{item1.product.price}}</text>
@@ -110,8 +110,8 @@
                     data-shopmsg='{{item1}}'  wx:else>
                 <image class='shopImage1' src='{{url+item1.product.head[0]}}' style='height:auto' mode='widthFix'></image>
                 <text class='shopDetailText' space='ensp' style='font-size:24rpx;font-weight:900'>{{item1.product.pname}}</text>
-                <text class='shopSize' style='font-size:20rpx;color:#808080' space='ensp' wx:if='{{item1.standard.length<=16}}'>{{item1.standard}}</text>
-                <text class='shopSize' style='font-size:20rpx;color:#808080' space='ensp' wx:else>{{item1.standard}}</text>
+                <text class='shopSize' style='font-size:16rpx;color:#808080;font-weight:900' space='ensp' wx:if='{{item1.product.size.length<=16&&item1.product.isMoren}}'>{{item1.product.size}}</text>
+                <text class='shopSize1' style='font-size:16rpx;color:#808080;font-weight:900' space='ensp' wx:elif='{{item1.product.size.length>16&&item1.product.isMoren}}'>{{item1.product.size}}</text>
                 <!-- <text class='shopType' style='font-size:20rpx;'>款式{{item1.product.size.color}}</text> -->
                 <text class='shopnumberText' style='font-size:22rpx;'>x {{item1.pcount}}</text>
                 <text class='oneShopNumber' space='ensp' style='font-size:24rpx;font-weight:900'>￥{{item1.product.price}}</text>
@@ -180,3 +180,9 @@
         </view>
     </view>
 </block>
+<view class='nullOrderView'  wx:if='{{isHas}}'>
+  <image class='nullIcon' src='../../resources/icon_sharenull.png' mode='widthFix' style="height:auto"></image>
+  <text class='nullText' style='font-size:26rpx;'>没有任何订单</text>
+
+
+</view>

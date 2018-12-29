@@ -1,5 +1,5 @@
 <!--pages/search/search.wxml-->
-<view class='mask' animation='{{backAnimaData}}' hidden='{{buyBoxHidden}}' catchtouchmove='test' data-e='mask'></view>
+<view class='mask' animation='{{backAnimaData}}' hidden='{{buyBoxHidden}}' bindtap='pressClose' catchtouchmove='test' data-e='mask'></view>
 <view class='searchView'>
     <!-- <image class='searchDa' mode='widthFix' src='../../resources/icon_right.png'></image> -->
     <view class='sreachboxView'>
@@ -31,7 +31,8 @@
         <view class='shopView' style='height:340rpx;' wx:if='{{idx==0}}' data-pid='{{item.pid}}' bindtap='buyShop'>
             <text class='tuijianText' style='font-size:28rpx;color:#000000;font-weight:900;'>推荐商品</text>
             <view class='nullView1'></view>
-            <image class='shopImage' style='top:61rpx;height:auto' mode='widthFix' src='{{url+item.head[0]}}'></image>
+            <image class='shopImage' style='top:61rpx;height:auto' mode='widthFix' wx:if='{{item.custom==0}}' src='{{url+item.head[0]}}'></image>
+            <image class='shopImage' style='top:61rpx;height:auto' mode='widthFix' wx:else src='{{url+item.customhead[0]}}'></image>
             <text class='shopName1' style='font-size:29rpx;color:#000000;font-weight:900;top:103rpx;'>{{item.pname}}</text>
             <!-- <text class='shopDetail' style='font-size:25rpx;color:#aaaaaa;font-weight:900;top:141rpx;'>阿打算大所多</text> -->
             <text class='shopPrice' space='ensp' style='font-size:23rpx;color:#707070;font-weight:900;top:224rpx;'>市场价 ￥{{item.otherprice}}</text>
@@ -41,7 +42,8 @@
         </view>
         <view class='shopView' wx:else bindtap='buyShop' data-pid='{{item.pid}}'>
             <view class='nullView1'></view>
-            <image class='shopImage' mode='widthFix' style='height:auto' src='{{url+item.head[0]}}'></image>
+          <image class='shopImage' style='top:61rpx;height:auto' mode='widthFix' wx:if='{{item.custom==0}}' src='{{url+item.head[0]}}'></image>
+            <image class='shopImage' style='top:61rpx;height:auto' mode='widthFix' wx:else src='{{url+item.customhead[0]}}'></image>
             <text class='shopName1' style='font-size:29rpx;color:#000000;font-weight:900;'>{{item.pname}}</text>
             <!-- <text class='shopDetail' style='font-size:25rpx;color:#aaaaaa;font-weight:900;'>阿打算大所多</text> -->
             <text class='shopPrice' space='ensp' style='font-size:23rpx;color:#707070;font-weight:900;'>市场价 {{item.otherprice}}</text>
@@ -116,7 +118,7 @@
         <image src='{{url+indexShopArray.head[0]}}' style='width:220rpx;height:220rpx;' class='img'></image>
         <view class='price-order-con'>
             <view class='price-item' style='font-size:40rpx;color:#ffcb05;font-weight:800;'>
-                ￥ {{indexShopArray.price * shopNumber}}
+                ￥ {{indexShopArray.price }}
             </view>
             <view class='price-item' style='font-size:30rpx;color:#404040'>
                 已选:
@@ -130,12 +132,13 @@
     <scroll-view class='scc-con' scroll-y>
         <block wx:for='{{typeArr}}' wx:for-index='outIndex' wx:for-item='outItem'>
             <view class='lineTwo-con'>
-                <view style='font-size:30rpx;'>
+                <view style='font-size:30rpx;' class='chi' wx:if="{{allDefault==false}}">
                     {{outItem}}
                 </view>
                 <view class='color-con'>
                     <block wx:for='{{typeValueArr[outIndex][outItem]}}' wx:for-index='innerIndex'>
-                        <view class='color-item' id='{{item.mode}}-{{outIndex}}-{{outItem}}' bindtap='chooseStand' style='background-color:{{item.touch ? selectColor : unSelectColor}};color:{{item.touch ? selectFontColor : unSelectFontColor}};border:{{item.touch ? selectBorder : unselectBorder}}'>
+                        <view class='color-item' id='{{item.mode}}-{{outIndex}}-{{outItem}}' bindtap='chooseStand' style='background-color:{{item.touch ? selectColor : unSelectColor}};color:{{item.touch ? selectFontColor : unSelectFontColor}};border:{{item.touch ? selectBorder : unselectBorder}}'
+                            wx:if="{{item.mode!='默认'}}">
                             {{item.mode}}
                         </view>
                     </block>
@@ -160,8 +163,7 @@
         </view>
     </view>
     <view class='addOrBuy'>
-
-        <view class='saveBuy' bindtap='confirm' id='buyit'>
+        <view class='saveBuy' bindtap='pressSure' id='buyit'>
             确定
         </view>
     </view>

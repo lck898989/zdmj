@@ -1,0 +1,53 @@
+<!--pages/lck/bindPhone/bindPhone.wxml-->
+<view class='page-con'>
+    <block wx:if='{{!clickNext}}'>
+        <view class='law'>
+            <view>
+                由于国家相关法规要求实名制
+            </view>
+            <view>
+                请绑定手机号
+            </view>
+        </view>
+        <view class='phoneWrapper'>
+            <view class='phone-con'>
+                <input placeholder='{{bindNumber === "" ? "请输入手机号" : bindNumber}}' placeholder-style='font-size:30rpx;' bindinput='getNumber' bindblur='checkNum'></input>
+                <image wx:if='{{showDel}}' src='../../../resources/ico_del_2.png' style='width:34rpx;height:34rpx;' class='delete' bindtap='delNumber'></image>
+            </view>
+        </view>
+        <view wx:if='{{!isEditorPhoneNumber}}' class='next-con'>
+            <view class='next' bindtap='next'>
+                下一步
+            </view>
+        </view>
+        <view wx:else>
+            <view class='next' bindtap='next'>
+                更换手机号码
+            </view>
+        </view>
+    </block>
+    <block wx:else>
+        <view class='message-con'>
+            <view class='message-code'>
+                输入短信验证码
+            </view>
+            <view class='info'>
+                验证码已发送至{{simplePhone}}
+            </view>
+        </view>
+        <!--填写具体的验证码-->
+        <form bindsubmit="formSubmit">
+            <view class='content'>
+                <block wx:for="{{inputArr}}" wx:key="item">
+                    <input class='iptbox' value="{{value.length>=index+1?value[index].text:''}}" disabled password='{{ispassword}}' catchtap='tap' style='{{value[index].active ? "border-bottom:4rpx solid #b964d8;" : ""}}'></input>
+                </block>
+            </view>
+            <input name="password" password="{{true}}" class='ipt' maxlength="{{inputArr}}" focus="{{isFocus}}" bindinput="getAuthCode"></input>
+        </form>
+        <view class='cutdownWrapper'>
+            <view>
+                重发短信验证码({{cutdownTime}}s)
+            </view>
+        </view>
+    </block>
+</view>

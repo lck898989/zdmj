@@ -1,8 +1,7 @@
 <!--pages/SreachResult/SreachResult.wxml-->
 <!-- <text>pages/SreachResult/SreachResult.wxml</text> -->
 
- <view class='mask' animation='{{backAnimaData}}' hidden='{{buyBoxHidden}}' catchtouchmove='test' data-e='mask'></view> 
- 
+<view class='mask' animation='{{backAnimaData}}' hidden='{{buyBoxHidden}}' bindtap='cancel' catchtouchmove='test' data-e='mask'></view>
 <view class='searchView'>
     <!-- <image class='searchDa' mode='widthFix' src='../../resources/icon_right.png'></image> -->
     <view class='sreachboxView'>
@@ -52,7 +51,8 @@
         <view class='leftView'>
             <block wx:for='{{leftArray}}'>
                 <block wx:if='{{item.productstype=="shopessays"}}'>
-                    <view class='leftSon' bindtap='intetWenzhang' data-title='{{item.shoptitle}}' data-productstype='{{item.productstype}}' data-shopjson='{{item}}' data-introduction='{{item.shopintroduction}}' data-shopurl='{{item.shopessayhead}}' data-shopid='{{item.shopid}}' wx:if='{{index==0}}' style='margin-top:0rpx;'>
+                    <view class='leftSon' bindtap='intetWenzhang' data-title='{{item.shoptitle}}' data-productstype='{{item.productstype}}' data-shopjson='{{item}}' data-introduction='{{item.shopintroduction}}' data-shopurl='{{item.shopessayhead}}' data-shopid='{{item.shopid}}'
+                        wx:if='{{index==0}}' style='margin-top:0rpx;'>
                         <view class='seeView'>
                             <image mode='widthFix' class='seeIcon' style='height:auto' src='../../resources/ico_eye.png'></image>
                             <text class='seeText' style='font-size:19rpx;font-weight:900'>{{item.see}}</text>
@@ -73,7 +73,8 @@
                         </view>
                         <view class='nullView2'></view>
                     </view>
-                    <view class='leftSon' bindtap='intetWenzhang' data-title='{{item.title}}' data-productstype='{{item.productstype}}' data-shopjson='{{item}}' data-introduction='{{item.shopintroduction}}' data-shopurl='{{item.shopessayhead}}' data-shopid='{{item.shopid}}' wx:else style='margin-top:18rpx;'>
+                    <view class='leftSon' bindtap='intetWenzhang' data-title='{{item.title}}' data-productstype='{{item.productstype}}' data-shopjson='{{item}}' data-introduction='{{item.shopintroduction}}' data-shopurl='{{item.shopessayhead}}' data-shopid='{{item.shopid}}'
+                        wx:else style='margin-top:18rpx;'>
                         <view class='seeView'>
                             <image mode='widthFix' class='seeIcon' style='height:auto' src='../../resources/ico_eye.png'></image>
                             <text class='seeText' style='font-size:19rpx;font-weight:900'>{{item.see}}</text>
@@ -96,52 +97,51 @@
                     </view>
                 </block>
                 <block wx:if='{{item.productstype=="essays"}}'>
-                      <view class='leftSon' bindtap='intetWenzhang'  data-title='{{item.title}}'data-productstype='{{item.productstype}}' data-shopjson='{{item}}' data-introduction='{{item.introduction}}'  data-shopurl='{{item.essayhead}}' wx:if='{{index==0}}' style='margin-top:0rpx;'>
+                    <view class='leftSon' bindtap='intetWenzhang' data-title='{{item.title}}' data-productstype='{{item.productstype}}' data-shopjson='{{item}}' data-introduction='{{item.introduction}}' data-shopurl='{{item.essayhead}}' wx:if='{{index==0}}' style='margin-top:0rpx;'>
                         <view class='seeView'>
                             <image mode='widthFix' class='seeIcon' style='height:auto' src='../../resources/ico_eye.png'></image>
                             <text class='seeText' style='font-size:19rpx;font-weight:900'>{{item.see}}</text>
                         </view>
                         <view class='wenzhangImageView' style='height:{{item.height}}rpx'>
                             <image class='wenzhangImage' data-id='{{index}}' style='height:auto' wx:if='{{item.essaycustom==1}}' data-type='{{"left"}}' data-shopurl='{{url+item.essayhead[0]}}' bindload='getHeight' mode='widthFix' src='{{url+item.essaycustomhead[0]}}'></image>
-                            <image class='wenzhangImage' data-id='{{index}}' wx:else data-type='{{"left"}}' data-shopurl='{{url+item.essayhead[0]}}' style='height:auto' bindload='getHeight' mode='widthFix' src='{{url+item.essayhead[0]}}'></image>
-                        </view>
-                        <view class='shopDetailView' wx:if='{{item.productstype=="essays"}}' style='font-size:18rpx;color:#000000;font-weight:900'>
-                            {{item.title}}
-                        </view>
-                     
-                        <!-- </view> -->
-                        <view class='authorView'>
-                            <image class='authorImage' mode='widthFix' src='{{item.wxhead}}' style='height:auto'></image>
-                            <text class='authorName' style='font-size:16rpx;color:#898989;font-weight:900'>{{item.wxnickname}}</text>
-                        </view>
-                        <view class='nullView2'></view>
-                    </view>  
-                      <view class='leftSon' bindtap='intetWenzhang'  data-title='{{item.title}}'data-productstype='{{item.productstype}}' wx:else data-shopjson='{{item}}' data-introduction='{{item.introduction}}' data-shopurl='{{item.essayhead}}' style='margin-top:18rpx;'>
-                        <view class='seeView'>
-                            <image mode='widthFix' class='seeIcon' style='height:auto' src='../../resources/ico_eye.png'></image>
-                            <text class='seeText' style='font-size:19rpx;font-weight:900'>{{item.see}}</text>
-                        </view>
-                        <view class='wenzhangImageView' style='height:{{item.height}}rpx'>
-                             <image class='wenzhangImage' data-id='{{index}}' style='height:auto' wx:if='{{item.essaycustom==1}}' data-type='{{"left"}}' data-shopurl='{{url+item.essayhead[0]}}' bindload='getHeight' mode='widthFix' src='{{url+item.essaycustomhead[0]}}'></image>
                             <image class='wenzhangImage' data-id='{{index}}' wx:else data-type='{{"left"}}' data-shopurl='{{url+item.essayhead[0]}}' style='height:auto' bindload='getHeight' mode='widthFix' src='{{url+item.essayhead[0]}}'></image>
                         </view>
                         <view class='shopDetailView' wx:if='{{item.productstype=="essays"}}' style='font-size:18rpx;color:#000000;font-weight:900'>
                             {{item.title}}
                         </view>
 
+                        <!-- </view> -->
+                        <view class='authorView'>
+                            <image class='authorImage' mode='widthFix' src='{{item.wxhead}}' style='height:auto'></image>
+                            <text class='authorName' style='font-size:16rpx;color:#898989;font-weight:900'>{{item.wxnickname}}</text>
+                        </view>
+                        <view class='nullView2'></view>
+                    </view>
+                    <view class='leftSon' bindtap='intetWenzhang' data-title='{{item.title}}' data-productstype='{{item.productstype}}' wx:else data-shopjson='{{item}}' data-introduction='{{item.introduction}}' data-shopurl='{{item.essayhead}}' style='margin-top:18rpx;'>
+                        <view class='seeView'>
+                            <image mode='widthFix' class='seeIcon' style='height:auto' src='../../resources/ico_eye.png'></image>
+                            <text class='seeText' style='font-size:19rpx;font-weight:900'>{{item.see}}</text>
+                        </view>
+                        <view class='wenzhangImageView' style='height:{{item.height}}rpx'>
+                            <image class='wenzhangImage' data-id='{{index}}' style='height:auto' wx:if='{{item.essaycustom==1}}' data-type='{{"left"}}' data-shopurl='{{url+item.essayhead[0]}}' bindload='getHeight' mode='widthFix' src='{{url+item.essaycustomhead[0]}}'></image>
+                            <image class='wenzhangImage' data-id='{{index}}' wx:else data-type='{{"left"}}' data-shopurl='{{url+item.essayhead[0]}}' style='height:auto' bindload='getHeight' mode='widthFix' src='{{url+item.essayhead[0]}}'></image>
+                        </view>
+                        <view class='shopDetailView' wx:if='{{item.productstype=="essays"}}' style='font-size:18rpx;color:#000000;font-weight:900'>
+                            {{item.title}}
+                        </view>
                         <view class='authorView'>
                             <image class='authorImage' src='{{item.wxhead}}'></image>
                             <text class='authorName' style='font-size:16rpx;color:#898989;font-weight:900'>{{item.wxnickname}}</text>
                         </view>
                         <view class='nullView2'></view>
-                    </view>  
+                    </view>
                 </block>
             </block>
         </view>
         <view class='rightView'>
             <block wx:for='{{rightArray}}'>
                 <block wx:if='{{item.productstype=="shopessays"}}'>
-       <view class='leftSon' bindtap='intetWenzhang' data-shopurl='{{item.shopessayhead}}' data-shopjson='{{item}}'data-title='{{item.shoptitle}}' data-productstype='{{item.productstype}}' wx:if='{{index==0}}' style='margin-top:0rpx;'>
+                    <view class='leftSon' bindtap='intetWenzhang' data-shopurl='{{item.shopessayhead}}' data-shopid='{{item.shopid}}' data-shopjson='{{item}}' data-title='{{item.shoptitle}}' data-productstype='{{item.productstype}}' wx:if='{{index==0}}' style='margin-top:0rpx;'>
                         <view class='seeView'>
                             <image mode='widthFix' class='seeIcon' style='height:auto' src='../../resources/ico_eye.png'></image>
                             <text class='seeText' style='font-size:19rpx;font-weight:900'>{{item.see}}</text>
@@ -162,7 +162,7 @@
                         </view>
                         <view class='nullView2'></view>
                     </view>
-                    <view class='leftSon' wx:else bindtap='intetWenzhang'   data-shopurl='{{item.shopessayhead}}'data-shopjson='{{item}}' data-title='{{item.shoptitle}}' data-productstype='{{item.productstype}}' style='margin-top:18rpx;'>
+                    <view class='leftSon' wx:else bindtap='intetWenzhang' data-shopurl='{{item.shopessayhead}}' data-shopjson='{{item}}' data-title='{{item.shoptitle}}' data-productstype='{{item.productstype}}' style='margin-top:18rpx;'>
                         <view class='seeView'>
                             <image mode='widthFix' class='seeIcon' style='height:auto' src='../../resources/ico_eye.png'></image>
                             <text class='seeText' style='font-size:19rpx;font-weight:900'>{{item.see}}</text>
@@ -185,7 +185,7 @@
                     </view>
                 </block>
                 <block wx:if='{{item.productstype=="essays"}}'>
-                    <view class='leftSon' bindtap='intetWenzhang' data-shopjson='{{item}}'  data-shopurl='{{item.essayhead}}'data-title='{{item.title}}'data-productstype='{{item.productstype}}' wx:if='{{index==0}}' style='margin-top:0rpx;'>
+                    <view class='leftSon' bindtap='intetWenzhang' data-shopjson='{{item}}' data-shopurl='{{item.essayhead}}' data-title='{{item.title}}' data-productstype='{{item.productstype}}' wx:if='{{index==0}}' style='margin-top:0rpx;'>
                         <view class='seeView'>
                             <image mode='widthFix' class='seeIcon' style='height:auto' src='../../resources/ico_eye.png'></image>
                             <text class='seeText' style='font-size:19rpx;font-weight:900'>{{item.see}}</text>
@@ -205,14 +205,14 @@
                             <text class='authorName' style='font-size:16rpx;color:#898989;font-weight:900'>{{item.wxnickname}}</text>
                         </view>
                         <view class='nullView2'></view>
-                    </view> 
-                    <view class='leftSon' wx:else bindtap='intetWenzhang'  data-shopurl='{{item.essayhead}}' data-shopjson='{{item}}' data-title='{{item.title}}' data-productstype='{{item.productstype}}' style='margin-top:18rpx;'>
+                    </view>
+                    <view class='leftSon' wx:else bindtap='intetWenzhang' data-shopurl='{{item.essayhead}}' data-shopjson='{{item}}' data-title='{{item.title}}' data-productstype='{{item.productstype}}' style='margin-top:18rpx;'>
                         <view class='seeView'>
                             <image mode='widthFix' class='seeIcon' style='height:auto' src='../../resources/ico_eye.png'></image>
                             <text class='seeText' style='font-size:19rpx;font-weight:900'>{{item.see}}</text>
                         </view>
                         <view class='wenzhangImageView' style='height:{{item.height}}rpx'>
-                              <image class='wenzhangImage' data-id='{{index}}' data-shopurl='{{url+item.essayhead[0]}}' wx:if='{{item.essaycustom==1}}' data-type='{{"right"}}' bindload='getHeight' style='height:{{item.height}}rpx' src='{{url+item.essaycustomhead[0]}}'></image>
+                            <image class='wenzhangImage' data-id='{{index}}' data-shopurl='{{url+item.essayhead[0]}}' wx:if='{{item.essaycustom==1}}' data-type='{{"right"}}' bindload='getHeight' style='height:{{item.height}}rpx' src='{{url+item.essaycustomhead[0]}}'></image>
                             <image class='wenzhangImage' data-id='{{index}}' data-shopurl='{{url+item.shopessayhead[0]}}' wx:else data-type='{{"right"}}' bindload='getHeight' style='height:{{item.height}}rpx' src='{{url+item.essayhead[0]}}'></image>
                         </view>
                         <!-- <view class='shopDetailView' wx:if='{{item.productstype=="essays"}}' style='font-size:18rpx;color:#000000;font-weight:900'>
@@ -232,13 +232,11 @@
         </view>
     </view>
 </scroll-view>
-
-
-
 <scroll-view class='scrollView1' scroll-y='true' wx:if='{{buttonParentType==true&&allproducts.length>0}}' style='height:{{scrollHeight}}px;top:{{top}}px'>
     <block wx:for='{{allproducts}}' wx:for-index='idx'>
-        <view class='shopView' style='height:302rpx;' wx:if='{{idx==0}}'>
-            <image class='shopImage' mode='widthFix' src='{{url+item.head[0]}}'></image>
+        <view class='shopView' style='height:302rpx;' wx:if='{{idx==0}}' data-pid='{{item.pid}}' bindtap='buyShop'>
+            <image class='shopImage' mode='widthFix' wx:if='{{item.custom==0}}' src='{{url+item.head[0]}}'></image>
+            <image class='shopImage' mode='widthFix' wx:else src='{{url+item.customhead[0]}}'></image>
             <text class='shopName1' style='font-size:29rpx;color:#000000;font-weight:900;'>{{item.pname}}</text>
             <!-- <text class='shopDetail' style='font-size:25rpx;color:#aaaaaa;font-weight:900;'>{{}}</text> -->
             <text class='shopPrice' space='ensp' style='font-size:23rpx;color:#707070;font-weight:900;'>市场价 ￥{{item.otherprice}}</text>
@@ -246,9 +244,10 @@
             <image class='shpoIcon' catchtap='buyShop1' style='height:auto' data-shop='{{item}}' data-pid='{{item.pid}}' mode='widthFix' src='../../resources/btn_buy.png'></image>
             <image class='zhidanIcon' mode='widthFix' style='height:auto' src='../../resources/img_jin.png'></image>
         </view>
-        <view class='shopView' wx:else>
+        <view class='shopView' wx:else data-pid='{{item.pid}}' bindtap='buyShop'>
             <view class='nullView1'></view>
-            <image class='shopImage' mode='widthFix' src='{{url+item.head[0]}}'></image>
+           <image class='shopImage' mode='widthFix' wx:if='{{item.custom==0}}' src='{{url+item.head[0]}}'></image>
+            <image class='shopImage' mode='widthFix' wx:else src='{{url+item.customhead[0]}}'></image>
             <text class='shopName1' style='font-size:29rpx;color:#000000;font-weight:900;'>{{item.pname}}</text>
             <!-- <text class='shopDetail' style='font-size:25rpx;color:#aaaaaa;font-weight:900;'>{{}}</text> -->
             <text class='shopPrice' space='ensp' style='font-size:23rpx;color:#707070;font-weight:900;'>市场价 ￥{{item.otherprice}}</text>
@@ -259,13 +258,13 @@
     </block>
 </scroll-view>
 
- 
+
 <view class='buy-con' hidden='{{buyBoxHidden}}' data-e='buy-con'>
     <view class='lineOne-con'>
         <image src='{{url+indexShopArray.head[0]}}' style='width:220rpx;height:220rpx;' class='img'></image>
         <view class='price-order-con'>
             <view class='price-item' style='font-size:40rpx;color:#ffcb05;font-weight:800;'>
-                ￥ {{indexShopArray.price * shopNumber}}
+                ￥ {{indexShopArray.price}}
             </view>
             <view class='price-item' style='font-size:30rpx;color:#404040'>
                 已选:
@@ -279,12 +278,13 @@
     <scroll-view class='scc-con' scroll-y>
         <block wx:for='{{typeArr}}' wx:for-index='outIndex' wx:for-item='outItem'>
             <view class='lineTwo-con'>
-                <view style='font-size:30rpx;'>
+                <view style='font-size:30rpx;' wx:if="{{allDefault==false}}">
                     {{outItem}}
                 </view>
                 <view class='color-con'>
                     <block wx:for='{{typeValueArr[outIndex][outItem]}}' wx:for-index='innerIndex'>
-                        <view class='color-item' id='{{item.mode}}-{{outIndex}}-{{outItem}}' bindtap='chooseStand' style='background-color:{{item.touch ? selectColor : unSelectColor}};color:{{item.touch ? selectFontColor : unSelectFontColor}};border:{{item.touch ? selectBorder : unselectBorder}}'>
+                        <view class='color-item' id='{{item.mode}}-{{outIndex}}-{{outItem}}' bindtap='chooseStand' style='background-color:{{item.touch ? selectColor : unSelectColor}};color:{{item.touch ? selectFontColor : unSelectFontColor}};border:{{item.touch ? selectBorder : unselectBorder}}'
+                            wx:if="{{item.mode!='默认'}}">
                             {{item.mode}}
                         </view>
                     </block>
@@ -310,8 +310,8 @@
     </view>
     <view class='addOrBuy'>
 
-        <view class='saveBuy' bindtap='confirm' id='buyit'>
+        <view class='saveBuy' bindtap='pressSure' id='buyit'>
             确定
         </view>
     </view>
-</view> 
+</view>

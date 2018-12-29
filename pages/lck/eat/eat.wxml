@@ -9,9 +9,10 @@
                 津津有味
             </view>
         </view>
-        <view class='search-con'>
-            <view class='input-con'>
-                <input class='input' placeholder='搜索...' bindfocus='enterSearch' placeholder-style='color:#fff;margin-left:-50rpx;'></input>
+        <view class='search-con' bindtap='enterSearch'>
+            <view class='input-con input' style='color:#fff;'>
+                <!-- <input class='input' placeholder='搜索...' bindfocus='enterSearch' placeholder-style='color:#fff;margin-left:-50rpx;' disabled='true'></input> -->
+                搜索...
             </view>
             <image class='search-icon' src='../../../resources/ico_search_2.png' style='width:30rpx;height:30rpx;'></image>
         </view>

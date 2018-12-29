@@ -5,6 +5,8 @@ var app = getApp();
 // pages/search/search.js
 Page({
     data: {
+        allDefault:false,
+        indexShopJson:{},
         sreachArray: [],
         sendServerSize: {},
         sreachText: "",
@@ -31,11 +33,12 @@ Page({
 
     },
   onShow:function(res){
+
  
 
   },
-    onLoad: function(res) {
-    
+    onLoad: function (query) {
+        // const scene = decodeURIComponent(query.scene); 
         app.setKaiQi = res => {
             // var selectsize = JSON.parse(event.currentTarget.dataset.shop.size);
             // console.log(selectsize + "333333333333");
@@ -74,6 +77,8 @@ Page({
                 typeValueArr: res.data.products,
                 buyBoxHidden: false,
                 typeArr: keys1, 
+                goodShop: this.data.goodShop
+               
             })
         }
         app.setSreachSize = res => {
@@ -103,6 +108,10 @@ Page({
         app.setSreachTui = res => {
             var orderArray1 = this.data.goodShop;
             for (let i = 0; i <= res.data.hotProducts.length - 1; i++) {
+                if (res.data.hotProducts[i].custom == 1 && typeof res.data.hotProducts[i].customhead=="string")
+                {
+                    res.data.hotProducts[i].customhead = res.data.hotProducts[i].customhead.split(",");
+                } 
                 res.data.hotProducts[i].head = res.data.hotProducts[i].head.split(",");
             }
             for (let i = 0; i <= res.data.hotProducts.length - 1; i++) {
@@ -113,28 +122,29 @@ Page({
             })
             wx.hideLoading();
         }
-     
         if (app.nearsreachArray) {
             this.setData({ 
                 nearSreach: app.nearsreachArray,
                 hotSreach: app.hotsreachArray,
             })
-
             console.log(this.data.nearSreach + "sreach");
         } else {
-
             app.setNearsreach = res => {
-                this.setData({
+                this.setData({ 
                     nearSreach: res.data.historySearchs,
                     hotSreach: res.data.hotsearchs,
                     goodShop: res.data.hotProducts
-                })
+                }) 
                 console.log(this.data.nearSreach + "sreach");
             }
         }
         if (app.goodShop) {
             console.log(JSON.stringify(app.goodShop)+"###################################");
             for (let i = 0; i <= app.goodShop.length - 1; i++) {
+                if (app.goodShop[i].custom == 1 &&typeof app.goodShop[i].customhead=="string")
+                {
+                    app.goodShop[i].customhead=app.goodShop[i].customhead.split(",");
+                }
                 if (typeof app.goodShop[i].head=="string")
                 {
                     app.goodShop[i].head = app.goodShop[i].head.split(",");
@@ -167,6 +177,9 @@ Page({
         } else {
             app.setTuiShop = res => {
                 for (let i = 0; i <= res.data.hotProducts.length - 1; i++) {
+                    if (res.data.hotProducts[i].custom == 1 &&typeof res.data.hotProducts[i].customhead=="string") {
+                        res.data.hotProducts[i].customhead=res.data.hotProducts[i].customhead.split(",");
+                    }
                     res.data.hotProducts[i].head = res.data.hotProducts[i].head.split(",");
                 }
                 // for (let k = 0; k <= res.data.hotProducts.length - 1; k++) {
@@ -219,12 +232,11 @@ Page({
                 console.log(this.data.sreachArray);
             }
         }
-        if (res.inter == "0") {
-            console.log(res.sreachText + "---------------------------------");
+        if (query.inter == "0") {
+        
             this.setData({
-                sreachText: res.sreachText
+                sreachText: query.sreachText  
             })
-
             app.ShortConnect(app.urlw + "Data/searchShop", {
                 searchText: this.data.sreachText
             }, "searchText");
@@ -259,12 +271,27 @@ Page({
         app.shopMsgJson = null;
         app.ShortConnect(app.urlw + "Data/GetProductByPid", {
             pid: event.currentTarget.dataset.pid
-        }, 'ActicleInterShop',function(r){});
-        wx.navigateTo({
-            url: '../lck/cartGoodsDetail/cartGoodsDetail'
-        })
+        }, 'ActicleInterShop',function(res){
+            wx.setStorage({
+                key: 'goods',
+                data:res,
+                success:function(){
+                    wx.navigateTo({
+                        url: '../lck/cartGoodsDetail/cartGoodsDetail'
+                    })
+                    // wx.navigateTo({
+                    //     url: '../lck/careGoodsDetail/cartGoodsDetail',
+                    // }) 
+
+                },
+            })  
+        });
+      
     },
     buyShop1: function(event) {
+        this.setData({
+            allDefault:false
+        })
         console.log(event.currentTarget.dataset.shop);
         // event.currentTarget.dataset.shop.head = event.currentTarget.dataset.shop.head.split(",");
         console.log(event.currentTarget.dataset.pid);
@@ -275,20 +302,15 @@ Page({
             app.ShortConnect(app.urlw + "Data/GetStandardByPid", {
                 pid: event.currentTarget.dataset.pid
             }, "setSreachSize");
-
         } else {
             var selectsize = JSON.parse(event.currentTarget.dataset.shop.size);
-            console.log(selectsize + "333333333333");
+            console.log(JSON.stringify(event.currentTarget.dataset.shop) + "333333333333");
             var keys = Object.keys(selectsize);
-            console.log(keys + "333333333333");
             var selectsize1 = {};
             for (let i = 0; i < keys.length; i++) {
                 var value = selectsize[`${keys[i]}`];
-
                 var keyss = keys[i].split(",");
-
                 var values = value.split("|");
-
                 for (let j = 0; j < keyss.length; j++) {
                     selectsize1[keyss[j]] = values[j];
                 }
@@ -309,19 +331,38 @@ Page({
                     tempArr.push(tempJson);
                 }
                 // typeValueJson.mode = typeValueArr1[i];
-                // typeValueJson.touch = true;
-
+                // typeValueJson.touch = true
                 typeValueArr2.push(typeValueJson);
-
             }
             console.log("typeValueArr2 is ", typeValueArr2);
             this.setData({
                 buyBoxHidden: false,
                 indexShopArray: event.currentTarget.dataset.shop,
                 typeArr: Object.keys(event.currentTarget.dataset.shop.size),
-                typeValueArr: typeValueArr2
-
+                typeValueArr: typeValueArr2,
+                goodShop: this.data.goodShop,
+                indexShopJson: event.currentTarget.dataset.shop
             })
+            let defaultCount = 0;
+            for (let k = 0; k < this.data.typeValueArr.length; k++) {
+                let itemType = this.data.typeValueArr[k];
+                console.log("itemType is ", itemType);
+                let key = this.data.typeArr[k];
+                let tempJson = itemType[`${key}`];
+                console.log("tempJson is ", tempJson);
+                for (let m = 0; m < tempJson.length; m++) {
+                    console.log("默认了吗：", tempJson[m].mode === '默认');
+                    if (tempJson[m].mode === '默认') {
+                        defaultCount++;
+                    }
+                }
+            }
+            if (defaultCount === this.data.typeArr.length) {
+                console.log("所有的规格都是默认");
+                this.setData({
+                    allDefault: true
+                })
+            }
             console.log(this.data.buyBoxHidden+ "333333333333");
         }
     },
@@ -349,10 +390,26 @@ Page({
         }
     },
     clearNear: function() {
-        this.setData({
-            nearSreach: [],
-        })
+        var self=this;
+        wx.showModal({
+            showCancel: true,
+            title: '提示',
+            content: "是否要清除历史搜索记录",
+            success: function (res) {
+                if (res.confirm) {
+                    app.ShortConnect(app.urlw +"Data/ClearSearch",{
+                        uid:app.uid,
+                    },"wode",function(res){
+                        self.setData({
+                            nearSreach: [],
+                        })
 
+                    });
+                } else if (res.cancel) {
+                    console.log('用户点击取消')
+                }
+            }
+        })
     },
     turnSreach: function (event) {
         // app.ShortConnect(app.urlw + "Data/searchShop", {
@@ -396,6 +453,30 @@ Page({
                 url: '../SreachResult/SreachResult?sreachText=' + this.data.sreachText + "&keywords=" + this.data.sreachText ,
             })     
         }       
+    },
+    pressSure: function () {
+        let data = {
+            uid: app.uid,
+            pid: this.data.indexShopJson.pid,
+            size: this.data.indexShopJson.size,
+            count: this.data.shopNumber,
+        }
+        console.log(JSON.stringify(this.data.wenzhangJson) + "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+        if (app.isShare) {
+            data.source = 2
+        }
+        else {
+            data.source = 0;
+        }
+        data.head = this.data.indexShopJson.head[0];
+        data.pname = this.data.indexShopJson.pname;
+        data.price = this.data.indexShopArray.price;
+        let orderA = [];
+        orderA.push(data);
+        wx.setStorageSync('orderArray', orderA);
+        wx.navigateTo({
+            url: '../lck/order/order?interSource=0',
+        });
     },
     sreach: function(event) {
         this.setData({

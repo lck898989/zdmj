@@ -15,7 +15,7 @@
         <view class='neibu3'> 提现</view>
     </view>
     <view class='neibu3' hidden='{{!hid2}}' bindtap='shuaxin' id='1'>
-        <image class='tutou' src='{{srcp6}}' style='height:auto' mode='widthFix' />
+        <image class='tutou' src='{{srcp6}}' style='height: auto' mode='widthFix' />
         <view class='neibu3' style='color:#7d7d7d'> 提现</view>
     </view>
     <view class='neibu4' hidden='{{hid3}}' bindtap='shuaxin' id='2'>
@@ -31,7 +31,7 @@
     </view>
 </view>
 <view class='bottomView1' style='height:{{bottomHeight}}px' wx:if='{{hasMsg==false}}' >
-  <image class='icon' src='../../../../resources/ico_detail_norecord.png'  mode='widthFix' style='auto'></image>
+  <image class='icon' src='../../../../resources/ico_detail_norecord.png'  mode='widthFix' style='height:auto'></image>
   <text class='meiyuouText' style='font-size:26rpx;font-weight:900'>没有任何记录</text>
 </view>
 <scroll-view scroll-y='true' class='bottomView' style='height:{{bottomHeight}}px' wx:if='{{hasMsg}}' >

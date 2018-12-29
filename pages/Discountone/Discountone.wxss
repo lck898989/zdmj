@@ -1,0 +1,145 @@
+/* pages/Discountone/Discountone.wxss */
+.shoppingMsg {
+    display: flex;
+    align-items: center;
+    position: relative;
+    width: 750rpx;
+    height: 100rpx;
+}
+
+/* .nullView1 {
+    position: absolute;
+    width: 750rpx;
+    height: 2px;
+} */
+
+.shoppingImage {
+    position: absolute;
+    width: 84rpx;
+    border-radius: 8px;
+    left: 22rpx;
+}
+
+.shoppingName {
+    position: absolute;
+    left: 127rpx;
+    top: 13rpx;
+    color: #fff;
+}
+
+.shoppingType {
+    position: absolute;
+    top: 30rpx;
+    left: 325rpx;
+    color: #fff;
+}
+
+.background {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+}
+.text4 {
+    position: absolute;
+    top: 466rpx;
+    width: 422rpx;
+    height: 72rpx;
+    left: 163rpx;
+    border-bottom: 3rpx solid #b964d8;
+}
+.input1 {
+    position: absolute;
+    width: 330rpx;
+    right: 0;
+    top: 0;
+}
+.price{
+   padding: 0rpx 10rpx 0rpx 0rpx;
+}
+.fuhao1{
+      margin-top: 10rpx;
+     padding: 0rpx 0rpx 0rpx 10rpx;
+}
+.leftText {
+    letter-spacing: 5rpx;
+}
+.rightText {
+    letter-spacing: 5rpx;
+}
+
+.zhe {
+    position: relative;
+    top: 7rpx;
+    letter-spacing: 5rpx;
+    padding: 0rpx 9rpx 0rpx 9rpx;
+}
+.jiesheng{
+    position: absolute;
+    top: 272rpx;
+    left: 70rpx;
+    display: flex;
+    height: 44rpx;
+    align-items: center;
+    justify-content: center;
+}
+.yuan{
+    padding: 0rpx 26rpx 0rpx 26rpx;
+    border-bottom: 2rpx solid #000000;
+}
+.text3 {
+    position: absolute;
+    top: 200rpx;
+    left: 70rpx;
+    height: 40rpx;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+.priceView{
+    position: absolute;
+    top:138rpx;
+    left: 480rpx;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    border-bottom: 3rpx solid #000000;
+
+}
+.yuanjia{
+    position: absolute;
+    top: 138rpx;
+    left: 71rpx;
+}
+.fuhao {
+    position: absolute;
+    top: 20rpx;
+    left: 13rpx;
+}
+.buttonsure{
+    position: absolute;
+    top: 629rpx;
+    width: 500rpx;
+    height: 94rpx;
+    left: 125rpx;
+    background-color: #b964d8;
+    color: #ffffff;
+    display: flex;
+    justify-content: center;
+     align-items: center;
+     border-radius: 10rpx;
+}
+.shoppingAdress1 {
+    position: absolute;
+    left: 127rpx;
+    color: #fff;
+    bottom: 15rpx;
+}
+
+.shoppingAdress {
+    position: absolute;
+    top: 31rpx;
+    left: 400rpx;
+    color: #fff;
+}

@@ -57,6 +57,12 @@ Page({
                 id: 0
             },
             {
+                text: '最新',
+                choosed: false,
+                id: 6
+            },
+
+            {
                 text: '吃',
                 choosed: false,
                 id: 1
@@ -87,25 +93,25 @@ Page({
         //模拟加载更能多数据
         moreDataArray: [],
         imageArr: [{
-                id: 'eat',
-                src: '../../../resources/btn_eat.png',
-                width: 362
-            },
-            {
-                id: 'drink',
-                src: '../../../resources/btn_drink.png',
-                width: 366
-            },
-            {
-                id: 'play',
-                src: '../../../resources/btn_play.png',
-                width: 362
-            },
-            {
-                id: 'fun',
-                src: '../../../resources/btn_fun.png',
-                width: 366
-            },
+            id: 'eat',
+            src: '../../../resources/btn_eat.png',
+            width: 362
+        },
+        {
+            id: 'drink',
+            src: '../../../resources/btn_drink.png',
+            width: 366
+        },
+        {
+            id: 'play',
+            src: '../../../resources/btn_play.png',
+            width: 362
+        },
+        {
+            id: 'fun',
+            src: '../../../resources/btn_fun.png',
+            width: 366
+        },
         ],
         // scorll-view的高度
         scrollH: 0,
@@ -126,23 +132,25 @@ Page({
         floorStatus: false,
         topNum: 0,
         simulateTimes: 0,
-        loadText : '下拉获取更多分享文章...',
+        loadText: '下拉获取更多分享文章...',
         //页数
         page: 1,
         //滚动视图可以滚动
-        canRoll : false,
+        canRoll: false,
         //节点选择器对象
         //在onImageLoad里面只渲染那些新增的文章，渲染完成之后添加到文章列表中去
         newAddEssays: [],
-        timer : 0,
+        timer: 0,
         //自动播放
-        autoPlay : false,
+        autoPlay: false,
         //用户是否操作轮播图了
-        userOperation : false,
+        userOperation: false,
         //加载完毕
-        loadOver : false,
+        loadOver: false,
         //是否点击了分类，点击分类默认是请求了数据的这样就不会再执行onReachBottom方法导致少显示一页的内容
-        click : true
+        click: true,
+        //是否开启显示用户头像
+        isShowUser: false
     },
 
     /**
@@ -151,8 +159,8 @@ Page({
     onLoad: async function (options) {
         let fileManager = wx.getFileSystemManager();
         fileManager.getSavedFileList({
-            success : function(res){
-                console.log("in onLoad res is ",res);
+            success: function (res) {
+                console.log("in onLoad res is ", res);
             }
         });
         // console.log("weatherData is ",weatherdata);
@@ -173,8 +181,8 @@ Page({
             let nightIcon = data.originalData.results[0].weather_data[0].nightPictureUrl;
             let dayUrl = self.getWeatherName(dayIcon);
             let nightUrl = self.getWeatherName(nightIcon);
-            console.log("dayUrl is ",dayUrl);
-            console.log("nightUrl is ",nightUrl);
+            console.log("dayUrl is ", dayUrl);
+            console.log("nightUrl is ", nightUrl);
             weather.dayUrl = 'https://shopfile.ykplay.com/resources/' + dayUrl;
             weather.nightUrl = 'https://shopfile.ykplay.com/resources/' + nightUrl;
             self.setData({
@@ -208,33 +216,33 @@ Page({
         for (let m = 0; m < resData.length; m++) {
             if (resData[m].shopessayhead) {
                 resData[m].shopessayhead = resData[m].shopessayhead.split(',');
-            }else if(resData[m].head){
+            } else if (resData[m].head) {
                 resData[m].head = resData[m].head.split(',');
-            }else if(resData[m].essayhead){
+            } else if (resData[m].essayhead) {
                 resData[m].essayhead = resData[m].essayhead.split(',');
             }
         }
         this.setData({
-            newAddEssays : resData,
-            click        : false
+            newAddEssays: resData,
+            click: false
         }, () => {
             console.log("newAddEssays is ", self.data.newAddEssays);
         })
         wx.hideLoading();
         //自动播放轮播图并且用户没有操作
-        if(!this.data.autoPlay && !this.data.autoPlay){
-            this.data.timer = setInterval(function(){
+        if (!this.data.autoPlay && !this.data.autoPlay) {
+            this.data.timer = setInterval(function () {
                 this.moveLeft(1);
-            }.bind(this),4000);
-            console.log("timer is ",this.data.timer);
+            }.bind(this), 4000);
+            console.log("timer is ", this.data.timer);
             this.setData({
-                autoPlay : true
+                autoPlay: true
             });
         }
         this.updateWeaterFall();
     },
     //获取百度地图返回的天气信息字符串
-    getWeatherName : function(weatherInfo){
+    getWeatherName: function (weatherInfo) {
         let weatherIndex = weatherInfo.indexOf('weather');
         let res = weatherInfo.substr(weatherIndex);
         return res;
@@ -252,28 +260,37 @@ Page({
         let req = new Request(app.host + url, data, "POST", "text");
         let res = await req.sendRequest();
         console.log("in getType res is ", res);
+        this.data.isShowUser = res.data.showWrite === 0 ? false : true;
+        this.setData({
+            isShowUser: this.data.isShowUser
+        })
+        console.log("isShowUser is ", this.data.isShowUser);
         if (tag === '0') {
             let wantArr = [];
-            if(res.data.allproducts.length === 0){
+            if (res.data.allproducts.length === 0) {
                 this.data.loadText = '已经到底了~~o(>_<)o ~~';
                 this.setData({
-                    loadText : this.data.loadText
+                    loadText: this.data.loadText
                 })
-            }else{
-                console.log("删除之前res.data.allproducts is ",res.data.allproducts);
+            } else {
+                console.log("删除之前res.data.allproducts is ", res.data.allproducts);
                 //将商品去除
-                for(let i = 0;i < res.data.allproducts.length;i++){
+                for (let i = 0; i < res.data.allproducts.length; i++) {
                     let tempItem = res.data.allproducts[i];
-                    console.log("tempItem is ",tempItem);
-                    if(tempItem.productstype !== 'products'){
-                        console.log("productstype is ",tempItem.productstype);
+                    console.log("tempItem is ", tempItem);
+                    if (tempItem.productstype !== 'products') {
+                        console.log("productstype is ", tempItem.productstype);
                         wantArr.push(tempItem);
                     }
                 }
             }
             return wantArr;
         } else {
-            return res.data.shopessays;
+            if(tag === '1'){
+                return res.data.allproducts;
+            }else{
+                return res.data.shopessays;
+            }
         }
     },
     //进入滚动图的详情
@@ -282,27 +299,30 @@ Page({
     },
     goDetail: async function (e) {
         console.log("-----> e is ", e);
+        console.log("关闭轮播图：",this.data.autoPlay);
+        //停止轮播图
+        this.data.autoPlay = false;
+        clearInterval(this.data.timer);
         //跳转网页
         let pid = e.currentTarget.dataset.pid;
         //跳转类型：商铺文章，商品文章，商品详情界面
-        //商品id
-        console.log("pid is ",pid);
+        console.log("pid is ", pid);
         let currentList = null;
         let listLen = this.data.HeadImageArr.length;
-        for(let i = 0;i < listLen;i++){
+        for (let i = 0; i < listLen; i++) {
             let tempList = this.data.HeadImageArr[i];
-            console.log("tempList is ",tempList);
-            if(tempList.pid === pid){
+            console.log("tempList is ", tempList);
+            if (tempList.pid === pid) {
                 currentList = tempList;
                 break;
             }
         }
-        console.log("currentList is ",currentList);
-        console.log("jumptype is ",currentList.ptype);
+        console.log("currentList is ", currentList);
+        console.log("jumptype is ", currentList.ptype);
         let jumptype = currentList.ptype;
         let url = '';
-        switch(jumptype){
-            case '1' :
+        switch (jumptype) {
+            case '1':
                 let url = app.host + 'Data/GetProductByPid';
                 let data = {
                     pid: pid,
@@ -325,7 +345,7 @@ Page({
                     url: '../cartGoodsDetail/cartGoodsDetail',
                 })
                 break;
-            case '2' :
+            case '2':
                 //跳转到店铺文章
                 app.wenzhangShop = null;
                 new Promise(function (resolve, reject) {
@@ -346,27 +366,19 @@ Page({
                 console.log("res is ", res);
                 console.log("shopWenZhangJson is ", app.shopWenZhangJson);
                 break;
-            case '3' :
+            case '3':
                 app.wenzhangJson = null;
                 app.ShortConnect(app.urlw + "Data/GetEssayInfo", {
                     pid: currentList.pid,
                     eid: currentList.pid,
                     uid: app.uid
-                }, "interWenZhang");
-                url = app.host + 'Data/GetEssayInfo';
-                data = {
-                    pid: currentList.pid,
-                    eid: currentList.pid,
-                    uid: app.uid
-                }
-                console.log("data is ",data);
-                req = new Request(url,data,'POST','text');
-                res = await req.sendRequest();
-                console.log("--->>res is ",res);
-                wx.navigateTo({
-                    url: '../../ActicleScene/ActicleScene?essayhead=' + res.data.essay.essayhead + '&title=' + res.data.essay.title + '&authorurl=' + res.data.essay.authorurl + '&authorname=' + res.data.essay.authorname + '&pid=' + res.data.essay.pid + '&eid=' + res.data.essay.eid,
-                })
-                break;     
+                }, "interWenZhang",function(res){
+                    console.log("--->>res is ", res);
+                    wx.navigateTo({
+                        url: '../../ActicleScene/ActicleScene?essayhead=' + res.data.essay.essayhead + '&title=' + res.data.essay.title + '&authorurl=' + res.data.essay.authorurl + '&authorname=' + res.data.essay.authorname + '&pid=' + res.data.essay.pid + '&eid=' + res.data.essay.eid,
+                    });
+                });
+                break;
         }
     },
     //获取滚动视图信息
@@ -381,7 +393,7 @@ Page({
         let res = await req.sendRequest();
         console.log("获取到的头图数组是：", res.data.activitys);
         this.setData({
-            HeadImageArr : res.data.activitys
+            HeadImageArr: res.data.activitys
         });
         let source = res.data.activitys
         for (let i = 0; i < 5; i++) {
@@ -422,13 +434,13 @@ Page({
             this.data.MainImageArr[i].acthead = this.data.MainImageArr[i].acthead.split(',');
             this.data.MainImageArr[i].direction = this.data.MainImageArr[i].direction.split(',');
             let goods = new Array(3);
-            for(let m = 0;m < goods.length;m++){
+            for (let m = 0; m < goods.length; m++) {
                 goods[m] = {};
                 goods[m].head = this.data.MainImageArr[i].acthead[m];
                 goods[m].pname = this.data.MainImageArr[i].products[m].pname;
                 goods[m].price = this.data.MainImageArr[i].products[m].price;
             }
-            for(let j = 0;j < this.data.MainImageArr[i].products.length;j++){
+            for (let j = 0; j < this.data.MainImageArr[i].products.length; j++) {
                 this.data.MainImageArr[i].products[j].head = this.data.MainImageArr[i].products[j].head.split(',');
             }
             //文章对应的pid
@@ -436,17 +448,17 @@ Page({
             this.data.MainImageArr[i].pid = this.data.MainImageArr[i].pid.split(',');
             console.log("MainImageArr[i] is ", this.data.MainImageArr[i]);
         }
-        console.log("主图是：",this.data.MainImageArr);
+        console.log("主图是：", this.data.MainImageArr);
         this.setData({
             MainImageArr: this.data.MainImageArr
         })
     },
     //创建瀑布流
-    updateWeaterFall : function(){
-        console.log("newAddEssays is ",this.data.newAddEssays);
-        console.log("dixio is ",this.data.ratio);
+    updateWeaterFall: function () {
+        console.log("newAddEssays is ", this.data.newAddEssays);
+        console.log("dixio is ", this.data.ratio);
         let addEssaysLen = this.data.newAddEssays.length;
-        for(let i = 0;i < addEssaysLen;i++){
+        for (let i = 0; i < addEssaysLen; i++) {
             let imgW = this.data.newAddEssays[i].width;
             let imgH = this.data.newAddEssays[i].height;
             let imgWidth = this.data.imageWidth;
@@ -466,14 +478,14 @@ Page({
             }
         }
         this.setData({
-            col1     : this.data.col1,
-            col2     : this.data.col2,
-            loadOver : true,
-            click    : false
-        },()=>{
+            col1: this.data.col1,
+            col2: this.data.col2,
+            loadOver: true,
+            click: false
+        }, () => {
 
         })
-        console.log('in createWeaterFall newAddEssays is ',this.data.newAddEssays);
+        console.log('in createWeaterFall newAddEssays is ', this.data.newAddEssays);
     },
     /**
      * 生命周期函数--监听页面初次渲染完成
@@ -488,10 +500,10 @@ Page({
     onShow: function () {
         console.log("开启自动轮播");
         //自动轮播设置
-        if(!this.data.autoPlay && !this.data.userOperation){
-            this.data.timer = setInterval(function(){
+        if (!this.data.autoPlay && !this.data.userOperation) {
+            this.data.timer = setInterval(function () {
                 this.moveLeft(1);
-            }.bind(this),4000);
+            }.bind(this), 4000);
             this.data.autoPlay = true;
         }
     },
@@ -500,7 +512,7 @@ Page({
      * 生命周期函数--监听页面隐藏
      */
     onHide: function () {
-        console.log("关闭自动轮播",this.data.timer);
+        console.log("关闭自动轮播", this.data.timer);
         this.data.autoPlay = false;
         clearInterval(this.data.timer);
     },
@@ -518,14 +530,14 @@ Page({
     onPullDownRefresh: function () {
 
     },
-    onPageScroll : function(e){
-        if(e.scrollTop > 100){
+    onPageScroll: function (e) {
+        if (e.scrollTop > 100) {
             this.setData({
-                floorStatus : true,
+                floorStatus: true,
             })
-        }else{
+        } else {
             this.setData({
-                floorStatus : false
+                floorStatus: false
             })
         }
     },
@@ -536,11 +548,11 @@ Page({
      * 
      */
     onReachBottom: async function () {
-        if(!this.data.click){
+        if (!this.data.click) {
             this.data.page++;
-            console.log("page is ",this.data.page);
+            console.log("page is ", this.data.page);
             this.setData({
-                loadOver : false
+                loadOver: false
             })
             await this.loadImages();
             this.updateWeaterFall();
@@ -591,19 +603,19 @@ Page({
             title: '数据加载中...',
         });
         this.setData({
-            loadText : '下拉获取更多文章...'
+            loadText: '下拉获取更多文章...'
         });
         let self = this;
         //将dataArray设置空为了让数据绑定来刷新新的数据
         //初始化列的数据
         this.setData({
-            col1         : [],
-            col2         : [],
-            col1H        : 0,
-            col2H        : 0,
-            scrollH      : 0,
-            newAddEssays : [],
-            click        : true
+            col1: [],
+            col2: [],
+            col1H: 0,
+            col2H: 0,
+            scrollH: 0,
+            newAddEssays: [],
+            click: true
         });
         let dataSet = event.currentTarget.dataset;
         let id = Number(dataSet.id);
@@ -621,9 +633,9 @@ Page({
             }
         }
         this.setData({
-            bannerType : this.data.bannerType,
-            loadOver   : false,
-            page       : 0
+            bannerType: this.data.bannerType,
+            loadOver: false,
+            page: 0
         })
         switch (id) {
             case 0:
@@ -650,43 +662,48 @@ Page({
                 this.data.page = 1;
                 res = await this.getType('购');
                 break;
+            case 6:
+                this.data.page = 1;
+                res = await this.getType('1');
+                console.log("最新的文章是：",res);
+                break;    
         }
         this.data.newAddEssays = res;
-        if(this.data.newAddEssays.length === 0){
+        if (this.data.newAddEssays.length === 0) {
             wx.hideLoading();
             this.setData({
-                loadOver     : true,
-                loadText     : '已经到底了~~o(>_<)o ~~',
-                newAddEssays : []
+                loadOver: true,
+                loadText: '已经到底了~~o(>_<)o ~~',
+                newAddEssays: []
             });
-        }else{
-            console.log("id is ",id);
+        } else {
+            console.log("id is ", id);
             this.setEssayHeadImage(id);
             console.log("set 之前newAddEssays is ", this.data.newAddEssays);
             this.setData({
-                newAddEssays : this.data.newAddEssays,
-                click        : false
-            },()=>{
+                newAddEssays: this.data.newAddEssays,
+                click: false
+            }, () => {
                 wx.hideLoading();
             })
         }
         this.updateWeaterFall();
     },
-    setEssayHeadImage : function(id){
+    setEssayHeadImage: function (id) {
         for (let j = 0; j < this.data.newAddEssays.length; j++) {
             if (id === 1 || id === 2 || id === 3 || id === 4) {
                 this.data.newAddEssays[j].productstype = 'shopessays';
             }
             if (this.data.newAddEssays[j].shopessayhead) {
-                if(typeof(this.data.newAddEssays[j].shopessayhead) === 'string'){
+                if (typeof (this.data.newAddEssays[j].shopessayhead) === 'string') {
                     this.data.newAddEssays[j].shopessayhead = this.data.newAddEssays[j].shopessayhead.split(',');
                 }
             } else if (this.data.newAddEssays[j].head) {
-                if (typeof(this.data.newAddEssays[j].head) === 'string') {
+                if (typeof (this.data.newAddEssays[j].head) === 'string') {
                     this.data.newAddEssays[j].head = this.data.newAddEssays[j].head.split(',');
                 }
             } else if (this.data.newAddEssays[j].essayhead) {
-                if (typeof(this.data.newAddEssays[j].essayhead) === 'string') {
+                if (typeof (this.data.newAddEssays[j].essayhead) === 'string') {
                     this.data.newAddEssays[j].essayhead = this.data.newAddEssays[j].essayhead.split(',');
                 }
             }
@@ -704,16 +721,16 @@ Page({
         this.data.userOperation = true;
         //记录最后一次点击的时间
         let lastTouchTime = new Date().getTime();
-        console.log("最后一次触发的时间是：",lastTouchTime);
+        console.log("最后一次触发的时间是：", lastTouchTime);
         //开始计时是否超过5s用户未操作
-        app.checkTime(function(){
+        app.checkTime(function () {
             console.log("5s用户未操作了，可以开启自动轮播图了");
-            console.log("this is ",this);
+            console.log("this is ", this);
             this.data.autoPlay = true;
             this.data.userOperation = false;
-            this.data.timer = setInterval(function(){
+            this.data.timer = setInterval(function () {
                 this.moveLeft(1);
-            }.bind(this),4000);
+            }.bind(this), 4000);
         }.bind(this));
     },
     moveEnd: function (e) {
@@ -724,19 +741,19 @@ Page({
         let endPoint = e.changedTouches[0].pageX;
         // console.log("是否向左移动？", (endPoint - this.data.startPoint) <  ? (isLeft = true) : (isRight = true));
         console.log("移动了", endPoint - this.data.startPoint);
-        if(endPoint - this.data.startPoint < -60){
+        if (endPoint - this.data.startPoint < -60) {
             isLeft = true;
             this.setData({
-                canRoll : true
+                canRoll: true
             });
-        }else if(endPoint - this.data.startPoint > 60){
+        } else if (endPoint - this.data.startPoint > 60) {
             isRight = true;
             this.setData({
-                canRoll : true
+                canRoll: true
             });
-        }else{
+        } else {
             this.setData({
-                canRoll : false
+                canRoll: false
             });
         }
         console.log("isLeft is ", isLeft);
@@ -744,7 +761,7 @@ Page({
         //如果向左移动的话执行相应方法
         if (isLeft) {
             this.moveLeft(1);
-        } else if(isRight){
+        } else if (isRight) {
             this.moveRight(0);
         }
     },
@@ -863,24 +880,28 @@ Page({
                         res = await this.getType('购');
                         id = 5;
                         break;
+                    case '最新':
+                        res = await this.getType('1');
+                        id = 6;
+                        break;    
                 }
             }
         }
         console.log("res is ", res);
-        if(res.length === 0){
+        if (res.length === 0) {
             wx.hideLoading();
             this.setData({
-                loadText     : '已经到底了~~o(>_<)o ~~',
-                loadOver     : true,
-                newAddEssays : []
+                loadText: '已经到底了~~o(>_<)o ~~',
+                loadOver: true,
+                newAddEssays: []
             });
-        }else{
+        } else {
             this.data.newAddEssays = res;
             this.setEssayHeadImage(id);
             console.log("newAddEssays is ", this.data.newAddEssays);
             console.log("当前的模拟数字是：", this.data.simulateTimes);
             this.setData({
-                newAddEssays : this.data.newAddEssays,
+                newAddEssays: this.data.newAddEssays,
             }, () => {
                 wx.hideLoading();
             })
@@ -920,8 +941,8 @@ Page({
             })
         }
     },
-    scrollEvent : function(e){
-        console.log("e is ",e);
+    scrollEvent: function (e) {
+        console.log("e is ", e);
         if (e.detail.scrollTop > 100) {
             this.setData({
                 floorStatus: true
@@ -932,22 +953,22 @@ Page({
             });
         }
     },
-    goTop1 : function(e){
+    goTop1: function (e) {
         this.setData({
-            topNum : 0
+            topNum: 0
         })
     },
     //一键回到顶部
     goTop: function (e) {
-        if(wx.pageScrollTo){
+        if (wx.pageScrollTo) {
             console.log("res is asdfasdf");
             wx.pageScrollTo({
-                scrollTop : 0,
-                success   : function(){
-                    
+                scrollTop: 0,
+                success: function () {
+
                 }
             })
-        }else{
+        } else {
             wx.showModal({
                 title: '提示',
                 content: '当前微信版本过低，暂无法使用该功能',
@@ -985,18 +1006,6 @@ Page({
         let id = dataSet.id;
         console.log("in enterShop id is ", id);
         if (id === 'shop') {
-            // wx.navigateTo({
-            //     url: '../shop/shop',
-            //     success :function(e){
-            //         console.log(e);
-            //     },
-            //     fail : function(e){
-            //         console.log("e is ",e);
-            //     }
-            // })
-            // wx.switchTab({
-            //     url: '../shop/shop',
-            // })
             wx.navigateTo({
                 url: '../shop/shop',
             })

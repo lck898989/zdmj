@@ -9,6 +9,8 @@ Page({
     srcp: app.imageUrl + 'img_Jin_icon.png',
     srcp1: app.imageUrl + 'ico_arrow.png',
     userInfo: {},
+    //是否有绑定的手机号
+    bindNumber : '',
   },
   backUSER: function(){
     console.log("33");
@@ -25,6 +27,7 @@ Page({
       userInfo: app.userInfo
     })
     console.log(this.data.gundongpic, "user信息")
+    console.log("bindNumber is ",this.data.bindNumber);
   },
 
   /**
@@ -74,5 +77,14 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+  //进入绑定手机号页面
+  enterBindPhone : function(e){
+      //进入绑定手机号界面，如果绑定的手机号不为空的话传到下一个页面一个参数
+      console.log("e is ",e);
+      wx.navigateTo({
+          url: '../../lck/bindPhone/bindPhone?phoneNumber='+this.data.bindNumber,
+      })
   }
+
 })

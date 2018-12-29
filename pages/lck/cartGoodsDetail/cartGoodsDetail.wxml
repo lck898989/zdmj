@@ -8,7 +8,6 @@
                 <block wx:for='{{goodsImageList}}'>
                     <swiper-item>
                         <view class='img-con'>
-                            <!-- <image src='{{imageHost}}{{item}}' style='width:750rpx;height:750rpx;'></image> -->
                             <image-loader originalImage='{{imageHost}}{{item}}' width='750rpx' height='750rpx' mode='widthFix'></image-loader>
                         </view>
                     </swiper-item>
@@ -98,7 +97,7 @@
             </view> -->
             <view class='index-p'>
                 <view bindtap='backIndex' class='index-con'>
-                    <image src='../../../resources/btn_main_0.png' style='width:40rpx;height:40rpx;'></image>
+                    <image src='../../../resources/btn_main_1.png' style='width:40rpx;height:40rpx;'></image>
                     <view class='backindex'>
                         回首页
                     </view>

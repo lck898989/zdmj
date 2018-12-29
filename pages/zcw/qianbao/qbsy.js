@@ -35,7 +35,6 @@ Page({
       app.encode=null;
       app.ShortConnect(app.urlw + "Data/GetAllInformByUid", {
           uid: app.uid,
-         
           page: 1
       }, "GetAllMessage2");
       wx.navigateTo({

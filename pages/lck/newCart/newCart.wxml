@@ -1,6 +1,6 @@
 <!--pages/lck/cart/cart.wxml-->
-<block wx:if='{{showBuyCon}}' >
-    <view class='mask' catchtouchmove='test' data-e='mask'></view>
+<block wx:if='{{showBuyCon}}'>
+    <view class='mask' catchtouchmove='test' data-e='mask' bindtap='cancelBox'></view>
 </block>
 <scroll-view class='{{showBuyCon ? "page-con-showbuy" : "page-con"}}' scroll-y>
     <scroll-view class='goodList'>
@@ -102,35 +102,38 @@
             {{loadText}}
         </view>
     </scroll-view>
-    <!--结算栏-->
-    <view class='settle-con'>
-        <view class='left-con'>
-            <image wx:if='{{!isFullChoosed}}' src='../../../resources/icon_selected_0.png' style='width:42rpx;height:42rpx;margin-left:30rpx;' bindtap='selectAllChange'></image>
-            <image wx:else src='https://shopfile.ykplay.com/resources/icon_selected_1.png' style='width:42rpx;height:42rpx;margin-left:30rpx;' bindtap='selectAllChange'></image>
-            <view class='selectAll-con'>
-                <view bindchange='selectAllChange' style='margin-left:15rpx;'>
-                    <view value='all' style='color:#000;font-size:30rpx;'>全选</view>
-                </view>
-            </view>
-            <view style='margin-left:30rpx;'>
-                <view style='font-size:30rpx;margin-right:30rpx;'>
-                    合计 : <text style='color:#b964d8;font-weight:600;'>￥{{totalPrice}}</text>
-                    <text class='marClass'>￥{{marketTotalPrice}}</text>
-                </view>
-                <view style='font-size:25rpx;color:#707070'>
-                    包邮
-                </view>
+    
+    
+</scroll-view>
+<!--结算栏-->
+<view wx:if='{{!showBuyCon}}' class='settle-con'>
+    <view class='left-con'>
+        <image wx:if='{{!isFullChoosed}}' src='../../../resources/icon_selected_0.png' style='width:42rpx;height:42rpx;margin-left:30rpx;' bindtap='selectAllChange'></image>
+        <image wx:else src='https://shopfile.ykplay.com/resources/icon_selected_1.png' style='width:42rpx;height:42rpx;margin-left:30rpx;' bindtap='selectAllChange'></image>
+        <view class='selectAll-con'>
+            <view bindchange='selectAllChange' style='margin-left:15rpx;'>
+                <view value='all' style='color:#000;font-size:30rpx;'>全选</view>
             </view>
         </view>
-        <view class='left-con settle-wraper'>
-            <view class='settle' bindtap='shopPay'>
-                去结算({{totalCount}})
+        <view style='margin-left:30rpx;'>
+            <view style='font-size:30rpx;margin-right:30rpx;'>
+                合计 : <text style='color:#b964d8;font-weight:600;'>￥{{totalPrice}}</text>
+                <text class='marClass'>￥{{marketTotalPrice}}</text>
             </view>
-            <view class='rightArrow'>
+            <view style='font-size:25rpx;color:#707070'>
+                包邮
             </view>
         </view>
     </view>
-    <block wx:if='{{showBuyCon}}'>
+    <view class='left-con settle-wraper'>
+        <view class='settle' bindtap='shopPay'>
+            去结算({{totalCount}})
+        </view>
+        <view class='rightArrow'>
+        </view>
+    </view>
+</view>
+<block wx:if='{{showBuyCon}}'>
         <view class='buy-con' catchtouchmove="ture" data-e='buy-con'>
             <view class='lineOne-con'>
                 <image src='{{imageHost}}{{product.head[0]}}' style='width:150rpx;height:150rpx;margin-left:20rpx;margin-top:20rpx;border-radius:20rpx;color:#ffcb05'></image>
@@ -189,5 +192,3 @@
             </view>
         </view>
     </block>
-    
-</scroll-view>

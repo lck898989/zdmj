@@ -10,7 +10,7 @@
 .shoppingImageView {
     position: relative;
     width: 750rpx;
-    height: 750rpx;
+
 }
 
 .shoppingType {
@@ -21,7 +21,7 @@
 }
 
 .shu {
-    position: absolute;
+    position: absolute; 
     top: 73rpx;
     width: 2rpx;
     height: 28rpx;
@@ -58,24 +58,24 @@
 }
 
 .imageActivity {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
+    position: relative;
+    margin-top: 0;
+    margin-left: 0;
+ 
     width: 750rpx;
 }
 
 .activityViewSon {
-    position: absolute;
-    top: 0;
-    left: 0;
+    position: relative;
+    margin-top: 0;
+    margin-left: 0;
     height: 100%;
     width: 750rpx;
 }
 
 .indexLun {
     position: absolute;
-    top: 1002rpx;
+    bottom: 20rpx;
     right: 21rpx;
     color: #fff;
 }
@@ -418,19 +418,29 @@
     bottom: 0;
 }
 .sharePrice {
+    background-color: #ffffff;
     position: relative;
-    width: 250rpx;
+    width: 220rpx;
     height: 100rpx;
+    display: flex; 
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.canPay{
+    width: 220rpx;
+    background-color: #a0a0a0;
+    color: #fff;
     display: flex;
     justify-content: center;
+    align-items: center;
 }
-
 .shareView {
     position: relative;
-    width: 200rpx;
+    width: 310rpx;
     height: 100rpx;
-    background-color: #f39800;
-    color: #fff;
+    background-color: #fff;
+    color: #f39800;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -438,13 +448,13 @@
 }
  button::after{ border:none;} 
 .huodeText {
-    position: absolute;
-    top: 12rpx;
+    /* position: absolute;
+    top: 12rpx; */
 }
 
 .getPriceText {
-    position: absolute;
-    bottom: 12rpx;
+    /* position: absolute;
+    bottom: 12rpx; */
 }
 .nullView8{
   position: absolute;
@@ -455,14 +465,14 @@
   top: 20rpx;
 }
 .backImage{
-  position: absolute;
+  /* position: absolute; */
   width:48rpx;
-  top: 12rpx;
+  /* top: 12rpx; */
 }
 .backtext{
-  position: absolute;
-  bottom: 18rpx;
-  color: #626262;
+  /* position: absolute; */
+  /* bottom: 18rpx; */
+  color: #b964d8;
 }
 .backIndex{
   position: relative;
@@ -470,6 +480,7 @@
   height: 100rpx;
   display: flex;
   justify-content: center;
+  flex-direction: column;
   align-items: center;
   background-color: #ffffff;
 
@@ -477,7 +488,7 @@
 
 .buy {
      position: relative;
-    width: 200rpx;
+    width: 220rpx;
     height: 100rpx;
     background-color: #b964d8;
     color: #fff;
@@ -561,18 +572,18 @@
 }
 
 .titleText {
-    position: absolute;
-    top: 22rpx;
-    left: 30rpx;
+    position: relative;
+    margin-top: 22rpx;
+  margin-left: 30rpx;
     width: 690rpx;
-    height: 80rpx;
+    /* height: 80rpx; */
     color: #ffffff;
     /* line-height: 15rpx; */
 }
 
 .authorView {
-    position: absolute;
-    top: 117rpx;
+    position: relative;
+    margin-top: 32rpx;
     left: 0rpx;
     width: 750rpx;
     height: 48rpx;

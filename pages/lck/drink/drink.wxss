@@ -1,14 +1,14 @@
-/* pages/lck/play/play.wxss */
 page{
     background: #f996c4;
+    width: 750rpx;
 }
 .page-con{
-    height   : 100%;
     position : relative;
-    width: 100%;
+    width: 100vw;
     height: 100%;
 }
 .title-con,.text{
+    width: 714rpx;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -32,23 +32,22 @@ page{
 }
 .search-con{
     width: 210rpx;
-    padding: 0rpx 20rpx;
     position: relative;
-    margin-left: 80rpx;
 }
 .input{
     width:90rpx;
     border: 2rpx solid #fff;
     border-radius: 50rpx;
     height: 50rpx;
+    line-height: 50rpx;
     font-size: 25rpx;
-    padding-left: 60rpx;
+    padding-left: 50rpx;
     color: #fff;
 }
 .search-icon{
     position: absolute;
     top: 15rpx;
-    left: 40rpx;
+    left: 20rpx;
 }
 swiper{
     height:750rpx;

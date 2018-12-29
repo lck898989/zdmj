@@ -3,119 +3,122 @@
 <import src="/wxParse/wxParse.wxml" />
 
 <scroll-view scroll-y='true' class='gundong' bindscroll='gunhdong'>
-  <swiper class="shoppingImageView" bindchange='changeSwiper' scroll-x="true" autoplay='true' circular='true'>
-    <swiper-item class="activityViewSon" wx:for="{{shopHead}}" bindtap='PressSwiper' id="{{index}}">
-      <image src="{{url+item}}" class="imageActivity"></image>
-    </swiper-item>
-  </swiper>
-  <view class='indexLun' style='font-size:23rpx'>
-{{index}}/{{activityImage.length}}
-  </view>
-  <view class='shoppingTitleView'>
-    <text class='titleText' style='font-size:32rpx;font-weight:900'>{{shopIntroduction}}</text>
-    <view class='authorView'>
-      <image class='authorImage' mode='widthFix' style='height:auto' src='{{shopJSon1.wxhead}}'></image>
-      <text class='authorName' style='font-size:23rpx;font-weight:900'>{{shopJSon1.wxnickname}}</text>
-      <text class='wenzhangData' style='font-size:16rpx;font-weight:900' space='ensp'>{{shopJSon1.time}}</text>
-      <image class='seeIcon' mode='widthFix' src='../../resources/ico_eye.png' style='height:auto'></image>
-      <text class='seeNumber' style='font-size:20rpx;font-weight:900'>{{shopJSon1.see}}</text>
+    <swiper class="shoppingImageView" bindchange='changeSwiper' scroll-x="true" style='height:{{heightSwiper[index-1]}}rpx' autoplay='true' circular='true'>
+        <swiper-item class="activityViewSon" wx:for="{{shopHead}}" bindtap='PressSwiper' id="{{index}}">
+            <image src="{{url+item}}" class="imageActivity" data-id='{{index}}' mode='widthFix' bindload='loadImage'></image>
+        </swiper-item>
+        <view class='indexLun' style='font-size:23rpx'>
+            {{index}}/{{shopJSon.shophead.length}}
+        </view>
+    </swiper>
+    <view class='shoppingTitleView'>
+        <text class='titleText' style='font-size:32rpx;font-weight:900'>{{shopIntroduction}}</text>
+        <view class='authorView'>
+            <image class='authorImage' mode='widthFix' style='height:auto' src='{{shopJSon1.wxhead}}'></image>
+            <text class='authorName' style='font-size:23rpx;font-weight:900'>{{shopJSon1.wxnickname}}</text>
+            <text class='wenzhangData' style='font-size:16rpx;font-weight:900' space='ensp'>{{shopJSon1.time}}</text>
+            <image class='seeIcon' mode='widthFix' src='../../resources/ico_eye.png' style='height:auto'></image>
+            <text class='seeNumber' style='font-size:20rpx;font-weight:900'>{{shopJSon1.see}}</text>
+        </view>
     </view>
-  </view>
-  <view class='authorTextView'>
-    <template is="wxParse" data="{{wxParseData:article.nodes}}" />
-  </view>
-  <view class='nullView' style='background:#0d0909'></view>
-  <view class='shoppingMsg' style='background:#0d0909'>
-    <view class='nullView1' style='background:#2f2f2f'></view>
-    <image class='shoppingImage' mode='widthFix' src='{{url+shopJSon.shophead[0]}}'></image>
-    <text class='shoppingName' style='font-size:33rpx;font-weight:900'>{{shopJSon.shopname}}</text>
-    <text class='shoppingType' style='font-size:23rpx;font-weight:900'>{{shopJSon.shoptname}}</text>
-    <text class='shu'></text>
-    <text class='shoppingAdress' style='font-size:23rpx;font-weight:900'>{{shopJSon.businessarea}}</text>
-    <text class='shoppingAdress1' style='font-size:23rpx;font-weight:900'>{{shopJSon.shopaddress}}</text>
-  </view>
-  <view class='shopMsg' style='background:#0d0909'>
-    <view class='nullView2' style='background:#2f2f2f'></view>
-    <view class='shopView' wx:for='{{shopArray}}'>
-      <view class='shopView1'>
-        <image class='shopImage' mode='widthFix' src='{{url+item.head[0]}}'></image>
-        <text class='daiText' style='font-size:32rpx;font-weight:900'>{{item.shoppname}}</text>
-        <text class='shopPrice' style='font-size:40rpx;font-weight:900lcolor:#ffcb05'>￥{{item.shopprice}}</text>
-        <text class='shopPrice1' style='font-size:24rpx;font-weight:900;color:#707070'>￥{{item.shopoprice}}</text>
-        <text class='detaitText1' bindtap='pressDetail' data-index='{{index}}' style='font-size:28rpx;font-weight:900;color:#707070'>详情</text>
-        <view class='dayuView' bindtap='pressDetail' data-index='{{index}}'>
-          <image class='dayu' mode='widthFix' wx:if='{{item.isOpen==false}}' style='width:11rpx;height:auto' src='../../resources/ico_arrow.png'></image>
-          <image class='dayu' mode='widthFix' wx:else style='width:29rpx;height:auto' src='../../resources/ico_arrow_旋转.png'></image>
-        </view>
-      </view>
-      <view class='detailView' wx:if='{{item.isOpen}}'>
-        <view class='nullView3'></view>
-        <view class='shopDetail2'>
-          <text class='textXiang' style='font-size:23rpx;font-weight:900;color:#707070'>商品详情 :</text>
-          <text class='textDetail' space='ensp' style='font-size:23rpx;font-weight:900;color:#707070'> {{item.info}}</text>
-        </view>
-        <view class='youxianView'>
-          <text class='youxiaoText' style='font-size:23rpx;font-weight:900;color:#707070'>有效日期：</text>
-          <text class='youxiaoData' style='font-size:23rpx;font-weight:900;color:#707070'>{{item.endtime}}至{{item.endtime}}</text>
-        </view>
-        <view class='chuwaiView'>
-          <text class='chuwaiText' style='font-size:23rpx;font-weight:900;color:#707070'>除外日期：</text>
-          <text class='chuwaiData' style='font-size:23rpx;font-weight:900;color:#707070'>有效期内周末、法定节假日可用</text>
-        </view>
-        <view class='keyongView'>
-          <text class='keyongText' style='font-size:23rpx;font-weight:900;color:#707070'>使用时间：</text>
-          <text class='keyongData' style='font-size:23rpx;font-weight:900;color:#707070'>团购券使用时间：11:00-17:00</text>
-        </view>
-        <view class='nullView4'></view>
-      </view>
+    <view class='authorTextView'>
+        <template is="wxParse" data="{{wxParseData:article.nodes}}" />
     </view>
-  </view>
-  <view class='nullView5' style='color:#0d0909'></view>
+    <view class='nullView' style='background:#0d0909'></view>
+    <view class='shoppingMsg' style='background:#0d0909'>
+        <view class='nullView1' style='background:#2f2f2f'></view>
+        <image class='shoppingImage' mode='widthFix' src='{{url+shopJSon.shophead[0]}}'></image>
+        <text class='shoppingName' style='font-size:33rpx;font-weight:900'>{{shopJSon.shopname}}</text>
+        <text class='shoppingType' style='font-size:23rpx;font-weight:900'>{{shopJSon.shoptname}}</text>
+        <text class='shu'></text>
+        <text class='shoppingAdress' style='font-size:23rpx;font-weight:900'>{{shopJSon.businessarea}}</text>
+        <text class='shoppingAdress1' style='font-size:23rpx;font-weight:900'>{{shopJSon.shopaddress}}</text>
+    </view>
+    <view class='shopMsg' style='background:#0d0909'>
+        <view class='nullView2' style='background:#2f2f2f'></view>
+        <view class='shopView' wx:for='{{shopArray}}'>
+            <view class='shopView1'>
+                <image class='shopImage' mode='widthFix' src='{{url+item.head[0]}}'></image>
+                <text class='daiText' style='font-size:32rpx;font-weight:900'>{{item.shoppname}}</text>
+                <text class='shopPrice' style='font-size:40rpx;font-weight:900lcolor:#ffcb05'>￥{{item.shopprice}}</text>
+                <text class='shopPrice1' style='font-size:24rpx;font-weight:900;color:#707070'>￥{{item.shopoprice}}</text>
+                <text class='detaitText1' bindtap='pressDetail' data-index='{{index}}' style='font-size:28rpx;font-weight:900;color:#707070'>详情</text>
+                <view class='dayuView' bindtap='pressDetail' data-index='{{index}}'>
+                    <image class='dayu' mode='widthFix' wx:if='{{item.isOpen==false}}' style='width:11rpx;height:auto' src='../../resources/ico_arrow.png'></image>
+                    <image class='dayu' mode='widthFix' wx:else style='width:29rpx;height:auto' src='../../resources/ico_arrow_旋转.png'></image>
+                </view>
+            </view>
+            <view class='detailView' wx:if='{{item.isOpen}}'>
+                <view class='nullView3'></view>
+                <view class='shopDetail2'>
+                    <text class='textXiang' style='font-size:23rpx;font-weight:900;color:#707070'>商品详情 :</text>
+                    <text class='textDetail' space='ensp' style='font-size:23rpx;font-weight:900;color:#707070'> {{item.info}}</text>
+                </view>
+                <view class='youxianView'>
+                    <text class='youxiaoText' style='font-size:23rpx;font-weight:900;color:#707070'>有效日期：</text>
+                    <text class='youxiaoData' style='font-size:23rpx;font-weight:900;color:#707070'>{{item.endtime}}至{{item.endtime}}</text>
+                </view>
+                <view class='chuwaiView'>
+                    <text class='chuwaiText' style='font-size:23rpx;font-weight:900;color:#707070'>除外日期：</text>
+                    <text class='chuwaiData' style='font-size:23rpx;font-weight:900;color:#707070'>有效期内周末、法定节假日可用</text>
+                </view>
+                <view class='keyongView'>
+                    <text class='keyongText' style='font-size:23rpx;font-weight:900;color:#707070'>使用时间：</text>
+                    <text class='keyongData' style='font-size:23rpx;font-weight:900;color:#707070'>团购券使用时间：11:00-17:00</text>
+                </view>
+                <view class='nullView4'></view>
+            </view>
+        </view>
+    </view>
+    <view class='nullView5' style='color:#0d0909'></view>
+    <view class='buyView'>
+        <view class='backIndex' bindtap='turnIndex'>
+            <image class='backImage' style='height:auto' src='../../resources/btn_main_1.png' mode='widthFix'></image>
+            <text class='backtext' style='font-size:18rpx'>回首页</text>
+            <view class='nullView8'></view>
+        </view>
+        <button class='shareView' open-type='share' style='font-size:32rpx;font-weight:900;color:#f39800'>马上分享</button>
+        <view class='sharePrice' wx:if='{{shopJSon.discount_open=="true"}}' bindtap='turnDazhe'>
+            <text class='huodeText' style='font-size:28rpx;font-weight:900;color:#878787'>{{shopJSon.discount_rate}}折</text>
+            <text class='getPriceText' style='font-size:30rpx;font-weight:900;color:#f39800'>折扣支付</text>
+        </view>
+        <view class='canPay' style='font-size:32rpx;font-weight:900' wx:else>
+        折扣支付
+            <!-- <text class='huodeText' style='font-size:28rpx;font-weight:900;color:#878787'>1折</text>
+            <text class='getPriceText' style='font-size:30rpx;font-weight:900;color:#f39800'>折扣支付</text> -->
+        </view>
 
-  <view class='buyView' >
-    <view class='backIndex' bindtap='turnIndex'>
-      <image class='backImage' style='height:auto' src='../../resources/btn_main_0.png' mode='widthFix'></image>
-      <text class='backtext' style='font-size:18rpx'>回首页</text>
-      <view class='nullView8'></view>
+        <view class='buy' style='font-size:32rpx;font-weight:900;color:#ffffff' bindtap='buy'>
+            立即购买
+        </view>
     </view>
-    <view class='sharePrice'>
-      <text class='huodeText' style='font-size:28rpx;font-weight:900;color:#878787'>分享可获得</text>
-      <text class='getPriceText' style='font-size:30rpx;font-weight:900;color:#f39800'>￥{{shopJSon.rebate}}</text>
+    <view class='buy-con' hidden='{{buyBoxHidden}}'>
+        <view class='chooseShop'>
+            <image class='chooseImage' src=' ../../resources/icon_share.png' style='height:auto' mode='widthFix'></image>
+            <text class='choosePrice' style='font-size:36rpx;font-weight:900;color:#ffcb05'>￥{{onePlice*shopNumber}}</text>
+            <text class='chooseShopName1' style='font-size:27rpx;font-weight:900;color:#707070' space='ensp'>已选: {{chooseShop.shoppname}}</text>
+            <image class='Icon' src='../../resources/Cancel.png' mode='widthFix' bindtap='pressClose'></image>
+        </view>
+        <scroll-view class='chooseShopView' scroll-y='true'>
+            <view class='nullView6'></view>
+            <view class='fenleiText' style='font-size:28rpx;font-weight:900;color:#000000'>
+                <text class='fenleiText1' style='font-size:28rpx;font-weight:900;color:#000000'>分类</text>
+            </view>
+            <view class='typeView'>
+                <block wx:for='{{shopArray}}'>
+                    <view class='typeView1' bindtap='chooseShop' data-index='{{index}}' data-shoppid='{{item.shoppid}}' wx:if='{{chooseIndex!=index}}' style='font-size:22rpx;font-weight:900;color:#404040'>{{item.shoppname}}</view>
+                    <view class='typeView1' wx:else style='font-size:22rpx;font-weight:900;color:#b25bd2;background:#ecceff;border-bottom: 2px solid #863bb7;border-top: 2px solid #863bb7;border-left: 2px solid #863bb7;border-right: 2px solid #863bb7;'>{{item.shoppname}}</view>
+                </block>
+            </view>
+            <view class='nullView7'></view>
+            <view class='nullView6'></view>
+            <view class='shopNumberView'>
+                <text class='goumaiText' style='font-size:28rpx;font-weight:900;color:#000000'>购买数量</text>
+                <text class='jiaTrxt' bindtap='add'>+</text>
+                <text class='shopNumber' style='font-size:20rpx;color:#404040;font-weight:900;'>{{shopNumber}}</text>
+                <text class='jianTrxt' bindtap='jian'>-</text>
+            </view>
+        </scroll-view>
+        <view class='sureView' bindtap='pressSure' style='font-size:32rpx;font-weight:900;color:#ffffff'>确定</view>
     </view>
-  
-    <button class='shareView' open-type='share'  style='font-size:32rpx;font-weight:900;color:#ffffff'>马上分享</button>
-    <view class='buy' style='font-size:32rpx;font-weight:900;color:#ffffff' bindtap='buy'>
-      立即购买
-    </view>
-  </view>
-
-  <view class='buy-con' hidden='{{buyBoxHidden}}'>
-    <view class='chooseShop'>
-      <image class='chooseImage' src=' ../../resources/icon_share.png' style='height:auto' mode='widthFix'></image>
-      <text class='choosePrice' style='font-size:36rpx;font-weight:900;color:#ffcb05'>￥{{onePlice*shopNumber}}</text>
-      <text class='chooseShopName1' style='font-size:27rpx;font-weight:900;color:#707070' space='ensp'>已选: {{chooseShop.shoppname}}</text>
-      <image class='Icon' src='../../resources/Cancel.png' mode='widthFix' bindtap='pressClose'></image>
-    </view>
-    <scroll-view class='chooseShopView' scroll-y='true'>
-      <view class='nullView6'></view>
-      <view class='fenleiText' style='font-size:28rpx;font-weight:900;color:#000000'>
-        <text class='fenleiText1' style='font-size:28rpx;font-weight:900;color:#000000'>分类</text>
-      </view>
-      <view class='typeView'>
-        <block wx:for='{{shopArray}}'>
-          <view class='typeView1' bindtap='chooseShop' data-index='{{index}}' data-shoppid='{{item.shoppid}}' wx:if='{{chooseIndex!=index}}' style='font-size:22rpx;font-weight:900;color:#404040'>{{item.shoppname}}</view>
-          <view class='typeView1' wx:else style='font-size:22rpx;font-weight:900;color:#b25bd2;background:#ecceff;border-bottom: 2px solid #863bb7;border-top: 2px solid #863bb7;border-left: 2px solid #863bb7;border-right: 2px solid #863bb7;'>{{item.shoppname}}</view>
-        </block>
-      </view>
-      <view class='nullView7'></view>
-      <view class='nullView6'></view>
-      <view class='shopNumberView'>
-        <text class='goumaiText' style='font-size:28rpx;font-weight:900;color:#000000'>购买数量</text>
-        <text class='jiaTrxt' bindtap='add'>+</text>
-        <text class='shopNumber' style='font-size:20rpx;color:#404040;font-weight:900;'>{{shopNumber}}</text>
-        <text class='jianTrxt' bindtap='jian'>-</text>
-      </view>
-    </scroll-view>
-    <view class='sureView' bindtap='pressSure' style='font-size:32rpx;font-weight:900;color:#ffffff'>确定</view>
-  </view>
 </scroll-view>

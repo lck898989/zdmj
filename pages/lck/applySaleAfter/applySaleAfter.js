@@ -246,7 +246,8 @@ Page({
           oitemid  : self.data.goods.oitemid,
           uid      : app.uid,
           typ      : self.data.backGoodsType.type,
-          backcount: self.data.backcount
+          backcount: self.data.backcount,
+          re       : []
       }
       console.log("reasonList is ",reasonList);
       //获得缩略图数组的长度
@@ -312,32 +313,49 @@ Page({
           }
       } else {
           //发送给服务器上传完毕--不上传图片
-          wx.request({
-              url: self.data.host + 'Data/ApplyAfterSale',
-              method: 'POST',
-              data: reasonList,
-              success: function (res) {
-                  console.log("图片上传完毕的相应");
-                  console.log("res is ", res);
-                  // 响应
-                  wx.hideLoading();
-                  if (res.data.encode === 0) {
-                      //跳转页面进入正在申请界面
-                      wx.navigateTo({
-                          url: '../saleService/saleService?status=1',
-                          success: function () {
-                              wx.showToast({
-                                  title: '提交数据成功!',
-                                  icon: 'none'
-                              })
-                          }
-                      })
-                  }
-              },
-              fail: function () {
-                  console.log("请求失败");
-              }
-          })
+          if(reasonList.accept !== '' && reasonList.phone !== '' && reasonList.reason !== ''){
+            wx.request({
+                url: self.data.host + 'Data/ApplyAfterSale',
+                method: 'POST',
+                data: reasonList,
+                success: function (res) {
+                    console.log("图片上传完毕的相应");
+                    console.log("res is ", res);
+                    // 响应
+                    wx.hideLoading();
+                    if (res.data.encode === 0) {
+                        //跳转页面进入正在申请界面
+                        wx.redirectTo({
+                            url: '../saleService/saleService?status=1',
+                            success: function () {
+                                wx.showToast({
+                                    title: '提交数据成功!',
+                                    icon: 'none'
+                                });
+                            }
+                        })
+                    }
+                },
+                fail: function () {
+                    console.log("请求失败");
+                }
+            })
+          }else if(reasonList.accept === ''){
+              wx.showToast({
+                  title : '请填写收货人',
+                  icon  : 'none'
+              });
+          }else if(reasonList.phone === ''){
+              wx.showToast({
+                  title : '请填写手机号码',
+                  icon  : 'none'
+              })
+          }else if(reasonList.reason === ''){
+              wx.showToast({
+                  title : '请填写原因',
+                  icon  : 'none'
+              })
+          }
       }
   },
   //获取输入的用户名

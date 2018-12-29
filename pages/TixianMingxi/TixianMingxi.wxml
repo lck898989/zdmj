@@ -21,8 +21,8 @@
             <image class='shibaiImage' src='../../resources/qiaobao_icon5.png' style='height:auto' wx:if='{{state==0}}' mode='widthFix'></image>
         </block>
         <block wx:if='{{type==1}}'>
-            <text class='stateText1' style='color:red;font-size:26rpx;' wx:if='{{detailtype==0}}'>分享商品</text>
-            <text class='stateText1' style='color:red;font-size:26rpx;' wx:if='{{tdetailtypeype==1}}'>分享文章</text>
+            <text class='stateText1' style='color:red;font-size:26rpx;' wx:if='{{detailtype==10}}'>分享商品</text>
+            <text class='stateText1' style='color:red;font-size:26rpx;' wx:if='{{detailtype==11}}'>分享文章</text>
         </block>
         <text class='stateText1' style='color:red;font-size:26rpx;' wx:if='{{type==3}}'>商城支付-抵用现金</text>
         <!-- <text class='stateText1' style='color:#7ccd7e;font-size:26rpx;' wx:else>提现成功</text> -->
@@ -55,8 +55,8 @@
                 <text class='numberText' style='font-size:26rpx;' wx:if='{{type==0}}'>提现单号</text>
                 <text class='numberText' style='font-size:26rpx;' wx:if='{{type==3}}'>购买商品</text>
                 <text class='number' style='font-size:26rpx;' wx:if='{{type==0}}'>{{number}}</text>
-                <text class='number' style='font-size:26rpx;' wx:if='{{type==1}}'>{{item.pname}}</text>
-                <text class='number' style='font-size:26rpx;' wx:if='{{type==3}}'>{{item.pname}}</text>
+                <text class='number' style='font-size:26rpx;' wx:if='{{type==1}}'>{{products[0].pname}}</text>
+                <text class='number' style='font-size:26rpx;' wx:if='{{type==3}}'>{{products[0].pname}}</text>
             </view>
         </block>
         <view class='nullView3'></view>

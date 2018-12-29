@@ -1,0 +1,24 @@
+<!--pages/Discount/Discount.wxml-->
+<view class='background'>
+    <view class='shoppingMsg' style='background:#0d0909'>
+        <view class='nullView1' style='background:#2f2f2f'></view>
+        <image class='shoppingImage' mode='widthFix'src='{{url+shopJSon.shophead[0]}}'></image>
+        <text class='shoppingName' style='font-size:33rpx;font-weight:900'>{{shopJSon.shopname}}</text>
+        <text class='shoppingType' style='font-size:23rpx;font-weight:900'>{{shopJSon.shoptname}}</text>
+        <text class='shu'></text>
+        <text class='shoppingAdress' style='font-size:23rpx;font-weight:900'>{{shopJSon.businessarea}}</text>
+        <text class='shoppingAdress1' style='font-size:23rpx;font-weight:900'>{{shopJSon.shopaddress}}</text>
+    </view>
+    <text class='text1' style='font-size:34rpx;font-weight:900;color:#000000'>请根据收银员的提示</text>
+    <text class='text2' style='font-size:34rpx;font-weight:900;color:#000000'>输入您此次的支付金额</text>
+    <view class='text3'>
+        <text style='font-size:34rpx;font-weight:900;color:#000000' class='leftText'>(此单享受</text>
+        <text style='font-size:43rpx;font-weight:900;color:#b964d8' class='zhe'>{{shopJSon.discount_rate}}</text>
+        <text style='font-size:34rpx;font-weight:900;color:#000000' class='rightText'>折优惠)</text>
+    </view>
+    <view class='text4'>
+        <text class='fuhao' style='font-size:34rpx;font-weight:900;color:#000000'>￥</text>
+        <input bindinput='sreach' class='input1' value='{{sreachText}}' style='font-size:59rpx;font-weight:900;color:#000000'></input>
+    </view>
+    <view class='buttonsure' style='font-size:35rpx;font-weight:900' bindtap='pressSure'>确认并获取折后价格</view>
+</view>

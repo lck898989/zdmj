@@ -63,7 +63,6 @@
     /* box-shadow: 0rpx 8rpx 8rpx #d0d0d0;
     -webkit-box-shadow: 0rpx 8rpx 8rpx #d0d0d0; */
 }
-
 .dataParent{
     position: relative;
     width: 750rpx;
@@ -284,6 +283,15 @@
   position: relative;
   margin-top: 0rpx;
 }
+.nullData{
+    position: relative;
+    width: 750rpx;
+    height:500rpx; 
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+
+}
 .date-box{
   position: relative;
   width: 700rpx;
@@ -319,9 +327,10 @@
   top: 0;
   width: 45rpx;
   height: 45rpx;
+  font-weight:900;
    border-radius: 50%; 
   color: #000000;
-  font-size:23rpx;
+  font-size:25rpx;
   display: flex;
   justify-content: center;
   align-items: center;

@@ -252,12 +252,10 @@
   text-align: center;
   border-radius: 0;
   background-color: #ffffff;
-
 }
 .daifukuan{
     position: absolute;
     top: 72rpx;
- 
 }
 .sz{
   position: absolute;
@@ -276,4 +274,8 @@
   right: 0rpx;
   text-align: center;
   background-color: #ffffff;
+}
+.code-canvas{
+    width:400rpx;
+    height:400rpx;
 }

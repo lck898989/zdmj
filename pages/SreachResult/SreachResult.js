@@ -1,11 +1,12 @@
 // pages/SreachResult/SreachResult.js
 var app = getApp();
 Page({
-
     /**
      * 页面的初始数据
      */
     data: {
+        indexShopJson:{}, 
+        allDefault:false,
         shopNumber:1,
         buyBoxHidden:true,
         url:"",
@@ -31,7 +32,6 @@ Page({
         this.setData({
             url:app.urlw3
         })
-        
         if (app.sreacJson) {
            
             for (let i = 0; i <= app.sreacJson.allessays.length-1;i++)
@@ -44,7 +44,6 @@ Page({
                             console.log("SreachResult222" + JSON.stringify(app.sreacJson));
                             app.sreacJson.allessays[i].essaycustomhead = app.sreacJson.allessays[i].essaycustomhead.split(",");
                         }
-                       
                     }
                     else
                     {
@@ -70,13 +69,16 @@ Page({
                             console.log("SreachResult111" + JSON.stringify(app.sreacJson));
                             app.sreacJson.allessays[i].essayhead = app.sreacJson.allessays[i].essayhead.split(",");
                         }
-                      
                     }
                 }  
             }
             console.log(JSON.stringify(app.sreacJson.allproducts) + "allessays11111111111111");
          
             for (let i = 0; i <= app.sreacJson.allproducts.length - 1; i++) {
+                if (app.sreacJson.allproducts[i].custom == 1 && typeof app.sreacJson.allproducts[i].customhead=="string")
+                {
+                    app.sreacJson.allproducts[i].customhead = app.sreacJson.allproducts[i].customhead.split(",");
+                }
                 if (typeof app.sreacJson.allproducts[i].head=="string")
                 {
                     app.sreacJson.allproducts[i].head = app.sreacJson.allproducts[i].head.split(",");
@@ -212,7 +214,11 @@ Page({
                     }
                 }
                 for (let i = 0; i <= res.data.allproducts.length - 1; i++) {
-                    res.data.allproducts[i].head =   res.data.allproducts[i].head.split(",");
+                    if (res.data.allproducts[i].custom == 1 && typeof res.data.allproducts[i].customhead=="string")
+                    {
+                        res.data.allproducts[i].customhead=res.data.allproducts[i].customhead.split(",");
+                    }
+                    res.data.allproducts[i].head =res.data.allproducts[i].head.split(",");
                 }
                 this.setData({
                     allproducts: res.data.allproducts,
@@ -325,7 +331,6 @@ Page({
                 }
             }
         }
-
         console.log(options.sreachText);
         this.setData({
             sreachText: options.sreachText,
@@ -397,24 +402,48 @@ Page({
         console.log(JSON.stringify(this.data.rightArray) + "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
         //获取每张图片的高度
     },
+    buyShop: function (event) {
+        console.log(event.currentTarget.dataset.pid);
+        app.shopMsgJson = null;
+        app.ShortConnect(app.urlw + "Data/GetProductByPid", {
+            pid: event.currentTarget.dataset.pid
+        }, 'ActicleInterShop', function (r) {
+            wx.setStorage({
+                key: 'goods',
+                data: r,
+                success: function () {
+                    wx.navigateTo({
+                        url: '../lck/cartGoodsDetail/cartGoodsDetail'
+                    })
+                    // wx.navigateTo({
+                    //     url: '../lck/careGoodsDetail/cartGoodsDetail',
+                    // }) 
 
+                },
+            })  
+        });
+        // wx.navigateTo({
+        //     url: '../lck/cartGoodsDetail/cartGoodsDetail'
+        // })
+    },
     buyShop1: function (event) {
+        this.setData({
+            allDefault: false
+        })
         console.log(event.currentTarget.dataset.shop);
         // event.currentTarget.dataset.shop.head = event.currentTarget.dataset.shop.head.split(",");
         console.log(event.currentTarget.dataset.pid);
         if (event.currentTarget.dataset.shop.openstandard == 1) {
-            // this.setData({
-            //     indexShopArray: event.currentTarget.dataset.shop,
-            // })
-            // app.ShortConnect(app.urlw + "Data/GetStandardByPid", {
-            //     pid: event.currentTarget.dataset.pid
-            // }, "setSreachSize");
-
+            this.setData({
+                indexShopArray: event.currentTarget.dataset.shop,
+            })
+            app.ShortConnect(app.urlw + "Data/GetStandardByPid", {
+                pid: event.currentTarget.dataset.pid
+            }, "setSreachSize");
         } else {
             var selectsize = JSON.parse(event.currentTarget.dataset.shop.size);
-            console.log(selectsize + "333333333333");
+            console.log(JSON.stringify(event.currentTarget.dataset.shop) + "333333333333");
             var keys = Object.keys(selectsize);
-            console.log(keys + "333333333333");
             var selectsize1 = {};
             for (let i = 0; i < keys.length; i++) {
                 var value = selectsize[`${keys[i]}`];
@@ -440,19 +469,38 @@ Page({
                     tempArr.push(tempJson);
                 }
                 // typeValueJson.mode = typeValueArr1[i];
-                // typeValueJson.touch = true;
-
+                // typeValueJson.touch = true
                 typeValueArr2.push(typeValueJson);
             }
-            
             console.log("typeValueArr2 is ", typeValueArr2);
             this.setData({
                 buyBoxHidden: false,
                 indexShopArray: event.currentTarget.dataset.shop,
                 typeArr: Object.keys(event.currentTarget.dataset.shop.size),
-                typeValueArr: typeValueArr2
-
+                typeValueArr: typeValueArr2,
+                goodShop: this.data.goodShop,
+                indexShopJson: event.currentTarget.dataset.shop
             })
+            let defaultCount = 0;
+            for (let k = 0; k < this.data.typeValueArr.length; k++) {
+                let itemType = this.data.typeValueArr[k];
+                console.log("itemType is ", itemType);
+                let key = this.data.typeArr[k];
+                let tempJson = itemType[`${key}`];
+                console.log("tempJson is ", tempJson);
+                for (let m = 0; m < tempJson.length; m++) {
+                    console.log("默认了吗：", tempJson[m].mode === '默认');
+                    if (tempJson[m].mode === '默认') {
+                        defaultCount++;
+                    }
+                }
+            }
+            if (defaultCount === this.data.typeArr.length) {
+                console.log("所有的规格都是默认");
+                this.setData({
+                    allDefault: true
+                })
+            }
             console.log(this.data.buyBoxHidden + "333333333333");
         }
     },
@@ -471,6 +519,30 @@ Page({
         this.setData({
             buyBoxHidden:true
         })
+    },
+    pressSure: function () {
+        let data = {
+            uid: app.uid,
+            pid: this.data.indexShopJson.pid,
+            size: this.data.indexShopJson.size,
+            count: this.data.shopNumber,
+        }
+        console.log(JSON.stringify(this.data.wenzhangJson) + "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+        if (app.isShare) {
+            data.source = 2
+        }
+        else {
+            data.source = 0;
+        }
+        data.head = this.data.indexShopJson.head[0];
+        data.pname = this.data.indexShopJson.pname;
+        data.price = this.data.indexShopArray.price;
+        let orderA = [];
+        orderA.push(data);
+        wx.setStorageSync('orderArray', orderA);
+        wx.navigateTo({
+            url: '../lck/order/order?interSource=0',
+        });
     },
     add: function () {
         this.setData({
@@ -494,12 +566,13 @@ Page({
                 pid: event.currentTarget.dataset.shopjson.pid,
                 eid: event.currentTarget.dataset.shopjson.eid,
                 uid:app.uid
-            }, "interWenZhang");
+            }, "interWenZhang",function(res){});
             wx.navigateTo({
                 url: '../ActicleScene/ActicleScene?essayhead=' + event.currentTarget.dataset.shopurl + "&title=" + event.currentTarget.dataset.title + "&authorurl=" + event.currentTarget.dataset.shopjson.wxhead + "&authorname=" + event.currentTarget.dataset.shopjson.wxnickname + "&pid=" + JSON.stringify(event.currentTarget.dataset.shopjson.pid) + "&eid=" + JSON.stringify(event.currentTarget.dataset.shopjson.eid),
             })
         }
         if (event.currentTarget.dataset.productstype == "shopessays") {
+            console.log(event.currentTarget.dataset.shopid+"--=----------------");
             var shopjson2 = encodeURIComponent(JSON.stringify(event.currentTarget.dataset.shopjson));
             // app.wenzhangShop = null;
             app.shopWenZhangJson=null;

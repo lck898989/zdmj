@@ -1,7 +1,11 @@
 {
     "pages": [
         "pages/wxscope/wxscope",
+        "pages/lck/test/test",
+        "pages/lck/bindPhone/bindPhone",
         "pages/lck/address/address",
+        "pages/Discount/Discount",
+        "pages/Discountone/Discountone",
         "pages/zcw/friends/friends",
         "pages/zcw/myfriends/myfriends",
         "pages/search/search",
@@ -9,6 +13,10 @@
         "pages/lck/newCart/newCart",
         "pages/lck/webview/webview",
         "pages/lck/shop/shop",
+        "pages/lck/eat/eat",
+        "pages/lck/drink/drink",
+        "pages/lck/play/play",
+        "pages/lck/fun/fun",
         "pages/ButReady/BuyReady",
         "pages/lck/ShopSuccess/ShopSuccess",
         "pages/indextwo/indextwo",
@@ -50,6 +58,7 @@
         "pages/ShopActicle/ShopActicle",
         "pages/HistroyShare/HistroyShare",
         "pages/zcw/user/user"
+        
     ],
     "window": {
         "navigationBarBackgroundColor": "white",
@@ -57,7 +66,6 @@
         "navigationBarTextStyle": "black",
         "enablePullDownRefresh": true
     },
-    
     "tabBar": {
         "selectedColor": "#863bb7",
         "backgroundColor": "#fff",

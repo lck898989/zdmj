@@ -1,0 +1,116 @@
+/* pages/lck/bindPhone/bindPhone.wxss */
+page{
+    background: #fff;
+}
+.page-con{
+    border-top: 2rpx solid #f2f2f2;
+}
+.law,.phone-con,.phoneWrapper,.itemInput{
+    display:flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: nowrap;
+    flex-direction: column; 
+}
+.law{
+    color: #7d7d7d;
+    font-size: 32rpx;
+    padding: 52rpx 150rpx;
+}
+.phoneWrapper{
+    justify-content: center;
+    flex-direction: row;
+}
+.phone-con{
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 104rpx;
+    width: 640rpx;
+    padding: 15rpx 10rpx 15rpx 30rpx;
+    border-bottom: 4rpx solid #b964d8;
+}
+.delete{
+    border-left: 20rpx solid #fff;
+    border-right: 20rpx solid #fff;
+    border-top: 10rpx solid #fff;
+}
+.next{
+    margin-top: 45rpx;
+    border-radius: 10rpx;
+    background: #b964d8;
+    padding: 30rpx 200rpx;
+    width: 300rpx;
+    color: #fff;
+    font-size: 32rpx;
+    text-align: center;
+    margin-left: 25rpx;
+    font-weight: bold;
+    white-space: nowrap;
+}
+.message-con{
+    padding: 70rpx 0rpx 130rpx 0rpx;
+    text-align: center;
+}
+.message-code{
+    color: #000;
+    font-weight: bold;
+    font-size: 35rpx;
+}
+.info{
+    margin-top: 25rpx;
+    font-size: 25rpx;
+    color: #7d7d7d;
+}
+.inputItem{
+    margin-left: 111rpx;
+}
+.detail-code{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    width:528rpx;
+    margin-left: 111rpx;
+}
+.itemInput{
+    width: 70rpx;
+    border-bottom: 4rpx solid #bfbfbf;
+    flex-direction: row;
+    justify-content: center;
+    text-align: center;
+}
+.input-style{
+    border-bottom: 4rpx solid #b964d8;
+}
+.inputWrapper{
+    position: relative;
+}
+.content{
+  width:528rpx;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-left: 111rpx;
+}
+.iptbox{
+  width: 70rpx;
+  border-bottom:4rpx solid #7d7d7d;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.ipt{
+  width: 0;
+  height: 0;
+}
+.btn-area{
+  width: 80%;
+  background-color: orange;
+  color:white;
+}
+.cutdownWrapper{
+    text-align: center;
+    color: #7d7d7d;
+    font-size: 25rpx;
+}

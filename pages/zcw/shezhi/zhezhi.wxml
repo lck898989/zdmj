@@ -9,13 +9,14 @@
 
   <view class='hang'>
     <view class='biaoti'>昵称</view>
-    <view class="nrzi">{{userInfo.nickName}}</view>
+    <view class="nrzi" style='color:#7d7d7d;'>{{userInfo.nickName}}(不可更改)</view>
   </view>
 
 
-  <view class='hang'>
+  <view class='hang' bindtap='enterBindPhone'>
     <view class='biaoti'>手机号码</view>
-    <view class="nrzi2"></view>
+
+    <view class="nrzi2" style='color:#a6a6a6'>{{bindNumber === "" ? "绑定手机号" : bindNumber}}</view>
     <image class='nrtu' src='{{srcp1}}' style='height:auto' mode='widthFix'/>
   </view>
 

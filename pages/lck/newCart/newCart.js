@@ -287,6 +287,7 @@ Page({
             sourceCarts : [],
             myshoppingPage : 1,
             isChoosed : false,
+            isFullChoosed : false,
             goodsCount : 0,
             count      : 0
         })

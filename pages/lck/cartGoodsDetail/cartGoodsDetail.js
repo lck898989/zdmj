@@ -64,6 +64,9 @@ Page({
         floorStatus : false,
         //全部是默认的
         allDefault : false,
+        essayuid   : '',
+        //是否是从文章详情里面进入商品详情购买的
+        isBuyFromEssays : false
     },
 
     /**
@@ -94,7 +97,9 @@ Page({
                 })
                 break;
             case "1":
-
+                this.setData({
+                    interSource : 1,
+                })
                 break;
             case "2":
                 this.setData({
@@ -102,6 +107,16 @@ Page({
                     transpondUid: options.transpondUid
                 })
                 break;
+        }
+        if (options.fromEssays === '1'){
+            //记录分享者的uid
+            console.log("interSource is ",this.data.interSource);
+            console.log("essayUid is ",this.data.essayuid);
+            this.data.essayuid = options.essayuid;
+            console.log("essayuid is ",this.data.essayuid);
+        }
+        if (options.fromEssays === '1'){
+            this.data.isBuyFromEssays = true;
         }
         if (app.shopMsgJson) {
             console.log(app.shopMsgJson);
@@ -143,7 +158,8 @@ Page({
                 //分享的来源编号是
                 console.log("商品来源编号是：",goodsObj.resources);
                 this.setData({
-                    goods: goodsObj
+                    goods       : goodsObj,
+                    interSource : 1
                 })
                 this.initGoodsInfo();
                 this.setData({
@@ -257,71 +273,71 @@ Page({
                     typeValueArr: self.data.typeValueArr
                 })
             }else{
-                //有规格的商品
-                let url = this.data.host+'Data/GetStandardByPid';
+                ///有规格的商品
+                let url = app.host + 'Data/GetStandardByPid';
                 let data = {
-                    pid : this.data.goods.pid
+                    pid: this.data.goods.pid
                 }
-                let req = new Request(url,data,'POST','text');
+                let req = new Request(url, data, 'POST', 'text');
                 let res = await req.sendRequest();
-                console.log("有规格的产品的规格是：",res.data.products);
-                let categoryArr = res.data.products;
-                let categoryLen = categoryArr.length;
-                for (let i = 0; i < categoryLen; i++) {
-                    let keys = Object.keys(categoryArr[i]);
-                    console.log("keys is ", keys);
-                    //把规格存进数组
-                    for (let m = 0; m < keys.length; m++) {
-                        let keyObj = keys[m];
-                        this.data.typeArr.push(keyObj);
-                        // console.log("种类的值是：", categoryArr[i][`${keyObj}`]);
-                        let le = categoryArr[i][`${keyObj}`].length;
-                        let tempJson = {};
-                        console.log("le is ", le);
-                        console.log("keyObj is ",keyObj);
-                        tempJson[`${keyObj}`] = [];
-                        for (let a = 0; a < le; a++) {
-                            // console.log("种类值是：", categoryArr[i][`${keyObj}`][a]);
-                            let innerJson = {
-    
-                            }
-                            innerJson.mode = categoryArr[i][`${keyObj}`][a];
-                            let typeKeys = categoryArr[i][`${keyObj}`];
-                            console.log("typeKeys is ",typeKeys);
-                            // a === 0 ? (innerJson.touch = true) : (innerJson.touch) = false;
-                            if(a === 0){
-                                innerJson.touch = true;
-                                //默认选择的类型
-                                this.data.sendServerSize[`${keyObj}`] = innerJson.mode;
-                            }else{
-                                innerJson.touch = false;
-                            }
-                            // //检查商品中的size_choosed中的value值是否与该
-                            // innerJson.touch = false;
-                            tempJson[`${keyObj}`].push(innerJson);
+                console.log("有规格的产品的规格是：", res.data.products);
+                let category = res.data.products.canselectstandard;
+                console.log("category is ", category);
+                let keys = Object.keys(category);
+                console.log("keys is ", keys);
+                //把规格存进数组
+                for (let m = 0; m < keys.length; m++) {
+                    let keyObj = keys[m];
+                    this.data.typeArr.push(keyObj);
+                    // console.log("种类的值是：", categoryArr[i][`${keyObj}`]);
+                    let le = category[`${keyObj}`].length;
+                    let tempJson = {};
+                    console.log("le is ", le);
+                    console.log("keyObj is ", keyObj);
+                    tempJson[`${keyObj}`] = [];
+                    for (let a = 0; a < le; a++) {
+                        // console.log("种类值是：", categoryArr[i][`${keyObj}`][a]);
+                        let innerJson = {
+
                         }
-                        this.data.typeValueArr.push(tempJson);
+                        innerJson.mode = category[`${keyObj}`][a];
+                        let typeKeys = category[`${keyObj}`];
+                        console.log("typeKeys is ", typeKeys);
+                        // a === 0 ? (innerJson.touch = true) : (innerJson.touch) = false;
+                        if (a === 0) {
+                            innerJson.touch = true;
+                            //默认选择的类型
+                            this.data.sendServerSize[`${keyObj}`] = innerJson.mode;
+                        } else {
+                            innerJson.touch = false;
+                        }
+                        // //检查商品中的size_choosed中的value值是否与该
+                        // innerJson.touch = false;
+                        tempJson[`${keyObj}`].push(innerJson);
                     }
+                    this.data.typeValueArr.push(tempJson);
                 }
-                let keys = Object.keys(categoryArr);
                 console.log("typeArr is ", this.data.typeArr);
                 console.log("typeValueArr is ", this.data.typeValueArr);
                 self.data.typeArr = Host.uniqByObj(self.data.typeArr);
                 self.data.typeValueArr = Host.uniqObjInArray(self.data.typeValueArr);
                 this.setData({
-                      typeArr : this.data.typeArr,
-                      typeValueArr : this.data.typeValueArr,
-                      sendServerSize : this.data.sendServerSize
+                    typeArr: this.data.typeArr,
+                    typeValueArr: this.data.typeValueArr,
+                    sendServerSize: this.data.sendServerSize,
                 });
             }
+            this.data.interSource = 0;
         }
         let defaultCount = 0;
         for(let k = 0;k < this.data.typeValueArr.length;k++){
             let itemType = this.data.typeValueArr[k];
+            console.log("itemType is ",itemType);
             let key = this.data.typeArr[k];
             let tempJson = itemType[`${key}`];
+            console.log("tempJson is ",tempJson);
             for(let m = 0;m < tempJson.length;m++){
-                if(tempJson[m] === '默认'){
+                if(tempJson[m].mode === '默认'){
                     defaultCount++;
                 }                
             }
@@ -329,6 +345,10 @@ Page({
         if(defaultCount === this.data.typeArr.length){
             this.setData({
                 allDefault : true
+            })
+        }else{
+            this.setData({
+                allDefault : false
             })
         }
     },
@@ -499,6 +519,13 @@ Page({
     },
     showBuyCon: async function (event) {
         console.log("event is ", event);
+        console.log("goods is ",this.data.goods);
+        if(typeof(this.data.goods.head) === 'string'){
+            this.data.goods.head = this.data.goods.head.split(',');
+            this.setData({
+                goods : this.data.goods
+            })
+        }
         let dataSet = event.currentTarget.dataset;
         let pid = dataSet.pid;
         let id = event.currentTarget.id;
@@ -507,7 +534,6 @@ Page({
         this.setData({
             showBuyCon: true,
         });
-        
         let data = this.checkData(this.data.goods.pid);
         switch(id){
             //点击商品详情页面内的选择规格弹出页面的
@@ -660,7 +686,6 @@ Page({
                     //尺寸颜色都已经选择了
                     isChooseType: true
                 });
-
                 //将对象的值取出来
                 this.data.sizeValueArr = Object.values(this.data.sendServerSize);
                 console.log("sizeValueArr is ", this.data.sizeValueArr);
@@ -718,12 +743,19 @@ Page({
         if (arguments.length === 2) {
             cancel = arguments[1];
         }
+        console.log("interSource is ",this.data.interSource);
+        console.log("goods is ",this.data.goods);
+        console.log("essayuid is ",this.data.essayuid);
         let data = {
             uid: app.uid,
             pid: pid,
             size: this.data.sendServerSize,
             count: this.data.count,
-            source: 0,
+            source: this.data.interSource,
+        }
+        if(this.data.isBuyFromEssays){
+            data.eid = this.data.essayuid;
+            data.source = 1;
         }
         console.log("typeArr is ", this.data.typeArr);
         let typeA = this.data.typeArr;

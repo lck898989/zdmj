@@ -1,0 +1,40 @@
+<!--pages/Discountone/Discountone.wxml-->
+<view class='background'>
+    <view class='shoppingMsg' style='background:#0d0909'>
+          <view class='nullView1' style='background:#2f2f2f'></view>
+        <image class='shoppingImage' mode='widthFix'src='{{url+shopJSon.shophead[0]}}'></image>
+        <text class='shoppingName' style='font-size:33rpx;font-weight:900'>{{shopJSon.shopname}}</text>
+        <text class='shoppingType' style='font-size:23rpx;font-weight:900'>{{shopJSon.shoptname}}</text>
+        <text class='shu'></text>
+        <text class='shoppingAdress' style='font-size:23rpx;font-weight:900'>{{shopJSon.businessarea}}</text>
+        <text class='shoppingAdress1' style='font-size:23rpx;font-weight:900'>{{shopJSon.shopaddress}}</text>
+    </view>
+    <view class='text3'>
+        <text style='font-size:34rpx;font-weight:900;color:#000000' class='leftText'>(此单享受</text>
+        <text style='font-size:43rpx;font-weight:900;color:#b964d8' class='zhe'>{{shopJSon.discount_rate}}</text>
+        <text style='font-size:34rpx;font-weight:900;color:#000000' class='rightText'>折优惠)</text>
+    </view>
+    <text class='yuanjia' space='ensp' style='font-size:34rpx;font-weight:900;color:#000000'>您此次的支付金额 原价为</text>
+    <view class='priceView'>
+        <text style='font-size:25rpx;font-weight:900' class='fuhao1'>￥</text>
+        <text style='font-size:36rpx;font-weight:900' class='price'>{{yuan}}</text>
+    </view>
+    <view class='jiesheng'>
+       <text  style='font-size:34rpx;font-weight:900'>已为您节省</text>
+       <text style='font-size:41rpx;font-weight:900' class='yuan'>{{jie}}</text>
+        <text style='font-size:34rpx;font-weight:900'>元</text>
+    </view>
+    <!--    
+    <text class='text1' style='font-size:31rpx;font-weight:900;color:#000000'>请根据收银员的提示</text>
+    <text class='text2' style='font-size:31rpx;font-weight:900;color:#000000'>输入您此次的支付金额</text>
+    <view class='text3'>
+        <text style='font-size:31rpx;font-weight:900;color:#000000' class='leftText'>(此单享受</text>
+        <text style='font-size:40rpx;font-weight:900;color:#b964d8' class='zhe'>8.5</text>
+        <text style='font-size:31rpx;font-weight:900;color:#b964d8' class='rightText'>折优惠)</text>
+    </view> -->
+    <view class='text4'>
+        <text class='fuhao' style='font-size:34rpx;font-weight:900;color:#000000'>￥</text>
+        <text class='input1' style='font-size:59rpx;font-weight:900;color:#000000'>{{shi}}</text>
+    </view>
+    <view class='buttonsure'  bindtap='pressSure' style='font-size:35rpx;font-weight:900'>确认并支付</view>
+</view>

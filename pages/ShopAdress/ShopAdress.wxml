@@ -2,7 +2,7 @@
 <!-- <text>pages/ShopAdress/ShopAdress.wxml</text> -->
 <view class='shopAdressView'>
     <view class='shoppingView'>
-        <image class='shoppingImage' src='../../resources/shope_icon.png' mode='widthFix'></image>
+        <image class='shoppingImage' src='../../resources/ico_type_1.png' mode='widthFix'></image>
         <text class='shopName' style='font-size:23rpx'>{{orderJSON.shopmsg.store.sname}}</text>
         <!-- <text class='DataText' style='font-size:19rpx'>2018-06-15</text> -->
     </view>

@@ -436,7 +436,7 @@ Page({
                     pname: applyingSaleDates[i].orderItems[0].product.pname,
                     headImg: applyingSaleDates[i].orderItems[0].product.head.split(',')[0],
                     price: applyingSaleDates[i].orderItems[0].product.price,
-                    count: applyingSaleDates[i].orderItems[0].pcount,
+                    count: applyingSaleDates[i].backcount,
                     oitemid: applyingSaleDates[i].orderItems[0].oitemid,
                     oid: applyingSaleDates[i].orderItems[0].oid,
                     size: JSON.parse(applyingSaleDates[i].orderItems[0].product.size)

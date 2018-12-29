@@ -1,9 +1,17 @@
 //app.js
 import Host from './utils/Const.js'
 App({
-    globalData: { userInfo:null},
+    iszhe:false,
+    allprotuct:[],
+    isSao:false,
+    price1:null,
+    price2: null,
+    price3: null,
+    globalData: {
+        userInfo: null
+    },
     isScope: false,
-    encode:null,
+    encode: null,
     MingXiaRRAY: [],
     pressButton: "",
     wenzhangShop: [],
@@ -137,9 +145,15 @@ App({
     //判断天气情况
     isDay: true,
     //计时器数组
-    intervelArr : [],
-    onLaunch: function (res) {
-
+    intervelArr: [],
+    onLaunch: function(res) {
+      
+      
+        // var a={};
+        // if (a["year"] ===undefined)
+        // {
+        //     console.log("!!!!!!!!!!!!!!!!");
+        // }
         if (res.scene == 1007 || res.scene == 1008) {
             self.isShare = true;
         }
@@ -152,7 +166,7 @@ App({
             this.isDay = true;
         }
         //判断天气情况
-        setInterval(function () {
+        setInterval(function() {
             let date = new Date();
             let hours = date.getHours() + 1;
             console.log("当前的时间是：", hours);
@@ -189,7 +203,7 @@ App({
         this.StartLongConnect();
         // 登录 
         wx.login({
-            fail: function (res) {
+            fail: function(res) {
                 console.log(res);
             },
             success: res => {
@@ -261,7 +275,7 @@ App({
         })
     },
     //开启长链接
-    StartLongConnect: function () {
+    StartLongConnect: function() {
         var self = this;
         //监听长链接
         wx.connectSocket({
@@ -276,8 +290,8 @@ App({
             protocols: ['protocol1'],
             method: "GET"
         })
-        wx.onSocketOpen(function (res) {
-            self.interval = setInterval(function () {
+        wx.onSocketOpen(function(res) {
+            self.interval = setInterval(function() {
                 wx.closeSocket()
                 //监听长链接
                 wx.connectSocket({
@@ -296,20 +310,20 @@ App({
             }, 30000);
             console.log('WebSocket连接已打开！')
         })
-        wx.onSocketMessage(function (res) {
+        wx.onSocketMessage(function(res) {
             if (self.setLong) {
                 self.setLong(JSON.parse(res.data).data[0]);
             }
             console.log('收到服务器内容：' + res.data)
 
         })
-        wx.onSocketError(function (res) {
+        wx.onSocketError(function(res) {
             console.log('WebSocket连接打开失败，请检查！')
         })
-        wx.onSocketClose(function (res) { })
+        wx.onSocketClose(function(res) {})
     },
     //微信授权
-    ShouQuan: function () {
+    ShouQuan: function() {
         console.log("33333");
         var self = this;
         wx.getUserInfo({
@@ -320,21 +334,25 @@ App({
             }
         })
     },
-    onShow: function (res) {
+    onShow: function(res) {
         console.log(res.scene);
         console.log("onHide");
         if (res.scene == 1007 || res.scene == 1008) {
             console.log("ppppppppppppppppppppp");
             this.isShare = true;
         }
+        if (res.scene == 1047 || res.scene == 1048 || res.scene == 1049)
+        {
+            this.isSao=true;
+        }
         // this.isShare = false;
         // this.isShareEnter = false;
     },
-    onHide: function (res) {
+    onHide: function(res) {
 
     },
     //显示分享界面
-    ShowShareMsg: function () {
+    ShowShareMsg: function() {
 
     },
     //与服务器断链接发送请求
@@ -349,7 +367,7 @@ App({
                 'content-type': 'application/json' // 默认值
             },
             method: "POST",
-            success: function (res) {
+            success: function(res) {
                 console.log("1111111111111" + JSON.stringify(res));
 
                 switch (state) {
@@ -411,14 +429,14 @@ App({
                                 success(res) {
                                     //当授权时
                                     if (res.authSetting['scope.userInfo']) {
-                                   
+
                                         console.log("============");
                                         self.ShouQuan();
                                     } else {
                                         if (self.isShare) {
                                             console.log("---------------");
                                             self.setacticle(res);
-                                          self.isNoShou1();
+                                            self.isNoShou1();
                                         }
                                     }
                                 }
@@ -444,7 +462,7 @@ App({
                     case "ActicleInterShop":
                         console.log("acticleIntershop is ", res.data);
                         self.shopMsgJson = res.data.product;
-                      
+
                         callback(res.data.product);
                         console.log(JSON.stringify(self.shopMsgJson) + "ActicleInterShop");
                         if (self.setShopArrayJson) {
@@ -544,6 +562,7 @@ App({
                                 case "quanfengkuaidi":
                                     self.orderMsg.com = "全峰快递";
                                     break;
+                                    
                             }
                         }
                         wx.navigateTo({
@@ -551,7 +570,6 @@ App({
                         })
                         break;
                     case "GetShopAdressNumber":
-
                         //  self.shopAdressArray = res.data.order.orderitems;
                         //  wx.navigateTo({
                         //      url: '../ShopAdress/ShopAdress',
@@ -572,8 +590,10 @@ App({
                         break;
                     case "interWenZhang":
                         self.wenzhangJson = res.data.essay;
+                        console.log("6666");
+                        callback(res);
                         if (self.setEssay) {
-
+                            console.log("5555");
                             self.setEssay(res);
                         }
                         break;
@@ -587,11 +607,11 @@ App({
                         if (res.data.desc == "用户合法登录") {
                             // self.ShortConnect(self.urlw + 'Data/GetTabs', {}, "GetType");
                             if (self.isShare) {
-                            //   if (self.isShouQuan1)
-                            //   {
-                            //     self.isShouQuan1();
-                            //   }
-                            console.log("1111111111111111111111111111");
+                                //   if (self.isShouQuan1)
+                                //   {
+                                //     self.isShouQuan1();
+                                //   }
+                                console.log("1111111111111111111111111111");
                                 if (self.pressButton == "buy") {
                                     self.showBox();
                                 }
@@ -604,10 +624,9 @@ App({
                                     self.agreeActicleShou(res);
                                 }
                                 console.log("4444444444444444444444444444444");
-                              if (self.setshared)
-                              {
-                                self.setshared(self.globalData.userInfo);
-                              }
+                                if (self.setshared) {
+                                    self.setshared(self.globalData.userInfo);
+                                }
                                 console.log("55555555555555555555555555555555");
                                 self.openid = res.data.userInfo.wxopenId;
                                 console.log(res.data.userInfo.openid);
@@ -625,9 +644,9 @@ App({
                                 self.ShortConnect("https://pay.ykplay.com/user/reg", {
                                     openid: self.serverOpenid
                                 }, "register");
-                                self.ShortConnect(self.urlw + "Data/GetHotProducts", {
-                                    page: 1
-                                }, "index2Remen");
+                                // self.ShortConnect(self.urlw + "Data/GetHotProducts", {
+                                //     page: 
+                                // }, "indemen");
                             }
                         } else {
                             console.log("登录失败");
@@ -648,7 +667,7 @@ App({
                         if (self.isShare) {
 
                         } else {
-                          wx.switchTab({
+                            wx.switchTab({
                                 url: '../lck/index/index',
                             })
                         }
@@ -675,7 +694,7 @@ App({
                                     showCancel: false,
                                     title: '提示',
                                     content: "用户最多有三个正在分享中的商品哦",
-                                    success: function (res) {
+                                    success: function(res) {
                                         if (res.confirm) {
                                             console.log('用户点击确定')
                                         } else if (res.cancel) {
@@ -688,7 +707,7 @@ App({
                                     showCancel: false,
                                     title: '提示',
                                     content: res.data.msg,
-                                    success: function (res) {
+                                    success: function(res) {
                                         if (res.confirm) {
                                             console.log('用户点击确定')
                                         } else if (res.cancel) {
@@ -748,7 +767,7 @@ App({
                                 showCancel: false,
                                 title: '提示',
                                 content: res.data.msg,
-                                success: function (res) {
+                                success: function(res) {
                                     if (res.confirm) {
                                         console.log('用户点击确定')
                                     } else if (res.cancel) {
@@ -771,14 +790,14 @@ App({
                                 'content-type': 'application/json'
                             },
                             method: "POST",
-                            success: function (res) {
+                            success: function(res) {
                                 console.log(self.url + "/users/TransformQrCode");
                                 self.ShortConnect(self.urlw2 + "/users/TransformQrCode", {
                                     QrCode: res.data,
                                 }, "stringcode");
 
                             },
-                            fail: function (res) {
+                            fail: function(res) {
                                 console.log('isFail')
                             }
                         })
@@ -804,7 +823,7 @@ App({
                         }
                         break;
                     case "getWenzhang":
-                        callback(res.data.essays);
+                        callback(res.data);
                         // if (res.data.essays.length % 2 == 0) {
                         //     for (let i = 0; i <= res.data.essays.length - 1; i++) {
                         //         if (i <= (res.data.essays.length / 2 - 1)) {
@@ -838,7 +857,7 @@ App({
 
                         // }
                         break;
-                    //访问分享记录
+                        //访问分享记录
                     case "shareMsg":
                         console.log("333");
                         if (res.data.msg == "查询结果为空") {
@@ -856,7 +875,33 @@ App({
                     case "remen":
                         self.setRenMen(res);
                         break;
-                    case "wechatpay":
+                    case "wechatpay1":
+                        wx.requestPayment({
+                            'timeStamp': res.data.timeStamp,
+                            'nonceStr': res.data.nonce_str,
+                            'package': "prepay_id=" + res.data.prepay_id,
+                            'signType': "MD5",
+                            'paySign': res.data.paySign,
+                            'success': function(res) {
+                                console.log(res);
+                                if (res.errMsg == "requestPayment:ok") {
+                                    console.log("555");
+                                    self.setLoad();
+                                    self.ShortConnect(self.urlw + "Data/PayShopOrder", {
+                                        openid: self.serverOpenid,
+                                        shoponumber: self.orderNumber
+                                    }, "checkPay");
+                                }
+                            },
+                            'fail': function(res) {
+                                console.log(res);
+                            },
+                            'complete': function(res) {
+                                console.log(res);
+                            }
+                        })
+                        break;
+                    case "wechatpay3":
                         wx.requestPayment({
                             'timeStamp': res.data.timeStamp,
                             'nonceStr': res.data.nonce_str,
@@ -867,10 +912,10 @@ App({
                                 console.log(res);
                                 if (res.errMsg == "requestPayment:ok") {
                                     console.log("555");
-                                    self.setLoad();
-                                    self.ShortConnect(self.urlw + "Data/PayOrder", {
+                                
+                                    self.ShortConnect(self.urlw + "Data/PayDiscountPayRecode", {
                                         openid: self.serverOpenid,
-                                        orderNumber: self.orderNumber
+                                        number: self.orderNumber
                                     }, "checkPay");
                                 }
                             },
@@ -882,22 +927,52 @@ App({
                             }
                         })
                         break;
+                    case "wechatpay":
+                        wx.requestPayment({
+                            'timeStamp': res.data.timeStamp,
+                            'nonceStr': res.data.nonce_str,
+                            'package': "prepay_id=" + res.data.prepay_id,
+                            'signType': "MD5",
+                            'paySign': res.data.paySign,
+                            'success': function(res) {
+                                console.log(res);
+                                if (res.errMsg == "requestPayment:ok") {
+                                    console.log("555");
+                                    self.setLoad();
+                                    self.ShortConnect(self.urlw + "Data/PayOrder", {
+                                        openid: self.serverOpenid,
+                                        orderNumber: self.orderNumber
+                                    }, "checkPay");
+                                }
+                            },
+                            'fail': function(res) {
+                                console.log(res);
+                            },
+                            'complete': function(res) {
+                                console.log(res);
+                            }
+                        })
+                        break;
+
                     case "checkPay":
                         if (res.data.msg == "支付成功") {
-                            if (res.data.type == 0) {
-                                self.ShortConnect(self.urlw + "Data/GetHotShop", {
-                                    page: 1
-                                }, "loadPaySuccess");
-                            } else {
-                                self.ShortConnect(self.urlw + "Data/GetHotEssays", {
-                                    page: 1
-                                }, "loadPaySuccess1");
-                            }
-                            self.shopName = res.data.order.orderItems[0].pname;
-                            self.adress = res.data.order.district + res.data.order.detaildistrict;
-                            self.shopNumber = res.data.order.allcounts;
-                            self.shopAllplice = res.data.order.oaccount;
-                            wx.hideLoading();
+                            self.ShortConnect(self.urlw + "Data/GetRecommendProduct", {
+                                page: 1,
+                            }, "loadPaySuccess");
+                            // if (res.data.type == 0) {
+                            //     self.ShortConnect(self.urlw + "Data/GetRecommendProduct", {
+                            //         page: 1,
+                            //     }, "loadPaySuccess");
+                            // } else {
+                            //     self.ShortConnect(self.urlw + "Data/GetHotEssays", {
+                            //         page: 1
+                            //     }, "loadPaySuccess1");
+                            // }
+                            // self.shopName = res.data.order.orderItems[0].pname;
+                            // self.adress = res.data.order.district + res.data.order.detaildistrict;
+                            // self.shopNumber = res.data.order.allcounts;
+                            // self.shopAllplice = res.data.order.oaccount;
+                            // wx.hideLoading();
                         }
                         break;
                     case "loadPaySuccess1":
@@ -910,9 +985,20 @@ App({
                     case "loadPaySuccess":
                         self.orderPage = res.data.pages;
                         self.hotShop = res.data.hotProducts;
-                        wx.navigateTo({
-                            url: '../ShopSuccess/ShopSuccess?buyType=shop',
-                        })
+                        if(self.iszhe)
+                        {
+                            wx.navigateTo({
+                                url: '../lck/ShopSuccess/ShopSuccess?buyType=shop',
+                            })
+                        }
+                        else
+                        {
+                            wx.navigateTo({
+                                url: '../ShopSuccess/ShopSuccess?buyType=shop',
+                            })
+
+                        }
+                       
                         break;
                     case "tixianZero":
                         if (res.data.encode == -1) {
@@ -944,8 +1030,40 @@ App({
                             }
                         }
                         break;
-                    case "pay1":
+                    case "zhekouPay1":
+                        if (res.data.encode == 0) {
+                            self.orderNumber = res.data.discountPayRecode.number;
+                            self.ShortConnect("https://pay.ykplay.com/miniWx/miniPay", {
+                                openid: self.serverOpenid,
+                                orderNumber: res.data.discountPayRecode.number,
+                                appid: self.appid,
+                                mch_id: self.payPhone,
+                                body: res.data.info,
+                                // total_fee: res.data.order.orderItems[0].product.price,
+                                total_fee: res.data.discountPayRecode.actual_payment,
+                                wxMsg: self.detailInfo,
+                                attach: "指点迷津"
+                            }, "wechatpay3");
+                        } else {
+                            wx.showModal({
+                                showCancel: false,
+                                title: '提示',
+                                content: res.data.msg,
+                                success: function (res) {
+                                    if (res.confirm) {
+                                        //  wx.switchTab({
+                                        //      url: '../indextwo/indextwo'
+                                        //  })
+                                    } else if (res.cancel) {
+                                        console.log('用户点击取消')
+                                    }
+                                }
+                            })
 
+                        }
+
+                         break;
+                    case "pay1":
                         if (res.data.encode == 0) {
                             self.orderNumber = res.data.order.onumber;
                             self.ShortConnect("https://pay.ykplay.com/miniWx/miniPay", {
@@ -956,29 +1074,6 @@ App({
                                 body: res.data.info,
                                 // total_fee: res.data.order.orderItems[0].product.price,
                                 total_fee: 1,
-                                wxMsg: self.detailInfo,
-                                attach: "指点迷津"
-                            }, "wechatpay");
-                        } else {
-
-
-
-
-
-
-
-                        }
-                        break;
-                    case "pay":
-                        if (res.data.encode == 0) {
-                            self.orderNumber = res.data.order.onumber;
-                            self.ShortConnect("https://pay.ykplay.com/miniWx/miniPay", {
-                                openid: self.serverOpenid,
-                                orderNumber: res.data.order.onumber,
-                                appid: self.appid,
-                                mch_id: self.payPhone,
-                                body: res.data.info,
-                                total_fee: res.data.order.oaccount,
                                 wxMsg: self.detailInfo,
                                 attach: "指点迷津"
                             }, "wechatpay");
@@ -997,6 +1092,68 @@ App({
                                     }
                                 }
                             })
+
+                        }
+                        break;
+                    case "AddShopOrder":
+                        if (res.data.encode == 0) {
+                            self.orderNumber = res.data.shopOrder.shoponumber;
+                            self.ShortConnect("https://pay.ykplay.com/miniWx/miniPay", {
+                                openid: self.serverOpenid,
+                                orderNumber: res.data.shopOrder.shoponumber,
+                                appid: self.appid,
+                                mch_id: self.payPhone,
+                                body: res.data.info,
+                                total_fee: res.data.shopOrder.account,
+                                wxMsg: self.detailInfo,
+                                attach: "指点迷津"
+                            }, "wechatpay1");
+                        } else {
+                            wx.showModal({
+                                showCancel: false,
+                                title: '提示',
+                                content: res.data.msg,
+                                success: function(res) {
+                                    if (res.confirm) {
+                                        //  wx.switchTab({
+                                        //      url: '../indextwo/indextwo'
+                                        //  })
+                                    } else if (res.cancel) {
+                                        console.log('用户点击取消')
+                                    }
+                                }
+                            })
+                        }
+                        break;
+                    case "pay":
+                        if (res.data.encode == 0) {
+                            console.log(res.data.info + "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+                            self.orderNumber = res.data.order.onumber;
+                            self.ShortConnect("https://pay.ykplay.com/miniWx/miniPay", {
+                                openid: self.serverOpenid,
+                                orderNumber: res.data.order.onumber,
+                                appid: self.appid,
+                                mch_id: self.payPhone,
+                                body: res.data.info,
+                                total_fee: res.data.order.oaccount,
+                                wxMsg: self.detailInfo,
+                                attach: "指点迷津"
+                            }, "wechatpay");
+                        } else {
+                            wx.showModal({
+                                showCancel: false,
+                                title: '提示',
+                                content: res.data.msg,
+                                success: function(res) {
+                                    if (res.confirm) {
+                                        //  wx.switchTab({
+                                        //      url: '../indextwo/indextwo'
+                                        //  })
+                                    } else if (res.cancel) {
+                                        console.log('用户点击取消')
+                                    }
+                                }
+                            })
                         }
                         break;
                     case "agree":
@@ -1006,7 +1163,7 @@ App({
                                 showCancel: false,
                                 title: '提示',
                                 content: res.data.msg,
-                                success: function (res) {
+                                success: function(res) {
                                     // if (res.confirm) {
                                     //     wx.switchTab({
                                     //         url: '../indextwo/indextwo'
@@ -1021,7 +1178,7 @@ App({
                                 showCancel: false,
                                 title: '提示',
                                 content: res.data.msg,
-                                success: function (res) {
+                                success: function(res) {
                                     if (res.confirm) {
                                         console.log('用户点击确定')
                                     } else if (res.cancel) {
@@ -1032,25 +1189,21 @@ App({
                         }
                         break;
                     case "GetAllMessage2":
-                        self.encode=res.data.encode;
-                        if(res.data.encode==-1)
-                        {
-                            if (self.setMingxiNull)
-                            {
+                        self.encode = res.data.encode;
+                        if (res.data.encode == -1) {
+                            if (self.setMingxiNull) {
                                 self.setMingxiNull();
                             }
-                           
-                        
-                        }
-                        else
-                        {
+
+
+                        } else {
                             self.MingXiaRRAY = res.data.informs;
                             console.log(self.MingXiaRRAY + "!!!!!!!!!!!!!!!!!!!!!!!!!!!");
                             if (self.GetAllMessage1) {
                                 self.GetAllMessage1(res);
                             }
                         }
-                        
+
                         break;
                     case "interorder":
                         self.myorderArray = res.data.orders;
@@ -1089,9 +1242,14 @@ App({
                                     res.data.orders[i].orderItems[0][j].product.head = c;
                                     // res.data.orders[i].orderItems[0][j].product.size = JSON.parse(res.data.orders[i].orderItems[0][j].product.size);
                                     res.data.orders[i].orderItems[0][j].standard = res.data.orders[i].orderItems[0][j].standard.replace("|", "");
+                                    if (res.data.orders[i].orderItems[0][j].product.size.includes("默认")) {
+                                        res.data.orders[i].orderItems[0][j].product.isMoren = false;
+                                    } else {
+                                        res.data.orders[i].orderItems[0][j].product.isMoren = true;
+                                    }
                                 }
                             }
-                            console.log(JSON.stringify(res.data.orders)+"///////////////////////////////////");
+                            console.log(JSON.stringify(res.data.orders) + "///////////////////////////////////");
                             self.getOrderArray(res);
                         }
                         break;
@@ -1231,6 +1389,9 @@ App({
                                 break;
                         }
                         break;
+                    case "wode":
+                    callback(res);
+                         break;
                     case "getPages":
                         self.orderPage = res.data.pages;
 
@@ -1288,12 +1449,21 @@ App({
                     case "pressTwo":
                         self.setShopEssayData2(res);
                         break;
+                    case "zhekouPay":
+                        self.price1 = res.data.money;
+                        self.price2 = res.data.discount_money;
+                        self.price3 = res.data.actual_payment;
+                        callback(res);
+                         break;
+                    case "shengchneg":
+                    callback(res);
+                        break;
                 }
             },
         })
     },
     //显示商品信息
-    ShowShopDate: function (res) {
+    ShowShopDate: function(res) {
 
         if (this.shopmsgcallback) {
             this.shopmsgcallback(res);
@@ -1302,13 +1472,13 @@ App({
 
     },
     // 获取用户信息
-    GetUserInfo: function (res) {
+    GetUserInfo: function(res) {
         var self = this;
         // 可以将 res 发送给后台解码出 unionId
         this.globalData.userInfo = res.userInfo;
         console.log(this.openid + "6666666666");
         res.sessionKey = this.sessionKey;
-        console.log(JSON.stringify(res.userInfo)+"=====================================");
+        console.log(JSON.stringify(res.userInfo) + "=====================================");
         this.ShortConnect("https://newaccount.ykplay.com/ykLogin/UserInfoLogin", {
             bindingType: "1",
             app: "zhidianmijin",
@@ -1322,19 +1492,19 @@ App({
         userInfo: null
     },
     //检查最后一次操作是否超过了5秒
-    checkTime : function(callback){
-      console.log("intervelArr is ",this.intervelArr);
-      //开启一个计时器，如果计时器的时间大于5s的时候重新开启轮播图
-      let tempIntervel = setInterval(function(){
-          for(let i = 0;i < this.intervelArr.length;i++){
-              //将所有的计时器停掉
-              clearInterval(this.intervelArr[i]);
-          }
-          this.intervelArr = [];
-          //告诉index.js文件5秒用户没有操作了
-          callback('stop');
-      }.bind(this),5000);
-      //把tempIntervel添加到intervel数组中去
-      this.intervelArr.push(tempIntervel);
+    checkTime: function(callback) {
+        console.log("intervelArr is ", this.intervelArr);
+        //开启一个计时器，如果计时器的时间大于5s的时候重新开启轮播图
+        let tempIntervel = setInterval(function() {
+            for (let i = 0; i < this.intervelArr.length; i++) {
+                //将所有的计时器停掉
+                clearInterval(this.intervelArr[i]);
+            }
+            this.intervelArr = [];
+            //告诉index.js文件5秒用户没有操作了
+            callback('stop');
+        }.bind(this), 5000);
+        //把tempIntervel添加到intervel数组中去
+        this.intervelArr.push(tempIntervel);
     }
 })

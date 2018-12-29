@@ -9,6 +9,8 @@ Page({
      * 页面的初始数据
      */
     data: {
+        //初始化高度swiper高度数组
+        heightSwiper:[],
         url: "",
         count: 1,
         buyBoxHidden: true,
@@ -68,6 +70,7 @@ Page({
             count: this.data.shopNumber,
 
         }
+        console.log(JSON.stringify(this.data.wenzhangJson)+"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
         if (app.isShare) {
             data.source = 2
         }
@@ -95,6 +98,16 @@ Page({
         this.setData({
             buyBoxHidden: true,
             shopNumber: 1
+        })
+    },
+    loadImage:function(event){
+        let heightSwiper = this.data.heightSwiper;
+       //计算此图片加载完是的高度
+        let heightImage = 750 * event.detail.height / event.detail.width;
+        heightSwiper[event.target.dataset.id] = heightImage;
+        console.log(JSON.stringify(heightSwiper)+"=========================");
+        this.setData({
+            heightSwiper: heightSwiper
         })
     },
     changeSwiper: function (event) {
@@ -213,7 +226,7 @@ Page({
                 })
                 app.ShortConnect(app.urlw + "Data/GetProductByPid", {
                     pid: this.data.wenzhangJson.pid
-                }, 'ActicleInterShop',function(r){});
+                }, 'ActicleInterShop',function(res){});
                 wxParse.wxParse('article', 'html', article, self);
                 console.log(typeof this.data.wenzhangJson.authorurl + "、、、、、、、、、、、、、、、、、、、、");
                 console.log(JSON.stringify(this.data.essayhead) + "、、、、、、、、、、、、、、、、、、、、");
@@ -261,7 +274,7 @@ Page({
                     })
                     app.ShortConnect(app.urlw + "Data/GetProductByPid", {
                         pid: this.data.wenzhangJson.pid
-                    }, 'ActicleInterShop',function(r){});
+                    }, 'ActicleInterShop',function(res){});
                     if (this.setSee) {
                         this.setSee(this.data.wenzhangJson);
                     }
@@ -332,7 +345,6 @@ Page({
     },
     //进入商品详情
     shopButton: function () {
-        
         let self = this;
         // this.setData({
         // buyBoxHidden: false,
@@ -340,26 +352,15 @@ Page({
         if (app.isShare) {
             app.ShortConnect(app.urlw + "Data/GetProductByPid", {
                 pid: self.data.wenzhangJson.pid
-            }, 'ActicleInterShop');
+            }, 'ActicleInterShop',function(res){});
             wx.navigateTo({
-                url: '../lck/cartGoodsDetail/cartGoodsDetail?transpondUid=' + self.data.transpondUid + "&interSource=2" + "&inter=wenzhang" + "&essayuid=" + self.data.essayuid,
+                url: '../lck/cartGoodsDetail/cartGoodsDetail?transpondUid=' + self.data.transpondUid + "&interSource=2" + "&inter=wenzhang" + "&essayuid=" + self.data.wenzhangJson.eid,
             })
         } else {
             console.log("22222222222222222222222222" + JSON.stringify(app.wenzhangJson));
             // wx.setStorageSync("goods", app.wenzhangJson);
             console.log("app.wenzhangJson is ", self.data.wenzhangJson);
             console.log("pid is ", self.data.wenzhangJson.pid);
-            // let url = app.host + 'Data/GetProductByPid';
-            // let data = {
-            //     pid: self.data.wenzhangJson.pid,
-            //     uid: app.uid
-            // };
-            // //跳转商品界面,获得对应pid的商品
-            // let product = null;
-            // let req = new Request(url, data, 'POST', 'text');
-            // let res = await req.sendRequest();
-            // console.log("product is ", res.data.product);
-
             app.ShortConnect(app.urlw + "Data/GetProductByPid", {
                 pid: self.data.wenzhangJson.pid,
                 uid: app.uid
@@ -370,7 +371,7 @@ Page({
                     data: r,
                     success: function () {
                         wx.navigateTo({
-                            url: '../lck/cartGoodsDetail/cartGoodsDetail?interSource=0' + "&inter=wenzhang" + "&essayuid=" + self.data.essayuid
+                            url: '../lck/cartGoodsDetail/cartGoodsDetail?interSource=0' + "&inter=wenzhang" + "&essayuid=" + self.data.wenzhangJson.eid + "&fromEssays=" + '1'
                         });
                     }
                 })
@@ -482,7 +483,6 @@ Page({
                             eid: self.data.wenzhangJson.eid,
                             uid:app.uid
                         }, "shareWenZhang");
-                 
                     }
                 },
                 fail: function (res) {　　　　　　 // 转发失败之后的回调

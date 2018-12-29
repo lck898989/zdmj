@@ -45,6 +45,11 @@
 .desc{
     font-size: 27rpx;
     color: #aaa;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    width:420rpx;
+
 }
 .price-con{
     justify-content: space-between;

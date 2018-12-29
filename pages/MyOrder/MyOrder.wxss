@@ -27,8 +27,30 @@ page {
 
 .typeson {
     padding: 11rpx 15rpx 11rpx 15rpx;
+    color: #000;/* border-bottom: 4rpx solid #ff861a; */
+}
+.nullOrderView{
+    position: relative;
+    width:750rpx;
+    height: 750rpx;
+    display: flex;
+    justify-content: center;
+}
+.nullText{
+    position: absolute;
+    top: 540rpx;
+    color: #959595;
+}
+.nullIcon{
+    position: absolute;
+    top: 357rpx;
+    width: 160rpx;
+}
+.typeson1 {
+    margin-top: 10rpx;
+    padding: 7rpx 15rpx 7rpx 15rpx;
     color: #000;
-    /* border-bottom: 4rpx solid #ff861a; */
+      
 }
 
 .backgroundView {
@@ -124,39 +146,42 @@ page {
     right: 12rpx;
     color: #b964d8;
 }
-.wuliuText2{
+
+.wuliuText2 {
     position: absolute;
     top: 0rpx;
     left: 31rpx;
-    color:#707070;
+    color: #707070;
 }
-.wuliuorderText1{
+
+.wuliuorderText1 {
     position: absolute;
     top: 24rpx;
     left: 154rpx;
-        color: #707070;
-
-
+    color: #707070;
 }
-.wuliuText1{
+
+.wuliuText1 {
     position: absolute;
     top: 0rpx;
     left: 154rpx;
     color: #707070;
-
 }
-.wuliuorderText{
+
+.wuliuorderText {
     position: absolute;
     top: 24rpx;
-    left:31rpx;
-    color:#707070;
+    left: 31rpx;
+    color: #707070;
 }
-.wulieText{
+
+.wulieText {
     position: absolute;
     bottom: 0;
     width: 750rpx;
     height: 56rpx;
 }
+
 .shopMsgView {
     position: relative;
     margin-top: 2rpx;
@@ -164,6 +189,7 @@ page {
     background-color: white;
     height: 246rpx;
 }
+
 .shopMsgView1 {
     position: relative;
     margin-top: 0rpx;
@@ -248,7 +274,7 @@ page {
 .oneShopNumber {
     position: absolute;
     left: 204rpx;
-    top:140rpx;
+    top: 140rpx;
     color: #b964d8;
 }
 
@@ -260,8 +286,8 @@ page {
 
 .dingstateText {
     position: absolute;
-     text-align: right;
-    right:19rpx;
+    text-align: right;
+    right: 19rpx;
     top: 189rpx;
     color: #b964d8;
 }
@@ -362,7 +388,7 @@ page {
 
 .shifuText {
     position: absolute;
-    left: 505rpx;   
+    left: 505rpx;
 }
 
 .stateButton2 {
@@ -376,8 +402,8 @@ page {
     border-top: 4rpx solid black;
     border-left: 4rpx solid black;
     border-right: 4rpx solid black; */
-    color: #ffffff;
-     display: flex;
+    color: #fff;
+    display: flex;
     align-items: center;
     justify-content: center;
     /* border-radius: 50px;  */

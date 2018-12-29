@@ -9,6 +9,12 @@ Page({
    * 页面的初始数据
    */
   data: {
+      shopname: null,
+      pcount: 0,
+      essayuid: 0,
+      shoppid: 0,
+      shopeid: 0,
+      shopid: 0,
       transpondUid: "",
       interSource: "0",
       host : app.host,
@@ -57,7 +63,7 @@ Page({
         });    
     }
     let self = this;
-    console.log(options.interSource + "!!!!!!!!!!!!!!!!!!!!!!!!!!!!1");
+
     switch (options.inter) {
         case "myOrder":
             this.setData({
@@ -66,9 +72,17 @@ Page({
             });
             break;
         case "wenzhang":
+            console.log(options.interSource + "!!!!!!!!!!!!!!!!!!!!!!!!!!!!1");
             this.setData({
-                essayuid: options.essayuid
+                interView: options.inter,
+                essayuid: options.essayuid,
+                shoppid: options.shoppid,
+                shopeid: options.shopeid,
+                shopid: options.shopid,
+                pcount: options.pcount,
+                shopname: options.shopname
             })
+            console.log(this.data.interView +"!!!!!!!!!!!!!!!!!!!!!!!!!!!!1");
             break;
         case "shopCar":
             let self = this;
@@ -98,6 +112,7 @@ Page({
             // })
             break;
     }
+    console.log("options is ",options);
     switch (options.interSource) {
           case "0":
 
@@ -139,8 +154,8 @@ Page({
         console.log("#########################");
         console.log("res's data is ",res.data);
         self.setData({
-            orderArray : res.data,
-            loadDataOk : true
+            orderArray  : res.data,
+            loadDataOk  : true,
         })
         console.log("orderArray is ",self.data.orderArray);
         self.computeTotalPrice();
@@ -154,8 +169,8 @@ Page({
     let count = 0;
     console.log("orderArray is ",self.data.orderArray);
     for(let j = 0;j < self.data.orderArray.length;j++){
-        sum += self.data.orderArray[j].price;
-        count += self.data.orderArray[j].count;
+        console.log("当前的商品项是总价是：", Host.MUL(self.data.orderArray[j].price, self.data.orderArray[j].count));
+        sum += Host.MUL(self.data.orderArray[j].price,self.data.orderArray[j].count);
     }
     console.log("sum is ",sum);
     console.log("count is ",count);
@@ -201,13 +216,7 @@ Page({
    * 生命周期函数--监听页面卸载,卸载缓存
    */
   onUnload: function() {
-    //   wx.removeStorage({
-    //       key: 'buyGoodsItem',
-    //       success: function(res) {
-
-    //       },
-    //   })
-
+    
   },
 
   /**
@@ -283,17 +292,18 @@ Page({
                     }
                 })
             }
+          
             else {
                 console.log("orderArray is ",self.data.orderArray);
                 for(let i = 0;i < self.data.orderArray.length;i++){
                     let tempOrderItem = {
                         // self.data.orderAr
-                        cid      : self.data.orderArray[i].cid,
-                        count    : self.data.orderArray[i].count,
-                        pid      : self.data.orderArray[i].pid,
-                        size     : self.data.orderArray[i].size,
-                        source   : self.data.orderArray[i].source,
-                        state    : self.data.orderArray[i].state,
+                        cid       : self.data.orderArray[i].cid,
+                        count     : self.data.orderArray[i].count,
+                        pid       : self.data.orderArray[i].pid,
+                        size      : self.data.orderArray[i].size,
+                        buysource : self.data.orderArray[i].source,
+                        state     : self.data.orderArray[i].state,
                     }
                     self.data.realOrder.push(tempOrderItem)
                 }
@@ -305,7 +315,21 @@ Page({
                     orderitems: self.data.realOrder,
                 }, "pay");
             }
-        } else {
+        } 
+        else if (this.data.interView == "wenzhang") {
+            console.log("wodeadasdasd");
+            app.ShortConnect(app.urlw + "Data/AddShopOrder", {
+                shopid: this.data.shopid,
+                shoppid: this.data.shoppid,
+                pcount: this.data.pcount,
+                uid: app.uid,
+                buysource: this.data.interSource,
+                fromuid: 0,
+                shopessayuid: this.data.essayuid,
+                shopeid: this.data.shopeid
+            }, "AddShopOrder");
+        }
+        else {
             console.log(app.userInfo1.familyAddress);
             var self = this;
             if (self.data.add == null) {
@@ -322,29 +346,40 @@ Page({
                     }
                 })
             } else {
-                console.log(this.data.interSource);
-                switch (this.data.interSource) {
-                    case "0":
+                console.log("商品来源是：",self.data.orderArray[0].source);
+                //查看商品的来源
+                switch (self.data.orderArray[0].source) {
+                    case 0:
                         app.ShortConnect(app.urlw + "Data/AddOrder", {
                             aid: self.data.add.aid,
                             pcount: self.data.orderArray[0].count,
                             pid: self.data.orderArray[0].pid,
-                            buysource: this.data.interSource,
+                            buysource: 0,
                             uid: app.uid,
                             fromuid: 0,
                             essayuid: this.data.essayuid,
                             standard: self.data.orderArray[0].size
                         }, "pay");
                         break;
-                    case "1":
+                    case 1:
+                        app.ShortConnect(app.urlw + "Data/AddOrder", {
+                            aid: self.data.add.aid,
+                            pcount: self.data.orderArray[0].count,
+                            pid: self.data.orderArray[0].pid,
+                            buysource: 1,
+                            uid: app.uid,
+                            fromuid: 0,
+                            essayuid: this.data.essayuid,
+                            standard: self.data.orderArray[0].size
+                        }, "pay");
                         break;
-                    case "2":
+                    case 2:
                         console.log(this.data.interSource);
                         app.ShortConnect(app.urlw + "Data/AddOrder", {
                             aid: self.data.add.aid,
                             pcount: self.data.goods.count,
                             pid: self.data.goods.pid,
-                            buysource: this.data.interSource,
+                            buysource: 2,
                             uid: app.uid,
                             essayuid: this.data.essayuid,
                             fromuid: this.data.transpondUid,

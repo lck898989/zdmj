@@ -11,8 +11,6 @@
     width:343rpx;
     flex-direction: column;
     border-radius: 10rpx;
-    /* margin-right: 18rpx; */
-    
     margin-bottom: 18rpx;
     padding-bottom: 10rpx;
     /*
@@ -20,7 +18,6 @@
     */
     -webkit-column-break-inside: avoid;
     break-inside: avoid;
-    /* counter-increment:item-counter; */
     background: #fff;
 }
 .author-con{
@@ -50,14 +47,19 @@
 .rebeat-con{
     align-self: flex-end;
     margin-right: 10rpx;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    white-space: nowrap;
 }
 .rebeat-text{
     font-size: 25rpx;
     color: #8f8f8f;
 }
 .rebeat-money{
-    color: #f39800;
+    color: #b964d8;
     font-size: 30rpx;
+    white-space: nowrap;
 }
 .watched-con{
     position: absolute;
@@ -76,4 +78,17 @@
     position: absolute;
     top: 0rpx;
     right: 0rpx;
+}
+.price{
+    color: #ffcb05;
+    font-size: 38rpx;
+}
+.price-con{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: nowrap;
+    align-self: flex-start;
+    margin-left:10rpx;
 }

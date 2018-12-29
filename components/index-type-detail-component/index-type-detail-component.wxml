@@ -15,10 +15,18 @@
     <view wx:if='{{isShopEssays}}' class="text">{{easyItem.shoptitle}}</view>
     <view wx:if='{{isEssays}}' class="text">{{easyItem.title}}</view>
     <view wx:if='{{isProduct}}' class="text">{{easyItem.pname}}</view>
-    <view class="author-con">
-        <!-- <image src='{{easyItem.authorAvatar}}' style="width:32rpx;height:32rpx;border-radius:32rpx;"></image> -->
-        <image-loader originalImage='{{easyItem.wxhead}}' width='32rpx' height='32rpx' mode='' styleClass='width:32rpx;height:32rpx;border-radius:32rpx;'></image-loader>
-        <view style="font-size:20rpx;margin-left:10rpx;">{{easyItem.wxnickname}}</view>
+    <block wx:if='{{isShowUser}}'>
+        <view class="author-con">
+            <!-- <image src='{{easyItem.authorAvatar}}' style="width:32rpx;height:32rpx;border-radius:32rpx;"></image> -->
+            <image-loader originalImage='{{easyItem.wxhead}}' width='32rpx' height='32rpx' mode='' styleClass='width:32rpx;height:32rpx;border-radius:32rpx;'></image-loader>
+            <view style="font-size:20rpx;margin-left:10rpx;">{{easyItem.wxnickname}}</view>
+        </view>
+    </block>
+    <view class='price-con'>
+        <view class='price'>
+            ￥{{easyItem.price}}
+        </view>
+        <image src='../../resources/img_jin.png' style='width:100rpx;height:25rpx;'></image>
     </view>
     <view class='rebeat-con'>
         <text class='rebeat-text'>分享奖励</text>
