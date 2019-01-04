@@ -1,10 +1,11 @@
 //app.js
 import Host from './utils/Const.js'
 App({
-    iszhe:false,
-    allprotuct:[],
-    isSao:false,
-    price1:null,
+    shangpuArray:[],
+    iszhe: false,
+    allprotuct: [],
+    isSao: false,
+    price1: null,
     price2: null,
     price3: null,
     globalData: {
@@ -147,8 +148,6 @@ App({
     //计时器数组
     intervelArr: [],
     onLaunch: function(res) {
-      
-      
         // var a={};
         // if (a["year"] ===undefined)
         // {
@@ -214,6 +213,7 @@ App({
                     success(res) {
                         //当授权时
                         if (res.authSetting['scope.userInfo']) {
+                            console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
                             if (self.loginCode) {
                                 self.ShortConnect("https://newaccount.ykplay.com/ykLogin/Login", {
                                     app: "zhidianmijin",
@@ -238,6 +238,7 @@ App({
                                 }
                             }
                         } else {
+                            console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1");
                             if (self.isShare == false) {
                                 self.ShortConnect("https://newaccount.ykplay.com/ykLogin/Login", {
                                     app: "zhidianmijin",
@@ -341,9 +342,8 @@ App({
             console.log("ppppppppppppppppppppp");
             this.isShare = true;
         }
-        if (res.scene == 1047 || res.scene == 1048 || res.scene == 1049)
-        {
-            this.isSao=true;
+        if (res.scene == 1047 || res.scene == 1048 || res.scene == 1049) {
+            this.isSao = true;
         }
         // this.isShare = false;
         // this.isShareEnter = false;
@@ -562,7 +562,7 @@ App({
                                 case "quanfengkuaidi":
                                     self.orderMsg.com = "全峰快递";
                                     break;
-                                    
+
                             }
                         }
                         wx.navigateTo({
@@ -574,6 +574,9 @@ App({
                         //  wx.navigateTo({
                         //      url: '../ShopAdress/ShopAdress',
                         //  })
+                        break;
+                    case "getShop":
+                        callback(res);
                         break;
                     case "userInfo":
                         console.log(res.data);
@@ -605,6 +608,9 @@ App({
                         break;
                     case "liginSuccess":
                         if (res.data.desc == "用户合法登录") {
+                            if (self.setSranInter) {
+                                self.setSranInter(res);
+                            }
                             // self.ShortConnect(self.urlw + 'Data/GetTabs', {}, "GetType");
                             if (self.isShare) {
                                 //   if (self.isShouQuan1)
@@ -633,12 +639,30 @@ App({
                                 self.unionId = res.data.userInfo.unionId;
                                 self.uid = res.data.userInfo.uid;
                                 self.serverOpenid = res.data.userInfo.openid;
+                                if (self.turnIndex1) {
+                                    self.turnIndex1();
+                                }
+                                if (self.turnDazhe) {
+                                    self.turnDazhe();
+                                }
+                                if (self.buy1) {
+                                    self.buy1();
+                                }
 
                             } else {
                                 self.openid = res.data.userInfo.wxopenId;
                                 console.log(res.data.userInfo.openid);
                                 self.unionId = res.data.userInfo.unionId;
                                 self.uid = res.data.userInfo.uid;
+                                if (self.turnIndex1) {
+                                    self.turnIndex1();
+                                }
+                                if (self.turnDazhe) {
+                                    self.turnDazhe();
+                                }
+                                if (self.buy1) {
+                                    self.buy1();
+                                }
                                 console.log(JSON.stringify(res.data.userInfo) + "???????????????????????");
                                 self.serverOpenid = res.data.userInfo.openid;
                                 self.ShortConnect("https://pay.ykplay.com/user/reg", {
@@ -666,7 +690,14 @@ App({
                     case "register":
                         if (self.isShare) {
 
-                        } else {
+                        }
+                        else if (self.isSao)
+                        {
+                            wx.switchTab({
+                                url: '../lck/index/index',
+                            })
+                        }
+                        else {
                             wx.switchTab({
                                 url: '../lck/index/index',
                             })
@@ -908,21 +939,21 @@ App({
                             'package': "prepay_id=" + res.data.prepay_id,
                             'signType': "MD5",
                             'paySign': res.data.paySign,
-                            'success': function (res) {
+                            'success': function(res) {
                                 console.log(res);
                                 if (res.errMsg == "requestPayment:ok") {
                                     console.log("555");
-                                
+
                                     self.ShortConnect(self.urlw + "Data/PayDiscountPayRecode", {
                                         openid: self.serverOpenid,
                                         number: self.orderNumber
                                     }, "checkPay");
                                 }
                             },
-                            'fail': function (res) {
+                            'fail': function(res) {
                                 console.log(res);
                             },
-                            'complete': function (res) {
+                            'complete': function(res) {
                                 console.log(res);
                             }
                         })
@@ -985,20 +1016,24 @@ App({
                     case "loadPaySuccess":
                         self.orderPage = res.data.pages;
                         self.hotShop = res.data.hotProducts;
-                        if(self.iszhe)
-                        {
+                        if (self.iszhe) {
                             wx.navigateTo({
                                 url: '../lck/ShopSuccess/ShopSuccess?buyType=shop',
                             })
-                        }
-                        else
-                        {
+                        } else {
                             wx.navigateTo({
                                 url: '../ShopSuccess/ShopSuccess?buyType=shop',
                             })
 
                         }
-                       
+
+                        break;
+                    case "SeeShopWen":
+                        callback(res);
+                        break;
+                    case "sranCode":
+
+                        callback(res);
                         break;
                     case "tixianZero":
                         if (res.data.encode == -1) {
@@ -1049,7 +1084,7 @@ App({
                                 showCancel: false,
                                 title: '提示',
                                 content: res.data.msg,
-                                success: function (res) {
+                                success: function(res) {
                                     if (res.confirm) {
                                         //  wx.switchTab({
                                         //      url: '../indextwo/indextwo'
@@ -1062,7 +1097,7 @@ App({
 
                         }
 
-                         break;
+                        break;
                     case "pay1":
                         if (res.data.encode == 0) {
                             self.orderNumber = res.data.order.onumber;
@@ -1082,7 +1117,7 @@ App({
                                 showCancel: false,
                                 title: '提示',
                                 content: res.data.msg,
-                                success: function (res) {
+                                success: function(res) {
                                     if (res.confirm) {
                                         //  wx.switchTab({
                                         //      url: '../indextwo/indextwo'
@@ -1390,8 +1425,8 @@ App({
                         }
                         break;
                     case "wode":
-                    callback(res);
-                         break;
+                        callback(res);
+                        break;
                     case "getPages":
                         self.orderPage = res.data.pages;
 
@@ -1454,9 +1489,9 @@ App({
                         self.price2 = res.data.discount_money;
                         self.price3 = res.data.actual_payment;
                         callback(res);
-                         break;
+                        break;
                     case "shengchneg":
-                    callback(res);
+                        callback(res);
                         break;
                 }
             },
@@ -1468,8 +1503,6 @@ App({
         if (this.shopmsgcallback) {
             this.shopmsgcallback(res);
         }
-
-
     },
     // 获取用户信息
     GetUserInfo: function(res) {

@@ -128,9 +128,16 @@ Page({
             // })
             console.log(app.shopMsgJson.head + "=========================");
             this.setData({
-                goods: app.shopMsgJson,
-                goodsImageList: a
+                goods : app.shopMsgJson,
+                goodsImageList : a
             })
+            // //清除缓存中的goods信息
+            // wx.removeStorage({
+            //     key: 'goods',
+            //     success: function(res) {
+            //         console.log("从搜索进入的时候商品缓存信息清除了：");
+            //     },
+            // })
             console.log(JSON.stringify(this.data.goods) + "=========================");
             this.initGoodsInfo();
         } else {

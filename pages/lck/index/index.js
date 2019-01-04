@@ -150,13 +150,17 @@ Page({
         //是否点击了分类，点击分类默认是请求了数据的这样就不会再执行onReachBottom方法导致少显示一页的内容
         click: true,
         //是否开启显示用户头像
-        isShowUser: false
+        isShowUser: false,
+        //当前选择的类型
+        curType : 0,
     },
 
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: async function (options) {
+        console.log("通过小程序码进入的小程序码有没有scene",options);
+        
         let fileManager = wx.getFileSystemManager();
         fileManager.getSavedFileList({
             success: function (res) {
@@ -241,6 +245,7 @@ Page({
         }
         this.updateWeaterFall();
     },
+    
     //获取百度地图返回的天气信息字符串
     getWeatherName: function (weatherInfo) {
         let weatherIndex = weatherInfo.indexOf('weather');
@@ -252,9 +257,9 @@ Page({
         //获得推荐的商品
         let url = 'Data/GetHomeEOrP'
         let data = {
-            page: this.data.page,
-            shoptag: tag,
-            uid: app.uid
+            page        : this.data.page,
+            shoptag     : tag,
+            uid         : app.uid
         }
         console.log("data is ", data);
         let req = new Request(app.host + url, data, "POST", "text");
@@ -450,8 +455,7 @@ Page({
         }
         console.log("主图是：", this.data.MainImageArr);
         this.setData({
-            MainImageArr: this.data.MainImageArr
-        })
+            MainImageArr: this.data.MainImageArr})
     },
     //创建瀑布流
     updateWeaterFall: function () {
@@ -497,7 +501,7 @@ Page({
     /**
      * 生命周期函数--监听页面显示
      */
-    onShow: function () {
+    onShow: async function () {
         console.log("开启自动轮播");
         //自动轮播设置
         if (!this.data.autoPlay && !this.data.userOperation) {
@@ -506,6 +510,21 @@ Page({
             }.bind(this), 4000);
             this.data.autoPlay = true;
         }
+        this.data.click = true;
+        //刷新浏览量
+        this.onPullDownRefresh();
+
+        let aasd = app.uid;
+        console.log("currentUid is ", aasd);
+        let url = Const.productionHost + 'Data/EwmAddFriend';
+        let data = {
+            parent: app.scene,
+            child: aasd
+        };
+        console.log("data is ", data);
+        let req = new Request(url, data, 'POST', 'text');
+        let res = await req.sendRequest();
+        console.log("res is ", res);
     },
 
     /**
@@ -527,7 +546,47 @@ Page({
     /**
      * 页面相关事件处理函数--监听用户下拉动作
      */
-    onPullDownRefresh: function () {
+    onPullDownRefresh: async function () {
+        let self = this;
+        this.setData({
+            newAddEssays : [],
+            col1         : [],
+            col2         : [],
+            col1H        : 0,
+            col2H        : 0,
+        })
+        //监听用户下拉动作刷新文章的浏览量
+        //请求服务器数据查看当前选择的分类是哪一个
+        console.log("当前选择的类型是：",this.data.curType);
+        this.data.curType = this.data.curType.toString();
+        //将page重置为1
+        this.data.page = 1;
+        let res = await this.getType(this.data.curType);
+        console.log("res is ",res);
+        for (let m = 0; m < res.length; m++) {
+            if (res[m].shopessayhead) {
+                res[m].shopessayhead = res[m].shopessayhead.split(',');
+                res[m].productstype = "shopessays";
+            } else if (res[m].head) {
+                res[m].head = res[m].head.split(',');
+                res[m].productstype = 'products';
+            } else if (res[m].essayhead) {
+                res[m].productstype = 'essays';
+                res[m].essayhead = res[m].essayhead.split(',');
+            }
+        }
+        this.setData({
+            newAddEssays : res,
+            click        : false
+        }, () => {
+            console.log("newAddEssays is ", this.data.newAddEssays);
+            wx.stopPullDownRefresh({
+                success : function(res){
+                    console.log("res is ",res);
+                }
+            });
+            self.updateWeaterFall();
+        })
 
     },
     onPageScroll: function (e) {
@@ -641,30 +700,37 @@ Page({
             case 0:
                 this.data.page = 1;
                 res = await this.getType('0');
+                this.data.curType = '0';
                 break;
             case 1:
                 this.data.page = 1;
                 res = await this.getType('吃');
+                this.data.curType = '吃';
                 break;
             case 2:
                 this.data.page = 1;
                 res = await this.getType('喝');
+                this.data.curType = '喝';
                 break;
             case 3:
                 this.data.page = 1;
                 res = await this.getType('玩');
+                this.data.curType = '玩';
                 break;
             case 4:
                 this.data.page = 1;
                 res = await this.getType('乐');
+                this.data.curType = '乐';
                 break;
             case 5:
                 this.data.page = 1;
                 res = await this.getType('购');
+                this.data.curType = '购';
                 break;
             case 6:
                 this.data.page = 1;
                 res = await this.getType('1');
+                this.data.curType = '1';
                 console.log("最新的文章是：",res);
                 break;    
         }

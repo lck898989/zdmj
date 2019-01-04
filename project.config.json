@@ -31,8 +31,30 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": -1,
-			"list": []
+			"current": 2,
+			"list": [
+				{
+					"id": -1,
+					"name": "adada",
+					"pathName": "pages/wxscope/wxscope",
+					"query": "",
+					"scene": "1047"
+				},
+				{
+					"id": -1,
+					"name": "adada",
+					"pathName": "pages/lck/index/index",
+					"query": "scene=3",
+					"scene": "1047"
+				},
+				{
+					"id": 2,
+					"name": "adada",
+					"pathName": "pages/wxscope/wxscope",
+					"query": "scene=9",
+					"scene": "1047"
+				}
+			]
 		}
 	}
 }

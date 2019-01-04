@@ -52,7 +52,7 @@
         </view>
     </view>
 </view>
-<view class='delete-apply'>
+<view wx:if='{{isShowDelete}}' class='delete-apply'>
     <view class='applyDelete' bindtap='deleteApply'>
         删除申请
     </view>

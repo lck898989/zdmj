@@ -42,7 +42,7 @@
                     <input class='iptbox' value="{{value.length>=index+1?value[index].text:''}}" disabled password='{{ispassword}}' catchtap='tap' style='{{value[index].active ? "border-bottom:4rpx solid #b964d8;" : ""}}'></input>
                 </block>
             </view>
-            <input name="password" password="{{true}}" class='ipt' maxlength="{{inputArr}}" focus="{{isFocus}}" bindinput="getAuthCode"></input>
+            <input name="password"  value='{{ipkey}}' password="{{true}}" class='ipt' maxlength="{{inputArr}}" focus="{{isFocus}}" bindinput="getAuthCode"></input>
         </form>
         <view class='cutdownWrapper'>
             <view>

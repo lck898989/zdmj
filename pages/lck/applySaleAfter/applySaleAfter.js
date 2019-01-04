@@ -54,8 +54,9 @@ Page({
       //输入的文字个数
       inputNumber : 0,
       serverType : '退货',
-      backcount : 0
-
+      backcount : 0,
+      //是否是商铺售后服务
+      isStoreSaleAfter : false
   },
 
   /**
@@ -70,27 +71,37 @@ Page({
       });
       //从缓存中取值完成之后将缓存中的数据删除防止下次取出来的商品不同
       wx.removeStorageSync('orderItem');
-      //向服务器获取该商品对应的售后选项
-      let data = {
-          uid     : app.uid,
-          oitemid : orderItem.oitemid
-      }
-      let url = this.data.host + 'Data/GetAfterSaleTypeByOitemId';
-      let req = new Request(url,data,'POST','text');
-      let res = await req.sendRequest();
-      console.log("res is ",res);
-      if(res.data.encode === 1){
-          wx.showToast({
-              title : '订单已发货不支持退款！',
-              icon  : 'none'
-          })
-      }else{
-        this.data.backGoodsType.msg = res.data.msg;
-        this.data.backGoodsType.type = res.data.type;
-        this.setData({
-            backGoodsType : this.data.backGoodsType
-        })
-        console.log("constArray is ",this.data.constArray);
+      if(JSON.stringify(options) === '{}'){
+        //向服务器获取该商品对应的售后选项
+        let data = {
+            uid     : app.uid,
+            oitemid : orderItem.oitemid
+        }
+        let url = this.data.host + 'Data/GetAfterSaleTypeByOitemId';
+        let req = new Request(url,data,'POST','text');
+        let res = await req.sendRequest();
+        console.log("res is ",res);
+        if(res.data.encode === 1){
+            wx.showToast({
+                title : '订单已发货不支持退款！',
+                icon  : 'none'
+            })
+        }else{
+            this.data.backGoodsType.msg = res.data.msg;
+            this.data.backGoodsType.type = res.data.type;
+            this.setData({
+                backGoodsType    : this.data.backGoodsType,
+                isStoreSaleAfter : false
+            })
+            console.log("constArray is ",this.data.constArray);
+        }
+      } else if (options.tag === 'storeSaleAfter'){
+          this.data.backGoodsType.msg = '退款';
+          this.data.backGoodsType.type = 1;
+          this.setData({
+              backGoodsType    : this.data.backGoodsType,
+              isStoreSaleAfter : true
+          });
       }
 
   },
@@ -231,12 +242,7 @@ Page({
       console.log("uid is ",app.uid);
       console.log("收货人是 ",this.data.receptInfo['收货人']);
       console.log("手机号是 ",this.data.receptInfo['手机号']);
-    //   if(this.data.receptInfo['收货人'] === '' || this.data.receptInfo['手机号'] === ''){
-    //       wx.showToast({
-    //           title : '请完善信息',
-    //           icon  : 'none'
-    //       });
-    //   }
+      console.log("goods is ",this.data.goods);
       let reasonList = {
           accept   : this.data.receptInfo['收货人'],
           phone    : this.data.receptInfo['手机号'],
@@ -244,9 +250,10 @@ Page({
           reason   : this.data.reason.text,
           add      : '上海市',
           oitemid  : self.data.goods.oitemid,
+          shopoid  : self.data.goods.shopoid,
           uid      : app.uid,
           typ      : self.data.backGoodsType.type,
-          backcount: self.data.backcount,
+          backcount: self.data.goods.count,
           re       : []
       }
       console.log("reasonList is ",reasonList);
@@ -278,8 +285,18 @@ Page({
                         console.log("j --==");
                         console.log("host is ",self.data.host);
                         //发送给服务器上传完毕
+                        let url = '';
+                        if(!this.data.isStoreSaleAfter){
+                            //商城申请售后的接口
+                            url = self.data.host + 'Data/ApplyAfterSale';
+                            delete reasonList.shopoid;
+                        }else{
+                            //商铺申请售后的接口
+                            url = self.data.host + 'Data/ApplyShopAfterSale';
+                            delete reasonList.oitemid;
+                        }
                         wx.request({
-                            url: self.data.host + 'Data/ApplyAfterSale',
+                            url    : url,
                             method : 'POST',
                             data   : reasonList,
                             success :function(res){
@@ -289,7 +306,7 @@ Page({
                                 wx.hideLoading();
                                 if(res.data.encode === 0){
                                     //跳转页面进入正在申请界面
-                                    wx.navigateTo({
+                                    wx.redirectTo({
                                         url: '../saleService/saleService?status=1',
                                         success : function(){
                                             wx.showToast({
@@ -313,11 +330,20 @@ Page({
           }
       } else {
           //发送给服务器上传完毕--不上传图片
-          if(reasonList.accept !== '' && reasonList.phone !== '' && reasonList.reason !== ''){
+          if((reasonList.accept !== '' || reasonList.accept === undefined) && (reasonList.phone !== '' || reasonList.phone === undefined) && (reasonList.reason !== '' || reasonList.reason === undefined)){
+            let url = '';
+            if(!this.data.isStoreSaleAfter){
+                url = self.data.host + 'Data/ApplyAfterSale';
+                delete reasonList.shopoid;
+            }else{
+                url = self.data.host + 'Data/ApplyShopAfterSale'
+                delete reasonList.oitemid;
+            }
+            console.log("data is ",reasonList);
             wx.request({
-                url: self.data.host + 'Data/ApplyAfterSale',
-                method: 'POST',
-                data: reasonList,
+                url    : url,
+                method : 'POST',
+                data   : reasonList,
                 success: function (res) {
                     console.log("图片上传完毕的相应");
                     console.log("res is ", res);
@@ -340,19 +366,19 @@ Page({
                     console.log("请求失败");
                 }
             })
-          }else if(reasonList.accept === ''){
+          } else if (reasonList.reason === '' || reasonList.reason == undefined) {
+              wx.showToast({
+                  title: '请选择原因',
+                  icon: 'none'
+              })
+          }else if(reasonList.accept === '' || reasonList.accept == undefined){
               wx.showToast({
                   title : '请填写收货人',
                   icon  : 'none'
               });
-          }else if(reasonList.phone === ''){
+          }else if(reasonList.phone === '' || reasonList.phone === undefined){
               wx.showToast({
                   title : '请填写手机号码',
-                  icon  : 'none'
-              })
-          }else if(reasonList.reason === ''){
-              wx.showToast({
-                  title : '请填写原因',
                   icon  : 'none'
               })
           }
@@ -425,12 +451,14 @@ Page({
     let dataSet = event.currentTarget.dataset;
     let count = Number(dataSet.c);
     console.log("c is ",count);
+    console.log("count is ",this.data.goods);
     //如果退货的数量小于商品的数量可以加数量
     if(this.data.backcount < count){
         this.data.backcount++;
+        this.data.goods.count = this.data.backcount;
     }
     this.setData({
-        backcount : this.data.backcount
+        goods : this.data.goods
     })
   },
   //较少数量
@@ -440,9 +468,10 @@ Page({
       console.log("count is ",count);
       if(this.data.backcount > 0){
           this.data.backcount--;
+          this.data.goods.count = this.data.backcount;
       }
       this.setData({
-        backcount : this.data.backcount
+        goods : this.data.goods
       })
   },
   confirmReason :function(e){

@@ -6,6 +6,17 @@
   bottom: 0;
   background-color: #eeeeee
 }
+.mask{
+    width: 750rpx;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #000;
+    opacity: 0.8;
+    overflow: hidden;
+    z-index: 2000;
+}
 .daohang{
   position: relative;
   top: 0;
@@ -276,6 +287,11 @@
   background-color: #ffffff;
 }
 .code-canvas{
+    position: absolute;
     width:400rpx;
     height:400rpx;
+}
+.qrcode{
+    position: absolute;
+    left: 135rpx;
 }

@@ -61,6 +61,8 @@ Page({
       expressOrgList : [],
       //选择的物流公司
       choosedExpressOrg : '',
+      //是商城的商品售后还是商铺券的商品售后
+      isShopSaleAfter : true
   },
 
   /**
@@ -233,86 +235,136 @@ Page({
     },
     //更新售后申请列表
     updateSaleAfterList : async function(){
-        let url = this.data.host + 'Data/GetAfterSale';
-        console.log("host is ", this.data.host);
-        console.log("uid is ", app.uid);
-        let data = {
-            uid: app.uid,
-            page: this.data.saleAfterPage
-        }
-        // console.log("uid is ",app.uid);
-        if (data.uid !== null) {
-            let req = new Request(url, data, 'POST', 'text');
-            let res = await req.sendRequest();
+        if(this.data.isShopSaleAfter){
+            let url = this.data.host + 'Data/GetAfterSale';
+            console.log("host is ", this.data.host);
+            console.log("uid is ", app.uid);
+            let data = {
+                uid: app.uid,
+                page: this.data.saleAfterPage
+            }
+            // console.log("uid is ",app.uid);
+            if (data.uid !== null) {
+                let req = new Request(url, data, 'POST', 'text');
+                let res = await req.sendRequest();
 
-            console.log(res);
-            console.log("时间是：", res.data.orders);
-            if (res.data.orders.length === 0) {
-                wx.showToast({
-                    title: '没有多余售后订单了!',
-                    icon: 'none'
-                })
-            }
-            if (res.data.encode === 0) {
-                // wx.hideLoading();
-                let orders = res.data.orders;
-                this.setData({
-                    sourceData: orders,
-                });
-                for (let i = 0; i < orders.length; i++) {
-                    let time = null;
-                    if (orders[i].ordertime.includes('-')) {
-                        time = orders[i].ordertime;
-                    } else {
-                        time = Const.formatDate(orders[i].ordertime);
-                    }
-                    let orderItemsLen = orders[i].orderItems.length;
-                    let saleOrderView = {
-                        ordertime: time,
-                        onumber: res.data.orders[i].onumber,
-                    }
-                    let products = [];
-                    //遍历订单项
-                    for (let j = 0; j < orderItemsLen; j++) {
-                        if(orders[i].orderItems[j].product){
-                            let headImg = orders[i].orderItems[j].product.head.split(',')[0];
-                            let count = orders[i].orderItems[j].pcount;
-                            let pname = orders[i].orderItems[j].product.pname;
-                            let price = orders[i].orderItems[j].product.price;
-                            let oitemid = orders[i].orderItems[j].oitemid;
-                            let oid = orders[i].orderItems[j].oid;
-                            let size = JSON.parse(orders[i].orderItems[j].product.size);
-                            let product = {
-                                headImg  : headImg,
-                                count    : count,
-                                pname    : pname,
-                                price    : price,
-                                oitemid  : oitemid,
-                                oid      : oid,
-                                size     : size
-                            }
-                            products.push(product);
-                        }
-                    }
-                    saleOrderView.products = products;
-                    // res.data.orders[i].ordertime = time;
-                    this.data.saleOrderArray.push(saleOrderView);
+                console.log(res);
+                console.log("时间是：", res.data.orders);
+                if (res.data.orders.length === 0) {
+                    wx.showToast({
+                        title: '没有多余售后订单了!',
+                        icon: 'none'
+                    })
                 }
-                console.log("saleOrderArray is ", this.data.saleOrderArray);
-                // this.data.saleOrderArray = Const.uniqObjInArray(this.data.saleOrderArray);
-                wx.hideLoading();
-                this.setData({
-                    saleOrderArray: this.data.saleOrderArray
-                },()=>{
-                })
-            } else {
-                wx.hideLoading();
-                //没有可以售后的订单信息
-                wx.showToast({
-                    title: res.data.msg,
-                    icon: 'none'
-                })
+                if (res.data.encode === 0) {
+                    // wx.hideLoading();
+                    let orders = res.data.orders;
+                    this.setData({
+                        sourceData: orders,
+                    });
+                    for (let i = 0; i < orders.length; i++) {
+                        let time = null;
+                        if (orders[i].ordertime.includes('-')) {
+                            time = orders[i].ordertime;
+                        } else {
+                            time = Const.formatDate(orders[i].ordertime);
+                        }
+                        let orderItemsLen = orders[i].orderItems.length;
+                        let saleOrderView = {
+                            ordertime: time,
+                            onumber: res.data.orders[i].onumber,
+                        }
+                        let products = [];
+                        //遍历订单项
+                        for (let j = 0; j < orderItemsLen; j++) {
+                            if(orders[i].orderItems[j].product){
+                                let headImg = orders[i].orderItems[j].product.head.split(',')[0];
+                                let count = orders[i].orderItems[j].pcount;
+                                let pname = orders[i].orderItems[j].product.pname;
+                                let price = orders[i].orderItems[j].product.price;
+                                let oitemid = orders[i].orderItems[j].oitemid;
+                                let oid = orders[i].orderItems[j].oid;
+                                let size =orders[i].orderItems[j].standard.split('|');
+                                let product = {
+                                    headImg  : headImg,
+                                    count    : count,
+                                    pname    : pname,
+                                    price    : price,
+                                    oitemid  : oitemid,
+                                    oid      : oid,
+                                    size     : size
+                                }
+                                products.push(product);
+                            }
+                        }
+                        saleOrderView.products = products;
+                        // res.data.orders[i].ordertime = time;
+                        this.data.saleOrderArray.push(saleOrderView);
+                    }
+                    console.log("saleOrderArray is ", this.data.saleOrderArray);
+                    // this.data.saleOrderArray = Const.uniqObjInArray(this.data.saleOrderArray);
+                    wx.hideLoading();
+                    this.setData({
+                        saleOrderArray : this.data.saleOrderArray
+                    },()=>{
+                    })
+                } else {
+                    wx.hideLoading();
+                    //没有可以售后的订单信息
+                    wx.showToast({
+                        title: res.data.msg,
+                        icon: 'none'
+                    })
+                }
             }
+        }else{
+            this.setData({
+                saleOrderArray : []
+            })
+            //商铺售后
+            let url = this.data.host + 'Data/GetShopAfterSale'
+            let data = {
+                uid  : app.uid,
+                page : this.data.saleAfterPage
+            }
+            console.log("data is ",data);
+            let req = new Request(url,data,"POST","text");
+            let res = await req.sendRequest();
+            let tempShopOrders = null;
+            if(res.data.shoporders){
+                tempShopOrders = res.data.shoporders;
+            }else if(res.data.orders){
+                tempShopOrders = res.data.orders;
+            }
+            if (tempShopOrders.length === 0){
+                wx.showToast({
+                    title : res.data.msg,
+                    icon  : 'none'
+                })
+            }else{
+                //显示商铺售后的信息
+                for(let i = 0;i < tempShopOrders.length;i++){
+                    let tempJson = {
+
+                    }
+                    tempJson.onumber = tempShopOrders[i].shoponumber;
+                    tempJson.ordertime = tempShopOrders[i].starttime;
+                    tempJson.products = [];
+                    let product = {};
+                    product.headImg = tempShopOrders[i].head;
+                    product.count = tempShopOrders[i].pcount;
+                    product.pname = tempShopOrders[i].shoppname;
+                    product.price = tempShopOrders[i].shopprice;
+                    product.size = '';
+                    product.shopoid = tempShopOrders[i].shopoid;
+                    tempJson.products.push(product);
+                    this.data.saleOrderArray.push(tempJson);
+                }
+            }
+            console.log("商铺售后信息是：",this.data.saleOrderArray)
+            this.setData({
+                saleOrderArray : this.data.saleOrderArray
+            })
         }
     },
     //获取正在申请的列表等待运营进行审核
@@ -327,54 +379,109 @@ Page({
         this.updateApplying();
     },
     updateApplying : async function(){
-        let url = this.data.host + 'Data/GetAfterSaleIng';
-        let data = {
-            uid: app.uid,
-            page: this.data.applyingPage,
-        }
-        let req = new Request(url, data, 'POST', 'text');
-        let res = await req.sendRequest();
-        console.log("正在申请的售后信息是：", res);
-        let applyingSaleDates = res.data.aftersales;
-        if (applyingSaleDates.length === 0) {
-            wx.showToast({
-                title: '没有更多了',
-                icon: 'none'
-            })
-        }
-        for (let i = 0; i < applyingSaleDates.length; i++) {
-            let serviceNumber = applyingSaleDates[i].service_number;
-            let servicetype = applyingSaleDates[i].type.toString();
-            let saleType = this.data.saleType[`${servicetype}`];
-            let reason = applyingSaleDates[i].reason;
-            let progressMsg = applyingSaleDates[i].progress_msg;
-            console.log("saleType is ", saleType);
-            let applyingView = {
-                serviceNumber: serviceNumber,
-                serviceType: saleType,
-                progressMsg: progressMsg,
-                reason: reason,
-                recepter: applyingSaleDates[i].consignee,
-                recepterPhone: applyingSaleDates[i].phone,
-                address: applyingSaleDates[i].address,
-                submitTime: applyingSaleDates[i].start_time,
-                questionDes: applyingSaleDates[i].info
+        if(this.data.isShopSaleAfter){
+            let url = this.data.host + 'Data/GetAfterSaleIng';
+            let data = {
+                uid: app.uid,
+                page: this.data.applyingPage,
             }
-            let products = [];
-            if (applyingSaleDates[i].orderItems[0].product !== null){
-                let productTemp = {
-                    pname: applyingSaleDates[i].orderItems[0].product.pname,
-                    headImg: applyingSaleDates[i].orderItems[0].product.head.split(',')[0],
-                    price: applyingSaleDates[i].orderItems[0].product.price,
-                    count: applyingSaleDates[i].orderItems[0].pcount,
-                    oitemid: applyingSaleDates[i].orderItems[0].oitemid,
-                    oid: applyingSaleDates[i].orderItems[0].oid,
-                    size: JSON.parse(applyingSaleDates[i].orderItems[0].product.size)
+            let req = new Request(url, data, 'POST', 'text');
+            let res = await req.sendRequest();
+            console.log("正在申请的售后信息是：", res);
+            let applyingSaleDates = res.data.aftersales;
+            if (applyingSaleDates.length === 0) {
+                wx.showToast({
+                    title: '没有更多了',
+                    icon: 'none'
+                })
+            }
+            for (let i = 0; i < applyingSaleDates.length; i++) {
+                let serviceNumber = applyingSaleDates[i].service_number;
+                let servicetype = applyingSaleDates[i].type.toString();
+                let saleType = this.data.saleType[`${servicetype}`];
+                let reason = applyingSaleDates[i].reason;
+                let progressMsg = applyingSaleDates[i].progress_msg;
+                console.log("saleType is ", saleType);
+                let applyingView = {
+                    serviceNumber: serviceNumber,
+                    serviceType: servicetype,
+                    progressMsg: progressMsg,
+                    reason: reason,
+                    recepter: applyingSaleDates[i].consignee,
+                    recepterPhone: applyingSaleDates[i].phone,
+                    address: applyingSaleDates[i].address,
+                    submitTime: applyingSaleDates[i].start_time,
+                    questionDes: applyingSaleDates[i].info
                 }
-                products.push(productTemp);
-                applyingView.products = products;
-                this.data.applyingOrderArr.push(applyingView);
+                let products = [];
+                if (applyingSaleDates[i].orderItems[0].product !== null){
+                    let productTemp = {
+                        pname   : applyingSaleDates[i].orderItems[0].product.pname,
+                        headImg : applyingSaleDates[i].orderItems[0].product.head.split(',')[0],
+                        price   : applyingSaleDates[i].orderItems[0].product.price,
+                        count   : applyingSaleDates[i].orderItems[0].pcount,
+                        oitemid : applyingSaleDates[i].orderItems[0].oitemid,
+                        oid     : applyingSaleDates[i].orderItems[0].oid,
+                        size    : applyingSaleDates[i].orderItems[0].standard.split('|')
+                    }
+                    products.push(productTemp);
+                    applyingView.products = products;
+                    this.data.applyingOrderArr.push(applyingView);
+                }
             }
+        }else{
+            //商铺的正在申请的商铺券
+            let url = this.data.host + 'Data/GetShopAfterSaleIng';
+            let data = {
+                uid: app.uid,
+                page: this.data.applyingPage,
+            }
+            let req = new Request(url, data, 'POST', 'text');
+            let res = await req.sendRequest();
+            console.log("正在申请的售后信息是：", res.data.shopaftersales);
+            if(res.data.shopaftersales.length === 0){
+                wx.showToast({
+                    title : res.data.msg,
+                    icon  : 'none'
+                });
+            }else{
+                //显示正在申请的商铺售后信息
+                let applyingData = res.data.shopaftersales;
+                for (let i = 0; i < applyingData.length; i++) {
+                    let serviceNumber = applyingData[i].service_number;
+                    let servicetype = applyingData[i].type.toString();
+                    let saleType = this.data.saleType[`${servicetype}`];
+                    let reason = applyingData[i].reason;
+                    let progressMsg = applyingData[i].progress_msg;
+                    console.log("saleType is ", saleType);
+                    let applyingView = {
+                        serviceNumber: serviceNumber,
+                        serviceType: servicetype,
+                        progressMsg: progressMsg,
+                        reason: reason,
+                        recepter: applyingData[i].consignee,
+                        recepterPhone: applyingData[i].phone,
+                        address: applyingData[i].address,
+                        submitTime: applyingData[i].starttime,
+                        questionDes: applyingData[i].info
+                    }
+                    let products = [];
+                    if (applyingData[i] !== null) {
+                        let productTemp = {
+                            pname: applyingData[i].shoppname,
+                            headImg: applyingData[i].head,
+                            price: applyingData[i].shopprice,
+                            count: applyingData[i].pcount,
+                            shopoid: applyingData[i].shopoid,
+                        }
+                        products.push(productTemp);
+                        applyingView.products = products;
+                        this.data.applyingOrderArr.push(applyingView);
+                    }
+                }
+
+            }
+
         }
         console.log("applyingOrderArr is ", this.data.applyingOrderArr);
         console.log("去重后的applyingOrderArr is ", Const.uniqObjInArray(this.data.applyingOrderArr));
@@ -399,51 +506,113 @@ Page({
     },
     //刷新申请记录
     updateApplyRecord : async function(){
-        let url = this.data.host + 'Data/GetAfterSaleRecord';
-        console.log("用户uid is ",app.uid);
-        let data = {
-            uid: app.uid,
-            page: this.data.applyRecordPage
-        }
-        let req = new Request(url, data, 'POST', 'text');
-        let res = await req.sendRequest();
-
-        console.log("获得的申请的记录是：", res.data.aftersales);
-        let applyingSaleDates = res.data.aftersales;
-        if (applyingSaleDates.length === 0) {
-            wx.showToast({
-                title: '没有更多了',
-                icon: 'none'
-            })
-        }
-        for (let i = 0; i < applyingSaleDates.length; i++) {
-            let serviceNumber = applyingSaleDates[i].service_number;
-            let servicetype = applyingSaleDates[i].type.toString();
-            let saleType = this.data.saleType[`${servicetype}`];
-            let reason = applyingSaleDates[i].reason;
-            let index = applyingSaleDates[i].progress_msg.lastIndexOf(';');
-            let progressMsg = applyingSaleDates[i].progress_msg.slice(index + 1);
-            console.log("saleType is ", saleType);
-            let applyingView = {
-                serviceNumber: serviceNumber,
-                serviceType: saleType,
-                progressMsg: progressMsg,
-                progressRes: applyingSaleDates[i].progress
+        if(this.data.isShopSaleAfter){
+            let url = this.data.host + 'Data/GetAfterSaleRecord';
+            console.log("用户uid is ",app.uid);
+            let data = {
+                uid: app.uid,
+                page: this.data.applyRecordPage
             }
-            let products = [];
-            if (applyingSaleDates[i].orderItems[0].product){
-                let productTemp = {
-                    pname: applyingSaleDates[i].orderItems[0].product.pname,
-                    headImg: applyingSaleDates[i].orderItems[0].product.head.split(',')[0],
-                    price: applyingSaleDates[i].orderItems[0].product.price,
-                    count: applyingSaleDates[i].backcount,
-                    oitemid: applyingSaleDates[i].orderItems[0].oitemid,
-                    oid: applyingSaleDates[i].orderItems[0].oid,
-                    size: JSON.parse(applyingSaleDates[i].orderItems[0].product.size)
+            let req = new Request(url, data, 'POST', 'text');
+            let res = await req.sendRequest();
+
+            console.log("获得的申请的记录是：", res.data.aftersales);
+            let applyingSaleDates = res.data.aftersales;
+            if (applyingSaleDates.length === 0) {
+                wx.showToast({
+                    title: '没有更多了',
+                    icon: 'none'
+                });
+                wx.hideLoading();
+            }
+            for (let i = 0; i < applyingSaleDates.length; i++) {
+                let serviceNumber = applyingSaleDates[i].service_number;
+                let servicetype = applyingSaleDates[i].type.toString();
+                let saleType = this.data.saleType[`${servicetype}`];
+                let reason = applyingSaleDates[i].reason;
+                let index = applyingSaleDates[i].progress_msg.lastIndexOf(';');
+                let progressMsg_res = applyingSaleDates[i].progress_msg.slice(index + 1);
+                let progressMsg = applyingSaleDates[i].progress_msg;
+                console.log("saleType is ", saleType);
+                let applyingView = {
+                    serviceNumber   : serviceNumber,
+                    serviceType     : servicetype,
+                    progressMsg     : progressMsg,
+                    progressRes     : applyingSaleDates[i].progress,
+                    progressMsg_res : progressMsg_res,
+                    reason          : applyingSaleDates[i].reason,
+                    recepter        : applyingSaleDates[i].consignee,
+                    recepterPhone   : applyingSaleDates[i].phone,
                 }
-                products.push(productTemp);
-                applyingView.products = products;
-                this.data.applyRecord.push(applyingView);
+                let products = [];
+                if (applyingSaleDates[i].orderItems[0].product){
+                    let productTemp = {
+                        pname: applyingSaleDates[i].orderItems[0].product.pname,
+                        headImg: applyingSaleDates[i].orderItems[0].product.head.split(',')[0],
+                        price: applyingSaleDates[i].orderItems[0].product.price,
+                        count: applyingSaleDates[i].backcount,
+                        oitemid: applyingSaleDates[i].orderItems[0].oitemid,
+                        oid: applyingSaleDates[i].orderItems[0].oid,
+                        size: JSON.parse(applyingSaleDates[i].orderItems[0].product.size)
+                    }
+                    products.push(productTemp);
+                    applyingView.products = products;
+                    this.data.applyRecord.push(applyingView);
+                }
+            }
+        }else{
+            //商铺券的申请记录
+            let url = this.data.host + 'Data/GetShopAfterSaleRecord';
+            console.log("用户uid is ", app.uid);
+            let data = {
+                uid: app.uid,
+                page: this.data.applyRecordPage
+            }
+            let req = new Request(url, data, 'POST', 'text');
+            let res = await req.sendRequest();
+            console.log("获得的申请的记录是：", res.data.shopaftersales);
+            if(res.data.shopaftersales.length === 0){
+                wx.showToast({
+                    title : res.data.msg,
+                    icon  : 'none'
+                })
+            }else{
+                //显示商铺售后的信息
+                let applyingSaleDates = res.data.shopaftersales;
+                for (let i = 0; i < applyingSaleDates.length; i++) {
+                    let serviceNumber = applyingSaleDates[i].service_number;
+                    let servicetype = applyingSaleDates[i].type.toString();
+                    let saleType = this.data.saleType[`${servicetype}`];
+                    let reason = applyingSaleDates[i].reason;
+                    let index = applyingSaleDates[i].progress_msg.lastIndexOf(';');
+                    let progressMsg_res = applyingSaleDates[i].progress_msg.slice(index + 1);
+                    let progressMsg = applyingSaleDates[i].progress_msg
+                    console.log("saleType is ", saleType);
+                    let applyingView = {
+                        serviceNumber: serviceNumber,
+                        serviceType     : servicetype,
+                        progressMsg     : progressMsg,
+                        progressRes     : applyingSaleDates[i].progress,
+                        progressMsg_res : progressMsg_res,
+                        reason          : applyingSaleDates[i].reason,
+                        recepter        : applyingSaleDates[i].consignee,
+                        recepterPhone   : applyingSaleDates[i].phone,
+                    }
+                    let products = [];
+                    if (applyingSaleDates[i]) {
+                        let productTemp = {
+                            pname   : applyingSaleDates[i].shoppname,
+                            headImg : applyingSaleDates[i].head,
+                            price   : applyingSaleDates[i].shopprice,
+                            count   : applyingSaleDates[i].backcount,
+                            shopoid : applyingSaleDates[i].shopoid,
+                        }
+                        products.push(productTemp);
+                        applyingView.products = products;
+                        this.data.applyRecord.push(applyingView);
+                    }
+                }
+
             }
         }
         console.log("applyRecord is ", this.data.applyRecord);
@@ -465,17 +634,25 @@ Page({
              if(oitemid === this.data.saleOrderArray[i].products[j].oitemid){
                  //找到该商品
                  goods = this.data.saleOrderArray[i].products[j];
+             }else if(oitemid === this.data.saleOrderArray[i].products[j].shopoid){
+                 goods = this.data.saleOrderArray[i].products[j];
              }
          }
       }
       console.log("goods is",goods);
       wx.setStorage({
-          key: 'orderItem',
-          data: goods
+          key  : 'orderItem',
+          data : goods
       })
-      wx.navigateTo({
-          url: '../applySaleAfter/applySaleAfter',
-      })
+      if(this.data.isShopSaleAfter){
+        wx.navigateTo({
+            url: '../applySaleAfter/applySaleAfter',
+        })
+      }else{
+        wx.navigateTo({
+            url: '../applySaleAfter/applySaleAfter?tag=storeSaleAfter',
+        })
+      }
     },
     //查看审核进度
     enterProgress : function(event){
@@ -483,31 +660,63 @@ Page({
         let dataSet = event.currentTarget.dataset;
         console.log("oitemid is ",dataSet.oitemid);
         let oitemid = Number(dataSet.oitemid);
+        let type = dataSet.type;
         console.log("oitemid is ",oitemid);
         // console
         console.log("applyingOrderArr is ",this.data.applyingOrderArr);
         let curGoods = null;
-        let saleOrderLen = this.data.applyingOrderArr.length;
-        for(let i = 0;i < saleOrderLen;i++){
-            let currentOrder = this.data.applyingOrderArr[i];
-            if(currentOrder.products instanceof Array){
-                let productsLen = currentOrder.products.length;
-                for(let j = 0;j < productsLen;j++){
-                    if(currentOrder.products[j].oitemid === oitemid){
-                        curGoods = currentOrder;
+        if(!type){
+            let saleOrderLen = this.data.applyingOrderArr.length;
+            for(let i = 0;i < saleOrderLen;i++){
+                let currentOrder = this.data.applyingOrderArr[i];
+                if(currentOrder.products instanceof Array){
+                    let productsLen = currentOrder.products.length;
+                    for(let j = 0;j < productsLen;j++){
+                        if(currentOrder.products[j].oitemid === oitemid){
+                            curGoods = currentOrder;
+                        }else if(currentOrder.products[j].shopoid === oitemid){
+                            curGoods = currentOrder;
+                        }
+                    }
+
+                }
+            }
+            console.log("curGoods is ", curGoods);
+            if (curGoods !== null) {
+                wx.setStorageSync('serverItem', curGoods);
+                wx.navigateTo({
+                    url: '../applyProgress/applyProgress',
+                });
+
+            }
+        }else{
+            console.log("type is ",type);
+            //从申请记录中进入审核jindu
+            let applyRecord = this.data.applyRecord;
+            let recordLen = applyRecord.length;
+            for(let i = 0;i < recordLen;i++){
+                let currentRecord = applyRecord[i];
+                if(currentRecord.products instanceof Array){
+                    let productsLen =  currentRecord.products.length;
+                    for (let j = 0; j < productsLen; j++) {
+                        if (currentRecord.products[j].oitemid === oitemid) {
+                            curGoods = currentRecord;
+                        } else if (currentRecord.products[j].shopoid === oitemid) {
+                            curGoods = currentRecord;
+                        }
                     }
                 }
+            }
+            console.log("curGoods is ", curGoods);
+            if (curGoods !== null) {
+                wx.setStorageSync('serverItem', curGoods);
+                wx.navigateTo({
+                    url: '../applyProgress/applyProgress?from=jl',
+                });
 
             }
         }
-        console.log("curGoods is ",curGoods);
-        if(curGoods !== null){
-            wx.setStorageSync('serverItem', curGoods);
-            wx.navigateTo({
-                url: '../applyProgress/applyProgress',
-            });
         
-        }
     },
     //获取输入的运单号
     getExpressOrder : function(event){
@@ -586,6 +795,54 @@ Page({
                 choosedExpressOrg : expressOrg
             });
             this.cancel();
+        }
+    },
+    //选择的售后商品的类型
+    chooseSaleAfterType : function(e){
+        let currentData = e.currentTarget.dataset;
+        let type = currentData.type;
+        console.log("type is ",type);
+        switch(type){
+            case 'shop':
+                //商城商品售后
+                this.setData({
+                    isShopSaleAfter : true,
+                    saleAfterPage   : 1,
+                    applyingPage    : 1,
+                    applyRecordPage : 1,
+                    saleOrderArray  : [],
+                    applyingOrderArr: [],
+                    applyRecord     : []
+                });
+                break;
+            case 'store':
+                //商铺商品售后
+                this.setData({
+                    isShopSaleAfter : false,
+                    saleAfterPage   : 1,
+                    applyingPage    : 1,
+                    applyRecordPage : 1,
+                    saleOrderArray  : [],
+                    applyingOrderArr: [],
+                    applyRecord     : []
+                });
+                break;
+        }
+        //查看现在选择的是申请售后，正在申请，申请记录的哪一个
+        for (let i = 0; i < this.data.saleHeadText.length; i++) {
+            if (this.data.saleHeadText[i].choosed) {
+                switch (this.data.saleHeadText[i].text) {
+                    case '申请售后':
+                        this.getSaleAfterList();
+                        break;
+                    case '正在申请':
+                        this.getApplyingList();
+                        break;
+                    case '申请记录':
+                        this.getApplyRecord();
+                        break;
+                }
+            }
         }
     }
 })

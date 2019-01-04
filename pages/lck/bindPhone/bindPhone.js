@@ -30,7 +30,9 @@ Page({
         //是否是修改电话号码
         isEditorPhoneNumber : false,
         //是否是输入手机号了
-        isInputNumber : false
+        isInputNumber : false,
+        //输入框的值
+        ipkey : ''
     },
     //获得用户输入的手机号
     getNumber : function(e){
@@ -175,11 +177,28 @@ Page({
         let self = this;
         self.setData({
             isFocus : true,
-        })
+        });
     },
     //获取验证码信息
     getAuthCode : function(e){
         console.log('验证码信息是：',e.detail.value);
+        if (e.detail.value == '') {
+            this.setData({
+                value: [],
+                ipkey: '',
+            })
+            return;
+        }
+        var regNum = new RegExp('[0-9]', 'g');
+        var k = e.detail.value;
+        var rsNum = regNum.exec(k[k.length - 1]);
+        if (rsNum == null) {
+            console.log(22222222)
+            this.setData({
+                ipkey: this.data.ipkey,
+            })
+            return;
+        }
         this.data.value = [];
         for(let i = 0;i < e.detail.value.length;i++){
             let tempJson = {};

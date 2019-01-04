@@ -1,10 +1,13 @@
 
-var app = getApp()
+let app = getApp();
+import regeneratorRuntime from '../../utils/regenerator-runtime/runtime-module.js';
+import Request from '../../utils/Request.js';
+import Const from '../../utils/Const.js';
 Page({
     data: {
-        scopeHidden: true,
-        loadHidden: true,
-        imageUrl:"",
+        scopeHidden : true,
+        loadHidden  : true,
+        imageUrl    : "",
 
     },
     //点击浏览商城
@@ -48,7 +51,14 @@ Page({
     onShareAppMessage: function() {
 
     },
-    onLoad: function() {
+    onLoad: function(options) {
+        console.log("in wxscope options is ",options);
+        if (options.scene) {
+            let scene = decodeURIComponent(options.scene);
+            console.log("scene is ", scene);
+            app.scene = scene;
+            console.log("app is ", app);
+        }
         this.setData({
             imageUrl: app.imageUrl
         })

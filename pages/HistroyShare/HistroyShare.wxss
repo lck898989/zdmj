@@ -58,8 +58,9 @@
     width: 343rpx;
     margin-left: 0;
     /* overflow: hidden; */
-    border-radius: 10px;
+    border-radius: 10rpx;
     background-color: white;
+    padding-bottom: 10rpx;
     /* box-shadow: 0rpx 8rpx 8rpx #d0d0d0;
     -webkit-box-shadow: 0rpx 8rpx 8rpx #d0d0d0; */
 }

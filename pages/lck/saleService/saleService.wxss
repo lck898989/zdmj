@@ -5,6 +5,31 @@ page{
 .page-con{
 
 }
+.saleAfterType-con,.shop-con,.store-con,.saleH{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: nowrap;
+}
+.saleAfterType-con{
+    width:750rpx;
+    padding: 8rpx 0rpx;
+    justify-content: space-around;
+}
+.saleH{
+    width:100%;
+    justify-content: space-around;
+    border-top: 2rpx solid #f2f2f2;
+}
+.shop-con,.store-con{
+    flex-direction: column;
+    width:375rpx;
+    text-align: center;
+}
+.shop-con{
+    border-right: 2rpx solid #f2f2f2;
+}
 .page-mask-con{
     height: 100vh;
 }
@@ -23,24 +48,26 @@ page{
     top:0rpx;
     left: 0rpx;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
     justify-content: space-around;
     background: #fff;
-    padding-top: 10rpx;
     border-top: 2rpx solid #f2f2f2;
 }
 .goods-con{
-    margin-top: 90rpx;
+    margin-top: 175rpx;
 }
-.saleaf-text{
+.saleaf-text,.store-name{
     display: flex;
     flex-direction: row;
-    justify-content: flex-start;
+    justify-content: space-between;
     background: #fff;
     margin-bottom: 2rpx;
     align-items: center;
     padding: 15rpx 24rpx;
+}
+.store-name{
+justify-content: flex-start;
 }
 .storeName{
     font-size: 26rpx;

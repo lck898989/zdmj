@@ -17,6 +17,16 @@ Component({
         isShowUser : {
             type  : Boolean,
             value : false
+        },
+        //是否显示浏览量
+        isShowSeer : {
+            type  : Boolean,
+            value : true
+        },
+        //可不可以进入文章详情
+        isEnterEssays : {
+            type  : Boolean,
+            value : true
         }
     },
     ready : function(){
@@ -30,6 +40,9 @@ Component({
             this.data.isShopEssays = true;
             this.data.isEssays = false;
             this.data.isProduct = false;
+            if(typeof this.data.easyItem.shopessayhead === 'string'){
+                this.data.easyItem.shopessayhead = this.data.easyItem.shopessayhead.split(',');
+            }
             if(this.data.easyItem.shopessaycustom === 1 && this.data.easyItem.shopessaycustomhead !== ''){
                 this.data.headImg = this.data.easyItem.shopessaycustomhead;
                 console.log("headImg is ", this.data.headImg);
@@ -45,6 +58,9 @@ Component({
             this.data.isEssays = true;
             this.data.isProduct = false;
             this.data.isShopEssays = false;
+            if(typeof this.data.easyItem.essayhead === 'string'){
+                this.data.easyItem.essayhead = this.data.easyItem.essayhead.split(',');
+            }
             if(this.data.easyItem.essaycustom === 1 && this.data.easyItem.essaycustomhead !== ''){
                 this.data.headImg = this.data.easyItem.essaycustomhead;
                 console.log("headImg is ",this.data.headImg);
@@ -60,6 +76,9 @@ Component({
             this.data.isProduct = true;
             this.data.isEssays = false;
             this.data.isShopEssays = false;
+            if(typeof this.data.easyItem.head === 'string'){
+                this.data.easyItem.head = this.data.easyItem.head.split(',');
+            }
             if (this.data.easyItem.custom === 1 && this.data.easyItem.customhead !== '') {
                 this.data.headImg = this.data.easyItem.customhead;
                 console.log("headImg is ", this.data.headImg);
@@ -102,6 +121,7 @@ Component({
     methods: {
         //进入商品或者店铺文章的详情，当时
         enterGoodsOrStore : function(e){
+            console.log("isEnterEssays is ",this.data.isEnterEssays);
             let self = this;
             if(this.data.isProduct){
                 //跳转商品详情

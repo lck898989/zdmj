@@ -43,7 +43,8 @@ Page({
           '收货地址': '上海市徐汇区滨江大道'
       },
       questionDes  : {},
-      progressArr  : []
+      progressArr  : [],
+      isShowDelete : true
   },
 
   /**
@@ -63,6 +64,17 @@ Page({
       wx.removeStorageSync("serverItem");
       console.log("Goods is ",this.data.Goods);
       console.log("serverItem is ",serverItem);
+      console.log("options is ",options);
+      if(options.from === 'jl'){
+          this.setData({
+              isShowDelete : false
+          })
+      }else{
+          this.setData({
+              isShowDelete : true
+          })
+      }
+    //   if(options.)
       //重新赋值服务单信息
       this.data.serverpageInfo['服务类型'] = serverItem.serviceType;
       this.data.serverpageInfo['申请原因'] = serverItem.reason;

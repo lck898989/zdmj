@@ -62,7 +62,7 @@
                                 <text class='jiangliText' style='font-size:15rpx;color:#8f8f8f;font-weight:900'>奖励</text>
                                 <text class='jiangliPrice' style='font-size:30rpx;color:#f39800;font-weight:900'>￥{{item1.product.rebate}}</text>
                             </view>
-                            <view class='nullView2'></view>
+                            <!-- <view class='nullView2'></view> -->
                         </view>
                     </block>
                     <block wx:if='{{item1.producttype=="essay"}}'>
@@ -84,7 +84,7 @@
                                 <text class='jiangliText' style='font-size:15rpx;color:#8f8f8f;font-weight:900'>奖励</text>
                                 <text class='jiangliPrice' style='font-size:30rpx;color:#f39800;font-weight:900'>￥{{item1.essay.rebate}}</text>
                             </view>
-                            <view class='nullView2'></view>
+                            <!-- <view class='nullView2'></view> -->
                         </view>
                     </block>
                     <block wx:if='{{item1.producttype=="shopessay"}}'>
@@ -105,7 +105,7 @@
                                 <text class='jiangliText' style='font-size:15rpx;color:#8f8f8f;font-weight:900'>奖励</text>
                                 <text class='jiangliPrice' style='font-size:30rpx;color:#f39800;font-weight:900'>￥{{item1.shopessay.rebate}}</text>
                             </view>
-                            <view class='nullView2'></view>
+                            <!-- <view class='nullView2'></view> -->
                         </view>
                     </block>
                 </block>
@@ -131,7 +131,7 @@
                                 <text class='jiangliText' style='font-size:15rpx;color:#8f8f8f;font-weight:900'>奖励</text>
                                 <text class='jiangliPrice' style='font-size:30rpx;color:#f39800;font-weight:900'>￥{{item1.product.rebate}}</text>
                             </view>
-                            <view class='nullView2'></view>
+                            <!-- <view class='nullView2'></view> -->
                         </view>
                     </block>
                     <block wx:if='{{item1.producttype=="essay"}}'>
@@ -157,7 +157,7 @@
                                 <text class='jiangliText' style='font-size:15rpx;color:#8f8f8f;font-weight:900'>奖励</text>
                                 <text class='jiangliPrice' style='font-size:30rpx;color:#f39800;font-weight:900'>￥{{item1.essay.rebate}}</text>
                             </view>
-                            <view class='nullView2'></view>
+                            <!-- <view class='nullView2'></view> -->
                         </view>
                     </block>
                     <block wx:if='{{item1.productstype=="shopessay"}}'>
@@ -183,7 +183,7 @@
                                 <text class='jiangliText' style='font-size:15rpx;color:#8f8f8f;font-weight:900'>奖励</text>
                                 <text class='jiangliPrice' style='font-size:30rpx;color:#f39800;font-weight:900'>￥{{item1.shopessay.rebate}}</text>
                             </view>
-                            <view class='nullView2'></view>
+                            <!-- <view class='nullView2'></view> -->
                         </view>
                     </block>
                 </block>

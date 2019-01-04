@@ -32,75 +32,78 @@ Page({
         //小程序码的二级制数据
         url: '',
         //系统的平台：是安卓平台还是苹果平台
-        systemType: ''
+        systemType: '',
+        //是否显示二维码
+        isShowQrCode : false,
+        //二维码图片地址
+        qrcodeUrl : '',
+        top : 0,
+        uid : 0,
     },
 
     gundongdianji() {
         console.log('点击了滚动视图中的图片')
     },
 
-    turn: function () {
+    turn: function() {
+        this.setData({
+            isShowQrCode : true
+        })
         var self = this;
-        app.ShortConnect(app.urlw + "Data/GetSmallProgramCode", {}, "shengchneg", function (res) {
-            // console.log("---->>res is ", res);
-            // console.log("res.data is", res.data);
-            // let fsm = wx.getFileSystemManager();
-            // let base64 = wx.arrayBufferToBase64(res.data);
-            // console.log(base64+"==================");
-            // console.log("res.data isadada ", base64);
-            // base64 = 'data:image/PNG;base64,' + base64;
-            // self.setData({
-            //     url: base64
-            // })
-            // let base64DataIndex = base64.indexOf('base64,') + 7;
-            // console.log("base64data is ", base64);
-            // const [, format, bodyData] = /data:image\/(\w+);base64,(.*)/.exec(base64) || [];
-            // console.log("format is ", format);
+        app.ShortConnect(app.urlw + "Data/GetAddFriendSmallProgramCode", {'fromUid' : app.uid}, "shengchneg", function(res) {
             let timestamp = new Date().getTime();
             let filePath = `${wx.env.USER_DATA_PATH}/`;
-            if (self.data.systemType === 'iphone') {
-                wx.downloadFile({
-                    url: app.urlw + res.data.path,
-
-                    success: function (res) {
-                        wx.saveFile({
-                            tempFilePath: res.tempFilePath,
-                            success: function (res) {
-                                console.log("filePath is ", res.savedFilePath);
-                                let qrCodeCanvas = wx.createCanvasContext('qrcode-canvas', self);
-                                console.log("canvas is ", qrCodeCanvas);
-                                qrCodeCanvas.drawImage(res.savedFilePath, 80, 5, 200, 200);
-                                qrCodeCanvas.draw(true, function () {
-                                    //保存图片到相册
-                                    self.createImageFromCanvas();
-                                });
-
-                            }
-                        })
-
-                    }
-                })
-            } else {
-                console.log(app.urlw + res.data.path);
-                //安卓系统环境
-                wx.downloadFile({
-                    url: app.urlw + res.data.path,
-                    success: function (res) {
-                        let qrCodeCanvas = wx.createCanvasContext('qrcode-canvas', self);
-                        console.log("安卓环境下canvas is ", qrCodeCanvas);
-                        console.log("安卓环境下 res.tempFilePath is ", res.tempFilePath);
-                        qrCodeCanvas.drawImage(res.tempFilePath, 80, 5, 200, 200);
-                        qrCodeCanvas.draw(true, self.createImageFromCanvas);
-                    }
-                })
-            }
+            console.log("二维码图片路径是：" + 'https://shop.ykplay.com' + res.data.path);
+            self.setData({
+                qrcodeUrl: 'https://shop.ykplay.com' + res.data.path
+            })
         });
-        //    wx.navigateTo({
-        //        url: '../../Discount/Discount',
-        //    })
+    },
+    turn2 : function(){
+        this.setData({
+            isShowQrCode: true
+        })
+        var self = this;
+        app.ShortConnect(app.urlw + "Data/GetSmallProgramCode", {}, "shengchneg", function (res) {
+            let timestamp = new Date().getTime();
+            let filePath = `${wx.env.USER_DATA_PATH}/`;
+            console.log("二维码图片路径是：" + 'https://shop.ykplay.com' + res.data.path);
+            // self.setData({
+            //     qrcodeUrl: app.urlw + res.data.path
+            // })
+            // wx.downloadFile({
+            //     url     : 'https://shop.ykplay.com' + res.data.path,
+            //     success : function(res){
+            //         console.log(res.tempFilePath);
+            //         wx.saveFile({
+            //             tempFilePath: res.tempFilePath,
+            //             success : function(re){
+            //                 console.log("re is ",re.savedFilePath);
+            //                 let qrCodeCanvas = wx.createCanvasContext('qrcode-canvas', self);
+            //                 console.log("canvas is ", qrCodeCanvas);
+            //                 qrCodeCanvas.drawImage(filePath, 80, 5, 200, 200);
+            //                 qrCodeCanvas.draw(true);
+            //             }
+            //         })
+            //     }
+            // })
+            wx.getImageInfo({
+                src: 'https://shop.ykplay.com' + res.data.path,
+                success : function(re){
+                    console.log("re is ",re);
+                    let qrCodeCanvas = wx.createCanvasContext('qrcode-canvas', self);
+                    console.log("canvas is ", qrCodeCanvas);
+                    qrCodeCanvas.drawImage(re.path, 80, 5, 200, 200);
+                    qrCodeCanvas.draw(true);
+                },
+                fail : function(e){
+                    console.log(e)
+                }
+            })
+        });
     },
 
-    shouhou: function () {
+    shouhou: function() {
         wx.navigateTo({
             url: '../../lck/saleService/saleService',
         })
@@ -221,16 +224,18 @@ Page({
     fw_jjsx() {
         console.log('即将上线')
     },
-
-    createCode: function (e) {
+    createCode: function(e) {
         let appid = app.appid;
         let screat = app.secret;
         let accessToken = '';
         let self = this;
+        this.setData({
+            isShowQrCode : true
+        })
         wx.request({
             url: 'https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=' + appid + '&secret=' + screat,
             method: 'GET',
-            success: function (res) {
+            success: function(res) {
                 console.log("res is ", res);
                 accessToken = res.data.access_token;
                 console.log("accessToken is ", accessToken);
@@ -247,7 +252,7 @@ Page({
                     header: {
                         'content-type': 'application/json;charset=utf-8'
                     },
-                    success: function (res) {
+                    success: function(res) {
                         console.log("---->>res is ", res);
                         console.log("res.data is ", res.data);
                         let fsm = wx.getFileSystemManager();
@@ -267,12 +272,12 @@ Page({
                                 filePath,
                                 data: base64.slice(base64DataIndex),
                                 encoding: 'base64',
-                                success: function () {
+                                success: function() {
                                     console.log("filePath is ", filePath);
                                     let qrCodeCanvas = wx.createCanvasContext('qrcode-canvas', self);
                                     console.log("canvas is ", qrCodeCanvas);
                                     qrCodeCanvas.drawImage(filePath, 80, 5, 200, 200);
-                                    qrCodeCanvas.draw(true, function () {
+                                    qrCodeCanvas.draw(true, function() {
                                         //保存图片到相册
                                         self.createImageFromCanvas();
                                     });
@@ -284,7 +289,7 @@ Page({
                                 filePath,
                                 data: res.data,
                                 encoding: 'binary',
-                                success: function () {
+                                success: function() {
                                     let qrCodeCanvas = wx.createCanvasContext('qrcode-canvas', self);
                                     console.log("安卓环境下canvas is ", qrCodeCanvas);
                                     console.log("安卓环境下filePath is ", filePath);
@@ -299,7 +304,7 @@ Page({
         })
     },
     //从canvas上生成图片
-    createImageFromCanvas: function () {
+    createImageFromCanvas: function() {
         let self = this;
         wx.canvasToTempFilePath({
             x: 80,
@@ -309,18 +314,18 @@ Page({
             destWidth: 200,
             destHeight: 200,
             canvasId: 'qrcode-canvas',
-            success: function (res) {
+            success: function(res) {
                 console.log("从画布中转换的图片路径是：", res.tempFilePath);
                 //将临时路径的图片保存到相册中去
                 wx.saveImageToPhotosAlbum({
                     filePath: res.tempFilePath,
-                    success: function (res) {
+                    success: function(res) {
                         console.log("保存到相册的二维码图片是：", res);
                     },
-                    fail: function () {
+                    fail: function() {
                         console.log("保存到相册失败");
                     },
-                    complete: function () {
+                    complete: function() {
                         console.log("保存到相册完成");
                     }
                 }, self)
@@ -335,19 +340,25 @@ Page({
      * 生命周期函数--监听页面加载
      */
 
-    onLoad: function (options) {
+    onLoad: function(options) {
         var self = this;
         wx.getSystemInfo({
-            success: function (res) {
+            success: function(res) {
                 console.log("res is ", res);
+                let ratio = res.pixelRatio;
+                let height = res.screenHeight;
+                console.log("height is ",height);
                 self.setData({
-                    systemType: res.system.indexOf('Android') >= 0 ? 'android' : 'iphone'
+                    systemType : res.system.indexOf('Android') >= 0 ? 'android' : 'iphone',
+                    top        : (height - 120) / 2
                 })
             },
         });
         // this.createCode();
         console.log("onload1");
-      
+        this.setData({
+            uid : app.uid
+        })
         app.setMessageNumber = res => {
             this.setData({
                 messageAllNumber: res.data.counts,
@@ -368,7 +379,7 @@ Page({
         })
         console.log(this.data.gundongpic, "user信息")
         wx.getSystemInfo({
-            success: function (res) {
+            success: function(res) {
                 console.log("res is ", res);
                 self.setData({
                     systemType: res.system.indexOf('Android') >= 0 ? 'android' : 'iphone'
@@ -381,14 +392,17 @@ Page({
     /**
      * 生命周期函数--监听页面初次渲染完成
      */
-    onReady: function () {
+    onReady: function() {
 
     },
 
     /**
      * 生命周期函数--监听页面显示
      */
-    onShow: function () {
+    onShow: function() {
+        this.setData({
+            isShowQrCode : false
+        })
         console.log("onShow1");
         app.ShortConnect(app.urlw + "Data/GetPersonCenter", {
             uid: app.uid
@@ -397,54 +411,58 @@ Page({
             uid: app.uid
         }, "");
     },
-
+    //取消二维码遮罩
+    cancelMask : function(){
+        this.setData({
+            isShowQrCode : false
+        })
+    },
     /**
      * 生命周期函数--监听页面隐藏
      */
-    onHide: function () {
-
+    onHide: function() {
     },
 
     /**
      * 生命周期函数--监听页面卸载
      */
-    onUnload: function () {
+    onUnload: function() {
 
     },
 
     /**
      * 页面相关事件处理函数--监听用户下拉动作
      */
-    onPullDownRefresh: function () {
+    onPullDownRefresh: function() {
 
     },
 
     /**
      * 页面上拉触底事件的处理函数
      */
-    onReachBottom: function () {
+    onReachBottom: function() {
 
     },
 
     /**
      * 用户点击右上角分享
      */
-    onShareAppMessage: function () {
+    onShareAppMessage: function() {
         var shareObj = {
             desc: '距离成功只差一步，求少侠出手！',
             title: '分享商城',
             path: 'pages/zcw/user/user',
-            success: function (res) {
+            success: function(res) {
 
                 // 转发成功之后的回调
                 if (res.errMsg == 'shareAppMessage:ok') {
                     console.log("???????2");
                 }
             },
-            fail: function (res) {　　　　　　 // 转发失败之后的回调
+            fail: function(res) {　　　　　　 // 转发失败之后的回调
                 console.log(res.errMsg + "???????");
             },
-            complete: function (res) {
+            complete: function(res) {
                 console.log(res.errMsg + "???????1");
             }
         }
@@ -452,7 +470,7 @@ Page({
     },
 
     //从canvas上生成图片
-    createImageFromCanvas: function () {
+    createImageFromCanvas: function() {
         let self = this;
         wx.canvasToTempFilePath({
             x: 80,
@@ -462,18 +480,18 @@ Page({
             destWidth: 200,
             destHeight: 200,
             canvasId: 'qrcode-canvas',
-            success: function (res) {
+            success: function(res) {
                 console.log("从画布中转换的图片路径是：", res.tempFilePath);
                 //将临时路径的图片保存到相册中去
                 wx.saveImageToPhotosAlbum({
                     filePath: res.tempFilePath,
-                    success: function (res) {
+                    success: function(res) {
                         console.log("保存到相册的二维码图片是：", res);
                     },
-                    fail: function () {
+                    fail: function() {
                         console.log("保存到相册失败");
                     },
-                    complete: function () {
+                    complete: function() {
                         console.log("保存到相册完成");
                     }
                 }, self)

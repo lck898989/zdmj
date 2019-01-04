@@ -1,11 +1,17 @@
 <!--pages/zcw/user/user.wxml-->
 <view class='quanju'>
+  <view wx:if='{{isShowQrCode}}' class='mask' bindtap='cancelMask'>
+    <canvas canvas-id='qrcode-canvas' style='width:600rpx;height:400rpx;' class='code-canvas'>
+     
+    </canvas>
+    <image src='https://shop.ykplay.com/smallprogram/{{uid}}_fromuid.png' style='width:480rpx;height:480rpx;z-index:2100;top:{{top}}rpx' class='qrcode'></image>
+  </view>
   <!-- 导航栏 -->
   <view class='daohang'>
     <image src='{{arraytu.dh_dh}}' class='daohangtu' style='height:auto' mode='widthFix' />
     <image mode='widthFix' class="userImage" style='height:auto' src="{{userInfo.avatarUrl}}" />
     <text class="userName" style='font-size:46rpx;color:white;font-weight:900;'>{{userInfo.nickName}}</text>
-    <image src='{{arraytu.dh_ewm}}' class='ewm' style='height:auto' mode='widthFix' bindtap='createCode'/>
+    <image src='{{arraytu.dh_ewm}}' class='ewm' style='height:auto' mode='widthFix' bindtap='turn'/>
   </view>
   <!-- 个人信息 -->
   <view class='grxx'>
@@ -105,9 +111,7 @@
       </view>
     </button>
   </view>
-  <canvas canvas-id='qrcode-canvas' style='width:600rpx;height:400rpx;' class='code-canvas'>
-     <!-- <image src='{{url}}'></image> -->
-  </canvas>
+  <!-- <image src='https://shop.ykplay.com/smallprogram/4.png' style='width:280rpx;height:280rpx;z-index:2100'></image> -->
   <!-- <image src='{{url}}'></image> -->
   <!-- <image src='https://shop.ykplay.com/Data/create_qrcode?url=https://shop.ykplay.com/BMS/qrcodeInfo&shopoid=6&verificationcode=400915045745' style='width:300rpx;height:300rpx;'></image> -->
 </view>

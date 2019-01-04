@@ -1,5 +1,5 @@
 <block wx:if='{{showReason}}'>
-    <view class='mask' catchtouchmove='test'></view>
+    <view class='mask' catchtouchmove='test' bindtap='cancel'></view>
 </block>
 <scroll-view class='{{showReason ? "page-con-showReason" : "page-con"}}'>
     <view class='contact-service'>

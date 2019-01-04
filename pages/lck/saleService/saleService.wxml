@@ -3,46 +3,81 @@
 </block>
 <scroll-view class='{{showExpressOrg ? "page-mask-con" : "page-con"}}'>
     <view class="saleHead">
-        <view wx:for='{{saleHeadText}}' style="{{item.choosed ? redText : headText}}" bindtap='chooseTitle' data-text='{{item.text}}'>{{item.text}}</view>
+        <!--商城商品售后和商铺券的售后-->
+        <view class='saleAfterType-con'>
+            <!--商城商品信息-->
+            <view class='shop-con' bindtap='chooseSaleAfterType' data-type='shop'>
+                <image wx:if='{{isShopSaleAfter}}' src='https://shopfile.ykplay.com/resources/ico_type_2.png' style='width:40rpx;height:40rpx;'></image>
+                <image wx:else src='https://shopfile.ykplay.com/resources/ico_type_2b.png' style='width:40rpx;height:40rpx;'></image>
+                <view class='shop-text'>
+                    <block wx:if='{{isShopSaleAfter}}'>
+                        <text style='font-size:25rpx;color:#b964d8;'>商城商品</text>
+                    </block>
+                    <block wx:else>
+                        <text style='font-size:25rpx;color:#a9a9a9;'>商城商品</text>
+                    </block>
+                </view>
+            </view>
+            <!--商铺券信息-->
+            <view class='store-con' bindtap='chooseSaleAfterType' data-type='store'>
+                <image wx:if='{{!isShopSaleAfter}}' src='https://shopfile.ykplay.com/resources/ico_type_1.png' style='width:40rpx;height:40rpx;'></image>
+                <image wx:else src='https://shopfile.ykplay.com/resources/ico_type_1b.png' style='width:40rpx;height:40rpx;'></image>
+                <view class='shop-text'>
+                    <block wx:if='{{!isShopSaleAfter}}'>
+                        <text style='font-size:25rpx;color:#b964d8;'>商铺券</text>
+                    </block>
+                    <block wx:else>
+                        <text style='font-size:25rpx;color:#a9a9a9;'>商铺券</text>
+                    </block>
+                </view>
+            </view>
+        </view>
+        <view class='saleH'>
+            <view wx:for='{{saleHeadText}}' style="{{item.choosed ? redText : headText}}" bindtap='chooseTitle' data-text='{{item.text}}'>{{item.text}}</view>
+        </view>
     </view>
     <view class='goods-con'>
+        <view wx:if='{{isShopSaleAfter}}' class='saleaf-text store-name'>
+            <image src='https://shopfile.ykplay.com/resources/ico_type_1.png' style='width:30rpx;height:30rpx;'></image>
+            <view class='storeName'>
+                指点迷津-自营店
+            </view>
+        </view>
         <block wx:if='{{isSaleAfter}}' wx:for='{{saleOrderArray}}'>
-            <view class='sale-com'>
-                <view class='saleaf-text'>
+                <!--商铺售后信息-->
+                <!-- <view wx:if='{{!isShopSaleAfter}}' class='sale-com'>
+                    <view wx:if='{{isShopSaleAfter}}' class='saleaf-text'>
                     <image src='https://shopfile.ykplay.com/resources/ico_type_1.png' style='width:30rpx;height:30rpx;'></image>
                     <view class='storeName'>
-                        指点迷津-自营店
+                        指点迷津-商铺店
                     </view>
-                    <!-- <view class='orderNum'>
-                        <view>订单编号：</view>
-                        <view class='orderItem'>{{item.onumber}}</view>
-                    </view>
-                    <view class='orderNum'>
-                        <view>下单时间：</view>
-                        <view class='orderItemTime'>{{item.ordertime}}</view>
-                    </view> -->
+                </view> -->
+            <!-- <view class='saleaf-text'>
+                <image src='https://shopfile.ykplay.com/resources/ico_type_1.png' style='width:30rpx;height:30rpx;'></image>
+                <view class='storeName'>
+                    指点迷津-自营店
                 </view>
-                <!--显示商品的详情-->
-                <block wx:for='{{item.products}}' wx:for-item='innerItem'>
-                    <saleAfter-component goods='{{innerItem}}'>
-                        <view slot='footer' class='footWrapper'>
-                            <view class='orderWrapper'>
-                                <view class='orderNum'>
-                                    <view>订单编号：</view>
-                                <view class='orderItem'>{{item.onumber}}</view>
-                                </view>
-                                <view class='orderNum'>
-                                    <view>下单时间：</view>
-                                    <view class='orderItemTime'>{{item.ordertime}}</view>
-                                </view>                               
-                            </view>    
-                            <view class='saleafter' bindtap='applyAfterSale' data-oitemid='{{innerItem.oitemid}}'>
-                                申请售后
+            </view> -->
+            <!--显示商品的详情-->
+            <block wx:for='{{item.products}}' wx:for-item='innerItem'>
+                <saleAfter-component goods='{{innerItem}}'>
+                    <view slot='footer' class='footWrapper'>
+                        <view class='orderWrapper'>
+                            <view class='orderNum'>
+                                <view>订单编号：</view>
+                            <view class='orderItem'>{{item.onumber}}</view>
                             </view>
+                            <view class='orderNum'>
+                                <view>下单时间：</view>
+                                <view class='orderItemTime'>{{item.ordertime}}</view>
+                            </view>                               
                         </view>
-                    </saleAfter-component>
-                </block>
-            </view>
+                        <view class='saleafter' bindtap='applyAfterSale' data-oitemid='{{isShopSaleAfter ? innerItem.oitemid : innerItem.shopoid}}'>
+                            申请售后
+                        </view>
+                    </view>
+                </saleAfter-component>
+            </block>
         </block>
         <block wx:if='{{isApplying}}' wx:for='{{applyingOrderArr}}'>
             <view class='sale-com'>
@@ -62,7 +97,7 @@
                         <saleAfter-component goods='{{innerItem}}'>
                             <view slot='footer'>
                                 <view class='saleafter-con'>
-                                    <view class='saleafter' bindtap='enterProgress' data-oitemid='{{innerItem.oitemid}}'>
+                                    <view class='saleafter' bindtap='enterProgress' data-oitemid='{{isShopSaleAfter ? innerItem.oitemid : innerItem.shopoid}}'>
                                         处理进度
                                     </view>
                                 </view>
@@ -84,7 +119,7 @@
                 <block wx:for='{{item.products}}' wx:for-item='innerItem'>
                     <saleAfter-component goods='{{innerItem}}'>
                         <view slot='footer'>
-                            <view class='record-status' bindtap='enterProgress' bind-oitemid='{{innerItem.oitemid}}'>
+                            <view class='record-status' bindtap='enterProgress' data-oitemid='{{isShopSaleAfter ? innerItem.oitemid : innerItem.shopoid}}' data-type='jl'>
                                 <block wx:if='{{item.progressRes === 2 || item.progressRes === 5}}'>
                                     <image src='../../../resources/zq.png' style='width:25rpx;height:25rpx;margin-right:50rpx;'></image>
                                 </block>
@@ -92,7 +127,7 @@
                                     <image src='../../../resources/err.png' style='width:25rpx;height:25rpx;margin-right:20rpx;'></image>
                                 </block>
                                 <view style='color:#404040;font-size:30rpx;white-space:nowrap'>
-                                    {{item.progressMsg}}
+                                    {{item.progressMsg_res}}
                                 </view>
                                 <image src='../../../resources/icon_right.png' style='width:20rpx;height:25rpx;' class='enterProgress'></image>
                             </view>

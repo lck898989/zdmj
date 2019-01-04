@@ -1,7 +1,6 @@
 {
     "pages": [
         "pages/wxscope/wxscope",
-        "pages/lck/test/test",
         "pages/lck/bindPhone/bindPhone",
         "pages/lck/address/address",
         "pages/Discount/Discount",

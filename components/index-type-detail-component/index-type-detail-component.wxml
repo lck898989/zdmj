@@ -32,6 +32,8 @@
         <text class='rebeat-text'>分享奖励</text>
         <text class='rebeat-money'>￥{{easyItem.rebate}}</text>
     </view>
-    <image src='../../resources/cover.png' style="width:128rpx;height:36rpx;" class="im_t"></image>
-    <text class="watched-count">{{easyItem.see}}</text>
+    <block wx:if='{{isShowSeer}}'>
+        <image src='../../resources/cover.png' style="width:128rpx;height:36rpx;" class="im_t"></image>
+        <text class="watched-count">{{easyItem.see}}</text>
+    </block>
 </view>
