@@ -126,6 +126,7 @@ justify-content: flex-start;
 }
 .sale-com{
     margin-bottom: 4rpx;
+    transition: 1s ease-in;
 }
 .record-status{
     display: flex;

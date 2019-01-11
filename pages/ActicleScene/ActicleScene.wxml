@@ -1,5 +1,7 @@
 <!--pages/ShopActicle/ShopActicle.wxml-->
 <view class='mask' animation='{{backAnimaData}}' hidden='{{buyBoxHidden}}' catchtouchmove='test' data-e='mask'></view>
+<view class='mask1' animation='{{backAnimaData}}' bindtap='pressin' hidden='{{shareHidden}}' catchtouchmove='test' data-e='mask'></view>
+<view class='mask2' animation='{{backAnimaData}}' bindtap='pressin1' hidden='{{shareFriends}}' catchtouchmove='test' data-e='mask'></view>
 <import src="/wxParse/wxParse.wxml" />
 <scroll-view class='gundongView' scroll-y='true' bindscroll='gunhdong'>
     <swiper class="shoppingImageView" bindchange='changeSwiper' style='height:{{heightSwiper[index-1]}}rpx' scroll-x="true" autoplay='true' circular='true'>
@@ -20,7 +22,7 @@
             <text class='seeNumber' style='font-size:20rpx;font-weight:900'>{{wenzhangJson.see}}</text>
         </view>
     </view>
-     <view class='authorTextView'>
+    <view class='authorTextView'>
         <template is="wxParse" data="{{wxParseData:article.nodes}}" />
     </view>
     <!-- <view class='nullView' style='background:#ffffff'></view> -->
@@ -33,24 +35,27 @@
     <text class='shoppingAdress' style='font-size:23rpx;font-weight:900'>时代奥城</text>
     <text class='shoppingAdress1' style='font-size:23rpx;font-weight:900'>宾水西道奥城商业广场天气22，2号楼底商119</text>
 </view> -->
-    <view class='shopView1' bindtap='shopButton' hidden='{{bottomView}}'>
-        <image class='shopImage' mode='widthFix' src='{{url+wenzhangJson.product_head[0]}}'></image>
-        <text class='daiText' style='font-size:32rpx;font-weight:900'>{{wenzhangJson.product_name}}</text>
-        <text class='shopPrice' style='font-size:40rpx;font-weight:900lcolor:#ffcb05'>￥{{wenzhangJson.product_price}}</text>
-        <text class='shopPrice1' style='font-size:24rpx;font-weight:900;color:#707070'>￥{{wenzhangJson.otherprice}}</text>
-        <text class='detaitText1' bindtap='pressDetail' data-index='{{index}}' style='font-size:28rpx;font-weight:900;color:#707070'>详情</text>
-        <view class='dayuView' bindtap='pressDetail' data-index='{{index}}'>
-            <image class='dayu' mode='widthFix' style='width:11rpx' src='../../resources/ico_arrow.png'></image>
+    <button class='shopView2' bindtap='{{turnDazhe1}}' open-type='{{open}}' bindgetuserinfo='{{getUserInfo}}' hidden='{{bottomView}}'>
+        <view class='shopView1'>
+            <image class='shopImage' mode='widthFix' src='{{url+wenzhangJson.product_head[0]}}'></image>
+            <text class='daiText' style='font-size:32rpx;font-weight:900'>{{wenzhangJson.product_name}}</text>
+            <text class='shopPrice' style='font-size:40rpx;font-weight:900lcolor:#ffcb05'>￥{{wenzhangJson.product_price}}</text>
+            <text class='shopPrice1' style='font-size:24rpx;font-weight:900;color:#707070'>￥{{wenzhangJson.otherprice}}</text>
+            <text class='detaitText1' bindtap='pressDetail' data-index='{{index}}' style='font-size:28rpx;font-weight:900;color:#707070'>详情</text>
+            <view class='dayuView' bindtap='pressDetail' data-index='{{index}}'>
+                <image class='dayu' mode='widthFix' style='width:11rpx' src='../../resources/ico_arrow.png'></image>
+            </view>
         </view>
-    </view>
+    </button>
+
     <view class='nullView5' style='color:#0d0909'></view>
     <view class='buyView'>
         <view class='backIndexparent'>
-            <view class='backIndex' bindtap='turnIndex'>
+            <button class='backIndex' bindtap='{{turnIndex1}}' open-type='{{open}}' bindgetuserinfo='{{getUserInfo}}'>
                 <image class='backImage' style='height:auto' src='../../resources/btn_main_1.png' mode='widthFix'></image>
                 <text class='backtext' style='font-size:18rpx'>回首页</text>
                 <view class='nullView8'></view>
-            </view>
+            </button>
         </view>
         <view class='sharePrice'>
             <view class='sharePrice1'>
@@ -58,10 +63,11 @@
                 <text class='getPriceText' style='font-size:30rpx;font-weight:900;color:#f39800'>￥{{wenzhangJson.rebate}}</text>
             </view>
         </view>
-        <button class='shareView' open-type='share' style='font-size:32rpx;font-weight:900;color:#ffffff'>马上分享</button>
-        <view class='buy' style='font-size:32rpx;font-weight:900;color:#ffffff' bindtap='buy'>
+        <view class='shareView1' bindtap='pressShare' style='font-size:32rpx;font-weight:900;color:#ffffff'>马上分享</view>
+        <!-- <button class='shareView' open-type='share' style='font-size:32rpx;font-weight:900;color:#ffffff'>马上分享</button> -->
+        <button class='buy' style='font-size:32rpx;font-weight:900;color:#ffffff' open-type='{{open}}' bindgetuserinfo='{{getUserInfo}}' bindtap='{{buy1}}'>
             立即购买
-        </view>
+        </button>
     </view>
     <view class='buy-con' hidden='{{buyBoxHidden}}'>
         <view class='chooseShop'>
@@ -91,3 +97,30 @@
         <view class='sureView' style='font-size:32rpx;font-weight:900;color:#ffffff' bindtap='pressSure'>确定</view>
     </view>
 </scroll-view>
+<view hidden='{{shareHidden}}' class='shareViews'>
+    <text style='font-size:29rpx;font-weight:900;color:#000000' class='shareText'>我要分享</text>
+    <view class='imageIcon'>
+        <button style='width:92rpx;height:92rpx' open-type='share'>
+            <image src='../../resources/ico_WX.png' class='icon1' style='height:auto;width:92rpx;' mode='widthFix'></image>
+        </button>
+        <button style='width:92rpx;height:92rpx' bindtap='shareFriends'>
+            <image src='../../resources/ico_PYQ.png' class='icon2' style='height:auto;width:92rpx;' mode='widthFix'></image>
+        </button>
+    </view>
+    <text style='font-size:24rpx;font-weight:900;color:#595959' class='asd'>分享后可在【历史分享】中查看 </text>
+</view>
+<!-- <view class='shareFriendView' hidden='{{shareFriends}}'>
+    <image class='xiaoCode' src="https://shop.ykplay.com/smallprogram/355_share.png" mode='widthFix'></image>
+    <text class='titleText1' style='font-size:30rpx;font-weight:900'>{{wenzhangJson.title}}
+   </text>
+
+    <text class='textWENZHANG' style='font-size:22rpx;font-weight:900' space='ensp'>    {{wenzhangJson.introduction}}</text>
+    <image class='authorImage2' mode='widthFix' src='{{wenzhangJson.authorurl}}' style='hright:auto'></image>
+    <text class='authorName1' style='font-size:23rpx;font-weight:900'>{{wenzhangJson.authorname}}</text>
+    <text class='wenzhangData1' style='font-size:16rpx;font-weight:900' space='ensp'>11月22日      18:27</text>
+    <image class='shopTotle' mode='widthFix' src='{{url+ wenzhangJson.essayhead[0]}}'></image>
+    <text style='font-size:28rpx;font-weight:900;color:#000000' class='changan'>长按扫码阅读</text>
+</view> -->
+<view class='baocunText' hidden='{{shareFriends}}' style='font-size:33rpx;font-weight:900' bindtap='saveImage'>保存图片</view>
+
+<canvas canvas-id="myCanvas" hidden='{{shareFriends}}' class='canvas'></canvas>

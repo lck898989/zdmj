@@ -1,0 +1,3 @@
+<!--pages/lck/zufang/zufang.wxml-->
+<!-- <text>pages/lck/zufang/zufang.wxml</text> -->
+<image src='https://shopfile.ykplay.com/resources/img_zufang.png' style='width:750rpx;height:auto' mode='widthFix' bindtap='enterdetail'></image>

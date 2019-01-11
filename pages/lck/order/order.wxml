@@ -42,7 +42,7 @@
         </view>
         <view class='saleaf-text'>
             <image src='https://shopfile.ykplay.com/resources/ico_type_1.png' style='width:30rpx;height:30rpx;'></image>
-            <view class='storeName'  wx:if='{{interView=="wenzhang"}}'>
+            <view class='storeName'  wx:if='{{interView=="wenzhang"||interView=="daifujuan"}}'>
             {{shopname}}
             </view>
             <view class='storeName' wx:else>

@@ -180,9 +180,11 @@
 }
 .wdddtu1{
   width: 62rpx;
+  height: 62rpx;
 }
 .wdddtu2{
   width: 65rpx;
+  height: 65rpx;
 }
 .wddd_ziti{
   position: relative;
@@ -294,4 +296,12 @@
 .qrcode{
     position: absolute;
     left: 135rpx;
+    z-index: 3000;
+    opacity: 1;
+    background: #fff;
+}
+.onMaskImg{
+    position: absolute;
+    left: 135rpx;
+    top: 0rpx;
 }

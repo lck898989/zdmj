@@ -6,18 +6,25 @@ Page({
      * 页面的初始数据
      */
     data: {
+        codeurl: "",
+        codeHidden: true,
+        indexverificationcode: null,
+        indexJSON: {},
+        indexchoose: 0,
         url: "http://shop.ykplay.com",
         //分类数组
         typeArray: ["全部", "待付款", "待收货", "已完成"],
+        typeShangpu: ["全部", "待付款 ", "可使用", "已使用", "已过期"],
         //初始化分类
         indexs: 0,
+        indexss: 0,
         //我的订单数组
         orderArray: [],
+        ordershangArray: [],
         //判断是否上拉加载中
         isPull: false,
         //判断是否有数据
         isHas: true,
-        
         text: "未确认收货",
         timeObject: [],
         oidObject: [],
@@ -26,30 +33,64 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function(options) {
-        switch (options.indexs)
-        {
+        app.setMyOrder1 = res => {
+            for (var i = 0; i <= res.data.orders.length - 1; i++) {
+                for (var j = 0; j <= res.data.orders[i].orderItems[0].length - 1; j++) {
+                    // res.data.orders[i].orderItems[0][j].product.size = JSON.parse(res.data.orders[i].orderItems[0][j].product.size);
+                    res.data.orders[i].orderItems[0][j].standard = res.data.orders[i].orderItems[0][j].standard.replace("|", "  ");
+                    var c = res.data.orders[i].orderItems[0][j].product.head.split(",");
+                    res.data.orders[i].orderItems[0][j].product.head = c;
+                    // let size = Object.values(JSON.parse(res.data.orders[i].orderItems[0][j].product.size));
+                    // let size1 = "";
+                    // for (let k = 0; k <= size.length - 1; k++) {
+                    //     size1 = size1 + size[k];
+                    // }
+                    // res.data.orders[i].orderItems[0][j].product.size = size1;
+                    // if (res.data.orders[i].orderItems[0][j].product.size.includes("默认")) {
+
+                    //     res.data.orders[i].orderItems[0][j].product.isMoren = false;
+                    // }
+                    // else {
+                    //     res.data.orders[i].orderItems[0][j].product.isMoren = true;
+                    // }
+                }
+            }
+            if (res.data.orders.length > 0) {
+                this.setData({
+                    isHas: false,
+                })
+
+            }
+            else {
+                this.setData({
+                    isHas: true,
+                })
+
+            }
+            this.setData({
+                orderArray: res.data.orders
+            })
+        }
+     
+        switch (options.indexs) {
             case "0":
                 this.setData({
                     indexs: parseInt(options.indexs)
-
                 })
-                   break;
+                break;
             case "1":
                 this.setData({
                     indexs: parseInt(options.indexs)
-
                 })
                 break;
             case "2":
                 this.setData({
                     indexs: parseInt(options.indexs)
-
                 })
                 break;
             case "3":
                 this.setData({
                     indexs: parseInt(options.indexs)
-
                 })
                 break;
         }
@@ -59,6 +100,7 @@ Page({
         //     })
         //     console.log("");
         // }
+
         app.setNullButton = res => {
             console.log("onLoad");
             this.setData({
@@ -70,32 +112,44 @@ Page({
             for (var i = 0; i <= app.myorderArray.length - 1; i++) {
                 for (var j = 0; j <= app.myorderArray[i].orderItems[0].length - 1; j++) {
                     // app.myorderArray[i].orderItems[0][j].product.size = JSON.parse(app.myorderArray[i].orderItems[0][j].product.size)                
-                    app.myorderArray[i].orderItems[0][j].standard = app.myorderArray[i].orderItems[0][j].standard.replace("|", "  ");
-                    if (typeof app.myorderArray[i].orderItems[0][j].product.head=="string")
-                    {
+                    app.myorderArray[i].orderItems[0][j].standard = app.myorderArray[i].orderItems[0][j].standard.replace("|", "");
+                    if (typeof app.myorderArray[i].orderItems[0][j].product.head == "string") {
                         var c = app.myorderArray[i].orderItems[0][j].product.head.split(",");
                         app.myorderArray[i].orderItems[0][j].product.head = c;
                     }
-                    let size = Object.values(JSON.parse(app.myorderArray[i].orderItems[0][j].product.size));
-                    let size1="";
-                    for (let k = 0; k <= size.length-1;k++)
-                    {
-                        size1 = size1 + size[k];
-                    }
-                    app.myorderArray[i].orderItems[0][j].product.size = size1;
-                    if (app.myorderArray[i].orderItems[0][j].product.size.includes("默认"))
-                    {
-                        app.myorderArray[i].orderItems[0][j].product.isMoren=false;
-                    }
-                    else
-                    {
-                        app.myorderArray[i].orderItems[0][j].product.isMoren = true;
-                    }
+                    // let size = Object.values(JSON.parse(app.myorderArray[i].orderItems[0][j].product.size));
+                    // let size1="";
+                    // for (let k = 0; k <= size.length-1;k++)
+                    // {
+                    //     size1 = size1 + size[k];
+                    // }
+                    // app.myorderArray[i].orderItems[0][j].product.size = size1;
+                    // if (app.myorderArray[i].orderItems[0][j].product.size.includes("默认"))
+                    // {
+                    //     app.myorderArray[i].orderItems[0][j].product.isMoren=false;
+                    // }
+                    // else
+                    // {
+                    //     app.myorderArray[i].orderItems[0][j].product.isMoren = true;
+                    // }
                     console.log();
                 }
             }
+            if (app.myorderArray.length > 0) {
+                this.setData({
+                    isHas: false,
+                })
+
+            }
+            else {
+                this.setData({
+                    isHas: true,
+                })
+
+            }
+            console.log(JSON.stringify(app.myorderArray) + "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
             this.setData({
-                isHas: false,
+               
                 orderArray: app.myorderArray,
             })
             // if (this.data.timeObject.length >= 1) {
@@ -109,24 +163,18 @@ Page({
             //         }
             //     }
             // }
-            if (app.isStartOrder==false)
-            {
-                var isHas=false;
-                for (let i = 0; i <= this.data.orderArray.length-1;i++)
-                {
-                    if (this.data.orderArray[i].state==1)
-                    {
-                        isHas=true;
+            if (app.isStartOrder == false) {
+                var isHas = false;
+                for (let i = 0; i <= this.data.orderArray.length - 1; i++) {
+                    if (this.data.orderArray[i].state == 1) {
+                        isHas = true;
                     }
                 }
-                if (isHas)
-                {
+                if (isHas) {
                     // this.countDown();
-                    app.isStartOrder=true;
+                    app.isStartOrder = true;
                 }
-            }
-            else
-            {
+            } else {
                 clearTimeout(js);
                 var isHas = false;
                 for (let i = 0; i <= this.data.orderArray.length - 1; i++) {
@@ -138,9 +186,10 @@ Page({
                     // this.countDown();
                 }
             }
-          
+           
         } else {
             app.setMyOrder = res => {
+                console.log(JSON.stringify(res.data.orders) + "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
                 console.log("???????????????????2");
                 for (var i = 0; i <= res.data.orders.length - 1; i++) {
                     for (var j = 0; j <= res.data.orders[i].orderItems[0].length - 1; j++) {
@@ -148,26 +197,40 @@ Page({
                         res.data.orders[i].orderItems[0][j].standard = res.data.orders[i].orderItems[0][j].standard.replace("|", "  ");
                         var c = res.data.orders[i].orderItems[0][j].product.head.split(",");
                         res.data.orders[i].orderItems[0][j].product.head = c;
-                        let size = Object.values(JSON.parse(res.data.orders[i].orderItems[0][j].product.size));
-                        let size1 = "";
-                        for (let k = 0; k <= size.length - 1; k++) {
-                            size1 = size1 + size[k];
-                        }
-                        res.data.orders[i].orderItems[0][j].product.size = size1;
-                        if (res.data.orders[i].orderItems[0][j].product.size.includes("默认")) {
-                            res.data.orders[i].orderItems[0][j].product.isMoren = false;
-                        }
-                        else {
-                            res.data.orders[i].orderItems[0][j].product.isMoren = true;
-                        }
-                        console.log();
+                        // let size = Object.values(JSON.parse(res.data.orders[i].orderItems[0][j].product.size));
+                        // let size1 = "";
+                        // for (let k = 0; k <= size.length - 1; k++) {
+                        //     size1 = size1 + size[k];
+                        // }
+                        // res.data.orders[i].orderItems[0][j].product.size = size1;
+                        // if (res.data.orders[i].orderItems[0][j].product.size.includes("默认")) {
+
+                        //     res.data.orders[i].orderItems[0][j].product.isMoren = false;
+                        // }
+                        // else {
+                        //     res.data.orders[i].orderItems[0][j].product.isMoren = true;
+                        // }
                     }
                 }
+                if (res.data.orders.length>0)
+                {
+                    this.setData({
+                        isHas: false,
+                    })
+                    
+                }
+                else
+                {
+                    this.setData({
+                        isHas: true,
+                    })
+
+                }
                 this.setData({
-                    isHas: false,
+                   
                     orderArray: res.data.orders
                 })
-               
+
                 if (app.isStartOrder == false) {
                     var isHas = false;
                     for (let i = 0; i <= res.data.orders.length - 1; i++) {
@@ -176,13 +239,12 @@ Page({
                         }
                     }
                     if (isHas) {
-                       
+
                         // this.countDown();
                         app.isStartOrder = true;
                     }
-                }
-                else {
-                 
+                } else {
+
                     clearTimeout(js);
                     var isHas = false;
                     for (let i = 0; i <= res.data.orders.length - 1; i++) {
@@ -194,7 +256,7 @@ Page({
                         // this.countDown();
 
                     }
-                    
+
                 }
             }
         }
@@ -205,23 +267,86 @@ Page({
                 for (var i = 0; i <= res.data.orders.length - 1; i++) {
                     orderArray1.push(res.data.orders[i]);
                 }
+                if (res.data.orders.length>0)
+                {
+                    this.setData({
+                        isHas:false
+                    })
+
+                }
+                else
+                {
+                    this.setData({
+                        isHas:true
+                    })
+                }
                 this.setData({
-                    orderArray: orderArray1, 
+                    orderArray: orderArray1,
                     isPull: false,
-                    isHas: false
+                   
                 })
                 console.log(this.data.orderArray.length);
             } else {
+               
                 this.setData({
                     orderArray: res.data.orders,
                     isPull: false,
-                    isHas: false
+                    
                 })
                 console.log(JSON.stringify(this.data.orderArray));
                 console.log(JSON.stringify(this.data.orderArray) + "==================================");
             }
             app.orderPage = res.data.pages;
             wx.hideLoading();
+        }
+    },
+    pressShangcheng: function() {
+        var self = this;
+        if (this.data.indexchoose != 0) {
+            app.orderLoadPage = 1;
+            app.ShortConnect(app.urlw + "Data/GetOrdersByUid", {
+                uid: app.uid,
+                page: 1
+            }, "getmyOrder");
+
+            this.setData({
+                indexchoose: 0
+            })
+        }
+
+    },
+    pressShangpu: function() {
+        var self = this;
+        if (this.data.indexchoose != 1) {
+            app.orderLoadPage = 1;
+            app.ShortConnect(app.urlw + "Data/GetShopOrdersByUidAndState", {
+                uid: app.uid,
+                page: 1,
+                state: 0
+            }, "getmyOrder2", function(res) {
+                if (res.data.shoporders.length>0)
+                {
+                    self.setData({
+                        isHas:false
+                    })
+                }
+                else
+                {
+                    self.setData({
+                        isHas: true
+                    })
+                }
+                for (let i = 0; i <= res.data.shoporders.length - 1; i++) {
+                    res.data.shoporders[i].head = res.data.shoporders[i].head.split(",");
+                }
+                self.setData({
+                    ordershangArray: res.data.shoporders
+                })
+            });
+
+            this.setData({
+                indexchoose: 1
+            })
         }
     },
     timeFormat(param) { //小于10的格式化函数
@@ -237,7 +362,7 @@ Page({
                 // a = a.replace("T", " ");
                 // a = a.replace(".000Z", " ");
                 // console.log(a);
-                let endTime = new Date(a).getTime() +50000;
+                let endTime = new Date(a).getTime() + 50000;
                 let day = '0';
                 let hou = '0';
                 let min = '0';
@@ -279,7 +404,7 @@ Page({
                         uid: app.uid
                     }, "dissppearOrder");
                 }
-           
+
                 self.data.orderArray[i].time = {
                     days: day,
                     hous: hou,
@@ -294,7 +419,7 @@ Page({
         })
         // 渲染，然后每隔一秒执行一次倒计时函数
         // this.setData({ countDownList: countDownArr })
-        js=setTimeout(this.countDown, 1000);
+        js = setTimeout(this.countDown, 1000);
         // console.log(js+"===========================");
     },
     // countDown() { //倒计时函数
@@ -543,9 +668,10 @@ Page({
      * 页面上拉触底事件的处理函数
      */
     onReachBottom: function() {
+        var self=this;
         console.log("4444");
         console.log(app.orderLoadPage);
-        if (this.data.isPull == false && app.orderLoadPage < app.orderPage) {
+        if (this.data.isPull == false) {
             this.setData({
                 isPull: true
             })
@@ -553,35 +679,179 @@ Page({
                 title: '加载中',
             })
             app.orderLoadPage += 1;
-            switch (this.data.indexs) {
-                case 0:
-                    app.ShortConnect(app.urlw + "Data/GetOrdersByUid", {
-                        uid: app.uid,
-                        page: app.orderLoadPage
-                    }, "getmyOrder");
-                    break;
-                case 1:
-                    app.ShortConnect(app.urlw + "Data/GetOrdersByUidAndState", {
-                        uid: app.uid,
-                        page: app.orderLoadPage,
-                        state: 1
-                    }, "getmyOrder");
-                    break;
-                case 2:
-                    app.ShortConnect(app.urlw + "Data/GetOrdersByUidAndState", {
-                        uid: app.uid,
-                        page: app.orderLoadPage,
-                        state: 3
-                    }, "getmyOrder");
-                    break;
-                case 3:
-                    app.ShortConnect(app.urlw + "Data/GetOrdersByUidAndState", {
-                        uid: app.uid,
-                        page: app.orderLoadPage,
-                        state: 5
-                    }, "getmyOrder");
-                    break;
+            if (this.data.indexchoose==1)
+            {
+                switch (this.data.indexss) {
+                    case 0:
+                        console.log(app.orderLoadPage);
+                        // app.orderLoadPage = 1;
+                        app.ShortConnect(app.urlw + "Data/GetShopOrdersByUidAndState", {
+                            uid: app.uid,
+                            page: app.orderLoadPage,
+                            state: 0
+                        }, "getmyOrder3", function (res) {
+                            if (res.data.shoporders.length > 0) {
+                                var ordershangArray = this.data.ordershangArray;
+                                for (let i = 0; i <= res.data.shoporders.length - 1; i++) {
+                                    res.data.shoporders[i].head = res.data.shoporders[i].head.split(",");
+                                    ordershangArray.push(res.data.shoporders[i]);
+                                }
+
+                                self.setData({
+                                    ordershangArray: ordershangArray
+                                })
+                            }
+                            else {
+                                console.log("????????????????????????????");
+                                wx.showToast({
+                                    title: '已经到底了',
+                                })
+                            }
+                        });
+
+                        break;
+                    case 1:
+                        // app.orderLoadPage = 1;
+                        app.ShortConnect(app.urlw + "Data/GetShopOrdersByUidAndState", {
+                            uid: app.uid,
+                            page: app.orderLoadPage,
+                            state: 1
+                        }, "getmyOrder3", function (res) {
+                            if (res.data.shoporders.length > 0) {
+                                var ordershangArray = this.data.ordershangArray;
+                                for (let i = 0; i <= res.data.shoporders.length - 1; i++) {
+                                    res.data.shoporders[i].head = res.data.shoporders[i].head.split(",");
+                                    ordershangArray.push(res.data.shoporders[i]);
+                                }
+
+                                self.setData({
+                                    ordershangArray: ordershangArray
+                                })
+                            }
+                            else {
+                                wx.showToast({
+                                    title: '已经到底了',
+                                })
+                            }
+                        });
+
+                        break;
+                    case 2:
+                        // app.orderLoadPage = 1;
+                        app.ShortConnect(app.urlw + "Data/GetShopOrdersByUidAndState", {
+                            uid: app.uid,
+                            page: app.orderLoadPage,
+                            state: 2
+                        }, "getmyOrder3", function (res) {
+                            if (res.data.shoporders.length > 0) {
+                                var ordershangArray = this.data.ordershangArray;
+                                for (let i = 0; i <= res.data.shoporders.length - 1; i++) {
+                                    res.data.shoporders[i].head = res.data.shoporders[i].head.split(",");
+                                    ordershangArray.push(res.data.shoporders[i]);
+                                }
+
+                                self.setData({
+                                    ordershangArray: ordershangArray
+                                })
+                            }
+                            else {
+                                wx.showToast({
+                                    title: '已经到底了',
+                                })
+                            }
+                        });
+
+                        break;
+                    case 3:
+                        // app.orderLoadPage = 1;
+                        app.ShortConnect(app.urlw + "Data/GetShopOrdersByUidAndState", {
+                            uid: app.uid,
+                            page: app.orderLoadPage,
+                            state: 21
+                        }, "getmyOrder3", function (res) {
+
+                            if (res.data.shoporders.length > 0) {
+                                var ordershangArray = this.data.ordershangArray;
+                                for (let i = 0; i <= res.data.shoporders.length - 1; i++) {
+                                    res.data.shoporders[i].head = res.data.shoporders[i].head.split(",");
+                                    ordershangArray.push(res.data.shoporders[i]);
+                                }
+
+                                self.setData({
+                                    ordershangArray: ordershangArray
+                                })
+                            }
+                            else {
+                                wx.showToast({
+                                    title: '已经到底了',
+                                })
+                            }
+                        });
+
+                        break;
+                    case 4:
+
+                        // app.orderLoadPage = 1;
+                        app.ShortConnect(app.urlw + "Data/GetShopOrdersByUidAndState", {
+                            uid: app.uid,
+                            page: app.orderLoadPage,
+                            state: 6
+                        }, "getmyOrder3", function (res) {
+                            if (res.data.shoporders.length > 0) {
+                                var ordershangArray = this.data.ordershangArray;
+                                for (let i = 0; i <= res.data.shoporders.length - 1; i++) {
+                                    res.data.shoporders[i].head = res.data.shoporders[i].head.split(",");
+                                    ordershangArray.push(res.data.shoporders[i]);
+                                }
+
+                                self.setData({
+                                    ordershangArray: ordershangArray
+                                })
+                            }
+                            else {
+                                wx.showToast({
+                                    title: '已经到底了',
+                                })
+                            }
+                        });
+                        break;
+                }
+
             }
+           if(this.data.indexchoose==0)
+           {
+               switch (this.data.indexs) {
+                   case 0:
+                       app.ShortConnect(app.urlw + "Data/GetOrdersByUid", {
+                           uid: app.uid,
+                           page: app.orderLoadPage
+                       }, "getmyOrder4");
+                       break;
+                   case 1:
+                       app.ShortConnect(app.urlw + "Data/GetOrdersByUidAndState", {
+                           uid: app.uid,
+                           page: app.orderLoadPage,
+                           state: 1
+                       }, "getmyOrder4");
+                       break;
+                   case 2:
+                       app.ShortConnect(app.urlw + "Data/GetOrdersByUidAndState", {
+                           uid: app.uid,
+                           page: app.orderLoadPage,
+                           state: 3
+                       }, "getmyOrder4");
+                       break;
+                   case 3:
+                       app.ShortConnect(app.urlw + "Data/GetOrdersByUidAndState", {
+                           uid: app.uid,
+                           page: app.orderLoadPage,
+                           state: 5
+                       }, "getmyOrder4");
+                       break;
+               }
+
+           }
+          
         } else {
             wx.showToast({
                 title: '已经到底了',
@@ -612,10 +882,120 @@ Page({
         });
     },
     goPay: function(event) {
-        console.log();
-        console.log(event.currentTarget.dataset.shopmsg);
+        console.log(JSON.stringify(event.currentTarget.dataset.jsonmsg));
+        let data = {
+            uid: app.uid,
+            pid: event.currentTarget.dataset.jsonmsg.orderItems[0][0].pid,
+            size: event.currentTarget.dataset.jsonmsg.orderItems[0][0].standard,
+            count: event.currentTarget.dataset.jsonmsg.orderItems[0][0].pcount,
+
+        }
+        console.log(JSON.stringify(this.data.wenzhangJson) + "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+        if (app.isShare) {
+            data.source = 2
+        } else {
+            data.source = 0;
+        }
+        console.log(event.currentTarget.dataset.jsonmsg.orderItems[0][0].product);
+        data.head = event.currentTarget.dataset.jsonmsg.orderItems[0][0].product.head[0];
+        data.pname = event.currentTarget.dataset.jsonmsg.orderItems[0][0].product.pname;
+        data.price = event.currentTarget.dataset.jsonmsg.orderItems[0][0].product.price;
+        let orderA = [];
+        orderA.push(data);
+        wx.setStorageSync('orderArray', orderA);
         wx.navigateTo({
             url: '../lck/order/order?inter=myOrder&interSource=0&oid=' + event.currentTarget.dataset.shopmsg,
+        })
+    },
+    pressYin: function () {
+        this.setData({
+            codeHidden: true,
+        })
+    },
+    goPay1: function(event) {
+        console.log();
+        console.log("222222222222");
+        console.log(typeof event.currentTarget.dataset.msg);
+        var msg1 = event.currentTarget.dataset.msg;
+        console.log(JSON.stringify(msg1)+"3333");
+        let data = {
+            uid: app.uid,
+            count: msg1.pcount,
+        }
+        if (app.isShare) {
+            data.source = 2
+        } else {
+            data.source = 0;
+        }
+        let endtime = msg1.endtime;
+        endtime = endtime.split(" ");
+        data.endtime = endtime[0];
+        data.head = msg1.head[0];
+        data.pname = msg1.shoppname;
+        data.price = msg1.shopprice;
+        data.iswenzhang = true;
+        let orderA = [];
+        orderA.push(data);
+        wx.setStorageSync('orderArray', orderA);
+        wx.navigateTo({
+            url: '../lck/order/order?inter=daifujuan&interSource=0&oid=' + event.currentTarget.dataset.shopmsg + "&shoppid=" + msg1.shoppid.toString() + "&pcount=" + msg1.pcount.toString() + "&shopeid=" + msg1.shopeid.toString() + "&shopid=" + msg1.shopid.toString() + "&shopname=" + msg1.shopname,
+        })
+    },
+    quanxiaoOrder1: function(event) {
+        var self = this;
+        app.ShortConnect(app.urlw + "Data/CancelShopOrder", {
+            shopoid: event.currentTarget.dataset.oid,
+        
+        }, "dissppearOrder3", function(res) {
+            switch (self.data.indexss) {
+                case 0:
+                    app.orderLoadPage = 1;
+                    app.ShortConnect(app.urlw + "Data/GetShopOrdersByUidAndState", {
+                        uid: app.uid,
+                        page: 1,
+                        state: 0
+                    }, "getmyOrder2", function(res) {
+                        for (let i = 0; i <= res.data.shoporders.length - 1; i++) {
+                            res.data.shoporders[i].head = res.data.shoporders[i].head.split(",");
+                        }
+                        self.setData({
+                            ordershangArray: res.data.shoporders
+                        })
+                    });
+                   
+                    app.orderIndexType =0;
+                    break;
+                case 1:
+                    app.orderLoadPage = 1;
+                    app.ShortConnect(app.urlw + "Data/GetShopOrdersByUidAndState", {
+                        uid: app.uid,
+                        page: 1,
+                        state: 1
+                    }, "getmyOrder2", function (res) {
+                        for (let i = 0; i <= res.data.shoporders.length - 1; i++) {
+                            res.data.shoporders[i].head = res.data.shoporders[i].head.split(",");
+                        }
+                        self.setData({
+                            ordershangArray: res.data.shoporders
+                        })
+                    });
+                    app.orderIndexType =1;
+                    break;
+            }
+        });
+    },
+    pressShiYongs:function(event){
+        console.log(JSON.stringify(event.currentTarget.dataset.shopjson));
+        let url = "https://shop.ykplay.com/Data/create_qrcode?url=https://shop.ykplay.com/BMS/qrcodeInfo&shopoid=" + event.currentTarget.dataset.shopoid.toString() + "&verificationcode=" + event.currentTarget.dataset.verificationcode.toString()
+        let verificationcode = [];
+        verificationcode[0] = event.currentTarget.dataset.verificationcode.toString().substr(0, 4);
+        verificationcode[1] = event.currentTarget.dataset.verificationcode.toString().substr(4, 4);
+        verificationcode[2] = event.currentTarget.dataset.verificationcode.toString().substr(8, 4);
+        this.setData({
+            codeurl: url,
+            codeHidden: false,
+            indexverificationcode: verificationcode,
+            indexJSON: event.currentTarget.dataset.shopjson
         })
     },
     quanxiaoOrder: function(event) {
@@ -638,6 +1018,160 @@ Page({
         }, "dissppearOrder");
 
     },
+    pressTypes: function(event) {
+        var self = this;
+        if (parseInt(event.currentTarget.id) != this.data.indexss) {
+            switch (event.currentTarget.id) {
+                case "0":
+                    app.orderLoadPage = 1;
+                    app.ShortConnect(app.urlw + "Data/GetShopOrdersByUidAndState", {
+                        uid: app.uid,
+                        page: 1,
+                        state: 0
+                    }, "getmyOrder2", function(res) {
+                        if (res.data.shoporders.length > 0) {
+                            self.setData({
+                                isHas: false
+                            })
+                        }
+                        else {
+                            self.setData({
+                                isHas: true
+                            })
+                        }
+                        for (let i = 0; i <= res.data.shoporders.length - 1; i++) {
+                            res.data.shoporders[i].head = res.data.shoporders[i].head.split(",");
+                        }
+                        self.setData({
+                            ordershangArray: res.data.shoporders
+                        })
+                    });
+                    this.setData({
+                        indexss: parseInt(event.currentTarget.id)
+                    })
+                    app.orderIndexType = parseInt(event.currentTarget.id);
+                    break;
+                case "1":
+                    app.orderLoadPage = 1;
+                    app.ShortConnect(app.urlw + "Data/GetShopOrdersByUidAndState", {
+                        uid: app.uid,
+                        page: 1,
+                        state: 1
+                    }, "getmyOrder2", function(res) {
+                        if (res.data.shoporders.length > 0) {
+                            self.setData({
+                                isHas: false
+                            })
+                        }
+                        else {
+                            self.setData({
+                                isHas: true
+                            })
+                        }
+                        for (let i = 0; i <= res.data.shoporders.length - 1; i++) {
+                            res.data.shoporders[i].head = res.data.shoporders[i].head.split(",");
+                        }
+                        self.setData({
+                            ordershangArray: res.data.shoporders
+                        })
+                    });
+                    this.setData({
+                        indexss: parseInt(event.currentTarget.id)
+                    })
+                    app.orderIndexType = parseInt(event.currentTarget.id);
+                    break;
+                case "2":
+                    app.orderLoadPage = 1;
+                    app.ShortConnect(app.urlw + "Data/GetShopOrdersByUidAndState", {
+                        uid: app.uid,
+                        page: 1,
+                        state: 2
+                    }, "getmyOrder2", function(res) {
+                        if (res.data.shoporders.length > 0) {
+                            self.setData({
+                                isHas: false
+                            })
+                        }
+                        else {
+                            self.setData({
+                                isHas: true
+                            })
+                        }
+                        for (let i = 0; i <= res.data.shoporders.length - 1; i++) {
+                            res.data.shoporders[i].head = res.data.shoporders[i].head.split(",");
+                        }
+                        self.setData({
+                            ordershangArray: res.data.shoporders
+                        })
+                    });
+                    this.setData({
+                        indexss: parseInt(event.currentTarget.id)
+                    })
+                    app.orderIndexType = parseInt(event.currentTarget.id);
+                    break;
+                case "3":
+                  
+                    app.orderLoadPage = 1;
+                    app.ShortConnect(app.urlw + "Data/GetShopOrdersByUidAndState", {
+                        uid: app.uid,
+                        page: 1,
+                        state: 21
+                    }, "getmyOrder2", function(res) {
+                        if (res.data.shoporders.length > 0) {
+                            self.setData({
+                                isHas: false
+                            })
+                        }
+                        else {
+                            self.setData({
+                                isHas: true
+                            })
+                        }
+                        for (let i = 0; i <= res.data.shoporders.length - 1; i++) {
+                            res.data.shoporders[i].head = res.data.shoporders[i].head.split(",");
+                        }
+                        self.setData({
+                            ordershangArray: res.data.shoporders
+                        })
+                    });
+                    this.setData({
+                        indexss: parseInt(event.currentTarget.id)
+                    })
+                    app.orderIndexType = parseInt(event.currentTarget.id);
+                    break;
+                case "4":
+                  
+                    app.orderLoadPage = 1;
+                    app.ShortConnect(app.urlw + "Data/GetShopOrdersByUidAndState", {
+                        uid: app.uid,
+                        page: 1,
+                        state: 6
+                    }, "getmyOrder2", function(res) {
+                        if (res.data.shoporders.length > 0) {
+                            self.setData({
+                                isHas: false
+                            })
+                        }
+                        else {
+                            self.setData({
+                                isHas: true
+                            })
+                        }
+                        for (let i = 0; i <= res.data.shoporders.length - 1; i++) {
+                            res.data.shoporders[i].head = res.data.shoporders[i].head.split(",");
+                        }
+                        self.setData({
+                            ordershangArray: res.data.shoporders
+                        })
+                    });
+                    this.setData({
+                        indexss: parseInt(event.currentTarget.id)
+                    })
+                    app.orderIndexType = parseInt(event.currentTarget.id);
+                    break;
+            }
+        }
+    },
     pressType: function(event) {
         if (parseInt(event.currentTarget.id) != this.data.indexs) {
             switch (event.currentTarget.id) {
@@ -646,7 +1180,7 @@ Page({
                     app.ShortConnect(app.urlw + "Data/GetOrdersByUid", {
                         uid: app.uid,
                         page: 1
-                    }, "getmyOrder");
+                    }, "getmyOrders");
                     this.setData({
                         indexs: parseInt(event.currentTarget.id)
                     })
@@ -658,7 +1192,7 @@ Page({
                         uid: app.uid,
                         page: 1,
                         state: 1
-                    }, "getmyOrder");
+                    }, "getmyOrders");
                     this.setData({
                         indexs: parseInt(event.currentTarget.id)
                     })
@@ -670,7 +1204,7 @@ Page({
                         uid: app.uid,
                         page: 1,
                         state: 3
-                    }, "getmyOrder");
+                    }, "getmyOrders");
                     this.setData({
                         indexs: parseInt(event.currentTarget.id)
                     })
@@ -682,7 +1216,7 @@ Page({
                         uid: app.uid,
                         page: 1,
                         state: 5
-                    }, "getmyOrder");
+                    }, "getmyOrders");
                     this.setData({
                         indexs: parseInt(event.currentTarget.id)
                     })

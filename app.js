@@ -1,6 +1,7 @@
 //app.js
 import Host from './utils/Const.js'
 App({
+    wenzhangsao:false,
     shangpuArray:[],
     iszhe: false,
     allprotuct: [],
@@ -73,7 +74,7 @@ App({
     arrayTixian: null,
     access_token: "",
     host: Host.productionHost,
-    urlw3: "http://shop.ykplay.com",
+    urlw3: "https://shop.ykplay.com",
     urlw2: "http://shop.ykplay.com/",
     urlw: "https://shop.ykplay.com/",
     //保存订单号
@@ -148,6 +149,7 @@ App({
     //计时器数组
     intervelArr: [],
     onLaunch: function(res) {
+     
         // var a={};
         // if (a["year"] ===undefined)
         // {
@@ -225,7 +227,7 @@ App({
                                         errMsg: "login:ok"
                                     }
                                 }, "code");
-                                if (self.isShare == false) {
+                                if (self.isShare == false&&self.isSao==false) {
                                     console.log("0000000000000000");
                                     if (self.setloadHidden) {
                                         self.setloadHidden(res);
@@ -404,6 +406,9 @@ App({
                                     break;
                             }
                         }
+                        break;
+                    case "scanInterShop":
+                        callback(res);
                         break;
                     case "shareWenZhang":
                         self.setSeeNumber(res);
@@ -690,12 +695,21 @@ App({
                     case "register":
                         if (self.isShare) {
 
-                        }
+
+                        } 
                         else if (self.isSao)
                         {
-                            wx.switchTab({
-                                url: '../lck/index/index',
-                            })
+                            if (self.wenzhangsao)
+                            {
+
+                            }
+                            else
+                            {
+                                wx.switchTab({
+                                    url: '../lck/index/index',
+                                })
+
+                            }  
                         }
                         else {
                             wx.switchTab({
@@ -1098,6 +1112,37 @@ App({
                         }
 
                         break;
+                    case "pay3":
+                        if (res.data.encode == 0) {
+                            console.log(res.data.info + "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+                            self.orderNumber = res.data.order.shoponumber;
+                            self.ShortConnect("https://pay.ykplay.com/miniWx/miniPay", {
+                                openid: self.serverOpenid,
+                                orderNumber: res.data.order.shoponumber,
+                                appid: self.appid,
+                                mch_id: self.payPhone,
+                                body: res.data.info,
+                                total_fee: res.data.order.account,
+                                wxMsg: self.detailInfo,
+                                attach: "指点迷津"
+                            }, "wechatpay");
+                        } else {
+                            wx.showModal({
+                                showCancel: false,
+                                title: '提示',
+                                content: res.data.msg,
+                                success: function (res) {
+                                    if (res.confirm) {
+                                        //  wx.switchTab({
+                                        //      url: '../indextwo/indextwo'
+                                        //  })
+                                    } else if (res.cancel) {
+                                        console.log('用户点击取消')
+                                    }
+                                }
+                            })
+                        }
+                         break;
                     case "pay1":
                         if (res.data.encode == 0) {
                             self.orderNumber = res.data.order.onumber;
@@ -1223,6 +1268,9 @@ App({
                             })
                         }
                         break;
+                    case "shareFriends":
+                        callback(res);
+                         break;
                     case "GetAllMessage2":
                         self.encode = res.data.encode;
                         if (res.data.encode == -1) {
@@ -1267,21 +1315,21 @@ App({
                         } else {
                             for (var i = 0; i <= res.data.orders.length - 1; i++) {
                                 for (var j = 0; j <= res.data.orders[i].orderItems[0].length - 1; j++) {
-                                    let size = Object.values(JSON.parse(res.data.orders[i].orderItems[0][j].product.size));
-                                    let size1 = "";
-                                    for (let k = 0; k <= size.length - 1; k++) {
-                                        size1 = size1 + size[k];
-                                    }
-                                    res.data.orders[i].orderItems[0][j].product.size = size1;
+                                    // let size = Object.values(JSON.parse(res.data.orders[i].orderItems[0][j].product.size));
+                                    // let size1 = "";
+                                    // for (let k = 0; k <= size.length - 1; k++) {
+                                    //     size1 = size1 + size[k];
+                                    // }
+                                    // res.data.orders[i].orderItems[0][j].product.size = size1;
                                     var c = res.data.orders[i].orderItems[0][j].product.head.split(",");
                                     res.data.orders[i].orderItems[0][j].product.head = c;
                                     // res.data.orders[i].orderItems[0][j].product.size = JSON.parse(res.data.orders[i].orderItems[0][j].product.size);
                                     res.data.orders[i].orderItems[0][j].standard = res.data.orders[i].orderItems[0][j].standard.replace("|", "");
-                                    if (res.data.orders[i].orderItems[0][j].product.size.includes("默认")) {
-                                        res.data.orders[i].orderItems[0][j].product.isMoren = false;
-                                    } else {
-                                        res.data.orders[i].orderItems[0][j].product.isMoren = true;
-                                    }
+                                    // if (res.data.orders[i].orderItems[0][j].product.size.includes("默认")) {
+                                    //     res.data.orders[i].orderItems[0][j].product.isMoren = false;
+                                    // } else {
+                                    //     res.data.orders[i].orderItems[0][j].product.isMoren = true;
+                                    // }
                                 }
                             }
                             console.log(JSON.stringify(res.data.orders) + "///////////////////////////////////");
@@ -1355,6 +1403,9 @@ App({
                             url: '../LookTianJin/LookTianJin',
                         })
                         break;
+                    case "getShangpu":
+                        callback(res);
+                         break;
                     case "2":
                         self.guanggaoTu = [];
                         for (var i = 0; i <= 4; i++) {
@@ -1404,6 +1455,9 @@ App({
                                 break;
                         }
                         break;
+                    case "dissppearOrder3":
+                    callback(res);
+                         break;
                     case "dissppearOrder":
                         switch (self.orderIndexType) {
                             case 0:
@@ -1491,6 +1545,12 @@ App({
                         callback(res);
                         break;
                     case "shengchneg":
+                        callback(res);
+                        break;
+                    case  "sharFriends":
+                        callback(res);
+                        break;
+                    case "getmyOrder2":
                         callback(res);
                         break;
                 }

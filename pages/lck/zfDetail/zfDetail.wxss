@@ -1,0 +1,18 @@
+/* pages/lck/zfDetail/zfDetail.wxss */
+.call{
+    position: fixed;
+    bottom: 0rpx;
+}
+.pagn-con{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: nowrap;
+    padding-bottom: 100rpx;
+}
+.concat{
+    position: fixed;
+    bottom: 0rpx;
+}

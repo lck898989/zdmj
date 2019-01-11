@@ -1,0 +1,4 @@
+<!--pages/lck/xiaoqu/xiaoqu.wxml-->
+<!-- <text>pages/lck/xiaoqu/xiaoqu.wxml</text> -->
+<image src='https://shopfile.ykplay.com/resources/img_xiaoqu.png' style='width:750rpx;height:auto' mode='widthFix' bindtap='enterdetail'></image>
+

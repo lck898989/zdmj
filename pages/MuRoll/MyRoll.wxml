@@ -1,0 +1,111 @@
+<!--pages/MuRoll/MyRoll.wxml-->
+<view class='nullView'></view>
+<view class='mask' animation='{{backAnimaData}}' style='height:{{bottomHeight}}px;top:{{topHeight}}px' hidden='{{buyBoxHidden}}' bindtap='pressNull' catchtouchmove='test' data-e='mask'></view>
+<view class='mask1' bindtap='pressYin' hidden='{{codeHidden}}'></view>
+<view class='fenyeView'>
+    <view class='quanbuView' bindtap='pressQuanbu'>
+        <text style='font-size:29rpx;font-weight:900;color:#000000' class='qianbuText'>{{quanbuArray[indexQuanbu]}}</text>
+        <image src='../../resources/ico_arrow_d_1.png' class='icon' mode='widthFix'></image>
+    </view>
+    <view class='shuView'></view>
+    <view class='goumaiView' bindtap='pressGoumai'>
+        <text style='font-size:29rpx;font-weight:900;color:#000000' class='goumaiText'>{{goumaiArray[indexGoumai]}}</text>
+        <image src='../../resources/ico_arrow_d_1.png' class='icon' mode='widthFix'></image>
+    </view>
+</view>
+<view class='fenyezhanView'>
+    <view class='quanbuView1' hidden='{{quanbuhidden}}'>
+        <view wx:for='{{quanbuArray}}' class='quanbuArray'>
+            <view class='nullView1' style='background-color:#bebebe' wx:if='{{index==0}}'></view>
+            <view class='nullView1' wx:else></view>
+            <view class='quanbusonText' style='font-size:29rpx;font-weight:900;color:#b964d8' data-index='{{index}}' bindtap='pressType' wx:if='{{index==indexQuanbu}}'>
+                <text class='quanbuText1' wx:if='{{index==0}}'>{{item}}</text>
+                <text class='quanbuText1' style='left:134rpx' wx:else>{{item}}</text>
+            </view>
+            <view class='quanbusonText' style='font-size:26rpx;font-weight:900;color:#000000' data-index='{{index}}' bindtap='pressType' wx:else>
+                <text class='quanbuText1' wx:if='{{index==0}}'>{{item}}</text>
+                <text class='quanbuText1' style='left:134rpx' wx:else>{{item}}</text>
+            </view>
+        </view>
+    </view>
+    <view class='goumaiText1' hidden='{{goumaiHidden}}'>
+        <view wx:for='{{goumaiArray}}' class='goumaiArray'>
+            <view class='nullView1' style='background-color:#bebebe' wx:if='{{index==0}}'></view>
+            <view class='nullView1' wx:else></view>
+            <view class='quanbusonText' style='font-size:29rpx;font-weight:900;color:#b964d8' data-index='{{index}}' bindtap='pressType1' wx:if='{{index==indexGoumai}}'>
+                <text class='quanbuText1' style='left:118rpx'>{{item}}</text>
+            </view>
+            <view class='quanbusonText' style='font-size:26rpx;font-weight:900;color:#000000' data-index='{{index}}' bindtap='pressType1' wx:else>
+                <text class='quanbuText1' style='left:118rpx'>{{item}}</text>
+            </view>
+        </view>
+    </view>
+</view>
+<scroll-view style='height:{{bottomHeight}}px;top:{{topHeight}}px' class='shopView' scroll-y='true'>
+    <view class='shopViewParent' wx:for='{{shop}}'>
+        <view class='shopViewson1'>
+            <image class='shopImage' mode='widthFix' src='{{url+item.head[0]}}' style='height:auto'></image>
+            <image class='shopIcon' mode='widthFix' src='../../resources/ico_type_1.png' style='height:auto'></image>
+            <text style='font-size:22rpx;color:#000000;font-weight:900' class='shoppingName'>{{item.shopname}}</text>
+            <text style='font-size:31rpx;color:#000000;font-weight:900' class='shopName'>{{item.shoppname}}</text>
+            <text style='font-size:17rpx;color:#707070;font-weight:900' class='youxiaoData' space='ensp'>有效期: 至{{item.endtime[0]}}</text>
+            <text class='shenqingText' style='font-size:17rpx;color:#707070;font-weight:900' wx:if='{{item.state==2}}' bindtap='tui'>申请退款</text>
+            <image src='../../resources/left.png' mode='widthFix' style='height:auto' wx:if='{{item.state==2}}' class='xiaoyuicon' bindtap='tui'></image>
+        </view>
+        <view class='stateView' wx:if='{{item.state==2}}' data-shopoid='{{item.shopoid}}' data-shopjson='{{item}}' bindtap='pressShiYongs' data-verificationcode='{{item.verificationcode}}'>
+            <image class='shiICON' src='../../resources/img_shop_ticket_1.png' mode='widthFix' style='height:auto' wx:if='{{item.state==2}}'></image>
+            <image class='shiICON' src='../../resources/img_shop_ticket_0.png' mode='widthFix' style='height:auto' wx:else></image>
+            <text class='shopprice' style='font-size:23rpx;color:#ffcb05' wx:if='{{item.state==2}}'>￥{{item.shopprice}}</text>
+            <text class='shopprice' style='font-size:23rpx;color:#ffffff' wx:else>￥{{item.shopprice}}</text>
+            <text class='shopprice1' style='font-size:23rpx;color:#fffeff' wx:if='{{item.state==2}}'>立即使用</text>
+            <text class='shopprice1' style='font-size:23rpx;color:#ffffff' wx:elif='{{item.state==6}}'>已过期</text>
+            <text class='shopprice1' style='font-size:23rpx;color:#ffffff' wx:elif='{{item.state==21}}'>已使用</text>
+            <text class='shopprice1' style='font-size:23rpx;color:#ffffff' wx:elif='{{item.state==3}}'>申请退款中</text>
+            <text class='shopprice1' style='font-size:23rpx;color:#ffffff' wx:elif='{{item.state==4}}'>退款成功</text>
+        </view>
+        <view class='stateView' wx:else>
+            <image class='shiICON' src='../../resources/img_shop_ticket_1.png' mode='widthFix' style='height:auto' wx:if='{{item.state==2}}'></image>
+            <image class='shiICON' src='../../resources/img_shop_ticket_0.png' mode='widthFix' style='height:auto' wx:else></image>
+            <text class='shopprice' style='font-size:23rpx;color:#ffcb05' wx:if='{{item.state==2}}'>￥{{item.shopprice}}</text>
+            <text class='shopprice' style='font-size:23rpx;color:#ffffff' wx:else>￥{{item.shopprice}}</text>
+            <text class='shopprice1' style='font-size:23rpx;color:#fffeff' wx:if='{{item.state==2}}'>立即使用</text>
+            <text class='shopprice1' style='font-size:23rpx;color:#ffffff' wx:elif='{{item.state==6}}'>已过期</text>
+            <text class='shopprice1' style='font-size:23rpx;color:#ffffff' wx:elif='{{item.state==21}}'>已使用</text>
+            <text class='shopprice1' style='font-size:23rpx;color:#ffffff' wx:elif='{{item.state==3}}'>申请退款中</text>
+            <text class='shopprice1' style='font-size:23rpx;color:#ffffff' wx:elif='{{item.state==4}}'>退款成功</text>
+        </view>
+
+    </view>
+</scroll-view>
+<image class='code' src='{{codeurl}}' hidden='{{codeHidden}}'></image>
+<view class='codeText' hidden='{{codeHidden}}'>
+    <text wx:for='{{indexverificationcode}}' style='font-size:50rpx;font-weight:900;color:#ffffff'>{{item}}</text>
+</view>
+<view class='shopmagView' hidden='{{codeHidden}}'>
+    <view class='shopView1'>
+        <image class='shopImages' mode='widthFix' src='{{url+indexJSON.head[0]}}'></image>
+        <text class='daiText' style='font-size:32rpx;font-weight:900'>{{indexJSON.shoppname}}</text>
+        <text class='shopPrices' style='font-size:40rpx;font-weight:900lcolor:#ffcb05'>￥{{indexJSON.shopprice}}</text>
+        <text class='shopPricess' style='font-size:24rpx;font-weight:900;color:#707070'>￥{{indexJSON.shopoprice}}</text>
+    </view>
+    <view class='detailView'>
+        <view class='nullView3'></view>
+        <view class='shopDetail2'>
+            <text class='textXiang' style='font-size:23rpx;font-weight:900;color:#707070'>商品详情 :</text>
+            <text class='textDetail' space='ensp' style='font-size:23rpx;font-weight:900;color:#707070'> {{indexJSON.info}}</text>
+        </view>
+        <view class='youxianView'>
+            <text class='youxiaoText' style='font-size:23rpx;font-weight:900;color:#707070'>有效日期：</text>
+            <text class='youxiaoDatas' style='font-size:23rpx;font-weight:900;color:#707070'>{{indexJSON.starttime}}至{{indexJSON.endtime}}</text>
+        </view>
+        <view class='chuwaiView'>
+            <text class='chuwaiText' style='font-size:23rpx;font-weight:900;color:#707070'>除外日期：</text>
+            <text class='chuwaiData' style='font-size:23rpx;font-weight:900;color:#707070'>有效期内周末、法定节假日可用</text>
+        </view>
+        <view class='keyongView'>
+            <text class='keyongText' style='font-size:23rpx;font-weight:900;color:#707070'>使用时间：</text>
+            <text class='keyongData' style='font-size:23rpx;font-weight:900;color:#707070'>团购券使用时间：11:00-17:00</text>
+        </view>
+        <view class='nullView4'></view>
+    </view>
+</view>

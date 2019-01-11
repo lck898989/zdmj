@@ -5,31 +5,21 @@
     <view>指点迷津</view>
     <view>v2.0</view>
   </view>
-
-
   <view class='hang'>
     <view class='biaoti'>昵称</view>
     <view class="nrzi" style='color:#7d7d7d;'>{{userInfo.nickName}}(不可更改)</view>
   </view>
-
-
   <view class='hang' bindtap='enterBindPhone'>
     <view class='biaoti'>手机号码</view>
-
     <view class="nrzi2" style='color:#a6a6a6'>{{bindNumber === "" ? "绑定手机号" : bindNumber}}</view>
     <image class='nrtu' src='{{srcp1}}' style='height:auto' mode='widthFix'/>
   </view>
-
-
   <view class='hang'>
     <view class='biaoti'>实名管理</view>
     <view class="nrzi2" style='color:#a6a6a6'>请前往实名</view>
     <image class='nrtu' src='{{srcp1}}' style='height:auto' mode='widthFix'/>
   </view>
-
   <view class='xiabu'>
-
-
     <view class='hang'>
       <view class='biaoti'>意见与反馈</view>
       <image class='nrtu' src='{{srcp1}}' style='height:auto' mode='widthFix'/>

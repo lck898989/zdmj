@@ -568,11 +568,11 @@ Page({
                 uid:app.uid
             }, "interWenZhang",function(res){});
             wx.navigateTo({
-                url: '../ActicleScene/ActicleScene?essayhead=' + event.currentTarget.dataset.shopurl + "&title=" + event.currentTarget.dataset.title + "&authorurl=" + event.currentTarget.dataset.shopjson.wxhead + "&authorname=" + event.currentTarget.dataset.shopjson.wxnickname + "&pid=" + JSON.stringify(event.currentTarget.dataset.shopjson.pid) + "&eid=" + JSON.stringify(event.currentTarget.dataset.shopjson.eid),
+                url: '../ActicleScene/ActicleScene?essayhead=' + event.currentTarget.dataset.shopurl + "&title=" + event.currentTarget.dataset.title + "&authorurl=" + event.currentTarget.dataset.shopjson.wxhead + "&authorname=" + event.currentTarget.dataset.shopjson.wxnickname + "&pid=" + JSON.stringify(event.currentTarget.dataset.shopjson.pid) + "&eid=" + JSON.stringify(event.currentTarget.dataset.shopjson.eid) + "&introduction=" + event.currentTarget.dataset.introduction,
             })
         }
         if (event.currentTarget.dataset.productstype == "shopessays") {
-            console.log(event.currentTarget.dataset.shopid+"--=----------------");
+            console.log(event.currentTarget.dataset.title+"--=----------------");
             var shopjson2 = encodeURIComponent(JSON.stringify(event.currentTarget.dataset.shopjson));
             // app.wenzhangShop = null;
             app.shopWenZhangJson=null;

@@ -1,10 +1,9 @@
 <!--pages/zcw/user/user.wxml-->
 <view class='quanju'>
-  <view wx:if='{{isShowQrCode}}' class='mask' bindtap='cancelMask'>
-    <canvas canvas-id='qrcode-canvas' style='width:600rpx;height:400rpx;' class='code-canvas'>
-     
-    </canvas>
-    <image src='https://shop.ykplay.com/smallprogram/{{uid}}_fromuid.png' style='width:480rpx;height:480rpx;z-index:2100;top:{{top}}rpx' class='qrcode'></image>
+  <view wx:if='{{isShowQrCode}}'>
+    <view class='mask' bindtap='cancelMask'>
+    </view>
+    <image src='https://shop.ykplay.com/smallprogram/{{uid}}_fromuid.png' style='width:480rpx;height:480rpx;top:{{top}}rpx;z-index:2500' class='onMaskImg' catchtap='previewQrcode'></image>
   </view>
   <!-- 导航栏 -->
   <view class='daohang'>
@@ -53,21 +52,21 @@
     <text style='font-size:34rpx;font-weight:900;' class='txtdd'>我的订单</text>
     <!-- 待付款 -->
     <view class='dfk' bindtap='wddd_dfk'>
-      <image class='wdddtu1' src='{{arraytu.dd_dfk}}' style='height:auto' mode='widthFix' />
+      <image class='wdddtu1' src='{{arraytu.dd_dfk}}'  />
       <text class='daifukuan' style='font-size:23rpx;color:#7d7d7d'>待付款</text>
     </view>
     <!-- 待收货 -->
     <view class='dsh' bindtap='wddd_dsh'>
-      <image class='wdddtu1' src='{{arraytu.dd_dsh}}' style='height:auto' mode='widthFix' />
+      <image class='wdddtu1' src='{{arraytu.dd_dsh}}' />
       <text class='daifukuan' style='font-size:23rpx;color:#7d7d7d'>待收货</text>
     </view>
     <!-- 已完成 -->
     <view class='ywc' bindtap='wddd_ywc'>
-      <image class='wdddtu1' src='{{arraytu.dd_ywc}}' style='height:auto' mode='widthFix' />
+      <image class='wdddtu1' src='{{arraytu.dd_ywc}}'  />
       <text class='daifukuan' style='font-size:23rpx;color:#7d7d7d'>已完成</text>
     </view>
     <view class='tuihuo' bindtap='shouhou'>
-      <image class='wdddtu1' src='../../../resources/btn_mine_refund.png' style='height:auto' mode='widthFix' />
+      <image class='wdddtu1' src='../../../resources/btn_mine_refund.png' />
       <text class='daifukuan' style='font-size:23rpx;color:#7d7d7d'>退款/售后</text>
     </view>
   </view>
@@ -84,33 +83,36 @@
     <button class='lianxi' open-type="contact"></button>
     <!-- 收货地址 -->
     <button class='shdz' bindtap='fw_shdz'>
-      <image class='wdddtu2' src='{{arraytu.fw_shdz}}' style='height:auto' mode='widthFix' />
+      <image class='wdddtu2' src='{{arraytu.fw_shdz}}'  />
       <view class='wddd_ziti'>
         <text style='font-size:23rpx;color:#7d7d7d'>收货地址</text>
       </view>
     </button>
     <!-- 联系客服 -->
     <button class='lxkf' open-type='contact' bindtap='fw_kf'>
-      <image class='wdddtu2' src='{{arraytu.fw_kf}}' style='height:auto' mode='widthFix' />
+      <image class='wdddtu2' src='{{arraytu.fw_kf}}'  />
       <view class='wddd_ziti'>
         <text style='font-size:23rpx;color:#7d7d7d'>联系客服</text>
       </view>
     </button>
     <!-- 设置 -->
     <button class='sz' bindtap='fw_sz'>
-      <image class='wdddtu2' src='{{arraytu.fw_sz}}' style='height:auto' mode='widthFix' />
+      <image class='wdddtu2' src='{{arraytu.fw_sz}}'  />
       <view class='wddd_ziti'>
         <text style='font-size:23rpx;color:#7d7d7d'>设置</text>
       </view>
     </button>
     <!-- 即将上线 -->
     <button class='jjsx' bindtap='fw_jjsx'>
-      <image class='wdddtu2' src='{{arraytu.fw_jjsx}}' style='height:auto' mode='widthFix' />
+      <image class='wdddtu2' src='{{arraytu.fw_jjsx}}'  />
       <view class='wddd_ziti'>
         <text style='font-size:23rpx;color:#7d7d7d'>帮助说明</text>
       </view>
     </button>
   </view>
+  <canvas canvas-id='qrcode' style='width:600rpx;height:400rpx;'>
+  </canvas>
+  <!-- <image></image> -->
   <!-- <image src='https://shop.ykplay.com/smallprogram/4.png' style='width:280rpx;height:280rpx;z-index:2100'></image> -->
   <!-- <image src='{{url}}'></image> -->
   <!-- <image src='https://shop.ykplay.com/Data/create_qrcode?url=https://shop.ykplay.com/BMS/qrcodeInfo&shopoid=6&verificationcode=400915045745' style='width:300rpx;height:300rpx;'></image> -->

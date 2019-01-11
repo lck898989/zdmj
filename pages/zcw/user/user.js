@@ -20,7 +20,6 @@ Page({
             dd_dsh: app.imageUrl + 'btn_mine_goods.png', //待收货
             dd_ywc: app.imageUrl + 'btn_mine_finish.png', //已完成
         },
-
         userInfo: {},
         //在我的中滚动视图中的子物体  scr 为图片地址需要填写   bindtype为此图片的点击事件的方法名称
         gundongpic: [
@@ -45,7 +44,7 @@ Page({
         console.log('点击了滚动视图中的图片')
     },
 
-    turn: function() {
+    turn: function() {        
         this.setData({
             isShowQrCode : true
         })
@@ -59,6 +58,7 @@ Page({
             })
         });
     },
+
     turn2 : function(){
         this.setData({
             isShowQrCode: true
@@ -68,25 +68,25 @@ Page({
             let timestamp = new Date().getTime();
             let filePath = `${wx.env.USER_DATA_PATH}/`;
             console.log("二维码图片路径是：" + 'https://shop.ykplay.com' + res.data.path);
-            // self.setData({
-            //     qrcodeUrl: app.urlw + res.data.path
-            // })
-            // wx.downloadFile({
-            //     url     : 'https://shop.ykplay.com' + res.data.path,
-            //     success : function(res){
-            //         console.log(res.tempFilePath);
-            //         wx.saveFile({
-            //             tempFilePath: res.tempFilePath,
-            //             success : function(re){
-            //                 console.log("re is ",re.savedFilePath);
-            //                 let qrCodeCanvas = wx.createCanvasContext('qrcode-canvas', self);
-            //                 console.log("canvas is ", qrCodeCanvas);
-            //                 qrCodeCanvas.drawImage(filePath, 80, 5, 200, 200);
-            //                 qrCodeCanvas.draw(true);
-            //             }
-            //         })
-            //     }
-            // })
+                // self.setData({
+                //     qrcodeUrl: app.urlw + res.data.path
+                // })
+                // wx.downloadFile({
+                //     url     : 'https://shop.ykplay.com' + res.data.path,
+                //     success : function(res){
+                //         console.log(res.tempFilePath);
+                //         wx.saveFile({
+                //             tempFilePath: res.tempFilePath,
+                //             success : function(re){
+                //                 console.log("re is ",re.savedFilePath);
+                //                 let qrCodeCanvas = wx.createCanvasContext('qrcode-canvas', self);
+                //                 console.log("canvas is ", qrCodeCanvas);
+                //                 qrCodeCanvas.drawImage(filePath, 80, 5, 200, 200);
+                //                 qrCodeCanvas.draw(true);
+                //             }
+                //         })
+                //     }
+                // })
             wx.getImageInfo({
                 src: 'https://shop.ykplay.com' + res.data.path,
                 success : function(re){
@@ -97,7 +97,7 @@ Page({
                     qrCodeCanvas.draw(true);
                 },
                 fail : function(e){
-                    console.log(e)
+                    console.log(e);
                 }
             })
         });
@@ -118,6 +118,24 @@ Page({
 
     //个人信息中的商铺券按钮点击事件
     grxx_spq() {
+        var self=this;
+        app.ShortConnect(app.urlw +"Data/GetShopOrdersByUidAndState",{
+            uid:app.uid, 
+            state:0,
+            page:1
+
+        },"getShangpu",function(res){
+            for (let i = 0; i <= res.data.shoporders.length-1;i++)
+            {
+                res.data.shoporders[i].head = res.data.shoporders[i].head.split(",");
+                res.data.shoporders[i].endtime = res.data.shoporders[i].endtime.split(",");
+
+            }
+            app.shangpuArray = res.data.shoporders;
+            wx.navigateTo({
+                url: '../../MuRoll/MyRoll',
+            })
+        })
         console.log('你点击了商铺券')
     },
 
@@ -223,6 +241,9 @@ Page({
     // 我的服务中即将上线按钮点击事件
     fw_jjsx() {
         console.log('即将上线')
+        wx.navigateTo({
+            url: '../../lck/help/help',
+        });
     },
     createCode: function(e) {
         let appid = app.appid;
@@ -495,6 +516,15 @@ Page({
                         console.log("保存到相册完成");
                     }
                 }, self)
+            }
+        })
+    },
+    previewQrcode : function(e){
+        console.log("预览图片");
+        wx.previewImage({
+            urls: ["https://shop.ykplay.com/smallprogram/" + app.uid + "_fromuid.png"],
+            success : function(){
+                console.log("预览图片成功");
             }
         })
     }

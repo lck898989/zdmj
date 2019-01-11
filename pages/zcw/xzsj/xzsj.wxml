@@ -1,0 +1,33 @@
+<!--pages/zcw/xzsj/xzsj.wxml-->
+<view class='quanju'>
+
+
+<view class='csjs'>
+<view class='neibu1'>
+  <view class='chushi1' hidden='{{chu}}' bindtap='dianjisj1'>
+    {{kaishishijian}}
+  </view>
+  <view class='chushi2' hidden='{{!chu}}'>
+    {{kaishishijian}}
+  </view>
+  <view class='zhi'>至</view>
+  <view class='chushi1' hidden='{{chu2}}' bindtap='dianjisj2'>
+    {{jieshushijian}}
+  </view>
+  <view class='chushi2' hidden='{{!chu2}}'>
+    {{jieshushijian}}
+  </view>
+</view>
+</view> 
+
+
+
+<swiper vertical='true'>
+  <block wx:for="{{shuzi}}">
+    <swiper-item>
+      <image src="{{item}}" class="slide-image" width="355" height="150" />
+    </swiper-item>
+  </block>
+</swiper>
+
+</view>

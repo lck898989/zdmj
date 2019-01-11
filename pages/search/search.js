@@ -30,7 +30,6 @@ Page({
         unSelectFontColor: '#000',
         selectBorder: '2rpx solid #863bb7',
         unselectBorder: '2rpx solid #eee',
-
     },
   onShow:function(res){
 

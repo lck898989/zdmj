@@ -101,6 +101,8 @@ Page({
         allDefault : false,
         //是否点击了精品分享或者是一级分类下的标签，或者是更改数据时候设置的标记
         click : false,
+        col   : 0,
+        updateEssay : null
     },
     topLevelArr: ["resources/btn_type_5.png", "resources/btn_type_6.png", "resources/btn_type_1.png", "resources/btn_type_2.png", "resources/btn_type_4.png", "resources/btn_type_7.png", "resources/btn_type_3.png", "resources/btn_type_8.png", "resources/btn_type_9.png", "resources/btn_type_10.png"],
     //详细分类
@@ -647,6 +649,12 @@ Page({
                 }
             });
         }
+        let requestData = e.detail;
+        console.log("requestData is ", requestData);
+        this.setData({
+            updateEssay : requestData,
+            col: e.target.dataset.col
+        })
     },
     onImageLoad: function (e) {
         let isLast = e.currentTarget.dataset.last;
@@ -741,42 +749,66 @@ Page({
      * 页面相关事件处理函数--监听用户下拉动作
      */
     onPullDownRefresh: async function () {
-        //检查当前的tid或者是t2id
-        console.log("tid is ",this.data.tid);
-        console.log("t2id is ",this.data.t2id);
-        if(this.data.isShare){
-            this.setData({
-                newAddEssays : [],
-                col1         : [],
-                col2         : [],
-                col2H        : 0,
-                col1H        : 0,
-                page         : 1,
-            })
-            if(this.data.t2id == -2){
-                if(this.data.tid == null || this.data.tid == -1){
-                //说明选择的是全部分类
-                 await this.getAllDataArrayInShare(function(){});
-                 console.log("all type is ",this.data.newAddEssays);
-                }else{
-                  let essays = await this.getShareEssayByTid();
-                  console.log("essays is ",essays);
-                  this.setData({
-                      newAddEssays : essays
-                  });
+        let self = this;
+        console.log("updateEssay is ", this.data.updateEssay);
+        console.log("col1 is ", this.data.col1);
+        console.log("col2 is ", this.data.col2);
+        console.log("当前选择的类型是：", this.data.curType);
+        let url = app.host + 'Data/GetEssaySeeNow';
+        let data = this.data.updateEssay;
+        let req = new Request(url, data, 'POST', 'text');
+        let res = await req.sendRequest();
+        console.log("res is ", res);
+        let updatecol = 0;
+        if (this.data.col === '1') {
+            for (let i = 0; i < this.data.col1.length; i++) {
+                if (this.data.updateEssay.type === 1) {
+                    //寻找有eid的文章
+                    if (this.data.col1[i].eid == this.data.updateEssay.id) {
+                        this.data.col1[i].see = res.data.see;
+                    }
+                    updatecol = 1;
+                } else if (this.data.updateEssay.type === 2) {
+                    //寻找有shopeid的文章
+                    if (this.data.col1[i].shopeid == this.data.updateEssay.id) {
+                        this.data.col1[i].see = res.data.see;
+                    }
+                    updatecol = 1;
                 }
-                wx.stopPullDownRefresh();
-            }else{
-                //二级分类被点击了
-                let essays = await this.getSecondLevelEssayByT2id();
-                console.log("二级分类文章是：",essays);
-                this.setData({
-                    newAddEssays : essays
-                },()=>{
-                    wx.stopPullDownRefresh();
-                })
             }
-        }else{
+        } else if (this.data.col === '2') {
+            for (let i = 0; i < this.data.col2.length; i++) {
+                if (this.data.updateEssay.type === 1) {
+                    //寻找有eid的文章
+                    if (this.data.col2[i].eid == this.data.updateEssay.id) {
+                        this.data.col2[i].see = res.data.see;
+                    }
+                    updatecol = 2;
+                } else if (this.data.updateEssay.type === 2) {
+                    //寻找有shopeid的文章
+                    if (this.data.col2[i].shopeid == this.data.updateEssay.id) {
+                        this.data.col2[i].see = res.data.see;
+                    }
+                    updatecol = 2;
+                }
+
+            }
+        }
+        console.log("col1 is ", this.data.col1);
+        console.log("col2 is ", this.data.col2);
+        if (updatecol === 1) {
+            this.setData({
+                col1: this.data.col1
+            }, () => {
+                wx.stopPullDownRefresh();
+            })
+        } else if (updatecol === 2) {
+            this.setData({
+                col2: this.data.col2
+            }, () => {
+                wx.stopPullDownRefresh();
+            })
+        } else if (updatecol === 0) {
             wx.stopPullDownRefresh();
         }
     },

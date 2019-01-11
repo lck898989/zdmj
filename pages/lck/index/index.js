@@ -94,24 +94,29 @@ Page({
         moreDataArray: [],
         imageArr: [{
             id: 'eat',
-            src: '../../../resources/btn_eat.png',
-            width: 362
+            src: 'https://shopfile.ykplay.com/resources/btn_eat_1.png',
+            width: 140
         },
         {
             id: 'drink',
-            src: '../../../resources/btn_drink.png',
-            width: 366
+            src: 'https://shopfile.ykplay.com/resources/btn_drink_1.png',
+            width: 140
         },
         {
             id: 'play',
-            src: '../../../resources/btn_play.png',
-            width: 362
+            src: 'https://shopfile.ykplay.com/resources/btn_play_1.png',
+            width: 140
         },
         {
             id: 'fun',
-            src: '../../../resources/btn_fun.png',
-            width: 366
+            src: 'https://shopfile.ykplay.com/resources/btn_fun_1.png',
+            width: 140
         },
+        {
+            id : 'shop',
+            src: 'https://shopfile.ykplay.com/resources/btn_shop_1.png',
+            width : 140
+        }
         ],
         // scorll-view的高度
         scrollH: 0,
@@ -148,11 +153,16 @@ Page({
         //加载完毕
         loadOver: false,
         //是否点击了分类，点击分类默认是请求了数据的这样就不会再执行onReachBottom方法导致少显示一页的内容
-        click: true,
+        click: false,
         //是否开启显示用户头像
         isShowUser: false,
         //当前选择的类型
         curType : 0,
+        //刷新某一个文章的请求对象
+        updateEssay : null,
+        //点击的是哪一列
+        col : 1,
+        swiperItem1: 'https://shopfile.ykplay.com/resources/b1.png'
     },
 
     /**
@@ -245,7 +255,20 @@ Page({
         }
         this.updateWeaterFall();
     },
-    
+    enterDetail : function(e){
+        console.log("子组件进入文章成功",e);
+        let requestData = e.detail;
+        console.log("requestData is ",requestData);
+
+        this.setData({
+            updateEssay : requestData,
+            col         : e.target.dataset.col
+        })
+        // this.setData({
+        //     isclickEssay : true
+        // })
+
+    },
     //获取百度地图返回的天气信息字符串
     getWeatherName: function (weatherInfo) {
         let weatherIndex = weatherInfo.indexOf('weather');
@@ -512,19 +535,22 @@ Page({
         }
         this.data.click = true;
         //刷新浏览量
-        this.onPullDownRefresh();
-
-        let aasd = app.uid;
-        console.log("currentUid is ", aasd);
-        let url = Const.productionHost + 'Data/EwmAddFriend';
-        let data = {
-            parent: app.scene,
-            child: aasd
-        };
-        console.log("data is ", data);
-        let req = new Request(url, data, 'POST', 'text');
-        let res = await req.sendRequest();
-        console.log("res is ", res);
+        if(this.data.updateEssay){
+            this.onPullDownRefresh();
+        }
+        if(app.scene){
+            let aasd = app.uid;
+            console.log("currentUid is ", aasd);
+            let url = Const.productionHost + 'Data/EwmAddFriend';
+            let data = {
+                parent: app.scene,
+                child: aasd
+            };
+            console.log("data is ", data);
+            let req = new Request(url, data, 'POST', 'text');
+            let res = await req.sendRequest();
+            console.log("res is ", res);
+        }
     },
 
     /**
@@ -548,46 +574,67 @@ Page({
      */
     onPullDownRefresh: async function () {
         let self = this;
-        this.setData({
-            newAddEssays : [],
-            col1         : [],
-            col2         : [],
-            col1H        : 0,
-            col2H        : 0,
-        })
-        //监听用户下拉动作刷新文章的浏览量
-        //请求服务器数据查看当前选择的分类是哪一个
-        console.log("当前选择的类型是：",this.data.curType);
-        this.data.curType = this.data.curType.toString();
-        //将page重置为1
-        this.data.page = 1;
-        let res = await this.getType(this.data.curType);
-        console.log("res is ",res);
-        for (let m = 0; m < res.length; m++) {
-            if (res[m].shopessayhead) {
-                res[m].shopessayhead = res[m].shopessayhead.split(',');
-                res[m].productstype = "shopessays";
-            } else if (res[m].head) {
-                res[m].head = res[m].head.split(',');
-                res[m].productstype = 'products';
-            } else if (res[m].essayhead) {
-                res[m].productstype = 'essays';
-                res[m].essayhead = res[m].essayhead.split(',');
+        console.log("updateEssay is ",this.data.updateEssay);
+        console.log("col1 is ",this.data.col1);
+        console.log("col2 is ",this.data.col2);
+        console.log("当前选择的类型是：", this.data.curType);
+        let url = app.host + 'Data/GetEssaySeeNow';
+        let data = this.data.updateEssay;
+        let req = new Request(url, data, 'POST', 'text');
+        let res = await req.sendRequest();
+        console.log("res is ", res);
+        let updatecol = 0;
+        if(this.data.col === '1'){
+            for(let i = 0;i < this.data.col1.length;i++){
+                if(this.data.updateEssay.type === 1){
+                    //寻找有eid的文章
+                    if(this.data.col1[i].eid == this.data.updateEssay.id){
+                        this.data.col1[i].see = res.data.see;
+                    }
+                    updatecol = 1;
+                }else if(this.data.updateEssay.type === 2){
+                    //寻找有shopeid的文章
+                    if(this.data.col1[i].shopeid == this.data.updateEssay.id){
+                        this.data.col1[i].see = res.data.see;
+                    }
+                    updatecol = 1;
+                }
+            }
+        }else if(this.data.col === '2'){
+            for(let i = 0;i < this.data.col2.length;i++){
+                if (this.data.updateEssay.type === 1) {
+                    //寻找有eid的文章
+                    if (this.data.col2[i].eid == this.data.updateEssay.id) {
+                        this.data.col2[i].see = res.data.see;
+                    }
+                    updatecol = 2;
+                } else if (this.data.updateEssay.type === 2) {
+                    //寻找有shopeid的文章
+                    if (this.data.col2[i].shopeid == this.data.updateEssay.id) {
+                        this.data.col2[i].see = res.data.see;
+                    }
+                    updatecol = 2;
+                }
+
             }
         }
-        this.setData({
-            newAddEssays : res,
-            click        : false
-        }, () => {
-            console.log("newAddEssays is ", this.data.newAddEssays);
-            wx.stopPullDownRefresh({
-                success : function(res){
-                    console.log("res is ",res);
-                }
-            });
-            self.updateWeaterFall();
-        })
-
+        console.log("col1 is ",this.data.col1);
+        console.log("col2 is ",this.data.col2);
+        if(updatecol === 1){
+            this.setData({
+                col1 : this.data.col1
+            },()=>{
+                wx.stopPullDownRefresh();
+            })
+        }else if(updatecol === 2){
+            this.setData({
+                col2 : this.data.col2
+            },()=>{
+                wx.stopPullDownRefresh();
+            })
+        }else if(updatecol === 0){
+            wx.stopPullDownRefresh();
+        }
     },
     onPageScroll: function (e) {
         if (e.scrollTop > 100) {
@@ -1076,5 +1123,33 @@ Page({
                 url: '../shop/shop',
             })
         }
+    },
+    //进入二手房页面
+    goSecondHandHouse: function(){
+        console.log("进入二手房页面");
+        wx.navigateTo({
+            url: '../ershou/ershou',
+        })
+    },
+    //进入小区界面
+    goRenting : function(){
+        console.log("进入小区界面");
+        console.log("进入租房界面");
+        wx.navigateTo({
+            url: '../zufang/zufang',
+        })
+    },
+    //进入租房界面
+    goEstate : function(){
+        wx.navigateTo({
+            url: '../xiaoqu/xiaoqu',
+        })
+    },
+    //进入门店页面
+    goStore : function(){
+        console.log("加入门店界面");
+        wx.navigateTo({
+            url: '../store/store',
+        })
     }
 })

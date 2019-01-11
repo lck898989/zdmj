@@ -1,6 +1,11 @@
 {
     "pages": [
         "pages/wxscope/wxscope",
+        "pages/lck/scancode/scancode",
+        "pages/MuRoll/MyRoll",
+        "pages/lck/help/help",
+        "pages/lck/ershou/ershou",
+        "pages/lck/ershouDetail/ershouDetail",
         "pages/lck/bindPhone/bindPhone",
         "pages/lck/address/address",
         "pages/Discount/Discount",
@@ -56,8 +61,12 @@
         "pages/SreachResult/SreachResult",
         "pages/ShopActicle/ShopActicle",
         "pages/HistroyShare/HistroyShare",
-        "pages/zcw/user/user"
-        
+        "pages/zcw/user/user",
+        "pages/lck/store/store",
+        "pages/lck/zufang/zufang",
+        "pages/lck/zfDetail/zfDetail",
+        "pages/lck/xiaoqu/xiaoqu",
+        "pages/lck/xiaoquDetail/xiaoquDetail"
     ],
     "window": {
         "navigationBarBackgroundColor": "white",

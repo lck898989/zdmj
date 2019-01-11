@@ -1,6 +1,8 @@
 <!--pages/ShopActicle/ShopActicle.wxml-->
 <view class='mask' animation='{{backAnimaData}}' hidden='{{buyBoxHidden}}' catchtouchmove='test' data-e='mask'></view>
 <import src="/wxParse/wxParse.wxml" />
+<view class='mask1' animation='{{backAnimaData}}' bindtap='pressin' hidden='{{shareHidden}}' catchtouchmove='test' data-e='mask'></view>
+<view class='mask2' animation='{{backAnimaData}}' bindtap='pressin1' hidden='{{shareFriends}}' catchtouchmove='test' data-e='mask'></view>
 
 <scroll-view scroll-y='true' class='gundong' bindscroll='gunhdong'>
     <swiper class="shoppingImageView" bindchange='changeSwiper' scroll-x="true" style='height:{{heightSwiper[index-1]}}rpx' autoplay='true' circular='true'>
@@ -21,9 +23,6 @@
             <text class='seeNumber' style='font-size:20rpx;font-weight:900'>{{shopJSon1.see}}</text>
         </view>
     </view>
-    <view class='authorTextView'>
-        <template is="wxParse" data="{{wxParseData:article.nodes}}" />
-    </view>
     <view class='nullView' style='background:#0d0909'></view>
     <view class='shoppingMsg' style='background:#0d0909'>
         <view class='nullView1' style='background:#2f2f2f'></view>
@@ -33,9 +32,14 @@
         <text class='shu'></text>
         <text class='shoppingAdress' style='font-size:23rpx;font-weight:900'>{{shopJSon.businessarea}}</text>
         <text class='shoppingAdress1' style='font-size:23rpx;font-weight:900'>{{shopJSon.shopaddress}}</text>
+        <view class='nullView9' style='background:#2f2f2f'></view>
     </view>
+    <view class='authorTextView'>
+        <template is="wxParse" data="{{wxParseData:article.nodes}}" />
+    </view>
+
     <view class='shopMsg' style='background:#0d0909'>
-        <view class='nullView2' style='background:#2f2f2f'></view>
+        <!-- <view class='nullView2' style='background:#2f2f2f'></view> -->
         <view class='shopView' wx:for='{{shopArray}}'>
             <view class='shopView1'>
                 <image class='shopImage' mode='widthFix' src='{{url+item.head[0]}}'></image>
@@ -72,29 +76,32 @@
     </view>
     <view class='nullView5' style='color:#0d0909'></view>
     <view class='buyView'>
-        <view class='backIndex' bindtap='turnIndex'>
-            <image class='backImage' style='height:auto' src='../../resources/btn_main_1.png' mode='widthFix'></image>
-            <text class='backtext' style='font-size:18rpx'>回首页</text>
-            <view class='nullView8'></view>
-        </view>
-        <button class='shareView' open-type='share' style='font-size:32rpx;font-weight:900;color:#f39800'>马上分享</button>
-        <view class='sharePrice' wx:if='{{shopJSon.discount_open=="true"}}' bindtap='turnDazhe'>
-            <text class='huodeText' style='font-size:28rpx;font-weight:900;color:#878787'>{{shopJSon.discount_rate}}折</text>
-            <text class='getPriceText' style='font-size:30rpx;font-weight:900;color:#f39800'>折扣支付</text>
-        </view>
-        <view class='canPay' style='font-size:32rpx;font-weight:900' wx:else>
-        折扣支付
+        <button class='backIndex1' bindtap='{{turnIndex1}}' open-type='{{open}}' bindgetuserinfo='{{getUserInfo}}'>
+            <view class='backIndex'>
+                <image class='backImage' style='height:auto' src='../../resources/btn_main_1.png' mode='widthFix'></image>
+                <text class='backtext' style='font-size:18rpx'>回首页</text>
+                <view class='nullView8'></view>
+            </view>
+        </button>
+        <button class='shareView' bindtap='pressShare' style='font-size:32rpx;font-weight:900;color:#f39800'>马上分享</button>
+        <button class='sharePrice1' bindtap='{{turnDazhe1}}' open-type='{{open}}' bindgetuserinfo='{{getUserInfo}}' wx:if='{{shopJSon.discount_open=="true"}}'>
+            <view class='sharePrice'>
+                <text class='huodeText' style='font-size:28rpx;font-weight:900;color:#878787'>{{shopJSon.discount_rate}}折</text>
+                <text class='getPriceText' style='font-size:30rpx;font-weight:900;color:#f39800'>折扣支付</text>
+            </view>
+        </button>
+        <button class='canPay' style='font-size:32rpx;font-weight:900' wx:else>
+            折扣支付
             <!-- <text class='huodeText' style='font-size:28rpx;font-weight:900;color:#878787'>1折</text>
             <text class='getPriceText' style='font-size:30rpx;font-weight:900;color:#f39800'>折扣支付</text> -->
-        </view>
-
-        <view class='buy' style='font-size:32rpx;font-weight:900;color:#ffffff' bindtap='buy'>
+        </button>
+        <button class='buy' style='font-size:32rpx;font-weight:900;color:#ffffff' bindtap='{{buy1}}' open-type='{{open}}' bindgetuserinfo='{{getUserInfo}}'>
             立即购买
-        </view>
+        </button>
     </view>
     <view class='buy-con' hidden='{{buyBoxHidden}}'>
         <view class='chooseShop'>
-            <image class='chooseImage' src=' ../../resources/icon_share.png' style='height:auto' mode='widthFix'></image>
+            <image class='chooseImage' src='{{url+chooseShop.head}}' style='height:auto' mode='widthFix'></image>
             <text class='choosePrice' style='font-size:36rpx;font-weight:900;color:#ffcb05'>￥{{onePlice*shopNumber}}</text>
             <text class='chooseShopName1' style='font-size:27rpx;font-weight:900;color:#707070' space='ensp'>已选: {{chooseShop.shoppname}}</text>
             <image class='Icon' src='../../resources/Cancel.png' mode='widthFix' bindtap='pressClose'></image>
@@ -122,3 +129,28 @@
         <view class='sureView' bindtap='pressSure' style='font-size:32rpx;font-weight:900;color:#ffffff'>确定</view>
     </view>
 </scroll-view>
+<view hidden='{{shareHidden}}' class='shareViews'>
+    <text style='font-size:29rpx;font-weight:900;color:#000000' class='shareText'>我要分享</text>
+    <view class='imageIcon'>
+        <button style='width:92rpx;height:92rpx' open-type='share'>
+            <image src='../../resources/ico_WX.png' class='icon1' style='height:auto;width:92rpx;' mode='widthFix'></image>
+        </button>
+        <button style='width:92rpx;height:92rpx' bindtap='shareFriends'>
+            <image src='../../resources/ico_PYQ.png' class='icon2' style='height:auto;width:92rpx;' mode='widthFix'></image>
+        </button>
+    </view>
+    <text style='font-size:24rpx;font-weight:900;color:#595959' class='asd'>分享后可在【历史分享】中查看 </text>
+</view>
+<!-- <view class='shareFriendView' hidden='{{shareFriends}}'>
+    <image class='xiaoCode' src='https://shop.ykplay.com/smallprogram/6_shopshare.png' mode='widthFix'></image>
+    <text class='titleText1' style='font-size:30rpx;font-weight:900'>{{shopIntroduction}}
+   </text>
+    <image class='authorImage2' mode='widthFix' src='{{shopJSon1.wxhead}}' style='height:auto'></image>
+    <text class='authorName1' style='font-size:23rpx;font-weight:900'>{{shopJSon1.wxnickname}}</text>
+    <text class='wenzhangData1' style='font-size:16rpx;font-weight:900' space='ensp'>{{shopJSon1.time}}</text>
+    <text class='textWENZHANG' style='font-size:22rpx;font-weight:900'space='ensp'>    {{shopJSon1.shopintroduction}}</text>
+    <image class='shopTotle' src='{{url+shopHead[0]}}'></image>
+    <text style='font-size:28rpx;font-weight:900;color:#000000' class='changan'>长按扫码阅读</text>
+</view> -->
+<view class='baocunText' hidden='{{shareFriends}}' style='font-size:33rpx;font-weight:900' bindtap='saveImage'>保存图片</view>
+<canvas canvas-id="myCanvas" hidden='{{shareFriends}}' class='canvas'></canvas>

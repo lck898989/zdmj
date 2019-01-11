@@ -159,7 +159,7 @@ Page({
 
     },
     turndetail: function(event) {
-        console.log(typeof event.currentTarget.dataset.products);
+        console.log(event.currentTarget.dataset.type);
         wx.navigateTo({
             url: '../../../TixianMingxi/TixianMingxi?type=' + event.currentTarget.dataset.type.toString() + "&time=" + event.currentTarget.dataset.time + "&rebate=" + event.currentTarget.dataset.rebate + "&detailtype=" + event.currentTarget.dataset.detailtype + "&state=" + event.currentTarget.dataset.state + "&number=" + event.currentTarget.dataset.number + "&products=" + JSON.stringify(event.currentTarget.dataset.products)
         })

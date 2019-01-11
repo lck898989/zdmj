@@ -8,11 +8,65 @@
     bottom: 0;
     background-color: #808080;
 } */
+.shoppingView{
+    position: relative;
+    width: 750rpx;
+    height: 66rpx;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #ffffff;
+    
+}
 
+.shangpuView{
+    position: relative;
+    width: 374rpx;
+    height: 66rpx;
+    display: flex;
+     justify-content: center;
+
+
+}
+.shancehngText1{
+    position: absolute;
+    bottom: 2rpx;
+}
+.shancehngText{
+    position:absolute;
+    bottom: 10rpx;
+}
+.shancehngImage{
+    position: absolute;
+    width: 33rpx;   
+    top: 10rpx;
+}
+.zhongView{
+    position: relative;
+    width: 2px;
+    height: 50rpx;
+    background-color: #eeeeee;
+}
+.shangchengView{
+    position: relative;
+    width: 374rpx;
+    height: 76rpx;
+    display: flex;
+    justify-content: center;
+}
 page {
     background-color: #eee;
 }
-
+.nullView8{
+    position: relative;
+    width: 750rpx;
+    height: 2px;
+    background-color: #eeeeee;
+}
+.youxiaoDatas{
+    position: relative;
+    width: 580rpx;
+}
 .typeView {
     position: relative;
     width: 750rpx;
@@ -48,9 +102,167 @@ page {
 }
 .typeson1 {
     margin-top: 10rpx;
-    padding: 7rpx 15rpx 7rpx 15rpx;
+    padding: 7rpx 15rpx 7rpx 15rpx; 
     color: #000;
       
+}
+.keyongData {
+    position: relative;
+    width: 580rpx;
+}
+.nullView4 {
+    position: relative;
+    width: 730rpx;
+    height: 20rpx;
+    margin-left: 0;
+    border-radius: 8px;
+}
+.chuwaiData {
+    position: relative;
+    width: 580rpx;
+}
+.keyongText {
+    position: relative;
+    width: 110rpx;
+}
+.keyongView {
+    position: relative;
+    width: 696rpx;
+    margin-left: 17rpx;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.chuwaiText {
+    position: relative;
+    width: 110rpx;
+}
+.chuwaiView {
+    position: relative;
+    width: 696rpx;
+    margin-left: 17rpx;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+.youxianView {
+    position: relative;
+    width: 696rpx;
+    margin-left: 17rpx;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+.textDetail {
+    position: relative;
+    width: 580rpx;
+}
+.textXiang {
+    position: relative;
+    width: 114rpx;
+}
+
+.shopDetail2 {
+    position: relative;
+    width: 696rpx;
+    margin-left: 17rpx;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.nullView3 {
+    position: relative;
+    width: 730rpx;
+    margin-left: 0;
+    height: 2px;
+    background-color: #eee;
+}
+.detailView {
+    position: absolute;
+    top: 147rpx;
+    width: 730rpx;
+    height: 150rpx;
+    left: 0rpx;
+    background-color: #fff;
+    border-radius: 8px;
+}
+.shopPricess {
+    position: absolute;
+    top: 100rpx;
+    left: 338rpx;
+    text-decoration: line-through;
+}
+.shopPrices {
+    position: absolute;
+    top: 85rpx;
+    left: 177rpx;
+    color: #ffcb05;
+}
+.daiText {
+    position: absolute;
+    top: 22rpx;
+    left: 177rpx;
+    color: #000;
+}
+
+.shopImages {
+    position: absolute;
+    top: 10rpx;
+    left: 10rpx;
+    width: 147rpx;
+}
+.shopView1 {
+    position: absolute;
+    width: 730rpx;
+    height: 147rpx;
+    top: 0rpx;
+    /* background-color: #ffffff; */
+    left: 0rpx;
+    border-radius: 8px;
+    display: flex;
+    align-items: center; 
+}
+.shopmagView{
+   position: fixed;
+    display: flex;
+    width: 730rpx;
+    left: 10rpx;
+    top: 500rpx;
+    height: 297rpx;
+    background-color: #ffffff;
+    z-index: 10;
+    border-radius: 8px;
+}
+.codeText {
+  display: flex;
+
+  position: fixed;
+  top: 0;
+  width: 400rpx;
+  left: 175rpx;
+  justify-content: space-between;
+  z-index: 10;
+}
+.code {
+  position: fixed;
+  top: 78rpx;
+  left: 207rpx;
+  width: 336rpx;
+  height: 336rpx;
+  z-index: 10;
+}
+.mask1 {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background-color: #000;
+  opacity: 0.5;
+  overflow: hidden;
+  z-index: 10;
 }
 
 .backgroundView {
@@ -187,9 +399,14 @@ page {
     margin-top: 2rpx;
     width: 750rpx;
     background-color: white;
-    height: 246rpx;
+    height: 250rpx;
 }
+.shifuTexrt1{
+    position: absolute;
+    left: 518rpx;
+    bottom: 22rpx;
 
+}
 .shopMsgView1 {
     position: relative;
     margin-top: 0rpx;
@@ -201,6 +418,7 @@ page {
 .shopImage1 {
     position: absolute;
     width: 150rpx;
+    height: 150rpx;
     top: 20rpx;
     left: 31rpx;
 }
@@ -419,7 +637,7 @@ page {
     position: relative;
     margin-top: 2rpx;
     width: 750rpx;
-    height: 56rpx;
+    height: 72rpx;
     background-color: white;
     display: flex;
     align-items: center;
@@ -433,7 +651,16 @@ page {
     justify-content :center;
      align-items :center; */
 }
-
+.leibieText{
+    position: absolute;
+    top: 15rpx;
+    left: 25rpx;
+}
+.youxiaoText1{
+    position: absolute;
+    bottom: 15rpx;
+    left: 24rpx;
+}
 .quxiaoOrder {
     position: absolute;
     /* top: 15rpx; */

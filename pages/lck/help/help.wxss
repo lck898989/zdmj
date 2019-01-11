@@ -1,0 +1,55 @@
+/* pages/lck/help/help.wxss */
+page{
+    background: #f2f2f2;
+    position: relative;
+}
+.bannerType,.item-banner,.item-banner-parent,.page{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: nowrap;
+}
+.title{
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 2000;
+}
+.page{
+    flex-direction: column;
+}
+.item-banner-parent{
+    justify-content: center;
+}
+.bannerType{
+    width: 710rpx;
+    /* height: 50rpx; */
+    padding: 8rpx 20rpx;
+    position: absolute;
+    top: 100rpx;
+    background: #fff;
+}
+.item-banner{
+    flex-direction: column;
+    font-size: 25rpx;
+    padding: 0rpx 8rpx;
+    white-space: nowrap;
+}
+.depart{
+    width: 2rpx;
+    height: 28rpx;
+    background: #f2f2f2;
+    /* margin-left: 10rpx; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: nowrap;
+    margin-left: 4rpx;
+    margin-right: 4rpx;
+}
+.imgCon{
+    padding-top : 190rpx;
+    position: absolute;
+}

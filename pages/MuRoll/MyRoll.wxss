@@ -1,0 +1,408 @@
+/* pages/MuRoll/MyRoll.wxss */
+
+.nullView {
+  position: relative;
+  width: 750rpx;
+  height: 2rpx;
+  background-color: #eee;
+}
+
+.mask1 {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background-color: #000;
+  opacity: 0.5;
+  overflow: hidden;
+  z-index: 10;
+}
+
+.codeText {
+  display: flex;
+
+  position: fixed;
+  top: 0;
+  width: 400rpx;
+  left: 175rpx;
+  justify-content: space-between;
+  z-index: 10;
+}
+.shopmagView{
+   position: fixed;
+    display: flex;
+    width: 730rpx;
+    left: 10rpx;
+    top: 500rpx;
+    height: 297rpx;
+    background-color: #ffffff;
+    z-index: 10;
+    border-radius: 8px;
+}
+.shopPrice1 {
+    position: absolute;
+    top: 100rpx;
+    left: 338rpx;
+    text-decoration: line-through;
+}
+.shopPrice {
+    position: absolute;
+    top: 85rpx;
+    left: 177rpx;
+    color: #ffcb05;
+}
+.daiText {
+    position: absolute;
+    top: 22rpx;
+    left: 177rpx;
+    color: #000;
+}
+
+.shopImages {
+    position: absolute;
+    top: 10rpx;
+    left: 10rpx;
+    width: 147rpx;
+}
+.textXiang {
+    position: relative;
+    width: 114rpx;
+}
+.chuwaiData {
+    position: relative;
+    width: 580rpx;
+}
+.keyongText {
+    position: relative;
+    width: 110rpx;
+}
+.keyongData {
+    position: relative;
+    width: 580rpx;
+}
+.nullView4 {
+    position: relative;
+    width: 730rpx;
+    height: 20rpx;
+    margin-left: 0;
+    border-radius: 8px;
+}
+.keyongView {
+    position: relative;
+    width: 696rpx;
+    margin-left: 17rpx;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+.chuwaiText {
+    position: relative;
+    width: 110rpx;
+}
+.youxiaoDatas {
+    position: relative;
+    width: 580rpx;
+}
+.chuwaiView {
+    position: relative;
+    width: 696rpx;
+    margin-left: 17rpx;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+.textDetail {
+    position: relative;
+    width: 580rpx;
+}
+.youxianView {
+    position: relative;
+    width: 696rpx;
+    margin-left: 17rpx;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+.shopDetail2 {
+    position: relative;
+    width: 696rpx;
+    margin-left: 17rpx;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+.nullView3 {
+    position: relative;
+    width: 730rpx;
+    margin-left: 0;
+    height: 2px;
+    background-color: #eee;
+}
+.detailView {
+    position: absolute;
+    top: 147rpx;
+    width: 730rpx;
+    height: 150rpx;
+    left: 0rpx;
+    background-color: #fff;
+    border-radius: 8px;
+}
+.shopPricess {
+    position: absolute;
+    top: 100rpx;
+    left: 338rpx;
+    text-decoration: line-through;
+}
+.shopPrices {
+    position: absolute;
+    top: 85rpx;
+    left: 177rpx;
+    color: #ffcb05;
+}
+.shopView1 {
+    position: absolute;
+    width: 730rpx;
+    height: 147rpx;
+    top: 0rpx;
+    /* background-color: #ffffff; */
+    left: 0rpx;
+    border-radius: 8px;
+    display: flex;
+    align-items: center; 
+}
+
+.code {
+  position: fixed;
+  top: 78rpx;
+  left: 207rpx;
+  width: 336rpx;
+  height: 336rpx;
+  z-index: 10;
+}
+
+.quanbusonText {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  width: 374rpx;
+  height: 80rpx;
+  align-items: center;
+}
+
+.shopView {
+  position: absolute;
+  width: 750rpx;
+}
+
+.shopImage {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 150rpx;
+}
+
+.youxiaoData {
+  position: absolute;
+  top: 126rpx;
+  left: 377rpx;
+}
+
+.shopName {
+  position: absolute;
+  top: 64rpx;
+  left: 289rpx;
+}
+
+.shoppingName {
+  position: absolute;
+  top: 13rpx;
+  left: 207rpx;
+}
+
+.shopIcon {
+  position: absolute;
+  top: 13rpx;
+  left: 162rpx;
+  width: 25rpx;
+}
+
+.shopViewson1 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 579rpx;
+  height: 150rpx;
+  background-color: #fff;
+  border-radius: 6px;
+}
+
+.shenqingText {
+  position: absolute;
+  left: 168rpx;
+  top: 126rpx;
+}
+
+.xiaoyuicon {
+  position: absolute;
+  left: 155rpx;
+  top: 130rpx;
+  width: 12rpx;
+}
+
+.shopViewParent {
+  position: relative;
+  width: 730rpx;
+  height: 150rpx;
+  margin-left: 10rpx;
+  margin-top: 17rpx;
+  border-radius: 5px;
+}
+
+.goumaiArray {
+  position: relative;
+  width: 750rpx;
+  height: 82rpx;
+  background-color: #fff;
+  z-index: 50;
+}
+
+.quanbuArray {
+  position: relative;
+  width: 374rpx;
+  height: 82rpx;
+  background-color: #fff;
+  z-index: 50;
+}
+
+.nullView1 {
+  position: relative;
+  width: 374rpx;
+  height: 2rpx;
+  background-color: #eee;
+}
+
+.icon {
+  position: absolute;
+  left: 253rpx;
+  width: 18rpx;
+}
+
+.fenyeView {
+  position: relative;
+  width: 750rpx;
+  height: 60rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+  flex-direction: row;
+}
+
+.quanbuSon {
+  position: relative;
+  width: 374rpx;
+}
+
+.goumaiText1 {
+  position: absolute;
+  width: 374rpx;
+  top: 0;
+  right: 0;
+  overflow: hidden;
+  height: 492rpx;
+}
+
+.quanbuText1 {
+  position: absolute;
+  left: 118rpx;
+}
+
+.quanbuView1 {
+  position: absolute;
+  width: 374rpx;
+  top: 0;
+  left: 0;
+  height: 492rpx;
+}
+
+.fenyezhanView {
+  position: relative;
+  width: 750rpx;
+  height: 492rpx;
+  /* z-index: 50; */
+}
+
+.shiICON {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 151rpx;
+}
+
+.shopprice {
+  position: absolute;
+  top: 37rpx;
+}
+
+.shopprice1 {
+  position: absolute;
+  top: 84rpx;
+}
+
+.stateView {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 151rpx;
+  height: 150rpx;
+  display: flex;
+  justify-content: center;
+}
+
+.mask {
+  position: fixed;
+  left: 0;
+  right: 0;
+  background-color: #000;
+  opacity: 0.25;
+  overflow: hidden;
+  z-index: 5;
+}
+
+.qianbuText {
+  position: absolute;
+  left: 118rpx;
+}
+
+.goumaiText {
+  position: absolute;
+  left: 118rpx;
+}
+
+.quanbuView {
+  position: relative;
+  width: 374rpx;
+  height: 60rpx;
+  display: flex;
+  align-items: center;
+}
+
+.shuView {
+  position: relative;
+  width: 2rpx;
+  height: 50rpx;
+  background-color: #eee;
+}
+
+.goumaiView {
+  position: relative;
+  width: 374rpx;
+  height: 60rpx;
+  display: flex;
+  align-items: center;
+}
+
+page {
+  background-color: #eee;
+}

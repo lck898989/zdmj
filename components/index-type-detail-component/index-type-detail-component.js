@@ -121,6 +121,12 @@ Component({
     methods: {
         //进入商品或者店铺文章的详情，当时
         enterGoodsOrStore : function(e){
+            let myEventDetail = {
+                
+
+            };
+            let myEventOption = {};
+            
             console.log("isEnterEssays is ",this.data.isEnterEssays);
             let self = this;
             if(this.data.isProduct){
@@ -159,7 +165,8 @@ Component({
                 wx.navigateTo({
                     url: '../../ActicleScene/ActicleScene?essayhead='+essayhead + '&title='+title + '&authorurl='+authorurl + '&authorname='+authorname + '&pid='+pid + '&eid='+eid,
                 })
-                
+                myEventDetail.id = self.data.easyItem.eid;
+                myEventDetail.type = 1;
             }else if(this.data.isShopEssays){
                 console.log("进入商铺文章详情");
                 let data = {
@@ -181,7 +188,10 @@ Component({
                 wx.navigateTo({
                     url: '../../ShopActicle/ShopActicle?shopurl='+ shopurl + '&introduction=' + introduction + '&shopjson='+shopjson2,
                 })
+                myEventDetail.id = self.data.easyItem.shopeid;
+                myEventDetail.type = 2;
             }
+            this.triggerEvent('enterDetail', myEventDetail, myEventOption);
         }
     }
 })

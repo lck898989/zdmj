@@ -227,9 +227,9 @@ Page({
         this.data.saleAfterPage = 1;
         console.log("saleAfterPage is ",this.data.saleAfterPage);
         this.setData({
-            isSaleAfter: true,
-            isApplying: false,
-            isApplyRecord: false
+            isSaleAfter   : true,
+            isApplying    : false,
+            isApplyRecord : false
         });
         this.updateSaleAfterList();
     },
@@ -256,7 +256,7 @@ Page({
                         icon: 'none'
                     })
                 }
-                if (res.data.encode === 0) {
+                if (res.data.orders.length !== 0) {
                     // wx.hideLoading();
                     let orders = res.data.orders;
                     this.setData({
@@ -312,8 +312,8 @@ Page({
                     wx.hideLoading();
                     //没有可以售后的订单信息
                     wx.showToast({
-                        title: res.data.msg,
-                        icon: 'none'
+                        title : '没有可售后订单',
+                        icon  : 'none'
                     })
                 }
             }
@@ -553,7 +553,7 @@ Page({
                         count: applyingSaleDates[i].backcount,
                         oitemid: applyingSaleDates[i].orderItems[0].oitemid,
                         oid: applyingSaleDates[i].orderItems[0].oid,
-                        size: JSON.parse(applyingSaleDates[i].orderItems[0].product.size)
+                        size: applyingSaleDates[i].orderItems[0].standard.split('|')
                     }
                     products.push(productTemp);
                     applyingView.products = products;

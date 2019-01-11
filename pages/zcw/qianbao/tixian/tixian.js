@@ -15,7 +15,7 @@ Page({
     //金额数组
     moneyArray: [5, 10, 20, 50, 100],
     //初始化提现金钱
-    loadMoney: "1",
+    loadMoney: "0",
     //初始化我的钱包余额
     myMoney: 0,
     money: null,
@@ -156,7 +156,6 @@ Page({
           this.setData({
             loadMoney: "30",
             xianzhong: parseInt(e.currentTarget.id),
-          
           })
         }
         else

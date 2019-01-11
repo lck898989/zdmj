@@ -1,0 +1,3 @@
+<!--pages/lck/store/store.wxml-->
+<!-- <text>pages/lck/store/store.wxml</text> -->
+<image src='https://shopfile.ykplay.com/resources/c21_store.png' style='width:750rpx;height:auto' mode='widthFix'></image>

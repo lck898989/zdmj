@@ -1,0 +1,26 @@
+<!--pages/lck/help/help.wxml-->
+<!-- <text>pages/lck/help/help.wxml</text> -->
+<view class='page'>
+    <view class='title'>
+        <image src='{{imageHost}}/help_banner.png' style='width:750rpx;height:100rpx;'></image>
+        <view class="bannerType">
+            <view wx:for='{{bannerType}}' class="item-banner-parent" bindtap='chooseIndex' data-index='{{item.index}}'>
+                <view class='item-banner' style='{{item.active ? "border-bottom:6rpx solid #b964d8;color:#b964d8;font-width:bold;" : ""}}'>
+                    <view style='text-align:center'>
+                        {{item.index}}
+                    </view>
+                    <view>
+                        {{item.text}}
+                    </view>
+                </view>
+                <view wx:if='{{index !== 5}}' class='depart'>
+                
+                </view>
+            </view>
+        </view>
+    </view>
+    <scroll-view class='imgCon' scroll-y scroll-with-animation='true' scroll-top='{{top}}rpx' style='height:{{screenHeight}}rpx'>
+        <image-loader wx:for='{{imgList}}' originalImage='{{item.url}}' width='750rpx' height='{{item.height}}' mode='widthFix'></image-loader>
+        <!-- <image wx:for='{{imgList}}' src='{{item}}' style='width:750rpx;height:auto;' mode='widthFix'></image> -->
+    </scroll-view>
+</view>

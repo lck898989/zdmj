@@ -1,25 +1,2 @@
 <!--pages/userInfo/userInfo.wxml-->
-
-<view class="scene">
-    <view class="userInfo">
-        <image mode='widthFix' class="userImage"  style='height:auto'src="{{userInfo.avatarUrl}}"></image>
-        <text class="userName">{{userInfo.nickName}}</text>
-    </view>
-    <view bindtap='MyMoney' class="MyMoney">
-        <text class='textmyqian'>我的钱包</text>
-        <text class='jine'>￥{{money}}</text>
-    </view>
-    <view class='orderButton' bindtap='orderButton'>
-        <text class='textdingdan'>订单管理</text>
-        <image class='dayuhao' mode='widthFix' style='height:auto'src='../../resources/icon_arrow.png'></image>
-    </view>
-    <view class='shouhouView' bindtap='shouhou'><text class='shouhouText'>售后申请</text></view>
-    <view class='myShopping' bindtap='PressMyShop'>
-        <text class='textgowuche'>购物车</text>
-        <text class='gouwuNumber'>{{shopNumber}}</text>
-    </view>
-    <button class="PersonMsg" open-type="contact">
-        <text class='lianxikefu'>联系客服</text>
-    </button>
-    <!-- <button bindtap='tiaot'>天气</button> -->
-</view>
+<text>pages/userInfo/userInfo.wxml</text>

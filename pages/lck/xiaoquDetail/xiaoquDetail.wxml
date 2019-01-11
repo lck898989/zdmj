@@ -1,0 +1,8 @@
+<!--pages/lck/xiaoquDetail/xiaoquDetail.wxml-->
+<view class='page-con'>
+    <image src='https://shopfile.ykplay.com/resources/img_xiaoqu_1.png' style='width:750rpx;heigth:auto' mode='widthFix'></image>
+    <image src='https://shopfile.ykplay.com/resources/img_xiaoqu_2.png'  style='width:750rpx;heigth:auto' mode='widthFix'></image>
+    <image src='https://shopfile.ykplay.com/resources/img_xiaoqu_3.png'  style='width:750rpx;heigth:auto' mode='widthFix'></image>
+    <!-- <image src='https://shopfile.ykplay.com/resources/btn_call.png' style='width:750rpx;heigth:auto;position:fixed;bottom:0rpx;' mode='widthFix'></image> -->
+    <image src='https://shopfile.ykplay.com/resources/btn_call.png' style='width:750rpx;heigth:auto;' mode='widthFix' class='concat'></image>
+</view>

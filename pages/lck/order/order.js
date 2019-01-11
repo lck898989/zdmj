@@ -63,8 +63,19 @@ Page({
         });    
     }
     let self = this;
-
     switch (options.inter) {
+        case "daifujuan":
+            this.setData({
+                interView: options.inter,
+                essayuid: options.essayuid,
+                shoppid: options.shoppid,
+                shopeid: options.shopeid,
+                shopid: options.shopid,
+                pcount: options.pcount,
+                shopname: options.shopname,
+                oid: options.oid
+            })
+             break;
         case "myOrder":
             this.setData({
                 interView: options.inter,
@@ -276,8 +287,32 @@ Page({
                     oid: this.data.oid
                 }, "pay");
             }
+        }
+        else if (this.data.interView =="daifujuan")
+        {
+            console.log(this.data.oid+"saddddddddddd");
+            if (self.data.add == null) {
+                wx.showModal({
+                    showCancel: false,
+                    title: '提示',
+                    content: "请添加收货地址",
+                    success: function (res) {
+                        if (res.confirm) {
+                            console.log('用户点击确定')
+                        } else if (res.cancel) {
+                            console.log('用户点击取消')
+                        }
+                    }
+                })
+            }
 
-        } else if (this.data.interView == "shopCar") {
+            else {
+                app.ShortConnect(app.urlw + "Data/GetShopOrderByShopOid", {
+                    shopoid: this.data.oid
+                }, "pay3");
+            }
+        }
+         else if (this.data.interView == "shopCar") {
             if (self.data.add == null) {
                 wx.showModal({
                     showCancel: false,

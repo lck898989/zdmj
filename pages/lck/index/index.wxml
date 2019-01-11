@@ -65,17 +65,55 @@
     </view>
     <view class='ed-con'>
         <view class='wrap-con'>
-            <block wx:for='{{imageArr}}' wx:key='b'>
+            <!-- <block wx:for='{{imageArr}}' wx:key='b'>
                 <image src='{{item.src}}' style='width:{{item.width}}rpx;height:134rpx;{{index % 2 === 0 ? "margin-right:10rpx;" : ""}} margin-bottom:10rpx;z-index:2;' bindtap='enterEDPFS' data-id='{{item.id}}'></image>
             </block>
-            <image src='../../../resources/btn_shop.png' style='width:220rpx;height:220rpx;z-index:3;' class='circle' catchtap='enterShop' data-id='shop'></image>
+            <image src='../../../resources/btn_shop.png' style='width:220rpx;height:220rpx;z-index:3;' class='circle' catchtap='enterShop' data-id='shop'></image> -->
+            <block wx:for='{{imageArr}}'>
+                <block wx:if='{{index !== 4}}'>
+                    <image src='{{item.src}}' data-id='{{item.id}}' style='width:140rpx;height:280rpx;' bindtap='enterEDPFS'></image>
+                </block>
+                <block wx:else>
+                    <image src='{{item.src}}' data-id='{{item.id}}' style='width:140rpx;height:280rpx;' bindtap='enterShop'></image>
+                </block>
+                <!-- <image src='{{item.src}' bindtap='enterEDPFS' data-id='{{item.id}}'></image> -->
+            </block>
         </view>
     </view>
     <view class='swiper-con'>
         <swiper current='{{swiperIndex}}' autoplay='true' circular='true' class='swiperCon' indicator-dots='true'>
-            <swiper-item wx:for='{{MainImageArr}}' style='height:385rpx;' wx:key='f'>
+           
+            <swiper-item style='height:385rpx;background-image:url("https://shopfile.ykplay.com/resources/img_hotbanner_C21_BG.png")' class='swiperItem'>
+                <view class='c21-con'>
+                    <view class='c21Item'>
+                        <view class='leftItem'>
+                                <image src='https://shopfile.ykplay.com/resources/btn_C21_02.png' style='width:436rpx;height:184rpx;' class='leftItem-con' bindtap='goSecondHandHouse'></image>
+                                <!-- <view class='mask1' style='width:435rpx;height:38rpx;'> -->
+                                    <!-- <text>二手房</text>
+                                </view> -->
+                            <view class='leftItem-bottom'>
+                                <image src='https://shopfile.ykplay.com/resources/btn_C21_03.png' style='width:214rpx;height:184rpx;' class='leftmost' bindtap='goRenting' mode='widthFix'></image>
+                                    <!-- <view class='mask1' style='width:212rpx;height:38rpx;'> -->
+                                    <!-- <text>二手房</text> -->
+                                    <!-- </view> -->
+                                <image src='https://shopfile.ykplay.com/resources/btn_C21_04.png' style='width:214rpx;height:184rpx;' class='rightmost' bindtap='goEstate' mode='widthFix'></image>
+                                    <!-- <view class='mask1' style='width:212rpx;height:38rpx;'> -->
+                                    <!-- <text>二手房</text> -->
+                                    <!-- </view> -->
+                            </view>
+                        </view>
+                        <view class='rightItem' style='margin-left:10rpx;'>
+                            <image src='https://shopfile.ykplay.com/resources/btn_C21_01.png' style='width:260rpx;height:378rpx;' class='rightImg' bindtap='goStore'></image>
+                                <!-- <view class='mask1' style='width:260rpx;height:38rpx;'>
+                                <!-- <text>二手房</text>
+                                </view> -->
+                        </view>
+                    </view>
+                </view>
+            </swiper-item>
+             <swiper-item wx:for='{{MainImageArr}}' style='height:385rpx;background-image: url({{swiperItem1}});' wx:key='f' class='swiperItem'>
                 <swiper-item-component item='{{item}}' goods='{{item.goods}}'></swiper-item-component>
-                <!-- <view>{{item.goods}}</view> -->
+                <!-- <view>{{item.goods}}</view>-->
             </swiper-item>
         </swiper>
         <!-- <view class='dots'>
@@ -108,12 +146,12 @@
                 <view class='twoColCon'>
                     <view class='left-con' style='width:342rpx;margin-right:18rpx;'>
                         <block wx:for='{{col1}}' wx:key='d'>
-                            <index-type-detail-component easyItem='{{item}}' bindenterDetail='enterDetail' isShowUSer='{{isShowUser}}'></index-type-detail-component>
+                            <index-type-detail-component easyItem='{{item}}' bindenterDetail='enterDetail' isShowUSer='{{isShowUser}}' data-col='1'></index-type-detail-component>
                         </block>
                     </view>
                     <view class='right-con' style='width:342rpx;'>
                         <block wx:for='{{col2}}' wx:key='e'>
-                            <index-type-detail-component easyItem='{{item}}' isShowUser='{{isShowUser}}'></index-type-detail-component>
+                            <index-type-detail-component easyItem='{{item}}' isShowUser='{{isShowUser}}' bindenterDetail='enterDetail' data-col='2'></index-type-detail-component>
                         </block>
                     </view>
                 </view>
