@@ -28,7 +28,7 @@
             </view>
         </view>
         <view class='search-con' bindtap='enterSearch'>
-            <view class='input-con input' bindtap='enterSearch'>
+            <view class='input-con input'>
                 搜索...
             </view>
             <image class='search-icon' src='../../../resources/search_icon.png' style='width:30rpx;height:30rpx;'></image>

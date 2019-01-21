@@ -654,6 +654,7 @@ Page({
      * 
      */
     onReachBottom: async function () {
+        console.log("click is ",this.data.click);
         if (!this.data.click) {
             this.data.page++;
             console.log("page is ", this.data.page);

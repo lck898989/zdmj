@@ -3,7 +3,7 @@
 .shoppingName {
     position: absolute;
     left: 197rpx;
-    top: 32rpx;
+    top: 26rpx;
     color: #fff;
 }
 
@@ -45,7 +45,7 @@
     position: absolute;
     left: 197rpx;
     color: #fff;
-    bottom: 25rpx;
+    bottom: 20rpx;
 }
 
 .shoppingImage {

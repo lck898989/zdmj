@@ -2,7 +2,6 @@
 import Const from '../../../utils/Const.js'
 var app = getApp()
 Page({
-
     /**
      * 页面的初始数据
      */
@@ -43,7 +42,6 @@ Page({
     gundongdianji() {
         console.log('点击了滚动视图中的图片')
     },
-
     turn: function() {        
         this.setData({
             isShowQrCode : true
@@ -128,7 +126,7 @@ Page({
             for (let i = 0; i <= res.data.shoporders.length-1;i++)
             {
                 res.data.shoporders[i].head = res.data.shoporders[i].head.split(",");
-                res.data.shoporders[i].endtime = res.data.shoporders[i].endtime.split(",");
+                res.data.shoporders[i].endtime = res.data.shoporders[i].endtime.split(" ");
 
             }
             app.shangpuArray = res.data.shoporders;
@@ -214,10 +212,6 @@ Page({
         })
         console.log('你点击了待收货')
     },
-
-
-
-
     // 我的服务中收货地址按钮点击事件
     fw_shdz() {
         wx.navigateTo({

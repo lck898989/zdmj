@@ -888,7 +888,6 @@ Page({
             pid: event.currentTarget.dataset.jsonmsg.orderItems[0][0].pid,
             size: event.currentTarget.dataset.jsonmsg.orderItems[0][0].standard,
             count: event.currentTarget.dataset.jsonmsg.orderItems[0][0].pcount,
-
         }
         console.log(JSON.stringify(this.data.wenzhangJson) + "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
         if (app.isShare) {

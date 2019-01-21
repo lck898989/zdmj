@@ -149,10 +149,10 @@ App({
     //计时器数组
     intervelArr: [],
     onLaunch: function(res) {
-     
         // var a={};
         // if (a["year"] ===undefined)
         // {
+            
         //     console.log("!!!!!!!!!!!!!!!!");
         // }
         if (res.scene == 1007 || res.scene == 1008) {
@@ -1308,6 +1308,34 @@ App({
                             }
                         }
                         break;
+                    case "getmyOrders":
+                        if (res.data.encode == -1) {
+                            self.setNullButton();
+                        } else {
+                            self.myorderArray = res.data.orders;
+                            self.orderPage = res.data.pages;
+                            if (self.setMyOrder1) {
+                                self.setMyOrder1(res);
+                            }
+                        }
+                         break;
+                    case "getmyOrder4":
+                        if (res.data.encode == -1) {
+                            wx.showToast({
+                                title: '已经到底了',
+                            })
+                        } else {
+                            for (var i = 0; i <= res.data.orders.length - 1; i++) {
+                                for (var j = 0; j <= res.data.orders[i].orderItems[0].length - 1; j++) {
+                                    var c = res.data.orders[i].orderItems[0][j].product.head.split(",");
+                                    res.data.orders[i].orderItems[0][j].product.head = c;
+                                    res.data.orders[i].orderItems[0][j].standard = res.data.orders[i].orderItems[0][j].standard.replace("|", "");
+                                }
+                            }
+                            console.log(JSON.stringify(res.data.orders) + "///////////////////////////////////");
+                            self.getOrderArray(res);
+                        }
+                         break;
                     case "getmyOrder":
                         if (res.data.encode == -1) {
                             self.setNullButton(res);
@@ -1338,6 +1366,9 @@ App({
                         break;
                     case "getMyShopping":
                         self.getmyshopping(res);
+                        break;
+                    case "getmyOrder3":
+                        callback(res);
                         break;
                     case "interIntroduction":
                         self.hotShop = res.data.hotProducts;
